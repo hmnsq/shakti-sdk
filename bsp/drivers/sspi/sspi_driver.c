@@ -144,7 +144,7 @@ void sspi_configure_comm_mode(sspi_struct *sspi_instance, uint8_t comm_mode)
 {
     //Clearing the SPI_COMM_MODE bits[5:4] before setting the respective bits in temp
     uint32_t temp = ( sspi_instance -> comm_control ) & ~(SPI_COMM_MODE(3));
-    sspi_instance -> comm_control = (temp & ~(SPI_COMM_MODE(comm_mode) ) );
+    sspi_instance -> comm_control = (temp | (SPI_COMM_MODE(comm_mode) ) );
 }
 
 /** @fn void sspi_configure_lsb_first(sspi_struct *sspi_instance, uint8_t lsb_enable)

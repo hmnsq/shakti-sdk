@@ -31,12 +31,12 @@
 #include "log.h"
 #include "uart.h"
 
-#define DELAY1 100
-#define DELAY2 50
+#define DELAY1 10
+#define DELAY2 5
 
 
 #define DELAY_VALUE 900
-#if 1
+#if 1																														
 #define PRESCALER_COUNT 24
 #define SCLK_COUNT 9
 #else
@@ -112,6 +112,7 @@ int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return read status (zero on success)
  */
+#if 0
 int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *readTemp, unsigned char length, unsigned long delay)
 {
 //	unsigned char read_buf[4] = {'\0'};
@@ -125,7 +126,7 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 //	delay_loop(DELAY1, DELAY2);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_REPSTART;
-	delay_loop(DELAY1, DELAY2);
+//	delay_loop(DELAY1, DELAY2);
 
 //Writes the slave address for read
 	i2c_write_data(i2c_instance, MPU6050_SLAVE_ADDRESS + I2C_READ, delay);
@@ -158,7 +159,68 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 	i2c_instance->control = I2C_STOP;
 	return 0;
 }
+#else
+int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *readTemp, unsigned char length, unsigned long delay)
+{
+//	unsigned char read_buf[4] = {'\0'};
+	int i = 0, status=0;
 
+//Writes the slave address for write
+	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
+//Writes the pointer to address that needs to be read
+	i2c_write_data(i2c_instance, reg_offset, delay);
+//	delay_loop(DELAY1, DELAY2);
+//Stops the I2C transaction to start reading the temperature value.
+	i2c_instance->control = I2C_REPSTART;
+//	delay_loop(DELAY1, DELAY2);
+
+//Writes the slave address for read
+	i2c_write_data(i2c_instance, MPU6050_SLAVE_ADDRESS + I2C_READ, delay);
+//	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_READ, delay);
+
+/* Make a dummy read as per spec of the I2C controller */
+	*readTemp = i2c_instance->data; //~
+	while(wait_till_txrx_operation_Completes(i2c_instance, &status))
+	{
+		waitfor(delay);
+	}
+
+//Reads the MSB Byte of temperature [D9 - D1]
+	for(i = 0; i < length; i++)
+	{
+		if(i == (length - 1) )
+		{
+			log_debug("\nSending nack");
+			i2c_instance->control = I2C_NACK;
+			*readTemp = i2c_instance->data; //~
+			while(wait_till_txrx_operation_Completes(i2c_instance, &status))
+			{
+				waitfor(delay);
+			}
+
+			break;
+		}
+		else
+		{
+//			i2c_read_data(i2c_instance, &temp, delay);
+			*readTemp = i2c_instance->data; //~
+			while(wait_till_txrx_operation_Completes(i2c_instance, &status))
+			{
+				printf("\twaiting for pin\n");
+				waitfor(delay);
+			}
+		}
+		log_debug("\n read data[%x]: %x", i, *readTemp);
+//		*readTemp = temp;
+		*readTemp++;
+	}
+	
+	log_debug("\n Sending Stop condition");
+	i2c_instance->control = I2C_STOP;
+	return 0;
+}
+
+#endif
 
 
 
@@ -236,12 +298,16 @@ void measuring_value(unsigned long delay)
 {
 	// read accelerometer data
 	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_DATA_CNT, delay);
+
+#if 0
 	printf("\n Read Buf: { ");
 	for(i = 0; i < RD_DATA_CNT; i++)
 	{
 		log_info(" %x, ", readbuf[i] );
 		}
 	log_info(" }\n" ); 
+#endif
+
 /*	AccX = (readbuf[0]<<8 |readbuf[1]) / 4096; //16-bit X-axis data
 	AccY = (readbuf[2]<<8 |readbuf[3]) / 4096; //16-bit Y-axis data
 	AccZ = (readbuf[4]<<8 |readbuf[5]) / 4096; //16-bit Z-axis data
@@ -304,7 +370,7 @@ int main()
 {
 	unsigned char i = 0;
 	int timeout;
-	unsigned long delay = 500;
+	unsigned long delay = 10;
 	unsigned int write_buf[7] = {0x00};
 	unsigned char length = 0;
 
@@ -344,8 +410,10 @@ int main()
 	log_debug("\n Entering While loop");
 	while(1)
 	{
-		measuring_value(delay);
-		delay_loop(2000, 1000);
+//		measuring_value(delay);
+		read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_DATA_CNT, delay);
+
+//		delay_loop(2000, 1000);
 	}
 
 	return 0;

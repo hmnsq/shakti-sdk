@@ -161,7 +161,7 @@ int wait_till_I2c_bus_free(i2c_struct * instance)
 	status = instance->status;
 
 	while (!(status & I2C_BB) && --timeout) {
-		waitfor(20000); /* wait for 100 us */
+		waitfor(300); /* wait for 100 us */
 		status = instance->status;
 	}
 
@@ -190,7 +190,7 @@ int wait_till_txrx_operation_Completes(i2c_struct * instance, int *status)
 	*status = instance->status;
 
 	while ((*status & I2C_PIN) && --timeout) {
-		waitfor(10000); /* wait for 100 us */
+		waitfor(10); /* wait for 100 us */
 		*status = instance->status;
 	}
 
@@ -199,7 +199,7 @@ int wait_till_txrx_operation_Completes(i2c_struct * instance, int *status)
 		return ETIMEDOUT;
 	}
 
-	waitfor(10000); /* wait for 100 us */
+	waitfor(300); /* wait for 100 us */
 	log_debug("\n I2C tx_rx operation is completed");
 	return 0;
 }
@@ -327,7 +327,7 @@ int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, un
 	//Writing the slave address that needs to be written into data register.
 	instance->data = slaveAddress;
 	log_debug("\tSlave Address 0x%x written into data register\n", slaveAddress);
-
+#ifdef VERIFY
 	//Reads back the data register to confirm
 	temp = instance->data; //Reads the slave address from I2C controller
 
@@ -337,7 +337,7 @@ int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, un
 		log_error("\n There is some issue in AXI interface. Please check.");
 		return EAXI_ERROR;
 	}
-
+#endif
 	//Waits till the bus becomes free.
 	while(wait_till_I2c_bus_free(instance))
 	{
@@ -349,7 +349,7 @@ int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, un
 	//Send the start condition and slave address to slave
 #ifndef USE_SA_WRITE_I2C_INTERRUPT
 	instance->control = I2C_START; //Sending the slave address to the I2C slave
-	waitfor(900);
+//	waitfor(900);
 	//Wait for PIN to become low.
 	timeout = wait_till_txrx_operation_Completes(instance, &status);
 	if (timeout) {//Asking the controller to send a start signal to initiate the transaction

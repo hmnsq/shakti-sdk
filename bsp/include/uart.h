@@ -53,10 +53,12 @@ typedef struct
 	unsigned short reserv9;  /*! reserved */
 #ifdef USE_RX_THRESHOLD /*! This is to be used only when support is there. */
 	unsigned char rx_threshold;	/*! RX FIFO size configuration register - 8 bits*/
-	unsigned char reserv10;    /*! reserved */ 
+	unsigned char reserv10;    /*! reserved */
 	unsigned short reserv11;    /*! reserved */
-#endif	
+#endif
 } uart_struct;
+
+#define USE_INTERRUPT
 
 #define STS_RX_THRESHOLD    0x1 << 8
 #define BREAK_ERROR	    1 << 7
@@ -85,7 +87,7 @@ typedef struct
 #define PARITY(x) ( (x & 3)  << 3 ) /*! 00 --- No parity; 01 -Odd Parity; 10 - Even Parity;  11 - Unused */
 #define UART_TX_RX_LEN(x)       ( (x & 0x1F) << 5) /*! Maximum length 32 bits */
 
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+extern volatile uart_struct *uart_instance[MAX_UART_COUNT];
 extern unsigned char uart0_complete;
 extern unsigned char uart1_complete;
 extern unsigned char uart2_complete;

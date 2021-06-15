@@ -47,7 +47,7 @@ interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
  * @details Signals completion of interrupt. From s/w side the interrupt claim/complete register is written with the interrupt id.
  * @param uint32_t interrupt_id
  */
-void interrupt_complete(uint32_t interrupt_id)
+inline static void interrupt_complete(uint32_t interrupt_id)
 {
 	log_trace("\ninterrupt_complete entered\n");
 
@@ -77,7 +77,7 @@ void interrupt_complete(uint32_t interrupt_id)
  *           of the highest priority pending interrupt
  * @return uint32_t
  */
-uint32_t interrupt_claim_request()
+inline static uint32_t interrupt_claim_request()
 {
 	uint32_t *interrupt_claim_address = NULL;
 	uint32_t interrupt_id;
@@ -158,7 +158,7 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
  * @param uint32_t interrupt_id
  * @return uint32_t
  */
-void isr_default(uint32_t interrupt_id)
+static inline void isr_default(uint32_t interrupt_id)
 {
 	log_trace("\nisr_default entered\n");
 
@@ -167,11 +167,12 @@ void isr_default(uint32_t interrupt_id)
 		/*
 		   Assuming 6 pwm's are there
 		 */
-
+#ifndef SOS
 		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
 		{
 			set_pwm_control_register((6-interrupt_id),0x80);
 		}
+#endif
 	}
 
 	log_info("interrupt [%d] serviced\n",interrupt_id);

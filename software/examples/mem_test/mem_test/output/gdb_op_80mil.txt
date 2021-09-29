@@ -1,0 +1,589 @@
+Values initalized location 87fff9d8(Hex)
+
+GDB Location Values :
+
+(gdb) x/512b 0x87fff9d8
+0x87fff9d8:	-6	-72	0	16	-114	-48	-68	0
+0x87fff9e0:	-80	-72	0	0	-114	-40	-114	-64
+0x87fff9e8:	-5	-66	0	124	-65	0	6	-71
+0x87fff9f0:	0	2	-13	-92	-22	33	6	0
+0x87fff9f8:	0	-66	-66	7	56	4	117	11
+0x87fffa00:	-125	-58	16	-127	-2	-2	117	-13
+0x87fffa08:	-21	22	-76	2	-80	1	-69	0
+0x87fffa10:	124	-78	-128	-118	116	1	-117	76
+0x87fffa18:	2	-51	19	-22	0	124	0	0
+0x87fffa20:	-21	-2	0	0	0	0	0	0
+0x87fffa28:	0	0	0	0	0	0	0	0
+0x87fffa30:	0	0	0	0	0	0	0	0
+0x87fffa38:	0	0	0	0	0	0	0	0
+0x87fffa40:	0	0	0	0	0	0	0	0
+0x87fffa48:	0	0	0	0	0	0	0	0
+0x87fffa50:	0	0	0	0	0	0	0	0
+0x87fffa58:	0	0	0	0	0	0	0	0
+0x87fffa60:	0	0	0	0	0	0	0	0
+0x87fffa68:	0	0	0	0	0	0	0	0
+0x87fffa70:	0	0	0	0	0	0	0	0
+0x87fffa78:	0	0	0	0	0	0	0	-112
+0x87fffa80:	6	-127	0	0	0	0	0	0
+0x87fffa88:	0	0	0	0	0	0	0	0
+0x87fffa90:	0	0	0	0	0	0	0	0
+0x87fffa98:	0	0	0	0	0	0	0	0
+0x87fffaa0:	0	0	0	0	0	0	0	0
+0x87fffaa8:	0	0	0	0	0	0	0	0
+0x87fffab0:	0	0	0	0	0	0	0	0
+0x87fffab8:	0	0	0	0	0	0	0	0
+0x87fffac0:	0	0	0	0	0	0	0	0
+0x87fffac8:	0	0	0	0	0	0	0	0
+0x87fffad0:	0	0	0	0	0	0	0	0
+0x87fffad8:	0	0	0	0	0	0	0	0
+0x87fffae0:	0	0	0	0	0	0	0	0
+0x87fffae8:	0	0	0	0	0	0	0	0
+0x87fffaf0:	0	0	0	0	0	0	0	0
+0x87fffaf8:	0	0	0	0	0	0	0	0
+0x87fffb00:	0	0	0	0	0	0	0	0
+0x87fffb08:	0	0	0	0	0	0	0	0
+0x87fffb10:	0	0	0	0	0	0	0	0
+0x87fffb18:	0	0	0	0	0	0	0	0
+0x87fffb20:	0	0	0	0	0	0	0	0
+0x87fffb28:	0	0	0	0	0	0	0	0
+0x87fffb30:	0	0	0	0	0	0	0	0
+0x87fffb38:	0	0	0	0	0	0	0	0
+0x87fffb40:	0	0	0	0	0	0	0	0
+0x87fffb48:	0	0	0	0	0	0	0	0
+0x87fffb50:	0	0	0	0	0	0	0	0
+0x87fffb58:	0	0	0	0	0	0	0	0
+0x87fffb60:	0	0	0	0	0	0	0	0
+0x87fffb68:	0	0	0	0	0	0	0	0
+0x87fffb70:	0	0	0	0	0	0	0	0
+--Type <RET> for more, q to quit, c to continue without paging--
+0x87fffb78:	0	0	0	0	0	0	0	0
+0x87fffb80:	0	-42	-64	-127	72	0	0	0
+0x87fffb88:	4	1	4	12	-2	-62	-1	0
+0x87fffb90:	8	0	0	0	-40	-20	0	0
+0x87fffb98:	0	0	0	0	0	0	0	0
+0x87fffba0:	0	0	0	0	0	0	0	0
+0x87fffba8:	0	0	0	0	0	0	0	0
+0x87fffbb0:	0	0	0	0	0	0	0	0
+0x87fffbb8:	0	0	0	0	0	0	0	0
+0x87fffbc0:	0	0	0	0	0	0	0	0
+0x87fffbc8:	0	0	0	0	0	0	0	0
+0x87fffbd0:	0	0	0	0	0	0	85	-86
+
+
+Console Output : 
+
+Buff[0] is fa
+Buff[1] is b8
+Buff[2] is 0
+Buff[3] is 10
+Buff[4] is 8e
+Buff[5] is d0
+Buff[6] is bc
+Buff[7] is 0
+Buff[8] is b0
+Buff[9] is b8
+Buff[10] is 0
+Buff[11] is 0
+Buff[12] is 8e
+Buff[13] is d8
+Buff[14] is 8e
+Buff[15] is c0
+Buff[16] is fb
+Buff[17] is be
+Buff[18] is 0
+Buff[19] is 7c
+Buff[20] is bf
+Buff[21] is 0
+Buff[22] is 6
+Buff[23] is b9
+Buff[24] is 0
+Buff[25] is 2
+Buff[26] is f3
+Buff[27] is a4
+Buff[28] is ea
+Buff[29] is 21
+Buff[30] is 6
+Buff[31] is 0
+Buff[32] is 0
+Buff[33] is be
+Buff[34] is be
+Buff[35] is 7
+Buff[36] is 38
+Buff[37] is 4
+Buff[38] is 75
+Buff[39] is b
+Buff[40] is 83
+Buff[41] is c6
+Buff[42] is 10
+Buff[43] is 81
+Buff[44] is fe
+Buff[45] is fe
+Buff[46] is 75
+Buff[47] is f3
+Buff[48] is eb
+Buff[49] is 16
+Buff[50] is b4
+Buff[51] is 2
+Buff[52] is b0
+Buff[53] is 1
+Buff[54] is bb
+Buff[55] is 0
+Buff[56] is 7c
+Buff[57] is b2
+Buff[58] is 80
+Buff[59] is 8a
+Buff[60] is 74
+Buff[61] is 1
+Buff[62] is 8b
+Buff[63] is 4c
+Buff[64] is 2
+Buff[65] is cd
+Buff[66] is 13
+Buff[67] is ea
+Buff[68] is 0
+Buff[69] is 7c
+Buff[70] is 0
+Buff[71] is 0
+Buff[72] is eb
+Buff[73] is fe
+Buff[74] is 0
+Buff[75] is 0
+Buff[76] is 0
+Buff[77] is 0
+Buff[78] is 0
+Buff[79] is 0
+Buff[80] is 0
+Buff[81] is 0
+Buff[82] is 0
+Buff[83] is 0
+Buff[84] is 0
+Buff[85] is 0
+Buff[86] is 0
+Buff[87] is 0
+Buff[88] is 0
+Buff[89] is 0
+Buff[90] is 0
+Buff[91] is 0
+Buff[92] is 0
+Buff[93] is 0
+Buff[94] is 0
+Buff[95] is 0
+Buff[96] is 0
+Buff[97] is 0
+Buff[98] is 0
+Buff[99] is 0
+Buff[100] is 0
+Buff[101] is 0
+Buff[102] is 0
+Buff[103] is 0
+Buff[104] is 0
+Buff[105] is 0
+Buff[106] is 0
+Buff[107] is 0
+Buff[108] is 0
+Buff[109] is 0
+Buff[110] is 0
+Buff[111] is 0
+Buff[112] is 0
+Buff[113] is 0
+Buff[114] is 0
+Buff[115] is 0
+Buff[116] is 0
+Buff[117] is 0
+Buff[118] is 0
+Buff[119] is 0
+Buff[120] is 0
+Buff[121] is 0
+Buff[122] is 0
+Buff[123] is 0
+Buff[124] is 0
+Buff[125] is 0
+Buff[126] is 0
+Buff[127] is 0
+Buff[128] is 0
+Buff[129] is 0
+Buff[130] is 0
+Buff[131] is 0
+Buff[132] is 0
+Buff[133] is 0
+Buff[134] is 0
+Buff[135] is 0
+Buff[136] is 0
+Buff[137] is 0
+Buff[138] is 0
+Buff[139] is 0
+Buff[140] is 0
+Buff[141] is 0
+Buff[142] is 0
+Buff[143] is 0
+Buff[144] is 0
+Buff[145] is 0
+Buff[146] is 0
+Buff[147] is 0
+Buff[148] is 0
+Buff[149] is 0
+Buff[150] is 0
+Buff[151] is 0
+Buff[152] is 0
+Buff[153] is 0
+Buff[154] is 0
+Buff[155] is 0
+Buff[156] is 0
+Buff[157] is 0
+Buff[158] is 0
+Buff[159] is 0
+Buff[160] is 0
+Buff[161] is 0
+Buff[162] is 0
+Buff[163] is 0
+Buff[164] is 0
+Buff[165] is 0
+Buff[166] is 0
+Buff[167] is 90
+Buff[168] is 6
+Buff[169] is 81
+Buff[170] is 0
+Buff[171] is 0
+Buff[172] is 0
+Buff[173] is 0
+Buff[174] is 0
+Buff[175] is 0
+Buff[176] is 0
+Buff[177] is 0
+Buff[178] is 0
+Buff[179] is 0
+Buff[180] is 0
+Buff[181] is 0
+Buff[182] is 0
+Buff[183] is 0
+Buff[184] is 0
+Buff[185] is 0
+Buff[186] is 0
+Buff[187] is 0
+Buff[188] is 0
+Buff[189] is 0
+Buff[190] is 0
+Buff[191] is 0
+Buff[192] is 0
+Buff[193] is 0
+Buff[194] is 0
+Buff[195] is 0
+Buff[196] is 0
+Buff[197] is 0
+Buff[198] is 0
+Buff[199] is 0
+Buff[200] is 0
+Buff[201] is 0
+Buff[202] is 0
+Buff[203] is 0
+Buff[204] is 0
+Buff[205] is 0
+Buff[206] is 0
+Buff[207] is 0
+Buff[208] is 0
+Buff[209] is 0
+Buff[210] is 0
+Buff[211] is 0
+Buff[212] is 0
+Buff[213] is 0
+Buff[214] is 0
+Buff[215] is 0
+Buff[216] is 0
+Buff[217] is 0
+Buff[218] is 0
+Buff[219] is 0
+Buff[220] is 0
+Buff[221] is 0
+Buff[222] is 0
+Buff[223] is 0
+Buff[224] is 0
+Buff[225] is 0
+Buff[226] is 0
+Buff[227] is 0
+Buff[228] is 0
+Buff[229] is 0
+Buff[230] is 0
+Buff[231] is 0
+Buff[232] is 0
+Buff[233] is 0
+Buff[234] is 0
+Buff[235] is 0
+Buff[236] is 0
+Buff[237] is 0
+Buff[238] is 0
+Buff[239] is 0
+Buff[240] is 0
+Buff[241] is 0
+Buff[242] is 0
+Buff[243] is 0
+Buff[244] is 0
+Buff[245] is 0
+Buff[246] is 0
+Buff[247] is 0
+Buff[248] is 0
+Buff[249] is 0
+Buff[250] is 0
+Buff[251] is 0
+Buff[252] is 0
+Buff[253] is 0
+Buff[254] is 0
+Buff[255] is 0
+Buff[256] is 0
+Buff[257] is 0
+Buff[258] is 0
+Buff[259] is 0
+Buff[260] is 0
+Buff[261] is 0
+Buff[262] is 0
+Buff[263] is 0
+Buff[264] is 0
+Buff[265] is 0
+Buff[266] is 0
+Buff[267] is 0
+Buff[268] is 0
+Buff[269] is 0
+Buff[270] is 0
+Buff[271] is 0
+Buff[272] is 0
+Buff[273] is 0
+Buff[274] is 0
+Buff[275] is 0
+Buff[276] is 0
+Buff[277] is 0
+Buff[278] is 0
+Buff[279] is 0
+Buff[280] is 0
+Buff[281] is 0
+Buff[282] is 0
+Buff[283] is 0
+Buff[284] is 0
+Buff[285] is 0
+Buff[286] is 0
+Buff[287] is 0
+Buff[288] is 0
+Buff[289] is 0
+Buff[290] is 0
+Buff[291] is 0
+Buff[292] is 0
+Buff[293] is 0
+Buff[294] is 0
+Buff[295] is 0
+Buff[296] is 0
+Buff[297] is 0
+Buff[298] is 0
+Buff[299] is 0
+Buff[300] is 0
+Buff[301] is 0
+Buff[302] is 0
+Buff[303] is 0
+Buff[304] is 0
+Buff[305] is 0
+Buff[306] is 0
+Buff[307] is 0
+Buff[308] is 0
+Buff[309] is 0
+Buff[310] is 0
+Buff[311] is 0
+Buff[312] is 0
+Buff[313] is 0
+Buff[314] is 0
+Buff[315] is 0
+Buff[316] is 0
+Buff[317] is 0
+Buff[318] is 0
+Buff[319] is 0
+Buff[320] is 0
+Buff[321] is 0
+Buff[322] is 0
+Buff[323] is 0
+Buff[324] is 0
+Buff[325] is 0
+Buff[326] is 0
+Buff[327] is 0
+Buff[328] is 0
+Buff[329] is 0
+Buff[330] is 0
+Buff[331] is 0
+Buff[332] is 0
+Buff[333] is 0
+Buff[334] is 0
+Buff[335] is 0
+Buff[336] is 0
+Buff[337] is 0
+Buff[338] is 0
+Buff[339] is 0
+Buff[340] is 0
+Buff[341] is 0
+Buff[342] is 0
+Buff[343] is 0
+Buff[344] is 0
+Buff[345] is 0
+Buff[346] is 0
+Buff[347] is 0
+Buff[348] is 0
+Buff[349] is 0
+Buff[350] is 0
+Buff[351] is 0
+Buff[352] is 0
+Buff[353] is 0
+Buff[354] is 0
+Buff[355] is 0
+Buff[356] is 0
+Buff[357] is 0
+Buff[358] is 0
+Buff[359] is 0
+Buff[360] is 0
+Buff[361] is 0
+Buff[362] is 0
+Buff[363] is 0
+Buff[364] is 0
+Buff[365] is 0
+Buff[366] is 0
+Buff[367] is 0
+Buff[368] is 0
+Buff[369] is 0
+Buff[370] is 0
+Buff[371] is 0
+Buff[372] is 0
+Buff[373] is 0
+Buff[374] is 0
+Buff[375] is 0
+Buff[376] is 0
+Buff[377] is 0
+Buff[378] is 0
+Buff[379] is 0
+Buff[380] is 0
+Buff[381] is 0
+Buff[382] is 0
+Buff[383] is 0
+Buff[384] is 0
+Buff[385] is 0
+Buff[386] is 0
+Buff[387] is 0
+Buff[388] is 0
+Buff[389] is 0
+Buff[390] is 0
+Buff[391] is 0
+Buff[392] is 0
+Buff[393] is 0
+Buff[394] is 0
+Buff[395] is 0
+Buff[396] is 0
+Buff[397] is 0
+Buff[398] is 0
+Buff[399] is 0
+Buff[400] is 0
+Buff[401] is 0
+Buff[402] is 0
+Buff[403] is 0
+Buff[404] is 0
+Buff[405] is 0
+Buff[406] is 0
+Buff[407] is 0
+Buff[408] is 0
+Buff[409] is 0
+Buff[410] is 0
+Buff[411] is 0
+Buff[412] is 0
+Buff[413] is 0
+Buff[414] is 0
+Buff[415] is 0
+Buff[416] is 0
+Buff[417] is 0
+Buff[418] is 0
+Buff[419] is 0
+Buff[420] is 0
+Buff[421] is 0
+Buff[422] is 0
+Buff[423] is 0
+Buff[424] is 0
+Buff[425] is d6
+Buff[426] is c0
+Buff[427] is 81
+Buff[428] is 48
+Buff[429] is 0
+Buff[430] is 0
+Buff[431] is 0
+Buff[432] is 4
+Buff[433] is 1
+Buff[434] is 4
+Buff[435] is c
+Buff[436] is fe
+Buff[437] is c2
+Buff[438] is ff
+Buff[439] is 0
+Buff[440] is 8
+Buff[441] is 0
+Buff[442] is 0
+Buff[443] is 0
+Buff[444] is d8
+Buff[445] is ec
+Buff[446] is 0
+Buff[447] is 0
+Buff[448] is 0
+Buff[449] is 0
+Buff[450] is 0
+Buff[451] is 0
+Buff[452] is 0
+Buff[453] is 0
+Buff[454] is 0
+Buff[455] is 0
+Buff[456] is 0
+Buff[457] is 0
+Buff[458] is 0
+Buff[459] is 0
+Buff[460] is 0
+Buff[461] is 0
+Buff[462] is 0
+Buff[463] is 0
+Buff[464] is 0
+Buff[465] is 0
+Buff[466] is 0
+Buff[467] is 0
+Buff[468] is 0
+Buff[469] is 0
+Buff[470] is 0
+Buff[471] is 0
+Buff[472] is 0
+Buff[473] is 0
+Buff[474] is 0
+Buff[475] is 0
+Buff[476] is 0
+Buff[477] is 0
+Buff[478] is 0
+Buff[479] is 0
+Buff[480] is 0
+Buff[481] is 0
+Buff[482] is 0
+Buff[483] is 0
+Buff[484] is 0
+Buff[485] is 0
+Buff[486] is 0
+Buff[487] is 0
+Buff[488] is 0
+Buff[489] is 0
+Buff[490] is 0
+Buff[491] is 0
+Buff[492] is 0
+Buff[493] is 0
+Buff[494] is 0
+Buff[495] is 0
+Buff[496] is 0
+Buff[497] is 0
+Buff[498] is 0
+Buff[499] is 0
+Buff[500] is 0
+Buff[501] is 0
+Buff[502] is 0
+Buff[503] is 0
+Buff[504] is 0
+Buff[505] is 0
+Buff[506] is 0
+Buff[507] is 0
+Buff[508] is 0
+Buff[509] is 0
+Buff[510] is 55
+Buff[511] is aa
+
+
+

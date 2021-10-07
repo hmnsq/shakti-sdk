@@ -106,7 +106,18 @@ ifeq ($(TARGET),vajra)                         # c-class 100t rv64imacsu
 	@$(eval INTERFACE=$(bspboard)/ftdi)
 	@$(eval DC =$(FLAGS) $(D))
 else
+ifeq ($(TARGET),iclass)                         # i-class 
+	@$(eval XLEN = 64)
+	@$(eval WIDTH = 8)
+	@$(eval FLAGS= -D iclass)
+	@$(eval MARCH=rv64imafdc)
+	@$(eval MABI=lp64d)
+	@$(eval UPLOADER=$(UPLOADDIR)/spansion)
+	@$(eval INTERFACE=$(bspboard)/ftdi)
+	@$(eval DC =$(FLAGS) $(D))
+else
 	@echo -e "$(TARGET) not supported"
+endif
 endif
 endif
 endif

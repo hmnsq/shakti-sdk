@@ -141,6 +141,16 @@ static void trap_init(void)
 	log_trace("trap_init exited \n ");
 }
 
+/**@fn void fd_init(void)
+ * @brif initialize mstatus csr register for f & D
+ *
+ */
+
+void fd_init(void) {
+	asm volatile("li      t0, 0x2000\t\n"
+       "csrrs   zero, mstatus, t0\t\n"
+       );
+}
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
@@ -158,6 +168,9 @@ void init(void)
 
 	trap_init();
 
+#ifdef iclass
+	fd_init();
+#endif
 	main();
 
 	log_trace("init exited\n");

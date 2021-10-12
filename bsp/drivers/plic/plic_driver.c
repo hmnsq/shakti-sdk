@@ -158,7 +158,7 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
  * @param uint32_t interrupt_id
  * @return uint32_t
  */
-void isr_default(uint32_t interrupt_id)
+void isr_default1(uint32_t interrupt_id)
 {
 	log_trace("\nisr_default entered\n");
 
@@ -178,6 +178,13 @@ void isr_default(uint32_t interrupt_id)
 
 	log_trace("\nisr_default exited\n");
 }
+
+void isr_default(uint32_t interrupt_id)
+{
+   printf("\nisr entry");
+   printf("\nIt did work");
+   printf("\nisr exited");
+}   
 
 /** @fn void interrupt_enable(uint32_t interrupt_id)
  * @brief enable the interrupt

@@ -39,8 +39,8 @@
 #define PLIC_PRIORITY_OFFSET            0x0000UL
 #define PLIC_PENDING_OFFSET             0x1000UL
 #define PLIC_ENABLE_OFFSET              0x2000UL
-#define PLIC_THRESHOLD_OFFSET           0x10000UL
-#define PLIC_CLAIM_OFFSET               0x10010UL
+#define PLIC_THRESHOLD_OFFSET           0x200000UL
+#define PLIC_CLAIM_OFFSET               0x200004UL
 
 /* The priority value for each int src can be found at addresses 4 bytes apart
    starting from base address + priority offset */

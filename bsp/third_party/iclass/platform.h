@@ -41,7 +41,7 @@ platform.h - header file for I class SoC on artix7_100t
  */
 
 /*! Core Local Interruptor CLINT */
-#define CLINT_BASE 0x020000000
+#define CLINT_BASE 0x02000000
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
 #define CLINT_DIVISOR   256
@@ -66,8 +66,8 @@ platform.h - header file for I class SoC on artix7_100t
 #define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Serial Peripheral Interface Offsets */
-#define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
-#define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
+#define SPI0_START 0x00022000 /* Serial Peripheral Interface 0 */
+#define SPI1_START 0x00022100 /* Serial Peripheral Interface 1 */
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
 #define UART0_START 0x00011300 /*! UART 0 */
@@ -93,32 +93,32 @@ platform.h - header file for I class SoC on artix7_100t
 #define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
 #define PLIC_INTERRUPT_1   1	/* PWM 0   */
 #define PLIC_INTERRUPT_2   2	/* PWM 1   */
-#define PLIC_INTERRUPT_3   3	/* PWM 2   */
-#define PLIC_INTERRUPT_4   4	/* PWM 3   */
-#define PLIC_INTERRUPT_5   5	/* PWM 4   */
-#define PLIC_INTERRUPT_6   6	/* PWM 5   */
-#define PLIC_INTERRUPT_7   7	/* GPIO 0  */
-#define PLIC_INTERRUPT_8   8	/* GPIO 1  */
-#define PLIC_INTERRUPT_9   9	/* GPIO 2  */
-#define PLIC_INTERRUPT_10  10	/* GPIO 3  */
-#define PLIC_INTERRUPT_11  11	/* GPIO 4  */
-#define PLIC_INTERRUPT_12  12	/* GPIO 5  */
-#define PLIC_INTERRUPT_13  13	/* GPIO 6  */
-#define PLIC_INTERRUPT_14  14	/* GPIO 7  */
-#define PLIC_INTERRUPT_15  15	/* GPIO 8  */
-#define PLIC_INTERRUPT_16  16	/* GPIO 9  */
-#define PLIC_INTERRUPT_17  17	/* GPIO 10 */
-#define PLIC_INTERRUPT_18  18	/* GPIO 11 */
-#define PLIC_INTERRUPT_19  19	/* GPIO 12 */
-#define PLIC_INTERRUPT_20  20	/* GPIO 13 */
-#define PLIC_INTERRUPT_21  21	/* GPIO 14 */
-#define PLIC_INTERRUPT_22  22	/* GPIO 15 */
-#define PLIC_INTERRUPT_23  23	/* I2C 0   */
-#define PLIC_INTERRUPT_24  24	/* I2C 1   */
-#define PLIC_INTERRUPT_25  25 	/* uart 0  */
-#define PLIC_INTERRUPT_26  26 	/* uart 1  */
-#define PLIC_INTERRUPT_27  27 	/* uart 2  */
-#define PLIC_MAX_INTERRUPT_SRC 28
+//#define PLIC_INTERRUPT_3   3	/* PWM 2   */
+//#define PLIC_INTERRUPT_4   4	/* PWM 3   */
+//#define PLIC_INTERRUPT_5   5	/* PWM 4   */
+//#define PLIC_INTERRUPT_6   6	/* PWM 5   */
+//#define PLIC_INTERRUPT_7   7	/* GPIO 0  */
+//#define PLIC_INTERRUPT_8   8	/* GPIO 1  */
+//#define PLIC_INTERRUPT_9   9	/* GPIO 2  */
+//#define PLIC_INTERRUPT_10  10	/* GPIO 3  */
+//#define PLIC_INTERRUPT_11  11	/* GPIO 4  */
+//#define PLIC_INTERRUPT_12  12	/* GPIO 5  */
+//#define PLIC_INTERRUPT_13  13	/* GPIO 6  */
+//#define PLIC_INTERRUPT_14  14	/* GPIO 7  */
+//#define PLIC_INTERRUPT_15  15	/* GPIO 8  */
+//#define PLIC_INTERRUPT_16  16	/* GPIO 9  */
+//#define PLIC_INTERRUPT_17  17	/* GPIO 10 */
+//#define PLIC_INTERRUPT_18  18	/* GPIO 11 */
+//#define PLIC_INTERRUPT_19  19	/* GPIO 12 */
+//#define PLIC_INTERRUPT_20  20	/* GPIO 13 */
+//#define PLIC_INTERRUPT_21  21	/* GPIO 14 */
+//#define PLIC_INTERRUPT_22  22	/* GPIO 15 */
+//#define PLIC_INTERRUPT_23  23	/* I2C 0   */
+//#define PLIC_INTERRUPT_24  24	/* I2C 1   */
+//#define PLIC_INTERRUPT_25  25 	/* uart 0  */
+//#define PLIC_INTERRUPT_26  26 	/* uart 1  */
+//#define PLIC_INTERRUPT_27  27 	/* uart 2  */
+#define PLIC_MAX_INTERRUPT_SRC 3
 
 /*!General Purpose Input / Output */
 #define GPIO_START 0x00040100 //GPIO Start Address */

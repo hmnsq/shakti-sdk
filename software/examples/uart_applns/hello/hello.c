@@ -33,6 +33,12 @@
  */
 void main()
 {
+	float a = 1.1;
+	float b = 2.3;
+	float c = b/a;
+
 	printf ("Hello World !\n");
+	printf("\n %f / %f = %f",a,b,c);
+	printf("\n %f * %f = %f",a,b,a*b);
 	while(1);
 }

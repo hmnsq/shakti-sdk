@@ -34,6 +34,7 @@ project's hex file
 #include <stdio.h>
 #include "spi.h"
 #include "flashdata.h"
+#define SECTOR_SIZE 0x4000
 
 /** @fn void deploy()
  * @brief Erases flash and writes the hex array entry by entry into the flash
@@ -43,7 +44,8 @@ void deploy()
 {
 	int read_address = 0x00b00000;
 	double count=0.0;
-
+	int read_value = 0;
+	int i = 0;
 	configure_spi(SPI0_OFFSET);
 	spi_init();
 	flash_device_id();
@@ -51,27 +53,55 @@ void deploy()
 	waitfor(200);
 	printf("\nErasing...\n");
 
-	flash_write_enable();
-	flash_erase(read_address);
-	flash_status_register_read();
-	printf("\nErase complete.\n");
+	i = 0;
+	while(1)
+	{
+		flash_write_enable();
+		flash_erase(read_address);
+		flash_status_register_read();
+//		printf("\nErase complete for sector address %x.\n", read_address);
+		read_address += (i * SECTOR_SIZE);
+		if(read_address > 0x00F00000)
+			break;
+			i++;
+	}
 
+	read_address = 0x00b00000;
 	flash_write(read_address,write_data[0]);
 	read_address+=4;
+		printf("\nWriting...");
 
-	printf("\nWriting...");
-
-	for(int i =0; i< write_data[0]; i++)
+	for( i = 0; i < write_data[0]; i++)
 	{
 		waitfor(200);
 		flash_write(read_address,write_data[i+1]);
 		read_address+=4;
 
-		if(i%512 == 0)
+		if(i % 2048 == 0)
 			printf(".");;
 	}
 
 	printf("\n\nWrite complete.\n");
+	read_address = 0x00b00000;
+#if 0
+	printf("\nVerifying...");
+	for( i = 0; i < write_data[0]; i++)
+	{
+		waitfor(200);
+		read_value = flash_read(read_address);
+		if(read_value != write_data[i])
+		{
+			printf("\n Error in verifying");
+			printf("\n Read value: %x; Write value: %x; offset: %x", read_value, write_data[i], i);
+			break;
+		}
+		read_address+=4;
+
+		if(i % 2048 == 0)
+			printf("*");;
+	}
+#endif
+
 	printf("\nPlease reset.\n");
 	asm volatile ("ebreak");
 }

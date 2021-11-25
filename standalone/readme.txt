@@ -10,11 +10,15 @@ e.g.
 	elf2hex 4 32768 /tmp/arduino_build_371879/Test_code.ino.elf  2147483648 > code.mem
 
 4. find the size of file and pass it as argument to elf_to_header
+size=`riscv32-unknown-elf-size  [elf file with full path] | awk 'FNR == 2 {print $4}'`
+e.g.
 size=`riscv32-unknown-elf-size  /tmp/arduino_build_371879/Test_code.ino.elf | awk 'FNR == 2 {print $4}'`
+5. Run the following commands to get the size in words.
 size=$(($size/4))
 echo "$size"
+6. Create application code as header file
 ./elf_to_header $size
-5. Build the deploy code.
+7. Build the deploy code.
 make
-6. program the flash with deploy code.
+8. program the flash with deploy code.
 sudo $(which openocd) -f ../bsp/third_party/pinaka/ftdi.cfg -c "reset init" -c "load_image outputs/deploy.shakti ;resume 0x80000000;shutdown"

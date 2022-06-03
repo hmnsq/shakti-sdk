@@ -174,6 +174,10 @@ filepath := ./sdsupport
 else
 ifeq ($(PROGRAM),sd_boot)
 filepath := ./sd_boot
+else
+ifeq ($(PROGRAM),mp3player)
+filepath := ./mp3player
+endif
 endif
 endif
 endif

@@ -30,11 +30,16 @@ $(PROGRAM).riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH)  -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) -I$(SD_DIR)	$(FLAGS) -c ./spicntrl.c -o ./output/spicntrl.o 
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH)  -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) -I$(SD_DIR)	$(FLAGS) -c $(SD_DIR)/ff.c -o ./output/ff.o 
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH)  -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) -I$(SD_DIR)	$(FLAGS) -c ./$(PROGRAM).c -o ./output/$(PROGRAM).o 
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH)  -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) -I$(SD_DIR)	$(FLAGS) -c $(SD_DIR)/audio.c -o ./output/audio.o 
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH)  -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) -I$(SD_DIR)	$(FLAGS) -c $(SD_DIR)/mp3decoder.c -o ./output/mp3decoder.o 
 	@echo "Linking files"
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./../gen_lib/sspi.o ./output/$(PROGRAM).o   $(GENLIB)/gen_lib/libshakti$(XLEN).a  ./output/ff.o ./output/spicntrl.o  -o ./output/$(PROGRAM).shakti -mcmodel=medany -march=$(MARCH)  -mabi=$(MABI) -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./../gen_lib/sspi.o ./output/$(PROGRAM).o   $(GENLIB)/gen_lib/libshakti$(XLEN).a  ./output/ff.o ./output/spicntrl.o ./output/audio.o ./output/mp3decoder.o -o ./output/$(PROGRAM).shakti -mcmodel=medany -march=$(MARCH)  -mabi=$(MABI) -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti &> ./output/$(PROGRAM).dump
 create_dir:
 	@mkdir -p ./output
 
+clean: 
+	@rm -rf $(OUTPUT)
+	@echo "cleaned"
 
 #  $(GENLIB)/gen_lib/libshakti$(XLEN).a 

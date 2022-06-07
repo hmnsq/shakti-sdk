@@ -135,8 +135,10 @@ compile:
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/sspi/sspi_driver.c -o ./gen_lib/sspi.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+
 build:
-	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o 
+	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o ./gen_lib/sspi.o
 	
 do:
 ifeq ($(PROGRAM),all)
@@ -176,6 +178,13 @@ else
 ifeq ($(PROGRAM),uart-cam)
 filepath := ./uart-cam/ucam
 else
+ifeq ($(PROGRAM),sdsupport)
+filepath := ./sdsupport
+else
+ifeq ($(PROGRAM),sd_boot)
+filepath := ./sd_boot
+endif
+endif
 endif
 endif
 endif

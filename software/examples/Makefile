@@ -207,6 +207,12 @@ else
 ifeq ($(PROGRAM),pcf8574)
 filepath := i2c_applns/pcf8574
 else
+ifeq ($(PROGRAM),ina219)
+filepath := i2c_applns/ina219
+else
+ifeq ($(PROGRAM),tca9548a)
+filepath := i2c_applns/tca9548a
+else
 ifeq ($(PROGRAM),at24c256)
 filepath := i2c_applns/at24c256
 else
@@ -324,6 +330,15 @@ else
 ifeq ($(PROGRAM),uart01_uart02_interrupt)
 filepath := plic_applns/uart01_uart02_interrupt
 else
+ifeq ($(PROGRAM),ZigBee_Gateway)
+filepath := plic_applns/ZigBee_Gateway
+else
+ifeq ($(PROGRAM),ZigBee_Router)
+filepath := plic_applns/ZigBee_Router
+else
+ifeq ($(PROGRAM),ZigBee_Endnode)
+filepath := plic_applns/ZigBee_Endnode
+else
 ifeq ($(PROGRAM),switches)
 filepath := gpio_applns/switches
 else
@@ -347,6 +362,12 @@ filepath := i2c_applns/bmp280
 else
 ifeq ($(PROGRAM),default_mode)
 filepath := xadc_applns/default_mode
+else
+ifeq ($(PROGRAM),mq2)
+filepath := xadc_applns/mq2
+else
+ifeq ($(PROGRAM),mq7)
+filepath := xadc_applns/mq7
 else
 ifeq ($(PROGRAM),self_test)
 filepath := eth_applns/self_test
@@ -469,6 +490,13 @@ ifeq ($(PROGRAM),mcp4921dac_chk)
 filepath := sspi_applns/mcp4921dac_chk
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
+endif
+endif
+endif
+endif
+endif
+endif
 endif
 endif
 endif

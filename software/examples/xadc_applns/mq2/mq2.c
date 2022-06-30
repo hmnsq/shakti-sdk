@@ -40,18 +40,6 @@
 //0x4125c is the address for A3 pin
 
 
-/** 
- * @fn int main()
- * @brief Calls the xadc apis to read temperature and onchip voltage.
- * @return none
- */
-
-
-
-//only pins a0 to a3 work.
-//a0 41250, a1 254, a2 258, a3 25c address
-
-
 int RL_VALUE = 5;     //define the load resistance on the board, in kilo ohms
 int RO_CLEAN_AIR_FACTOR = 9.83;  
 int CALIBARAION_SAMPLE_TIMES = 5; 
@@ -76,11 +64,20 @@ float smoke = 0;
 int lastReadTime = 0;
 
 
+/**
+  * @fn float MQResistanceCalculation(int raw_adc)
+  * @brief Calculates the resistance value of the sensor
+  * @param raw_adc
+*/
 float MQResistanceCalculation(int raw_adc) {
    return (((float)RL_VALUE*(1023-raw_adc)/raw_adc));
 }
 
 
+/**
+  * @fn float MQCalibration()
+  * @brief Calibrates the sensor
+*/
 float MQCalibration() {
   float val=0;
  
@@ -97,6 +94,10 @@ float MQCalibration() {
 }
 
 
+/**
+  * @fn float MQRead()
+  * @brief Read the analog values and samples it
+*/
 float MQRead() {
   int i;
   float rs=0;
@@ -111,12 +112,23 @@ float MQRead() {
   return rs;  
 }
 
+/**
+  * @fn float MQGetPercentage(float rs_ro_ratio,  float *pcurve)
+  * @brief Calculates the actual values using mathematical calculations
+  * @param rs_ro_ratio 
+  * @param pcurve contains the values needed for mathematical calculations
+*/
 int MQGetPercentage(float rs_ro_ratio, float *pcurve) {
   return (pow(10,(((log(rs_ro_ratio)-pcurve[1])/pcurve[2]) + pcurve[0])));
 }
 
 
-
+/**
+  * @fn float MQGetGasPercentage(float rs_ro_ratio, int gas_id)
+  * @brief calls the MQGetPercentage function based on the value to be read.
+  * @param rs_ro_ratio 
+  * @param gas_id
+*/
 float MQGetGasPercentage(float rs_ro_ratio, int gas_id) {
   if ( gas_id == GAS_LPG ) {
      return MQGetPercentage(rs_ro_ratio,LPGCurve);
@@ -128,105 +140,50 @@ float MQGetGasPercentage(float rs_ro_ratio, int gas_id) {
   return 0;
 }
 
+
+/**
+  * @fn float readLPG()
+  * @brief calculates the LPG value
+*/
 float readLPG(){
         return lpg = MQGetGasPercentage(MQRead()/10,GAS_LPG);
 }
 
+/**
+  * @fn float readCO()
+  * @brief calculates the CO value
+*/
 float readCO(){
         return co = MQGetGasPercentage(MQRead()/10,GAS_CO);
 }
 
+/**
+  * @fn float readSmoke()
+  * @brief calculates the Smoke value
+*/
 float readSmoke(){
         return smoke = MQGetGasPercentage(MQRead()/10,GAS_SMOKE);
 }
 
-
-
-
+/** 
+ * @fn int main()
+ * @brief Calls the xadc apis to read CO, smoke, lpg values.
+ * @return none
+ */
 void main()
 {       
     
     uint32_t value ;
+    //Calibrating the sensor
     Ro = MQCalibration();
     printf("\tCalibrating... Ro: %f kohm\n", Ro);
 
     while(1){
+
+    //Reading LPG, CO, Smoke Values
     lpg = readLPG()/100;
     co = readCO()/100;
     smoke = readSmoke()/100;
     printf("LPG: %f ppm,\t CO: %f ppm,\t SMOKE: %f ppm \n", lpg, co, smoke);
     }
-   
-
 }
-
-
-
-
-
-
-// class MQ2 {
-// public: 
-// 	MQ2(int pin);
-// 	float* read(bool print);
-// 	float readLPG();
-// 	float readCO();
-// 	float readSmoke();
-// 	void begin();
-// private:
-// 	int _pin;
-	
-	
-// 	float MQRead();
-// 	float MQGetGasPercentage(float rs_ro_ratio, int gas_id);
-// 	int MQGetPercentage(float rs_ro_ratio, float *pcurve);
-// 	float MQCalibration();
-// 	float MQResistanceCalculation(int raw_adc);
-
-// 	int lastReadTime = 0;
-// };
-
-// //#endif
-    // for( unsigned int i = 0x41250; i <= 0x4125c; i=i+4 ) {
-    //     //printf("");
-    //     value = xadc_read_data(i);
-    //     //if(value>0){
-    //         printf(" value %d\n", value>>4);
-    //         printf("value %x temp= %f\n", i,xadc_onchip_temp(value));
-    //         printf("value %x voltage= %f\n\n",i, xadc_onchip_voltage(value));		
-    //         //c++;
-    //     //}
-    // }
-//	printf("value  c = %d\n", c);		
-//		delay(30);
-
-		// uint32_t value = xadc_read_data(0x41000);
-
-		// printf("value 41000 temp= %f\n", xadc_onchip_temp(value));
-		// printf("value 41000 voltage= %f\n", xadc_onchip_voltage(value));
-
-		// value = xadc_read_data(0x41004);
-
-		// printf("value 41004 temp= %f\n", xadc_onchip_temp(value));
-		// printf("value 41004 voltage= %f\n", xadc_onchip_voltage(value));
-
-		// value = xadc_read_data(0x41008);
-
-		// printf("value 41008 temp= %f\n", xadc_onchip_temp(value));
-		// printf("value 41008 voltage= %f\n", xadc_onchip_voltage(value));
-
-		// value = xadc_read_data(0x4100C);
-
-		// printf("value 4100C temp= %f\n", xadc_onchip_temp(value));
-		// printf("value 4100C voltage= %f\n", xadc_onchip_voltage(value));
-
-		// value = xadc_read_data(0x41010);
-
-		// printf("value 41010 temp= %f\n", xadc_onchip_temp(value));
-		// printf("value 41010 voltage= %f\n", xadc_onchip_voltage(value));
-
-
-		// value = xadc_read_data(0x41004);
-		// printf("value 41004 voltage= %f\n", xadc_onchip_voltage(value));
-
-	//}

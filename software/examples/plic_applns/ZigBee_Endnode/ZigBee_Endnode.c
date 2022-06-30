@@ -1,8 +1,8 @@
 /***************************************************************************
  * Project           			:  shakti devt board
- * Name of the file	     		:  ZigBeeEndnode.c
+ * Name of the file	     		:  ZigBee_Endnode.c
  * Created date			        :  31.03.2022
- * Brief Description of file    :  ZigBee Router acts as an intermediary between ZigBee Coordinator and ZigBee Endnode
+ * Brief Description of file    :  ZigBee endnode acts as ZigBee end device and collects data using sensors 
  * Name of Author               :  Kolan Nikshith Reddy
  * Email ID of Author           :  nkreddy100@gmail.com
  * Name of Mentor               :  E. Kotteeswaran
@@ -147,21 +147,18 @@ int enterATMode(uart_struct * uart_instance)
 }
 
 /**
-  * @fn int write_xbee_uart01(uart_struct * uart_instance, char *str, int length)
+  * @fn int write_xbee_uart01(uart_struct * uart_instance, char *str)
   * @brief Writes the AT Commands to XBEE PRO S2C to update the firmware
   * @param uart_instance The instance of uart pointed to XBEE PRO S2C
   * @param str AT Command is passed as string
   * @param length length of the AT Command
 */
-int write_xbee_uart01(uart_struct * uart_instance, char *str, int length)
+int write_xbee_uart01(uart_struct * uart_instance, char *str)
 {
     delay(3);
     char *s1 = str;
 
-    // for(int i=0;i<length;i++){
-    //     write_uart_character(uart_instance, *str);
-    //     str++;
-    // }
+
     while(*str!='\0')
     {
        write_uart_character(uart_instance,*str);
@@ -208,91 +205,91 @@ void configure_xbee(uart_struct * uart_instance){
    write_xbee_uart01(uart_instance, "ATJV1", 5);
    write_xbee_uart01(uart_instance, "ATDL0", 8);
 
-   //Networking commands
-   write_xbee_uart01(uart_instance, "ATID1234", 5);
-   write_xbee_uart01(uart_instance, "ATSC7FFF", 8);
-   write_xbee_uart01(uart_instance, "ATSD3", 5);
-   write_xbee_uart01(uart_instance, "ATZS0", 5);
-   write_xbee_uart01(uart_instance, "ATNJFF",6);
-   write_xbee_uart01(uart_instance, "ATNW0", 5);
-   write_xbee_uart01(uart_instance, "ATJN1", 5);   
-   write_xbee_uart01(uart_instance, "ATDO8", 5);
-   write_xbee_uart01(uart_instance, "ATDC0", 5);
+     //Networking commands
+   write_xbee_uart01(uart_instance, "ATID1234");
+   write_xbee_uart01(uart_instance, "ATSC7FFF");
+   write_xbee_uart01(uart_instance, "ATSD3");
+   write_xbee_uart01(uart_instance, "ATZS0");
+   write_xbee_uart01(uart_instance, "ATNJFF");
+   write_xbee_uart01(uart_instance, "ATNW0");
+   write_xbee_uart01(uart_instance, "ATJN1");   
+   write_xbee_uart01(uart_instance, "ATDO8");
+   write_xbee_uart01(uart_instance, "ATDC0");
 
    //Addressing commands
-   write_xbee_uart01(uart_instance, "ATDH0", 5);
-   write_xbee_uart01(uart_instance, "ATNH1E", 6);
-   write_xbee_uart01(uart_instance, "ATBH0", 5);
-   write_xbee_uart01(uart_instance, "ATARFF", 6);
-   write_xbee_uart01(uart_instance, "ATDDA0000", 9);
-   write_xbee_uart01(uart_instance, "ATNT3C", 6);
-   write_xbee_uart01(uart_instance, "ATNO0", 5);
-   write_xbee_uart01(uart_instance, "ATCR3", 5);
+   write_xbee_uart01(uart_instance, "ATDH0");
+   write_xbee_uart01(uart_instance, "ATNH1E");
+   write_xbee_uart01(uart_instance, "ATBH0");
+   write_xbee_uart01(uart_instance, "ATARFF");
+   write_xbee_uart01(uart_instance, "ATDDA0000");
+   write_xbee_uart01(uart_instance, "ATNT3C");
+   write_xbee_uart01(uart_instance, "ATNO0");
+   write_xbee_uart01(uart_instance, "ATCR3");
 
    //Zigbee Addressing
-   write_xbee_uart01(uart_instance, "ATSEE8", 6);
-   write_xbee_uart01(uart_instance, "ATDEE8", 6);
-   write_xbee_uart01(uart_instance, "ATCI11", 6);
-   write_xbee_uart01(uart_instance, "ATTO0", 5);
+   write_xbee_uart01(uart_instance, "ATSEE8");
+   write_xbee_uart01(uart_instance, "ATDEE8");
+   write_xbee_uart01(uart_instance, "ATCI11");
+   write_xbee_uart01(uart_instance, "ATTO0");
 
    //RF Interfacing
-   write_xbee_uart01(uart_instance, "ATPL4", 5);
+   write_xbee_uart01(uart_instance, "ATPL4");
 
    //Security
-   write_xbee_uart01(uart_instance, "ATEE0", 5);
-   write_xbee_uart01(uart_instance, "ATEO0", 5);
-   write_xbee_uart01(uart_instance, "ATKY0", 5);
-   write_xbee_uart01(uart_instance, "ATNK0", 5);
+   write_xbee_uart01(uart_instance, "ATEE0");
+   write_xbee_uart01(uart_instance, "ATEO0");
+   write_xbee_uart01(uart_instance, "ATKY0");
+   write_xbee_uart01(uart_instance, "ATNK0");
    
    
    //Serial Interfacing
-   write_xbee_uart01(uart_instance, "ATBD3", 5);
-   write_xbee_uart01(uart_instance, "ATNB0", 5);
-   write_xbee_uart01(uart_instance, "ATSB0", 5);
-   write_xbee_uart01(uart_instance, "ATRO3", 5);
-   write_xbee_uart01(uart_instance, "ATD60", 5);
-   write_xbee_uart01(uart_instance, "ATD71", 5);
-   write_xbee_uart01(uart_instance, "ATAP1", 5);
-   write_xbee_uart01(uart_instance, "ATAO0", 5);
+   write_xbee_uart01(uart_instance, "ATBD3");
+   write_xbee_uart01(uart_instance, "ATNB0");
+   write_xbee_uart01(uart_instance, "ATSB0");
+   write_xbee_uart01(uart_instance, "ATRO3");
+   write_xbee_uart01(uart_instance, "ATD60");
+   write_xbee_uart01(uart_instance, "ATD71");
+   write_xbee_uart01(uart_instance, "ATAP1");
+   write_xbee_uart01(uart_instance, "ATAO0");
 
    //AT Command Options
-   write_xbee_uart01(uart_instance, "ATCT64", 6);
-   write_xbee_uart01(uart_instance, "ATGT3E8",7);
-   write_xbee_uart01(uart_instance, "ATCC2B", 6);
-  
+   write_xbee_uart01(uart_instance, "ATCT64");
+   write_xbee_uart01(uart_instance, "ATGT3E8");
+   write_xbee_uart01(uart_instance, "ATCC2B");
+
    //Sleep Modes
-   write_xbee_uart01(uart_instance, "ATSP64",6 );       //ATSP64 = 64(HEX) = 100(decimal)*10ms = 1 second.
-   write_xbee_uart01(uart_instance, "ATSN1", 5);
-   write_xbee_uart01(uart_instance, "ATSM4", 5);        //ATSM4 = Cyclic Sleep mode
-   write_xbee_uart01(uart_instance, "ATST1388", 8);    //ATST1f4 = 1f4 HEX = 500(decimal) * 10ms = 5 Seconds.
+   write_xbee_uart01(uart_instance, "ATSP64" );       //ATSP64 = 64(HEX) = 100(decimal)*10ms = 1 second.
+   write_xbee_uart01(uart_instance, "ATSN1");
+   write_xbee_uart01(uart_instance, "ATSM4");        //ATSM4 = Cyclic Sleep mode
+   write_xbee_uart01(uart_instance, "ATST1388");    //ATST1f4 = 1f4 HEX = 500(decimal) * 10ms = 5 Seconds.
 
-   write_xbee_uart01(uart_instance, "ATSO0", 5);
-   write_xbee_uart01(uart_instance, "ATWH0", 5);
-   write_xbee_uart01(uart_instance, "ATPO0", 5);
+   write_xbee_uart01(uart_instance, "ATSO0");
+   write_xbee_uart01(uart_instance, "ATWH0");
+   write_xbee_uart01(uart_instance, "ATPO0");
 
-   //I/O Settings
-   write_xbee_uart01(uart_instance, "ATD01", 5);
-   write_xbee_uart01(uart_instance, "ATD10", 5);
-   write_xbee_uart01(uart_instance, "ATD20", 5);
-   write_xbee_uart01(uart_instance, "ATD30", 5);
-   write_xbee_uart01(uart_instance, "ATD40", 5);
-   write_xbee_uart01(uart_instance, "ATD51", 5);
-   write_xbee_uart01(uart_instance, "ATD81", 5);
-   write_xbee_uart01(uart_instance, "ATD91", 5);
-   write_xbee_uart01(uart_instance, "ATP01", 5);
-   write_xbee_uart01(uart_instance, "ATP10", 5);
-   write_xbee_uart01(uart_instance, "ATP20", 5);
-   write_xbee_uart01(uart_instance, "ATP31", 5);
-   write_xbee_uart01(uart_instance, "ATP41", 5);
-   write_xbee_uart01(uart_instance, "ATPR1FBF", 8);
-   write_xbee_uart01(uart_instance, "ATPD1FFF", 8);
-   write_xbee_uart01(uart_instance, "ATLT0",5 );
-   write_xbee_uart01(uart_instance, "ATRP28",6 );
+     //I/O Settings
+   write_xbee_uart01(uart_instance, "ATD01");
+   write_xbee_uart01(uart_instance, "ATD10");
+   write_xbee_uart01(uart_instance, "ATD20");
+   write_xbee_uart01(uart_instance, "ATD30");
+   write_xbee_uart01(uart_instance, "ATD40");
+   write_xbee_uart01(uart_instance, "ATD51");
+   write_xbee_uart01(uart_instance, "ATD81");
+   write_xbee_uart01(uart_instance, "ATD91");
+   write_xbee_uart01(uart_instance, "ATP01");
+   write_xbee_uart01(uart_instance, "ATP10");
+   write_xbee_uart01(uart_instance, "ATP20");
+   write_xbee_uart01(uart_instance, "ATP31");
+   write_xbee_uart01(uart_instance, "ATP41");
+   write_xbee_uart01(uart_instance, "ATPR1FBF");
+   write_xbee_uart01(uart_instance, "ATPD1FFF");
+   write_xbee_uart01(uart_instance, "ATLT0");
+   write_xbee_uart01(uart_instance, "ATRP28");
 
    //I/O Sampling
-   write_xbee_uart01(uart_instance, "ATIR0", 5);
-   write_xbee_uart01(uart_instance, "ATIC0", 5);
-   write_xbee_uart01(uart_instance, "ATV+0", 5);
+   write_xbee_uart01(uart_instance, "ATIR0");
+   write_xbee_uart01(uart_instance, "ATIC0");
+   write_xbee_uart01(uart_instance, "ATV+0");
 }
 
 /**

@@ -234,7 +234,7 @@ int write_xbee_uart01(uart_struct * uart_instance, char *str)
        write_uart_character(uart_instance,*str);
        str++;
     }
-    //AT Command is send by carrige return
+    //AT Command is sent by carrige return
     write_uart_character(uart_instance,'\r');
 
     delay(2);

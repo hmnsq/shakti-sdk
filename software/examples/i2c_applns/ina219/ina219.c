@@ -28,6 +28,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 @brief Contains the driver routines to configure and read current/power.
 @detail I2C based routines to configures and read current/power using ina219 sensor.
 */
+
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
 #include "log.h"

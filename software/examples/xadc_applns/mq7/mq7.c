@@ -1,7 +1,7 @@
 /***************************************************************************
 * Project                               : shakti devt board
-* Name of the file                      : mq2.c
-* Brief Description of file             : Demonstrates the usage of MQ2 gas sensor.
+* Name of the file                      : mq7.c
+* Brief Description of file             : Demonstrates the usage of MQ7 gas sensor.
 * Name of Student                       : Kolan Nikshith Reddy
 * Email ID                              : cs20m030@smail.iitm.ac.in
 * Name of mentor                        : Kottesswaran Ekambaram
@@ -24,9 +24,8 @@
 
 ***************************************************************************/
 /**
-@file mq2.c
-@brief  write data to flash by xadc
-@detail Contains driver codes to read and write flash using SPI interface.
+@file mq7.c
+@brief Demonstrates the usage of MQ7 gas sensor.
 */
 
 #include <stdint.h>

@@ -233,7 +233,6 @@ int write_xbee_uart01(uart_struct * uart_instance, char *str)
    //      str++;
    //  }
 
-   //length variable is not used to check the end of string
    while(*str!='\0')
     {
        write_uart_character(uart_instance,*str);

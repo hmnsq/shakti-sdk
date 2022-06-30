@@ -1,7 +1,7 @@
 /***********************************************************************************
  * Project           	      : shakti devt board
  * Name of the file	          : tca9548a.c
- * Brief Description of file  : TCA9548A I2C Expander
+ * Brief Description of file  : TCA9548A I2C Expander multiplexes DS3231 RTC Sensor
  * Student Name               : Kolan Nikshith Reddy
  * Student email              : cs20m030@smail.iitm.ac.in
  * Mentor Name                : Kotteeswaran
@@ -140,7 +140,7 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 //		delay_loop(800, 800);
 
 
-			return 0;
+	return 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)

@@ -228,11 +228,7 @@ int write_xbee_uart01(uart_struct * uart_instance, char *str)
     delay(3);
     char *s1 = str;
 
-   //  for(int i=0;i<length;i++){
-   //      write_uart_character(uart_instance, *str);
-   //      str++;
-   //  }
-
+ 
    while(*str!='\0')
     {
        write_uart_character(uart_instance,*str);

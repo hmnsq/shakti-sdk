@@ -40,15 +40,13 @@
 //0x4125c is the address for A3 pin
 
 
-
-
-//only pins a0 to a3 work.
-//a0 41250, a1 254, a2 258, a3 25c address
-
-
 int MQ7sensorValue = 0;   // value read from the sensor
 
-
+/** 
+ * @fn int main()
+ * @brief Calls the xadc apis to read Carbon Monoxide.
+ * @return none
+ */
 void main()
 {       
     
@@ -56,6 +54,7 @@ void main()
     printf("MQ-7 Gas Sensor started...");
     while(1){
 
+    //Reading the analog value
     MQ7sensorValue = xadc_read_data(0x41250)>>4;
 
 
@@ -63,7 +62,7 @@ void main()
     {
         printf("CO: %d PPM \t Air-Quality: CO perfect\n", MQ7sensorValue);
     }
-    else if ((MQ7sensorValue > 200) && (MQ7sensorValue <= 800)) // || = or
+    else if ((MQ7sensorValue > 200) && (MQ7sensorValue <= 800))
     {
         printf("CO: %d PPM \t Air-Quality: CO Normal\n", MQ7sensorValue);
     }

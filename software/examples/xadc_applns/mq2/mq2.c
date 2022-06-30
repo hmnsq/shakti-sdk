@@ -25,8 +25,7 @@
 ***************************************************************************/
 /**
 @file mq2.c
-@brief  write data to flash by xadc
-@detail Contains driver codes to read and write flash using SPI interface.
+@brief  Demonstrates the usage of MQ2 gas sensor.
 */
 
 #include <stdint.h>

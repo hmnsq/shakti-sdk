@@ -69,6 +69,11 @@ platform.h - header file for vajra C class SoC on artix7_100t
 #define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
 #define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
 
+/*!standard Serial Peripheral Interface Offsets */
+#define SSPI0_BASE_ADDRESS 0x00020000
+#define SSPI_BASE_OFFSET 0X100
+#define SSPI_MAX_COUNT  1
+
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
 #define UART0_START 0x00011300 /*! UART 0 */
 #define UART_OFFSET 0x100

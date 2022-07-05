@@ -135,8 +135,10 @@ compile:
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -I$(bspinc)/ethernet -c $(bspdri)/ethernet/eth_driver.c -o ./gen_lib/eth_driver.o -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/pinmux/pinmux.c -o ./gen_lib/pinmux.o -lm -lgcc
+
 build:
-	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o  ./gen_lib/xadc_driver.o ./gen_lib/pwm_driver.o ./gen_lib/eth_driver.o
+	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o  ./gen_lib/xadc_driver.o ./gen_lib/pwm_driver.o ./gen_lib/eth_driver.o ./gen_lib/pinmux.o 
 	
 do:
 ifeq ($(PROGRAM),all)
@@ -149,7 +151,9 @@ ifeq ($(PROGRAM),all)
 	cd ./clint_applns && $(MAKE) all TARGET=$(TARGET)
 	cd ./malloc_test && $(MAKE) all TARGET=$(TARGET)
 	cd ./xadc_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./sspi_applns && $(MAKE) all TARGET=$(TARGET)
 	cd ./eth_test && $(MAKE) all TARGET=$(TARGET)
+	
 else
 ifeq ($(PROGRAM),loopback)
 filepath := uart_applns/loopback
@@ -319,7 +323,11 @@ else
 ifeq ($(PROGRAM),lora_transmit)
 filepath := uart_applns/lora_transmit
 else
+ifeq ($(PROGRAM),framsdcard)
+filepath := sspi_applns/framsdcard
+else
 	@echo "Entry for $(PROGRAM) not present"
+endif
 endif
 endif
 endif
@@ -465,3 +473,4 @@ else
 endif
 endif
 endif
+

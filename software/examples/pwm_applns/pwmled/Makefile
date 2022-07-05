@@ -33,7 +33,7 @@ all: create_dir
 
 pwmled.riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c ./pwmled.c -o ./output/pwmled.o
-	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -T  $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/pwmled.o -o ./output/$(PROGRAM).shakti -static -nostartfiles
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -T  $(bspboard)/link.ld  ./output/pwmled.o  $(GENLIB)/gen_lib/libshakti$(XLEN).a -o ./output/$(PROGRAM).shakti -static -nostartfiles
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:

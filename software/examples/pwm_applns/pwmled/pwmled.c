@@ -41,7 +41,6 @@ int main()
 	 **/
 	pwm_configure(PWM_0, 0xf000, 0xf0, 0x80, false);
     *pinmux_config_reg = 0x80;
-		
 	/*This function starts the PWM in the specified mode*/
 	pwm_start(PWM_0,0);
 	return 0;

@@ -184,6 +184,9 @@ else
 ifeq ($(PROGRAM),mpu6050)
 filepath := i2c_applns/mpu6050
 else
+ifeq ($(PROGRAM),oled)
+filepath := i2c_applns/oled
+else
 ifeq ($(PROGRAM),btnled)
 filepath := gpio_applns/btnled
 else
@@ -320,6 +323,7 @@ ifeq ($(PROGRAM),lora_transmit)
 filepath := uart_applns/lora_transmit
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
 endif
 endif
 endif

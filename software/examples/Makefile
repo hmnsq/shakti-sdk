@@ -268,6 +268,9 @@ else
 ifeq ($(PROGRAM),mcp4921_dac)
 filepath := spi_applns/mcp4921_dac
 else
+ifeq ($(PROGRAM),tft_display)
+filepath := spi_applns/tft_display
+else
 ifeq ($(PROGRAM),pwmmotor)
 filepath := pwm_applns/pwmmotor
 else
@@ -323,6 +326,7 @@ ifeq ($(PROGRAM),lora_transmit)
 filepath := uart_applns/lora_transmit
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
 endif
 endif
 endif

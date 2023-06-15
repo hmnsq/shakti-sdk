@@ -1,3 +1,35 @@
+/****************************************************************************
+ * Project           	        : shakti devt board
+ * Name of the file	          : oled.c
+ * Brief Description of file  : Implements functions for controlling and displaying 
+                                content on an OLED display.
+ * Name of Author             : Balaji Sivanallaperumal
+ * Email ID                   : ospbalaji@gmail.com
+
+ Copyright (C) 2019  IIT Madras. All rights reserved.
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*******************************************************************************/
+/**
+@file   oled.c
+@brief  Implements functions for controlling and displaying content on an OLED display.
+@detail This file provides functions to initialize the OLED display, write text and graphics,
+and control the display's settings. It utilizes an OLED display driver to communicate
+with the display hardware and provide a convenient interface for displaying information via I2C.
+*/                                                                                                
+
 #include <stdint.h> 
 #include <stdbool.h>
 #include "i2c.h"
@@ -288,7 +320,6 @@ void ssd1306_command(unsigned int c)
  
 }
 
-
 int write_ssd1306_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned long delay)
 {
 	int i = 0, j = 0,  k = 0, status=0;
@@ -367,12 +398,6 @@ void TextSize(unsigned int t_size)
   text_size = t_size;
 }
 
-/* print single char
-    \a  Set cursor position to upper left (0, 0)
-    \b  Move back one position
-    \n  Go to start of current line
-    \r  Go to line below
-*/
 void Print(unsigned int c)
 {
   unsigned int _color;

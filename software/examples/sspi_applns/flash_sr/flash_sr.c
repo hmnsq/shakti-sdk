@@ -31,7 +31,7 @@ protocol.
 #include <stdint.h>
 #include "sspi.h"
 #include "uart.h"
-
+#include "pinmux.h"
 #define  WRITE_SIZE 10
 #define  READ_SIZE 10
 #define FLASH_BASE_ADDRESS 0x00b00000
@@ -96,6 +96,7 @@ void test_spi()
  */
 void main()
 {
+	*pinmux_config_reg = 0x154000;	
 	int write_address = FLASH_BASE_ADDRESS;  // read/write from/to this address
 	int read_address  = FLASH_BASE_ADDRESS;  // read/write from/to this address
 	int data = 0xDEADBEEF; //32 bits of data can be written at a time

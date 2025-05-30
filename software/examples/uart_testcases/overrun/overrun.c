@@ -29,7 +29,7 @@ Try sending chars from UART1 to UART0
 
 #include<uart.h>
 #include "pinmux.h"
-
+volatile unsigned int* pinmux_config_reg = (volatile unsigned int* ) PINMUX_CONFIGURE_REG;
 void main()
 {
 	write_uart_string (uart_instance[0], "Hello World in uart 0 !\n");

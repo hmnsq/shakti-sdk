@@ -31,7 +31,7 @@ protocol.
 #include <stdint.h>
 #include "sspi.h"
 #include "uart.h"
-
+#include "pinmux.h"
 #define  WRITE_SIZE 10
 #define  READ_SIZE 10
 #define FLASH_BASE_ADDRESS 0x00b00000
@@ -54,6 +54,8 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
 	}
 }
 #else
+volatile unsigned int* pinmux_config_reg = (volatile unsigned int* ) PINMUX_CONFIGURE_REG;
+
 static void flash_read_locations(uint32_t read_address, uint32_t length, int *read_data)
 {
 	for(int i = 0; i < length; ++i)
@@ -74,6 +76,7 @@ static void flash_read_locations(uint32_t read_address, uint32_t length, int *re
  */
 void main()
 {
+	*pinmux_config_reg = 0x154000;
 	int write_address = FLASH_BASE_ADDRESS;  // read/write from/to this address
 	int read_address  = FLASH_BASE_ADDRESS;  // read/write from/to this address
 	int data = 0xDEADBEEF; //32 bits of data can be written at a time

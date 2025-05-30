@@ -18,7 +18,7 @@
 
 #define GPIO_IN  0
 #define GPIO_OUT 1
-#define GPIO_QUAL_MAX_CYCLES 15
+#define GPIO_QUAL_MAX_CYCLES 32
 #define ALL_GPIO_PINS -1
 
 

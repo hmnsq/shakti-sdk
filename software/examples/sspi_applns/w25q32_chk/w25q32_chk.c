@@ -76,6 +76,7 @@ static void flash_read_locations(uint32_t read_address, uint32_t length, int *re
 }
 #endif
 
+volatile unsigned int* pinmux_config_reg = (volatile unsigned int* ) PINMUX_CONFIGURE_REG;
 /** @fn void main()
  * @brief Configures the SPI flash and writes into a flash location.
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
@@ -96,6 +97,7 @@ void main()
 	flash_device_id();
 	waitfor(200);
 	printf("\n Flash device id read complete");
+	status_register_update(STATUS_REGISTER);
 	flash_erase(FLASH_BASE_ADDRESS); //erases an entire sector
 	printf("\nErase complete");
 

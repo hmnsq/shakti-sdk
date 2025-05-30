@@ -47,7 +47,7 @@
 #define FLASH_NORMAL_READ_COMMAND 0x13
 
 
-#define SSPI_INSTANCE 0
+#define SSPI_INSTANCE 1
 
 
 //sspi_struct *SSPI0 = (sspi_struct *) SSPI0_BASE_ADDRESS;
@@ -61,7 +61,7 @@ void flash_init()
 	sspi_configure_pins(sspi_instance[SSPI_INSTANCE], 1, 0 ,  1 , 1);
 	sspi_configure_mas_slv(sspi_instance[SSPI_INSTANCE], SPI_MASTER);
 	sspi_configure_lsb_first(sspi_instance[SSPI_INSTANCE], MSB_FIRST);
-	sspi_configure_tx_setup_time(sspi_instance[SSPI_INSTANCE], 1);
+	sspi_configure_tx_setup_time(sspi_instance[SSPI_INSTANCE], 2);
 //	sspi_configure_tx_hold_time(sspi_instance[SSPI_INSTANCE], 0);
 }
 
@@ -141,7 +141,7 @@ char flash_register_read(char command)
 	char stat = 0x0;
 
 		stat = flash_cmd_read(command);
-		printf("\ncommand [%x] read value: %x\n", command, stat);
+		printf("command [%x] read value: %x\n", command, stat);
 
 	return stat;
 }

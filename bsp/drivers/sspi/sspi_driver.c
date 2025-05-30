@@ -47,7 +47,7 @@ void sspi_init()
     for(int i = 0; i < SSPI_MAX_COUNT; i++)
     {
 		sspi_instance[i] = (sspi_struct*) ( (SSPI0_BASE_ADDRESS + ( i * SSPI_BASE_OFFSET) ) );
-        printf("\nsspi_instance[%x]: %x", i, sspi_instance[i]);
+        printf("sspi_instance[%x]: %x", i, sspi_instance[i]);
     }
 }
 

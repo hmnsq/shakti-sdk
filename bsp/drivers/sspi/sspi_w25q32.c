@@ -91,6 +91,29 @@ int sspi_notbusy(void)
 	log_debug("\n SPI comm done \n");
 	return 1;
 }
+/**
+ * @fn void status_register_update(int data)
+ * @brief Updates the flash memory status register.
+ * @details This function that disables protection to the flash memory bysending the 
+ * `WRITE STATUS REGISTER (WRSR)` command along with a new status value to modify 
+ * protection bits in the flash status register.
+ * @param data The value to be written to the flash status register.
+ */
+void status_register_update(int data)
+{
+#ifdef DISABLE_CS
+	sspi_enable_txrx(sspi_instance[SSPI_INSTANCE], DISABLE);
+#endif
+	flash_write_enable();
+	sspi_instance[SSPI_INSTANCE]->data_tx = FLASH_WRITE_SR;	//Do not shift  command when passing as argument.
+	sspi_instance[SSPI_INSTANCE]->data_tx = 0;	//MSB byte of address.
+	sspi_configure_tx_rx_length(sspi_instance[SSPI_INSTANCE], 16, 0);//Tx - 40, Rx - 0;
+	sspi_configure_comm_mode(sspi_instance[SSPI_INSTANCE], SIMPLEX_TX);
+	sspi_enable_txrx(sspi_instance[SSPI_INSTANCE], ENABLE);
+	waitfor(20);
+	sspi_notbusy();	
+	log_debug("\n status register protection removed");
+}
 
 
 char flash_cmd_read(char command)

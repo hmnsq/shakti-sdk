@@ -167,7 +167,7 @@ static inline void isr_default(uint32_t interrupt_id)
 		/*
 		   Assuming 6 pwm's are there
 		 */
-#ifndef SOS
+#ifndef yamuna
 		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
 		{
 			set_pwm_control_register((6-interrupt_id),0x80);
@@ -349,10 +349,8 @@ void plic_init()
 	uint32_t int_id = 0;
 
 	log_trace("\nplic_init entered\n");
-
 	/*Assign service routine for external interrupt in machine mode*/
 	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT] = mach_plic_handler;
-
 	log_debug("Assigned mach_plic_handler to trap id : %d\n", MACH_EXTERNAL_INTERRUPT);
 
 	/*
@@ -424,7 +422,7 @@ void configure_interrupt(uint32_t int_id)
 	/*
 	   Call only for GPIO pins
 	 */
-	if(int_id >6 && int_id < 22)
+	if(int_id > 6 && int_id < 52)
 	{
 		configure_interrupt_pin(int_id);
 	}
@@ -432,4 +430,53 @@ void configure_interrupt(uint32_t int_id)
 	interrupt_enable(int_id);
 
 	log_trace("configure_interrupt exited \n");
+}
+
+/** @fn void enable_machine_global_interrupts()
+ * @brief Clear Interrupt pending register & enable mcahine global interrupts.
+ * @details All PLIC interrupts are passed to core machine interrupts. Enabling the machine interrupts will only enables the interrupts handler for all the machine related interrupts.
+ * @warning Nil
+ * @param None
+ */
+void enable_machine_global_interrupts()
+{
+	uint32_t ret_val;
+	// Enable Global (PLIC) interrupts.
+	asm volatile("li      t0, 8\t\n"
+		     "csrrs   zero, mstatus, t0\t\n"
+		    );
+
+	asm volatile("li      t0, 0x800\t\n"
+		     "csrrs   zero, mie, t0\t\n"
+		    );
+
+	asm volatile(
+		     "csrr %[ret_val], mstatus\n"
+		     :
+		     [ret_val]
+		     "=r"
+		     (ret_val)
+		    );
+
+	//printf(" ret_valret_val = %x\n", ret_val);
+
+	asm volatile(
+		     "csrr %[ret_val], mie\n"
+		     :
+		     [ret_val]
+		     "=r"
+		     (ret_val)
+		    );
+
+	//printf(" ret_val = %x\n", ret_val);
+
+	asm volatile(
+		     "csrr %[ret_val], mip\n"
+		     :
+		     [ret_val]
+		     "=r"
+		     (ret_val)
+		    );
+
+	//printf(" ret_val = %x\n", ret_val);
 }

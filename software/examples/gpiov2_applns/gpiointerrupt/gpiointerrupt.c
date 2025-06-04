@@ -26,7 +26,7 @@
 #include "plic_driver.h"
 #include "platform.h"
 
-#define ACTIVE_HIGH_to_LOW 0
+#define ACTIVE_HIGH_to_LOW 1
 #define ACTIVE_LOW_to_HIGH 0
 
 unsigned handle_button_press (unsigned num)
@@ -60,13 +60,13 @@ unsigned handle_button_press (unsigned num)
 	/* Check the GPIO interrupt switch from Active low to Active high */
 				/* TEST DONE on GPIO_2 */
 	gpiov2_instance->direction = 0x0;
-	if (gpiov2_instance->data == 0)
+	if (gpiov2_instance->data == 0x1)
 	{
 		log_info("\nActive low interrupt");
 		delay_loop(1000,1000);
 		gpiov2_instance->intr_config = 0xff;
-		configure_interrupt(PLIC_INTERRUPT_9);
-		isr_table[PLIC_INTERRUPT_9] = handle_button_press;	
+		configure_interrupt(PLIC_INTERRUPT_7);
+		isr_table[PLIC_INTERRUPT_7] = handle_button_press;	
 	}
 #endif	
 
@@ -86,9 +86,7 @@ void main()
     unsigned int int_id = 7;
     register uint32_t retval;
     int i;
-
-    gpiov2_instance->direction = 0xf0000;
-    check_gpiov2();
+	check_gpiov2();
     printf("\n Starting GPIO INTERRUPT tests \n");
     printf("\n GPIO_INTERRUPT_OFFSET: %x; PLIC_MAX_INTERRUPT_SRC: %x; Intr.Src: %x",PLIC_GPIO_OFFSET, PLIC_MAX_INTERRUPT_SRC, int_id);
 
@@ -101,7 +99,7 @@ void main()
 	/* Checking for active high */
 	// gpiov2_instance->intr_config = 0x00;
 
-    plic_init();
+    // plic_init();
 
 /* GPIO_0 */
     // configure_interrupt(PLIC_INTERRUPT_7);
@@ -182,8 +180,8 @@ void main()
 
 	/* Checking for active high */
 	gpiov2_instance->intr_config = 0x00;
-	configure_interrupt(PLIC_INTERRUPT_9);
-	isr_table[PLIC_INTERRUPT_9] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_7);
+	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
 
 #endif
 

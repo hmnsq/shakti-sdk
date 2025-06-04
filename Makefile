@@ -184,6 +184,7 @@ ifeq ($(PROGRAM),)
 	cd ./software/examples/malloc_test && $(MAKE) clean CLEAR=CLEAR
 	cd ./software/examples/xadc_applns && $(MAKE) clean CLEAR=CLEAR
 	cd ./software/examples/eth_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/gpt_applns && $(MAKE) clean CLEAR=CLEAR
 	cd ./software/projects && $(MAKE) clean CLEAR=CLEAR
 else
 	cd ./software/examples && $(MAKE) PROGRAM=$(PROGRAM) CLEAR=CLEAR

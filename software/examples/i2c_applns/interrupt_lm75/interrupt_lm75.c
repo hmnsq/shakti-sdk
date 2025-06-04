@@ -111,7 +111,7 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
 }
 void handle_i2c1_interrupt( uint32_t num)
 {
-	i2c_complete_flag = 1;
+	// i2c_complete_flag = 1;
 	log_info("i2c1 interrupt handled: %x\n", num);
 }
 

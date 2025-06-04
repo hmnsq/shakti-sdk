@@ -32,9 +32,11 @@
 #include "plic_driver.h"
 #include "gpiov2.h"
 #define PWM_0 0
-
+volatile unsigned int* pinmux_config_reg = (volatile unsigned int* ) PINMUX_CONFIGURE_REG;
 void handle_pwm_interrupt( uint32_t num)
 {
+	printf("\nhi\n");
+	*pinmux_config_reg = 0x0;
 	gpiov2_init();
 	gpiov2_instance->direction = 0x10000;
 	gpiov2_instance->toggle = 0x10000;
@@ -45,7 +47,7 @@ void handle_pwm_interrupt( uint32_t num)
 
 int main()
 {
-
+	*pinmux_config_reg = 0x2aa80;
 	printf("\n====================================================\n");
 
     register unsigned int retval;
@@ -56,13 +58,13 @@ int main()
 	/*
 	   Configure pwm module interrupt
 	*/
-	configure_interrupt(PLIC_INTERRUPT_6);
+	configure_interrupt(PLIC_INTERRUPT_1);
 
 	/* For checking PWM Interrupt by toggling one board LED */
 	// isr_table[PLIC_INTERRUPT_6] = handle_pwm_interrupt;
 
 	/* For checking all the test case*/
-	isr_table[PLIC_INTERRUPT_6] = pwm_isr_handler0;
+	isr_table[PLIC_INTERRUPT_1] = pwm_isr_handler0;
 
 
 	/**we need to set the period, duty cycle and the clock divisor in order

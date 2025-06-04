@@ -167,7 +167,7 @@ static inline void isr_default(uint32_t interrupt_id)
 		/*
 		   Assuming 6 pwm's are there
 		 */
-#ifndef yamuna
+#ifdef vajra
 		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
 		{
 			set_pwm_control_register((6-interrupt_id),0x80);

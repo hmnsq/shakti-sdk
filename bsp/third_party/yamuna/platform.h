@@ -160,7 +160,7 @@ platform.h - header file for SoS C class SoC on artix7_100t
 /*!General Purpose Input / Output */
 #define GPIO_START 0x00040100 //GPIO Start Address */
 #define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
-#define PLIC_GPIO_OFFSET 6
+#define PLIC_GPIO_OFFSET 7
 
 /*! General Purpose Timer Interface */
 #define GPT_BASE_ADDRESS 0X00040200 /*! General Purpose Timer Base Address */

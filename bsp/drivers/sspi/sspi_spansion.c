@@ -35,7 +35,7 @@
 #define SPI_HALF_DUPLEX 1
 //#define SHOW_REG 1
 
-#define SSPI_DRIVER     1
+#define SSPI_DRIVER 1
 #define FAST_READ 1
 #define FLASH_WRITE_COMMAND 0x12
 #define FLASH_FAST_READ_COMMAND 0x0C
@@ -47,7 +47,7 @@
 #define FLASH_NORMAL_READ_COMMAND 0x13
 
 
-#define SSPI_INSTANCE 1
+#define SSPI_INSTANCE 0
 
 
 //sspi_struct *SSPI0 = (sspi_struct *) SSPI0_BASE_ADDRESS;

@@ -30,7 +30,7 @@
 
 #define SSPI_DRIVER  1
 #include "sspi.h"
-#include "platform.h"
+// #include "platform.h"
 #include "log.h"
 
 

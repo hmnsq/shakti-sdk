@@ -33,8 +33,8 @@
 //#define DISABLE_CS 1
 
 #define SSPI_DRIVER     1
-#define FAST_READ 1
-//#define NORMAL_READ 1
+// #define FAST_READ 1
+#define NORMAL_READ 1
 #define FLASH_WRITE_COMMAND 0x02
 #define FLASH_FAST_READ_COMMAND 0x0B
 #define FLASH_ERASE_COMMAND 0xD8
@@ -75,7 +75,7 @@ int flash_write_enable(void)
 	sspi_instance[SSPI_INSTANCE]->data_tx = FLASH_WRITE_ENABLE;	//MSB byte of address.
  	sspi_enable_txrx(sspi_instance[SSPI_INSTANCE], ENABLE);
  	sspi_notbusy();
-	 log_debug("\n Flash write enabled");
+	log_debug("\n Flash write enabled");
  	return 1;
 }
 

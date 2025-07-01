@@ -42,8 +42,8 @@ protocol.
 
 #define  WRITE_SIZE 10
 #define  READ_SIZE 10
-#define FLASH_BASE_ADDRESS 0x00000000
-
+#define FLASH_BASE_ADDRESS 0x000000
+#define STATUS_REGISTER 0x01000000
 
 /** @fn static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @brief Reads the flash memory contents starting from read_address.
@@ -93,7 +93,6 @@ void main()
 	sspi_init();
 	flash_init();
 	printf("SPI init done\n");
-
 	flash_device_id();
 	waitfor(200);
 	printf("\n Flash device id read complete");
@@ -128,9 +127,9 @@ void main()
 	printf("\n Data read after erase:")	;
 	length = READ_SIZE;
 //	for(int i = 0; i < length; i++)
-	{
-		flash_read_locations( read_address, length, &read_data);
-	}
+	// {
+	// 	flash_read_locations( read_address, length, &read_data);
+	// }
 //	while(1);
 	length = WRITE_SIZE;
 	data = 0x0;

@@ -440,6 +440,9 @@ else
 ifeq ($(PROGRAM),baudrate)
 filepath := uart_testcases/baudrate
 else
+ifeq ($(PROGRAM),bigfiletest)
+filepath := uart_testcases/bigfiletest
+else
 ifeq ($(PROGRAM),breakerror)
 filepath := uart_testcases/breakerror
 else
@@ -460,6 +463,9 @@ filepath := uart_testcases/txrxlen
 else
 ifeq ($(PROGRAM),sspi_full_duplex)
 filepath := sspi_applns/sspi_full_duplex
+else
+ifeq ($(PROGRAM),adc_dac_test)
+filepath := sspi_applns/adc_dac_test
 else
 ifeq ($(PROGRAM),sspi_MSB_check)
 filepath := sspi_applns/sspi_MSB_check
@@ -567,6 +573,8 @@ ifeq ($(PROGRAM),gptpwm_interrupt)
 filepath := gpt_applns/gptpwm_interrupt
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
+endif
 endif
 endif
 endif

@@ -44,8 +44,8 @@ typedef struct
 	unsigned short reserv3;  /*! reserved */
 	unsigned short control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
 	unsigned short reserv5;  /*! reserved */
-	unsigned char ien;	     /*! Enables the required interrupts - 8 bits*/
-	unsigned char reserv6;   /*! reserved */
+	unsigned short ien;	     /*! Enables the required interrupts - 8 bits*/
+	//unsigned char reserv6;   /*! reserved */
 	unsigned short reserv7;  /*! reserved */
 	unsigned char  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
 	unsigned char reserv8;   /*! reserved */
@@ -105,7 +105,7 @@ extern unsigned char u2_rcv_char[UARTX_BUFFER_SIZE];
 
 void uart_init(void);
 void set_baud_rate(uart_struct * uart_instance, unsigned int baudrate);
-void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt);
+void enable_uart_interrupts(uart_struct * uart_instance, unsigned short interrupt);
 void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold);
 uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character);
 uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string);

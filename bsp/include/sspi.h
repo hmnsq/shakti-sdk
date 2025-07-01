@@ -126,6 +126,14 @@ extern uint32_t buf_data;
 
 #define LSB_FIRST 1
 #define MSB_FIRST 0
+#define SSPI_CLOCK_FREQUENCY 100000
+#define SETUP_TIME_CYCLES 1
+#define HOLD_TIME_CYCLES 0
+
+#define CLK_POLARITY_HIGH 1
+#define CLK_POLARITY_LOW 0
+#define CLK_PHASE_HIGH 1
+#define CLK_PHASE_LOW 0
 
 #define SIMPLEX_TX 0
 #define SIMPLEX_RX 1

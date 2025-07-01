@@ -31,11 +31,10 @@ protocol.
 #include <stdint.h>
 #include "sspi.h"
 #include "uart.h"
+#include "pinmux.h"
 #include "flashdata.h"
-
-
-#define  WRITE_SIZE write_data[0]
-#define  READ_SIZE 10
+#define  WRITE_SIZE 8193
+#define  READ_SIZE 8193
 #define FLASH_BASE_ADDRESS 0x00b00000
 
 /** @fn static void flash_read_locations(uint32_t read_address, uint16_t length)
@@ -56,9 +55,11 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
 	}
 }
 #else
+volatile unsigned int* pinmux_config_reg = (volatile unsigned int* ) PINMUX_CONFIGURE_REG;
+
 static void flash_read_locations(uint32_t read_address, uint32_t length, int *read_data)
 {
-	for(int i = 0; i < length; ++i)
+	for(int i = 0; i < 8193; ++i)
 	{
 		int read_value = flash_read(read_address);
 		printf("\nReading from adddress %x and data \
@@ -76,10 +77,11 @@ static void flash_read_locations(uint32_t read_address, uint32_t length, int *re
  */
 void main()
 {
+	*pinmux_config_reg = 0x154000;
 	int write_address = FLASH_BASE_ADDRESS;  // read/write from/to this address
 	int read_address  = FLASH_BASE_ADDRESS;  // read/write from/to this address
 	int data = 0xDEADBEEF; //32 bits of data can be written at a time
-	uint32_t length = 11;
+	uint32_t length = 8193;
 
 	sspi_init();
 	flash_init();
@@ -93,23 +95,59 @@ void main()
 	flash_erase(FLASH_BASE_ADDRESS); //erases an entire sector
 	printf("\nErase complete");
 
-	flash_write(read_address,write_data[0]);
-	read_address+=4;
+#if 0
+	flash_read_locations(read_address, length);
 
-	printf("\nWriting...");
+	//flash write
+	flash_write( write_address, 0x12345678);
+	flash_write( write_address + 0x04, 0xaaaaaaaa);
+	flash_write( write_address + 0x08, 0x55555555);
+	flash_write( write_address + 0x0C, 0xAAAA5555);
+	flash_write( write_address + 0x10, 0x5555AAAA);
+	flash_write( write_address + 0x14, 0xaaa5aaa5);
+	flash_write( write_address + 0x18, 0x555A555A);
+	flash_write( write_address + 0x1c, 0xaa55aa55);
+	flash_write( write_address + 0x20, 0x55aa55aa);
+	flash_write( write_address + 0x24, 0x5a5a5a5a);
+	flash_write( write_address + 0x28, 0xa5a5a5a5);
 
-	for(int i =0; i< write_data[0]; i++)
+	printf("\nFlash write done on address %x and data %x \n", 
+	       write_address, data);
+
+	printf("\n After Write");
+	flash_read_locations(read_address, length);
+#else
+	// int write_data[WRITE_SIZE] = {0};
+	int read_data[READ_SIZE] = {0};
+	printf("\n Data read after erase:")	;
+	length = READ_SIZE;
+	// for(int i = 0; i < length; i++)
+	// {
+		// flash_read_locations( read_address, length, &read_data);
+	// }
+//	while(1);
+	length = WRITE_SIZE;
+	data = 0x0;
+	for(int i = 0; i < length; i++)
 	{
-		waitfor(200);
-		flash_write(read_address,write_data[i+1]);
-		read_address+=4;
-
-		if(i%512 == 0)
-			printf(".");;
+		flash_write( write_address,write_data[i]);
+		// write_data[i] = data;
+		// data += 0x01010101;
+		write_address += 0x04;
 	}
+	length = READ_SIZE;
+		flash_read_locations( read_address, length, &read_data);
 
-	printf("\n\nWrite complete.\n");
-	printf("\nPlease reset.\n");
+	for(int i = 0; i < length; i++)
+	{
+		if(read_data[i] != write_data[i] )
+		{
+			log_error("\n Flash test failed");
+			log_error("\n write_value: %x; read_value: %x", write_data[i], read_data[i]);
+			return;
+		}
+	}
+	log_info("\n Flash Test passed");
+#endif
 	asm volatile ("ebreak");
-
 }

@@ -26,8 +26,8 @@
 #include "plic_driver.h"
 #include "platform.h"
 
-#define ACTIVE_HIGH_to_LOW 1
-#define ACTIVE_LOW_to_HIGH 0
+#define ACTIVE_HIGH_to_LOW 0
+#define ACTIVE_LOW_to_HIGH 1
 
 unsigned handle_button_press (unsigned num)
 {
@@ -46,7 +46,7 @@ unsigned handle_button_press (unsigned num)
 	/* Check the GPIO interrupt switch from Active low to Active high */
 				/* TEST DONE on GPIO_2 */
 	gpiov2_instance->direction = 0x0;
-	if (gpiov2_instance->data == 4)
+	if (gpiov2_instance->data == 1)
 	{
 		log_info("\nActive high interrupt");
 		delay_loop(1000,1000);
@@ -99,7 +99,7 @@ void main()
 	/* Checking for active high */
 	// gpiov2_instance->intr_config = 0x00;
 
-    // plic_init();
+    plic_init();
 
 /* GPIO_0 */
     // configure_interrupt(PLIC_INTERRUPT_7);
@@ -170,8 +170,8 @@ void main()
 
 	/* Checking for active low */
 	gpiov2_instance->intr_config = 0xff;
-	configure_interrupt(PLIC_INTERRUPT_9);
-	isr_table[PLIC_INTERRUPT_9] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_7);
+	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
 
 #endif	
 

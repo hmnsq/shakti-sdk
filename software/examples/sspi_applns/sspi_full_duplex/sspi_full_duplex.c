@@ -181,13 +181,13 @@ int main()
 	temp = spi_notbusy(1);
 	printf("SSPI1 status: %x \n", temp);
 
-	set_shakti32(spi1_clkctrl,(CLKCTRL_PRESCALE(60)|CLKCTRL_POLARITY | CLKCTRL_PHASE));
-	set_shakti8(spi1_inqual, 0x00);
+	set_shakti32(spi1_clkctrl,(CLKCTRL_CS_T(1) | CLKCTRL_PRESCALE(60)|CLKCTRL_POLARITY | CLKCTRL_PHASE));
+	// set_shakti8(spi1_inqual, 0x00);
 	temp = spi_notbusy(1);
-	printf("SSPI0 status: %x \n", temp);
+	// printf("SSPI0 status: %x \n", temp);
 
 //	set_shakti32(sspi1_clkctrl,(CLKCTRL_PRESCALE(30) |CLKCTRL_POLARITY | CLKCTRL_PHASE));
-	set_shakti8(spi1_inqual, 0x00);
+	// set_shakti8(spi1_inqual, 0x00);
 	temp = spi_notbusy(1);
 	printf("SSPI1 status: %x \n", temp);
 

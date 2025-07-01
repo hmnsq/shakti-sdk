@@ -127,7 +127,7 @@ void set_baud_rate(uart_struct *instance, unsigned int baudrate)
  * @param uart instance
  * @param unsigned char interrupt
  */
-void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
+void enable_uart_interrupts(uart_struct * instance, unsigned short interrupt)
 {
 	instance->ien = interrupt;
 }

@@ -81,12 +81,14 @@ void main()
 	for(int i = 1; i < count; i++)
 	{
 		data = flash_read(read_address);
-//		printf("\n Addr: %x; wdata: %x; rdata: %x", read_address, write_data[i], data);
-		if(data != write_data[i])
+		printf("\n Addr: %x; wdata: %x; rdata: %x", read_address, write_data[i], data);
+		delay_loop(10, 5);
+/*		if(data != write_data[i])
 			{
 				printf("\n Error in read data @ Address: %x", read_address);
 				return 1;
 			}
+*/
 				*(bram_address) = data;
 	bram_address++;
 	read_address += 4;

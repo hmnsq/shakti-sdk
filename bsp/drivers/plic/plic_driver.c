@@ -175,7 +175,7 @@ static inline void isr_default(uint32_t interrupt_id)
 #endif
 	}
 
-	log_info("interrupt [%d] serviced\n",interrupt_id);
+	log_debug("interrupt [%d] serviced\n",interrupt_id);
 
 	log_trace("\nisr_default exited\n");
 }
@@ -187,32 +187,32 @@ static inline void isr_default(uint32_t interrupt_id)
  */
 void interrupt_enable(uint32_t interrupt_id)
 {
-	uint8_t *interrupt_enable_addr;
-	uint8_t current_value = 0x00, new_value;
+	uint32_t *interrupt_enable_addr;
+	uint32_t current_value = 0x00, new_value;
 
-	log_trace("\ninterrupt_enable entered \n");
+	log_debug("\ninterrupt_enable entered \n");
 
-	log_debug("interrupt_id = %x\n", interrupt_id);
+	log_debug("interrupt_id = %d\n", interrupt_id);
 
 	log_debug("PLIC BASE ADDRESS = %x, PLIC ENABLE OFFSET = %x\n" \
 			,PLIC_BASE_ADDRESS, PLIC_ENABLE_OFFSET);
-	interrupt_enable_addr = (uint8_t *) (PLIC_BASE_ADDRESS +
+	interrupt_enable_addr = (uint32_t *) (PLIC_BASE_ADDRESS +
 			PLIC_ENABLE_OFFSET +
-			((interrupt_id) >> 3));
+			4*((interrupt_id) >> 5));
 
 	current_value = *interrupt_enable_addr;
 
-	log_debug("interrupt_enable_addr = %x current_value = %x \n", \
+	 log_debug("interrupt_enable_addr = %x current_value = %x \n", \
 			interrupt_enable_addr, current_value);
 
 	/*set the bit corresponding to the interrupt src*/
-	new_value = current_value | (0x1 << (interrupt_id % 8));
+	new_value = current_value | (0x1 << (interrupt_id % 32));
 
-	*((uint8_t*)interrupt_enable_addr) = new_value;
+	*((uint32_t*)interrupt_enable_addr) = new_value;
 
 	log_debug("value read: new_value = %x\n", new_value);
 
-	log_trace("\ninterrupt_enable exited \n");
+	log_debug("\ninterrupt_enable exited \n");
 }
 
 /** @fn void interrupt_disable(uint32_t interrupt_id) 
@@ -223,19 +223,19 @@ void interrupt_enable(uint32_t interrupt_id)
  */
 void interrupt_disable(uint32_t interrupt_id)
 {
-	uint8_t *interrupt_disable_addr = 0;
-	uint8_t current_value = 0x00, new_value;
+	uint32_t *interrupt_disable_addr = 0;
+	uint32_t current_value = 0x00, new_value;
 
-	log_trace("\ninterrupt_disable entered \n");
+	log_debug("\ninterrupt_disable entered \n");
 
 	log_debug("interrupt_id = %x\n", interrupt_id);
 
 	log_debug("PLIC BASE ADDRESS = %x, PLIC ENABLE OFFSET = %x interrupt_id = %x\n",
 		  PLIC_BASE_ADDRESS, PLIC_ENABLE_OFFSET, interrupt_id);
 
-	interrupt_disable_addr = (uint8_t *) (PLIC_BASE_ADDRESS +
+	interrupt_disable_addr = (uint32_t *) (PLIC_BASE_ADDRESS +
 					      PLIC_ENABLE_OFFSET +
-					      (interrupt_id >> 3));
+					     4* (interrupt_id >> 5));
 
 	current_value = *interrupt_disable_addr;
 
@@ -243,16 +243,16 @@ void interrupt_disable(uint32_t interrupt_id)
 		  interrupt_disable_addr, current_value);
 
 	/*unset the bit corresponding to the interrupt src*/
-	new_value = current_value & (~(0x1 << (interrupt_id % 8)));
+	new_value = current_value & (~(0x1 << (interrupt_id % 32)));
 
 	*interrupt_disable_addr = new_value;
 
-	hart0_interrupt_matrix[interrupt_id].state = INACTIVE;
+//	hart0_interrupt_matrix[interrupt_id].state = INACTIVE;
 
 	log_debug("interrupt id %d, state changed to %d\n",
 		  interrupt_id,hart0_interrupt_matrix[interrupt_id].state);
 
-	log_trace("interrupt_disable exited\n");
+	log_debug("interrupt_disable exited\n");
 }
 
 /** @fn void set_interrupt_threshold(uint32_t priority_value)

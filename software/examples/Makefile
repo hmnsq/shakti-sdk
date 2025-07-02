@@ -214,7 +214,7 @@ ifeq ($(PROGRAM),all)
 	cd ./clint_applns && $(MAKE) all TARGET=$(TARGET)
 	cd ./malloc_test && $(MAKE) all TARGET=$(TARGET)
 	cd ./xadc_applns && $(MAKE) all TARGET=$(TARGET)
-	cd ./eth_applns && $(MAKE) all TARGET=$(TARGET)
+#	cd ./eth_applns && $(MAKE) all TARGET=$(TARGET)
 ifeq ($(TARGET),sos)
 	cd ./gpiov2_applns && $(MAKE) all TARGET=$(TARGET)
 	cd ./pwmv2_applns && $(MAKE) all TARGET=$(TARGET)
@@ -707,6 +707,7 @@ ifeq ($(UPLOAD),UPLOAD)
 	@elf2hex 4 8192 $(filepath)/output/$(PROGRAM).shakti 2147483648 > $(filepath)/output/code.mem
 	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
 	@$(filepath)/output/elf_to_header
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/sspi/sspi_driver.c -o $(filepath)/output/deploy.shakti -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspboard) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/sspi/sspi_driver.c -o $(filepath)/output/deploy.shakti -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspboard) -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc

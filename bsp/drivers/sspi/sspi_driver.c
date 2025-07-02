@@ -33,7 +33,7 @@
 // #include "platform.h"
 #include "log.h"
 
-
+// #define SSPI_INSTANCE 0
 /**
  * @fn sspi_init
  * @brief This function initialises the SSPI registers as array of pointers
@@ -544,18 +544,18 @@ void sspi_clear_fifo(sspi_struct *sspi_instance)
 	printf("\n sspi_instance->comm_status: %x", sspi_instance->comm_status);
     
 }
-int sspi_notbusy(sspi_struct *sspi_instance)
-{
-	unsigned char  read_data = 0x01;
-	while(read_data & 0x01){
-		waitfor(10);
-		read_data = sspi_instance -> comm_status;
-//		read_data = SSPI0->comm_status;
-		//log_info("\n Status Register: %x", read_data);
-	}
-	log_debug("\n SPI comm done \n");
-	return 1;
-}
+// int sspi_notbusy(sspi_struct *sspi_instance)
+// {
+// 	unsigned char  read_data = 0x01;
+// 	while(read_data & 0x01){
+// 		waitfor(10);
+// 		read_data = sspi_instance[SSPI_INSTANCE]->comm_status;
+// //		read_data = SSPI0->comm_status;
+// 		log_info("\n Status Register: %x", read_data);
+// 	}
+// 	log_info("\n SPI comm done \n");
+// 	return 1;
+// }
 
 /** @fn unsigned int sspi_receive_n_data(sspi_struct *sspi_instance, uint32_t *buf_data, uint8_t buf_length)
  * @brief Receiving 'n' number of data on RX Data Register

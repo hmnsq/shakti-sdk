@@ -47,7 +47,7 @@
 #define FLASH_NORMAL_READ_COMMAND 0x13
 
 
-#define SSPI_INSTANCE 1
+#define SSPI_INSTANCE 0
 
 
 //sspi_struct *SSPI0 = (sspi_struct *) SSPI0_BASE_ADDRESS;
@@ -55,7 +55,7 @@
 void flash_init()
 {
  	sspi_enable_txrx(sspi_instance[SSPI_INSTANCE], DISABLE);
-	sspi_configure_clock_in_hz(sspi_instance[SSPI_INSTANCE], 1000000); /* Currently configuring for 100kHz, as the maximum clock is 20MHz */
+	sspi_configure_clock_in_hz(sspi_instance[SSPI_INSTANCE], 100000); /* Currently configuring for 100kHz, as the maximum clock is 20MHz */
 	sspi_configure_clock_pol(sspi_instance[SSPI_INSTANCE], 1);
 	sspi_configure_clock_phase(sspi_instance[SSPI_INSTANCE], 1);	
 	sspi_configure_pins(sspi_instance[SSPI_INSTANCE], 1, 0 ,  1 , 1);
@@ -76,23 +76,24 @@ int flash_write_enable(void)
 	sspi_configure_comm_mode(sspi_instance[SSPI_INSTANCE], SIMPLEX_TX);
 	sspi_instance[SSPI_INSTANCE]->data_tx = FLASH_WRITE_ENABLE;	//MSB byte of address.
  	sspi_enable_txrx(sspi_instance[SSPI_INSTANCE], ENABLE);
- 	sspi_notbusy();
+ 	sspi_notbusy(sspi_instance[SSPI_INSTANCE]);
 	 log_debug("\n Flash write enabled");
  	return 1;
 }
 
-// int sspi_notbusy(sspi_struct *sspi_instance)
-// {
-// 	unsigned char  read_data = 0x01;
-// 	while(read_data & 0x01){
-// 		waitfor(10);
-// 		read_data = sspi_instance -> comm_status;
-// //		read_data = SSPI0->comm_status;
-// 		//log_info("\n Status Register: %x", read_data);
-// 	}
-// 	log_debug("\n SPI comm done \n");
-// 	return 1;
-// }
+int sspi_notbusy()
+{
+	unsigned char  read_data = 0x01;
+	while(read_data & 0x01){
+		waitfor(10);
+		read_data = sspi_instance[SSPI_INSTANCE]->comm_status;
+		// read_data = sspi_instance -> comm_status;
+//		read_data = SSPI0->comm_status;
+		//log_info("\n Status Register: %x", read_data);
+	}
+	log_debug("\n SPI comm done \n");
+	return 1;
+}
 
 
 char flash_cmd_read(char command)
@@ -218,8 +219,9 @@ int flash_cmd_addr(int command, int addr)
 	sspi_configure_comm_mode(sspi_instance[SSPI_INSTANCE], SIMPLEX_TX);
 	sspi_enable_txrx(sspi_instance[SSPI_INSTANCE], ENABLE);
 	waitfor(20);
+	log_info("\n Flash Erase command is sent");
 	sspi_notbusy();
-	log_debug("\n Flash Erase command is sent");
+	log_info("\n Flash Erase command is sent");
 	return 1;
 }
 

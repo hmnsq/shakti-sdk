@@ -26,7 +26,7 @@
 #include "plic_driver.h"
 #include "platform.h"
 
-#define ACTIVE_HIGH_to_LOW 0
+// #define ACTIVE_HIGH_to_LOW 1
 #define ACTIVE_LOW_to_HIGH 1
 
 unsigned handle_button_press (unsigned num)
@@ -40,7 +40,7 @@ unsigned handle_button_press (unsigned num)
 	log_info("\nActive high interrupt");
 #endif
 
-	log_info("GPIO %x interrupt occured\n", (num - PLIC_GPIO_OFFSET - 1) );
+	log_info("GPIO %x interrupt occured\n", (num - (PLIC_GPIO_OFFSET - 1) ));
 
 #if ACTIVE_LOW_to_HIGH
 	/* Check the GPIO interrupt switch from Active low to Active high */
@@ -51,8 +51,8 @@ unsigned handle_button_press (unsigned num)
 		log_info("\nActive high interrupt");
 		delay_loop(1000,1000);
 		gpiov2_instance->intr_config = 0x00;
-		configure_interrupt(PLIC_INTERRUPT_9);
-		isr_table[PLIC_INTERRUPT_9] = handle_button_press;	
+		configure_interrupt(PLIC_INTERRUPT_11);
+		isr_table[PLIC_INTERRUPT_11] = handle_button_press;	
 	}
 #endif	
 
@@ -60,13 +60,13 @@ unsigned handle_button_press (unsigned num)
 	/* Check the GPIO interrupt switch from Active low to Active high */
 				/* TEST DONE on GPIO_2 */
 	gpiov2_instance->direction = 0x0;
-	if (gpiov2_instance->data == 0x1)
+	if (gpiov2_instance->data == 0xFF)
 	{
 		log_info("\nActive low interrupt");
 		delay_loop(1000,1000);
 		gpiov2_instance->intr_config = 0xff;
-		configure_interrupt(PLIC_INTERRUPT_7);
-		isr_table[PLIC_INTERRUPT_7] = handle_button_press;	
+		configure_interrupt(PLIC_INTERRUPT_11);
+		isr_table[PLIC_INTERRUPT_11] = handle_button_press;	
 	}
 #endif	
 
@@ -83,7 +83,7 @@ unsigned handle_button_press (unsigned num)
 
 void main()
 {
-    unsigned int int_id = 7;
+    unsigned int int_id = 8;
     register uint32_t retval;
     int i;
 	check_gpiov2();
@@ -102,76 +102,140 @@ void main()
     plic_init();
 
 /* GPIO_0 */
-    // configure_interrupt(PLIC_INTERRUPT_7);
-	// isr_table[PLIC_INTERRUPT_7] = handle_button_press;
+    configure_interrupt(PLIC_INTERRUPT_7);
+	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
 
 /* GPIO_1 */
-	// configure_interrupt(PLIC_INTERRUPT_8);
-	// isr_table[PLIC_INTERRUPT_8] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_8);
+	isr_table[PLIC_INTERRUPT_8] = handle_button_press;
 
 /* GPIO_2 */
-	// configure_interrupt(PLIC_INTERRUPT_9);
-	// isr_table[PLIC_INTERRUPT_9] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_9);
+	isr_table[PLIC_INTERRUPT_9] = handle_button_press;
 	
 /* GPIO_3 */	
-	// configure_interrupt(PLIC_INTERRUPT_10);
-	// isr_table[PLIC_INTERRUPT_10] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_10);
+	isr_table[PLIC_INTERRUPT_10] = handle_button_press;
 	
 /* GPIO_4 */	
-	// configure_interrupt(PLIC_INTERRUPT_11);
-	// isr_table[PLIC_INTERRUPT_11] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_11);
+	isr_table[PLIC_INTERRUPT_11] = handle_button_press;
 
 /* GPIO_5 */	
-	// configure_interrupt(PLIC_INTERRUPT_12);
-	// isr_table[PLIC_INTERRUPT_12] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_12);
+	isr_table[PLIC_INTERRUPT_12] = handle_button_press;
 
 /* GPIO_6 */	
-	// configure_interrupt(PLIC_INTERRUPT_13);
-	// isr_table[PLIC_INTERRUPT_13] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_13);
+	isr_table[PLIC_INTERRUPT_13] = handle_button_press;
 
 /* GPIO_7 */	
-	// configure_interrupt(PLIC_INTERRUPT_14);
-	// isr_table[PLIC_INTERRUPT_14] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_14);
+	isr_table[PLIC_INTERRUPT_14] = handle_button_press; 
 
 /* GPIO_8 */	
-	// configure_interrupt(PLIC_INTERRUPT_15);
-	// isr_table[PLIC_INTERRUPT_15] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_15);
+	isr_table[PLIC_INTERRUPT_15] = handle_button_press; 
 
 /* GPIO_9 */
-	// configure_interrupt(PLIC_INTERRUPT_16);
-	// isr_table[PLIC_INTERRUPT_16] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_16);
+	isr_table[PLIC_INTERRUPT_16] = handle_button_press; 
 
 /* GPIO_10 */
-	// configure_interrupt(PLIC_INTERRUPT_17);
-	// isr_table[PLIC_INTERRUPT_17] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_17);
+	isr_table[PLIC_INTERRUPT_17] = handle_button_press; 
 
 /* GPIO_11 */
-	// configure_interrupt(PLIC_INTERRUPT_18);
-	// isr_table[PLIC_INTERRUPT_18] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_18);
+	isr_table[PLIC_INTERRUPT_18] = handle_button_press; 
 
 /* GPIO_12 */
-	// configure_interrupt(PLIC_INTERRUPT_19);
-	// isr_table[PLIC_INTERRUPT_19] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_19);
+	isr_table[PLIC_INTERRUPT_19] = handle_button_press; 
 
 /* GPIO_13 */
-	// configure_interrupt(PLIC_INTERRUPT_20);
-	// isr_table[PLIC_INTERRUPT_20] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_20);
+	isr_table[PLIC_INTERRUPT_20] = handle_button_press; 
 
 /* GPIO_14 */
-	// configure_interrupt(PLIC_INTERRUPT_21);
-	// isr_table[PLIC_INTERRUPT_21] = handle_button_press; 
+	configure_interrupt(PLIC_INTERRUPT_21);
+	isr_table[PLIC_INTERRUPT_21] = handle_button_press; 
 
 /* GPIO_15 */
-	// configure_interrupt(PLIC_INTERRUPT_22);
-	// isr_table[PLIC_INTERRUPT_22] = handle_button_press; 		
+	configure_interrupt(PLIC_INTERRUPT_22);
+	isr_table[PLIC_INTERRUPT_22] = handle_button_press; 		
+
+// /* GPIO_16 */
+//     configure_interrupt(PLIC_INTERRUPT_23);
+// 	isr_table[PLIC_INTERRUPT_23] = handle_button_press;
+
+// /* GPIO_17 */
+// 	configure_interrupt(PLIC_INTERRUPT_24);
+// 	isr_table[PLIC_INTERRUPT_24] = handle_button_press;
+
+// /* GPIO_18 */
+// 	configure_interrupt(PLIC_INTERRUPT_25);
+// 	isr_table[PLIC_INTERRUPT_25] = handle_button_press;
+	
+// /* GPIO_19 */	
+// 	configure_interrupt(PLIC_INTERRUPT_26);
+// 	isr_table[PLIC_INTERRUPT_26] = handle_button_press;
+	
+// /* GPIO_20 */	
+// 	configure_interrupt(PLIC_INTERRUPT_27);
+// 	isr_table[PLIC_INTERRUPT_27] = handle_button_press;
+
+// /* GPIO_21 */	
+// 	configure_interrupt(PLIC_INTERRUPT_28);
+// 	isr_table[PLIC_INTERRUPT_28] = handle_button_press;
+
+// /* GPIO_22 */	
+// 	configure_interrupt(PLIC_INTERRUPT_29);
+// 	isr_table[PLIC_INTERRUPT_29] = handle_button_press;
+
+// /* GPIO_23 */	
+// 	configure_interrupt(PLIC_INTERRUPT_30);
+// 	isr_table[PLIC_INTERRUPT_30] = handle_button_press; 
+
+// /* GPIO_24 */	
+// 	configure_interrupt(PLIC_INTERRUPT_31);
+// 	isr_table[PLIC_INTERRUPT_31] = handle_button_press; 
+
+// /* GPIO_25 */
+// 	configure_interrupt(PLIC_INTERRUPT_32);
+// 	isr_table[PLIC_INTERRUPT_32] = handle_button_press; 
+
+// /* GPIO_26 */
+// 	configure_interrupt(PLIC_INTERRUPT_33);
+// 	isr_table[PLIC_INTERRUPT_33] = handle_button_press; 
+
+// /* GPIO_27 */
+// 	configure_interrupt(PLIC_INTERRUPT_34);
+// 	isr_table[PLIC_INTERRUPT_34] = handle_button_press; 
+
+// /* GPIO_28 */
+// 	configure_interrupt(PLIC_INTERRUPT_35);
+// 	isr_table[PLIC_INTERRUPT_35] = handle_button_press; 
+
+// /* GPIO_29 */
+// 	configure_interrupt(PLIC_INTERRUPT_36);
+// 	isr_table[PLIC_INTERRUPT_36] = handle_button_press; 
+
+// /* GPIO_30 */
+// 	configure_interrupt(PLIC_INTERRUPT_37);
+// 	isr_table[PLIC_INTERRUPT_37] = handle_button_press; 
+
+// /* GPIO_31 */
+// 	configure_interrupt(PLIC_INTERRUPT_38);
+// 	isr_table[PLIC_INTERRUPT_38] = handle_button_press; 		
 
 #if ACTIVE_LOW_to_HIGH
 /* Check the GPIO interrupt switch from Active low to Active high */
 
 	/* Checking for active low */
 	gpiov2_instance->intr_config = 0xff;
-	configure_interrupt(PLIC_INTERRUPT_7);
-	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_11);
+	isr_table[PLIC_INTERRUPT_11] = handle_button_press;
 
 #endif	
 
@@ -180,8 +244,8 @@ void main()
 
 	/* Checking for active high */
 	gpiov2_instance->intr_config = 0x00;
-	configure_interrupt(PLIC_INTERRUPT_7);
-	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
+	configure_interrupt(PLIC_INTERRUPT_11);
+	isr_table[PLIC_INTERRUPT_11] = handle_button_press;
 
 #endif
 

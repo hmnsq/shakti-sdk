@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#अगर_अघोषित GPIO_I2C_H
+#घोषणा GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#समावेश "platform.h"
+#समावेश "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#घोषणा I2C_SCL GPIO0 
+#घोषणा I2C_SDA GPIO1
+#घोषणा GPIOD_IS_IN 0
+#घोषणा GPIOD_IS_OUT 1
+#घोषणा I2C_WRITE 0
+#घोषणा I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+व्योम I2cInit();
+व्योम I2cSendSlaveAddress(अचिन्हित अक्षर , अचिन्हित अक्षर , अचिन्हित अक्षर );
+व्योम I2cWriteByte(अचिन्हित अक्षर , अचिन्हित अक्षर );
+अचिन्हित अक्षर I2cReadByte(अचिन्हित अक्षर );
+व्योम I2c_Write_तथ्य(अचिन्हित अक्षर , अचिन्हित अक्षर );
+अचिन्हित अक्षर I2c_Read_तथ्य_Ack(अचिन्हित अक्षर );
+अचिन्हित अक्षर I2c_Read_तथ्य_Nack(अचिन्हित अक्षर );
+व्योम I2cStart(अचिन्हित अक्षर );
+व्योम I2cStop(अचिन्हित अक्षर );
+व्योम I2c_Write_byte(अचिन्हित अक्षर, अचिन्हित अक्षर, अचिन्हित अक्षर, अचिन्हित अक्षर);
+पूर्णांक I2c_Read_byte(अचिन्हित अक्षर ,अचिन्हित अक्षर , अचिन्हित अक्षर );
+पूर्णांक I2c_shakti_readbytes(अक्षर *, पूर्णांक , पूर्णांक , अचिन्हित अक्षर );
+व्योम ReadAckForWrite(अचिन्हित अक्षर delay);
+व्योम SendNackForRead(अचिन्हित अक्षर delay);
+व्योम SendAckForRead(अचिन्हित अक्षर delay);
 
-#endif
+#पूर्ण_अगर

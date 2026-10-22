@@ -25,25 +25,25 @@
  * @brief Header file for buttons 
  */
 
-#ifndef BUTTON_DRIVER_H
-#define BUTTON_DRIVER_H
+#अगर_अघोषित BUTTON_DRIVER_H
+#घोषणा BUTTON_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#अगर defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
+#समावेश "platform.h"
+#समावेश "gpio.h"
 
 //Buttons
-#define BTN0 GPIO28
-#define BTN1 GPIO29
-#define BTN2 GPIO30
-#define BTN3 GPIO31
+#घोषणा BTN0 GPIO28
+#घोषणा BTN1 GPIO29
+#घोषणा BTN2 GPIO30
+#घोषणा BTN3 GPIO31
 
-#define ALL_BTNS (BTN0 | BTN1 | BTN2 | BTN3)
+#घोषणा ALL_BTNS (BTN0 | BTN1 | BTN2 | BTN3)
 
 // function prototype
-void configure_btn(unsigned long pinCntrl);
-void configure_all_btn();
+व्योम configure_btn(अचिन्हित दीर्घ pinCntrl);
+व्योम configure_all_btn();
 
-#endif
-#endif
+#पूर्ण_अगर
+#पूर्ण_अगर

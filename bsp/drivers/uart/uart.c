@@ -27,30 +27,30 @@
   and receive over UART interface.
  */
 
-#include "uart.h"
-#include "gpio.h"
-#include "utils.h"
+#समावेश "uart.h"
+#समावेश "gpio.h"
+#समावेश "utils.h"
 
-uart_struct *uart_instance[MAX_UART_COUNT];
+uart_struct *uart_instance[MAX_UART_गिनती];
 
-#define RTS GPIO4
+#घोषणा RTS GPIO4
 //#define USE_INTERRUPT 
 
-unsigned char uart0_complete = 0;
-unsigned char uart1_complete = 0;
-unsigned char uart2_complete = 0;
-unsigned int uart0_tx_isr_count = 0;
-unsigned int uart0_rcv_isr_count = 0;
-unsigned int uart1_tx_isr_count = 0;
-unsigned int uart1_rcv_isr_count = 0;
-unsigned int uart2_tx_isr_count = 0;
-unsigned int uart2_rcv_isr_count = 0;
+अचिन्हित अक्षर uart0_complete = 0;
+अचिन्हित अक्षर uart1_complete = 0;
+अचिन्हित अक्षर uart2_complete = 0;
+अचिन्हित पूर्णांक uart0_tx_isr_गिनती = 0;
+अचिन्हित पूर्णांक uart0_rcv_isr_गिनती = 0;
+अचिन्हित पूर्णांक uart1_tx_isr_गिनती = 0;
+अचिन्हित पूर्णांक uart1_rcv_isr_गिनती = 0;
+अचिन्हित पूर्णांक uart2_tx_isr_गिनती = 0;
+अचिन्हित पूर्णांक uart2_rcv_isr_गिनती = 0;
 
-#ifdef USE_INTERRUPT
-unsigned char u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-#endif
+#अगर_घोषित USE_INTERRUPT
+अचिन्हित अक्षर u0_rcv_char[UARTX_बफर_आकार] = {'\0'};
+अचिन्हित अक्षर u1_rcv_char[UARTX_बफर_आकार] = {'\0'};
+अचिन्हित अक्षर u2_rcv_char[UARTX_बफर_आकार] = {'\0'};
+#पूर्ण_अगर
 
 /**
  * @fn void uart_init()
@@ -58,9 +58,9 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
  * @details Initialises given number of UART Arrays which has 
  *          complete set of UART registers.
  */
-void uart_init()
+व्योम uart_init()
 {
-	for(int i=0; i< MAX_UART_COUNT; i++)
+	क्रम(पूर्णांक i=0; i< MAX_UART_गिनती; i++)
 	{
 		uart_instance[i] = (uart_struct*) (UART0_START+i*UART_OFFSET);
 	}
@@ -72,11 +72,11 @@ void uart_init()
  * @details This function will be called to write a single character from the stdin.
  * @return integer equivalent of the received character.
  */
-#undef getchar
-int getchar()
+#अघोषित अक्षर_लो
+पूर्णांक अक्षर_लो()
 {
-	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
-	return (uart_instance[0]->rcv_reg);
+	जबतक((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
+	वापस (uart_instance[0]->rcv_reg);
 }
 
 /**
@@ -87,14 +87,14 @@ int getchar()
  * @param character as int.
  * @return Zero
  */
-#undef putchar
-int putchar(int ch)
+#अघोषित अक्षर_दो
+पूर्णांक अक्षर_दो(पूर्णांक ch)
 {
-	while(uart_instance[0]->status & STS_TX_FULL);
+	जबतक(uart_instance[0]->status & STS_TX_FULL);
 
 	uart_instance[0]->tx_reg = ch;
 
-	return 0;
+	वापस 0;
 }
 
 /**
@@ -105,11 +105,11 @@ int putchar(int ch)
  * @param UART instance
  * @param unsigned int baudrate
  */
-void set_baud_rate(uart_struct *instance, unsigned int baudrate)
+व्योम set_baud_rate(uart_struct *instance, अचिन्हित पूर्णांक baudrate)
 {
-	unsigned int baud_count = 0;
-	baud_count = CLOCK_FREQUENCY / (16 * baudrate);
-	instance->baud = baud_count;
+	अचिन्हित पूर्णांक baud_गिनती = 0;
+	baud_गिनती = CLOCK_FREQUENCY / (16 * baudrate);
+	instance->baud = baud_गिनती;
 }
 
 /**
@@ -120,12 +120,12 @@ void set_baud_rate(uart_struct *instance, unsigned int baudrate)
  * @param uart instance 
  * @param unsigned char interrupt
  */
-void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
+व्योम enable_uart_interrupts(uart_struct * instance, अचिन्हित अक्षर interrupt)
 {
 	instance->ien = interrupt; 
 }
 
-#ifdef USE_RX_THRESHOLD
+#अगर_घोषित USE_RX_THRESHOLD
 /**
  * @fn void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  * @brief Funtion to set the threshold value of the Rx FIFO.
@@ -134,11 +134,11 @@ void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
  * @param uart instance 
  * @param unsigned char rxthreshold
  */
-void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
+व्योम set_uart_rx_threshold(uart_struct * instance, अचिन्हित अक्षर rxthreshold)
 {
 	instance->rx_threshold = rxthreshold;
 }
-#endif
+#पूर्ण_अगर
 
 /**
  * @fn uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
@@ -150,11 +150,11 @@ void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  */
 uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 {
-	while(instance->status & STS_TX_FULL);
+	जबतक(instance->status & STS_TX_FULL);
 
 	instance->tx_reg = prn_character;
 
-	return 0;
+	वापस 0;
 }
 
 /**
@@ -169,15 +169,15 @@ uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
 {
 	uint32_t i = 0;
-	uint8_t temp;
+	uint8_t अस्थायी;
 
-	do
+	करो
 	{
-		temp = ptr_string[i++];
-		write_uart_character(instance, temp);
-	} while(temp != 0);
+		अस्थायी = ptr_string[i++];
+		write_uart_character(instance, अस्थायी);
+	} जबतक(अस्थायी != 0);
 
-	return 0;
+	वापस 0;
 }
 
 /**
@@ -189,16 +189,16 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
  * @param pointer to a character.
  * @return number of characters read
  */
-uint8_t read_uart_character(uart_struct * instance, char * prn_character)
+uint8_t read_uart_character(uart_struct * instance, अक्षर * prn_character)
 {
-	uint8_t temp = 0;
+	uint8_t अस्थायी = 0;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+	जबतक ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
-	temp = instance->rcv_reg;
-	*prn_character = temp;
+	अस्थायी = instance->rcv_reg;
+	*prn_character = अस्थायी;
 
-	return 1;
+	वापस 1;
 }
 
 /**
@@ -210,24 +210,24 @@ uint8_t read_uart_character(uart_struct * instance, char * prn_character)
  * @param pointer to an array of character.
  * @return length of the received string
  */
-uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
+uint8_t read_uart_string(uart_struct * instance, अक्षर * ptr_string)
 {
 	uint32_t i = 0;
-	uint8_t temp = 0;
+	uint8_t अस्थायी = 0;
 
-	while(1)
+	जबतक(1)
 	{
-		while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+		जबतक ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
-		temp = instance->rcv_reg;
-		ptr_string[i++] = temp;
-		putchar(temp);
+		अस्थायी = instance->rcv_reg;
+		ptr_string[i++] = अस्थायी;
+		अक्षर_दो(अस्थायी);
 
-		if (temp == 0x0D)
+		अगर (अस्थायी == 0x0D)
 		{
 			ptr_string[i++] = 0x0A;
 			ptr_string[i++] = 0x00;
-			return(i);
+			वापस(i);
 		}
 	}
 }
@@ -239,19 +239,19 @@ uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
  * passing UART number for different offset addresses.
  * @param UART instance.
  */
-void flush_uart(uart_struct * instance)
+व्योम flush_uart(uart_struct * instance)
 {
-	__attribute__((unused)) char temp;
+	__attribute__((unused)) अक्षर अस्थायी;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) != 0)
+	जबतक ((instance->status & STS_RX_NOT_EMPTY) != 0)
 	{
-		temp = instance->rcv_reg ;
+		अस्थायी = instance->rcv_reg ;
 	}
 }
 
 /*Enable USE_INTERRUPT in command line*/
 
-#ifdef USE_INTERRUPT
+#अगर_घोषित USE_INTERRUPT
 /**
  * @fn unsigned char uart0_isr()
  * @brief Function to offer interrupt service routine for uart_instance[0].
@@ -260,39 +260,39 @@ void flush_uart(uart_struct * instance)
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart0_isr()
+अचिन्हित अक्षर uart0_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_मूल्य = '\0';
 
-	if(uart_instance[0]->status & STS_RX_THRESHOLD)
+	अगर(uart_instance[0]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		जबतक(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_मूल्य = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_गिनती++] = read_मूल्य;
+			write_uart_character(uart_instance[0], read_मूल्य);
 		}
 	}
-	else if(uart_instance[0]->status & STS_RX_FULL)
+	अन्यथा अगर(uart_instance[0]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_word(GPIO_तथ्य_REG, read_word(GPIO_तथ्य_REG) | RTS);
 
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		जबतक(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_मूल्य = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_गिनती++] = read_मूल्य;
+			write_uart_character(uart_instance[0], read_मूल्य);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_word(GPIO_तथ्य_REG, read_word(GPIO_तथ्य_REG) & ~(RTS));
 	}
-	else if(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+	अन्यथा अगर(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 	{
-		read_value = uart_instance[0]->rcv_reg;
-		u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[0], read_value);
+		read_मूल्य = uart_instance[0]->rcv_reg;
+		u0_rcv_char[uart0_rcv_isr_गिनती++] = read_मूल्य;
+		write_uart_character(uart_instance[0], read_मूल्य);
 	}
-	return 0;
+	वापस 0;
 }
 
 /**
@@ -303,39 +303,39 @@ unsigned char uart0_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart1_isr()
+अचिन्हित अक्षर uart1_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_मूल्य = '\0';
 
-	if(uart_instance[1]->status & STS_RX_THRESHOLD)
+	अगर(uart_instance[1]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		जबतक(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_मूल्य = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_गिनती++] = read_मूल्य;
+			write_uart_character(uart_instance[1], read_मूल्य);
 		}
 	}
-	else if(uart_instance[1]->status & STS_RX_FULL)
+	अन्यथा अगर(uart_instance[1]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_word(GPIO_तथ्य_REG, read_word(GPIO_तथ्य_REG) | RTS);
 
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		जबतक(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_मूल्य = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_गिनती++] = read_मूल्य;
+			write_uart_character(uart_instance[1], read_मूल्य);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_word(GPIO_तथ्य_REG, read_word(GPIO_तथ्य_REG) & ~(RTS));
 	}
-	else if(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+	अन्यथा अगर(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 	{
-		read_value = uart_instance[1]->rcv_reg;
-		u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[1], read_value);
+		read_मूल्य = uart_instance[1]->rcv_reg;
+		u1_rcv_char[uart1_rcv_isr_गिनती++] = read_मूल्य;
+		write_uart_character(uart_instance[1], read_मूल्य);
 	}
-	return 0;
+	वापस 0;
 }
 
 /**
@@ -346,38 +346,38 @@ unsigned char uart1_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart2_isr()
+अचिन्हित अक्षर uart2_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_मूल्य = '\0';
 
-	if(uart_instance[2]->status & STS_RX_THRESHOLD)
+	अगर(uart_instance[2]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		जबतक(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_मूल्य = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_गिनती++] = read_मूल्य;
+			write_uart_character(uart_instance[2], read_मूल्य);
 		}
 	}
-	else if(uart_instance[2]->status & STS_RX_FULL)
+	अन्यथा अगर(uart_instance[2]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_word(GPIO_तथ्य_REG, read_word(GPIO_तथ्य_REG) | RTS);
 
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		जबतक(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_मूल्य = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_गिनती++] = read_मूल्य;
+			write_uart_character(uart_instance[2], read_मूल्य);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_word(GPIO_तथ्य_REG, read_word(GPIO_तथ्य_REG) & ~(RTS));
 	}
-	else if(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+	अन्यथा अगर(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 	{
-		read_value = uart_instance[2]->rcv_reg;
-		u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[2], read_value);
+		read_मूल्य = uart_instance[2]->rcv_reg;
+		u2_rcv_char[uart2_rcv_isr_गिनती++] = read_मूल्य;
+		write_uart_character(uart_instance[2], read_मूल्य);
 	}
-	return 0;
+	वापस 0;
 }
-#endif
+#पूर्ण_अगर

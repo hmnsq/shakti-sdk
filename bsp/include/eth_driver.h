@@ -27,41 +27,41 @@
  * for the plic module is also defined here.
  */
 
-#ifndef ETH_DRIVER_H
-#define ETH_DRIVER_H
-#include "platform.h"
-#include "traps.h"
-#include "eth_driver.h"
-#include "eth_macros.h"
+#अगर_अघोषित ETH_DRIVER_H
+#घोषणा ETH_DRIVER_H
+#समावेश "platform.h"
+#समावेश "traps.h"
+#समावेश "eth_driver.h"
+#समावेश "eth_macros.h"
 
-#define INLINE inline
-#define __LITTLE_ENDIAN__ 1
+#घोषणा INLINE अंतरभूत
+#घोषणा __LITTLE_ENDIAN__ 1
 
 
 /*
  * guarded against xbasic_types.h.
  */
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
+प्रकार uint8_t u8;
+प्रकार uint16_t u16;
+प्रकार uint32_t u32;
 /** @}*/
-#define __XUINT64__
-typedef struct
+#घोषणा __XUINT64__
+प्रकार काष्ठा
 {
 	u32 Upper;
 	u32 Lower;
 } Xuint64;
 
-typedef char char8;
-typedef int8_t s8;
-typedef int16_t s16;
-typedef int32_t s32;
-typedef int64_t s64;
-typedef uint64_t u64;
-typedef int sint32;
+प्रकार अक्षर char8;
+प्रकार int8_t s8;
+प्रकार int16_t s16;
+प्रकार int32_t s32;
+प्रकार int64_t s64;
+प्रकार uint64_t u64;
+प्रकार पूर्णांक sint32;
 
-typedef intptr_t INTPTR;
-typedef uintptr_t UINTPTR;
+प्रकार intptr_t INTPTR;
+प्रकार uintptr_t UINTPTR;
 //typedef ptrdiff_t PTRDIFF;
 
 /*****************************************************************************
@@ -69,58 +69,58 @@ typedef uintptr_t UINTPTR;
  * EmacLite defines .
  * DeviceID starts at 240
  */
-#define XPAR_XEMACLITE_NUM_INSTANCES    1
-#define XPAR_EMACLITE_0_DEVICE_ID       240
+#घोषणा XPAR_XEMACLITE_अंक_INSTANCES    1
+#घोषणा XPAR_EMACLITE_0_DEVICE_ID       240
 /* EK Change */
-#define XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
-#define XPAR_EMACLITE_0_TX_PING_PONG    1
-#define XPAR_EMACLITE_0_RX_PING_PONG    1
-#define XPAR_EMACLITE_0_INCLUDE_MDIO 1
-#define XPAR_EMACLITE_0_INCLUDE_INTERNAL_LOOPBACK 1
+#घोषणा XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
+#घोषणा XPAR_EMACLITE_0_TX_PING_PONG    1
+#घोषणा XPAR_EMACLITE_0_RX_PING_PONG    1
+#घोषणा XPAR_EMACLITE_0_INCLUDE_MDIO 1
+#घोषणा XPAR_EMACLITE_0_INCLUDE_INTERNAL_LOOPBACK 1
 
 
-#define TRUE		1U
-#define FALSE		0U
+#घोषणा TRUE		1U
+#घोषणा FALSE		0U
 
-#define NULL		0U
-#define SUCCESS 0
-#define FAILURE -1
-#define DEVICE_BUSY                 21L	/*!< Device is busy */
-#define NO_CALLBACK 18L	/*!< A callback has not yet been
+#घोषणा शून्य		0U
+#घोषणा SUCCESS 0
+#घोषणा FAILURE -1
+#घोषणा DEVICE_BUSY                 21L	/*!< Device is busy */
+#घोषणा NO_CALLBACK 18L	/*!< A callback has not yet been
 						   registered */
-#define NO_DATA                     13L	/*!< There was no data available */
-#define XST_LOOPBACK_ERROR              17L	/*!< A loopback test failed */
-#define XST_NO_CALLBACK                 18L	/*!< A callback has not yet been
+#घोषणा NO_तथ्य                     13L	/*!< There was no data available */
+#घोषणा XST_LOOPBACK_ERROR              17L	/*!< A loopback test failed */
+#घोषणा XST_NO_CALLBACK                 18L	/*!< A callback has not yet been
 						   registered */
-#define XST_NO_FEATURE                  19L	/*!< Device is not configured with
+#घोषणा XST_NO_FEATURE                  19L	/*!< Device is not configured with
 						   the requested feature */
-#define XST_NOT_INTERRUPT               20L	/*!< Device is not configured for
+#घोषणा XST_NOT_INTERRUPT               20L	/*!< Device is not configured for
 						   interrupt mode operation */
 
-#define XIL_COMPONENT_IS_READY     0x11111111U  /**< In device drivers, This macro will be
+#घोषणा XIL_COMPONENT_IS_READY     0x11111111U  /**< In device drivers, This macro will be
                                                  assigend to "IsReady" member of driver
 												 instance to indicate that driver
 												 instance is initialized and ready to use. */
-#define XIL_COMPONENT_IS_STARTED   0x22222222U  /**< In device drivers, This macro will be assigend to
+#घोषणा XIL_COMPONENT_IS_STARTED   0x22222222U  /**< In device drivers, This macro will be assigend to
                                                  "IsStarted" member of driver instance
 												 to indicate that driver instance is
 												 started and it can be enabled. */
-#define XST_SUCCESS SUCCESS
-#define XST_FAILURE FAILURE
-#define xil_printf log_debug
+#घोषणा XST_SUCCESS SUCCESS
+#घोषणा XST_FAILURE FAILURE
+#घोषणा xil_printf log_debug
 
 /************************** Constant Definitions ****************************/
 
-#define PHY_REG0_OFFSET		0 /* Register 0 of PHY device */
-#define PHY_REG1_OFFSET 	1 /* Register 1 of PHY device */
+#घोषणा PHY_REG0_OFFSET		0 /* Register 0 of PHY device */
+#घोषणा PHY_REG1_OFFSET 	1 /* Register 1 of PHY device */
 
-#define PHY_REG0_RESET_MASK	0x8000  /* Reset Phy device */
-#define PHY_REG0_LOOPBACK_MASK	0x4000  /* Loopback Enable in Phy */
-#define PHY_REG0_SPD_100_MASK	0x2000  /* Speed of 100Mbps for Phy */
+#घोषणा PHY_REG0_RESET_MASK	0x8000  /* Reset Phy device */
+#घोषणा PHY_REG0_LOOPBACK_MASK	0x4000  /* Loopback Enable in Phy */
+#घोषणा PHY_REG0_SPD_100_MASK	0x2000  /* Speed of 100Mbps for Phy */
 
-#define PHY_REG1_DETECT_MASK	0x1808	/* Mask to detect PHY device */
+#घोषणा PHY_REG1_DETECT_MASK	0x1808	/* Mask to detect PHY device */
 
-#define EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
+#घोषणा EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
 					 * PHY to reset.
 					 */
 
@@ -128,7 +128,7 @@ typedef uintptr_t UINTPTR;
 /**
  * This typedef contains configuration information for a device.
  */
-typedef struct {
+प्रकार काष्ठा {
 	u16 DeviceId;	 /**< Unique ID  of device */
 	UINTPTR BaseAddress; /**< Device base address */
 	u8 TxPingPong;	 /**< 1 if TX Pong buffer configured, 0 otherwise */
@@ -143,40 +143,40 @@ typedef struct {
  *		when setting the callback functions, and passed back to the
  *		upper layer when the callback is invoked.
  */
-typedef void (*XEmacLite_Handler) (void *CallBackRef);
+प्रकार व्योम (*XEmacLite_Handler) (व्योम *CallBackRef);
 
 /**
  * The XEmacLite driver instance data. The user is required to allocate a
  * variable of this type for every EmacLite device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+प्रकार काष्ठा {
 	XEmacLite_Config EmacLiteConfig; /* Device configuration */
 	u32 IsReady;			 /* Device is initialized and ready */
 
-	u32 NextTxBufferToUse;		 /* Next TX buffer to write to */
-	u32 NextRxBufferToUse;		 /* Next RX buffer to read from */
+	u32 अग्र_Tx_बफर_To_Use;		 /* Next TX buffer to write to */
+	u32 अग्र_Rx_बफर_To_Use;		 /* Next RX buffer to read from */
 
 	/*
 	 * Callbacks
 	 */
 	XEmacLite_Handler RecvHandler;
-	void *RecvRef;
+	व्योम *RecvRef;
 	XEmacLite_Handler SendHandler;
-	void *SendRef;
+	व्योम *SendRef;
 
 } XEmacLite;
 
-#ifndef ETH_VARI
-extern volatile u32 RecvFrameLength;
-extern UINTPTR TxBuffPtr;
-extern UINTPTR RxBuffPtr;
-extern volatile int FramesTx;
-extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
-extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
-#endif
+#अगर_अघोषित ETH_VARI
+बाह्य अस्थिर u32 Recv_Frame_लंबाई;
+बाह्य UINTPTR TxBuffPtr;
+बाह्य UINTPTR RxBuffPtr;
+बाह्य अस्थिर पूर्णांक FramesTx;
+बाह्य अस्थिर पूर्णांक FramesRx;
+बाह्य अस्थिर पूर्णांक Tx_गिनती;
+बाह्य अस्थिर पूर्णांक Rx_गिनती;
+बाह्य अस्थिर पूर्णांक Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+#पूर्ण_अगर
 
 
 
@@ -195,9 +195,9 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 * This is used to determine the destination of the next transmit data frame.
 *
 *****************************************************************************/
-#define XEmacLite_NextTransmitAddr(InstancePtr) 			\
+#घोषणा XEmac_Lite_अग्र_Transmit_Addr(InstancePtr) 			\
 	((InstancePtr)->EmacLiteConfig.BaseAddress + 			\
-		(InstancePtr)->NextTxBufferToUse) + XEL_TXBUFF_OFFSET
+		(InstancePtr)->अग्र_Tx_बफर_To_Use) + XEL_TXBUFF_OFFSET
 
 /****************************************************************************/
 /**
@@ -214,9 +214,9 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 * This is the expected receive buffer address if the driver is in sync.
 *
 *****************************************************************************/
-#define XEmacLite_NextReceiveAddr(InstancePtr)				\
+#घोषणा XEmac_Lite_अग्र_Receive_Addr(InstancePtr)				\
 	((InstancePtr)->EmacLiteConfig.BaseAddress + 			\
-	(InstancePtr)->NextRxBufferToUse)
+	(InstancePtr)->अग्र_Rx_बफर_To_Use)
 
 /*****************************************************************************/
 /**
@@ -234,7 +234,7 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 *		int XEmacLite_IsMdioConfigured(XEmacLite *InstancePtr)
 *
 ******************************************************************************/
-#define XEmacLite_IsMdioConfigured(InstancePtr) 			\
+#घोषणा XEmacLite_IsMdioConfigured(InstancePtr) 			\
 	((InstancePtr)->EmacLiteConfig.MdioInclude == 1)
 
 /*****************************************************************************/
@@ -254,19 +254,19 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 *		int XEmacLite_IsLoopbackConfigured(XEmacLite *InstancePtr)
 *
 ******************************************************************************/
-#define XEmacLite_IsLoopbackConfigured(InstancePtr) 			\
+#घोषणा XEmacLite_IsLoopbackConfigured(InstancePtr) 			\
             ((InstancePtr)->EmacLiteConfig.Loopback == 1)
 
 /************************** Variable Definitions *****************************/
 
 
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
+व्योम XEmacLite_AlignedWrite(व्योम *SrcPtr, UINTPTR *DestPtr, अचिन्हित Byte_गिनती);
+व्योम XEmacLite_AlignedRead(UINTPTR *SrcPtr, व्योम *DestPtr, अचिन्हित Byte_गिनती);
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
-extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+बाह्य XEmacLite_Config XEmacLite_ConfigTable;
+बाह्य पूर्णांक XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr);
 
 
-#endif
+#पूर्ण_अगर

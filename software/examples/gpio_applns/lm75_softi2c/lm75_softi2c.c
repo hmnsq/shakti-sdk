@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#समावेश "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#घोषणा LM75_SLAVE_ADDRESS 0x90
+#घोषणा DELAY_गिनती 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+अचिन्हित पूर्णांक Lm75ReadTemperature(अचिन्हित दीर्घ delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
+	अचिन्हित अक्षर readBuf = 0;
+	अचिन्हित लघु read_मूल्य_2 = 0;
 	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	readBuf = I2c_Read_तथ्य_Ack(delay);
+	read_मूल्य_2 = (readBuf << 1);
+	readBuf = I2c_Read_तथ्य_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_मूल्य_2 = (readBuf >> 7) | read_मूल्य_2;
+	वापस read_मूल्य_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+व्योम मुख्य() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	अचिन्हित लघु अस्थायी_Read = 0;
+	अचिन्हित लघु अस्थायी = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	म_लिखो("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	अस्थायी_Read = Lm75ReadTemperature(DELAY_गिनती);
+	अगर(अस्थायी_Read & 0x100) {
+		अस्थायी_Read = ( (~अस्थायी_Read) + 1 ) >> 1;
+		म_लिखो("\n\t Current Temperature:=-%u°C",अस्थायी_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	अन्यथा {
+		अस्थायी_Read = अस्थायी_Read >> 1;
+		म_लिखो("\n\t Current Temperature:=+%u°C",अस्थायी_Read);
 	 }
 	delay_loop(10000,20000);
 }

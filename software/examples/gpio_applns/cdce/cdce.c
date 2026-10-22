@@ -29,11 +29,11 @@
   @detail Helps to write the values in flash of cdceic to set clock frequecy.
  */
 
-#include "gpio_i2c.h"
+#समावेश "gpio_i2c.h"
 
-#define CDCE913_SLAVE_ADDRESS 0xCA
-#define DELAY_COUNT 50
-#define _50MHZ
+#घोषणा CDCE913_SLAVE_ADDRESS 0xCA
+#घोषणा DELAY_गिनती 50
+#घोषणा _50MHZ
 //#define _75MHZ
 //#define _100MHZ
 //#define _125MHZ
@@ -47,23 +47,23 @@
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int reg_count, unsigned int *write_data, unsigned long delay)
+अचिन्हित पूर्णांक cdce913_write_all_registers(अचिन्हित पूर्णांक reg_offset, अचिन्हित पूर्णांक reg_गिनती, अचिन्हित पूर्णांक *write_तथ्य_2, अचिन्हित दीर्घ delay)
 {
 	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_WRITE, delay);
-	if(reg_count > 1)
-		I2cWriteData(reg_offset, delay);
-	else
-		I2cWriteData(reg_offset | 0x80, delay);
-	I2cWriteData(reg_count, delay);
+	अगर(reg_गिनती > 1)
+		I2c_Write_तथ्य(reg_offset, delay);
+	अन्यथा
+		I2c_Write_तथ्य(reg_offset | 0x80, delay);
+	I2c_Write_तथ्य(reg_गिनती, delay);
 
-	for(int i = 0; i < reg_count; i++)
+	क्रम(पूर्णांक i = 0; i < reg_गिनती; i++)
 	{
-		I2cWriteData(*write_data, delay);
-		if(reg_count > 1)
-			*write_data++;
+		I2c_Write_तथ्य(*write_तथ्य_2, delay);
+		अगर(reg_गिनती > 1)
+			*write_तथ्य_2++;
 	}
 	I2cStop(delay);
-	return 0;
+	वापस 0;
 }
 
 /** @fn unsigned int cdceReadunsigned long delay)
@@ -71,112 +71,112 @@ unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int r
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int cdce913_read_all_registers(unsigned int reg_offset, unsigned int reg_count, unsigned long delay)
+अचिन्हित पूर्णांक cdce913_read_all_registers(अचिन्हित पूर्णांक reg_offset, अचिन्हित पूर्णांक reg_गिनती, अचिन्हित दीर्घ delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
+	अचिन्हित अक्षर readBuf = 0;
+	अचिन्हित लघु read_मूल्य_2 = 0;
 
 	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_WRITE, delay);
 
-	if(reg_count > 1)
-		I2cWriteData(reg_offset, delay);
-	else
-		I2cWriteData(reg_offset | 0x80, delay);
+	अगर(reg_गिनती > 1)
+		I2c_Write_तथ्य(reg_offset, delay);
+	अन्यथा
+		I2c_Write_तथ्य(reg_offset | 0x80, delay);
 
 	I2cStart(delay);
 	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_READ, delay);
 
-	if(reg_count > 1)
+	अगर(reg_गिनती > 1)
 	{
-		for(int i = 0; i < reg_count; i++)
+		क्रम(पूर्णांक i = 0; i < reg_गिनती; i++)
 		{
-			readBuf = I2cReadDataAck(delay);
-			printf("\n Read Value: %x", readBuf);
+			readBuf = I2c_Read_तथ्य_Ack(delay);
+			म_लिखो("\n Read Value: %x", readBuf);
 		}
 	}
-	else
+	अन्यथा
 	{
-		readBuf = I2cReadDataAck(delay);
-		printf("\n Value @ [%x]: [%x]", reg_offset , readBuf);
+		readBuf = I2c_Read_तथ्य_Ack(delay);
+		म_लिखो("\n Value @ [%x]: [%x]", reg_offset , readBuf);
 	}
 	I2cStop(delay);
 
-	return readBuf;
+	वापस readBuf;
 }
 
 /** @fn void main()
  * @brief Calling cdceRead to check the register value
  * @details to check the given value
  */
-void main()
+व्योम मुख्य()
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	अचिन्हित लघु अस्थायी_Read = 0;
+	अचिन्हित लघु अस्थायी = 0;
 
-#ifdef _50MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x04, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
-#endif
-#ifdef _75MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x03, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xFE, 0xBA, 0x32, 0x7, 0xFE, 0xBA, 0x32, 0x04};
-#endif
-#ifdef _100MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x02, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
-#endif
-#ifdef _125MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x8C, 0xA7, 0xE2, 0x49, 0x8C, 0xA7, 0xE2, 0x48};
-#endif
-#ifdef _130MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x92, 0x43, 0xF2, 0x69, 0x92, 0x43, 0xF2, 0x68};
-#endif
-#ifdef _150MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xAF, 0x03, 0x82, 0xCA, 0xAF, 0x03, 0x82, 0xC8};
-#endif
-#ifdef _175MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xC4, 0xEE, 0x23, 0x2B, 0xC4, 0xEE, 0x23, 0x28};
-#endif
-#ifdef _200MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
-#endif
+#अगर_घोषित _50MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x04, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
+#पूर्ण_अगर
+#अगर_घोषित _75MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x03, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xFE, 0xBA, 0x32, 0x7, 0xFE, 0xBA, 0x32, 0x04};
+#पूर्ण_अगर
+#अगर_घोषित _100MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x02, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
+#पूर्ण_अगर
+#अगर_घोषित _125MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x8C, 0xA7, 0xE2, 0x49, 0x8C, 0xA7, 0xE2, 0x48};
+#पूर्ण_अगर
+#अगर_घोषित _130MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x92, 0x43, 0xF2, 0x69, 0x92, 0x43, 0xF2, 0x68};
+#पूर्ण_अगर
+#अगर_घोषित _150MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xAF, 0x03, 0x82, 0xCA, 0xAF, 0x03, 0x82, 0xC8};
+#पूर्ण_अगर
+#अगर_घोषित _175MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xC4, 0xEE, 0x23, 0x2B, 0xC4, 0xEE, 0x23, 0x28};
+#पूर्ण_अगर
+#अगर_घोषित _200MHZ
+	अचिन्हित पूर्णांक write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	अचिन्हित पूर्णांक write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
+#पूर्ण_अगर
 
-	unsigned int eeprom_write = 0;
-	unsigned int read_value = 0xff;
+	अचिन्हित पूर्णांक eeprom_write = 0;
+	अचिन्हित पूर्णांक read_मूल्य = 0xff;
 
-	printf("\n\ttemp sensor initiating!");
+	म_लिखो("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	cdce913_write_all_registers(write_buf1[0], write_buf1[1], &write_buf1[2], DELAY_COUNT);
-	cdce913_write_all_registers(write_buf2[0], write_buf2[1], &write_buf2[2], DELAY_COUNT);
+	cdce913_write_all_registers(write_buf1[0], write_buf1[1], &write_buf1[2], DELAY_गिनती);
+	cdce913_write_all_registers(write_buf2[0], write_buf2[1], &write_buf2[2], DELAY_गिनती);
 
 	eeprom_write = 0x21;
-	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_COUNT);
+	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_गिनती);
 
-	while(1)
+	जबतक(1)
 	{
-		read_value = cdce913_read_all_registers(0x02, 1, DELAY_COUNT);
-		if(0 == (read_value & 0x40) )
-			break;
+		read_मूल्य = cdce913_read_all_registers(0x02, 1, DELAY_गिनती);
+		अगर(0 == (read_मूल्य & 0x40) )
+			अवरोध;
 	}
 	eeprom_write = 0x20;
-	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_COUNT);
+	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_गिनती);
 
-	printf("\n After Write");
+	म_लिखो("\n After Write");
 
-	for(int i = 0; i < 32; i++)
+	क्रम(पूर्णांक i = 0; i < 32; i++)
 	{
-		if  ( (i >= 7) && (i <= 15) )
-			continue;
-		cdce913_read_all_registers(i, 1, DELAY_COUNT);
+		अगर  ( (i >= 7) && (i <= 15) )
+			जारी;
+		cdce913_read_all_registers(i, 1, DELAY_गिनती);
 		delay_loop(1000,2000);
 	}
 
-	while(1);
+	जबतक(1);
 }

@@ -26,121 +26,121 @@
  * @detail This file contains the tests to verify the working of malloc
  */
 
-extern char _free_space[];
-extern char _STACK_SIZE[];
-extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
-extern char __bss_end[];
-extern char __bss_start[];
-extern char __sbss_end[];
-extern char __sbss_start[];
+बाह्य अक्षर _free_space[];
+बाह्य अक्षर ढेर_आकार[];
+बाह्य अक्षर HEAP_आकार[];
+बाह्य अक्षर ढेर_end[];
+बाह्य अक्षर ढेर[];
+बाह्य अक्षर _heap[];
+बाह्य अक्षर _heap_end[];
+बाह्य अक्षर __bss_end[];
+बाह्य अक्षर __bss_start[];
+बाह्य अक्षर __sbss_end[];
+बाह्य अक्षर __sbss_start[];
 
 
-char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
-char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
-char *test7=(char *)&_heap;
-char *test8=(char *)&_heap_end;
-char *test9=(char *)&__bss_end;
-char *test10=(char *)&__bss_start;
-char *test11=(char *)&__sbss_end;
-char *test12=(char *)&__sbss_start;
+अक्षर *test1=(अक्षर *)&_free_space;
+अक्षर *test3=(अक्षर *)&ढेर_आकार;
+अक्षर *test4=(अक्षर *)&HEAP_आकार;
+अक्षर *test5=(अक्षर *)&ढेर_end;
+अक्षर *test6=(अक्षर *)&ढेर;
+अक्षर *test7=(अक्षर *)&_heap;
+अक्षर *test8=(अक्षर *)&_heap_end;
+अक्षर *test9=(अक्षर *)&__bss_end;
+अक्षर *test10=(अक्षर *)&__bss_start;
+अक्षर *test11=(अक्षर *)&__sbss_end;
+अक्षर *test12=(अक्षर *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+पूर्णांक c1,c2,c3,c4,c5;
+पूर्णांक *pointer;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+पूर्णांक मुख्य()
 {
 
-  printf("\n\n\n\n\n\nTest Running");
-  printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
-  printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
+  म_लिखो("\n\n\n\n\n\nTest Running");
+  म_लिखो("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
+  म_लिखो("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
-  printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
+  अटल पूर्णांक b1,b2,b3,b4,b5;
+  म_लिखो("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
-  printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
+  पूर्णांक a1,a2,a3,a4,a5;
+  म_लिखो("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+पूर्णांक **a;
+पूर्णांक *b,*c,*d;
+पूर्णांक i=0;पूर्णांक n;
 
 //Enter Size of Array;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+म_लिखो("\n size of array %d %x",n,&n);
+b=दो_स्मृति(n*माप(पूर्णांक))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+म_लिखो("\n B's address %x %x",b,&b);
+क्रम(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+क्रम(i=0;i<n;i++)
 {
-    printf("\n b[%d]'s address is : %x",i,&b[i]);
-    printf("\n b[%d]'s value is : %d",i,b[i]);
+    म_लिखो("\n b[%d]'s address is : %x",i,&b[i]);
+    म_लिखो("\n b[%d]'s value is : %d",i,b[i]);
 }
 
-free(b);
+मुक्त(b);
 
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
+म_लिखो("\nArray B is freed");
+म_लिखो("\nb=%x",b);
+म_लिखो("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
-printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
+c=दो_स्मृति(n*माप(पूर्णांक))	;
+म_लिखो("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
-printf("\n C's address %x",c);
+म_लिखो("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+क्रम(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+क्रम(i=0;i<n;i++)
 {
-    printf("\n c[%d]'s address is : %x",i,&c[i]);
-    printf("\n c[%d]'s value is : %d",i,c[i]);
+    म_लिखो("\n c[%d]'s address is : %x",i,&c[i]);
+    म_लिखो("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+मुक्त(c);
 
-printf("\nc=%x",c);
+म_लिखो("\nc=%x",c);
 
-int x;
+पूर्णांक x;
 x=30;
 
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+म_लिखो("\n\n\nx address is %x",&x);
+d=दो_स्मृति(x*माप(पूर्णांक));
 
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+म_लिखो("\n D's address %x",d);
+क्रम(i=0;i<x;i++)
 {
-    printf("\nSetting value %d , %x",i+1,&d[i]); 
+    म_लिखो("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+क्रम(i=0;i<x;i++)
 {
-    printf("\n d[%d]'s address is : %x",i,&d[i]);
-    printf("\n d[%d]'s value is : %d",i,d[i]);
+    म_लिखो("\n d[%d]'s address is : %x",i,&d[i]);
+    म_लिखो("\n d[%d]'s value is : %d",i,d[i]);
 }
 
-free(d);
+मुक्त(d);
 
-printf("\nd=%x",d);
+म_लिखो("\nd=%x",d);
 
 }

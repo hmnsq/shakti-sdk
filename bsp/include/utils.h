@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#अगर_अघोषित UTIL_H
+#घोषणा UTIL_H
+#समावेश <stdio.h>
+#समावेश <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+व्योम waitfor(अचिन्हित पूर्णांक secs);
+व्योम delay(अचिन्हित दीर्घ seconds);
+भग्न pow_10(अचिन्हित पूर्णांक y);
+व्योम reverse(अक्षर *str, पूर्णांक len);
+व्योम ftoa( भग्न, अक्षर *, अचिन्हित पूर्णांक);
+व्योम delay_loop(अचिन्हित दीर्घ cntr1, अचिन्हित दीर्घ cntr2);
+अचिन्हित दीर्घ read_word(uint32_t *addr);
+व्योम write_word(uint32_t *addr, अचिन्हित दीर्घ val);
+पूर्णांक int_to_string(पूर्णांक संख्या, अक्षर str[], अचिन्हित पूर्णांक afterpoint);
+व्योम _printf_(स्थिर अक्षर *fmt, बहु_सूची ap);
+पूर्णांक म_लिखो(स्थिर अक्षर* fmt, ...);
 
-#endif
+#पूर्ण_अगर

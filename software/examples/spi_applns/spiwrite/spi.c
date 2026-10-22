@@ -27,13 +27,13 @@
 @detail Contains driver codes to read and write flash using SPI interface.
 */
 
-#include <stdint.h>
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#समावेश <stdint.h>
+#समावेश "spi.h"
+#समावेश "uart.h"
+#समावेश "utils.h"
 
-#define DELAY1 1000//Determines the duration of delay1//
-#define DELAY2 2000//Determines the duration of delay2//
+#घोषणा DELAY1 1000//Determines the duration of delay1//
+#घोषणा DELAY2 2000//Determines the duration of delay2//
 
 /** @fn static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @brief Reads the flash memory contents starting from read_address.
@@ -41,13 +41,13 @@
  * @param unsigned int (32-bit).
  * @param unsigned int (16-bit).           
  */
-static void flash_read_locations(uint32_t read_address, uint16_t length)
+अटल व्योम flash_read_locations(uint32_t read_address, uint16_t लंबाई_2)
 {
-	for(int i = 0; i < length; ++i)
+	क्रम(पूर्णांक i = 0; i < लंबाई_2; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("\nReading from adddress %x and data \
-			   %x\n",read_address,read_value);
+		पूर्णांक read_मूल्य= flash_read(read_address);
+		म_लिखो("\nReading from adddress %x and तथ्य_2 \
+			   %x\n",read_address,read_मूल्य);
 		read_address=read_address+4;
 	}
 }
@@ -57,29 +57,29 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+व्योम मुख्य()
 {
-	int write_address = 0x00b00004;  // read/write from/to this address
-	int read_address  = 0x00b00004;  // read/write from/to this address
-	int data = 0xDEADBEEF; //32 bits of data can be written at a time
-	uint16_t length = 11;
+	पूर्णांक write_address = 0x00b00004;  // read/write from/to this address
+	पूर्णांक read_address  = 0x00b00004;  // read/write from/to this address
+	पूर्णांक तथ्य_2 = 0xDEADBEEF; //32 bits of data can be written at a time
+	uint16_t लंबाई_2 = 11;
 
 	configure_spi(SPI0_OFFSET);
 	spi_init();
 
-	printf("SPI init done\n");
+	म_लिखो("SPI init done\n");
 
 	flash_device_id(); 
 
 	waitfor(200);
 
-	printf("\n Before Erase");
-	flash_read_locations(read_address, length);
+	म_लिखो("\n Before Erase");
+	flash_read_locations(read_address, लंबाई_2);
 	flash_write_enable();
 	flash_erase(0x00b00000); //erases an entire sector
 	flash_status_register_read();
-	printf("\n After Erase");
-	flash_read_locations(read_address, length);
+	म_लिखो("\n After Erase");
+	flash_read_locations(read_address, लंबाई_2);
 
 	//flash write
 	flash_write( write_address, 0x12345678);
@@ -94,10 +94,10 @@ void main()
 	flash_write( write_address + 0x24, 0x5a5a5a5a);
 	flash_write( write_address + 0x28, 0xa5a5a5a5);
 
-	printf("\nFlash write done on address %x and data %x \n", 
-	       write_address, data);
+	म_लिखो("\nFlash write done on address %x and data %x \n", 
+	       write_address, तथ्य_2);
 
-	printf("\n After Write");
-	flash_read_locations(read_address, length);
-	asm volatile ("ebreak");
+	म_लिखो("\n After Write");
+	flash_read_locations(read_address, लंबाई_2);
+	यंत्र अस्थिर ("ebreak");
 }

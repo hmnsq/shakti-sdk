@@ -28,42 +28,42 @@
 */
 
 
-#ifndef INTRUDER_DETECTION_H
-#define INTRUDER_DETECTION_H
+#अगर_अघोषित INTRUDER_DETECTION_H
+#घोषणा INTRUDER_DETECTION_H
 
-#define ROWNUM              4
-#define COLNUM              4
-#define OUTPINS_OFFSET      0
-#define INPINS_OFFSET       4
-#define OUTPINS             (0xF << OUTPINS_OFFSET)
-#define INPINS              (0xF << INPINS_OFFSET)
+#घोषणा ROWNUM              4
+#घोषणा COLNUM              4
+#घोषणा OUTPINS_OFFSET      0
+#घोषणा INPINS_OFFSET       4
+#घोषणा OUTPINS             (0xF << OUTPINS_OFFSET)
+#घोषणा INPINS              (0xF << INPINS_OFFSET)
 
 //Peripheral Pins
-#define BUZZER              GPIO11
-#define LED_P1              GPIO16
-#define LED_P2              GPIO18
-#define LED_P3              GPIO19
-#define LED_P4              GPIO21
-#define POWER_SWITCH        GPIO24
-#define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
-#define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
-#define PIR_IN	            GPIO8
-#define PANIC_BUTTON_OFFSET 28
-#define PIR_OFFSET          8
-#define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#घोषणा BUZZER              GPIO11
+#घोषणा LED_P1              GPIO16
+#घोषणा LED_P2              GPIO18
+#घोषणा LED_P3              GPIO19
+#घोषणा LED_P4              GPIO21
+#घोषणा POWER_SWITCH        GPIO24
+#घोषणा DEACTIVATE_SWITCH   GPIO25
+#घोषणा PANIC_BUTTON        GPIO28          //निवेश
+#घोषणा GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
+#घोषणा PIR_IN	            GPIO8
+#घोषणा PANIC_BUTTON_OFFSET 28
+#घोषणा PIR_OFFSET          8
+#घोषणा ALARM_TIMER         5
+#घोषणा ऊपरी                1
+#घोषणा निचला                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#घोषणा PASS_अंक            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+व्योम set_कुंजी_pins_map(अचिन्हित पूर्णांक* row, अचिन्हित पूर्णांक* col, पूर्णांक table[COLNUM][ROWNUM]);
+पूर्णांक get_कुंजी();
+पूर्णांक get_col_row(व्योम);
+अचिन्हित पूर्णांक row_pins[ROWNUM];
+अचिन्हित पूर्णांक col_pins[COLNUM];
+पूर्णांक कुंजी_map[COLNUM][ROWNUM];
 
-#endif
+#पूर्ण_अगर

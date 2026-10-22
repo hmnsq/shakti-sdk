@@ -27,22 +27,22 @@
 @detail SPI interface is used to configure the DAC and then write passed 
         value to DAC for converstion.
 */
-#include "spi.h"
-#include <stdint.h>
-#include "platform.h"
-#include "pinmux.h"
+#समावेश "spi.h"
+#समावेश <stdint.h>
+#समावेश "platform.h"
+#समावेश "pinmux.h"
 
-extern volatile unsigned int* pinmux_config_reg;
-extern int* spi_cr1 ;
-extern int* spi_dr1 ;
-extern int* spi_dr5;
+बाह्य अस्थिर अचिन्हित पूर्णांक* pinmux_config_reg;
+बाह्य पूर्णांक* spi_cr1 ;
+बाह्य पूर्णांक* spi_dr1 ;
+बाह्य पूर्णांक* spi_dr5;
 
 /** @fn void spi_dac()
  * @brief Configures DAC and write digital value to DAC.
  * @details configures the DAC and writes the digital value to DAC to convert 
  *          with digital to analog. Configuration is done using SPI.
  */
-void spi_dac()
+व्योम spi_dac()
 {
 	*(pinmux_config_reg) =  0x154000;
     configure_spi(SPI1_OFFSET);	
@@ -51,17 +51,17 @@ void spi_dac()
 	log_debug("SPI init done\n");
 
 	waitfor(200);
-	write_dac_value(0xfff);
+	write_dac_मूल्य(0xfff);
 
 	log_debug("\nDac Value Written\n");
 
-	while(1)
+	जबतक(1)
 	{
-		write_dac_value(0xFFF);
+		write_dac_मूल्य(0xFFF);
 		log_debug("Dac Value Written - 4096\n");
 
 		delay_loop(0x1750, 0x1750);
-		write_dac_value(0x0);
+		write_dac_मूल्य(0x0);
 		log_debug("Dac Value Written - 0\n");
 
 		delay_loop(0x1750, 0x1750);
@@ -74,20 +74,20 @@ void spi_dac()
  * @param dac_value
  * @return One.
  */
-int write_dac_value(unsigned dac_value)
+पूर्णांक write_dac_मूल्य(अचिन्हित dac_मूल्य)
 {
-	int data1 = ((0x3 << 28) | (dac_value << 16));
+	पूर्णांक data1 = ((0x3 << 28) | (dac_मूल्य << 16));
 
 	log_info("\n Data value written: %x", data1);
 
 	set_spi(spi_dr1, data1);
 	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(16)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	set_spi(spi_cr1, (SPI_BR(7)|SPI_योग_BITS_TX(16)|SPI_योग_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	वापस 1;
 }
 
 /** @fn void main()
@@ -95,7 +95,7 @@ int write_dac_value(unsigned dac_value)
  * @details Configures DAC registers and then write the digital 
  *          that needs to be converted to analog.  
  */
-void main()
+व्योम मुख्य()
 {
 	spi_dac();
 }

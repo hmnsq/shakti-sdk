@@ -26,24 +26,24 @@
 @detail This algorithm implements the malloc function using the first-fit algorithm. It allocates and frees blocks of memory for usage.
 */ 
 
-#include<unistd.h>
-#include<sys/types.h>
-#include "platform.h"
-#include "defines.h"
-#include "log.h"
+#समावेश<unistd.h>
+#समावेश<sys/types.h>
+#समावेश "platform.h"
+#समावेश "defines.h"
+#समावेश "log.h"
 
-extern char* _HEAP_SIZE[];
-char* HEAP_SIZE = (char *)&_HEAP_SIZE;
+बाह्य अक्षर* HEAP_आकार[];
+अक्षर* HEAP_आकार_2 = (अक्षर *)&HEAP_आकार;
 
 //Header block denotes start of the segment
-struct Header
+काष्ठा Header
 {
-	size_t size;
-	int free;
-	struct Header* next;
+	माप_प्रकार आकार;
+	पूर्णांक मुक्त;
+	काष्ठा Header* अग्र;
 };
 
-struct Header* global_base=NULL;
+काष्ठा Header* global_base=शून्य;
 
 /** @fn  struct Header* allocate_block(struct Header* last, size_t size)
  * @brief it allocates a block of given size 
@@ -53,18 +53,18 @@ struct Header* global_base=NULL;
  * @return returns a pointer to the newly allocated block
  *         returns null if mmemory allocated or block allocation fails
  */
-struct Header* allocate_block(struct Header* last, size_t size)
+काष्ठा Header* allocate_block(काष्ठा Header* last, माप_प्रकार आकार)
 {
 	uintptr_t x=0;
 
 	log_trace("\nFunction allocate_block entered");
 
-	if(last->size > size)
+	अगर(last->आकार > आकार)
 	{
-		struct Header* newblock;
-		void *p = last;
+		काष्ठा Header* newblock;
+		व्योम *p = last;
 
-		p += size + sizeof(struct Header);
+		p += आकार + माप(काष्ठा Header);
 		x = p;
 
 		x = ((( x) + ((REGSIZE) - 1)) & ~((REGSIZE) - 1));
@@ -73,19 +73,19 @@ struct Header* allocate_block(struct Header* last, size_t size)
 
 		newblock = p;
 
-		newblock->size = last->size - size - sizeof(struct Header);
+		newblock->आकार = last->आकार - आकार - माप(काष्ठा Header);
 
-		last->size = size;
-		last->free = 0;
-		last->next = newblock;
+		last->आकार = आकार;
+		last->मुक्त = 0;
+		last->अग्र = newblock;
 
-		newblock->free = 1;
-		newblock->next = NULL;
+		newblock->मुक्त = 1;
+		newblock->अग्र = शून्य;
 
-		return last;
+		वापस last;
 	}
-	else
-		return NULL;
+	अन्यथा
+		वापस शून्य;
 	log_trace("\nFunction allocate_block entered");
 }
 
@@ -98,29 +98,29 @@ struct Header* allocate_block(struct Header* last, size_t size)
  * @return returns a free block if available
  *         returns null if unavailable
  */
-struct Header *find_free_block(struct Header **last, size_t size)
+काष्ठा Header *find_free_block(काष्ठा Header **last, माप_प्रकार आकार)
 {
 	log_trace("\nfind free entered");
 
-	struct Header *current = global_base;
+	काष्ठा Header *current = global_base;
 
-	while (current && !(current->free && current->size >= size))
+	जबतक (current && !(current->मुक्त && current->आकार >= आकार))
 	{
 
-		log_debug("\n Inside Loop %d %d %x %x",current->size,size,current,*last);
+		log_debug("\n Inside Loop %d %d %x %x",current->आकार,आकार,current,*last);
 		*last = current;
-		current = current->next;
+		current = current->अग्र;
 	}
 
-	log_debug("\n After Loop %d %d %x %x",current->size,size,current,*last);
+	log_debug("\n After Loop %d %d %x %x",current->आकार,आकार,current,*last);
 
-	if(current && current->size>=size)
+	अगर(current && current->आकार>=आकार)
 	{
 		*last=current;
-		return current;
+		वापस current;
 	}
-	else
-		return NULL;
+	अन्यथा
+		वापस शून्य;
 
 	log_trace("\nfind free exited");
 }
@@ -132,31 +132,31 @@ struct Header *find_free_block(struct Header **last, size_t size)
  * @return returns a pointer to the allocated heap
  *         returns NULL if heap is unable to be allocated
  */
-struct Header* request_heap()
+काष्ठा Header* request_heap()
 {
-	struct Header *block;
+	काष्ठा Header *block;
 
 	block = m_sbrk(0);
 
-	void *request = m_sbrk(HEAP_SIZE);
+	व्योम *request = m_sbrk(HEAP_आकार_2);
 
-	if((void*)block == request); // Not thread safe.
+	अगर((व्योम*)block == request); // Not thread safe.
 	block=request;
 
 	log_debug("\nInitial Heap start address =%x",block);
 
-	if (request == (void*) -1) {
+	अगर (request == (व्योम*) -1) {
 		log_error("\nNo space left to allocate memory");
-		return NULL; // sbrk failed.
+		वापस शून्य; // sbrk failed.
 	}
 
-	block->size = HEAP_SIZE;
-	block->next = NULL;
-	block->free = 1;
+	block->आकार = HEAP_आकार_2;
+	block->अग्र = शून्य;
+	block->मुक्त = 1;
 
 	log_debug("\nBlock Assigned");
 
-	return block;
+	वापस block;
 }
 
 //malloc function to allocate space
@@ -167,17 +167,17 @@ struct Header* request_heap()
  * @return  returns a pointer to the assigned block
  *          returns NULL if allocation fails
  */
-void *malloc(size_t size)
+व्योम *दो_स्मृति(माप_प्रकार आकार)
 {
-	struct Header *block;
+	काष्ठा Header *block;
 
-	if (size <= 0) {
-               return NULL;
+	अगर (आकार <= 0) {
+               वापस शून्य;
 	}
 
 	log_info("\n global_base: %x",global_base);
 
-	if(global_base==0x00000000)
+	अगर(global_base==0x00000000)
 	{
 		// First call. global_base is empty
 		log_debug("\n Requesting block");
@@ -186,43 +186,43 @@ void *malloc(size_t size)
 
 		log_debug("\n block=%x",block);
 
-		if (!block)
+		अगर (!block)
 		{
-			return NULL;
+			वापस शून्य;
 		}
 		global_base = block;
 	}
 
-	struct Header *last = global_base;
+	काष्ठा Header *last = global_base;
 
-	block = find_free_block(&last, size);
+	block = find_free_block(&last, आकार);
 
-	if(!block)
+	अगर(!block)
 	{
 		log_error("\n No free blocks");
-		return NULL;
+		वापस शून्य;
 	}
 
-	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
+	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->आकार,आकार);
 
-	if (block->size>size)
+	अगर (block->आकार>आकार)
 	{
 		// Failed to find free block.
-		block = allocate_block(last,size);
+		block = allocate_block(last,आकार);
 
-		if (!block)
+		अगर (!block)
 		{
-			return NULL;
+			वापस शून्य;
 		}
 	}
-	else if(block->size==size)
+	अन्यथा अगर(block->आकार==आकार)
 	{
 		// Found free block
 		log_debug("\nFound free block of same size");
-		block->free = 0;
+		block->मुक्त = 0;
 	}
 
-  return(block+1);
+  वापस(block+1);
 }
 
 /** @fn  struct Header *get_block_ptr(void *ptr)
@@ -231,9 +231,9 @@ void *malloc(size_t size)
  * @param void* ptr - pointer to the block
  * @return returns pointer to the block
  */
-struct Header *get_block_ptr(void *ptr)
+काष्ठा Header *get_block_ptr(व्योम *ptr)
 {
-  return (struct Header*)ptr - 1;
+  वापस (काष्ठा Header*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
@@ -242,18 +242,18 @@ struct Header *get_block_ptr(void *ptr)
  * @detail  frees the memory assigned by malloc and when freed this memory is added back to the list to be reused
  * @param void *ptr - pointer to the memory assigned by malloc
  */
-void free(void *ptr)
+व्योम मुक्त(व्योम *ptr)
 {
-	if (!ptr)
+	अगर (!ptr)
 	{
 		log_error("\n Wrong value passed to free");
-		return;
+		वापस;
 	}
 
-	struct Header* block_ptr = get_block_ptr(ptr);
+	काष्ठा Header* block_ptr = get_block_ptr(ptr);
 
 	log_debug("\n %x is freed",block_ptr);
 
-	if(block_ptr->free==0)
-		block_ptr->free = 1;
+	अगर(block_ptr->मुक्त==0)
+		block_ptr->मुक्त = 1;
 }

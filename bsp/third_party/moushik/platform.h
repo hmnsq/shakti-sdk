@@ -20,125 +20,125 @@ platform.h - header file for moushik E class SoC
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#अगर_अघोषित PLATFORM_H
+#घोषणा PLATFORM_H
 
 /*
  *@brief RISCV - E CLASS SOC Memory mapping
  */
 
-#define CLOCK_FREQUENCY 40000000
+#घोषणा CLOCK_FREQUENCY 40000000
 
 /*! Core Local Interruptor CLINT */
 
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   16
+#घोषणा CLINT_BASE 0x020000000
+#घोषणा MTIME      0x0200BFF8
+#घोषणा MTIMECMP   0x02004000
+#घोषणा CLINT_भाजक   16
 
-#define MCAUSE_INT         0x80000000
-#define MCAUSE_CAUSE       0x7FFFFFFF
+#घोषणा MCAUSE_INT         0x80000000
+#घोषणा MCAUSE_CAUSE       0x7FFFFFFF
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#घोषणा PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000010
+#घोषणा DBG_MEM_START 0x00000010
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 128kB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
+#घोषणा TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
 
 /*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
+#घोषणा TCM_MEM_आकार 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#घोषणा ढेर_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#घोषणा HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#घोषणा PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
+#घोषणा PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Serial Peripheral Interface Offsets */
-#define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
-#define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
-#define SPI2_START 0x00020200 /* Serial Peripheral Interface 2 */
+#घोषणा SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
+#घोषणा SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
+#घोषणा SPI2_START 0x00020200 /* Serial Peripheral Interface 2 */
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART1_START 0x00011400 /*! UART 1 */
-#define UART2_START 0x00011500 /*! UART 2 */
-#define UART_OFFSET 0x100
-#define UART_BASE 0x11300
-#define MAX_UART_COUNT 3
+#घोषणा UART0_START 0x00011300 /*! UART 0 */
+#घोषणा UART1_START 0x00011400 /*! UART 1 */
+#घोषणा UART2_START 0x00011500 /*! UART 2 */
+#घोषणा UART_OFFSET 0x100
+#घोषणा UART_BASE 0x11300
+#घोषणा MAX_UART_गिनती 3
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#घोषणा PINMUX_CONFIGURE_REG 0x40310
 
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x00040000
-#define I2C_OFFSET 0x400
-#define MAX_I2C_COUNT 2
+#घोषणा I2C0_BASE 0x00040000
+#घोषणा I2C_OFFSET 0x400
+#घोषणा MAX_I2_C_गिनती 2
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1
-#define PLIC_INTERRUPT_2   2
-#define PLIC_INTERRUPT_3   3
-#define PLIC_INTERRUPT_4   4
-#define PLIC_INTERRUPT_5   5
-#define PLIC_INTERRUPT_6   6
-#define PLIC_INTERRUPT_7   7
-#define PLIC_INTERRUPT_8   8
-#define PLIC_INTERRUPT_9   9
-#define PLIC_INTERRUPT_10  10
-#define PLIC_INTERRUPT_11  11
-#define PLIC_INTERRUPT_12  12
-#define PLIC_INTERRUPT_13  13
-#define PLIC_INTERRUPT_14  14
-#define PLIC_INTERRUPT_15  15
-#define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_17  17
-#define PLIC_INTERRUPT_18  18
-#define PLIC_INTERRUPT_19  19
-#define PLIC_INTERRUPT_20  20
-#define PLIC_INTERRUPT_21  21
-#define PLIC_INTERRUPT_22  22
-#define PLIC_INTERRUPT_23  23
-#define PLIC_INTERRUPT_24  24
-#define PLIC_INTERRUPT_25  25 //uart 0
-#define PLIC_INTERRUPT_26  26 //uart 1
-#define PLIC_INTERRUPT_27  27 //uart 2
+#घोषणा PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
+#घोषणा PLIC_INTERRUPT_1   1
+#घोषणा PLIC_INTERRUPT_2   2
+#घोषणा PLIC_INTERRUPT_3   3
+#घोषणा PLIC_INTERRUPT_4   4
+#घोषणा PLIC_INTERRUPT_5   5
+#घोषणा PLIC_INTERRUPT_6   6
+#घोषणा PLIC_INTERRUPT_7   7
+#घोषणा PLIC_INTERRUPT_8   8
+#घोषणा PLIC_INTERRUPT_9   9
+#घोषणा PLIC_INTERRUPT_10  10
+#घोषणा PLIC_INTERRUPT_11  11
+#घोषणा PLIC_INTERRUPT_12  12
+#घोषणा PLIC_INTERRUPT_13  13
+#घोषणा PLIC_INTERRUPT_14  14
+#घोषणा PLIC_INTERRUPT_15  15
+#घोषणा PLIC_INTERRUPT_16  16
+#घोषणा PLIC_INTERRUPT_17  17
+#घोषणा PLIC_INTERRUPT_18  18
+#घोषणा PLIC_INTERRUPT_19  19
+#घोषणा PLIC_INTERRUPT_20  20
+#घोषणा PLIC_INTERRUPT_21  21
+#घोषणा PLIC_INTERRUPT_22  22
+#घोषणा PLIC_INTERRUPT_23  23
+#घोषणा PLIC_INTERRUPT_24  24
+#घोषणा PLIC_INTERRUPT_25  25 //uart 0
+#घोषणा PLIC_INTERRUPT_26  26 //uart 1
+#घोषणा PLIC_INTERRUPT_27  27 //uart 2
 
-#define PLIC_MAX_INTERRUPT_SRC 28
+#घोषणा PLIC_MAX_INTERRUPT_SRC 28
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x00040100 //GPIO Start Address */
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
-#define PLIC_GPIO_OFFSET 6
+#घोषणा GPIO_START 0x00040100 //GPIO Start Address */
+#घोषणा GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
+#घोषणा PLIC_GPIO_OFFSET 6
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
+#घोषणा GPIO0  (1 <<  0)
+#घोषणा GPIO1  (1 <<  1)
+#घोषणा GPIO2  (1 <<  2)
+#घोषणा GPIO3  (1 <<  3)
+#घोषणा GPIO4  (1 <<  4)
+#घोषणा GPIO5  (1 <<  5)
+#घोषणा GPIO6  (1 <<  6)
+#घोषणा GPIO7  (1 <<  7)
+#घोषणा GPIO8  (1 <<  8)
+#घोषणा GPIO9  (1 <<  9)
+#घोषणा GPIO10 (1 << 10)
+#घोषणा GPIO11 (1 << 11)
+#घोषणा GPIO12 (1 << 12)
+#घोषणा GPIO13 (1 << 13)
+#घोषणा GPIO14 (1 << 14)
+#घोषणा GPIO15 (1 << 15)
 
-#define GPIO_COUNT  0x10
+#घोषणा GPIO_गिनती  0x10
 
-#endif
+#पूर्ण_अगर

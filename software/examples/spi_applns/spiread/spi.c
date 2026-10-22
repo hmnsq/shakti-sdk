@@ -25,33 +25,33 @@
   @brief read data from the flash by spi
   @detail Contains driver codes to read and write flash using SPI interface.
  */
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#समावेश "spi.h"
+#समावेश "uart.h"
+#समावेश "utils.h"
 
 /** @fn void main()
  * @brief Configures the SPI flash and reads the flash.
  * @details Configures the SPI flash, Confirms the flash device id,
             then read 10 addresses in flash and prints the value.
  */
-int main(void){
+पूर्णांक मुख्य(व्योम){
 
 	configure_spi(SPI0_OFFSET);
 
 	spi_init();
-	printf("SPI init done\n");
+	म_लिखो("SPI init done\n");
 	flash_device_id();
 	waitfor(200);
-	int total_data = 10; //total data you want to read/write
-	int read_address = 0x00b00000;  //read from this address
+	पूर्णांक योग_तथ्य = 10; //total data you want to read/write
+	पूर्णांक read_address = 0x00b00000;  //read from this address
 
-	for(int i = 0; i < total_data; ++i)
+	क्रम(पूर्णांक i = 0; i < योग_तथ्य; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("Reading from adddress %x and data \
-		       %x\n",read_address,read_value);
+		पूर्णांक read_मूल्य= flash_read(read_address);
+		म_लिखो("Reading from adddress %x and तथ्य_2 \
+		       %x\n",read_address,read_मूल्य);
 		read_address=read_address+4;
 	}
-	asm volatile ("ebreak");
-	return 0;
+	यंत्र अस्थिर ("ebreak");
+	वापस 0;
 }

@@ -26,24 +26,24 @@
  * @brief Header file for switches
  */
 
-#ifndef SWITCH_DRIVER_H
-#define SWITCH_DRIVER_H
+#अगर_अघोषित SWITCH_DRIVER_H
+#घोषणा SWITCH_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#अगर defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
+#समावेश "platform.h"
+#समावेश "gpio.h"
 
 //Switches
-#define SW0 GPIO24
-#define SW1 GPIO25
-#define SW2 GPIO26
-#define SW3 GPIO27
+#घोषणा SW0 GPIO24
+#घोषणा SW1 GPIO25
+#घोषणा SW2 GPIO26
+#घोषणा SW3 GPIO27
 
-#define ALL_SWITCHES (SW0 | SW1 | SW2 | SW3)
+#घोषणा ALL_SWITCHES (SW0 | SW1 | SW2 | SW3)
 
 // function prototype
-void configure_switch(unsigned long pinCntrl);
-void configure_all_switchs();
-#endif
-#endif
+व्योम configure_switch(अचिन्हित दीर्घ pinCntrl);
+व्योम configure_all_switchs();
+#पूर्ण_अगर
+#पूर्ण_अगर

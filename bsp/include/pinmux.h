@@ -25,14 +25,14 @@
  * @brief store pinmux configuration
  */
 
-#ifndef PINMUX_H
-#define PINMUX_H
-#include "platform.h"
+#अगर_अघोषित PINMUX_H
+#घोषणा PINMUX_H
+#समावेश "platform.h"
 
-volatile unsigned int* pinmux_config_reg = PINMUX_CONFIGURE_REG;
+अस्थिर अचिन्हित पूर्णांक* pinmux_config_reg = PINMUX_CONFIGURE_REG;
 
-#define PINMUX_CONFIG_1 
-#define PINMUX_CONFIG_2 
-#define PINMUX_CONFIG_3
+#घोषणा PINMUX_CONFIG_1 
+#घोषणा PINMUX_CONFIG_2 
+#घोषणा PINMUX_CONFIG_3
 
-#endif
+#पूर्ण_अगर

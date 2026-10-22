@@ -26,24 +26,24 @@
 @detail this is header file for gpio_spi.c
 */ 
  
-#ifndef GPIO_SPI_H
-#define GPIO_SPI_H
+#अगर_अघोषित GPIO_SPI_H
+#घोषणा GPIO_SPI_H
 
-#define IR_1 (1 << 4)
-#define IR_2 (1 << 5)
-#define IR_3 (1 << 6)
-#define IR_4 (1 << 7)
-#define IR_5 (1 << 8)
+#घोषणा IR_1 (1 << 4)
+#घोषणा IR_2 (1 << 5)
+#घोषणा IR_3 (1 << 6)
+#घोषणा IR_4 (1 << 7)
+#घोषणा IR_5 (1 << 8)
 
-#define SPI_MISO 1<<0 //1st bit 
-#define SPI_MOSI 1<<1 //2nd bit
-#define SPI_SCLK 1<<2 //3rd bit
-#define SPI_SS   1<<3 //4th bit
-#define SPI_ADC_IN 0xC0
+#घोषणा SPI_MISO 1<<0 //1st bit 
+#घोषणा SPI_MOSI 1<<1 //2nd bit
+#घोषणा SPI_SCLK 1<<2 //3rd bit
+#घोषणा SPI_SS   1<<3 //4th bit
+#घोषणा SPI_ADC_IN 0xC0
 
 // function prototype
- unsigned char readbyte(unsigned char delay);
- int config();
+ अचिन्हित अक्षर readbyte(अचिन्हित अक्षर delay);
+ पूर्णांक config();
 
-#endif/* GPIO_SPI_H*/
+#पूर्ण_अगर/* GPIO_SPI_H*/
 

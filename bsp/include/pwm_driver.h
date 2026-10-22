@@ -26,48 +26,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#समावेश<stdbool.h>
 
 // PWM Registers 
-#define PERIOD_REGISTER     0x00000000	//16 bits (short)
-#define DUTY_REGISTER       0x00000004	//16 bits (short)
-#define CONTROL_REGISTER    0x00000008	//8 bits (char)
-#define CLOCK_REGISTER      0x0000000c	//16 bits (short)
+#घोषणा PERIOD_REGISTER     0x00000000	//16 bits (short)
+#घोषणा DUTY_REGISTER       0x00000004	//16 bits (short)
+#घोषणा CONTROL_REGISTER    0x00000008	//8 bits (char)
+#घोषणा CLOCK_REGISTER      0x0000000c	//16 bits (short)
 
 // Control Register Individual Bits 
-#define CLOCK_SELECTOR      0x00000001
-#define PWM_ENABLE          0x00000002
-#define PWM_START           0x00000004
-#define CONTINUOUS_ONCE     0x00000008
-#define PWM_OUTPUT_ENABLE   0x00000010
-#define INTERRUPT           0x00000020
-#define READ_ONLY           0x00000040
-#define RESET_COUNTER       0x00000080
+#घोषणा CLOCK_SELECTOR      0x00000001
+#घोषणा PWM_ENABLE          0x00000002
+#घोषणा PWM_START           0x00000004
+#घोषणा CONTINUOUS_ONCE     0x00000008
+#घोषणा PWM_OUTPUT_ENABLE   0x00000010
+#घोषणा INTERRUPT           0x00000020
+#घोषणा READ_ONLY           0x00000040
+#घोषणा RESET_गणक       0x00000080
 
 // PWM Modules 
-#define PWM_0 0
-#define PWM_1 1
-#define PWM_2 2
-#define PWM_3 3
-#define PWM_4 4
-#define PWM_5 5
+#घोषणा PWM_0 0
+#घोषणा PWM_1 1
+#घोषणा PWM_2 2
+#घोषणा PWM_3 3
+#घोषणा PWM_4 4
+#घोषणा PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+व्योम pwm_configure(पूर्णांक module_संख्या, पूर्णांक clock_भाजक, पूर्णांक period, पूर्णांक duty, bool external_clock);
+व्योम pwm_start(पूर्णांक module_संख्या, पूर्णांक mode);
+पूर्णांक pwm_check_continuous_mode(पूर्णांक module_संख्या);
+व्योम pwm_clear_registers(पूर्णांक module_संख्या);
+व्योम pwm_init(व्योम);
+व्योम pwm_set_external_clock(पूर्णांक module_संख्या, bool मूल्य);
+व्योम pwm_set_clock(पूर्णांक module_संख्या, पूर्णांक clock_भाजक);
+व्योम pwm_set_duty_cycle(पूर्णांक module_संख्या, पूर्णांक duty);
+व्योम pwm_set_periodic_cycle(पूर्णांक module_संख्या, पूर्णांक period);
+व्योम pwm_stop(पूर्णांक module_संख्या);
+व्योम show_register_मूल्यावली(पूर्णांक module_संख्या);
+पूर्णांक set_pwm_period_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक set_pwm_duty_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक set_pwm_control_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक set_pwm_clock_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक configure_control_register_mode(पूर्णांक mode);
+व्योम pwm_use_external_clock(पूर्णांक module_संख्या, bool मूल्य);
 

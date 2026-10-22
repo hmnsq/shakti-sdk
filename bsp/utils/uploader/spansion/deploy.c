@@ -29,56 +29,56 @@ flash device. SPI protocol is used for this purporse. The array is usually a
 project's hex file 
 */
 
-#include <stdint.h>
-#include <uart.h>
-#include <stdio.h>
-#include "spi.h"
-#include "flashdata.h"
+#समावेश <stdint.h>
+#समावेश <uart.h>
+#समावेश <stdio.h>
+#समावेश "spi.h"
+#समावेश "flashdata.h"
 
 /** @fn void deploy()
  * @brief Erases flash and writes the hex array entry by entry into the flash
  *       memory. Here SPI protocol is used.
  */
-void deploy()
+व्योम deploy()
 {
-	int read_address = 0x00b00000;
-	double count=0.0;
+	पूर्णांक read_address = 0x00b00000;
+	द्विगुन गिनती=0.0;
 
 	configure_spi(SPI0_OFFSET);
 	spi_init();
 	flash_device_id();
 
 	waitfor(200);
-	printf("\nErasing...\n");
+	म_लिखो("\nErasing...\n");
 
 	flash_write_enable();
 	flash_erase(read_address);
 	flash_status_register_read();
-	printf("\nErase complete.\n");
+	म_लिखो("\nErase complete.\n");
 
-	flash_write(read_address,write_data[0]);
+	flash_write(read_address,write_तथ्य_2[0]);
 	read_address+=4;
 
-	printf("\nWriting...");
+	म_लिखो("\nWriting...");
 
-	for(int i =0; i< write_data[0]; i++)
+	क्रम(पूर्णांक i =0; i< write_तथ्य_2[0]; i++)
 	{
 		waitfor(200);
-		flash_write(read_address,write_data[i+1]);
+		flash_write(read_address,write_तथ्य_2[i+1]);
 		read_address+=4;
 
-		if(i%512 == 0)
-			printf(".");;
+		अगर(i%512 == 0)
+			म_लिखो(".");;
 	}
 
-	printf("\n\nWrite complete.\n");
-	printf("\nPlease reset.\n");
-	asm volatile ("ebreak");
+	म_लिखो("\n\nWrite complete.\n");
+	म_लिखो("\nPlease reset.\n");
+	यंत्र अस्थिर ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function
  */
-void main(){
+व्योम मुख्य(){
 	deploy();
 }

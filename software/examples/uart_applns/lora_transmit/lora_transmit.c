@@ -48,22 +48,22 @@
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+puur_naa_nka read_from_lora(var_na *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	puur_naa_nka ch;
+	var_na *str = data;
+	var_na *test = data;
+	for (puur_naa_nka i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		ᰀᰧ (ch == '\n')
 		{
-			break;
+			bha_nga;
 		}
 	}
-	return;	
+	ᰀᰧᰌ;	
 }
 
 
@@ -72,11 +72,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+puur_naa_nka write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	ᰀᰧᰌ 0;
 }
 
 
@@ -84,9 +84,9 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+void write_to_lora(var_na *data)
 {
-	while (*data != '\0')
+	ᰀᰬ (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -101,7 +101,7 @@ void write_to_lora(char *data)
  */
 void send_data()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -119,7 +119,7 @@ void send_data()
  */
 void check_set_lora_value()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -150,7 +150,7 @@ void check_set_lora_value()
  */
 void setup_lora()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);

@@ -207,14 +207,14 @@
 #define ETH_INTS_H			/* by using protection macros */
 
 #ifdef __cplusplus
-extern "C" {
+बाह्य "C" {
 #endif
 
 
 /***************************** Include Files *********************************/
 
 
-#include "xintc_l.h"
+#अन्तर्भाव "xintc_l.h"
 
 /************************** Constant Definitions *****************************/
 
@@ -272,25 +272,25 @@ extern "C" {
 /**
  * This typedef contains configuration information for the device.
  */
-typedef struct {
+प्रकारव्याख्या संरचना {
 	u16 DeviceId;		/**< Unique ID  of device */
 	UINTPTR BaseAddress;	/**< Register base address */
 	u32 AckBeforeService;	/**< Ack location per interrupt */
-	int FastIntr;		/**< Fast Interrupt enabled */
+	पूर्णांक FastIntr;		/**< Fast Interrupt enabled */
 	u32 IntVectorAddr;	/**< Interrupt Vector Address */
-	int NumberofIntrs;      /**< Number of Interrupt sources */
+	पूर्णांक NumberofIntrs;      /**< Number of Interrupt sources */
 	u8 VectorAddrWidth;		/**< Width of vector address */
 	u32 Options;		/**< Device options */
-	int IntcType;		/**< Intc type 0 - No Cascade Mode
+	पूर्णांक IntcType;		/**< Intc type 0 - No Cascade Mode
 				               1 - primary instance
 				               2 - secondary instance
 				               3 - last instance */
 
 /** Static vector table of interrupt handlers */
-#if XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
+#जर XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
 	XIntc_VectorTableEntry HandlerTable[XIN_CONTROLLER_MAX_INTRS];
-#else
-	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_NUM_INTR_INPUTS];
+#अन्यथा
+	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_अंक_INTR_INPUTS];
 #endif
 
 } XIntc_Config;
@@ -300,7 +300,7 @@ typedef struct {
  * variable of this type for every intc device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+प्रकारव्याख्या संरचना {
 	UINTPTR BaseAddress;	 /**< Base address of registers */
 	u32 IsReady;		 /**< Device is initialized and ready */
 	u32 IsStarted;		 /**< Device has been started */
@@ -316,43 +316,43 @@ typedef struct {
 /*
  * Required functions in xintc.c
  */
-int XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
+पूर्णांक XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
 
-int XIntc_Start(XIntc * InstancePtr, u8 Mode);
-void XIntc_Stop(XIntc * InstancePtr);
+पूर्णांक XIntc_Start(XIntc * InstancePtr, u8 Mode);
+शून्य XIntc_Stop(XIntc * InstancePtr);
 
-int XIntc_Connect(XIntc * InstancePtr, u8 Id,
-		  XInterruptHandler Handler, void *CallBackRef);
-void XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
+पूर्णांक XIntc_Connect(XIntc * InstancePtr, u8 Id,
+		  XInterruptHandler Handler, शून्य *CallBackRef);
+शून्य XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
 
-void XIntc_Enable(XIntc * InstancePtr, u8 Id);
-void XIntc_Disable(XIntc * InstancePtr, u8 Id);
+शून्य XIntc_Enable(XIntc * InstancePtr, u8 Id);
+शून्य XIntc_Disable(XIntc * InstancePtr, u8 Id);
 
-void XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
+शून्य XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
 
 XIntc_Config *XIntc_LookupConfig(u16 DeviceId);
 
-int XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
+पूर्णांक XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
 				XFastInterruptHandler Handler);
-void XIntc_SetNormalIntrMode(XIntc *InstancePtr, u8 Id);
+शून्य XIntc_SetNormalIntrMode(XIntc *InstancePtr, u8 Id);
 
 /*
  * Interrupt functions in xintr_intr.c
  */
-void XIntc_VoidInterruptHandler(void);
-void XIntc_InterruptHandler(XIntc * InstancePtr);
+शून्य XIntc_VoidInterruptHandler(शून्य);
+शून्य XIntc_InterruptHandler(XIntc * InstancePtr);
 
 /*
  * Options functions in xintc_options.c
  */
-int XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
+पूर्णांक XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
 u32 XIntc_GetOptions(XIntc * InstancePtr);
 
 /*
  * Self-test functions in xintc_selftest.c
  */
-int XIntc_SelfTest(XIntc * InstancePtr);
-int XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
+पूर्णांक XIntc_SelfTest(XIntc * InstancePtr);
+पूर्णांक XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
 
 #ifdef __cplusplus
 }

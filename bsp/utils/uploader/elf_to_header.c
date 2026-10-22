@@ -26,62 +26,62 @@
 @brief Create hex array of the contents in elf.
 */
 
-#include <stdio.h>
+#अन्तर्भाव <stdio.h>
 
 /** @fn void convert_hex_array()
  * @brief Converts the hex code to an array of hex code
  * @details reads code.mem file and coverts the hex code into an array of hex
  *     codes in the flashdata.h, first entry in the array tells the size of file.
  */
-void convert_hex_array()
+शून्य convert_hex_array()
 {
-	unsigned int  i= 0;
-	int write_data;
-	int count=0;
+	अचिन्हित पूर्णांक  i= 0;
+	पूर्णांक write_data;
+	पूर्णांक मोजणी=0;
 
-	FILE *myFile;
-	FILE *Cypress;
+	खाता *myFile;
+	खाता *Cypress;
 
-	myFile = fopen(FILEPATH "/output/code.mem", "r");
-	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
+	myFile = ख_खोलो(FILEPATH "/output/code.mem", "r");
+	Cypress = ख_खोलो(FILEPATH "/output/flashdata.h","w");
 
-	if(!myFile) {
-		printf(" unable to read code.mem\n");
-		return;
+	जर(!myFile) {
+		म_लिखो(" unable to read code.mem\n");
+		परत;
 	}
 
-	if(!Cypress) {
-		printf(" unable to open flashdata.h\n");
-		return;
+	जर(!Cypress) {
+		म_लिखो(" unable to open flashdata.h\n");
+		परत;
 	}
 	
-	while (fscanf(myFile, "%x", &write_data) != EOF) {
-		count++;
+	पर्यंत (ख_पूछो(myFile, "%x", &write_data) != खातापूर्ण) {
+		मोजणी++;
 	}
 
-	rewind(myFile);
+	शुरुआत(myFile);
 
-	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
+	ख_लिखो(Cypress,"unsigned int write_data[%d] = { 0x%x", मोजणी + 1, मोजणी); 
 
-	while (fscanf(myFile, "%x", &write_data) != EOF)
+	पर्यंत (ख_पूछो(myFile, "%x", &write_data) != खातापूर्ण)
 	{
-		fprintf(Cypress,"\n ,0x%x", write_data);
+		ख_लिखो(Cypress,"\n ,0x%x", write_data);
 	}
 
-	fprintf(Cypress,"};\n\n");
+	ख_लिखो(Cypress,"};\n\n");
 
-	fprintf(Cypress,"#define SIZE %d", count);
+	ख_लिखो(Cypress,"#define SIZE %d", मोजणी);
 
-	fclose(Cypress);
-	fclose(myFile);
-	printf("\n Converted codemem to array\n");
+	ख_बंद(Cypress);
+	ख_बंद(myFile);
+	म_लिखो("\n Converted codemem to array\n");
 }
 /** @fn void main()
  * @brief Initiates conversion by calling convert_hex_array
  */
-void main()
+शून्य main()
 {
-	printf(" Converting codemem to array\n");
+	म_लिखो(" Converting codemem to array\n");
 	convert_hex_array();
 }
 

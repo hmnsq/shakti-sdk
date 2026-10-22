@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+पूर्णांक main()
 {
-printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+म_लिखो("\nTest Running");
+पूर्णांक *b,*c,*d;
+पूर्णांक i=0;पूर्णांक n;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+म_लिखो("\n size of array %d %x",n,&n);
+b=दो_स्मृति(n*आकार(पूर्णांक))	;
+म_लिखो("\n B's address %x %x",b,&b);
+साठी(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+साठी(i=0;i<n;i++)
 {
-printf("\n b[%d]'s address is : %x",i,&b[i]);
-printf("\n b[%d]'s value is : %d",i,b[i]);
+म_लिखो("\n b[%d]'s address is : %x",i,&b[i]);
+म_लिखो("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
-printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+मुक्त(b);
+म_लिखो("\nArray B is freed");
+म_लिखो("\nb=%x",b);
+म_लिखो("\n size of array %d",n);
+c=दो_स्मृति(n*आकार(पूर्णांक))	;
+म_लिखो("\n C's address %x",c);
+साठी(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+साठी(i=0;i<n;i++)
 {
-printf("\n c[%d]'s address is : %x",i,&c[i]);
-printf("\n c[%d]'s value is : %d",i,c[i]);
+म_लिखो("\n c[%d]'s address is : %x",i,&c[i]);
+म_लिखो("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
-printf("\nc=%x",c);
-int x;
+मुक्त(c);
+म_लिखो("\nc=%x",c);
+पूर्णांक x;
 x=30;
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+म_लिखो("\n\n\nx address is %x",&x);
+d=दो_स्मृति(x*आकार(पूर्णांक));
+म_लिखो("\n D's address %x",d);
+साठी(i=0;i<x;i++)
 {
-printf("\nSetting value %d , %x",i+1,&d[i]); 
+म_लिखो("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+साठी(i=0;i<x;i++)
 {
-printf("\n d[%d]'s address is : %x",i,&d[i]);
-printf("\n d[%d]'s value is : %d",i,d[i]);
+म_लिखो("\n d[%d]'s address is : %x",i,&d[i]);
+म_लिखो("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
-printf("\nd=%x",d);
+मुक्त(d);
+म_लिखो("\nd=%x",d);
 
-return 0;
+परत 0;
 }
 

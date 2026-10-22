@@ -26,9 +26,9 @@
 @detail The GPIO_SPI module driver supports SPI driver routines using GPIO lines as SPI lines.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "gpio_spi.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "gpio_spi.h"
 
 /** @fn static void writebyte(unsigned char writeData, unsigned char delay)
  * @brief Writes a byte
@@ -37,15 +37,15 @@
  * @param unsigned char delay
  */
 // at starting  edge sending
-static void writebyte(unsigned char writeData, unsigned char delay)
+स्थिर शून्य writebyte(अचिन्हित अक्षर writeData, अचिन्हित अक्षर delay)
 {
-	unsigned char j = 0, k;
-	unsigned long readData = 0;
+	अचिन्हित अक्षर j = 0, k;
+	अचिन्हित दीर्घ readData = 0;
 	//readData = read_word(GPIO_DATA_REG);
 
     // Before initiating communication SS -> low
        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SS)) );
-	while (j < 8) {
+	पर्यंत (j < 8) {
 		k = writeData;
 		k = ( k << j ) & 0x80;
 
@@ -54,11 +54,11 @@ static void writebyte(unsigned char writeData, unsigned char delay)
         // increasing sck --> Rising EDGE
         write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
 
-        if (k == 0) {
+        जर (k == 0) {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_MOSI)) );
 			delay_loop(delay, delay);
 		}
-		else {
+		अन्यथा {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_MOSI) );
 			delay_loop(delay, delay);
 		}
@@ -82,26 +82,26 @@ static void writebyte(unsigned char writeData, unsigned char delay)
  * @return Read value
  */
 //reading at rising edge reading 
-unsigned char readbyte(unsigned char delay)
+अचिन्हित अक्षर readbyte(अचिन्हित अक्षर delay)
 {
-	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
-	unsigned char readData = 0;
-        unsigned long readGpioData = 0;
+	अचिन्हित अक्षर j = 0, i = 0;
+	अचिन्हित अक्षर bit_मूल्य;
+	अचिन्हित अक्षर readData = 0;
+        अचिन्हित दीर्घ readGpioData = 0;
 	readData = read_word(GPIO_DATA_REG);
-	while (j < 8) {
+	पर्यंत (j < 8) {
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
 		delay_loop(delay, delay);
 
 		readGpioData = read_word(GPIO_DATA_REG)  & SPI_MISO;
 
-        if (readGpioData != 0)
-			bitValue = 1;
-		else
-			bitValue = 0;
+        जर (readGpioData != 0)
+			bit_मूल्य = 1;
+		अन्यथा
+			bit_मूल्य = 0;
 	    
         readData = readData << 1;
-		readData = readData | bitValue;
+		readData = readData | bit_मूल्य;
 		
         delay_loop(delay, delay);
 
@@ -109,7 +109,7 @@ unsigned char readbyte(unsigned char delay)
 		delay_loop(delay, delay);
 		++j;
 	}
-	return readData;
+	परत readData;
 }
 /*
   1.) MISO_pin  --> 1st GPIO //0 
@@ -122,18 +122,18 @@ unsigned char readbyte(unsigned char delay)
  * @brief Configures the GPIO pins for SPI functionality
  * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
  */
-int config()
+पूर्णांक config()
 {
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
-    unsigned char writeData = (int) 'a';
-    unsigned char delay = 10;
-    for (;;)
+    अचिन्हित अक्षर writeData = (पूर्णांक) 'a';
+    अचिन्हित अक्षर delay = 10;
+    साठी (;;)
     {
     writebyte(writeData,delay);
-    printf("%d\n",writeData);
+    म_लिखो("%d\n",writeData);
     delay_loop(100,120);
     }
 }

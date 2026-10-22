@@ -29,10 +29,10 @@
 
 
 
-#include <stdio.h>
-#include "uart.h"
+#अन्तर्भाव <stdio.h>
+#अन्तर्भाव "uart.h"
 #define CAM uart_instance[1]
 #define HOST uart_instance[2]
-int init_cam();
-void get_pic(int);  // two modes 0---one pic, 1---continuous pictures
-void send_full_reset();
+पूर्णांक init_cam();
+शून्य get_pic(पूर्णांक);  // two modes 0---one pic, 1---continuous pictures
+शून्य send_full_reset();

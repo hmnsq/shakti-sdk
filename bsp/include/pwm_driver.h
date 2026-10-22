@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#अन्तर्भाव<stdbool.h>
 
 // PWM Registers 
 #define PERIOD_REGISTER     0x00000000	//16 bits (short)
@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+शून्य pwm_configure(पूर्णांक module_संख्या, पूर्णांक clock_भाजक, पूर्णांक period, पूर्णांक duty, bool external_clock);
+शून्य pwm_start(पूर्णांक module_संख्या, पूर्णांक mode);
+पूर्णांक pwm_check_continuous_mode(पूर्णांक module_संख्या);
+शून्य pwm_clear_registers(पूर्णांक module_संख्या);
+शून्य pwm_init(शून्य);
+शून्य pwm_set_external_clock(पूर्णांक module_संख्या, bool मूल्य);
+शून्य pwm_set_clock(पूर्णांक module_संख्या, पूर्णांक clock_भाजक);
+शून्य pwm_set_duty_cycle(पूर्णांक module_संख्या, पूर्णांक duty);
+शून्य pwm_set_periodic_cycle(पूर्णांक module_संख्या, पूर्णांक period);
+शून्य pwm_stop(पूर्णांक module_संख्या);
+शून्य show_register_मूल्ये(पूर्णांक module_संख्या);
+पूर्णांक set_pwm_period_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक set_pwm_duty_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक set_pwm_control_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक set_pwm_clock_register(पूर्णांक module_संख्या, पूर्णांक मूल्य);
+पूर्णांक configure_control_register_mode(पूर्णांक mode);
+शून्य pwm_use_external_clock(पूर्णांक module_संख्या, bool मूल्य);
 

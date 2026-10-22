@@ -26,10 +26,10 @@
 @detail Switches ON/OFF/TOGGLE the LEDs.
 */
 
-#include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
-#include "led_driver.h"
-#include "utils.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h" // includes definitions of gpio pins and read, write functions//
+#अन्तर्भाव "led_driver.h"
+#अन्तर्भाव "utils.h"
 
 /*! Define one of the the following macros to control LEDs in different ways. */
 //#define CONTROL_INDIVIDUAL_LEDS  /*! Controls LEDs Individually */
@@ -50,12 +50,12 @@
  * @details Based on the uncommented macro. Performs the on/off/toggle 
  * operation on LEDS.     
  */
-void main()
+शून्य main()
 {
 	//  write_word(GPIO_DIRECTION_CNTRL_REG, 0x0);
 	//  write_word(GPIO_DATA_REG, 0x0);
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#जर defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #ifdef CONTROL_INDIVIDUAL_LEDS
 	configure_ledx(LED0_B);
@@ -111,7 +111,7 @@ void main()
 
 	write_word(GPIO_DATA_REG, 0x0);
 
-	while (1){
+	पर्यंत (1){
 #ifdef CONTROL_INDIVIDUAL_LEDS
 		delay_loop(DELAY1, DELAY2);
 		turn_on_ledx( LED0_G);
@@ -156,7 +156,7 @@ void main()
 		delay_loop(DELAY1, DELAY2);
 #endif
 
-#if 0
+#जर 0
 #ifdef CONTROL_RGB_LEDX
 		turn_on_rgb_ledx( RGB_LED0);
 		turn_on_rgb_ledx( RGB_LED1);

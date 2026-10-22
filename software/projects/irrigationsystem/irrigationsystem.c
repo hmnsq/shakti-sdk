@@ -41,10 +41,10 @@
   on.
 */
 
-#include "platform.h"
-#include "gpio.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
 
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
+बाह्य शून्य delay_loop(अचिन्हित दीर्घ cntr1, अचिन्हित दीर्घ cntr2);
 
 #define MOTOR_ON (1 << 7)
 #define MOTOR_OFF 0
@@ -54,10 +54,10 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @brief Entry point for the program
  */
 
-void main()
+शून्य main()
 {
-    unsigned long readData = 0;
-    unsigned long moistureDetetected = 0;
+    अचिन्हित दीर्घ readData = 0;
+    अचिन्हित दीर्घ moistureDetetected = 0;
 
 /*********************************************************************
    set the read & write bits in GPIO Direction Control Register
@@ -66,17 +66,17 @@ void main()
 *********************************************************************/
     write_word(GPIO_DIRECTION_CNTRL_REG, (0x00|MOTOR_ON));
     
-    while (1) {
+    पर्यंत (1) {
         readData = read_word(GPIO_DATA_REG);
-        printf("\n Read Data:=%d", readData);
+        म_लिखो("\n Read Data:=%d", readData);
 	moistureDetetected = ((readData & 1 ) == 1) ? 1 : 0;
-        if (moistureDetetected == 0) {
+        जर (moistureDetetected == 0) {
             write_word(GPIO_DATA_REG, MOTOR_ON);
-            printf("\nTurn on Motor");
+            म_लिखो("\nTurn on Motor");
         }
-        else {
+        अन्यथा {
             write_word(GPIO_DATA_REG, MOTOR_OFF);
-            printf("\nTurn off Motor");
+            म_लिखो("\nTurn off Motor");
         }
         delay_loop(1000,1000);
     } 

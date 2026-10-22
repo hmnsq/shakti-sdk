@@ -30,39 +30,39 @@
 #define IO_ACCESS_H           /* by using protection macros */
 
 #ifdef __cplusplus
-extern "C" {
+ബാഹ്യ "C" {
 #endif
 
 /***************************** Include Files *********************************/
 
-#include "xil_types.h"
-#include "log_debug.h"
-#include "xstatus.h"
+#അന്തര്ഭാവ "xil_types.h"
+#അന്തര്ഭാവ "log_debug.h"
+#അന്തര്ഭാവ "xstatus.h"
 
-#if defined (__MICROBLAZE__)
-#include "mb_interface.h"
-#else
-#include "xpseudo_asm.h"
+#എങ്കിൽ defined (__MICROBLAZE__)
+#അന്തര്ഭാവ "mb_interface.h"
+#അല്ലെങ്കിൽ
+#അന്തര്ഭാവ "xpseudo_asm.h"
 #endif
 
 /************************** Function Prototypes ******************************/
 u16 Xil_EndianSwap16(u16 Data);
 u32 Xil_EndianSwap32(u32 Data);
 #ifdef ENABLE_SAFETY
-extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
+ബാഹ്യ u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 #endif
 
 /***************** Macros (Inline Functions) Definitions *********************/
-#if defined __GNUC__
-#if defined (__MICROBLAZE__)
+#എങ്കിൽ defined __GNUC__
+#എങ്കിൽ defined (__MICROBLAZE__)
 #  define INST_SYNC		mbar(0)
 #  define DATA_SYNC		mbar(1)
-# else
+# അല്ലെങ്കിൽ
 #  define SYNCHRONIZE_IO	dmb()
 #  define INST_SYNC		isb()
 #  define DATA_SYNC		dsb()
 # endif
-#else
+#അല്ലെങ്കിൽ
 # define SYNCHRONIZE_IO
 # define INST_SYNC
 # define DATA_SYNC
@@ -70,9 +70,9 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 # define DATA_SYNC
 #endif
 
-#if defined (__GNUC__) || defined (__ICCARM__) || defined (__MICROBLAZE__)
-#define INLINE inline
-#else
+#എങ്കിൽ defined (__GNUC__) || defined (__ICCARM__) || defined (__MICROBLAZE__)
+#define INLINE വരിയിൽ
+#അല്ലെങ്കിൽ
 #define INLINE __inline
 #endif
 
@@ -89,9 +89,9 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 
 *
 ******************************************************************************/
-static INLINE uint8_t get_io8(UINTPTR Addr)
+സ്ഥിതം INLINE uint8_t get_io8(UINTPTR Addr)
 {
-	return *(volatile uint8_t *) Addr;
+	തിരികെ *(അസ്ഥിര uint8_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -106,9 +106,9 @@ static INLINE uint8_t get_io8(UINTPTR Addr)
 * @return	The 16 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE uin16_t get_io16(UINTPTR Addr)
+സ്ഥിതം INLINE uin16_t get_io16(UINTPTR Addr)
 {
-	return *(volatile uin16_t *) Addr;
+	തിരികെ *(അസ്ഥിര uin16_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -123,9 +123,9 @@ static INLINE uin16_t get_io16(UINTPTR Addr)
 * @return	The 32 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE uint32_t get_io32(UINTPTR Addr)
+സ്ഥിതം INLINE uint32_t get_io32(UINTPTR Addr)
 {
-	return *(volatile uint32_t *) Addr;
+	തിരികെ *(അസ്ഥിര uint32_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -140,9 +140,9 @@ static INLINE uint32_t get_io32(UINTPTR Addr)
 * @return	The 64 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE uint64_t get_io64(UINTPTR Addr)
+സ്ഥിതം INLINE uint64_t get_io64(UINTPTR Addr)
 {
-	return *(volatile uint64_t *) Addr;
+	തിരികെ *(അസ്ഥിര uint64_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -158,10 +158,10 @@ static INLINE uint64_t get_io64(UINTPTR Addr)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io8(UINTPTR Addr, uint8_t Value)
+സ്ഥിതം INLINE ശൂന്യം set_io8(UINTPTR Addr, uint8_t മൂല്യം_2)
 {
-	volatile uint8_t *LocalAddr = (volatile uint8_t *)Addr;
-	*LocalAddr = Value;
+	അസ്ഥിര uint8_t *LocalAddr = (അസ്ഥിര uint8_t *)Addr;
+	*LocalAddr = മൂല്യം_2;
 }
 
 /*****************************************************************************/
@@ -176,10 +176,10 @@ static INLINE void set_io8(UINTPTR Addr, uint8_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io16(UINTPTR Addr, uint16_t Value)
+സ്ഥിതം INLINE ശൂന്യം set_io16(UINTPTR Addr, uint16_t മൂല്യം_2)
 {
-	volatile uint16_t *LocalAddr = (volatile uint16_t *)Addr;
-	*LocalAddr = Value;
+	അസ്ഥിര uint16_t *LocalAddr = (അസ്ഥിര uint16_t *)Addr;
+	*LocalAddr = മൂല്യം_2;
 }
 
 /*****************************************************************************/
@@ -195,10 +195,10 @@ static INLINE void set_io16(UINTPTR Addr, uint16_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io32(UINTPTR Addr, uint32_t Value)
+സ്ഥിതം INLINE ശൂന്യം set_io32(UINTPTR Addr, uint32_t മൂല്യം_2)
 {
-	volatile uint32_t *LocalAddr = (volatile uint32_t *)Addr;
-	*LocalAddr = Value;
+	അസ്ഥിര uint32_t *LocalAddr = (അസ്ഥിര uint32_t *)Addr;
+	*LocalAddr = മൂല്യം_2;
 }
 
 /*****************************************************************************/
@@ -213,10 +213,10 @@ static INLINE void set_io32(UINTPTR Addr, uint32_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io64(UINTPTR Addr, uint64_t Value)
+സ്ഥിതം INLINE ശൂന്യം set_io64(UINTPTR Addr, uint64_t മൂല്യം_2)
 {
-	volatile uint64_t *LocalAddr = (volatile uint64_t *)Addr;
-	*LocalAddr = Value;
+	അസ്ഥിര uint64_t *LocalAddr = (അസ്ഥിര uint64_t *)Addr;
+	*LocalAddr = മൂല്യം_2;
 }
 
 /*****************************************************************************/
@@ -234,25 +234,25 @@ static INLINE void set_io64(UINTPTR Addr, uint64_t Value)
  *        	- FAILURE on failure
  *
  *****************************************************************************/
-static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
+സ്ഥിതം INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 മൂല്യം_2)
 {
 	u32 ReadReg;
 	u32 ReadRegTemp;
 	u32 Status = (u32)FAILURE;
 
-	Xil_Out32(Addr, Value);
+	Xil_Out32(Addr, മൂല്യം_2);
 
 	ReadReg = Xil_In32(Addr);
 	ReadRegTemp = Xil_In32(Addr);
 
-	if( (ReadReg == Value) && (ReadRegTemp == Value) ) {
+	എങ്കിൽ( (ReadReg == മൂല്യം_2) && (ReadRegTemp == മൂല്യം_2) ) {
 		Status = (u32)SUCCESS;
 	}
 
-	return Status;
+	തിരികെ Status;
 }
 
-#if defined (__MICROBLAZE__)
+#എങ്കിൽ defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 # define Xil_In16LE	get_io16
 # define Xil_In32LE	get_io32
@@ -262,7 +262,7 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Htonl	Xil_EndianSwap32
 # define Xil_Ntohs	Xil_EndianSwap16
 # define Xil_Ntohl	Xil_EndianSwap32
-# else
+# അല്ലെങ്കിൽ
 # define Xil_In16BE	get_io16
 # define Xil_In32BE	get_io32
 # define Xil_Out16BE	set_io16
@@ -272,7 +272,7 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Ntohs(Data) (Data)
 # define Xil_Ntohl(Data) (Data)
 #endif
-#else
+#അല്ലെങ്കിൽ
 # define Xil_In16LE	get_io16
 # define Xil_In32LE	get_io32
 # define Xil_Out16LE	set_io16
@@ -283,60 +283,60 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Ntohl	Xil_EndianSwap32
 #endif
 
-#if defined (__MICROBLAZE__)
+#എങ്കിൽ defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE u16 Xil_In16BE(UINTPTR Addr)
-#else
-static INLINE u16 Xil_In16LE(UINTPTR Addr)
+സ്ഥിതം INLINE u16 Xil_In16BE(UINTPTR Addr)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE u16 Xil_In16LE(UINTPTR Addr)
 #endif
-#else
-static INLINE u16 Xil_In16BE(UINTPTR Addr)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE u16 Xil_In16BE(UINTPTR Addr)
 #endif
 {
-	u16 value = Xil_In16(Addr);
-	return Xil_EndianSwap16(value);
+	u16 മൂല്യം = Xil_In16(Addr);
+	തിരികെ Xil_EndianSwap16(മൂല്യം);
 }
 
-#if defined (__MICROBLAZE__)
+#എങ്കിൽ defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE u32 Xil_In32BE(UINTPTR Addr)
-#else
-static INLINE u32 Xil_In32LE(UINTPTR Addr)
+സ്ഥിതം INLINE u32 Xil_In32BE(UINTPTR Addr)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE u32 Xil_In32LE(UINTPTR Addr)
 #endif
-#else
-static INLINE u32 Xil_In32BE(UINTPTR Addr)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE u32 Xil_In32BE(UINTPTR Addr)
 #endif
 {
-	u32 value = Xil_In32(Addr);
-	return Xil_EndianSwap32(value);
+	u32 മൂല്യം = Xil_In32(Addr);
+	തിരികെ Xil_EndianSwap32(മൂല്യം);
 }
 
-#if defined (__MICROBLAZE__)
+#എങ്കിൽ defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
-#else
-static INLINE void Xil_Out16LE(UINTPTR Addr, u16 Value)
+സ്ഥിതം INLINE ശൂന്യം Xil_Out16BE(UINTPTR Addr, u16 മൂല്യം_2)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE ശൂന്യം Xil_Out16LE(UINTPTR Addr, u16 മൂല്യം_2)
 #endif
-#else
-static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE ശൂന്യം Xil_Out16BE(UINTPTR Addr, u16 മൂല്യം_2)
 #endif
 {
-	Value = Xil_EndianSwap16(Value);
-	Xil_Out16(Addr, Value);
+	മൂല്യം_2 = Xil_EndianSwap16(മൂല്യം_2);
+	Xil_Out16(Addr, മൂല്യം_2);
 }
 
-#if defined (__MICROBLAZE__)
+#എങ്കിൽ defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
-#else
-static INLINE void Xil_Out32LE(UINTPTR Addr, u32 Value)
+സ്ഥിതം INLINE ശൂന്യം Xil_Out32BE(UINTPTR Addr, u32 മൂല്യം_2)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE ശൂന്യം Xil_Out32LE(UINTPTR Addr, u32 മൂല്യം_2)
 #endif
-#else
-static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
+#അല്ലെങ്കിൽ
+സ്ഥിതം INLINE ശൂന്യം Xil_Out32BE(UINTPTR Addr, u32 മൂല്യം_2)
 #endif
 {
-	Value = Xil_EndianSwap32(Value);
-	Xil_Out32(Addr, Value);
+	മൂല്യം_2 = Xil_EndianSwap32(മൂല്യം_2);
+	Xil_Out32(Addr, മൂല്യം_2);
 }
 
 #ifdef __cplusplus

@@ -29,7 +29,7 @@
 
 #include "defines.h"
 
-  .global trap_entry
+  .വൈശ്വിക trap_entry
   .align 2
 
   trap_entry:

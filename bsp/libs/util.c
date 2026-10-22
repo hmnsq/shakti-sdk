@@ -27,32 +27,32 @@
 used to achieve higher level objectives.
 */
 
-#include "log.h"
-#include "utils.h"
-#include "string.h"
+#അന്തര്ഭാവ "log.h"
+#അന്തര്ഭാവ "utils.h"
+#അന്തര്ഭാവ "string.h"
 
 /** @fn  void waitfor(unsigned int secs)
  * @brief stall the process for given time
  * @param unsigned int secs
  */
-void waitfor(unsigned int secs)
+ശൂന്യം waitfor(unsigned പൂർണ്ണസംഖ്യ secs)
 {
-	unsigned int time = 0;
-	while (time++ < secs);
+	unsigned പൂർണ്ണസംഖ്യ time = 0;
+	ആകുമ്പോൾ (time++ < secs);
 }
 
 /** @fn void delay(unsigned long count)
  * @brief  sleeps for number of "count"
  * @param unsigned long (number of count)
  */
-void delay(unsigned long count)
+ശൂന്യം delay(unsigned long എണ്ണം)
 {
-	unsigned long cntr1 = count *1000;
+	unsigned long cntr1 = എണ്ണം *1000;
 	unsigned long tmpCntr;
 
-	while (cntr1--){
+	ആകുമ്പോൾ (cntr1--){
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		ആകുമ്പോൾ (tmpCntr--);
 	}
 }
 
@@ -61,29 +61,29 @@ void delay(unsigned long count)
  * @param unsigned int y
  * @return return result in float 
  */
-float pow_10(unsigned int y)
+ദശാംശം pow_10(unsigned പൂർണ്ണസംഖ്യ y)
 {
-	unsigned int x=1;
+	unsigned പൂർണ്ണസംഖ്യ x=1;
 
-	for (unsigned int i=0; i <y; i++)
+	വേണ്ടി (unsigned പൂർണ്ണസംഖ്യ i=0; i <y; i++)
 	{
 		x *= 10;
 	}
 
-	return ((float) x);
+	തിരികെ ((ദശാംശം) x);
 }
 /** @fn void reverse(char *str, int length)
  * @brief reverse a string and store in the same string
  * @param char *str
  * @param int length
  */
-void reverse(char *str, int length)
+ശൂന്യം reverse(അക്ഷരം *str, പൂർണ്ണസംഖ്യ length)
 {
-	int i = 0;
-	int j = length - 1;
-	char tmp;
+	പൂർണ്ണസംഖ്യ i = 0;
+	പൂർണ്ണസംഖ്യ j = length - 1;
+	അക്ഷരം tmp;
 
-	while (i<j)
+	ആകുമ്പോൾ (i<j)
 	{
 		tmp = str[i];
 		str[i] = str[j];
@@ -105,22 +105,22 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+പൂർണ്ണസംഖ്യ int_to_string(പൂർണ്ണസംഖ്യ സംഖ്യ, അക്ഷരം str[], unsigned പൂർണ്ണസംഖ്യ afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	ആകുമ്പോൾ (സംഖ്യ != 0)
 	{
-		str[i] = ((number%10) + '0');
+		str[i] = ((സംഖ്യ%10) + '0');
 		i++;
-		number = number/10;
+		സംഖ്യ = സംഖ്യ/10;
 	}
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint)
+	ആകുമ്പോൾ (i < afterpoint)
 	{
 		str[i] = '0';
 		i++;
@@ -133,7 +133,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 	reverse(str, i);
 	str[i] = '\0';
 
-	return i;
+	തിരികെ i;
 }
 /** @fn void ftoa(float n, char *res, int afterpoint)
  * @brief converts float to string
@@ -144,32 +144,32 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
  * @param char* (float in string - res)
  * @param int (precision - afterpoint)
  */
-void ftoa(float n, char *res, unsigned int afterpoint)
+ശൂന്യം ftoa(ദശാംശം n, അക്ഷരം *res, unsigned പൂർണ്ണസംഖ്യ afterpoint)
 {
-	int i=0;
-	char temp[30]={'\0'};
+	പൂർണ്ണസംഖ്യ i=0;
+	അക്ഷരം temp[30]={'\0'};
 	n += 0.0000001;
 
 	// Extract integer part
-	int ipart = (int)n;
+	പൂർണ്ണസംഖ്യ ipart = (പൂർണ്ണസംഖ്യ)n;
 
 	// Extract floating part
-	float fpart = (float) (n - (float)ipart);
-	int j=0;
+	ദശാംശം fpart = (ദശാംശം) (n - (ദശാംശം)ipart);
+	പൂർണ്ണസംഖ്യ j=0;
 
-	if(n < (0/1))
+	എങ്കിൽ(n < (0/1))
 	{
 		res[j]='-';
 		j=1;
 	}
 
-	if (ipart == 0)
+	എങ്കിൽ (ipart == 0)
 	{
 		res[j]='0';
 		j=j+1;
 	}
-	else{
-		if (ipart <0)
+	അല്ലെങ്കിൽ{
+		എങ്കിൽ (ipart <0)
 		{
 			ipart =(-1)*ipart;
 		}
@@ -182,24 +182,24 @@ void ftoa(float n, char *res, unsigned int afterpoint)
 	i = i+j;
 
 	// check for display option after point
-	if (afterpoint != 0)
+	എങ്കിൽ (afterpoint != 0)
 	{
 		res[i] = '.';// add dot
 
-		if (fpart < 0/1)
+		എങ്കിൽ (fpart < 0/1)
 		{
 
 			fpart = (-1)*fpart;
 
 		}
-		else if (fpart == 0/1)
+		അല്ലെങ്കിൽ എങ്കിൽ (fpart == 0/1)
 		{
 			fpart = fpart;
 		}
 
 		fpart = fpart * pow_10( afterpoint);
 
-		int_to_string((int)fpart, res + i + 1, afterpoint);
+		int_to_string((പൂർണ്ണസംഖ്യ)fpart, res + i + 1, afterpoint);
 	}
 }
 
@@ -208,15 +208,15 @@ void ftoa(float n, char *res, unsigned int afterpoint)
  * @param unsigned long cntr1 - one counter value
  * @param unsigned long cntr2 - another counter value
  */
-void delay_loop(unsigned long cntr1, unsigned long cntr2)
+ശൂന്യം delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
 	unsigned long tmpCntr = cntr2;
 
-	while (cntr1--)
+	ആകുമ്പോൾ (cntr1--)
 	{
 		tmpCntr = cntr2;
 
-		while (tmpCntr--);
+		ആകുമ്പോൾ (tmpCntr--);
 	}
 }
 
@@ -229,7 +229,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 unsigned long read_word(uint32_t *addr)
 {
 	log_debug("addr = %x data = %x\n", addr, *addr);
-	return *addr;
+	തിരികെ *addr;
 }
 
 /** @fn void write_word(int *addr, unsigned long val)
@@ -237,7 +237,7 @@ unsigned long read_word(uint32_t *addr)
  * @param int*
  * @param unsigned long
  */
-void write_word(uint32_t *addr, unsigned long val)
+ശൂന്യം write_word(uint32_t *addr, unsigned long val)
 {
 	*addr = val;
 	log_debug("addr = %x data = %x\n", addr, *addr);

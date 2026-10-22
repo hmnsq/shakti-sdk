@@ -28,20 +28,20 @@
 
 #ifndef UTIL_H
 #define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#അന്തര്ഭാവ <stdio.h>
+#അന്തര്ഭാവ <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
+ശൂന്യം waitfor(unsigned പൂർണ്ണസംഖ്യ secs);
+ശൂന്യം delay(unsigned long seconds);
+ദശാംശം pow_10(unsigned പൂർണ്ണസംഖ്യ y);
+ശൂന്യം reverse(അക്ഷരം *str, പൂർണ്ണസംഖ്യ len);
+ശൂന്യം ftoa( ദശാംശം, അക്ഷരം *, unsigned പൂർണ്ണസംഖ്യ);
+ശൂന്യം delay_loop(unsigned long cntr1, unsigned long cntr2);
 unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+ശൂന്യം write_word(uint32_t *addr, unsigned long val);
+പൂർണ്ണസംഖ്യ int_to_string(പൂർണ്ണസംഖ്യ സംഖ്യ, അക്ഷരം str[], unsigned പൂർണ്ണസംഖ്യ afterpoint);
+ശൂന്യം _printf_(സ്ഥിരം അക്ഷരം *fmt, va_list ap);
+പൂർണ്ണസംഖ്യ printf(സ്ഥിരം അക്ഷരം* fmt, ...);
 
 #endif

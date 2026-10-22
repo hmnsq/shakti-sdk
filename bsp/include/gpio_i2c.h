@@ -29,8 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
@@ -42,20 +42,20 @@ add a method to set the GPIO pins that are to be used  */
 #define I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+ശൂന്യം I2cInit();
+ശൂന്യം I2cSendSlaveAddress(unsigned അക്ഷരം , unsigned അക്ഷരം , unsigned അക്ഷരം );
+ശൂന്യം I2cWriteByte(unsigned അക്ഷരം , unsigned അക്ഷരം );
+unsigned അക്ഷരം I2cReadByte(unsigned അക്ഷരം );
+ശൂന്യം I2cWriteData(unsigned അക്ഷരം , unsigned അക്ഷരം );
+unsigned അക്ഷരം I2cReadDataAck(unsigned അക്ഷരം );
+unsigned അക്ഷരം I2cReadDataNack(unsigned അക്ഷരം );
+ശൂന്യം I2cStart(unsigned അക്ഷരം );
+ശൂന്യം I2cStop(unsigned അക്ഷരം );
+ശൂന്യം I2c_Write_byte(unsigned അക്ഷരം, unsigned അക്ഷരം, unsigned അക്ഷരം, unsigned അക്ഷരം);
+പൂർണ്ണസംഖ്യ I2c_Read_byte(unsigned അക്ഷരം ,unsigned അക്ഷരം , unsigned അക്ഷരം );
+പൂർണ്ണസംഖ്യ I2c_shakti_readbytes(അക്ഷരം *, പൂർണ്ണസംഖ്യ , പൂർണ്ണസംഖ്യ , unsigned അക്ഷരം );
+ശൂന്യം ReadAckForWrite(unsigned അക്ഷരം delay);
+ശൂന്യം SendNackForRead(unsigned അക്ഷരം delay);
+ശൂന്യം SendAckForRead(unsigned അക്ഷരം delay);
 
 #endif

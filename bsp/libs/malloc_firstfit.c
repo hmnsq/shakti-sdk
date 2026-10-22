@@ -26,24 +26,24 @@
 @detail This algorithm implements the malloc function using the first-fit algorithm. It allocates and frees blocks of memory for usage.
 */ 
 
-#include<unistd.h>
-#include<sys/types.h>
-#include "platform.h"
-#include "defines.h"
-#include "log.h"
+#അന്തര്ഭാവ<unistd.h>
+#അന്തര്ഭാവ<sys/types.h>
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "defines.h"
+#അന്തര്ഭാവ "log.h"
 
-extern char* _HEAP_SIZE[];
-char* HEAP_SIZE = (char *)&_HEAP_SIZE;
+ബാഹ്യ അക്ഷരം* _HEAP_SIZE[];
+അക്ഷരം* HEAP_SIZE = (അക്ഷരം *)&_HEAP_SIZE;
 
 //Header block denotes start of the segment
-struct Header
+ഘടന Header
 {
 	size_t size;
-	int free;
-	struct Header* next;
+	പൂർണ്ണസംഖ്യ സ്വതന്ത്രം;
+	ഘടന Header* next;
 };
 
-struct Header* global_base=NULL;
+ഘടന Header* global_base=ശൂന്യ;
 
 /** @fn  struct Header* allocate_block(struct Header* last, size_t size)
  * @brief it allocates a block of given size 
@@ -53,18 +53,18 @@ struct Header* global_base=NULL;
  * @return returns a pointer to the newly allocated block
  *         returns null if mmemory allocated or block allocation fails
  */
-struct Header* allocate_block(struct Header* last, size_t size)
+ഘടന Header* allocate_block(ഘടന Header* last, size_t size)
 {
 	uintptr_t x=0;
 
 	log_trace("\nFunction allocate_block entered");
 
-	if(last->size > size)
+	എങ്കിൽ(last->size > size)
 	{
-		struct Header* newblock;
-		void *p = last;
+		ഘടന Header* newblock;
+		ശൂന്യം *p = last;
 
-		p += size + sizeof(struct Header);
+		p += size + വലുപ്പം(ഘടന Header);
 		x = p;
 
 		x = ((( x) + ((REGSIZE) - 1)) & ~((REGSIZE) - 1));
@@ -73,19 +73,19 @@ struct Header* allocate_block(struct Header* last, size_t size)
 
 		newblock = p;
 
-		newblock->size = last->size - size - sizeof(struct Header);
+		newblock->size = last->size - size - വലുപ്പം(ഘടന Header);
 
 		last->size = size;
-		last->free = 0;
+		last->സ്വതന്ത്രം = 0;
 		last->next = newblock;
 
-		newblock->free = 1;
-		newblock->next = NULL;
+		newblock->സ്വതന്ത്രം = 1;
+		newblock->next = ശൂന്യ;
 
-		return last;
+		തിരികെ last;
 	}
-	else
-		return NULL;
+	അല്ലെങ്കിൽ
+		തിരികെ ശൂന്യ;
 	log_trace("\nFunction allocate_block entered");
 }
 
@@ -98,13 +98,13 @@ struct Header* allocate_block(struct Header* last, size_t size)
  * @return returns a free block if available
  *         returns null if unavailable
  */
-struct Header *find_free_block(struct Header **last, size_t size)
+ഘടന Header *find_free_block(ഘടന Header **last, size_t size)
 {
 	log_trace("\nfind free entered");
 
-	struct Header *current = global_base;
+	ഘടന Header *current = global_base;
 
-	while (current && !(current->free && current->size >= size))
+	ആകുമ്പോൾ (current && !(current->സ്വതന്ത്രം && current->size >= size))
 	{
 
 		log_debug("\n Inside Loop %d %d %x %x",current->size,size,current,*last);
@@ -114,13 +114,13 @@ struct Header *find_free_block(struct Header **last, size_t size)
 
 	log_debug("\n After Loop %d %d %x %x",current->size,size,current,*last);
 
-	if(current && current->size>=size)
+	എങ്കിൽ(current && current->size>=size)
 	{
 		*last=current;
-		return current;
+		തിരികെ current;
 	}
-	else
-		return NULL;
+	അല്ലെങ്കിൽ
+		തിരികെ ശൂന്യ;
 
 	log_trace("\nfind free exited");
 }
@@ -132,31 +132,31 @@ struct Header *find_free_block(struct Header **last, size_t size)
  * @return returns a pointer to the allocated heap
  *         returns NULL if heap is unable to be allocated
  */
-struct Header* request_heap()
+ഘടന Header* request_heap()
 {
-	struct Header *block;
+	ഘടന Header *block;
 
 	block = m_sbrk(0);
 
-	void *request = m_sbrk(HEAP_SIZE);
+	ശൂന്യം *request = m_sbrk(HEAP_SIZE);
 
-	if((void*)block == request); // Not thread safe.
+	എങ്കിൽ((ശൂന്യം*)block == request); // Not thread safe.
 	block=request;
 
 	log_debug("\nInitial Heap start address =%x",block);
 
-	if (request == (void*) -1) {
+	എങ്കിൽ (request == (ശൂന്യം*) -1) {
 		log_error("\nNo space left to allocate memory");
-		return NULL; // sbrk failed.
+		തിരികെ ശൂന്യ; // sbrk failed.
 	}
 
 	block->size = HEAP_SIZE;
-	block->next = NULL;
-	block->free = 1;
+	block->next = ശൂന്യ;
+	block->സ്വതന്ത്രം = 1;
 
 	log_debug("\nBlock Assigned");
 
-	return block;
+	തിരികെ block;
 }
 
 //malloc function to allocate space
@@ -167,17 +167,17 @@ struct Header* request_heap()
  * @return  returns a pointer to the assigned block
  *          returns NULL if allocation fails
  */
-void *malloc(size_t size)
+ശൂന്യം *malloc(size_t size)
 {
-	struct Header *block;
+	ഘടന Header *block;
 
-	if (size <= 0) {
-               return NULL;
+	എങ്കിൽ (size <= 0) {
+               തിരികെ ശൂന്യ;
 	}
 
 	log_info("\n global_base: %x",global_base);
 
-	if(global_base==0x00000000)
+	എങ്കിൽ(global_base==0x00000000)
 	{
 		// First call. global_base is empty
 		log_debug("\n Requesting block");
@@ -186,43 +186,43 @@ void *malloc(size_t size)
 
 		log_debug("\n block=%x",block);
 
-		if (!block)
+		എങ്കിൽ (!block)
 		{
-			return NULL;
+			തിരികെ ശൂന്യ;
 		}
 		global_base = block;
 	}
 
-	struct Header *last = global_base;
+	ഘടന Header *last = global_base;
 
 	block = find_free_block(&last, size);
 
-	if(!block)
+	എങ്കിൽ(!block)
 	{
 		log_error("\n No free blocks");
-		return NULL;
+		തിരികെ ശൂന്യ;
 	}
 
 	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
 
-	if (block->size>size)
+	എങ്കിൽ (block->size>size)
 	{
 		// Failed to find free block.
 		block = allocate_block(last,size);
 
-		if (!block)
+		എങ്കിൽ (!block)
 		{
-			return NULL;
+			തിരികെ ശൂന്യ;
 		}
 	}
-	else if(block->size==size)
+	അല്ലെങ്കിൽ എങ്കിൽ(block->size==size)
 	{
 		// Found free block
 		log_debug("\nFound free block of same size");
-		block->free = 0;
+		block->സ്വതന്ത്രം = 0;
 	}
 
-  return(block+1);
+  തിരികെ(block+1);
 }
 
 /** @fn  struct Header *get_block_ptr(void *ptr)
@@ -231,9 +231,9 @@ void *malloc(size_t size)
  * @param void* ptr - pointer to the block
  * @return returns pointer to the block
  */
-struct Header *get_block_ptr(void *ptr)
+ഘടന Header *get_block_ptr(ശൂന്യം *ptr)
 {
-  return (struct Header*)ptr - 1;
+  തിരികെ (ഘടന Header*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
@@ -242,18 +242,18 @@ struct Header *get_block_ptr(void *ptr)
  * @detail  frees the memory assigned by malloc and when freed this memory is added back to the list to be reused
  * @param void *ptr - pointer to the memory assigned by malloc
  */
-void free(void *ptr)
+ശൂന്യം സ്വതന്ത്രം(ശൂന്യം *ptr)
 {
-	if (!ptr)
+	എങ്കിൽ (!ptr)
 	{
 		log_error("\n Wrong value passed to free");
-		return;
+		തിരികെ;
 	}
 
-	struct Header* block_ptr = get_block_ptr(ptr);
+	ഘടന Header* block_ptr = get_block_ptr(ptr);
 
 	log_debug("\n %x is freed",block_ptr);
 
-	if(block_ptr->free==0)
-		block_ptr->free = 1;
+	എങ്കിൽ(block_ptr->സ്വതന്ത്രം==0)
+		block_ptr->സ്വതന്ത്രം = 1;
 }

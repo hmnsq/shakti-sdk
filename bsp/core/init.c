@@ -30,50 +30,50 @@ uart is initialized. Trap handler is initialized.
 Disable Xip for Aardonyx
 */
 
-#include "traps.h"
-#include "plic_driver.h"
-#include "clint_driver.h"
-#include "log.h"
-#include "utils.h"
-#include "qspi.h"
-#include "platform.h"
-#include "defines.h"
-#include "uart.h"
+#അന്തര്ഭാവ "traps.h"
+#അന്തര്ഭാവ "plic_driver.h"
+#അന്തര്ഭാവ "clint_driver.h"
+#അന്തര്ഭാവ "log.h"
+#അന്തര്ഭാവ "utils.h"
+#അന്തര്ഭാവ "qspi.h"
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "defines.h"
+#അന്തര്ഭാവ "uart.h"
 
-extern void init(void);
-extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+ബാഹ്യ ശൂന്യം init(ശൂന്യം);
+ബാഹ്യ ശൂന്യം trap_entry(ശൂന്യം);
+ബാഹ്യ uart_struct *uart_instance[MAX_UART_എണ്ണം];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+ബാഹ്യ അക്ഷരം അട്ടി_end[];
+ബാഹ്യ അക്ഷരം അട്ടി[];
+ബാഹ്യ അക്ഷരം _heap[];
+ബാഹ്യ അക്ഷരം _heap_end[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+അക്ഷരം *അട്ടി_end_2=(അക്ഷരം *)&അട്ടി_end;
+അക്ഷരം *അട്ടി_start=(അക്ഷരം *)&അട്ടി;
+അക്ഷരം *heap_start=(അക്ഷരം *)&_heap;
+അക്ഷരം *heap_end=(അക്ഷരം *)&_heap_end;
 
 /** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
  */
-static void section_init(void)
+സ്ഥിതം ശൂന്യം section_init(ശൂന്യം)
 {
-#if 0
+#എങ്കിൽ 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	ആകുമ്പോൾ(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	ആകുമ്പോൾ(അട്ടി_end_2>=അട്ടി_start)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*അട്ടി_end_2=0x0;
+		അട്ടി_end_2--;
 	}
 #endif
 
@@ -84,7 +84,7 @@ static void section_init(void)
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
  */
-static void trap_init(void)
+സ്ഥിതം ശൂന്യം trap_init(ശൂന്യം)
 {
 	log_trace("trap_init entered \n ");
 
@@ -144,7 +144,7 @@ static void trap_init(void)
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+ശൂന്യം init(ശൂന്യം)
 {
 //	section_init(); // uncomment on need basis
 	uart_init();
@@ -158,7 +158,7 @@ void init(void)
 
 	trap_init();
 
-	main();
+	പ്രധാന();
 
 	log_trace("init exited\n");
 }

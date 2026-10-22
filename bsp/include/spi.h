@@ -28,7 +28,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include<stdlib.h>
+#അന്തര്ഭാവ<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI0_OFFSET 0x00000000
@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+ശൂന്യം configure_spi(പൂർണ്ണസംഖ്യ offset);
+ശൂന്യം spi_init(ശൂന്യം);
+ശൂന്യം set_spi(പൂർണ്ണസംഖ്യ* addr, പൂർണ്ണസംഖ്യ val);
+ശൂന്യം bin(unsigned n);
+ശൂന്യം spi_tx_rx_start(ശൂന്യം);
+ശൂന്യം spi_enable(ശൂന്യം);
+ശൂന്യം spi_rx_enable(ശൂന്യം);
+ശൂന്യം flash_cmd_addr_data(പൂർണ്ണസംഖ്യ command, പൂർണ്ണസംഖ്യ addr, പൂർണ്ണസംഖ്യ data);
+ശൂന്യം flash_write(പൂർണ്ണസംഖ്യ address, പൂർണ്ണസംഖ്യ data);
+ശൂന്യം flash_erase(പൂർണ്ണസംഖ്യ address);
+പൂർണ്ണസംഖ്യ get_spi(പൂർണ്ണസംഖ്യ* addr);
+പൂർണ്ണസംഖ്യ bitExtracted(പൂർണ്ണസംഖ്യ സംഖ്യ, പൂർണ്ണസംഖ്യ k, പൂർണ്ണസംഖ്യ p) ;
+പൂർണ്ണസംഖ്യ concat(പൂർണ്ണസംഖ്യ x, പൂർണ്ണസംഖ്യ y) ;
+പൂർണ്ണസംഖ്യ spi_rxne_enable(ശൂന്യം);
+പൂർണ്ണസംഖ്യ spi_notbusy(ശൂന്യം);
+പൂർണ്ണസംഖ്യ flash_write_enable(ശൂന്യം);
+പൂർണ്ണസംഖ്യ flash_clear_sr(ശൂന്യം);
+പൂർണ്ണസംഖ്യ flash_cmd_addr(പൂർണ്ണസംഖ്യ command, പൂർണ്ണസംഖ്യ addr);
+പൂർണ്ണസംഖ്യ flash_cmd_to_read(പൂർണ്ണസംഖ്യ command, പൂർണ്ണസംഖ്യ addr);
+പൂർണ്ണസംഖ്യ flash_read(പൂർണ്ണസംഖ്യ address);
+പൂർണ്ണസംഖ്യ flash_cmd_read(പൂർണ്ണസംഖ്യ command);
+പൂർണ്ണസംഖ്യ flash_status_register_read(ശൂന്യം);
+പൂർണ്ണസംഖ്യ flash_device_id(ശൂന്യം);
 
 #endif

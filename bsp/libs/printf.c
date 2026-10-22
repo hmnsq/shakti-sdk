@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#അന്തര്ഭാവ <stdint.h>
+#അന്തര്ഭാവ <stdarg.h>
+#അന്തര്ഭാവ "utils.h"
+#അന്തര്ഭാവ "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+സ്ഥിതം വരിയിൽ ശൂന്യം itoa (unsigned long long പൂർണ്ണസംഖ്യ സംഖ്യ, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	പൂർണ്ണസംഖ്യ i = 0;
+	unsigned പൂർണ്ണസംഖ്യ intermediate = 0;
+	unsigned പൂർണ്ണസംഖ്യ digits[വലുപ്പം(സംഖ്യ)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	ആകുമ്പോൾ (1) {
+		digits[i] = സംഖ്യ % base;
 
-		if (number < base)
-			break;
+		എങ്കിൽ (സംഖ്യ < base)
+			നിർത്തുക;
 
-		number /= base;
+		സംഖ്യ /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	ആകുമ്പോൾ (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		എങ്കിൽ (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		അല്ലെങ്കിൽ
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -72,21 +72,21 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+ശൂന്യം _printf_(സ്ഥിരം അക്ഷരം *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	രജിസ്റ്റർ സ്ഥിരം അക്ഷരം* p;
+	സ്ഥിരം അക്ഷരം* last_fmt;
+	രജിസ്റ്റർ പൂർണ്ണസംഖ്യ ch;
+	unsigned long long അക്കം;
+	പൂർണ്ണസംഖ്യ base, lflag, i;
+	ദശാംശം float_അക്കം = 0;
+	അക്ഷരം float_arr[30] = {'\0'};
+	പൂർണ്ണസംഖ്യ backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	വേണ്ടി (;;) {
+		വേണ്ടി (;(ch = *(unsigned അക്ഷരം *) fmt) != '%'; fmt++) {
+			എങ്കിൽ (ch == '\0')
+				തിരികെ;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,127 +96,127 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		വേണ്ടി (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			തിരഞ്ഞെടുപ്പ് (ch = *(unsigned അക്ഷരം *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				അവസ്ഥ 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					നിർത്തുക;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				അവസ്ഥ 'c':
+					putchar(va_arg(ap, പൂർണ്ണസംഖ്യ));
+					നിർത്തുക;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				അവസ്ഥ 's':
+					എങ്കിൽ ((p = va_arg(ap, അക്ഷരം *)) == ശൂന്യ)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					വേണ്ടി (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
-					break;
+					നിർത്തുക;
 
 					// (signed) decimal
-				case 'd':
+				അവസ്ഥ 'd':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					എങ്കിൽ (lflag >= 2)
+						അക്കം = va_arg(ap, long long);
+					അല്ലെങ്കിൽ എങ്കിൽ (lflag ==1)
+						അക്കം = va_arg(ap, long);
+					അല്ലെങ്കിൽ
+						അക്കം = va_arg(ap, പൂർണ്ണസംഖ്യ);
 
-					if ((long long) num < 0) {
+					എങ്കിൽ ((long long) അക്കം < 0) {
 						putchar('-');
-						num = -(long long) num;
+						അക്കം = -(long long) അക്കം;
 					}
 
-					itoa( num, base);
+					itoa( അക്കം, base);
 
-					break;
+					നിർത്തുക;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				അവസ്ഥ 'f':
+					float_അക്കം =  va_arg(ap, ഇരട്ട);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_അക്കം, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					വേണ്ടി( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						എങ്കിൽ(i > 29) നിർത്തുക;
 					}
-					break;
+					നിർത്തുക;
 
 					// unsigned decimal
-				case 'u':
+				അവസ്ഥ 'u':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					എങ്കിൽ (lflag >= 2)
+						അക്കം = va_arg(ap, unsigned long long);
+					അല്ലെങ്കിൽ എങ്കിൽ (lflag)
+						അക്കം = va_arg(ap, unsigned long);
+					അല്ലെങ്കിൽ
+						അക്കം = va_arg(ap, unsigned പൂർണ്ണസംഖ്യ);
 
-					itoa( num, base);
+					itoa( അക്കം, base);
 
-					break;
+					നിർത്തുക;
 
 					// (unsigned) octal
-				case 'o':
+				അവസ്ഥ 'o':
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					എങ്കിൽ (lflag >= 2)
+						അക്കം = va_arg(ap, unsigned long long);
+					അല്ലെങ്കിൽ എങ്കിൽ (lflag)
+						അക്കം = va_arg(ap, unsigned long);
+					അല്ലെങ്കിൽ
+						അക്കം = va_arg(ap, unsigned പൂർണ്ണസംഖ്യ);
 
-					itoa( num, base);
+					itoa( അക്കം, base);
 
-					break;
+					നിർത്തുക;
 
-				case 'x':
+				അവസ്ഥ 'x':
 					base = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					എങ്കിൽ (lflag >= 2)
+						അക്കം = va_arg(ap, unsigned long long);
+					അല്ലെങ്കിൽ എങ്കിൽ (lflag)
+						അക്കം = va_arg(ap, unsigned long);
+					അല്ലെങ്കിൽ
+						അക്കം = va_arg(ap, unsigned പൂർണ്ണസംഖ്യ);
 
-					itoa( num, base);
+					itoa( അക്കം, base);
 
-					break;
+					നിർത്തുക;
 
 					// escaped '%' character
-				case '%':
+				അവസ്ഥ '%':
 					putchar(ch);
-					break;
+					നിർത്തുക;
 
 					// unrecognized escape sequence - just print it literally
-				default:
+				സ്ഥിരസ്ഥിതി:
 					putchar('%');
 					fmt = last_fmt;
-					break;
+					നിർത്തുക;
 			}
 
-			if (backtothebeginning)
+			എങ്കിൽ (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				തുടരുക;
 			}
-			else
-				break;
+			അല്ലെങ്കിൽ
+				നിർത്തുക;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+പൂർണ്ണസംഖ്യ printf(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	തിരികെ 0;// incorrect return value, but who cares, anyway?
 }

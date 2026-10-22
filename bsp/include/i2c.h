@@ -29,7 +29,7 @@
 #ifndef I2C_H
 #define I2C_H
 
-#include "platform.h"
+#അന്തര്ഭാവ "platform.h"
 
 #define ETIMEOUT -60
 #define DEF_TIMEOUT 60
@@ -84,65 +84,65 @@
 `define     SCL            8'h38
 */
 
-unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+unsigned അക്ഷരം i2c_complete_flag;
+unsigned പൂർണ്ണസംഖ്യ i2c_read_മൂല്യം;
 
 /* Struct to access I2C registers as 32 bit registers */
-typedef struct
+തരനിർവചനം ഘടന
 {
 /* 0x00 */
-	unsigned int  prescale;     /*! Prescale Register */
-	unsigned int   prescale_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  prescale;     /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   prescale_rsvd;
 
 /* 0x08 */
-	unsigned int   control;
-	unsigned int   control_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ   control;
+	unsigned പൂർണ്ണസംഖ്യ   control_rsvd;
 
 /* 0x10 */
-	unsigned int  data;	 /*! Prescale Register */
-	unsigned int   data_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  data;	 /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   data_rsvd;
 
 /* 0x18 */
-	unsigned int  status;	 /*! Prescale Register */
-	unsigned int   status_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  status;	 /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   status_rsvd;
 
 /* 0x20 */
-	unsigned int  s01;	 /*! Prescale Register */
-	unsigned int   s01_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  s01;	 /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   s01_rsvd;
 
 /* 0x28 */
-	unsigned int  s3;	 /*! Prescale Register */
-	unsigned int   s3_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  s3;	 /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   s3_rsvd;
 
 /* 0x30 */
-	unsigned int  time;	 /*! Prescale Register */
-	unsigned int   time_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  time;	 /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   time_rsvd;
 
 /* 0x38 */
-	unsigned int  scl;	 /*! Prescale Register */
-	unsigned int   scl_rsvd;
+	unsigned പൂർണ്ണസംഖ്യ  scl;	 /*! Prescale Register */
+	unsigned പൂർണ്ണസംഖ്യ   scl_rsvd;
 } i2c_struct;
 
-void i2c_init(void);
-int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
-int wait_till_I2c_bus_free(i2c_struct *);
-int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
-int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
-			   char rdWrCntrl, unsigned long delay);
-int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
-int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
-				     slaveAddress, unsigned char rdWrCntrl,
+ശൂന്യം i2c_init(ശൂന്യം);
+പൂർണ്ണസംഖ്യ config_i2c(i2c_struct *,unsigned അക്ഷരം prescale_div, unsigned അക്ഷരം scl_div);
+പൂർണ്ണസംഖ്യ wait_till_I2c_bus_free(i2c_struct *);
+പൂർണ്ണസംഖ്യ wait_till_txrx_operation_Completes(i2c_struct *,പൂർണ്ണസംഖ്യ *status);
+പൂർണ്ണസംഖ്യ sendbytes(i2c_struct *, സ്ഥിരം അക്ഷരം *buf, പൂർണ്ണസംഖ്യ എണ്ണം, പൂർണ്ണസംഖ്യ last, പൂർണ്ണസംഖ്യ eni);
+പൂർണ്ണസംഖ്യ readbytes(i2c_struct *,അക്ഷരം *buf, പൂർണ്ണസംഖ്യ എണ്ണം, പൂർണ്ണസംഖ്യ last);
+പൂർണ്ണസംഖ്യ i2c_send_slave_address(i2c_struct *,unsigned അക്ഷരം slaveAddress, unsigned
+			   അക്ഷരം rdWrCntrl, unsigned long delay);
+പൂർണ്ണസംഖ്യ i2c_write_data(i2c_struct *,unsigned അക്ഷരം writeData, unsigned അക്ഷരം delay);
+പൂർണ്ണസംഖ്യ i2c_read_data(i2c_struct *,unsigned അക്ഷരം *read_data, unsigned അക്ഷരം delay);
+പൂർണ്ണസംഖ്യ i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned അക്ഷരം
+				     slaveAddress, unsigned അക്ഷരം rdWrCntrl,
 				     unsigned long delay);
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
-			    unsigned char delay, unsigned char last);
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
-			     unsigned char delay, unsigned char last);
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
-		       char delay);
+പൂർണ്ണസംഖ്യ i2c_read_interrupt_data(i2c_struct * instance, unsigned അക്ഷരം *read_data,
+			    unsigned അക്ഷരം delay, unsigned അക്ഷരം last);
+പൂർണ്ണസംഖ്യ i2c_write_interrupt_data(i2c_struct * instance, unsigned അക്ഷരം writeData,
+			     unsigned അക്ഷരം delay, unsigned അക്ഷരം last);
+പൂർണ്ണസംഖ്യ i2c_read_data_nack(i2c_struct * instance, unsigned അക്ഷരം *read_data, unsigned
+		       അക്ഷരം delay);
 
-extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
+ബാഹ്യ i2c_struct *i2c_instance[MAX_I2_C_എണ്ണം];
 
 #endif

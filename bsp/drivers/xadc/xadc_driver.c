@@ -27,8 +27,8 @@
  setup each xadc registers, isr routine and xadc interrupt handler are here.
 */
 
-#include<stdio.h>
-#include "xadc_driver.h"
+#അന്തര്ഭാവ<stdio.h>
+#അന്തര്ഭാവ "xadc_driver.h"
 
 //Dedicated mode
 
@@ -40,7 +40,7 @@
  */
 uint32_t xadc_read_data(uint32_t *address)
 {
-	return(*address);
+	തിരികെ(*address);
 }
 
 /**
@@ -49,7 +49,7 @@ uint32_t xadc_read_data(uint32_t *address)
  * @param unsigned int (32-bit) address
  * @param unsigned int (32-bit) data
  */
-void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
+ശൂന്യം xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
 {
 	*address = data;
 }
@@ -61,9 +61,9 @@ void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_voltage(uint32_t value)
+ദശാംശം xadc_onchip_voltage(uint32_t മൂല്യം)
 {
-	return (((value >> 4)*3.0f)/4096.0f );
+	തിരികെ (((മൂല്യം >> 4)*3.0f)/4096.0f );
 }
 
 /**
@@ -74,9 +74,9 @@ float xadc_onchip_voltage(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_temp(uint32_t value)
+ദശാംശം xadc_onchip_temp(uint32_t മൂല്യം)
 {
-	return (((value/65536.0f)/0.00198421639f ) - 273.15f);
+	തിരികെ (((മൂല്യം/65536.0f)/0.00198421639f ) - 273.15f);
 }
 
 /**
@@ -85,7 +85,7 @@ float xadc_onchip_temp(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_dedicated_channel(uint32_t value)
+ദശാംശം xadc_dedicated_channel(uint32_t മൂല്യം)
 {
-	return ((value >> 4)/4096.0f );
+	തിരികെ ((മൂല്യം >> 4)/4096.0f );
 }

@@ -27,12 +27,12 @@
 @detail configures buttons to serve as Input 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#എങ്കിൽ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
-#include "button_driver.h"
-#include "utils.h"
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "gpio.h"
+#അന്തര്ഭാവ "button_driver.h"
+#അന്തര്ഭാവ "utils.h"
 
 /**
  * @fn void configure_btn(unsigned long pinCntrl)
@@ -41,7 +41,7 @@
  *          each BTN as input pin.
  * @param unsigned long (Pin that needs to be configured as BTN.)
  */
-void configure_btn(unsigned long pinCntrl)
+ശൂന്യം configure_btn(unsigned long pinCntrl)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
@@ -53,7 +53,7 @@ void configure_btn(unsigned long pinCntrl)
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          all BTNs as input pin.
  */
-void configure_all_btn()
+ശൂന്യം configure_all_btn()
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);

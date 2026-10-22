@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#അന്തര്ഭാവ<stdbool.h>
 
 // PWM Registers 
 #define PERIOD_REGISTER     0x00000000	//16 bits (short)
@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+ശൂന്യം pwm_configure(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ clock_ഹാരകം, പൂർണ്ണസംഖ്യ period, പൂർണ്ണസംഖ്യ duty, bool external_clock);
+ശൂന്യം pwm_start(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ mode);
+പൂർണ്ണസംഖ്യ pwm_check_continuous_mode(പൂർണ്ണസംഖ്യ module_സംഖ്യ);
+ശൂന്യം pwm_clear_registers(പൂർണ്ണസംഖ്യ module_സംഖ്യ);
+ശൂന്യം pwm_init(ശൂന്യം);
+ശൂന്യം pwm_set_external_clock(പൂർണ്ണസംഖ്യ module_സംഖ്യ, bool മൂല്യം);
+ശൂന്യം pwm_set_clock(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ clock_ഹാരകം);
+ശൂന്യം pwm_set_duty_cycle(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ duty);
+ശൂന്യം pwm_set_periodic_cycle(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ period);
+ശൂന്യം pwm_stop(പൂർണ്ണസംഖ്യ module_സംഖ്യ);
+ശൂന്യം show_register_മൂല്യങ്ങൾ(പൂർണ്ണസംഖ്യ module_സംഖ്യ);
+പൂർണ്ണസംഖ്യ set_pwm_period_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം);
+പൂർണ്ണസംഖ്യ set_pwm_duty_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം);
+പൂർണ്ണസംഖ്യ set_pwm_control_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം);
+പൂർണ്ണസംഖ്യ set_pwm_clock_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം);
+പൂർണ്ണസംഖ്യ configure_control_register_mode(പൂർണ്ണസംഖ്യ mode);
+ശൂന്യം pwm_use_external_clock(പൂർണ്ണസംഖ്യ module_സംഖ്യ, bool മൂല്യം);
 

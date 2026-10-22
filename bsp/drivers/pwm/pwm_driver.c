@@ -26,9 +26,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail the device driver for the pwm module which is used to change the frequency, period and duty registers 
 */
 
-#include "pwm_driver.h"
-#include "platform.h"
-#include "log.h"
+#അന്തര്ഭാവ "pwm_driver.h"
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "log.h"
 
 #define PERIOD_REGISTER_MAX     0x0000FFFF 
 #define DUTY_REGISTER_MAX       0x0000FFFF 
@@ -42,20 +42,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_period_register(int module_number, int value)
+പൂർണ്ണസംഖ്യ set_pwm_period_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം)
 {
-	if (value > PERIOD_REGISTER_MAX) {
+	എങ്കിൽ (മൂല്യം > PERIOD_REGISTER_MAX) {
 		log_error("\nPeriod Register Value higher than max value (%x)", PERIOD_REGISTER_MAX);	
-		return 0;
+		തിരികെ 0;
 	}
 
-	volatile short* period_value;
-	period_value = (int*) (PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + PERIOD_REGISTER);
-	*period_value = value;
+	അസ്ഥിര short* period_മൂല്യം;
+	period_മൂല്യം = (പൂർണ്ണസംഖ്യ*) (PWM_BASE_ADDRESS + module_സംഖ്യ*PWM_MODULE_OFFSET + PERIOD_REGISTER);
+	*period_മൂല്യം = മൂല്യം;
 
-	log_info("\n Period Register of module number %d set to %x", module_number, value);
+	log_info("\n Period Register of module number %d set to %x", module_സംഖ്യ, മൂല്യം);
 
-	return 1;
+	തിരികെ 1;
 }
 
 /** @fn int set_pwm_duty_register(int module_number, int value)
@@ -65,21 +65,21 @@ int set_pwm_period_register(int module_number, int value)
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_duty_register(int module_number, int value)
+പൂർണ്ണസംഖ്യ set_pwm_duty_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം)
 {
-	volatile short* duty_value;
+	അസ്ഥിര short* duty_മൂല്യം;
 
-	if (value > DUTY_REGISTER_MAX) {
+	എങ്കിൽ (മൂല്യം > DUTY_REGISTER_MAX) {
 		log_error("\nDuty Register Value higher than max value (%x)", DUTY_REGISTER_MAX);
-		return 0;
+		തിരികെ 0;
 	}
 
-	duty_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + DUTY_REGISTER;
-	*duty_value = value;
+	duty_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ*PWM_MODULE_OFFSET + DUTY_REGISTER;
+	*duty_മൂല്യം = മൂല്യം;
 
-	log_info("\n Duty Register of module number %d set to %x", module_number, value);
+	log_info("\n Duty Register of module number %d set to %x", module_സംഖ്യ, മൂല്യം);
 
-	return 1;
+	തിരികെ 1;
 }
 
 /** @fn int set_pwm_control_register(int module_number, int value)
@@ -89,21 +89,21 @@ int set_pwm_duty_register(int module_number, int value)
  * @param int value - value to be set between 0x0000 to 0xff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_control_register(int module_number, int value)
+പൂർണ്ണസംഖ്യ set_pwm_control_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം)
 {
-	volatile char* control_value;
+	അസ്ഥിര അക്ഷരം* control_മൂല്യം;
 
-	if (value > CONTROL_REGISTER_MAX) {
+	എങ്കിൽ (മൂല്യം > CONTROL_REGISTER_MAX) {
 		log_error("\nControl Register Value higher than max value (%x)", CONTROL_REGISTER_MAX);	
-		return 0;
+		തിരികെ 0;
 	}
 
-	control_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	*control_value = value;
+	control_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ*PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	*control_മൂല്യം = മൂല്യം;
 
-	log_info("\n Control Register of module number %d set to %x", module_number, value);
+	log_info("\n Control Register of module number %d set to %x", module_സംഖ്യ, മൂല്യം);
 
-	return 1;
+	തിരികെ 1;
 }
 
 /** @fn int pwm_check_continuous_mode(int module_number)
@@ -112,16 +112,16 @@ int set_pwm_control_register(int module_number, int value)
  * @param int module_number- specifies the pwm module to be selected 
  * @return int returns 1 if running in continuous mode, 0 if not.
  */
-int pwm_check_continuous_mode(int module_number)
+പൂർണ്ണസംഖ്യ pwm_check_continuous_mode(പൂർണ്ണസംഖ്യ module_സംഖ്യ)
 {
-	volatile char* control_value;
-	control_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	int value = *control_value & CONTINUOUS_ONCE;
-	log_info("\n Running in continuous mode(1/0): %d", (value>>3));
-	if( (value>>3) == 1)
-		return 1;
-	else
-		return 0;
+	അസ്ഥിര അക്ഷരം* control_മൂല്യം;
+	control_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ*PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	പൂർണ്ണസംഖ്യ മൂല്യം = *control_മൂല്യം & CONTINUOUS_ONCE;
+	log_info("\n Running in continuous mode(1/0): %d", (മൂല്യം>>3));
+	എങ്കിൽ( (മൂല്യം>>3) == 1)
+		തിരികെ 1;
+	അല്ലെങ്കിൽ
+		തിരികെ 0;
 }
 
 /** @fn int set_pwm_clock_register(int module_number, int value)
@@ -131,19 +131,19 @@ int pwm_check_continuous_mode(int module_number)
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_clock_register(int module_number, int value)
+പൂർണ്ണസംഖ്യ set_pwm_clock_register(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ മൂല്യം)
 {
-	volatile short* clock_value;
+	അസ്ഥിര short* clock_മൂല്യം;
 
-	if (value > CLOCK_REGISTER_MAX) {
+	എങ്കിൽ (മൂല്യം > CLOCK_REGISTER_MAX) {
 		log_error("\nClock Register Value higher than max value (%x)", CLOCK_REGISTER_MAX);
-		return 0;
+		തിരികെ 0;
 	}
 
-	clock_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CLOCK_REGISTER;
-	*clock_value = value;
+	clock_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ*PWM_MODULE_OFFSET + CLOCK_REGISTER;
+	*clock_മൂല്യം = മൂല്യം;
 
-	return 1;
+	തിരികെ 1;
 }
 
 /** @fn void pwm_clear_registers(int module_number)
@@ -151,25 +151,25 @@ int set_pwm_clock_register(int module_number, int value)
  * @details This function will be called to clear all registers in a specific pwm module
  * @param int module_number- specifies the pwm module to be selected
  */
-void pwm_clear_registers(int module_number)
+ശൂന്യം pwm_clear_registers(പൂർണ്ണസംഖ്യ module_സംഖ്യ)
 {
-	set_pwm_period_register(module_number, 0);
-	set_pwm_duty_register(module_number, 0);
-	set_pwm_control_register(module_number, 0);
-	set_pwm_clock_register(module_number, 0);
+	set_pwm_period_register(module_സംഖ്യ, 0);
+	set_pwm_duty_register(module_സംഖ്യ, 0);
+	set_pwm_control_register(module_സംഖ്യ, 0);
+	set_pwm_clock_register(module_സംഖ്യ, 0);
 
-	log_info("\n All registers of module number %d cleared", module_number);
+	log_info("\n All registers of module number %d cleared", module_സംഖ്യ);
 }
 
 /** @fn void pwm_init
  * @brief Function to initialize all pwm modules
  * @details This function will be called to initialize all pwm modules
  */
-void pwm_init(void)
+ശൂന്യം pwm_init(ശൂന്യം)
 {
-	int i;
+	പൂർണ്ണസംഖ്യ i;
 
-	for (i = 0; i < 5; i++) {
+	വേണ്ടി (i = 0; i < 5; i++) {
 		pwm_clear_registers(i);
 	}
 
@@ -185,30 +185,30 @@ void pwm_init(void)
  *                2-Timer Mode run continuously.)
  * @return int (returns value to be set in the control register.)
  */
-int configure_control_register_mode(int mode)
+പൂർണ്ണസംഖ്യ configure_control_register_mode(പൂർണ്ണസംഖ്യ mode)
 {
-	int value = 0x0;
+	പൂർണ്ണസംഖ്യ മൂല്യം = 0x0;
 
-	if (mode == 0) {
+	എങ്കിൽ (mode == 0) {
 		log_info("\n Current Module is set to PWM mode");
 
-		value += PWM_ENABLE;
-		value += PWM_START;
-		value += PWM_OUTPUT_ENABLE;
+		മൂല്യം += PWM_ENABLE;
+		മൂല്യം += PWM_START;
+		മൂല്യം += PWM_OUTPUT_ENABLE;
 	}
-	else if (mode == 1) {
+	അല്ലെങ്കിൽ എങ്കിൽ (mode == 1) {
 		log_info("\n Current Module is set to timer once only mode");
 
-		value += PWM_START;
+		മൂല്യം += PWM_START;
 	}
-	else if(mode == 2) {
+	അല്ലെങ്കിൽ എങ്കിൽ(mode == 2) {
 		log_info("\n Current Module is set to timer continuous mode");
 
-		value += PWM_START;
-		value += CONTINUOUS_ONCE;
+		മൂല്യം += PWM_START;
+		മൂല്യം += CONTINUOUS_ONCE;
 	}
 
-	return value;
+	തിരികെ മൂല്യം;
 }
 
 /** @fn void pwm_start(int module_number, int mode) 
@@ -220,18 +220,18 @@ int configure_control_register_mode(int mode)
  *                  1-Timer Mode run once
  *                  2-Timer Mode run contin )
  */
-void pwm_start(int module_number, int mode)
+ശൂന്യം pwm_start(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ mode)
 {
-	int control = configure_control_register_mode(mode);
+	പൂർണ്ണസംഖ്യ control = configure_control_register_mode(mode);
 
-	if(set_pwm_control_register(module_number, control))
+	എങ്കിൽ(set_pwm_control_register(module_സംഖ്യ, control))
 	{
-		log_info("\n PWM module number %d has been entered", module_number);
+		log_info("\n PWM module number %d has been entered", module_സംഖ്യ);
 	}
 
-	if(!set_pwm_control_register(module_number, control))
+	എങ്കിൽ(!set_pwm_control_register(module_സംഖ്യ, control))
 	{
-		log_error("\n PWM module number %d not entered",module_number);
+		log_error("\n PWM module number %d not entered",module_സംഖ്യ);
 	}
 }
 
@@ -242,14 +242,14 @@ void pwm_start(int module_number, int mode)
  * @param int (value -true or 1  - External Clock 
  *                    false or 0 - Internal Clock )
  */
-void pwm_use_external_clock(int module_number, bool value)
+ശൂന്യം pwm_use_external_clock(പൂർണ്ണസംഖ്യ module_സംഖ്യ, bool മൂല്യം)
 {
-	unsigned char* control_value;
-	control_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	if(value == 1)
-	control_value += CLOCK_SELECTOR;
-	else if(control_value && CLOCK_SELECTOR)
-	control_value -= CLOCK_SELECTOR;	
+	unsigned അക്ഷരം* control_മൂല്യം;
+	control_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ * PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	എങ്കിൽ(മൂല്യം == 1)
+	control_മൂല്യം += CLOCK_SELECTOR;
+	അല്ലെങ്കിൽ എങ്കിൽ(control_മൂല്യം && CLOCK_SELECTOR)
+	control_മൂല്യം -= CLOCK_SELECTOR;	
 }
 
 /** @fn void pwm_set_clock(int module_number, int clock_divisor) 
@@ -258,9 +258,9 @@ void pwm_use_external_clock(int module_number, bool value)
  * @param int module_number-  the pwm module to be selected
               int clock_divisor- value of clock divisor to be used to divide base clock speed of 50MHz.
  */
-void pwm_set_clock(int module_number, int clock_divisor)
+ശൂന്യം pwm_set_clock(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ clock_ഹാരകം)
 {
-	if (set_pwm_clock_register(module_number, clock_divisor) == 0)
+	എങ്കിൽ (set_pwm_clock_register(module_സംഖ്യ, clock_ഹാരകം) == 0)
 	{
 		log_error("\n Error in setting clock register");
 	}
@@ -272,9 +272,9 @@ void pwm_set_clock(int module_number, int clock_divisor)
  * @param int module_number-  the pwm module to be selected 
  * @param int duty - value of duty cycles to be used to decide how many period cycles the pwm signal is set to 1.
  */
-void pwm_set_duty_cycle(int module_number, int duty)
+ശൂന്യം pwm_set_duty_cycle(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ duty)
 {
-	if (set_pwm_duty_register(module_number, duty) == 0) {
+	എങ്കിൽ (set_pwm_duty_register(module_സംഖ്യ, duty) == 0) {
 		log_error("\n Error in setting duty register");
 	}
 }
@@ -286,9 +286,9 @@ void pwm_set_duty_cycle(int module_number, int duty)
  * @param int clock_divisor-  value of period cycles which is used to further divide the                                                      
  *         frequency into fixed period cycles.
  */
-void pwm_set_periodic_cycle(int module_number, int period)
+ശൂന്യം pwm_set_periodic_cycle(പൂർണ്ണസംഖ്യ module_സംഖ്യ, പൂർണ്ണസംഖ്യ period)
 {
-	if(set_pwm_period_register(module_number, period) == 0) {
+	എങ്കിൽ(set_pwm_period_register(module_സംഖ്യ, period) == 0) {
 		log_error("\n Error in setting period register");
 	}
 }
@@ -302,13 +302,13 @@ void pwm_set_periodic_cycle(int module_number, int period)
  * @param int duty_cycle - value of duty cycle. It specifies how many cycles the signal is active out of the periodic cycle
  * @param bool external_clock - value of external clock selector. It specifies if external clock is to be used.
   */
-void pwm_configure(int module_number,int clock_divisor, int period, int duty, bool external_clock)
+ശൂന്യം pwm_configure(പൂർണ്ണസംഖ്യ module_സംഖ്യ,പൂർണ്ണസംഖ്യ clock_ഹാരകം, പൂർണ്ണസംഖ്യ period, പൂർണ്ണസംഖ്യ duty, bool external_clock)
 {
-	pwm_set_periodic_cycle(module_number, period);
-	pwm_set_duty_cycle(module_number, duty);
-	pwm_set_clock(module_number, clock_divisor);
-	pwm_use_external_clock(module_number, external_clock);
-	log_info("\nPWM %d succesfully configured",module_number);
+	pwm_set_periodic_cycle(module_സംഖ്യ, period);
+	pwm_set_duty_cycle(module_സംഖ്യ, duty);
+	pwm_set_clock(module_സംഖ്യ, clock_ഹാരകം);
+	pwm_use_external_clock(module_സംഖ്യ, external_clock);
+	log_info("\nPWM %d succesfully configured",module_സംഖ്യ);
 }
 
 /** @fn void pwm_stop(int module_number)
@@ -316,10 +316,10 @@ void pwm_configure(int module_number,int clock_divisor, int period, int duty, bo
  * @details This function will stop a specific pwm module
  * @param int module_number-  the pwm module to be selected
  */
-void pwm_stop(int module_number)
+ശൂന്യം pwm_stop(പൂർണ്ണസംഖ്യ module_സംഖ്യ)
 {
-	set_pwm_control_register(module_number, 0x0);
-	log_info("\n PWM module number %d has been stopped", module_number);
+	set_pwm_control_register(module_സംഖ്യ, 0x0);
+	log_info("\n PWM module number %d has been stopped", module_സംഖ്യ);
 }
 
 /** @fn void show_register_values(int module_number)
@@ -327,21 +327,21 @@ void pwm_stop(int module_number)
  * @details This function will print the values of all the registers of a specific pwm module
  * @param int module_number-  the pwm module to be selected
  */
-void show_register_values(int module_number)
+ശൂന്യം show_register_മൂല്യങ്ങൾ(പൂർണ്ണസംഖ്യ module_സംഖ്യ)
 {
-	volatile unsigned short* period_value;
-	volatile unsigned short* duty_value;
-	volatile unsigned char*  control_value;
-	volatile unsigned short* clock_value;
+	അസ്ഥിര unsigned short* period_മൂല്യം;
+	അസ്ഥിര unsigned short* duty_മൂല്യം;
+	അസ്ഥിര unsigned അക്ഷരം*  control_മൂല്യം;
+	അസ്ഥിര unsigned short* clock_മൂല്യം;
 
-	period_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + PERIOD_REGISTER;
-	duty_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + DUTY_REGISTER;
-	control_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	clock_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CLOCK_REGISTER;
+	period_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ * PWM_MODULE_OFFSET + PERIOD_REGISTER;
+	duty_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ * PWM_MODULE_OFFSET + DUTY_REGISTER;
+	control_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ * PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	clock_മൂല്യം = PWM_BASE_ADDRESS + module_സംഖ്യ * PWM_MODULE_OFFSET + CLOCK_REGISTER;
 
-	log_info("\nThe value of period register is %x",  *period_value);
-	log_info("\nThe value of duty register is %x",    *duty_value);
-	log_info("\nThe value of control register is %x", *control_value);
-	log_info("\nThe value of clock register is %x",   *clock_value);
+	log_info("\nThe value of period register is %x",  *period_മൂല്യം);
+	log_info("\nThe value of duty register is %x",    *duty_മൂല്യം);
+	log_info("\nThe value of control register is %x", *control_മൂല്യം);
+	log_info("\nThe value of clock register is %x",   *clock_മൂല്യം);
 }
 

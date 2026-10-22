@@ -40,15 +40,15 @@
 
 */
 
-#include "uart.h" //Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
-#include "bmp280.h"
+#അന്തര്ഭാവ "uart.h" //Includes the definitions of uart communication protocol//
+#അന്തര്ഭാവ "string.h"
+#അന്തര്ഭാവ "pinmux.h"
+#അന്തര്ഭാവ "i2c.h"
+#അന്തര്ഭാവ "log.h"
+#അന്തര്ഭാവ "bmp280.h"
 
 // Replace the API KEY
-#define API_KEY "PPI6OVOI1A2LGXMZ"
+#define API_താക്കോൽ "PPI6OVOI1A2LGXMZ"
 
 // UART 1 to communicate to ESP8266
 #define ESP_UART uart_instance[1]
@@ -64,9 +64,9 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+പൂർണ്ണസംഖ്യ write_to_esp8266(അക്ഷരം *data)
 {
-	while (*data != '\0')
+	ആകുമ്പോൾ (*data != '\0')
 	{
 		write_uart_character(ESP_UART, *data);
 		data++;
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+പൂർണ്ണസംഖ്യ write_enter_to_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+പൂർണ്ണസംഖ്യ read_from_esp8266(അക്ഷരം *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 198; i++)
+	പൂർണ്ണസംഖ്യ ch;
+	അക്ഷരം *str = data;
+	അക്ഷരം *test = data;
+	വേണ്ടി (പൂർണ്ണസംഖ്യ i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		എങ്കിൽ (strstr(test, "OK") != ശൂന്യ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			തിരികെ;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		എങ്കിൽ (strstr(test, "ERROR") != ശൂന്യ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			തിരികെ;
 		}
-		if (strstr(test, ">") != NULL)
+		എങ്കിൽ (strstr(test, ">") != ശൂന്യ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			തിരികെ;
 		}
-		if (strstr(test, "RECV") != NULL)
+		എങ്കിൽ (strstr(test, "RECV") != ശൂന്യ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			തിരികെ;
 		}
-		if (strstr(test, "IP") != NULL)
+		എങ്കിൽ (strstr(test, "IP") != ശൂന്യ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			തിരികെ;
 		}
 	}
 	*str = '\0';
-	return 1;
+	തിരികെ 1;
 }
 
 /**
@@ -145,9 +145,9 @@ int read_from_esp8266(char *data)
   * @brief setup MUX mode in  esp8266
   * @details setup MUX mode in  esp8266
 */
-void setup_esp8266()
+ശൂന്യം setup_esp8266()
 {
-	char data[200];
+	അക്ഷരം data[200];
 	write_to_esp8266("AT");
 	delay_loop(1000, 1000);
 	read_from_esp8266(data);
@@ -171,13 +171,13 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+ശൂന്യം transmit_data(പൂർണ്ണസംഖ്യ temperature, പൂർണ്ണസംഖ്യ pressure)
 {
-	char data[200];
-	char sendData[93];
-	char CIPSEND[14];
-	int length;
-	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
+	അക്ഷരം data[200];
+	അക്ഷരം sendData[93];
+	അക്ഷരം CIPSEND[14];
+	പൂർണ്ണസംഖ്യ length;
+	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_താക്കോൽ, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
 	length = strlen(sendData);
 	length = length + 2;
@@ -219,13 +219,13 @@ void transmit_data(int temperature, int pressure)
   * @fn void main()
   * @brief Entry point for the program
 */
-void main()
+ശൂന്യം പ്രധാന()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
-	char data[200];
-	unsigned int tempReadValue = 0;
+	പൂർണ്ണസംഖ്യ i = 0;
+	പൂർണ്ണസംഖ്യ baudrate = 115200;
+	പൂർണ്ണസംഖ്യ transmit_എണ്ണം = 0;
+	അക്ഷരം data[200];
+	unsigned പൂർണ്ണസംഖ്യ temp_Read_മൂല്യം = 0;
 	unsigned long delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
@@ -240,24 +240,24 @@ void main()
 	setup_esp8266();
 	setup_bmp280();
 
-	while (1)
+	ആകുമ്പോൾ (1)
 	{
 		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		എങ്കിൽ (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &temp_Read_മൂല്യം, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			എങ്കിൽ (!(temp_Read_മൂല്യം & 0x9))
 			{
 				//Read pressure and temperature values.
-				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
+				read_bmp280_മൂല്യങ്ങൾ(I2C, 0xF7, &pressure, &temperature, delay);
 				printf("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
 				printf("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
 				transmit_data(temperature, pressure);
 			}
 		}
-		else
+		അല്ലെങ്കിൽ
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

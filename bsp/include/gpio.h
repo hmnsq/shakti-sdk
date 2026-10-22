@@ -28,8 +28,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GPIO_H
 #define GPIO_H
 
-#include "platform.h"
-#include "stdint.h"
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "stdint.h"
 
 #define GPIO_DIRECTION_CNTRL_REG (uint32_t*) (GPIO_START  + (0 * GPIO_OFFSET ))
 #define GPIO_DATA_REG (uint32_t*) (GPIO_START + (1 * GPIO_OFFSET ))

@@ -29,8 +29,8 @@
 
 #ifndef PLIC_DRIVER_H
 #define PLIC_DRIVER_H
-#include "platform.h"
-#include "traps.h"
+#അന്തര്ഭാവ "platform.h"
+#അന്തര്ഭാവ "traps.h"
 
 /* Macros */
 
@@ -62,7 +62,7 @@
 
 /* Enumerators */
 
-typedef enum
+തരനിർവചനം എണ്ണൽ
 {
 	INACTIVE = 0,
 	ACTIVE   = 1,
@@ -72,32 +72,32 @@ typedef enum
 
 /* Structures and Unions */
 
-typedef struct
+തരനിർവചനം ഘടന
 {
 	uint32_t id; /*id of the interrupt target source*/
 	uint32_t priority; /*priority assigned to it*/
 	interrupt_status_e state; /*state of the interrupt*/
-	uint32_t count; /*number of times this interrupt occured*/
+	uint32_t എണ്ണം; /*number of times this interrupt occured*/
 } interrupt_data_t;
 
 /* Platform Level Interrupt Controller (PLIC) table
    Each entry in the table corresponds to an interrupt service routine */
 
-typedef void (*plic_fptr_t) (uint32_t);
-extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+തരനിർവചനം ശൂന്യം (*plic_fptr_t) (uint32_t);
+ബാഹ്യ plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /* Function prototypes */
 
-void interrupt_complete(uint32_t interrupt_id);
-uint32_t interrupt_claim_request(void);
-void isr_default(uint32_t interrupt_id);
-void interrupt_enable(uint32_t interrupt_id);
-void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
-void configure_interrupt_pin(uint32_t pin);
-void plic_init(void);
-void configure_interrupt(uint32_t int_id);
+ശൂന്യം interrupt_complete(uint32_t interrupt_id);
+uint32_t interrupt_claim_request(ശൂന്യം);
+ശൂന്യം isr_default(uint32_t interrupt_id);
+ശൂന്യം interrupt_enable(uint32_t interrupt_id);
+ശൂന്യം mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+ശൂന്യം interrupt_disable(uint32_t interrupt_id);
+ശൂന്യം set_interrupt_threshold(uint32_t priority_മൂല്യം);
+ശൂന്യം set_interrupt_priority(uint32_t priority_മൂല്യം, uint32_t int_id);
+ശൂന്യം configure_interrupt_pin(uint32_t pin);
+ശൂന്യം plic_init(ശൂന്യം);
+ശൂന്യം configure_interrupt(uint32_t int_id);
 
 #endif

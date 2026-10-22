@@ -26,8 +26,8 @@
 @detail This file contains implementation of different log levels.
 */ 
 
-#include "log.h"
-#include "utils.h"
+#അന്തര്ഭാവ "log.h"
+#അന്തര്ഭാവ "utils.h"
 
 /*Use -D compiler flag to set the LOG_LEVEL; default value is 1*/
 #ifndef LOG_LEVEL
@@ -39,9 +39,9 @@
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_trace(const char* fmt, ...)
+ശൂന്യം log_trace(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
-	if (TRACE <= LOG_LEVEL) {
+	എങ്കിൽ (TRACE <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -56,9 +56,9 @@ void log_trace(const char* fmt, ...)
  * @details This function print info logs if the LOG_LEVEL allows info logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_info(const char* fmt, ...)
+ശൂന്യം log_info(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
-	if (INFO <= LOG_LEVEL) {
+	എങ്കിൽ (INFO <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -73,9 +73,9 @@ void log_info(const char* fmt, ...)
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_debug(const char* fmt, ...)
+ശൂന്യം log_debug(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
-	if (DEBUG <= LOG_LEVEL) {
+	എങ്കിൽ (DEBUG <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -90,9 +90,9 @@ void log_debug(const char* fmt, ...)
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_warn(const char* fmt, ...)
+ശൂന്യം log_warn(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
-	if (WARN <= LOG_LEVEL) {
+	എങ്കിൽ (WARN <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -107,9 +107,9 @@ void log_warn(const char* fmt, ...)
  * @details This function print error logs if the LOG_LEVEL allows error logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_error(const char* fmt, ...)
+ശൂന്യം log_error(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
-	if (ERROR <= LOG_LEVEL) {
+	എങ്കിൽ (ERROR <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -124,9 +124,9 @@ void log_error(const char* fmt, ...)
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_fatal(const char* fmt, ...)
+ശൂന്യം log_fatal(സ്ഥിരം അക്ഷരം* fmt, ...)
 {
-	if (FATAL <= LOG_LEVEL) {
+	എങ്കിൽ (FATAL <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -136,5 +136,5 @@ void log_fatal(const char* fmt, ...)
 	}
 
 	log_info("\n panic \n");
-	while (1);
+	ആകുമ്പോൾ (1);
 }

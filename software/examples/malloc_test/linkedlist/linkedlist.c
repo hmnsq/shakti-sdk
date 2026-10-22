@@ -22,28 +22,28 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#അന്തര്ഭാവ "uart.h"
+#അന്തര്ഭാവ <stdio.h>
+#അന്തര്ഭാവ <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+ഘടന കണ്ണി {
+	പൂർണ്ണസംഖ്യ അക്കം;
+	ഘടന കണ്ണി *nptr;
 }*head;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+ശൂന്യം create_list(പൂർണ്ണസംഖ്യ n);
+ശൂന്യം display_list();
+ശൂന്യം delete_കണ്ണി(പൂർണ്ണസംഖ്യ position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+ശൂന്യം പ്രധാന()
 {
-	int n,position,m;
-	char t[15];
+	പൂർണ്ണസംഖ്യ n,position,m;
+	അക്ഷരം t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -63,12 +63,12 @@ void main()
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_കണ്ണി(position);
 
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	ആകുമ്പോൾ(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+ശൂന്യം create_list(പൂർണ്ണസംഖ്യ n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	ഘടന കണ്ണി *കണ്ണി, *tmp;
+	പൂർണ്ണസംഖ്യ data,m;
+	അക്ഷരം t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (ഘടന കണ്ണി*)malloc(വലുപ്പം(ഘടന കണ്ണി));
 
-	if(head == NULL)
+	എങ്കിൽ(head == ശൂന്യ)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	അല്ലെങ്കിൽ
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -96,28 +96,28 @@ void create_list(int n)
 
 		data = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
+		head->അക്കം = data;
+		head->nptr = ശൂന്യ;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		വേണ്ടി(പൂർണ്ണസംഖ്യ i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			കണ്ണി = (ഘടന കണ്ണി*)malloc(വലുപ്പം(ഘടന കണ്ണി));
 
-			if(node == NULL)
+			എങ്കിൽ(കണ്ണി == ശൂന്യ)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			അല്ലെങ്കിൽ 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
 				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				കണ്ണി->അക്കം = data;
+				കണ്ണി->nptr = ശൂന്യ;
 
-				tmp->nptr = node;
+				tmp->nptr = കണ്ണി;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,21 +129,21 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+ശൂന്യം display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	പൂർണ്ണസംഖ്യ i = 0;
+	ഘടന കണ്ണി *tmp;
 
-	if(head == NULL)
+	എങ്കിൽ(head == ശൂന്യ)
 	{
 		printf(" List is empty.");
 	}
-	else
+	അല്ലെങ്കിൽ
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		ആകുമ്പോൾ(tmp != ശൂന്യ) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
+			printf(" Node%d = %d",i,tmp->അക്കം);
 			printf("->");
 			tmp = tmp->nptr;
 			i++;
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+ശൂന്യം delete_കണ്ണി(പൂർണ്ണസംഖ്യ position)
 {
-	struct node *temp;
+	ഘടന കണ്ണി *temp;
 
-	if(head == NULL)
+	എങ്കിൽ(head == ശൂന്യ)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	അല്ലെങ്കിൽ 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		എങ്കിൽ (position == 0)//Delete head node
 		{
 			head = temp->nptr;
-			free(temp);
-			return;
+			സ്വതന്ത്രം(temp);
+			തിരികെ;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		വേണ്ടി (പൂർണ്ണസംഖ്യ i = 0; temp != ശൂന്യ && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		എങ്കിൽ (temp == ശൂന്യ || temp->nptr == ശൂന്യ)
+			തിരികെ;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		ഘടന കണ്ണി *nptr = temp->nptr->nptr;
 
-		free(temp->nptr);
+		സ്വതന്ത്രം(temp->nptr);
 		temp->nptr = nptr; 
 	}
 }

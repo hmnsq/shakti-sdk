@@ -46,24 +46,24 @@
 #define LED_P4              GPIO21
 #define POWER_SWITCH        GPIO24
 #define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
+#define PANIC_BUTTON        GPIO28          //كىرگۈزۈش
 #define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
 #define PIR_IN	            GPIO8
 #define PANIC_BUTTON_OFFSET 28
 #define PIR_OFFSET          8
 #define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#define يۇقىرى                1
+#define تۆۋەن                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#define PASS_رەقەم            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+فراغ set_ئاچقۇچ_pins_map(unsigned صحيح* row, unsigned صحيح* col, صحيح table[COLNUM][ROWNUM]);
+صحيح get_ئاچقۇچ();
+صحيح get_col_row(فراغ);
+unsigned صحيح row_pins[ROWNUM];
+unsigned صحيح col_pins[COLNUM];
+صحيح ئاچقۇچ_map[COLNUM][ROWNUM];
 
 #endif

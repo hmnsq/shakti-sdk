@@ -25,16 +25,16 @@
   @brief read data from the flash by spi
   @detail Contains driver codes to read and write flash using SPI interface.
  */
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#ضمن "spi.h"
+#ضمن "uart.h"
+#ضمن "utils.h"
 
 /** @fn void main()
  * @brief Configures the SPI flash and reads the flash.
  * @details Configures the SPI flash, Confirms the flash device id,
             then read 10 addresses in flash and prints the value.
  */
-int main(void){
+صحيح main(فراغ){
 
 	configure_spi(SPI0_OFFSET);
 
@@ -42,16 +42,16 @@ int main(void){
 	printf("SPI init done\n");
 	flash_device_id();
 	waitfor(200);
-	int total_data = 10; //total data you want to read/write
-	int read_address = 0x00b00000;  //read from this address
+	صحيح total_data = 10; //total data you want to read/write
+	صحيح read_address = 0x00b00000;  //read from this address
 
-	for(int i = 0; i < total_data; ++i)
+	لكل(صحيح i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
+		صحيح read_قىممەت= flash_read(read_address);
 		printf("Reading from adddress %x and data \
-		       %x\n",read_address,read_value);
+		       %x\n",read_address,read_قىممەت);
 		read_address=read_address+4;
 	}
-	asm volatile ("ebreak");
-	return 0;
+	asm متطاير ("ebreak");
+	أرجع 0;
 }

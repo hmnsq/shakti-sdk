@@ -64,9 +64,9 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+puur_naa_nka write_to_esp8266(var_na *data)
 {
-	while (*data != '\0')
+	ᱡᱚᱠᱷᱚᱱ (*data != '\0')
 	{
 		write_uart_character(ESP_UART, *data);
 		data++;
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+puur_naa_nka write_enter_to_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+puur_naa_nka read_from_esp8266(var_na *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 198; i++)
+	puur_naa_nka ch;
+	var_na *str = data;
+	var_na *test = data;
+	for (puur_naa_nka i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		ᱡᱩᱫᱤ (strstr(test, "OK") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ᱨᱩᱣᱟᱹᱲ;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		ᱡᱩᱫᱤ (strstr(test, "ERROR") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ᱨᱩᱣᱟᱹᱲ;
 		}
-		if (strstr(test, ">") != NULL)
+		ᱡᱩᱫᱤ (strstr(test, ">") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ᱨᱩᱣᱟᱹᱲ;
 		}
-		if (strstr(test, "RECV") != NULL)
+		ᱡᱩᱫᱤ (strstr(test, "RECV") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ᱨᱩᱣᱟᱹᱲ;
 		}
-		if (strstr(test, "IP") != NULL)
+		ᱡᱩᱫᱤ (strstr(test, "IP") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ᱨᱩᱣᱟᱹᱲ;
 		}
 	}
 	*str = '\0';
-	return 1;
+	ᱨᱩᱣᱟᱹᱲ 1;
 }
 
 /**
@@ -147,7 +147,7 @@ int read_from_esp8266(char *data)
 */
 void setup_esp8266()
 {
-	char data[200];
+	var_na data[200];
 	write_to_esp8266("AT");
 	delay_loop(1000, 1000);
 	read_from_esp8266(data);
@@ -171,12 +171,12 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+void transmit_data(puur_naa_nka temperature, puur_naa_nka pressure)
 {
-	char data[200];
-	char sendData[93];
-	char CIPSEND[14];
-	int length;
+	var_na data[200];
+	var_na sendData[93];
+	var_na CIPSEND[14];
+	puur_naa_nka length;
 	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
 	length = strlen(sendData);
@@ -221,11 +221,11 @@ void transmit_data(int temperature, int pressure)
 */
 void main()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
-	char data[200];
-	unsigned int tempReadValue = 0;
+	puur_naa_nka i = 0;
+	puur_naa_nka baudrate = 115200;
+	puur_naa_nka transmit_count = 0;
+	var_na data[200];
+	unsigned puur_naa_nka tempReadValue = 0;
 	unsigned long delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
@@ -240,15 +240,15 @@ void main()
 	setup_esp8266();
 	setup_bmp280();
 
-	while (1)
+	ᱡᱚᱠᱷᱚᱱ (1)
 	{
 		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		ᱡᱩᱫᱤ (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			ᱡᱩᱫᱤ (!(tempReadValue & 0x9))
 			{
 				//Read pressure and temperature values.
 				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
@@ -257,7 +257,7 @@ void main()
 				transmit_data(temperature, pressure);
 			}
 		}
-		else
+		ᱵᱟᱝ
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

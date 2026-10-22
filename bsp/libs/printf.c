@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+static anta_hstha void itoa (unsigned long long puur_naa_nka number, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	puur_naa_nka i = 0;
+	unsigned puur_naa_nka intermediate = 0;
+	unsigned puur_naa_nka digits[parimaa_na(number)*8];
 
-	while (1) {
+	ᱡᱚᱠᱷᱚᱱ (1) {
 		digits[i] = number % base;
 
-		if (number < base)
-			break;
+		ᱡᱩᱫᱤ (number < base)
+			bha_nga;
 
 		number /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	ᱡᱚᱠᱷᱚᱱ (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		ᱡᱩᱫᱤ (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		ᱵᱟᱝ
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -72,21 +72,21 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+void _printf_(const var_na *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
+	pa_njikaa const var_na* p;
+	const var_na* last_fmt;
+	pa_njikaa puur_naa_nka ch;
 	unsigned long long num;
-	int base, lflag, i;
+	puur_naa_nka base, lflag, i;
 	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	var_na float_arr[30] = {'\0'};
+	puur_naa_nka backtothebeginning;
 
 	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+		for (;(ch = *(unsigned var_na *) fmt) != '%'; fmt++) {
+			ᱡᱩᱫᱤ (ch == '\0')
+				ᱨᱩᱣᱟᱹᱲ;
 			putchar(ch);
 		}
 		fmt++;
@@ -98,125 +98,125 @@ void _printf_(const char *fmt, va_list ap)
 		backtothebeginning = 0;
 		for (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			switch (ch = *(unsigned var_na *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				pak_sa 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					bha_nga;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				pak_sa 'c':
+					putchar(va_arg(ap, puur_naa_nka));
+					bha_nga;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				pak_sa 's':
+					ᱡᱩᱫᱤ ((p = va_arg(ap, var_na *)) == NULL)
 						p = "(null)";
 					for (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
-					break;
+					bha_nga;
 
 					// (signed) decimal
-				case 'd':
+				pak_sa 'd':
 					base = 10;
 
-					if (lflag >= 2)
+					ᱡᱩᱫᱤ (lflag >= 2)
 						num = va_arg(ap, long long);
-					else if (lflag ==1)
+					ᱵᱟᱝ ᱡᱩᱫᱤ (lflag ==1)
 						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					ᱵᱟᱝ
+						num = va_arg(ap, puur_naa_nka);
 
-					if ((long long) num < 0) {
+					ᱡᱩᱫᱤ ((long long) num < 0) {
 						putchar('-');
 						num = -(long long) num;
 					}
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				pak_sa 'f':
+					float_num =  va_arg(ap, dviguu_na);
 
 					ftoa(float_num, float_arr, 6);
 
 					for( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						ᱡᱩᱫᱤ(i > 29) bha_nga;
 					}
-					break;
+					bha_nga;
 
 					// unsigned decimal
-				case 'u':
+				pak_sa 'u':
 					base = 10;
 
-					if (lflag >= 2)
+					ᱡᱩᱫᱤ (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					ᱵᱟᱝ ᱡᱩᱫᱤ (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					ᱵᱟᱝ
+						num = va_arg(ap, unsigned puur_naa_nka);
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
 					// (unsigned) octal
-				case 'o':
+				pak_sa 'o':
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
+					ᱡᱩᱫᱤ (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					ᱵᱟᱝ ᱡᱩᱫᱤ (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					ᱵᱟᱝ
+						num = va_arg(ap, unsigned puur_naa_nka);
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
-				case 'x':
+				pak_sa 'x':
 					base = 16;
 
-					if (lflag >= 2)
+					ᱡᱩᱫᱤ (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					ᱵᱟᱝ ᱡᱩᱫᱤ (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					ᱵᱟᱝ
+						num = va_arg(ap, unsigned puur_naa_nka);
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
 					// escaped '%' character
-				case '%':
+				pak_sa '%':
 					putchar(ch);
-					break;
+					bha_nga;
 
 					// unrecognized escape sequence - just print it literally
 				default:
 					putchar('%');
 					fmt = last_fmt;
-					break;
+					bha_nga;
 			}
 
-			if (backtothebeginning)
+			ᱡᱩᱫᱤ (backtothebeginning)
 			{
 				backtothebeginning = 0;
 				continue;
 			}
-			else
-				break;
+			ᱵᱟᱝ
+				bha_nga;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+puur_naa_nka printf(const var_na* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	ᱨᱩᱣᱟᱹᱲ 0;// incorrect return value, but who cares, anyway?
 }

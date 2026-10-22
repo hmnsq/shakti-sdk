@@ -37,9 +37,9 @@
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+unsigned puur_naa_nka Lm75ReadTemperature(unsigned long delay)
 {
-	unsigned char readBuf = 0;
+	unsigned var_na readBuf = 0;
 	unsigned short readValue = 0;
 	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
 	readBuf = I2cReadDataAck(delay);
@@ -47,7 +47,7 @@ unsigned int Lm75ReadTemperature(unsigned long delay)
 	readBuf = I2cReadDataNack(delay);
 	I2cStop(delay);  
 	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	ᱨᱩᱣᱟᱹᱲ readValue;
 }
 
 /** @fn void main()
@@ -64,11 +64,11 @@ void main()
 	I2cInit();
 
 	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
+	ᱡᱩᱫᱤ(tempRead & 0x100) {
 		tempRead = ( (~tempRead) + 1 ) >> 1;
 		printf("\n\t Current Temperature:=-%u°C",tempRead);
 	}		
-	else {
+	ᱵᱟᱝ {
 		tempRead = tempRead >> 1;
 		printf("\n\t Current Temperature:=+%u°C",tempRead);
 	 }

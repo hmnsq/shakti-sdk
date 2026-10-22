@@ -101,7 +101,7 @@ uint32_t interrupt_claim_request()
 
 	log_trace("interrupt_claim_request exited\n");
 
-	return interrupt_id;
+	ᱨᱩᱣᱟᱹᱲ interrupt_id;
 }
 
 /** @fn void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
@@ -121,7 +121,7 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
 
 	log_debug("interrupt id claimed = %x\n", interrupt_id);
 
-	if (interrupt_id <= 0 || interrupt_id > PLIC_MAX_INTERRUPT_SRC)
+	ᱡᱩᱫᱤ (interrupt_id <= 0 || interrupt_id > PLIC_MAX_INTERRUPT_SRC)
 	{
 		log_fatal("Fatal error, interrupt id [%x] claimed is wrong\n", interrupt_id);
 	}
@@ -162,13 +162,13 @@ void isr_default(uint32_t interrupt_id)
 {
 	log_trace("\nisr_default entered\n");
 
-	if( interrupt_id > 0 && interrupt_id < 7 )  //PWM Interrupts
+	ᱡᱩᱫᱤ( interrupt_id > 0 && interrupt_id < 7 )  //PWM Interrupts
 	{
 		/*
 		   Assuming 6 pwm's are there
 		 */
 
-		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
+		ᱡᱩᱫᱤ(pwm_check_continuous_mode((6-interrupt_id)) == 0)
 		{
 			set_pwm_control_register((6-interrupt_id),0x80);
 		}
@@ -423,7 +423,7 @@ void configure_interrupt(uint32_t int_id)
 	/*
 	   Call only for GPIO pins
 	 */
-	if(int_id >6 && int_id < 22)
+	ᱡᱩᱫᱤ(int_id >6 && int_id < 22)
 	{
 		configure_interrupt_pin(int_id);
 	}

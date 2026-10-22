@@ -55,9 +55,9 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+puur_naa_nka main(void){
+	pa_njikaa unsigned puur_naa_nka retval;
+	puur_naa_nka i;
 
 	plic_init();
 
@@ -87,12 +87,12 @@ int main(void){
 
 	asm("ebreak");
 
-	while(1){
+	ᱡᱚᱠᱷᱚᱱ(1){
 		i++;
 
-		if((i%10000000) == 0){
+		ᱡᱩᱫᱤ((i%10000000) == 0){
 
-			asm volatile(
+			asm ca_ncala(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -102,5 +102,5 @@ int main(void){
 			printf("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	ᱨᱩᱣᱟᱹᱲ 0;
 }

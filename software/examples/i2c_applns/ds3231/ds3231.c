@@ -28,18 +28,18 @@
 */
 
 //#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#अन्तर्भाव "i2c.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "uart.h"
 
 #define UPDATE_TIME 1
 #define I2C i2c_instance[1]
 #define DS3231_SLAVE_ADDRESS 0XD0
 #define DS3231_REG_OFFSET 0
 #define DS3231_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define DELAY_मान 900
+#define PRESCALER_गन्ती 0x1F
+#define SCLK_गन्ती 0x91
 
 
 /** @fn int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -53,11 +53,11 @@
  * @param delay
  * @return read status (Zero of success)
  */
-int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+पूर्णाङ्क read_ds3231_registers(i2c_struct * i2c_instance, अचिन्हित पूर्णाङ्क reg_offset, अचिन्हित पूर्णाङ्क *readTemp, अचिन्हित वर्ण length, अचिन्हित दीर्घ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	अचिन्हित वर्ण read_buf[4] = {'\0'};
+	पूर्णाङ्क i = 0, j = 0,  k = 0, status=0;
+	अचिन्हित वर्ण temp = 0;
 
 //Writes the slave address for write
 		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -75,17 +75,17 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 		i2c_read_data(i2c_instance, &temp, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-		for(i = 0; i < length; i++)
+		लागि(i = 0; i < length; i++)
 		{
 			i2c_read_data(i2c_instance, &temp, delay);
 			*readTemp = temp;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
-			if( i == (length - 2) )
+			यदि( i == (length - 2) )
 				i2c_instance->control = I2C_NACK;
 			*readTemp++;
 		}
 		i2c_instance->control = I2C_STOP;
-		return 0;
+		फर्काऊ 0;
 }
 
 /** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -99,22 +99,22 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+पूर्णाङ्क write_ds3231_registers(i2c_struct * i2c_instance, अचिन्हित पूर्णाङ्क reg_offset, अचिन्हित पूर्णाङ्क *write_मान, अचिन्हित वर्ण length, अचिन्हित दीर्घ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	पूर्णाङ्क i = 0, j = 0,  k = 0, status=0;
+	अचिन्हित पूर्णाङ्क temp = 0;
 		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, delay);
 		i2c_write_data(i2c_instance, reg_offset, delay);
-		for(i = 0; i < length; i++)
+		लागि(i = 0; i < length; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_data(i2c_instance,  ( *write_मान++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 //		delay_loop(800, 800);
 
 
-			return 0;
+			फर्काऊ 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)
@@ -125,12 +125,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param y
  * @return Day of the week (0 - 6)
  */
-int dayofweek(int d, int m, int y)
+पूर्णाङ्क dayofweek(पूर्णाङ्क d, पूर्णाङ्क m, पूर्णाङ्क y)
 {
-    static int t[] = { 0, 3, 2, 5, 0, 3,
+    स्थिर पूर्णाङ्क t[] = { 0, 3, 2, 5, 0, 3,
                        5, 1, 4, 6, 2, 4 };
     y -= m < 3;
-    return ( y + y / 4 - y / 100 +
+    फर्काऊ ( y + y / 4 - y / 100 +
              y / 400 + t[m - 1] + d) % 7;
 }
 
@@ -140,9 +140,9 @@ int dayofweek(int d, int m, int y)
  * @param decimal
  * @return Calculated hex value. 
  */
-unsigned int ds3231_decimal_to_hex(unsigned int decimal)
+अचिन्हित पूर्णाङ्क ds3231_decimal_to_hex(अचिन्हित पूर्णाङ्क decimal)
 {
-	return( ((decimal / 10 ) << 4) | (decimal % 10) );
+	फर्काऊ( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
 /** @fn void main()
@@ -150,14 +150,14 @@ unsigned int ds3231_decimal_to_hex(unsigned int decimal)
  * @details Configures the DS3231 and reads Date and time information and prints the 
  * in decimal
  */
-void main()
+शून्य main()
 {
-		int timeout;
-		unsigned int tempReadValue = 0;
-		unsigned long delay = 1000;
-		unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-		unsigned char length;
-		unsigned int hour, minute, second, date, month, year;
+		पूर्णाङ्क timeout;
+		अचिन्हित पूर्णाङ्क temp_Read_मान = 0;
+		अचिन्हित दीर्घ delay = 1000;
+		अचिन्हित पूर्णाङ्क write_buf[7] = {0x00}, read_buf[7] = {0x00};
+		अचिन्हित वर्ण length;
+		अचिन्हित पूर्णाङ्क hour, minute, second, date, month, year;
 	
 		hour = 11;
 		minute = 46;
@@ -179,56 +179,56 @@ void main()
 		length = 7;
 	
 //	set_baud_rate(uart_instance[0], 115200);
-	printf("\nHello Welcome to Shakti");
+	म_लिखो("\nHello Welcome to Shakti");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	यदि(config_i2c(I2C, PRESCALER_गन्ती, SCLK_गन्ती))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		फर्काऊ -1;
 	}
-	else
+	अन्यथा
 		log_info("\tIntilization Happened Fine\n");
 #ifdef UPDATE_TIME
 	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
-			printf("\n Write complete");
+			म_लिखो("\n Write complete");
 #endif
-	while(1)
+	जबसम्म(1)
 	{
 			read_ds3231_registers(I2C, DS3231_REG_OFFSET, &read_buf[0], 7, 800);
 			
 			log_info("\n Date: %x-%x-20%x Day: ", read_buf[4], read_buf[5], read_buf[6]);
 			
-			switch(read_buf[3])
+			विकल्प(read_buf[3])
 			{
-				case 1:
+				पक्ष 1:
 						log_info( "   Sunday; ");
-						break;
+						रोक;
 
-				case 2:
+				पक्ष 2:
 						log_info( "   Monday; ");
-						break;
+						रोक;
 
-				case 3:
+				पक्ष 3:
 						log_info( "  Tuesday; ");
-						break;
+						रोक;
 
-				case 4:
+				पक्ष 4:
 						log_info( "Wednesday; ");
-						break;
+						रोक;
 
-				case 5:
+				पक्ष 5:
 						log_info( " Thursday; ");
-						break;
+						रोक;
 
-				case 6:
+				पक्ष 6:
 						log_info( "   Friday; ");
-						break;
+						रोक;
 
-				case 7:
+				पक्ष 7:
 						log_info( " Saturday; ");
-						break;
+						रोक;
 			}
 			log_info("Time: %x:%x:%x", read_buf[2], read_buf[1], read_buf[0]);
 			delay_loop(1000, 1000);

@@ -27,29 +27,29 @@
 @detail Detects the pressed key/button and prints pressed button.
 */
 
-#include <stdio.h>        
-#include "platform.h"
-#include "gpio.h"         
-#include "button_driver.h"
-#include "utils.h"
+#अन्तर्भाव <stdio.h>        
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"         
+#अन्तर्भाव "button_driver.h"
+#अन्तर्भाव "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
 #define READ_INDIVIDUAL_BTNS /*! Read each button value */
 //#define READ_ALL_BTNS /*! Read All button values */
 
-unsigned long read_data = 0;
+अचिन्हित दीर्घ read_data = 0;
 
 /** @fn void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
  */
-void main()
+शून्य main()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#यदि defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	जबसम्म (1) {
 
 #ifdef READ_INDIVIDUAL_BTNS
 
@@ -87,47 +87,47 @@ void main()
 
 #ifdef BTN_0
 		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x10000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
-			printf("\n BTN0: HIGH"); 		
-		else
-			printf("\n BTN0: LOW");
+		म_लिखो("\n Read Data is :0x%x", read_data);
+		यदि(read_data == 0x10000000)
+			म_लिखो("\n BTN0: HIGH"); 		
+		अन्यथा
+			म_लिखो("\n BTN0: LOW");
 #endif
 
 #ifdef BTN_1
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x20000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
-			printf("\n BTN1: HIGH"); 		
-		else
-			printf("\n BTN1: LOW");
+		म_लिखो("\n Read Data is :0x%x", read_data);
+		यदि(read_data == 0x20000000)
+			म_लिखो("\n BTN1: HIGH"); 		
+		अन्यथा
+			म_लिखो("\n BTN1: LOW");
 #endif
 
 #ifdef BTN_2
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x40000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
-			printf("\n BTN2: HIGH"); 		
-		else
-			printf("\n BTN2: LOW");
+		म_लिखो("\n Read Data is :0x%x", read_data);
+		यदि(read_data == 0x40000000)
+			म_लिखो("\n BTN2: HIGH"); 		
+		अन्यथा
+			म_लिखो("\n BTN2: LOW");
 #endif
 
 #ifdef BTN_3
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x80000000);
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 
-		if(read_data == 0x80000000)
-			printf("\n BTN3: HIGH"); 		
-		else
-			printf("\n BTN3: LOW");
+		यदि(read_data == 0x80000000)
+			म_लिखो("\n BTN3: HIGH"); 		
+		अन्यथा
+			म_लिखो("\n BTN3: LOW");
 #endif
 
 		delay_loop(500, 500);
@@ -136,124 +136,124 @@ void main()
 
 #ifdef READ_ALL_BTNS	
 
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		म_लिखो("\n Read Data is :0x%x", read_data);
 
-		switch(read_data)
+		विकल्प(read_data)
 		{
 
-		case 0x00000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x00000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x10000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x10000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x20000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x20000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x30000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x30000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x40000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x40000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x50000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x50000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x60000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x60000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x70000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		पक्ष 0x70000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: LOW");
+			रोक;
 
-		case 0x80000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0x80000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0x90000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0x90000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0xA0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0xA0000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0xB0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0xB0000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: LOW");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0xC0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0xC0000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0xD0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0xD0000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: LOW");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0xE0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0xE0000000:
+			म_लिखो("\n BTN0: LOW");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 
-		case 0xF0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		पक्ष 0xF0000000:
+			म_लिखो("\n BTN0: HIGH");
+			म_लिखो("\n BTN1: HIGH");
+			म_लिखो("\n BTN2: HIGH");
+			म_लिखो("\n BTN3: HIGH");
+			रोक;
 		}
 
 		delay_loop(500, 500);

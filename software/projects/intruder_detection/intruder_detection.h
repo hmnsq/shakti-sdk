@@ -46,24 +46,24 @@
 #define LED_P4              GPIO21
 #define POWER_SWITCH        GPIO24
 #define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
+#define PANIC_BUTTON        GPIO28          //आगत
 #define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
 #define PIR_IN	            GPIO8
 #define PANIC_BUTTON_OFFSET 28
 #define PIR_OFFSET          8
 #define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#define माथिल्लो                1
+#define तल्लो                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#define PASS_अङ्क            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+शून्य set_साँचो_pins_map(अचिन्हित पूर्णाङ्क* row, अचिन्हित पूर्णाङ्क* col, पूर्णाङ्क table[COLNUM][ROWNUM]);
+पूर्णाङ्क get_साँचो();
+पूर्णाङ्क get_col_row(शून्य);
+अचिन्हित पूर्णाङ्क row_pins[ROWNUM];
+अचिन्हित पूर्णाङ्क col_pins[COLNUM];
+पूर्णाङ्क साँचो_map[COLNUM][ROWNUM];
 
 #endif

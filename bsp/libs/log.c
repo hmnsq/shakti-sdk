@@ -26,8 +26,8 @@
 @detail This file contains implementation of different log levels.
 */ 
 
-#include "log.h"
-#include "utils.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "utils.h"
 
 /*Use -D compiler flag to set the LOG_LEVEL; default value is 1*/
 #ifndef LOG_LEVEL
@@ -39,15 +39,15 @@
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_trace(const char* fmt, ...)
+शून्य log_trace(अचर वर्ण* fmt, ...)
 {
-	if (TRACE <= LOG_LEVEL) {
-		va_list ap;
-		va_start(ap, fmt);
+	यदि (TRACE <= LOG_LEVEL) {
+		बहु_सूची ap;
+		बहु_शुरू(ap, fmt);
 
 		_printf_(fmt, ap);
 
-		va_end(ap);
+		बहु_पूर्ण(ap);
 	}
 }
 
@@ -56,15 +56,15 @@ void log_trace(const char* fmt, ...)
  * @details This function print info logs if the LOG_LEVEL allows info logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_info(const char* fmt, ...)
+शून्य log_info(अचर वर्ण* fmt, ...)
 {
-	if (INFO <= LOG_LEVEL) {
-		va_list ap;
-		va_start(ap, fmt);
+	यदि (INFO <= LOG_LEVEL) {
+		बहु_सूची ap;
+		बहु_शुरू(ap, fmt);
 
 		_printf_( fmt, ap);
 
-		va_end(ap);
+		बहु_पूर्ण(ap);
 	}
 }
 
@@ -73,15 +73,15 @@ void log_info(const char* fmt, ...)
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_debug(const char* fmt, ...)
+शून्य log_debug(अचर वर्ण* fmt, ...)
 {
-	if (DEBUG <= LOG_LEVEL) {
-		va_list ap;
-		va_start(ap, fmt);
+	यदि (DEBUG <= LOG_LEVEL) {
+		बहु_सूची ap;
+		बहु_शुरू(ap, fmt);
 
 		_printf_(fmt, ap);
 
-		va_end(ap);
+		बहु_पूर्ण(ap);
 	}
 }
 
@@ -90,15 +90,15 @@ void log_debug(const char* fmt, ...)
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_warn(const char* fmt, ...)
+शून्य log_warn(अचर वर्ण* fmt, ...)
 {
-	if (WARN <= LOG_LEVEL) {
-		va_list ap;
-		va_start(ap, fmt);
+	यदि (WARN <= LOG_LEVEL) {
+		बहु_सूची ap;
+		बहु_शुरू(ap, fmt);
 
 		_printf_( fmt, ap);
 
-		va_end(ap);
+		बहु_पूर्ण(ap);
 	}
 }
 
@@ -107,15 +107,15 @@ void log_warn(const char* fmt, ...)
  * @details This function print error logs if the LOG_LEVEL allows error logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_error(const char* fmt, ...)
+शून्य log_error(अचर वर्ण* fmt, ...)
 {
-	if (ERROR <= LOG_LEVEL) {
-		va_list ap;
-		va_start(ap, fmt);
+	यदि (ERROR <= LOG_LEVEL) {
+		बहु_सूची ap;
+		बहु_शुरू(ap, fmt);
 
 		_printf_( fmt, ap);
 
-		va_end(ap);
+		बहु_पूर्ण(ap);
 	}
 }
 
@@ -124,17 +124,17 @@ void log_error(const char* fmt, ...)
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_fatal(const char* fmt, ...)
+शून्य log_fatal(अचर वर्ण* fmt, ...)
 {
-	if (FATAL <= LOG_LEVEL) {
-		va_list ap;
-		va_start(ap, fmt);
+	यदि (FATAL <= LOG_LEVEL) {
+		बहु_सूची ap;
+		बहु_शुरू(ap, fmt);
 
 		_printf_( fmt, ap);
 
-		va_end(ap);
+		बहु_पूर्ण(ap);
 	}
 
 	log_info("\n panic \n");
-	while (1);
+	जबसम्म (1);
 }

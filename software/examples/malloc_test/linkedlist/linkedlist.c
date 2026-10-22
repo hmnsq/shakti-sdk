@@ -22,53 +22,53 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#अन्तर्भाव "uart.h"
+#अन्तर्भाव <stdio.h>
+#अन्तर्भाव <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+संरचना गाँठो {
+	पूर्णाङ्क अङ्क;
+	संरचना गाँठो *nptr;
 }*head;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+शून्य create_list(पूर्णाङ्क n);
+शून्य display_list();
+शून्य delete_गाँठो(पूर्णाङ्क position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+शून्य main()
 {
-	int n,position,m;
-	char t[15];
-	printf("\n Enter the number of nodes on the linked list:\n");
+	पूर्णाङ्क n,position,m;
+	वर्ण t[15];
+	म_लिखो("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
 
-	n = atoi(t);
+	n = म_से_प(t);
 
 	create_list(n);
 
-	printf("\n\n\nData entered in the list\n");
+	म_लिखो("\n\n\nData entered in the list\n");
 
 	display_list();
 
-	printf("\n\n Deletion\n");
-	printf("\nEnter the Node Position to be Deleted:\n");
+	म_लिखो("\n\n Deletion\n");
+	म_लिखो("\nEnter the Node Position to be Deleted:\n");
 
 	read_uart_string(uart_instance[0],t);
 
-	position = atoi(t);
+	position = म_से_प(t);
 
-	delete_node(position);
+	delete_गाँठो(position);
 
-	printf("\nLinked list after deletion\n");
+	म_लिखो("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	जबसम्म(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,48 +76,48 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+शून्य create_list(पूर्णाङ्क n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	संरचना गाँठो *गाँठो, *tmp;
+	पूर्णाङ्क data,m;
+	वर्ण t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (संरचना गाँठो*)दो_स्मृति(परिमाण(संरचना गाँठो));
 
-	if(head == NULL)
+	यदि(head == रिक्त)
 	{
-		printf("\n Memory cannot be allocated");
+		म_लिखो("\n Memory cannot be allocated");
 	}
-	else
+	अन्यथा
 	{
-		printf("\n\nInput data for node 1:");
+		म_लिखो("\n\nInput data for node 1:");
 
 		read_uart_string(uart_instance[0],t);
 
-		data = atoi(t);
+		data = म_से_प(t);
 
-		head->num = data;
-		head->nptr = NULL;
+		head->अङ्क = data;
+		head->nptr = रिक्त;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		लागि(पूर्णाङ्क i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			गाँठो = (संरचना गाँठो*)दो_स्मृति(परिमाण(संरचना गाँठो));
 
-			if(node == NULL)
+			यदि(गाँठो == रिक्त)
 			{
-				printf("\n Memory Cannot be allocated");
+				म_लिखो("\n Memory Cannot be allocated");
 			}
-			else 
+			अन्यथा 
 			{
-				printf("\n\nInput Data for node %d :",i);
+				म_लिखो("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
-				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				data = म_से_प(t);
+				गाँठो->अङ्क = data;
+				गाँठो->nptr = रिक्त;
 
-				tmp->nptr = node;
+				tmp->nptr = गाँठो;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,22 +129,22 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+शून्य display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	पूर्णाङ्क i = 0;
+	संरचना गाँठो *tmp;
 
-	if(head == NULL)
+	यदि(head == रिक्त)
 	{
-		printf(" List is empty.");
+		म_लिखो(" List is empty.");
 	}
-	else
+	अन्यथा
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		जबसम्म(tmp != रिक्त) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
-			printf("->");
+			म_लिखो(" Node%d = %d",i,tmp->अङ्क);
+			म_लिखो("->");
 			tmp = tmp->nptr;
 			i++;
 		}
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+शून्य delete_गाँठो(पूर्णाङ्क position)
 {
-	struct node *temp;
+	संरचना गाँठो *temp;
 
-	if(head == NULL)
+	यदि(head == रिक्त)
 	{
-		printf(" List is empty.");
+		म_लिखो(" List is empty.");
 	}
-	else 
+	अन्यथा 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		यदि (position == 0)//Delete head node
 		{
 			head = temp->nptr;
-			free(temp);
-			return;
+			मुक्त(temp);
+			फर्काऊ;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		लागि (पूर्णाङ्क i = 0; temp != रिक्त && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		यदि (temp == रिक्त || temp->nptr == रिक्त)
+			फर्काऊ;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		संरचना गाँठो *nptr = temp->nptr->nptr;
 
-		free(temp->nptr);
+		मुक्त(temp->nptr);
 		temp->nptr = nptr; 
 	}
 }

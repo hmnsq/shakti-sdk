@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා clock_divisor, පූර්ණ_සංඛ්‍යා period, පූර්ණ_සංඛ්‍යා duty, bool external_clock);
+void pwm_start(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා mode);
+පූර්ණ_සංඛ්‍යා pwm_check_continuous_mode(පූර්ණ_සංඛ්‍යා module_number);
+void pwm_clear_registers(පූර්ණ_සංඛ්‍යා module_number);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_set_external_clock(පූර්ණ_සංඛ්‍යා module_number, bool value);
+void pwm_set_clock(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා clock_divisor);
+void pwm_set_duty_cycle(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා duty);
+void pwm_set_periodic_cycle(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා period);
+void pwm_stop(පූර්ණ_සංඛ්‍යා module_number);
+void show_register_values(පූර්ණ_සංඛ්‍යා module_number);
+පූර්ණ_සංඛ්‍යා set_pwm_period_register(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා value);
+පූර්ණ_සංඛ්‍යා set_pwm_duty_register(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා value);
+පූර්ණ_සංඛ්‍යා set_pwm_control_register(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා value);
+පූර්ණ_සංඛ්‍යා set_pwm_clock_register(පූර්ණ_සංඛ්‍යා module_number, පූර්ණ_සංඛ්‍යා value);
+පූර්ණ_සංඛ්‍යා configure_control_register_mode(පූර්ණ_සංඛ්‍යා mode);
+void pwm_use_external_clock(පූර්ණ_සංඛ්‍යා module_number, bool value);
 

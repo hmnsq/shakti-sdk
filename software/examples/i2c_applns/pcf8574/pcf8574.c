@@ -50,16 +50,16 @@
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_pcf8574_registers(i2c_struct * i2c_instance,unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+පූර්ණ_සංඛ්‍යා write_pcf8574_registers(i2c_struct * i2c_instance,unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned පූර්ණ_සංඛ්‍යා write_value, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	පූර්ණ_සංඛ්‍යා i = 0, j = 0,  k = 0, status=0;
+	unsigned පූර්ණ_සංඛ්‍යා temp = 0;
 	i2c_send_slave_address(i2c_instance, PCF8574_SLAVE_ADDRESS, I2C_WRITE, delay);
 	i2c_write_data(i2c_instance,  ( write_value & 0xff), delay);
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 	// delay_loop(800, 800);
-	return 0;
+	ආපසු 0;
 }
 
 /** @fn void main()
@@ -68,23 +68,23 @@ int write_pcf8574_registers(i2c_struct * i2c_instance,unsigned int reg_offset, u
  */
 void main()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
+	පූර්ණ_සංඛ්‍යා timeout;
+	unsigned පූර්ණ_සංඛ්‍යා tempReadValue = 0;
 	unsigned long delay = 1000;
 
 	printf("\nPCF8574 IO Expander Test");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	නම්(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		ආපසු -1;
 	}
-		else
+		නැතහොත්
 		log_info("\tIntilization Happened Fine\n");
 		printf("\n Write he scomplete");
-	while(1)
+	අතරතුර(1)
 	{
 		printf("\n Writing 0");
 		write_pcf8574_registers(I2C, 0x00, 0x00, delay);

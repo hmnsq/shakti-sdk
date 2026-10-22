@@ -36,10 +36,10 @@
 
 
 #define DELAY_VALUE 900
-#if 1
+#නම් 1
 #define PRESCALER_COUNT 24
 #define SCLK_COUNT 9
-#else
+#නැතහොත්
 #define PRESCALER_COUNT 8
 #define SCLK_COUNT 6
 #endif
@@ -64,21 +64,21 @@
 
 #define PI 3.141592654
 
-char readbuf[RD_DATA_CNT];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
+var_na readbuf[RD_DATA_CNT];
+පූර්ණ_සංඛ්‍යා AccX,AccY,AccZ;
+පූර්ණ_සංඛ්‍යා accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+පූර්ණ_සංඛ්‍යා roll, pitch, yaw;
+පූර්ණ_සංඛ්‍යා AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+පූර්ණ_සංඛ්‍යා AccErrorX,AccErrory;
+පූර්ණ_සංඛ්‍යා GyroX, GyroY, GyroZ;
+පූර්ණ_සංඛ්‍යා c = 0;
+පූර්ණ_සංඛ්‍යා i=0;
 
-int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *read_data, unsigned char length, unsigned long delay)
+පූර්ණ_සංඛ්‍යා read_mpu6050_register(i2c_struct * i2c_instance, unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned var_na *read_data, unsigned var_na length, unsigned long delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	unsigned var_na read_buf[4] = {'\0'};
+	පූර්ණ_සංඛ්‍යා i = 0, j = 0,  k = 0, status=0;
+	unsigned var_na temp = 0;
 
 //Writes the slave address for write
 	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -99,7 +99,7 @@ int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
 //	delay_loop(DELAY1, DELAY2);
 	i2c_instance->control = I2C_STOP;
 	delay_loop(DELAY1, DELAY2);
-	return 0;
+	ආපසු 0;
 }
 
 /** @fn int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -112,11 +112,11 @@ int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return read status (zero on success)
  */
-int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *readTemp, unsigned char length, unsigned long delay)
+පූර්ණ_සංඛ්‍යා read_mpu6050_registers(i2c_struct * i2c_instance, unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned var_na *readTemp, unsigned var_na length, unsigned long delay)
 {
 //	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	පූර්ණ_සංඛ්‍යා i = 0, j = 0,  k = 0, status=0;
+	unsigned var_na temp = 0;
 
 //Writes the slave address for write
 	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
@@ -135,17 +135,17 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 	i2c_read_data(i2c_instance, &temp, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	සඳහා(i = 0; i < length; i++)
 	{
-		if(i == (length - 1) )
+		නම්(i == (length - 1) )
 		{
 			log_debug("\nSending nack");
 			i2c_instance->control = I2C_NACK;
 //			i2c_read_data_nack(i2c_instance, &temp, delay);
 			i2c_read_data(i2c_instance, &temp, delay);
-			break;
+			bha_nga;
 			}
-		else
+		නැතහොත්
 		{
 			i2c_read_data(i2c_instance, &temp, delay);
 		}
@@ -156,7 +156,7 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 	
 	log_debug("\n Sending Stop condition");
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	ආපසු 0;
 }
 
 
@@ -172,7 +172,7 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned long delay)
+පූර්ණ_සංඛ්‍යා write_mpu6050_register(i2c_struct * i2c_instance, unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned පූර්ණ_සංඛ්‍යා *write_value, unsigned long delay)
 {
 	i2c_instance->control = I2C_IDLE;
 	delay_loop(DELAY1, DELAY2);
@@ -201,22 +201,22 @@ int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+පූර්ණ_සංඛ්‍යා write_mpu6050_registers(i2c_struct * i2c_instance, unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned පූර්ණ_සංඛ්‍යා *write_value, unsigned var_na length, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	පූර්ණ_සංඛ්‍යා i = 0, j = 0,  k = 0, status=0;
+	unsigned පූර්ණ_සංඛ්‍යා temp = 0;
 	
 	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
 	i2c_write_data(i2c_instance, reg_offset, delay);
 	delay_loop(DELAY1, DELAY2);
 	
-	if(1 == length)
+	නම්(1 == length)
 	{
 		i2c_write_data(i2c_instance,  ( *write_value	& 0xff), delay);
 	}
-	else
+	නැතහොත්
 	{
-		for(i = 0; i < length; i++)
+		සඳහා(i = 0; i < length; i++)
 		{
 			i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
 
@@ -226,7 +226,7 @@ int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 	delay_loop(DELAY1, DELAY2);
-	return 0;
+	ආපසු 0;
 }
 
 /*
@@ -237,7 +237,7 @@ void measuring_value(unsigned long delay)
 	// read accelerometer data
 	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_DATA_CNT, delay);
 	printf("\n Read Buf: { ");
-	for(i = 0; i < RD_DATA_CNT; i++)
+	සඳහා(i = 0; i < RD_DATA_CNT; i++)
 	{
 		log_info(" %x, ", readbuf[i] );
 		}
@@ -260,11 +260,11 @@ void measuring_value(unsigned long delay)
 
 void calculate_imu_error(unsigned long delay)
 {
-	int c=0;
-	int yaw;
+	පූර්ණ_සංඛ්‍යා c=0;
+	පූර්ණ_සංඛ්‍යා yaw;
 	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while(c<200)
+	අතරතුර(c<200)
 	{
 		measuring_value(delay);
 
@@ -292,40 +292,40 @@ void calculate_imu_error(unsigned long delay)
 	GyroZ = GyroZ - GyroErrorZ; // GyroErrorZ
 }
 
-unsigned char CheckForDeviceId(unsigned long delay)
+unsigned var_na CheckForDeviceId(unsigned long delay)
 {
-	unsigned char readBuf = 0xFF;
+	unsigned var_na readBuf = 0xFF;
 	read_mpu6050_register(I2C, DEV_IDENTITY_DATA_REG, &readBuf, 1, delay);
 	log_debug("\n Read Buf Value: %x", readBuf);
-	return readBuf;
+	ආපසු readBuf;
 }
 
-int main()
+පූර්ණ_සංඛ්‍යා main()
 {
-	unsigned char i = 0;
-	int timeout;
+	unsigned var_na i = 0;
+	පූර්ණ_සංඛ්‍යා timeout;
 	unsigned long delay = 500;
-	unsigned int write_buf[7] = {0x00};
-	unsigned char length = 0;
+	unsigned පූර්ණ_සංඛ්‍යා write_buf[7] = {0x00};
+	unsigned var_na length = 0;
 
 	log_debug("\tI2C: MPU6050 - ACC test\n");
 
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	නම්(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+			ආපසු -1;
 	}
-	else
+	නැතහොත්
 		log_info("\tIntilization Happened Fine\n");
 
-		if(DEV_IDENTITY == CheckForDeviceId(delay))
+		නම්(DEV_IDENTITY == CheckForDeviceId(delay))
 		{
 			log_info("Device ID Check Success");
 		}
-		else
+		නැතහොත්
 		{
 			log_error("Could not verify Device identity");
 		}
@@ -342,12 +342,12 @@ int main()
 
 
 	log_debug("\n Entering While loop");
-	while(1)
+	අතරතුර(1)
 	{
 		measuring_value(delay);
 		delay_loop(2000, 1000);
 	}
 
-	return 0;
+	ආපසු 0;
 }
 

@@ -41,7 +41,7 @@
 #define PRESCALER_COUNT 0x1F
 #define SCLK_COUNT 0x91
 
-char sending_data[50];
+var_na sending_data[50];
 
 /** @fn int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the date and time field of DS3231 registers.
@@ -54,11 +54,11 @@ char sending_data[50];
  * @param delay
  * @return read status (Zero of success)
  */
-int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+පූර්ණ_සංඛ්‍යා read_ds3231_registers(i2c_struct * i2c_instance, unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned පූර්ණ_සංඛ්‍යා *readTemp, unsigned var_na length, unsigned long delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	unsigned var_na read_buf[4] = {'\0'};
+	පූර්ණ_සංඛ්‍යා i = 0, j = 0,  k = 0, status=0;
+	unsigned var_na temp = 0;
 
 //Writes the slave address for write
 		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -76,17 +76,17 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 		i2c_read_data(i2c_instance, &temp, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-		for(i = 0; i < length; i++)
+		සඳහා(i = 0; i < length; i++)
 		{
 			i2c_read_data(i2c_instance, &temp, delay);
 			*readTemp = temp;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
-			if( i == (length - 2) )
+			නම්( i == (length - 2) )
 				i2c_instance->control = I2C_NACK;
 			*readTemp++;
 		}
 		i2c_instance->control = I2C_STOP;
-		return 0;
+		ආපසු 0;
 }
 
 /** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -100,13 +100,13 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+පූර්ණ_සංඛ්‍යා write_ds3231_registers(i2c_struct * i2c_instance, unsigned පූර්ණ_සංඛ්‍යා reg_offset, unsigned පූර්ණ_සංඛ්‍යා *write_value, unsigned var_na length, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	පූර්ණ_සංඛ්‍යා i = 0, j = 0,  k = 0, status=0;
+	unsigned පූර්ණ_සංඛ්‍යා temp = 0;
 		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, delay);
 		i2c_write_data(i2c_instance, reg_offset, delay);
-		for(i = 0; i < length; i++)
+		සඳහා(i = 0; i < length; i++)
 	{
 		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
@@ -115,7 +115,7 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 //		delay_loop(800, 800);
 
 
-			return 0;
+			ආපසු 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)
@@ -126,12 +126,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param y
  * @return Day of the week (0 - 6)
  */
-int dayofweek(int d, int m, int y)
+පූර්ණ_සංඛ්‍යා dayofweek(පූර්ණ_සංඛ්‍යා d, පූර්ණ_සංඛ්‍යා m, පූර්ණ_සංඛ්‍යා y)
 {
-    static int t[] = { 0, 3, 2, 5, 0, 3,
+    static පූර්ණ_සංඛ්‍යා t[] = { 0, 3, 2, 5, 0, 3,
                        5, 1, 4, 6, 2, 4 };
     y -= m < 3;
-    return ( y + y / 4 - y / 100 +
+    ආපසු ( y + y / 4 - y / 100 +
              y / 400 + t[m - 1] + d) % 7;
 }
 
@@ -141,9 +141,9 @@ int dayofweek(int d, int m, int y)
  * @param decimal
  * @return Calculated hex value. 
  */
-unsigned int ds3231_decimal_to_hex(unsigned int decimal)
+unsigned පූර්ණ_සංඛ්‍යා ds3231_decimal_to_hex(unsigned පූර්ණ_සංඛ්‍යා decimal)
 {
-	return( ((decimal / 10 ) << 4) | (decimal % 10) );
+	ආපසු( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
 /** @fn void intermediate()
@@ -152,12 +152,12 @@ unsigned int ds3231_decimal_to_hex(unsigned int decimal)
  */
 void intermediate(void)
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
+	පූර්ණ_සංඛ්‍යා timeout;
+	unsigned පූර්ණ_සංඛ්‍යා tempReadValue = 0;
 	unsigned long delay = 1000;
-	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-	unsigned char length;
-	unsigned int hour, minute, second, date, month, year;
+	unsigned පූර්ණ_සංඛ්‍යා write_buf[7] = {0x00}, read_buf[7] = {0x00};
+	unsigned var_na length;
+	unsigned පූර්ණ_සංඛ්‍යා hour, minute, second, date, month, year;
 
 	hour = 11;
 	minute = 46;
@@ -181,12 +181,12 @@ void intermediate(void)
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	නම්(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		ආපසු -1;
 	}
-	else
+	නැතහොත්
 
 #ifdef UPDATE_TIME
 	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
@@ -198,9 +198,9 @@ void intermediate(void)
  * @brief Configures the DS3231
  * @details Reads Date and time information and returns the in string
  */
-const char* values()
+const var_na* values()
 {
-	unsigned int read_buf[7] = {0x00};
+	unsigned පූර්ණ_සංඛ්‍යා read_buf[7] = {0x00};
 
 	read_ds3231_registers(I2C, DS3231_REG_OFFSET, &read_buf[0], 7, 800);
 	
@@ -210,7 +210,7 @@ const char* values()
 	sprintf(sending_data, "AT+SEND=0,50, Date: %x-%x-20%x  Time: %x:%x:%x", read_buf[4], read_buf[5], read_buf[6], read_buf[2], read_buf[1], read_buf[0]);
 	// delay_loop(1500, 1500);		
 
-	return sending_data;
+	ආපසු sending_data;
 
 }
 

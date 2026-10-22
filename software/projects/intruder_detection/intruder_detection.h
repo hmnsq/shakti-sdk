@@ -59,11 +59,11 @@
 #define PASS_NUM            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+void set_key_pins_map(unsigned පූර්ණ_සංඛ්‍යා* row, unsigned පූර්ණ_සංඛ්‍යා* col, පූර්ණ_සංඛ්‍යා table[COLNUM][ROWNUM]);
+පූර්ණ_සංඛ්‍යා get_key();
+පූර්ණ_සංඛ්‍යා get_col_row(void);
+unsigned පූර්ණ_සංඛ්‍යා row_pins[ROWNUM];
+unsigned පූර්ණ_සංඛ්‍යා col_pins[COLNUM];
+පූර්ණ_සංඛ්‍යා key_map[COLNUM][ROWNUM];
 
 #endif

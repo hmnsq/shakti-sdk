@@ -16,8 +16,8 @@
 void main()
 {
     printf("-- UART Loopback Test --\n");
-    while(1) {
-        int val = getchar();
+    අතරතුර(1) {
+        පූර්ණ_සංඛ්‍යා val = getchar();
         putchar(val);
     };
 }

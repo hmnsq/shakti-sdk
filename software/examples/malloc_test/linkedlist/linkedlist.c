@@ -26,14 +26,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+sa_nracanaa node {
+	පූර්ණ_සංඛ්‍යා num;
+	sa_nracanaa node *nptr;
 }*head;
 
-void create_list(int n);
+void create_list(පූර්ණ_සංඛ්‍යා n);
 void display_list();
-void delete_node(int position);
+void delete_node(පූර්ණ_සංඛ්‍යා position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
@@ -42,8 +42,8 @@ void delete_node(int position);
  */
 void main()
 {
-	int n,position,m;
-	char t[15];
+	පූර්ණ_සංඛ්‍යා n,position,m;
+	var_na t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -68,7 +68,7 @@ void main()
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	අතරතුර(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+void create_list(පූර්ණ_සංඛ්‍යා n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	sa_nracanaa node *node, *tmp;
+	පූර්ණ_සංඛ්‍යා data,m;
+	var_na t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (sa_nracanaa node*)malloc(parimaa_na(sa_nracanaa node));
 
-	if(head == NULL)
+	නම්(head == NULL)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	නැතහොත්
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -100,15 +100,15 @@ void create_list(int n)
 		head->nptr = NULL;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		සඳහා(පූර්ණ_සංඛ්‍යා i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			node = (sa_nracanaa node*)malloc(parimaa_na(sa_nracanaa node));
 
-			if(node == NULL)
+			නම්(node == NULL)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			නැතහොත් 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
@@ -131,17 +131,17 @@ void create_list(int n)
  */
 void display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	පූර්ණ_සංඛ්‍යා i = 0;
+	sa_nracanaa node *tmp;
 
-	if(head == NULL)
+	නම්(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else
+	නැතහොත්
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		අතරතුර(tmp != NULL) 
 		{
 			printf(" Node%d = %d",i,tmp->num);
 			printf("->");
@@ -157,35 +157,35 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+void delete_node(පූර්ණ_සංඛ්‍යා position)
 {
-	struct node *temp;
+	sa_nracanaa node *temp;
 
-	if(head == NULL)
+	නම්(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	නැතහොත් 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		නම් (position == 0)//Delete head node
 		{
 			head = temp->nptr;
 			free(temp);
-			return;
+			ආපසු;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		සඳහා (පූර්ණ_සංඛ්‍යා i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		නම් (temp == NULL || temp->nptr == NULL)
+			ආපසු;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		sa_nracanaa node *nptr = temp->nptr->nptr;
 
 		free(temp->nptr);
 		temp->nptr = nptr; 

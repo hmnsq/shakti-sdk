@@ -32,13 +32,13 @@
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+unsigned පූර්ණ_සංඛ්‍යා uart0_prev_rcv_isr_count_flag = 0;
+unsigned පූර්ණ_සංඛ්‍යා uart1_prev_rcv_isr_count_flag = 0;
+unsigned පූර්ණ_සංඛ්‍යා uart2_prev_rcv_isr_count_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+unsigned පූර්ණ_සංඛ්‍යා uart0_prev_tx_isr_count_flag = 0;
+unsigned පූර්ණ_සංඛ්‍යා uart1_prev_tx_isr_count_flag = 0;
+unsigned පූර්ණ_සංඛ්‍යා uart2_prev_tx_isr_count_flag = 0;
 
 
 void init_variables()
@@ -63,15 +63,15 @@ void init_variables()
 	uart1_prev_tx_isr_count_flag = 0;
 	uart2_prev_tx_isr_count_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+extern ca_ncala unsigned පූර්ණ_සංඛ්‍යා* pinmux_config_reg;
 
 
 
-int main(void){
+පූර්ණ_සංඛ්‍යා main(void){
 
 
-	register uint32_t retval;
-	int i;
+	pa_njikaa uint32_t retval;
+	පූර්ණ_සංඛ්‍යා i;
 	init_variables();
 
 	printf("\n---------------Uart 1 Interrupt Test---------------\n");
@@ -85,15 +85,15 @@ int main(void){
 	isr_table[PLIC_INTERRUPT_26] = uart1_isr;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm ca_ncala("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm ca_ncala("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -102,7 +102,7 @@ int main(void){
 		    );
 
 	printf("\n retval = %x", retval);
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -112,7 +112,7 @@ int main(void){
 
 	printf("\t retval = %x", retval);
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -131,24 +131,24 @@ int main(void){
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	අතරතුර(1)
 	{
-#if 0
-		if(i % 2)
+#නම් 0
+		නම්(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		නැතහොත්
 			write_uart_string(uart_instance[1], "tEsT");
 #endif
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		නම්(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
 		{
 			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		නම්(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
 		{
 			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
 		}
-		if(i++ >= 10)
+		නම්(i++ >= 10)
 		{
 			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
@@ -161,5 +161,5 @@ int main(void){
 	};
 
 
-	return 0;
+	ආපසු 0;
 }

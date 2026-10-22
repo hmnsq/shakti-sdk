@@ -34,7 +34,7 @@
  * @details Configures the SPI flash, Confirms the flash device id,
             then read 10 addresses in flash and prints the value.
  */
-int main(void){
+ཧྲིལ main(void){
 
 	configure_spi(SPI0_OFFSET);
 
@@ -42,16 +42,16 @@ int main(void){
 	printf("SPI init done\n");
 	flash_device_id();
 	waitfor(200);
-	int total_data = 10; //total data you want to read/write
-	int read_address = 0x00b00000;  //read from this address
+	ཧྲིལ total_data = 10; //total data you want to read/write
+	ཧྲིལ read_address = 0x00b00000;  //read from this address
 
-	for(int i = 0; i < total_data; ++i)
+	དོན་ལུ(ཧྲིལ i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
+		ཧྲིལ read_value= flash_read(read_address);
 		printf("Reading from adddress %x and data \
 		       %x\n",read_address,read_value);
 		read_address=read_address+4;
 	}
-	asm volatile ("ebreak");
-	return 0;
+	asm ca_ncala ("ebreak");
+	ལོག 0;
 }

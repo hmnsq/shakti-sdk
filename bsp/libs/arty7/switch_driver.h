@@ -29,7 +29,7 @@
 #ifndef SWITCH_DRIVER_H
 #define SWITCH_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#གལ་སྲིད defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #include "platform.h"
 #include "gpio.h"

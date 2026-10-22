@@ -43,8 +43,8 @@ cs  -spi cs
  */
 void w25q32()
 {
-	int tmp = 0x00;//32 bits of data can be written at a time
-	int write_address = 0x0000100;  // read/write from/to this address
+	ཧྲིལ tmp = 0x00;//32 bits of data can be written at a time
+	ཧྲིལ write_address = 0x0000100;  // read/write from/to this address
 
 	*pinmux_config_reg = 0x154000;	
 
@@ -56,7 +56,7 @@ void w25q32()
 	
 	flash_device_id(); 
 
-	for ( int data=0;  data<=100;  data++)
+	དོན་ལུ ( ཧྲིལ data=0;  data<=100;  data++)
 	{
 	  flash_erase(write_address); //erases an entire sector
 	  flash_status_register_read();
@@ -80,5 +80,5 @@ void w25q32()
 void main()
 {
 	w25q32();
-	while (1);
+	སྐབས (1);
 }

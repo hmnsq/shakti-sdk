@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
+void configure_spi(ཧྲིལ offset);
 void spi_init(void);
-void set_spi(int* addr, int val);
+void set_spi(ཧྲིལ* addr, ཧྲིལ val);
 void bin(unsigned n);
 void spi_tx_rx_start(void);
 void spi_enable(void);
 void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+void flash_cmd_addr_data(ཧྲིལ command, ཧྲིལ addr, ཧྲིལ data);
+void flash_write(ཧྲིལ address, ཧྲིལ data);
+void flash_erase(ཧྲིལ address);
+ཧྲིལ get_spi(ཧྲིལ* addr);
+ཧྲིལ bitExtracted(ཧྲིལ number, ཧྲིལ k, ཧྲིལ p) ;
+ཧྲིལ concat(ཧྲིལ x, ཧྲིལ y) ;
+ཧྲིལ spi_rxne_enable(void);
+ཧྲིལ spi_notbusy(void);
+ཧྲིལ flash_write_enable(void);
+ཧྲིལ flash_clear_sr(void);
+ཧྲིལ flash_cmd_addr(ཧྲིལ command, ཧྲིལ addr);
+ཧྲིལ flash_cmd_to_read(ཧྲིལ command, ཧྲིལ addr);
+ཧྲིལ flash_read(ཧྲིལ address);
+ཧྲིལ flash_cmd_read(ཧྲིལ command);
+ཧྲིལ flash_status_register_read(void);
+ཧྲིལ flash_device_id(void);
 
 #endif

@@ -28,11 +28,11 @@
 
 #include "platform.h"
 
-extern char _end[];                /* _end is set in the linker file */
-extern char _heap_end[];	   /* _heap_end is set in the linker file */
+extern var_na _end[];                /* _end is set in the linker file */
+extern var_na _heap_end[];	   /* _heap_end is set in the linker file */
 
-char *heap_ptr=(char *)&_end;
-char *end_of_heap=(char *)&_heap_end;
+var_na *heap_ptr=(var_na *)&_end;
+var_na *end_of_heap=(var_na *)&_heap_end;
 
 /* OS LESS IMPLEMENTATION OF SBRK
  * sbrk -- changes heap size. Get nbytes more RAM.
@@ -46,25 +46,25 @@ char *end_of_heap=(char *)&_heap_end;
  * @param int nbytes - specifies the size of the heap 
  * @return  returns a pointer to the start of the heap
  */
-char * m_sbrk (nbytes)
-	int nbytes;
+var_na * m_sbrk (nbytes)
+	ཧྲིལ nbytes;
 {
-	char *base;
+	var_na *base;
 
 	log_debug("\nHeap pointer is %x",heap_ptr);
 
-	if(!heap_ptr)
-		heap_ptr = (char *)&_end;
+	གལ་སྲིད(!heap_ptr)
+		heap_ptr = (var_na *)&_end;
 
 	base = heap_ptr;
 	heap_ptr += nbytes;
 
 	log_debug("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
 
-	if(heap_ptr>end_of_heap)
+	གལ་སྲིད(heap_ptr>end_of_heap)
 	{
 		log_error("\nMemory allocation error: Insufficient Space");
-		return -1;
+		ལོག -1;
 	}
-	return base;
+	ལོག base;
 }

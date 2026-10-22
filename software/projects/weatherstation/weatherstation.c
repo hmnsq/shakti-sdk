@@ -53,8 +53,8 @@
   * @param data data that has to be sent to cloud
 */
 
-int write_to_esp8266(char *data) {
-	while (*data != '\0') {
+ཧྲིལ write_to_esp8266(var_na *data) {
+	སྐབས (*data != '\0') {
 		write_uart_character(ESP_UART, *data);
 		data++;
 	}
@@ -70,7 +70,7 @@ int write_to_esp8266(char *data) {
   *         this method is neeed to indicate end to data transmission
 */
 
-int write_enter_to_esp8266(){
+ཧྲིལ write_enter_to_esp8266(){
 	write_uart_character(ESP_UART,'\r');
 	write_uart_character(ESP_UART,'\n');
 }
@@ -81,40 +81,40 @@ int write_enter_to_esp8266(){
   * @details Reads data sent by esp8266 until one of the key word is found
   * @param data responses read from esp8266, mainly used for logging
 */
-int read_from_esp8266(char *data) {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for(int i=0;i<198;i++) {
+ཧྲིལ read_from_esp8266(var_na *data) {
+	ཧྲིལ ch;
+	var_na *str = data;
+	var_na *test = data;
+	དོན་ལུ(ཧྲིལ i=0;i<198;i++) {
 		read_uart_character(ESP_UART,&ch);
 		//printf("read from esp %c  \n",ch);
 		*str = ch;
 		str++; 
 		*str = '\0';
 		//printf("read  %c\n",ch);
-		if(strstr(test,"OK") != NULL)  {
+		གལ་སྲིད(strstr(test,"OK") != NULL)  {
 			printf("read from esp8266 %s\n",test);
-			return;
+			ལོག;
 		}
-		if(strstr(test,"ERROR") != NULL) {
+		གལ་སྲིད(strstr(test,"ERROR") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			ལོག;
 		}
-		if(strstr(test,">") != NULL) {
+		གལ་སྲིད(strstr(test,">") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			ལོག;
 		}
-		if(strstr(test,"RECV") != NULL) {
+		གལ་སྲིད(strstr(test,"RECV") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			ལོག;
 		}
-		if(strstr(test,"IP") != NULL) {
+		གལ་སྲིད(strstr(test,"IP") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			ལོག;
 		}
 	}
 	*str = '\0';
-	return 1;
+	ལོག 1;
 }
 
 /**
@@ -123,7 +123,7 @@ int read_from_esp8266(char *data) {
   * @details set up esp8266 to send data
 */
 void setup_esp8266(){
-	char data[200];
+	var_na data[200];
 	write_to_esp8266("AT");
 	delay(1);
 	read_from_esp8266(data);
@@ -152,7 +152,7 @@ void setup_esp8266(){
   * @details Open http connection to thingspeak.com, using GET method send data and close the connection
   * @param temperature value that has to eb transmitted.
 */
-void transmit_data(int temperature) {
+void transmit_data(ཧྲིལ temperature) {
 /***************************************************
     AT – response OK
     AT+CWLAP – list nearby available WiFi networks
@@ -164,8 +164,8 @@ void transmit_data(int temperature) {
 **************************************************/
 
 
-	char data[200];
-	char sendData[76];
+	var_na data[200];
+	var_na sendData[76];
 	sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_KEY,temperature);
 	//printf("\n send data %s\n",sendData);
 	// Connect to Wifi using esp8266
@@ -212,12 +212,12 @@ void transmit_data(int temperature) {
 */
 void main()
 {	
-	int i=0;
+	ཧྲིལ i=0;
 	//int baudrate = 9600;
-	int baudrate = 115200;
-	int temperature = 24;
-	int transmit_count = 0;
-	char data[200];
+	ཧྲིལ baudrate = 115200;
+	ཧྲིལ temperature = 24;
+	ཧྲིལ transmit_count = 0;
+	var_na data[200];
    	printf("\n setting PIN MUX config to 2 .... \n");
     	*pinmux_config_reg = 0x5;
    	printf("\n set PIN MUX config to 2 .... \n");
@@ -227,9 +227,9 @@ void main()
 	printf("\n Waiting to ESP8266 to initialize \n");
 	delay(3);
 	setup_esp8266();
-	while (1) {
+	སྐབས (1) {
  		temperature = temperature_value();
-		if (temperature != 999)
+		གལ་སྲིད (temperature != 999)
 			transmit_data(temperature); 
 		delay(60);
 

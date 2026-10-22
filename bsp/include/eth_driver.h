@@ -34,7 +34,7 @@
 #include "eth_driver.h"
 #include "eth_macros.h"
 
-#define INLINE inline
+#define INLINE anta_hstha
 #define __LITTLE_ENDIAN__ 1
 
 
@@ -46,19 +46,19 @@ typedef uint16_t u16;
 typedef uint32_t u32;
 /** @}*/
 #define __XUINT64__
-typedef struct
+typedef sa_nracanaa
 {
 	u32 Upper;
 	u32 Lower;
 } Xuint64;
 
-typedef char char8;
+typedef var_na char8;
 typedef int8_t s8;
 typedef int16_t s16;
 typedef int32_t s32;
 typedef int64_t s64;
 typedef uint64_t u64;
-typedef int sint32;
+typedef ཧྲིལ sint32;
 
 typedef intptr_t INTPTR;
 typedef uintptr_t UINTPTR;
@@ -128,7 +128,7 @@ typedef uintptr_t UINTPTR;
 /**
  * This typedef contains configuration information for a device.
  */
-typedef struct {
+typedef sa_nracanaa {
 	u16 DeviceId;	 /**< Unique ID  of device */
 	UINTPTR BaseAddress; /**< Device base address */
 	u8 TxPingPong;	 /**< 1 if TX Pong buffer configured, 0 otherwise */
@@ -150,7 +150,7 @@ typedef void (*XEmacLite_Handler) (void *CallBackRef);
  * variable of this type for every EmacLite device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+typedef sa_nracanaa {
 	XEmacLite_Config EmacLiteConfig; /* Device configuration */
 	u32 IsReady;			 /* Device is initialized and ready */
 
@@ -168,14 +168,14 @@ typedef struct {
 } XEmacLite;
 
 #ifndef ETH_VARI
-extern volatile u32 RecvFrameLength;
+extern ca_ncala u32 RecvFrameLength;
 extern UINTPTR TxBuffPtr;
 extern UINTPTR RxBuffPtr;
-extern volatile int FramesTx;
-extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
-extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+extern ca_ncala ཧྲིལ FramesTx;
+extern ca_ncala ཧྲིལ FramesRx;
+extern ca_ncala ཧྲིལ TxCount;
+extern ca_ncala ཧྲིལ RxCount;
+extern ca_ncala ཧྲིལ Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 #endif
 
 
@@ -264,7 +264,7 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
 void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
 
 extern XEmacLite_Config XEmacLite_ConfigTable;
-extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+extern ཧྲིལ XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr);
 

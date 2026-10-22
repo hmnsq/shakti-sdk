@@ -33,18 +33,18 @@ d0 - spi miso
 clk -spi clk
 cs  -spi cs
 *************************************************/
-#include <stdint.h>
-#include "spi.h"
-#include "pinmux.h"
+#अन्तर्भाव <stdint.h>
+#अन्तर्भाव "spi.h"
+#अन्तर्भाव "pinmux.h"
 
 /** @fn void w25q32()
  * @brief Writes the spi value to w25q32
  * @details Writes SPI over w25q32 interface
  */
-void w25q32()
+शून्य w25q32()
 {
-	int tmp = 0x00;//32 bits of data can be written at a time
-	int write_address = 0x0000100;  // read/write from/to this address
+	पूर्णाङ्क tmp = 0x00;//32 bits of data can be written at a time
+	पूर्णाङ्क write_address = 0x0000100;  // read/write from/to this address
 
 	*pinmux_config_reg = 0x154000;	
 
@@ -52,11 +52,11 @@ void w25q32()
 	configure_spi(SPI1_OFFSET);
 	spi_init();
 	
-	printf("SPI init done\n");
+	म_लिखो("SPI init done\n");
 	
 	flash_device_id(); 
 
-	for ( int data=0;  data<=100;  data++)
+	प्रति ( पूर्णाङ्क data=0;  data<=100;  data++)
 	{
 	  flash_erase(write_address); //erases an entire sector
 	  flash_status_register_read();
@@ -64,12 +64,12 @@ void w25q32()
 	  flash_write_enable();
 	  flash_write( write_address,tmp);
 	  
-	  printf("Flash write done on address %x and tmp %x \n", write_address, data);
+	  म_लिखो("Flash write done on address %x and tmp %x \n", write_address, data);
 	  
 	  tmp = tmp+0x1;
 	  write_address = write_address+4;
 	}
-	printf("SPI Write Success\n");
+	म_लिखो("SPI Write Success\n");
 }
 
 /**  @fn void main()
@@ -77,8 +77,8 @@ void w25q32()
  * @details Configures the SPI Write FLASH values, Write the same 
  * prints the write values.
  */
-void main()
+शून्य main()
 {
 	w25q32();
-	while (1);
+	यावत् (1);
 }

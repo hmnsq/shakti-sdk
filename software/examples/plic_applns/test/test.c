@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "uart.h"
+#अन्तर्भाव "utils.h"
+#अन्तर्भाव "traps.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "plic_driver.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "defines.h"
+#अन्तर्भाव "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+शून्य handle_button_press(__attribute__((unused)) uint32_t अंक);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+शून्य handle_button_press(__attribute__((unused)) uint32_t अंक)
 {
 	log_info("button pressed\n");
 }
@@ -55,52 +55,52 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+पूर्णाङ्क main(शून्य){
+	पञ्जिका अचिन्हित पूर्णाङ्क retval;
+	पूर्णाङ्क i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	प्रति(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
+		म_लिखो("i %d\n",i);
 		interrupt_enable(i);
 	}
-	printf("\n");
-	asm("ebreak");
+	म_लिखो("\n");
+	यंत्र("ebreak");
 
-	for(i=1;i<33;i++)
+	प्रति(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
+		म_लिखो("i %d\n",i);
 		interrupt_disable(i);
 	}
-	printf("\n");
+	म_लिखो("\n");
 
-	asm("ebreak");
+	यंत्र("ebreak");
 
-	for(i=1;i<33;i++)
+	प्रति(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
+		म_लिखो("i %d\n",i);
 		interrupt_enable(i + 1);
 	}
-	printf("\n");
+	म_लिखो("\n");
 
-	asm("ebreak");
+	यंत्र("ebreak");
 
-	while(1){
+	यावत्(1){
 		i++;
 
-		if((i%10000000) == 0){
+		यदि((i%10000000) == 0){
 
-			asm volatile(
+			यंत्र चञ्चल(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
 			     "=r"
 			     (retval)
 			    );
-			printf("mip = %u\n", retval);
+			म_लिखो("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	प्रत्यागम 0;
 }

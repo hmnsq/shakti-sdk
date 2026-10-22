@@ -26,70 +26,70 @@
  * @brief  All the definitions are very specific to ARTY A7 (35T & 100T) boards
  */
 
-#ifndef LED_DRIVER_H
-#define LED_DRIVER_H
+#جيڪڏهن_وصف_نه_ٿيل LED_DRIVER_H
+#وصف_ڪريو LED_DRIVER_H
 
-#include "platform.h" //Contains arty a7 gpio definitions.
-#include "gpio.h"  //Contains the methods to Access GPIOs
+#ضمن "platform.h" //Contains arty a7 gpio definitions.
+#ضمن "gpio.h"  //Contains the methods to Access GPIOs
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#إذا defined(ARTIX7_35T) || defined(ARTIX7_100T)
 /*! RGB LED 0 defines */
-#define LED0_R GPIO16 
-#define LED0_G GPIO17
-#define LED0_B GPIO18
+#وصف_ڪريو LED0_R GPIO16 
+#وصف_ڪريو LED0_G GPIO17
+#وصف_ڪريو LED0_B GPIO18
 
 /*! RGB LED 1 defines */
-#define LED1_R GPIO19
-#define LED1_G GPIO20
-#define LED1_B GPIO21
+#وصف_ڪريو LED1_R GPIO19
+#وصف_ڪريو LED1_G GPIO20
+#وصف_ڪريو LED1_B GPIO21
 
 /*! Normal LED 1 defines */
-#define LED2 GPIO22
+#وصف_ڪريو LED2 GPIO22
 
 /*! Normal LED 2 defines */
-#define LED3 GPIO23
+#وصف_ڪريو LED3 GPIO23
 
 
 /*! Combined RGB LED defines */
-#define RGB0 (LED0_R | LED0_G | LED0_B )
-#define RGB1 (LED1_R | LED1_G | LED1_B )
+#وصف_ڪريو RGB0 (LED0_R | LED0_G | LED0_B )
+#وصف_ڪريو RGB1 (LED1_R | LED1_G | LED1_B )
 
 /*! Combined Normal LED defines */
-#define NORMAL_LEDS ( LED2 | LED3 )
-#define RGB_LEDS ( RGB0 | RGB1 )
+#وصف_ڪريو عام_LEDS ( LED2 | LED3 )
+#وصف_ڪريو RGB_LEDS ( RGB0 | RGB1 )
 
 /*! Combines ALL LED defines */
-#define ALL_LEDS (RGB_LEDS | NORMAL_LEDS)
+#وصف_ڪريو ALL_LEDS (RGB_LEDS | عام_LEDS)
 
 
 /*! Control for all LEDS */
-#define NORMAL_LED0 0
-#define NORMAL_LED1 1
+#وصف_ڪريو عام_LED0 0
+#وصف_ڪريو عام_LED1 1
 
-#define RGB_LED0 0
-#define RGB_LED1 1
+#وصف_ڪريو RGB_LED0 0
+#وصف_ڪريو RGB_LED1 1
 
 // function prototype
-void configure_ledx(unsigned long pin_cntrl);
-void configure_rgb_ledx(unsigned char led_no);
-void configure_normal_leds();
-void configure_rgb_leds();
-void configure_all_leds();
-void turn_on_ledx(unsigned long pin_cntrl);
-void turn_off_ledx(unsigned long pin_cntrl);
-void turn_on_normal_leds();
-void turn_off_normal_leds();
-void turn_on_rgb_ledx(unsigned char led_no);
-void turn_off_rgb_ledx(unsigned char led_no);
-void turn_on_rgb_leds();
-void turn_off_rgb_leds();
-void turn_on_all_leds();
-void turn_off_all_leds();
-void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2);
-void toggle_normal_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_all_leds( unsigned long delay1, unsigned long delay2);
+فراغ configure_ledx(بنانشان ڊگهو pin_cntrl);
+فراغ configure_rgb_ledx(بنانشان حرف led_no);
+فراغ configure_عام_leds();
+فراغ configure_rgb_leds();
+فراغ configure_all_leds();
+فراغ turn_on_ledx(بنانشان ڊگهو pin_cntrl);
+فراغ turn_off_ledx(بنانشان ڊگهو pin_cntrl);
+فراغ turn_on_عام_leds();
+فراغ turn_off_عام_leds();
+فراغ turn_on_rgb_ledx(بنانشان حرف led_no);
+فراغ turn_off_rgb_ledx(بنانشان حرف led_no);
+فراغ turn_on_rgb_leds();
+فراغ turn_off_rgb_leds();
+فراغ turn_on_all_leds();
+فراغ turn_off_all_leds();
+فراغ toggle_ledx(بنانشان ڊگهو pin_cntrl, بنانشان ڊگهو delay1, بنانشان ڊگهو delay2);
+فراغ toggle_عام_leds( بنانشان ڊگهو delay1, بنانشان ڊگهو delay2 );
+فراغ toggle_rgb_leds( بنانشان ڊگهو delay1, بنانشان ڊگهو delay2 );
+فراغ toggle_all_leds( بنانشان ڊگهو delay1, بنانشان ڊگهو delay2);
 
 
-#endif
-#endif
+#جيڪڏهن_پورو
+#جيڪڏهن_پورو

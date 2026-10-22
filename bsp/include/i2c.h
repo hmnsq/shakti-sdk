@@ -26,52 +26,52 @@
  * @detail this is the header file for i2c_driver.c
  */
 
-#ifndef I2C_H
-#define I2C_H
+#جيڪڏهن_وصف_نه_ٿيل I2C_H
+#وصف_ڪريو I2C_H
 
-#include "platform.h"
+#ضمن "platform.h"
 
-#define ETIMEOUT -60
-#define DEF_TIMEOUT 60
-#define ETIMEDOUT -80
-#define ENXIO -82
-#define EREMOTEIO -81
+#وصف_ڪريو ETIMEOUT -60
+#وصف_ڪريو DEF_TIMEOUT 60
+#وصف_ڪريو ETIMEDOUT -80
+#وصف_ڪريو ENXIO -82
+#وصف_ڪريو EREMOTEIO -81
 
-#define I2C_SUCCESS 0
-#define EAXI_ERROR -1
-#define EI2C_BUS_ERROR -2
-#define EI2C_PIN_ERROR -3
-#define EI2C_LRB_ERROR -4
+#وصف_ڪريو I2C_SUCCESS 0
+#وصف_ڪريو EAXI_ERROR -1
+#وصف_ڪريو EI2C_BUS_ERROR -2
+#وصف_ڪريو EI2C_PIN_ERROR -3
+#وصف_ڪريو EI2C_LRB_ERROR -4
 
-#define I2C_PIN	0x80
-#define I2C_ESO	0x40
-#define I2C_ES1	0x20
-#define I2C_ES2	0x10
-#define I2C_ENI	0x08
-#define I2C_STA	0x04
-#define I2C_STO	0x02
-#define I2C_ACK	0x01
+#وصف_ڪريو I2C_PIN	0x80
+#وصف_ڪريو I2C_ESO	0x40
+#وصف_ڪريو I2C_ES1	0x20
+#وصف_ڪريو I2C_ES2	0x10
+#وصف_ڪريو I2C_ENI	0x08
+#وصف_ڪريو I2C_STA	0x04
+#وصف_ڪريو I2C_STO	0x02
+#وصف_ڪريو I2C_ACK	0x01
 
-#define I2C_INI 0x40   /* 1 if not initialized */
-#define I2C_STS 0x20
-#define I2C_BER 0x10
-#define I2C_AD0 0x08
-#define I2C_LRB 0x08
-#define I2C_AAS 0x04
-#define I2C_LAB 0x02
-#define I2C_BB  0x01
+#وصف_ڪريو I2C_INI 0x40   /* 1 if not initialized */
+#وصف_ڪريو I2C_STS 0x20
+#وصف_ڪريو I2C_BER 0x10
+#وصف_ڪريو I2C_AD0 0x08
+#وصف_ڪريو I2C_LRB 0x08
+#وصف_ڪريو I2C_AAS 0x04
+#وصف_ڪريو I2C_LAB 0x02
+#وصف_ڪريو I2C_BB  0x01
 
-#define I2C_START         (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK)
-#define I2C_START_ENI     (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
-#define I2C_STOP          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK)
-#define I2C_REPSTART      (                 I2C_ESO | I2C_STA | I2C_ACK)
-#define I2C_REPSTART_ENI  (                 I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
-#define I2C_IDLE          (I2C_PIN | I2C_ESO                  | I2C_ACK)
-#define I2C_NACK          (I2C_ESO  )
-#define I2C_STOP_ENI          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK | I2C_ENI)
+#وصف_ڪريو I2_C_شروعات         (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK)
+#وصف_ڪريو I2_C_شروعات_ENI     (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
+#وصف_ڪريو I2C_STOP          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK)
+#وصف_ڪريو I2C_REPSTART      (                 I2C_ESO | I2C_STA | I2C_ACK)
+#وصف_ڪريو I2C_REPSTART_ENI  (                 I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
+#وصف_ڪريو I2C_IDLE          (I2C_PIN | I2C_ESO                  | I2C_ACK)
+#وصف_ڪريو I2C_NACK          (I2C_ESO  )
+#وصف_ڪريو I2C_STOP_ENI          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK | I2C_ENI)
 
-#define I2C_READ 1
-#define I2C_WRITE 0
+#وصف_ڪريو I2C_READ 1
+#وصف_ڪريو I2C_WRITE 0
 
 /*
 `define     S2             8'h00
@@ -84,65 +84,65 @@
 `define     SCL            8'h38
 */
 
-unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+بنانشان حرف i2c_complete_flag;
+بنانشان صحيح i2c_read_قدر;
 
 /* Struct to access I2C registers as 32 bit registers */
-typedef struct
+تعريفنوع بنية
 {
 /* 0x00 */
-	unsigned int  prescale;     /*! Prescale Register */
-	unsigned int   prescale_rsvd;
+	بنانشان صحيح  prescale;     /*! Prescale Register */
+	بنانشان صحيح   prescale_rsvd;
 
 /* 0x08 */
-	unsigned int   control;
-	unsigned int   control_rsvd;
+	بنانشان صحيح   control;
+	بنانشان صحيح   control_rsvd;
 
 /* 0x10 */
-	unsigned int  data;	 /*! Prescale Register */
-	unsigned int   data_rsvd;
+	بنانشان صحيح  معلومات_2;	 /*! Prescale Register */
+	بنانشان صحيح   معلومات_rsvd;
 
 /* 0x18 */
-	unsigned int  status;	 /*! Prescale Register */
-	unsigned int   status_rsvd;
+	بنانشان صحيح  حالت_2;	 /*! Prescale Register */
+	بنانشان صحيح   حالت_rsvd;
 
 /* 0x20 */
-	unsigned int  s01;	 /*! Prescale Register */
-	unsigned int   s01_rsvd;
+	بنانشان صحيح  s01;	 /*! Prescale Register */
+	بنانشان صحيح   s01_rsvd;
 
 /* 0x28 */
-	unsigned int  s3;	 /*! Prescale Register */
-	unsigned int   s3_rsvd;
+	بنانشان صحيح  s3;	 /*! Prescale Register */
+	بنانشان صحيح   s3_rsvd;
 
 /* 0x30 */
-	unsigned int  time;	 /*! Prescale Register */
-	unsigned int   time_rsvd;
+	بنانشان صحيح  وقت;	 /*! Prescale Register */
+	بنانشان صحيح   وقت_rsvd;
 
 /* 0x38 */
-	unsigned int  scl;	 /*! Prescale Register */
-	unsigned int   scl_rsvd;
+	بنانشان صحيح  scl;	 /*! Prescale Register */
+	بنانشان صحيح   scl_rsvd;
 } i2c_struct;
 
-void i2c_init(void);
-int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
-int wait_till_I2c_bus_free(i2c_struct *);
-int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
-int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
-			   char rdWrCntrl, unsigned long delay);
-int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
-int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
-				     slaveAddress, unsigned char rdWrCntrl,
-				     unsigned long delay);
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
-			    unsigned char delay, unsigned char last);
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
-			     unsigned char delay, unsigned char last);
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
-		       char delay);
+فراغ i2c_init(فراغ);
+صحيح config_i2c(i2c_struct *,بنانشان حرف prescale_div, بنانشان حرف scl_div);
+صحيح wait_till_I2c_bus_free(i2c_struct *);
+صحيح wait_till_txrx_operation_Completes(i2c_struct *,صحيح *حالت_2);
+صحيح sendbytes(i2c_struct *, ثابت حرف *buf, صحيح ڳڻپ, صحيح آخري, صحيح eni);
+صحيح readbytes(i2c_struct *,حرف *buf, صحيح ڳڻپ, صحيح آخري);
+صحيح i2c_send_slave_پتو(i2c_struct *,بنانشان حرف slave_پتو, بنانشان
+			   حرف rdWrCntrl, بنانشان ڊگهو delay);
+صحيح i2c_write_معلومات(i2c_struct *,بنانشان حرف write_معلومات, بنانشان حرف delay);
+صحيح i2c_read_معلومات(i2c_struct *,بنانشان حرف *read_معلومات_2, بنانشان حرف delay);
+صحيح i2c_send_مداخلت_slave_پتو(i2c_struct * instance, بنانشان حرف
+				     slave_پتو, بنانشان حرف rdWrCntrl,
+				     بنانشان ڊگهو delay);
+صحيح i2c_read_مداخلت_معلومات(i2c_struct * instance, بنانشان حرف *read_معلومات_2,
+			    بنانشان حرف delay, بنانشان حرف آخري);
+صحيح i2c_write_مداخلت_معلومات(i2c_struct * instance, بنانشان حرف write_معلومات,
+			     بنانشان حرف delay, بنانشان حرف آخري);
+صحيح i2c_read_معلومات_nack(i2c_struct * instance, بنانشان حرف *read_معلومات_2, بنانشان
+		       حرف delay);
 
-extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
+خارجي i2c_struct *i2c_instance[MAX_I2_C_ڳڻپ];
 
-#endif
+#جيڪڏهن_پورو

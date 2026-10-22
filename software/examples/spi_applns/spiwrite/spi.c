@@ -27,13 +27,13 @@
 @detail Contains driver codes to read and write flash using SPI interface.
 */
 
-#include <stdint.h>
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#ضمن <stdint.h>
+#ضمن "spi.h"
+#ضمن "uart.h"
+#ضمن "utils.h"
 
-#define DELAY1 1000//Determines the duration of delay1//
-#define DELAY2 2000//Determines the duration of delay2//
+#وصف_ڪريو DELAY1 1000//Determines the duration of delay1//
+#وصف_ڪريو DELAY2 2000//Determines the duration of delay2//
 
 /** @fn static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @brief Reads the flash memory contents starting from read_address.
@@ -41,14 +41,14 @@
  * @param unsigned int (32-bit).
  * @param unsigned int (16-bit).           
  */
-static void flash_read_locations(uint32_t read_address, uint16_t length)
+ساكن فراغ flash_read_locations(uint32_t read_پتو, uint16_t ڊيگهائي_2)
 {
-	for(int i = 0; i < length; ++i)
+	لكل(صحيح i = 0; i < ڊيگهائي_2; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("\nReading from adddress %x and data \
-			   %x\n",read_address,read_value);
-		read_address=read_address+4;
+		صحيح read_قدر= flash_read(read_پتو);
+		لکو("\nReading from adddress %x and معلومات_2 \
+			   %x\n",read_پتو,read_قدر);
+		read_پتو=read_پتو+4;
 	}
 }
 
@@ -57,47 +57,47 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+فراغ مکيه()
 {
-	int write_address = 0x00b00004;  // read/write from/to this address
-	int read_address  = 0x00b00004;  // read/write from/to this address
-	int data = 0xDEADBEEF; //32 bits of data can be written at a time
-	uint16_t length = 11;
+	صحيح write_پتو = 0x00b00004;  // read/write from/to this address
+	صحيح read_پتو  = 0x00b00004;  // read/write from/to this address
+	صحيح معلومات_2 = 0xDEADBEEF; //32 bits of data can be written at a time
+	uint16_t ڊيگهائي_2 = 11;
 
-	configure_spi(SPI0_OFFSET);
+	configure_spi(SPI0_وٿي);
 	spi_init();
 
-	printf("SPI init done\n");
+	لکو("SPI init done\n");
 
 	flash_device_id(); 
 
 	waitfor(200);
 
-	printf("\n Before Erase");
-	flash_read_locations(read_address, length);
+	لکو("\n Before Erase");
+	flash_read_locations(read_پتو, ڊيگهائي_2);
 	flash_write_enable();
 	flash_erase(0x00b00000); //erases an entire sector
-	flash_status_register_read();
-	printf("\n After Erase");
-	flash_read_locations(read_address, length);
+	flash_حالت_رجسٽر_read();
+	لکو("\n After Erase");
+	flash_read_locations(read_پتو, ڊيگهائي_2);
 
 	//flash write
-	flash_write( write_address, 0x12345678);
-	flash_write( write_address + 0x04, 0xaaaaaaaa);
-	flash_write( write_address + 0x08, 0x55555555);
-	flash_write( write_address + 0x0C, 0xAAAA5555);
-	flash_write( write_address + 0x10, 0x5555AAAA);
-	flash_write( write_address + 0x14, 0xaaa5aaa5);
-	flash_write( write_address + 0x18, 0x555A555A);
-	flash_write( write_address + 0x1c, 0xaa55aa55);
-	flash_write( write_address + 0x20, 0x55aa55aa);
-	flash_write( write_address + 0x24, 0x5a5a5a5a);
-	flash_write( write_address + 0x28, 0xa5a5a5a5);
+	flash_write( write_پتو, 0x12345678);
+	flash_write( write_پتو + 0x04, 0xaaaaaaaa);
+	flash_write( write_پتو + 0x08, 0x55555555);
+	flash_write( write_پتو + 0x0C, 0xAAAA5555);
+	flash_write( write_پتو + 0x10, 0x5555AAAA);
+	flash_write( write_پتو + 0x14, 0xaaa5aaa5);
+	flash_write( write_پتو + 0x18, 0x555A555A);
+	flash_write( write_پتو + 0x1c, 0xaa55aa55);
+	flash_write( write_پتو + 0x20, 0x55aa55aa);
+	flash_write( write_پتو + 0x24, 0x5a5a5a5a);
+	flash_write( write_پتو + 0x28, 0xa5a5a5a5);
 
-	printf("\nFlash write done on address %x and data %x \n", 
-	       write_address, data);
+	لکو("\nFlash write done on address %x and data %x \n", 
+	       write_پتو, معلومات_2);
 
-	printf("\n After Write");
-	flash_read_locations(read_address, length);
-	asm volatile ("ebreak");
+	لکو("\n After Write");
+	flash_read_locations(read_پتو, ڊيگهائي_2);
+	asm متطاير ("ebreak");
 }

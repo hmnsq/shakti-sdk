@@ -40,21 +40,21 @@
 
 */
 
-#include "uart.h" //Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
-#include "bmp280.h"
+#ضمن "uart.h" //Includes the definitions of uart communication protocol//
+#ضمن "string.h"
+#ضمن "pinmux.h"
+#ضمن "i2c.h"
+#ضمن "log.h"
+#ضمن "bmp280.h"
 
 // Replace the API KEY
-#define API_KEY "PPI6OVOI1A2LGXMZ"
+#وصف_ڪريو API_ڪنجي "PPI6OVOI1A2LGXMZ"
 
 // UART 1 to communicate to ESP8266
-#define ESP_UART uart_instance[1]
+#وصف_ڪريو ESP_UART uart_instance[1]
 
 // Using I2C 1 to connect to BMP280
-#define I2C i2c_instance[1]
+#وصف_ڪريو I2C i2c_instance[1]
 
 /**
   * @fn int write_to_esp8266(char *data,uart_num sel,int baudrate)
@@ -64,12 +64,12 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+صحيح write_منزل_esp8266(حرف *معلومات_2)
 {
-	while (*data != '\0')
+	طالما (*معلومات_2 != '\0')
 	{
-		write_uart_character(ESP_UART, *data);
-		data++;
+		write_uart_character(ESP_UART, *معلومات_2);
+		معلومات_2++;
 	}
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+صحيح write_enter_منزل_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+صحيح read_from_esp8266(حرف *معلومات_2)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 198; i++)
+	صحيح ch;
+	حرف *str = معلومات_2;
+	حرف *test = معلومات_2;
+	لكل (صحيح i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		إذا (لڙي_ڳولا(test, "OK") != عدم)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			أرجع;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		إذا (لڙي_ڳولا(test, "ERROR") != عدم)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			أرجع;
 		}
-		if (strstr(test, ">") != NULL)
+		إذا (لڙي_ڳولا(test, ">") != عدم)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			أرجع;
 		}
-		if (strstr(test, "RECV") != NULL)
+		إذا (لڙي_ڳولا(test, "RECV") != عدم)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			أرجع;
 		}
-		if (strstr(test, "IP") != NULL)
+		إذا (لڙي_ڳولا(test, "IP") != عدم)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			أرجع;
 		}
 	}
 	*str = '\0';
-	return 1;
+	أرجع 1;
 }
 
 /**
@@ -145,21 +145,21 @@ int read_from_esp8266(char *data)
   * @brief setup MUX mode in  esp8266
   * @details setup MUX mode in  esp8266
 */
-void setup_esp8266()
+فراغ تياري_esp8266()
 {
-	char data[200];
-	write_to_esp8266("AT");
+	حرف معلومات_2[200];
+	write_منزل_esp8266("AT");
 	delay_loop(1000, 1000);
-	read_from_esp8266(data);
+	read_from_esp8266(معلومات_2);
 
-	printf("sending AT Echo off command to esp\n");
-	write_to_esp8266("ATE0");
+	لکو("sending AT Echo off command to esp\n");
+	write_منزل_esp8266("ATE0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
-	printf("write AT+CIPMUX\n");
-	write_to_esp8266("AT+CIPMUX=0");
+	read_from_esp8266(معلومات_2);
+	لکو("write AT+CIPMUX\n");
+	write_منزل_esp8266("AT+CIPMUX=0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
+	read_from_esp8266(معلومات_2);
 }
 /**
   * @fn void transmit_data(int temperature, int baudrate)
@@ -171,93 +171,93 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+فراغ transmit_معلومات(صحيح temperature, صحيح pressure)
 {
-	char data[200];
-	char sendData[93];
-	char CIPSEND[14];
-	int length;
-	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
+	حرف معلومات_2[200];
+	حرف send_معلومات_2[93];
+	حرف CIPSEND[14];
+	صحيح ڊيگهائي_2;
+	sprintf(send_معلومات_2, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_ڪنجي, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
-	length = strlen(sendData);
-	length = length + 2;
-	sprintf(CIPSEND, "AT+CIPSEND=%d", length);
+	ڊيگهائي_2 = لڙي_ڊيگهه(send_معلومات_2);
+	ڊيگهائي_2 = ڊيگهائي_2 + 2;
+	sprintf(CIPSEND, "AT+CIPSEND=%d", ڊيگهائي_2);
 	// Connect to Wifi using esp8266
 
 	// Connect to Wifi using esp8266
-	printf("\n Open connection to thingspeak.com\n");
-	printf("\n sending  %s\n", sendData);
+	لکو("\n Open connection to thingspeak.com\n");
+	لکو("\n sending  %s\n", send_معلومات_2);
 	flush_uart(ESP_UART);
-	write_to_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	write_منزل_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
+	read_from_esp8266(معلومات_2);
+	لکو(" data from esp :%s\n",معلومات_2);
 
 	//delay_loop(2000,2000);
-	printf("\n%s\n", CIPSEND);
+	لکو("\n%s\n", CIPSEND);
 	flush_uart(ESP_UART);
-	write_to_esp8266(CIPSEND);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	write_منزل_esp8266(CIPSEND);
+	read_from_esp8266(معلومات_2);
+	لکو(" data from esp :%s\n",معلومات_2);
 
-	printf(" write Data\n");
+	لکو(" write Data\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266(sendData);
+	write_منزل_esp8266(send_معلومات_2);
 
 	//flush_uart(ESP_UART);
-	write_enter_to_esp8266();
+	write_enter_منزل_esp8266();
 	//delay(100,100);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	read_from_esp8266(معلومات_2);
+	لکو(" data from esp :%s\n",معلومات_2);
 	// disconnect from link
-	printf(" write AT+CIPCLOSE\n");
+	لکو(" write AT+CIPCLOSE\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266("AT+CIPCLOSE");
-	read_from_esp8266(data);
+	write_منزل_esp8266("AT+CIPCLOSE");
+	read_from_esp8266(معلومات_2);
 }
 
 /**
   * @fn void main()
   * @brief Entry point for the program
 */
-void main()
+فراغ مکيه()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
-	char data[200];
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
+	صحيح i = 0;
+	صحيح baudrate = 115200;
+	صحيح transmit_ڳڻپ = 0;
+	حرف معلومات_2[200];
+	بنانشان صحيح عارضي_Read_قدر = 0;
+	بنانشان ڊگهو delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
-	printf("\n setting PIN MUX config to 2 .... \n");
+	لکو("\n setting PIN MUX config to 2 .... \n");
 	*pinmux_config_reg = 0x5;
-	printf("\n set PIN MUX config to 2 .... \n");
-	set_baud_rate(ESP_UART, baudrate);
-	printf("\n Sending temperature data to cloud server!....\n");
-	printf("\n Baud rate set to %d \n", baudrate);
-	printf("\n Waiting to ESP8266 to initialize \n");
+	لکو("\n set PIN MUX config to 2 .... \n");
+	سيٽ_baud_شرح(ESP_UART, baudrate);
+	لکو("\n Sending temperature data to cloud server!....\n");
+	لکو("\n Baud rate set to %d \n", baudrate);
+	لکو("\n Waiting to ESP8266 to initialize \n");
 	delay_loop(1000, 1000);
-	setup_esp8266();
-	setup_bmp280();
+	تياري_esp8266();
+	تياري_bmp280();
 
-	while (1)
+	طالما (1)
 	{
-		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
+		write_bmp280_رجسٽر(I2C, BMP280_CTRL_MEANS, BMP280_عام_گهڻائي, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		إذا (0 == read_bmp280_رجسٽر(I2C, BMP280_حالت_رجسٽر, &عارضي_Read_قدر, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			إذا (!(عارضي_Read_قدر & 0x9))
 			{
 				//Read pressure and temperature values.
-				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
-				printf("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
-				printf("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
-				transmit_data(temperature, pressure);
+				read_bmp280_قدرون(I2C, 0xF7, &pressure, &temperature, delay);
+				لکو("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
+				لکو("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
+				transmit_معلومات(temperature, pressure);
 			}
 		}
-		else
+		وإلا
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

@@ -25,25 +25,25 @@
  * @brief Header file for buttons 
  */
 
-#ifndef BUTTON_DRIVER_H
-#define BUTTON_DRIVER_H
+#جيڪڏهن_وصف_نه_ٿيل BUTTON_DRIVER_H
+#وصف_ڪريو BUTTON_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#إذا defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 //Buttons
-#define BTN0 GPIO28
-#define BTN1 GPIO29
-#define BTN2 GPIO30
-#define BTN3 GPIO31
+#وصف_ڪريو BTN0 GPIO28
+#وصف_ڪريو BTN1 GPIO29
+#وصف_ڪريو BTN2 GPIO30
+#وصف_ڪريو BTN3 GPIO31
 
-#define ALL_BTNS (BTN0 | BTN1 | BTN2 | BTN3)
+#وصف_ڪريو ALL_BTNS (BTN0 | BTN1 | BTN2 | BTN3)
 
 // function prototype
-void configure_btn(unsigned long pinCntrl);
-void configure_all_btn();
+فراغ configure_btn(بنانشان ڊگهو pinCntrl);
+فراغ configure_all_btn();
 
-#endif
-#endif
+#جيڪڏهن_پورو
+#جيڪڏهن_پورو

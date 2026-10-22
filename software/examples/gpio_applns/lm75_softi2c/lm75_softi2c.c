@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ضمن "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#وصف_ڪريو LM75_SLAVE_پتو 0x90
+#وصف_ڪريو DELAY_ڳڻپ 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+بنانشان صحيح Lm75ReadTemperature(بنانشان ڊگهو delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
-	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	بنانشان حرف readBuf = 0;
+	بنانشان ننڍو read_قدر_2 = 0;
+	I2c_Send_Slave_پتو(LM75_SLAVE_پتو, I2C_READ, delay);
+	readBuf = I2c_Read_معلومات_Ack(delay);
+	read_قدر_2 = (readBuf << 1);
+	readBuf = I2c_Read_معلومات_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_قدر_2 = (readBuf >> 7) | read_قدر_2;
+	أرجع read_قدر_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+فراغ مکيه() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	بنانشان ننڍو عارضي_Read = 0;
+	بنانشان ننڍو عارضي = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	لکو("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	عارضي_Read = Lm75ReadTemperature(DELAY_ڳڻپ);
+	إذا(عارضي_Read & 0x100) {
+		عارضي_Read = ( (~عارضي_Read) + 1 ) >> 1;
+		لکو("\n\t Current Temperature:=-%u°C",عارضي_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	وإلا {
+		عارضي_Read = عارضي_Read >> 1;
+		لکو("\n\t Current Temperature:=+%u°C",عارضي_Read);
 	 }
 	delay_loop(10000,20000);
 }

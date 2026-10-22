@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#جيڪڏهن_وصف_نه_ٿيل GPIO_I2C_H
+#وصف_ڪريو GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#وصف_ڪريو I2C_SCL GPIO0 
+#وصف_ڪريو I2C_SDA GPIO1
+#وصف_ڪريو GPIOD_IS_اندريون 0
+#وصف_ڪريو GPIOD_IS_ٻاهريون 1
+#وصف_ڪريو I2C_WRITE 0
+#وصف_ڪريو I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+فراغ I2cInit();
+فراغ I2c_Send_Slave_پتو(بنانشان حرف , بنانشان حرف , بنانشان حرف );
+فراغ I2cWriteByte(بنانشان حرف , بنانشان حرف );
+بنانشان حرف I2cReadByte(بنانشان حرف );
+فراغ I2c_Write_معلومات(بنانشان حرف , بنانشان حرف );
+بنانشان حرف I2c_Read_معلومات_Ack(بنانشان حرف );
+بنانشان حرف I2c_Read_معلومات_Nack(بنانشان حرف );
+فراغ I2c_شروعات(بنانشان حرف );
+فراغ I2cStop(بنانشان حرف );
+فراغ I2c_Write_byte(بنانشان حرف, بنانشان حرف, بنانشان حرف, بنانشان حرف);
+صحيح I2c_Read_byte(بنانشان حرف ,بنانشان حرف , بنانشان حرف );
+صحيح I2c_shakti_readbytes(حرف *, صحيح , صحيح , بنانشان حرف );
+فراغ ReadAckForWrite(بنانشان حرف delay);
+فراغ SendNackForRead(بنانشان حرف delay);
+فراغ SendAckForRead(بنانشان حرف delay);
 
-#endif
+#جيڪڏهن_پورو

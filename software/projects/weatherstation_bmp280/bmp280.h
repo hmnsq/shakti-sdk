@@ -24,29 +24,29 @@
 
 ***************************************************************************/
 
-#define I2C i2c_instance[1]
+#وصف_ڪريو I2C i2c_instance[1]
 
-#define BMP280_SLAVE_ADDRESS 0xEC       //Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define BMP280_CTRL_MEANS 0xF4
-#define BMP280_NORMAL_MODE 0x26
-#define BMP280_STATUS_REGISTER 0xF3
-#define BMP280_CONFIG_REGISTER 0xF5
-#define BMP280_RESET_REGISTER 0xE0
+#وصف_ڪريو BMP280_SLAVE_پتو 0xEC       //Defines the Starting address of slave//
+#وصف_ڪريو DELAY_قدر 900
+#وصف_ڪريو PRESCALER_ڳڻپ 0x1F
+#وصف_ڪريو SCLK_ڳڻپ 0x91
+#وصف_ڪريو BMP280_CTRL_MEANS 0xF4
+#وصف_ڪريو BMP280_عام_گهڻائي 0x26
+#وصف_ڪريو BMP280_حالت_رجسٽر 0xF3
+#وصف_ڪريو BMP280_CONFIG_رجسٽر 0xF5
+#وصف_ڪريو BMP280_RESET_رجسٽر 0xE0
 
-#define BMP280_REG_DIG_T1 0x88
-#define BMP280_REG_DIG_T2 0x8A
-#define BMP280_REG_DIG_T3 0x8C
+#وصف_ڪريو BMP280_REG_DIG_T1 0x88
+#وصف_ڪريو BMP280_REG_DIG_T2 0x8A
+#وصف_ڪريو BMP280_REG_DIG_T3 0x8C
 
-#define BMP280_REG_DIG_P1 0x8E
-#define BMP280_REG_DIG_P2 0x90
-#define BMP280_REG_DIG_P3 0x92
-#define BMP280_REG_DIG_P4 0x94
-#define BMP280_REG_DIG_P5 0x96
-#define BMP280_REG_DIG_P6 0x98
-#define BMP280_REG_DIG_P7 0x9A
-#define BMP280_REG_DIG_P8 0x9C
-#define BMP280_REG_DIG_P9 0x9E
+#وصف_ڪريو BMP280_REG_DIG_P1 0x8E
+#وصف_ڪريو BMP280_REG_DIG_P2 0x90
+#وصف_ڪريو BMP280_REG_DIG_P3 0x92
+#وصف_ڪريو BMP280_REG_DIG_P4 0x94
+#وصف_ڪريو BMP280_REG_DIG_P5 0x96
+#وصف_ڪريو BMP280_REG_DIG_P6 0x98
+#وصف_ڪريو BMP280_REG_DIG_P7 0x9A
+#وصف_ڪريو BMP280_REG_DIG_P8 0x9C
+#وصف_ڪريو BMP280_REG_DIG_P9 0x9E
 

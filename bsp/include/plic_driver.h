@@ -27,77 +27,77 @@
  * for the plic module is also defined here.
  */
 
-#ifndef PLIC_DRIVER_H
-#define PLIC_DRIVER_H
-#include "platform.h"
-#include "traps.h"
+#جيڪڏهن_وصف_نه_ٿيل PLIC_DRIVER_H
+#وصف_ڪريو PLIC_DRIVER_H
+#ضمن "platform.h"
+#ضمن "traps.h"
 
 /* Macros */
 
 /* Offsets for different registers in plic */
 
-#define PLIC_PRIORITY_OFFSET            0x0000UL
-#define PLIC_PENDING_OFFSET             0x1000UL
-#define PLIC_ENABLE_OFFSET              0x2000UL
-#define PLIC_THRESHOLD_OFFSET           0x10000UL
-#define PLIC_CLAIM_OFFSET               0x10010UL
+#وصف_ڪريو PLIC_ترجيح_وٿي            0x0000UL
+#وصف_ڪريو PLIC_PENDING_وٿي             0x1000UL
+#وصف_ڪريو PLIC_ENABLE_وٿي              0x2000UL
+#وصف_ڪريو PLIC_حد_وٿي           0x10000UL
+#وصف_ڪريو PLIC_CLAIM_وٿي               0x10010UL
 
 /* The priority value for each int src can be found at addresses 4 bytes apart
    starting from base address + priority offset */
 
-#define PLIC_PRIORITY_SHIFT_PER_INT  2
+#وصف_ڪريو PLIC_ترجيح_سرڪايو_في_INT  2
 
 /* 7 priority levels are supported.
    PLIC_PRIORITY_1 means 'no interrupt */
 
-#define PLIC_PRIORITY_1 0X00
-#define PLIC_PRIORITY_2 0X01
-#define PLIC_PRIORITY_3 0X02
-#define PLIC_PRIORITY_4 0X04
-#define PLIC_PRIORITY_5 0X08
-#define PLIC_PRIORITY_6 0X10
-#define PLIC_PRIORITY_7 0X20
+#وصف_ڪريو PLIC_ترجيح_1 0X00
+#وصف_ڪريو PLIC_ترجيح_2 0X01
+#وصف_ڪريو PLIC_ترجيح_3 0X02
+#وصف_ڪريو PLIC_ترجيح_4 0X04
+#وصف_ڪريو PLIC_ترجيح_5 0X08
+#وصف_ڪريو PLIC_ترجيح_6 0X10
+#وصف_ڪريو PLIC_ترجيح_7 0X20
 
-#define PLIC_PENDING_SHIFT_PER_SOURCE   0
+#وصف_ڪريو PLIC_PENDING_سرڪايو_في_ذريعو   0
 
 /* Enumerators */
 
-typedef enum
+تعريفنوع تعداد
 {
 	INACTIVE = 0,
-	ACTIVE   = 1,
+	سرگرم   = 1,
 	SERVICED = 2,
 	MASKED
-}interrupt_status_e;
+}مداخلت_حالت_e;
 
 /* Structures and Unions */
 
-typedef struct
+تعريفنوع بنية
 {
 	uint32_t id; /*id of the interrupt target source*/
-	uint32_t priority; /*priority assigned to it*/
-	interrupt_status_e state; /*state of the interrupt*/
-	uint32_t count; /*number of times this interrupt occured*/
-} interrupt_data_t;
+	uint32_t ترجيح; /*priority assigned to it*/
+	مداخلت_حالت_e state; /*state of the interrupt*/
+	uint32_t ڳڻپ; /*number of times this interrupt occured*/
+} مداخلت_معلومات_t;
 
 /* Platform Level Interrupt Controller (PLIC) table
    Each entry in the table corresponds to an interrupt service routine */
 
-typedef void (*plic_fptr_t) (uint32_t);
-extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+تعريفنوع فراغ (*plic_fptr_t) (uint32_t);
+خارجي plic_fptr_t isr_جدول[PLIC_MAX_مداخلت_SRC];
 
 /* Function prototypes */
 
-void interrupt_complete(uint32_t interrupt_id);
-uint32_t interrupt_claim_request(void);
-void isr_default(uint32_t interrupt_id);
-void interrupt_enable(uint32_t interrupt_id);
-void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
-void configure_interrupt_pin(uint32_t pin);
-void plic_init(void);
-void configure_interrupt(uint32_t int_id);
+فراغ مداخلت_complete(uint32_t مداخلت_id);
+uint32_t مداخلت_claim_request(فراغ);
+فراغ isr_default(uint32_t مداخلت_id);
+فراغ مداخلت_enable(uint32_t مداخلت_id);
+فراغ mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+فراغ مداخلت_disable(uint32_t مداخلت_id);
+فراغ سيٽ_مداخلت_حد(uint32_t ترجيح_قدر);
+فراغ سيٽ_مداخلت_ترجيح(uint32_t ترجيح_قدر, uint32_t int_id);
+فراغ configure_مداخلت_pin(uint32_t pin);
+فراغ plic_init(فراغ);
+فراغ configure_مداخلت(uint32_t int_id);
 
-#endif
+#جيڪڏهن_پورو

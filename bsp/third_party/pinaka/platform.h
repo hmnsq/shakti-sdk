@@ -34,133 +34,133 @@ platform.h - header file for pinaka E class SoC on artix7_35t
 ********************************/
    
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#جيڪڏهن_وصف_نه_ٿيل PLATFORM_H
+#وصف_ڪريو PLATFORM_H
 
 /*
  *@brief RISCV - E CLASS SOC Memory mapping
  */
 
 /*! Core Local Interruptor CLINT */
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   16
+#وصف_ڪريو CLINT_بنياد 0x020000000
+#وصف_ڪريو MTIME      0x0200BFF8
+#وصف_ڪريو MTIMECMP   0x02004000
+#وصف_ڪريو CLINT_ورهائيندڙ   16
 
-#define CLOCK_FREQUENCY 50000000
+#وصف_ڪريو CLOCK_FREQUENCY 50000000
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000010
+#وصف_ڪريو DBG_MEM_شروعات 0x00000010
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 128kB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
+#وصف_ڪريو TCM_MEM_شروعات 0x80000000 /*! DDR3 Memory Start address */
 
 /*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
+#وصف_ڪريو TCM_MEM_سائيز 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#وصف_ڪريو ڍير_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#وصف_ڪريو ڍير_PERCENTAGE_2 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#وصف_ڪريو PWM_بنياد_پتو 0x00030000 /*PWM Base address*/
+#وصف_ڪريو PWM_MODULE_وٿي 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Serial Peripheral Interface Offsets */
-#define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
-#define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
+#وصف_ڪريو SPI0_شروعات 0x00020000 /* Serial Peripheral Interface 0 */
+#وصف_ڪريو SPI1_شروعات 0x00020100 /* Serial Peripheral Interface 1 */
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART_OFFSET 0x100
-#define MAX_UART_COUNT 3
+#وصف_ڪريو UART0_شروعات 0x00011300 /*! UART 0 */
+#وصف_ڪريو UART_وٿي 0x100
+#وصف_ڪريو MAX_UART_ڳڻپ 3
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x00040000 /*! I2C Start Address */
-#define I2C_OFFSET 0x1400
-#define MAX_I2C_COUNT 2
+#وصف_ڪريو I2_C0_بنياد 0x00040000 /*! I2C Start Address */
+#وصف_ڪريو I2_C_وٿي 0x1400
+#وصف_ڪريو MAX_I2_C_ڳڻپ 2
 
 /*! Xilinx Analog to Digital converter */
-#define XADC_BASE_ADDRESS 0x00041000
+#وصف_ڪريو XADC_بنياد_پتو 0x00041000
 
 /*! pinmux*/
-#define PINMUX_START 0x41500 
-#define PINMUX_CONFIGURE_REG 0x41510
+#وصف_ڪريو PINMUX_شروعات 0x41500 
+#وصف_ڪريو PINMUX_CONFIGURE_REG 0x41510
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1	/* PWM 0   */
-#define PLIC_INTERRUPT_2   2	/* PWM 1   */
-#define PLIC_INTERRUPT_3   3	/* PWM 2   */
-#define PLIC_INTERRUPT_4   4	/* PWM 3   */
-#define PLIC_INTERRUPT_5   5	/* PWM 4   */
-#define PLIC_INTERRUPT_6   6	/* PWM 5   */
-#define PLIC_INTERRUPT_7   7	/* GPIO 0  */
-#define PLIC_INTERRUPT_8   8	/* GPIO 1  */
-#define PLIC_INTERRUPT_9   9	/* GPIO 2  */
-#define PLIC_INTERRUPT_10  10	/* GPIO 3  */
-#define PLIC_INTERRUPT_11  11	/* GPIO 4  */
-#define PLIC_INTERRUPT_12  12	/* GPIO 5  */
-#define PLIC_INTERRUPT_13  13	/* GPIO 6  */
-#define PLIC_INTERRUPT_14  14	/* GPIO 7  */
-#define PLIC_INTERRUPT_15  15	/* GPIO 8  */
-#define PLIC_INTERRUPT_16  16	/* GPIO 9  */
-#define PLIC_INTERRUPT_17  17	/* GPIO 10 */
-#define PLIC_INTERRUPT_18  18	/* GPIO 11 */
-#define PLIC_INTERRUPT_19  19	/* GPIO 12 */
-#define PLIC_INTERRUPT_20  20	/* GPIO 13 */
-#define PLIC_INTERRUPT_21  21	/* GPIO 14 */
-#define PLIC_INTERRUPT_22  22	/* GPIO 15 */
-#define PLIC_INTERRUPT_23  23	/* I2C 0   */
-#define PLIC_INTERRUPT_24  24	/* I2C 1   */
-#define PLIC_INTERRUPT_25  25 	/* uart 0  */
-#define PLIC_INTERRUPT_26  26 	/* uart 1  */
-#define PLIC_INTERRUPT_27  27 	/* uart 2  */
-#define PLIC_MAX_INTERRUPT_SRC 28
+#وصف_ڪريو PLIC_بنياد_پتو 0x0C000000 /*! PLIC Interface Start */
+#وصف_ڪريو PLIC_مداخلت_1   1	/* PWM 0   */
+#وصف_ڪريو PLIC_مداخلت_2   2	/* PWM 1   */
+#وصف_ڪريو PLIC_مداخلت_3   3	/* PWM 2   */
+#وصف_ڪريو PLIC_مداخلت_4   4	/* PWM 3   */
+#وصف_ڪريو PLIC_مداخلت_5   5	/* PWM 4   */
+#وصف_ڪريو PLIC_مداخلت_6   6	/* PWM 5   */
+#وصف_ڪريو PLIC_مداخلت_7   7	/* GPIO 0  */
+#وصف_ڪريو PLIC_مداخلت_8   8	/* GPIO 1  */
+#وصف_ڪريو PLIC_مداخلت_9   9	/* GPIO 2  */
+#وصف_ڪريو PLIC_مداخلت_10  10	/* GPIO 3  */
+#وصف_ڪريو PLIC_مداخلت_11  11	/* GPIO 4  */
+#وصف_ڪريو PLIC_مداخلت_12  12	/* GPIO 5  */
+#وصف_ڪريو PLIC_مداخلت_13  13	/* GPIO 6  */
+#وصف_ڪريو PLIC_مداخلت_14  14	/* GPIO 7  */
+#وصف_ڪريو PLIC_مداخلت_15  15	/* GPIO 8  */
+#وصف_ڪريو PLIC_مداخلت_16  16	/* GPIO 9  */
+#وصف_ڪريو PLIC_مداخلت_17  17	/* GPIO 10 */
+#وصف_ڪريو PLIC_مداخلت_18  18	/* GPIO 11 */
+#وصف_ڪريو PLIC_مداخلت_19  19	/* GPIO 12 */
+#وصف_ڪريو PLIC_مداخلت_20  20	/* GPIO 13 */
+#وصف_ڪريو PLIC_مداخلت_21  21	/* GPIO 14 */
+#وصف_ڪريو PLIC_مداخلت_22  22	/* GPIO 15 */
+#وصف_ڪريو PLIC_مداخلت_23  23	/* I2C 0   */
+#وصف_ڪريو PLIC_مداخلت_24  24	/* I2C 1   */
+#وصف_ڪريو PLIC_مداخلت_25  25 	/* uart 0  */
+#وصف_ڪريو PLIC_مداخلت_26  26 	/* uart 1  */
+#وصف_ڪريو PLIC_مداخلت_27  27 	/* uart 2  */
+#وصف_ڪريو PLIC_MAX_مداخلت_SRC 28
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x00040100 //GPIO Start Address */
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
-#define PLIC_GPIO_OFFSET 6
+#وصف_ڪريو GPIO_شروعات 0x00040100 //GPIO Start Address */
+#وصف_ڪريو GPIO_وٿي 0x08 /*!Generic offset used to access GPIO registers*/
+#وصف_ڪريو PLIC_GPIO_وٿي 6
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
-#define GPIO16 (1 << 16)
-#define GPIO17 (1 << 17)
-#define GPIO18 (1 << 18)
-#define GPIO19 (1 << 19)
-#define GPIO20 (1 << 20)
-#define GPIO21 (1 << 21)
-#define GPIO22 (1 << 22)
-#define GPIO23 (1 << 23)
-#define GPIO24 (1 << 24)
-#define GPIO25 (1 << 25)
-#define GPIO26 (1 << 26)
-#define GPIO27 (1 << 27)
-#define GPIO28 (1 << 28)
-#define GPIO29 (1 << 29)
-#define GPIO30 (1 << 30)
-#define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#وصف_ڪريو GPIO0  (1 <<  0)
+#وصف_ڪريو GPIO1  (1 <<  1)
+#وصف_ڪريو GPIO2  (1 <<  2)
+#وصف_ڪريو GPIO3  (1 <<  3)
+#وصف_ڪريو GPIO4  (1 <<  4)
+#وصف_ڪريو GPIO5  (1 <<  5)
+#وصف_ڪريو GPIO6  (1 <<  6)
+#وصف_ڪريو GPIO7  (1 <<  7)
+#وصف_ڪريو GPIO8  (1 <<  8)
+#وصف_ڪريو GPIO9  (1 <<  9)
+#وصف_ڪريو GPIO10 (1 << 10)
+#وصف_ڪريو GPIO11 (1 << 11)
+#وصف_ڪريو GPIO12 (1 << 12)
+#وصف_ڪريو GPIO13 (1 << 13)
+#وصف_ڪريو GPIO14 (1 << 14)
+#وصف_ڪريو GPIO15 (1 << 15)
+#وصف_ڪريو GPIO16 (1 << 16)
+#وصف_ڪريو GPIO17 (1 << 17)
+#وصف_ڪريو GPIO18 (1 << 18)
+#وصف_ڪريو GPIO19 (1 << 19)
+#وصف_ڪريو GPIO20 (1 << 20)
+#وصف_ڪريو GPIO21 (1 << 21)
+#وصف_ڪريو GPIO22 (1 << 22)
+#وصف_ڪريو GPIO23 (1 << 23)
+#وصف_ڪريو GPIO24 (1 << 24)
+#وصف_ڪريو GPIO25 (1 << 25)
+#وصف_ڪريو GPIO26 (1 << 26)
+#وصف_ڪريو GPIO27 (1 << 27)
+#وصف_ڪريو GPIO28 (1 << 28)
+#وصف_ڪريو GPIO29 (1 << 29)
+#وصف_ڪريو GPIO30 (1 << 30)
+#وصف_ڪريو GPIO31 (1 << 31)
+#وصف_ڪريو GPIO_ڳڻپ  0x20
 
-#endif
+#جيڪڏهن_پورو

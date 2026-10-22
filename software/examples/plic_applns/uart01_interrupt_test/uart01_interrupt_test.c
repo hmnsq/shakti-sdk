@@ -23,77 +23,77 @@
 
  ***************************************************************************/
 //#include "gpiov2.h"
-#include "pinmux.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "uart.h"
+#ضمن "pinmux.h"
+#ضمن "traps.h"
+#ضمن "platform.h"
+#ضمن "plic_driver.h"
+#ضمن "log.h"
+#ضمن "uart.h"
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+بنانشان صحيح uart0_prev_rcv_isr_ڳڻپ_flag = 0;
+بنانشان صحيح uart1_prev_rcv_isr_ڳڻپ_flag = 0;
+بنانشان صحيح uart2_prev_rcv_isr_ڳڻپ_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+بنانشان صحيح uart0_prev_tx_isr_ڳڻپ_flag = 0;
+بنانشان صحيح uart1_prev_tx_isr_ڳڻپ_flag = 0;
+بنانشان صحيح uart2_prev_tx_isr_ڳڻپ_flag = 0;
 
 
-void init_variables()
+فراغ init_variables()
 {
 	uart0_complete = 0;
 	uart1_complete = 0;
 	uart2_complete = 0;
-	uart0_tx_isr_count = 0;
-	uart0_rcv_isr_count = 0;
-	uart1_tx_isr_count = 0;
-	uart1_rcv_isr_count = 0;
-	uart2_tx_isr_count = 0;
-	uart2_rcv_isr_count = 0;
-	memset(u0_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	memset(u2_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	uart0_prev_rcv_isr_count_flag = 0;
-	uart1_prev_rcv_isr_count_flag = 0;
-	uart2_prev_rcv_isr_count_flag = 0;
+	uart0_tx_isr_ڳڻپ = 0;
+	uart0_rcv_isr_ڳڻپ = 0;
+	uart1_tx_isr_ڳڻپ = 0;
+	uart1_rcv_isr_ڳڻپ = 0;
+	uart2_tx_isr_ڳڻپ = 0;
+	uart2_rcv_isr_ڳڻپ = 0;
+	memset(u0_rcv_char,'\0', UARTX_بفر_سائيز);
+	memset(u1_rcv_char,'\0', UARTX_بفر_سائيز);
+	memset(u2_rcv_char,'\0', UARTX_بفر_سائيز);
+	uart0_prev_rcv_isr_ڳڻپ_flag = 0;
+	uart1_prev_rcv_isr_ڳڻپ_flag = 0;
+	uart2_prev_rcv_isr_ڳڻپ_flag = 0;
 
-	uart0_prev_tx_isr_count_flag = 0;
-	uart1_prev_tx_isr_count_flag = 0;
-	uart2_prev_tx_isr_count_flag = 0;
+	uart0_prev_tx_isr_ڳڻپ_flag = 0;
+	uart1_prev_tx_isr_ڳڻپ_flag = 0;
+	uart2_prev_tx_isr_ڳڻپ_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+خارجي متطاير بنانشان صحيح* pinmux_config_reg;
 
 
 
-int main(void){
+صحيح مکيه(فراغ){
 
 
-	register uint32_t retval;
-	int i;
+	سجل uint32_t retval;
+	صحيح i;
 	init_variables();
 
-	printf("\n---------------Uart 1 Interrupt Test---------------\n");
+	لکو("\n---------------Uart 1 Interrupt Test---------------\n");
 
 	*(pinmux_config_reg) = 0x55;
-	set_baud_rate(uart_instance[0], 19200);
-	set_baud_rate(uart_instance[1], 19200);
+	سيٽ_baud_شرح(uart_instance[0], 19200);
+	سيٽ_baud_شرح(uart_instance[1], 19200);
 	plic_init();
 
-	configure_interrupt(PLIC_INTERRUPT_26);
-	isr_table[PLIC_INTERRUPT_26] = uart1_isr;
+	configure_مداخلت(PLIC_مداخلت_26);
+	isr_جدول[PLIC_مداخلت_26] = uart1_isr;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm متطاير("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm متطاير("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm متطاير(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -101,8 +101,8 @@ int main(void){
 		     (retval)
 		    );
 
-	printf("\n retval = %x", retval);
-	asm volatile(
+	لکو("\n retval = %x", retval);
+	asm متطاير(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -110,56 +110,56 @@ int main(void){
 		     (retval)
 		    );
 
-	printf("\t retval = %x", retval);
+	لکو("\t retval = %x", retval);
 
-	asm volatile(
+	asm متطاير(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
 		     "=r"
 		     (retval)
 		    );
-	printf("\t retval = %x", retval);
+	لکو("\t retval = %x", retval);
 
 
-	uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
-	uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+	uart1_prev_tx_isr_ڳڻپ_flag = uart1_tx_isr_ڳڻپ;
+	uart1_prev_rcv_isr_ڳڻپ_flag = uart1_rcv_isr_ڳڻپ;
 
 
-	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_EMPTY | ENABLE_RX_FULL);
-	printf("\n Before Tx: Status Register= %x \n", uart_instance[1]->status);
+	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_خالي_جايون | ENABLE_RX_ڀريل);
+	لکو("\n Before Tx: Status Register= %x \n", uart_instance[1]->حالت_2);
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	طالما(1)
 	{
-#if 0
-		if(i % 2)
+#إذا 0
+		إذا(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		وإلا
 			write_uart_string(uart_instance[1], "tEsT");
-#endif
+#جيڪڏهن_پورو
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		إذا(uart1_prev_tx_isr_ڳڻپ_flag != uart1_tx_isr_ڳڻپ)
 		{
-			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
+			uart1_prev_tx_isr_ڳڻپ_flag = uart1_tx_isr_ڳڻپ;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		إذا(uart1_prev_rcv_isr_ڳڻپ_flag != uart1_rcv_isr_ڳڻپ)
 		{
-			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+			uart1_prev_rcv_isr_ڳڻپ_flag = uart1_rcv_isr_ڳڻپ;
 		}
-		if(i++ >= 10)
+		إذا(i++ >= 10)
 		{
-			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
+			u1_rcv_char[++uart1_rcv_isr_ڳڻپ] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
-			printf("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_count-1);
+			لکو("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_ڳڻپ-1);
 			i = 0;
-			uart1_rcv_isr_count = 0;
-			memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
+			uart1_rcv_isr_ڳڻپ = 0;
+			memset(u1_rcv_char,'\0', UARTX_بفر_سائيز);
 			//break;
 		}
 	};
 
 
-	return 0;
+	أرجع 0;
 }

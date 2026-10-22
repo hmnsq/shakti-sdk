@@ -32,28 +32,28 @@
            bytewise. We transfer all those to our laptop, where this code is run.
 **/
 
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
-#include <stdlib.h>
-#include <string.h>
+#ضمن <stdio.h>
+#ضمن <string.h>
+#ضمن <assert.h>
+#ضمن <stdlib.h>
+#ضمن <string.h>
 // Linux headers
-#include <fcntl.h> // Contains file controls like O_RDWR
-#include <errno.h> // Error integer and strerror() function
-#include <termios.h> // Contains POSIX terminal control definitions
-#include <unistd.h> // write(), read(), close()
+#ضمن <fcntl.h> // Contains file controls like O_RDWR
+#ضمن <errno.h> // Error integer and strerror() function
+#ضمن <termios.h> // Contains POSIX terminal control definitions
+#ضمن <unistd.h> // write(), read(), close()
 
-int main(int argc,char *argv[]) {
+صحيح مکيه(صحيح argc,حرف *argv[]) {
   // Open the serial port. Change device path as needed (currently set to an standard FTDI USB-UART cable type device)
-    int serial_port1 = open(argv[1], O_RDWR);
-    printf("%s\n",argv[1]);
+    صحيح serial_port1 = open(argv[1], O_RDWR);
+    لکو("%s\n",argv[1]);
     // Create new termios struc, we call it 'tty1' for convention
-    struct termios tty1;
+    بنية termios tty1;
 
     // Read in existing settings, and handle any error
-    if(tcgetattr(serial_port1, &tty1) != 0) {
-        printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
-        return 1;
+    إذا(tcgetattr(serial_port1, &tty1) != 0) {
+        لکو("Error %i from tcgetattr: %s\n", errno, strerror(errno));
+        أرجع 1;
     }
     tty1.c_cflag &= ~PARENB; // Clear parity bit, disabling parity (most common)
     tty1.c_cflag &= ~CSTOPB; // Clear stop field, only one stop bit used in communication (most common)
@@ -81,76 +81,76 @@ int main(int argc,char *argv[]) {
     // Set in/out baud rate to be 19200
     cfsetispeed(&tty1, B115200);
     cfsetospeed(&tty1, B115200);
-    printf("\n Baud rate is set to 115200");
+    لکو("\n Baud rate is set to 115200");
 
   // Save tty1 settings, also checking for error
-    if (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
-        printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
-        return 1;
+    إذا (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
+        لکو("Error %i from tcsetattr: %s\n", errno, strerror(errno));
+        أرجع 1;
     }
-    else
-        printf("\n  BaudRate = 115200 \n  StopBits = 1 \n  Parity   = none\n");
+    وإلا
+        لکو("\n  BaudRate = 115200 \n  StopBits = 1 \n  Parity   = none\n");
 
   // Allocate memory for read buffer, set size according to your needs
-    int loop=0;
-    while(1){
+    صحيح loop=0;
+    طالما(1){
       loop++;
-      unsigned char read_buf [7];
-      memset(&read_buf, '\0', sizeof(read_buf));
-      start:
+      بنانشان حرف read_buf [7];
+      memset(&read_buf, '\0', حجم(read_buf));
+      شروعات:
       // From Shakti we expect 6 bytes : 0xAA 0xA 0x5 a b c where a b c represent size of image
 
-      while(read_buf[0]!=(unsigned char)0xAA){
-          read(serial_port1, &read_buf[0], sizeof(read_buf[0]));
+      طالما(read_buf[0]!=(بنانشان حرف)0xAA){
+          اقرأ(serial_port1, &read_buf[0], حجم(read_buf[0]));
       }
-      read(serial_port1, &read_buf[1], sizeof(read_buf[0]));
-      if(read_buf[1]!=(unsigned char)0xA){
-        goto start;
+      اقرأ(serial_port1, &read_buf[1], حجم(read_buf[0]));
+      إذا(read_buf[1]!=(بنانشان حرف)0xA){
+        اذهب شروعات;
       }
-      read(serial_port1, &read_buf[2], sizeof(read_buf[0]));
-      if(read_buf[2]!=(unsigned char)0x5){
-        goto start;
+      اقرأ(serial_port1, &read_buf[2], حجم(read_buf[0]));
+      إذا(read_buf[2]!=(بنانشان حرف)0x5){
+        اذهب شروعات;
       }
-      read(serial_port1, &read_buf[3], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[4], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[5], sizeof(read_buf[0]));
-      unsigned long size = 0;
-      size = (unsigned long)read_buf[3] + (((unsigned long)read_buf[4])<<8) + (((unsigned long)read_buf[5])<<16) ;
-      printf("Size : %ld\n",size);
-      char* temp = (char*) malloc(size*sizeof(char));
-      if(temp==NULL) {
-        printf("Malloc failed\n");
-        exit(1);
+      اقرأ(serial_port1, &read_buf[3], حجم(read_buf[0]));
+      اقرأ(serial_port1, &read_buf[4], حجم(read_buf[0]));
+      اقرأ(serial_port1, &read_buf[5], حجم(read_buf[0]));
+      بنانشان ڊگهو سائيز = 0;
+      سائيز = (بنانشان ڊگهو)read_buf[3] + (((بنانشان ڊگهو)read_buf[4])<<8) + (((بنانشان ڊگهو)read_buf[5])<<16) ;
+      لکو("Size : %ld\n",سائيز);
+      حرف* عارضي = (حرف*) يادگيري_ڏيو(سائيز*حجم(حرف));
+      إذا(عارضي==عدم) {
+        لکو("Malloc failed\n");
+        ٻاهر_نڪرو(1);
       }
-      char write_buff;
+      حرف write_buff;
       write_buff='K';
       //Send a conformation 'K'
       tcflush(serial_port1,TCIOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
-      for(long i=0;i<size;i++){
-          read(serial_port1, (temp + i) , sizeof(read_buf[0]));
+      اكتب(serial_port1,&write_buff,حجم(write_buff));
+      لكل(ڊگهو i=0;i<سائيز;i++){
+          اقرأ(serial_port1, (عارضي + i) , حجم(read_buf[0]));
       }
       tcflush(serial_port1,TCIOFLUSH);
       FILE *f1;
-      char str[]="Images/image";
-      char inte[20];
+      حرف str[]="Images/image";
+      حرف inte[20];
       sprintf(inte, "%d", loop);
       strcat(str,inte);
       strcat(str,".jpeg");
       f1=fopen(str,"w");
-      for(long i=0;i<size;i++)
+      لكل(ڊگهو i=0;i<سائيز;i++)
       {
-        fputc(*(temp+i),f1);
+        fputc(*(عارضي+i),f1);
       }
-      free(temp);
+      حرر(عارضي);
       fclose(f1);
       write_buff='O';
       //Send a conformation 'O'
       tcflush(serial_port1,TCOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
+      اكتب(serial_port1,&write_buff,حجم(write_buff));
       tcflush(serial_port1,TCIOFLUSH);
-      printf("Image %d done",loop);
+      لکو("Image %d done",loop);
     }
     close(serial_port1);
-    return 0; // success
+    أرجع 0; // success
 }

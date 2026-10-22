@@ -27,36 +27,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail It helps to find the temperature and pressure of a surroundings.
 */
 
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ضمن <stdint.h>//Includes the definitions of standard input/output functions//
+#ضمن "i2c.h"
+#ضمن "log.h"
+#ضمن "uart.h"
 
-#define I2C i2c_instance[1]
+#وصف_ڪريو I2C i2c_instance[1]
 
-#define BMP280_SLAVE_ADDRESS 0xEC	//Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define BMP280_CTRL_MEANS 0xF4
-#define BMP280_NORMAL_MODE 0x26
-#define BMP280_STATUS_REGISTER 0xF3
-#define BMP280_CONFIG_REGISTER 0xF5
-#define BMP280_RESET_REGISTER 0xE0
+#وصف_ڪريو BMP280_SLAVE_پتو 0xEC	//Defines the Starting address of slave//
+#وصف_ڪريو DELAY_قدر 900
+#وصف_ڪريو PRESCALER_ڳڻپ 0x1F
+#وصف_ڪريو SCLK_ڳڻپ 0x91
+#وصف_ڪريو BMP280_CTRL_MEANS 0xF4
+#وصف_ڪريو BMP280_عام_گهڻائي 0x26
+#وصف_ڪريو BMP280_حالت_رجسٽر 0xF3
+#وصف_ڪريو BMP280_CONFIG_رجسٽر 0xF5
+#وصف_ڪريو BMP280_RESET_رجسٽر 0xE0
 
-#define BMP280_REG_DIG_T1 0x88
-#define BMP280_REG_DIG_T2 0x8A
-#define BMP280_REG_DIG_T3 0x8C
+#وصف_ڪريو BMP280_REG_DIG_T1 0x88
+#وصف_ڪريو BMP280_REG_DIG_T2 0x8A
+#وصف_ڪريو BMP280_REG_DIG_T3 0x8C
 
-#define BMP280_REG_DIG_P1 0x8E
-#define BMP280_REG_DIG_P2 0x90
-#define BMP280_REG_DIG_P3 0x92
-#define BMP280_REG_DIG_P4 0x94
-#define BMP280_REG_DIG_P5 0x96
-#define BMP280_REG_DIG_P6 0x98
-#define BMP280_REG_DIG_P7 0x9A
-#define BMP280_REG_DIG_P8 0x9C
-#define BMP280_REG_DIG_P9 0x9E
+#وصف_ڪريو BMP280_REG_DIG_P1 0x8E
+#وصف_ڪريو BMP280_REG_DIG_P2 0x90
+#وصف_ڪريو BMP280_REG_DIG_P3 0x92
+#وصف_ڪريو BMP280_REG_DIG_P4 0x94
+#وصف_ڪريو BMP280_REG_DIG_P5 0x96
+#وصف_ڪريو BMP280_REG_DIG_P6 0x98
+#وصف_ڪريو BMP280_REG_DIG_P7 0x9A
+#وصف_ڪريو BMP280_REG_DIG_P8 0x9C
+#وصف_ڪريو BMP280_REG_DIG_P9 0x9E
 
 uint16_t bmp280_calib_dig_T1;
 int16_t  bmp280_calib_dig_T2;
@@ -82,33 +82,33 @@ int16_t  bmp280_calib_dig_P9;
  * @param unsigned long delay  Used delay for I2C functionality.
  * @return It returns the value to the main.
  */
-int read_bmp280_register(i2c_struct *i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
+صحيح read_bmp280_رجسٽر(i2c_struct *i2c_instance, بنانشان صحيح reg_وٿي, بنانشان صحيح *read_عارضي, بنانشان ڊگهو delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	بنانشان حرف read_buf[4] = {'\0'};
+	صحيح i = 0, j = 0,  k = 0, حالت_2=0;
+	بنانشان حرف عارضي = 0;
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_WRITE, 800);
 
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset , delay);
+	i2c_write_معلومات(i2c_instance, reg_وٿي , delay);
 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_READ, 800);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_معلومات(i2c_instance, &عارضي, delay);
 	i2c_instance->control = I2C_NACK;
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	i2c_read_data(i2c_instance, &read_buf[0], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[0], delay);
 
 	i2c_instance->control = I2C_STOP;
-	*readTemp = read_buf[0] ;
-	return 0;
+	*read_عارضي = read_buf[0] ;
+	أرجع 0;
 }
 
 /** @fn int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned long *pressure, unsigned long *temperature, unsigned long delay) 
@@ -121,38 +121,38 @@ int read_bmp280_register(i2c_struct *i2c_instance, unsigned int reg_offset, unsi
  * @param unsigned long *temperature  Reading the temperature value.
  * @param unsigned long delay  Used delay for I2C functionality.
  */
-int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned long *pressure, unsigned long *temperature, unsigned long delay)
+صحيح read_bmp280_قدرون(i2c_struct * i2c_instance, بنانشان صحيح reg_وٿي, بنانشان ڊگهو *pressure, بنانشان ڊگهو *temperature, بنانشان ڊگهو delay)
 {
-	unsigned char read_buf[6] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	int32_t adc_P, adc_T, var1, var2, var3, var4, t_fine, temp;
+	بنانشان حرف read_buf[6] = {'\0'};
+	صحيح i = 0, j = 0,  k = 0, حالت_2=0;
+	int32_t adc_P, adc_T, var1, var2, var3, var4, t_fine, عارضي;
 	int32_t p;
 
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_WRITE, 800);
 
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset , delay);
+	i2c_write_معلومات(i2c_instance, reg_وٿي , delay);
 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_READ, 800);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_معلومات(i2c_instance, &عارضي, delay);
 
 //Read Pressure
-	i2c_read_data(i2c_instance, &read_buf[0], delay);
-	i2c_read_data(i2c_instance, &read_buf[1], delay);
-	i2c_read_data(i2c_instance, &read_buf[2], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[0], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[1], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[2], delay);
 	
 //Read Temperature	
-	i2c_read_data(i2c_instance, &read_buf[3], delay);
-	i2c_read_data(i2c_instance, &read_buf[4], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[3], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[4], delay);
 	i2c_instance->control = I2C_NACK;
-	i2c_read_data(i2c_instance, &read_buf[5], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[5], delay);
 	
 	i2c_instance->control = I2C_STOP;
 	adc_P = ((read_buf[0] << 12) | (read_buf[1] << 4) | (read_buf[2] >> 4));
@@ -162,9 +162,9 @@ int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 	var1 = ((((adc_T / 8) - ((int32_t)bmp280_calib_dig_T1 * 2))) * ((int32_t)bmp280_calib_dig_T2)) / 2048;
   	var2 = (((((adc_T / 16) - ((int32_t)bmp280_calib_dig_T1)) * ((adc_T / 16) - ((int32_t)bmp280_calib_dig_T1))) / 4096) * ((int32_t)bmp280_calib_dig_T3)) / 16384;
   	t_fine = var1 + var2;
-	temp = (t_fine * 5 + 128) / 256;
-	*temperature = temp;
-	printf("\nTemperature Value:%u.%u °C", (temp/100),(temp%100));
+	عارضي = (t_fine * 5 + 128) / 256;
+	*temperature = عارضي;
+	لکو("\nTemperature Value:%u.%u °C", (عارضي/100),(عارضي%100));
 
 //Calculate Pressure
 	var1 = 0; var2 = 0;
@@ -175,15 +175,15 @@ int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 	var1 = ((((int32_t)bmp280_calib_dig_P3 * (((var1/4) * (var1/4)) / 8192 )) / 8) + ((((int32_t)bmp280_calib_dig_P2) * var1)/2)) / 262144;
 	var1 =((((32768 + var1)) * ((int32_t)bmp280_calib_dig_P1)) / 32768);
 
-	if (var1 == 0)
-		return 0; // avoid exception caused by division by zero
+	إذا (var1 == 0)
+		أرجع 0; // avoid exception caused by division by zero
 
 	p = (((uint32_t)(((int32_t)1048576) - adc_P) - (var2 / 4096))) * 3125;
 
-	if (p < 0x80000000)
+	إذا (p < 0x80000000)
 		p = (p * 2) / ((uint32_t)var1);
 
-	else
+	وإلا
 		p = (p / (uint32_t)var1) * 2;
 
 	var1 = (((int32_t)bmp280_calib_dig_P9) * ((int32_t)(((p/8) * (p/8)) / 8192))) / 4096;
@@ -191,8 +191,8 @@ int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 
 	p = (uint32_t)((int32_t)p + ((var1 + var2 + (int32_t)bmp280_calib_dig_P7) / 16));
 	*pressure = p;
-	printf("\nThe Pressure Value:%u.%u Kpa",(p/1000),(p%1000));
-		return 0;
+	لکو("\nThe Pressure Value:%u.%u Kpa",(p/1000),(p%1000));
+		أرجع 0;
 }
 
 /** @fn short read_bmp280_values16(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned long delay)
@@ -204,33 +204,33 @@ int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
  * @param unsigned long delay  Used delay for I2C functionality.
  * @return It returns 16bits value to the main.
  */
-short read_bmp280_values16(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned long delay)
+ننڍو read_bmp280_values16(i2c_struct * i2c_instance, بنانشان صحيح reg_وٿي, بنانشان ڊگهو delay)
 {
-	unsigned char read_buf[2] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	int8_t temp = 0;
+	بنانشان حرف read_buf[2] = {'\0'};
+	صحيح i = 0, j = 0,  k = 0, حالت_2=0;
+	int8_t عارضي = 0;
 
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_WRITE, 800);
 
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset , delay);
+	i2c_write_معلومات(i2c_instance, reg_وٿي , delay);
 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_READ, 800);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_معلومات(i2c_instance, &عارضي, delay);
 
-	i2c_read_data(i2c_instance, &read_buf[0], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[0], delay);
 	i2c_instance->control = I2C_NACK;
-	i2c_read_data(i2c_instance, &read_buf[1], delay);
+	i2c_read_معلومات(i2c_instance, &read_buf[1], delay);
 	i2c_instance->control = I2C_STOP;
 
-	return ( ( read_buf[1] << 8 ) | read_buf[0] );	
+	أرجع ( ( read_buf[1] << 8 ) | read_buf[0] );	
 }
 
 /** @fn int write_bmp280_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char write_value, unsigned long delay) 
@@ -243,17 +243,17 @@ short read_bmp280_values16(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param unsigned long delay  Used delay for I2C functionality.
  * @return Returns 0 to the main after stopping I2C.
  */
-int write_bmp280_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char write_value, unsigned long delay)
+صحيح write_bmp280_رجسٽر(i2c_struct * i2c_instance, بنانشان صحيح reg_وٿي, بنانشان حرف write_قدر, بنانشان ڊگهو delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset , delay);
-	i2c_write_data(i2c_instance, write_value , delay);
+	صحيح i = 0, j = 0, k = 0, حالت_2=0;
+	بنانشان صحيح عارضي = 0;
+	i2c_send_slave_پتو(i2c_instance, BMP280_SLAVE_پتو, I2C_WRITE, delay);
+	i2c_write_معلومات(i2c_instance, reg_وٿي , delay);
+	i2c_write_معلومات(i2c_instance, write_قدر , delay);
 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int main()
@@ -262,39 +262,39 @@ int write_bmp280_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @warning All the functions should call accordingly to get the perfect output.
  * @return It returns 0.
  */
-int main()
+صحيح مکيه()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
-	unsigned long pressure = 0, temperature = 0;
-	int len;
+	صحيح timeout;
+	بنانشان صحيح عارضي_Read_قدر = 0;
+	بنانشان ڊگهو delay = 1000;
+	بنانشان ڊگهو pressure = 0, temperature = 0;
+	صحيح len;
 	log_debug("\n\tI2C: BMP280 Temperature Sensor I2C read\n");
 	i2c_init();
 
 	//Initialises I2C Controller
-	if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+	إذا(config_i2c(I2C, PRESCALER_ڳڻپ,SCLK_ڳڻپ))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		أرجع -1;
 	}
-	else
+	وإلا
 		log_info("\tIntilization BMP280_STATUS_REGISTER Happened Fine\n");
 
-	write_bmp280_register(I2C, BMP280_CONFIG_REGISTER, 0xC0, delay);
-	write_bmp280_register(I2C, BMP280_CTRL_MEANS, 0x27, delay);
+	write_bmp280_رجسٽر(I2C, BMP280_CONFIG_رجسٽر, 0xC0, delay);
+	write_bmp280_رجسٽر(I2C, BMP280_CTRL_MEANS, 0x27, delay);
 
-	if(0 == read_bmp280_register(I2C, 0xD0, &tempReadValue, delay))
+	إذا(0 == read_bmp280_رجسٽر(I2C, 0xD0, &عارضي_Read_قدر, delay))
 	{
-		if (0x58 != tempReadValue)
+		إذا (0x58 != عارضي_Read_قدر)
 		{
-			printf("\n Device Not detected");
-			return -1;
+			لکو("\n Device Not detected");
+			أرجع -1;
 		}
 	}
 		
-	write_bmp280_register(I2C, BMP280_RESET_REGISTER, 0xB6, delay);
-	read_bmp280_register(I2C, BMP280_RESET_REGISTER, &tempReadValue, delay);
+	write_bmp280_رجسٽر(I2C, BMP280_RESET_رجسٽر, 0xB6, delay);
+	read_bmp280_رجسٽر(I2C, BMP280_RESET_رجسٽر, &عارضي_Read_قدر, delay);
 	
 	bmp280_calib_dig_T1 = read_bmp280_values16(I2C, BMP280_REG_DIG_T1, delay);
 	bmp280_calib_dig_T2 = read_bmp280_values16(I2C, BMP280_REG_DIG_T2, delay);
@@ -310,23 +310,23 @@ int main()
 	bmp280_calib_dig_P8 = read_bmp280_values16(I2C, BMP280_REG_DIG_P8, delay);
 	bmp280_calib_dig_P9 = read_bmp280_values16(I2C, BMP280_REG_DIG_P9, delay);
 
-while(1)
+طالما(1)
 	{
-		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay );     // Set it to NORMAL MODE
-		if(0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		write_bmp280_رجسٽر(I2C, BMP280_CTRL_MEANS, BMP280_عام_گهڻائي, delay );     // Set it to NORMAL MODE
+		إذا(0 == read_bmp280_رجسٽر(I2C, BMP280_حالت_رجسٽر, &عارضي_Read_قدر, delay))
 		{
-			if(!(tempReadValue & 0x9))
+			إذا(!(عارضي_Read_قدر & 0x9))
 			{
 			//Read pressure and temperature values.
-			read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
+			read_bmp280_قدرون(I2C, 0xF7, &pressure, &temperature, delay);
 			}
 		}
-			else
+			وإلا
 			{
 			//Display the error
 				log_error("\nTemperature read failed.");
 			}
 			delay_loop(2000, 2000);
 	}
-	return 0;
+	أرجع 0;
 }

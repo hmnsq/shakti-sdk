@@ -31,13 +31,13 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
-#include "poll_eg.h"
+#ضمن "gpio.h"
+#ضمن "uart.h"
+#ضمن "traps.h"
+#ضمن "platform.h"
+#ضمن "eth_driver.h"
+#ضمن "log.h"
+#ضمن "poll_eg.h"
 
 
 
@@ -46,13 +46,13 @@
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID			240
-#define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+#وصف_ڪريو EMAC_DEVICE_ID			240
+#وصف_ڪريو ETH_بنياد_REG 0x44000
+متطاير بنانشان صحيح* eth_بنياد_reg = ETH_بنياد_REG;
 /*
  * The Size of the Test Frame.
  */
-#define EMACLITE_TEST_FRAME_SIZE	1000
+#وصف_ڪريو EMACLITE_TEST_چوکٺو_سائيز	1000
 
 /**************************** Type Definitions *******************************/
 
@@ -60,13 +60,13 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-int EmacLitePolledExample(u16 DeviceId);
+صحيح EmacLitePolledExample(u16 DeviceId);
 
-static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize);
+ساكن صحيح Emac_Lite_Send_چوکٺو(XEmacLite *InstancePtr, u32 Payload_سائيز);
 
-static int EmacLiteRecvFrame(u32 PayloadSize);
+ساكن صحيح Emac_Lite_Recv_چوکٺو(u32 Payload_سائيز);
 
-extern u16 Xil_EndianSwap16(u16 Data);
+خارجي u16 Xil_EndianSwap16(u16 معلومات);
 
 /************************** Variable Definitions *****************************/
 
@@ -74,23 +74,23 @@ extern u16 Xil_EndianSwap16(u16 Data);
  * Set up valid local and remote MAC addresses. This loop back test uses the
  * LocalAddress both as a source and destination MAC address.
  */
-static u8 LocalAddress[XEL_MAC_ADDR_SIZE] =
+ساكن u8 Local_پتو[XEL_MAC_ADDR_سائيز] =
 {
 	0x00, 0x0A, 0x35, 0x01, 0x02, 0x03
 };
-static u8 RemoteAddress[XEL_MAC_ADDR_SIZE] =
+ساكن u8 Remote_پتو[XEL_MAC_ADDR_سائيز] =
 {
 	0x00, 0x10, 0xa4, 0xb6, 0xfd, 0x09
 };
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
+خارجي XEmacLite_Config XEmac_Lite_Config_جدول;
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+ساكن XEmacLite EmacLite;
 
 /****************************************************************************/
 /**
@@ -104,22 +104,22 @@ static XEmacLite EmacLite;
 * @note		None.
 *
 *****************************************************************************/
-int main()
+صحيح مکيه()
 {
-	int Status;
+	صحيح حالت;
 
 	/*
 	 * Run the EmacLite Polled example, specify the Device ID that is
 	 * generated in xparameters.h.
 	 */
-	Status = EmacLitePolledExample(EMAC_DEVICE_ID);
-	if (Status != SUCCESS) {
+	حالت = EmacLitePolledExample(EMAC_DEVICE_ID);
+	إذا (حالت != SUCCESS) {
 		log_debug("Emaclite polled Example Failed\r\n");
-		return FAILURE;
+		أرجع FAILURE;
 	}
 
 	log_debug("Successfully ran Emaclite polled Example\r\n");
-	return SUCCESS;
+	أرجع SUCCESS;
 }
 
 
@@ -142,61 +142,61 @@ int main()
 * @note		None.
 *
 ******************************************************************************/
-int EmacLitePolledExample(u16 DeviceId)
+صحيح EmacLitePolledExample(u16 DeviceId)
 {
-	int Status;
+	صحيح حالت;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
-	u32 PhyAddress = 0;
-	RecvFrameLength = 0;
+	u32 Phy_پتو = 0;
+	Recv_چوکٺو_ڊيگهائي = 0;
 	XEmacLite_Config *ConfigPtr;
 
-	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	ConfigPtr = &XEmac_Lite_Config_جدول;
+	إذا (ConfigPtr == عدم) {
+		أرجع -1;
 	}
-	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
+	ConfigPtr->بنياد_پتو = (UINTPTR *) 0X44000;
 	ConfigPtr->RxPingPong = XPAR_EMACLITE_0_RX_PING_PONG;
 	ConfigPtr->MdioInclude = XPAR_EMACLITE_0_INCLUDE_MDIO;
 	ConfigPtr->TxPingPong = XPAR_EMACLITE_0_TX_PING_PONG;
-	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->BaseAddress);
+	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->بنياد_پتو);
 	log_debug("\n ConfigPtr: DeviceId: %x", ConfigPtr->DeviceId);
 	log_debug("\n ConfigPtr: TxPingPong: %x", ConfigPtr->TxPingPong);
 	log_debug("\n ConfigPtr: RxPingPong: %x", ConfigPtr->RxPingPong);
 	log_debug("\n ConfigPtr: MdioInclude: %x", ConfigPtr->MdioInclude);
 	log_debug("\n ConfigPtr: Loopback: %x", ConfigPtr->Loopback);
-	Status = XEmacLite_CfgInitialize(EmacLiteInstPtr,
+	حالت = XEmacLite_CfgInitialize(EmacLiteInstPtr,
 					ConfigPtr,
-					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+					ConfigPtr->بنياد_پتو);
+	إذا (حالت != 0) {
+		أرجع -1;
 	}
 
 	/*
 	 * Set the MAC address.
 	 */
-	XEmacLite_SetMacAddress(EmacLiteInstPtr, LocalAddress);
+	XEmac_Lite_سيٽ_Mac_پتو(EmacLiteInstPtr, Local_پتو);
 
 	/*
 	 * Check if there is a TX buffer available, if there isn't it is an
 	 * error.
 	 */
-	if (XEmacLite_TxBufferAvailable(EmacLiteInstPtr) != TRUE) {
-		return FAILURE;
+	إذا (XEmac_Lite_Tx_بفر_موجود(EmacLiteInstPtr) != TRUE) {
+		أرجع FAILURE;
 	}
 
 	/*
 	 * If the MDIO is configured in the device.
 	 */
-	if (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+	إذا (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
 		/*
 		 * Detect the PHY device and enable the MAC Loop back
 		 * in the PHY.
 		 */
-		PhyAddress = EmacLitePhyDetect(EmacLiteInstPtr);
-		Status = EmacLiteEnablePhyLoopBack(EmacLiteInstPtr,
-							 PhyAddress);
-		if (Status != SUCCESS) {
-			return FAILURE;
+		Phy_پتو = EmacLitePhyDetect(EmacLiteInstPtr);
+		حالت = Emac_Lite_Enable_Phy_Loop_پٺ(EmacLiteInstPtr,
+							 Phy_پتو);
+		إذا (حالت != SUCCESS) {
+			أرجع FAILURE;
 		}
 	}
 
@@ -208,16 +208,16 @@ int EmacLitePolledExample(u16 DeviceId)
 	/*
 	 * Reset the receive frame length to zero.
 	 */
-	RecvFrameLength = 0;
-	Status = EmacLiteSendFrame(EmacLiteInstPtr, EMACLITE_TEST_FRAME_SIZE);
-	if (Status != SUCCESS) {
-		if (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+	Recv_چوکٺو_ڊيگهائي = 0;
+	حالت = Emac_Lite_Send_چوکٺو(EmacLiteInstPtr, EMACLITE_TEST_چوکٺو_سائيز);
+	إذا (حالت != SUCCESS) {
+		إذا (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
 			/*
 			 * Disable the MAC Loop back in the PHY.
 			 */
-			EmacLiteDisablePhyLoopBack(EmacLiteInstPtr,
-							 PhyAddress);
-			return FAILURE;
+			Emac_Lite_Disable_Phy_Loop_پٺ(EmacLiteInstPtr,
+							 Phy_پتو);
+			أرجع FAILURE;
 		}
 	}
 
@@ -225,38 +225,38 @@ int EmacLitePolledExample(u16 DeviceId)
 	 * If the MDIO is not configured in the core then return SUCCESS
 	 * as the frame has been transmitted.
 	 */
-	if (!XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
-		return SUCCESS;
+	إذا (!XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+		أرجع SUCCESS;
 	}
 
 
 	/*
 	 * Poll for receive packet.
 	 */
-	while ((volatile u32)RecvFrameLength == 0)  {
-		RecvFrameLength = XEmacLite_Recv(EmacLiteInstPtr,
-						(u8 *)RxFrame);
+	طالما ((متطاير u32)Recv_چوکٺو_ڊيگهائي == 0)  {
+		Recv_چوکٺو_ڊيگهائي = XEmacLite_Recv(EmacLiteInstPtr,
+						(u8 *)Rx_چوکٺو);
 	}
 
 	/*
 	 * Check the received frame.
 	 */
-	Status = EmacLiteRecvFrame(EMACLITE_TEST_FRAME_SIZE);
-	if ((Status != SUCCESS) && (Status != NO_DATA)) {
+	حالت = Emac_Lite_Recv_چوکٺو(EMACLITE_TEST_چوکٺو_سائيز);
+	إذا ((حالت != SUCCESS) && (حالت != NO_معلومات)) {
 		/*
 		 * Disable the MAC Loop back in the PHY.
 		 */
-		EmacLiteDisablePhyLoopBack(EmacLiteInstPtr, PhyAddress);
-		return FAILURE;
+		Emac_Lite_Disable_Phy_Loop_پٺ(EmacLiteInstPtr, Phy_پتو);
+		أرجع FAILURE;
 	}
 
 
 	/*
 	 * Disable the MAC Loop back in the PHY.
 	 */
-	EmacLiteDisablePhyLoopBack(EmacLiteInstPtr, PhyAddress);
+	Emac_Lite_Disable_Phy_Loop_پٺ(EmacLiteInstPtr, Phy_پتو);
 
-	return SUCCESS;
+	أرجع SUCCESS;
 }
 
 /******************************************************************************/
@@ -274,67 +274,67 @@ int EmacLitePolledExample(u16 DeviceId)
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
+ساكن صحيح Emac_Lite_Send_چوکٺو(XEmacLite *InstancePtr, u32 Payload_سائيز)
 {
-	u8 *FramePtr;
-	int Index;
-	FramePtr = (u8 *)TxFrame;
+	u8 *چوکٺو_Ptr;
+	صحيح اشاريو;
+	چوکٺو_Ptr = (u8 *)Tx_چوکٺو;
 
 	/*
 	 * Set up the destination address as the local address for
 	 * Phy Loopback.
 	 */
-	if (XEmacLite_IsMdioConfigured(InstancePtr)) {
+	إذا (XEmacLite_IsMdioConfigured(InstancePtr)) {
 
-		*FramePtr++ = LocalAddress[0];
-		*FramePtr++ = LocalAddress[1];
-		*FramePtr++ = LocalAddress[2];
-		*FramePtr++ = LocalAddress[3];
-		*FramePtr++ = LocalAddress[4];
-		*FramePtr++ = LocalAddress[5];
-	} else {
+		*چوکٺو_Ptr++ = Local_پتو[0];
+		*چوکٺو_Ptr++ = Local_پتو[1];
+		*چوکٺو_Ptr++ = Local_پتو[2];
+		*چوکٺو_Ptr++ = Local_پتو[3];
+		*چوکٺو_Ptr++ = Local_پتو[4];
+		*چوکٺو_Ptr++ = Local_پتو[5];
+	} وإلا {
 		/*
 		 * Fill in the valid Destination MAC address if
 		 * the Loopback is not enabled.
 		 */
-		*FramePtr++ = RemoteAddress[0];
-		*FramePtr++ = RemoteAddress[1];
-		*FramePtr++ = RemoteAddress[2];
-		*FramePtr++ = RemoteAddress[3];
-		*FramePtr++ = RemoteAddress[4];
-		*FramePtr++ = RemoteAddress[5];
+		*چوکٺو_Ptr++ = Remote_پتو[0];
+		*چوکٺو_Ptr++ = Remote_پتو[1];
+		*چوکٺو_Ptr++ = Remote_پتو[2];
+		*چوکٺو_Ptr++ = Remote_پتو[3];
+		*چوکٺو_Ptr++ = Remote_پتو[4];
+		*چوکٺو_Ptr++ = Remote_پتو[5];
 	}
 
 	/*
 	 * Fill in the source MAC address.
 	 */
-	*FramePtr++ = LocalAddress[0];
-	*FramePtr++ = LocalAddress[1];
-	*FramePtr++ = LocalAddress[2];
-	*FramePtr++ = LocalAddress[3];
-	*FramePtr++ = LocalAddress[4];
-	*FramePtr++ = LocalAddress[5];
+	*چوکٺو_Ptr++ = Local_پتو[0];
+	*چوکٺو_Ptr++ = Local_پتو[1];
+	*چوکٺو_Ptr++ = Local_پتو[2];
+	*چوکٺو_Ptr++ = Local_پتو[3];
+	*چوکٺو_Ptr++ = Local_پتو[4];
+	*چوکٺو_Ptr++ = Local_پتو[5];
 
 	/*
 	 * Set up the type/length field - be sure its in network order.
 	 */
-    *((u16 *)FramePtr) = Xil_EndianSwap16(PayloadSize);
-	FramePtr++;
-	FramePtr++;
+    *((u16 *)چوکٺو_Ptr) = Xil_EndianSwap16(Payload_سائيز);
+	چوکٺو_Ptr++;
+	چوکٺو_Ptr++;
 
 	/*
 	 * Now fill in the data field with known values so we can verify them
 	 * on receive.
 	 */
-	for (Index = 0; Index < PayloadSize; Index++) {
-		*FramePtr++ = (u8)Index;
+	لكل (اشاريو = 0; اشاريو < Payload_سائيز; اشاريو++) {
+		*چوکٺو_Ptr++ = (u8)اشاريو;
 	}
 
 	/*
 	 * Now send the frame.
 	 */
-	return XEmacLite_Send(InstancePtr, (u8 *)TxFrame,
-				PayloadSize + XEL_HEADER_SIZE);
+	أرجع XEmacLite_Send(InstancePtr, (u8 *)Tx_چوکٺو,
+				Payload_سائيز + XEL_سرو_سائيز);
 
 }
 
@@ -354,36 +354,36 @@ static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLiteRecvFrame(u32 PayloadSize)
+ساكن صحيح Emac_Lite_Recv_چوکٺو(u32 Payload_سائيز)
 {
-	u8 *FramePtr;
+	u8 *چوکٺو_Ptr;
 
 	/*
 	 * This assumes MAC does not strip padding or CRC.
 	 */
-	if (RecvFrameLength != 0) {
-		int Index;
+	إذا (Recv_چوکٺو_ڊيگهائي != 0) {
+		صحيح اشاريو;
 
 		/*
 		 * Verify length, which should be the payload size.
 		 */
-		if ((RecvFrameLength- (XEL_HEADER_SIZE + XEL_FCS_SIZE)) !=
-				PayloadSize) {
-			return XST_LOOPBACK_ERROR;
+		إذا ((Recv_چوکٺو_ڊيگهائي- (XEL_سرو_سائيز + XEL_FCS_سائيز)) !=
+				Payload_سائيز) {
+			أرجع XST_LOOPBACK_ERROR;
 		}
 
 		/*
 		 * Verify the contents of the Received Frame.
 		 */
-		FramePtr = (u8 *)RxFrame;
-		FramePtr += XEL_HEADER_SIZE;	/* Get past the header */
+		چوکٺو_Ptr = (u8 *)Rx_چوکٺو;
+		چوکٺو_Ptr += XEL_سرو_سائيز;	/* Get past the header */
 
-		for (Index = 0; Index < PayloadSize; Index++) {
-			if (*FramePtr++ != (u8)Index) {
-				return XST_LOOPBACK_ERROR;
+		لكل (اشاريو = 0; اشاريو < Payload_سائيز; اشاريو++) {
+			إذا (*چوکٺو_Ptr++ != (u8)اشاريو) {
+				أرجع XST_LOOPBACK_ERROR;
 			}
 		}
 	}
 
-	return SUCCESS;
+	أرجع SUCCESS;
 }

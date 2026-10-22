@@ -27,7 +27,7 @@
 @detail configures buttons to serve as Input 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ᨀᨘ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #include "platform.h"
 #include "gpio.h"

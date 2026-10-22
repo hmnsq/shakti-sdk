@@ -66,15 +66,15 @@ void main()
 *********************************************************************/
     write_word(GPIO_DIRECTION_CNTRL_REG, (0x00|MOTOR_ON));
     
-    while (1) {
+    ᨀᨛ (1) {
         readData = read_word(GPIO_DATA_REG);
         printf("\n Read Data:=%d", readData);
 	moistureDetetected = ((readData & 1 ) == 1) ? 1 : 0;
-        if (moistureDetetected == 0) {
+        ᨀᨘ (moistureDetetected == 0) {
             write_word(GPIO_DATA_REG, MOTOR_ON);
             printf("\nTurn on Motor");
         }
-        else {
+        ᨀᨘᨁ {
             write_word(GPIO_DATA_REG, MOTOR_OFF);
             printf("\nTurn off Motor");
         }

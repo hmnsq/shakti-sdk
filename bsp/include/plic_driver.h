@@ -62,7 +62,7 @@
 
 /* Enumerators */
 
-typedef enum
+typedef ga_nanaa
 {
 	INACTIVE = 0,
 	ACTIVE   = 1,
@@ -72,7 +72,7 @@ typedef enum
 
 /* Structures and Unions */
 
-typedef struct
+typedef sa_nracanaa
 {
 	uint32_t id; /*id of the interrupt target source*/
 	uint32_t priority; /*priority assigned to it*/

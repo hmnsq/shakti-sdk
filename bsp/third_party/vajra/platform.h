@@ -33,134 +33,134 @@ platform.h - header file for vajra C class SoC on artix7_100t
  pinmux
 ************************************/
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#నిర్వచితం_కాకపోతే PLATFORM_H
+#నిర్వచించు PLATFORM_H
 
 /*
  *@brief RISCV - C CLASS SOC Memory mapping
  */
 
 /*! Core Local Interruptor CLINT */
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   256
+#నిర్వచించు CLINT_పునాది 0x020000000
+#నిర్వచించు MTIME      0x0200BFF8
+#నిర్వచించు MTIMECMP   0x02004000
+#నిర్వచించు CLINT_భాజకం   256
 
-#define CLOCK_FREQUENCY 50000000
+#నిర్వచించు CLOCK_FREQUENCY 50000000
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000010
+#నిర్వచించు DBG_MEM_ప్రారంభం 0x00000010
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 256mB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
-#define TCM_MEM_SIZE 0x10000000 /*! DDR3 Memory Size */
+#నిర్వచించు TCM_MEM_ప్రారంభం 0x80000000 /*! DDR3 Memory Start address */
+#నిర్వచించు TCM_MEM_కొలత 0x10000000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#నిర్వచించు దొంతర_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#నిర్వచించు కుప్ప_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#నిర్వచించు PWM_పునాది_చిరునామా 0x00030000 /*PWM Base address*/
+#నిర్వచించు PWM_MODULE_స్థానభ్రంశం 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Serial Peripheral Interface Offsets */
-#define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
-#define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
+#నిర్వచించు SPI0_ప్రారంభం 0x00020000 /* Serial Peripheral Interface 0 */
+#నిర్వచించు SPI1_ప్రారంభం 0x00020100 /* Serial Peripheral Interface 1 */
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART_OFFSET 0x100
-#define MAX_UART_COUNT 3
+#నిర్వచించు UART0_ప్రారంభం 0x00011300 /*! UART 0 */
+#నిర్వచించు UART_స్థానభ్రంశం 0x100
+#నిర్వచించు MAX_UART_లెక్క 3
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x00040000 /*! I2C Start Address */
-#define I2C_OFFSET 0x1400
-#define MAX_I2C_COUNT 2
+#నిర్వచించు I2_C0_పునాది 0x00040000 /*! I2C Start Address */
+#నిర్వచించు I2_C_స్థానభ్రంశం 0x1400
+#నిర్వచించు MAX_I2_C_లెక్క 2
 
 /*! Xilinx Analog to Digital converter */
-#define XADC_BASE_ADDRESS 0x00041000
+#నిర్వచించు XADC_పునాది_చిరునామా 0x00041000
 
 /*!Ethernet */
-#define ETHERNET_BASE 0x00044000
+#నిర్వచించు ETHERNET_పునాది 0x00044000
 
 /*! pinmux*/
-#define PINMUX_START 0x41500 
-#define PINMUX_CONFIGURE_REG 0x41510
+#నిర్వచించు PINMUX_ప్రారంభం 0x41500 
+#నిర్వచించు PINMUX_CONFIGURE_REG 0x41510
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1	/* PWM 0   */
-#define PLIC_INTERRUPT_2   2	/* PWM 1   */
-#define PLIC_INTERRUPT_3   3	/* PWM 2   */
-#define PLIC_INTERRUPT_4   4	/* PWM 3   */
-#define PLIC_INTERRUPT_5   5	/* PWM 4   */
-#define PLIC_INTERRUPT_6   6	/* PWM 5   */
-#define PLIC_INTERRUPT_7   7	/* GPIO 0  */
-#define PLIC_INTERRUPT_8   8	/* GPIO 1  */
-#define PLIC_INTERRUPT_9   9	/* GPIO 2  */
-#define PLIC_INTERRUPT_10  10	/* GPIO 3  */
-#define PLIC_INTERRUPT_11  11	/* GPIO 4  */
-#define PLIC_INTERRUPT_12  12	/* GPIO 5  */
-#define PLIC_INTERRUPT_13  13	/* GPIO 6  */
-#define PLIC_INTERRUPT_14  14	/* GPIO 7  */
-#define PLIC_INTERRUPT_15  15	/* GPIO 8  */
-#define PLIC_INTERRUPT_16  16	/* GPIO 9  */
-#define PLIC_INTERRUPT_17  17	/* GPIO 10 */
-#define PLIC_INTERRUPT_18  18	/* GPIO 11 */
-#define PLIC_INTERRUPT_19  19	/* GPIO 12 */
-#define PLIC_INTERRUPT_20  20	/* GPIO 13 */
-#define PLIC_INTERRUPT_21  21	/* GPIO 14 */
-#define PLIC_INTERRUPT_22  22	/* GPIO 15 */
-#define PLIC_INTERRUPT_23  23	/* I2C 0   */
-#define PLIC_INTERRUPT_24  24	/* I2C 1   */
-#define PLIC_INTERRUPT_25  25 	/* uart 0  */
-#define PLIC_INTERRUPT_26  26 	/* uart 1  */
-#define PLIC_INTERRUPT_27  27 	/* uart 2  */
-#define PLIC_MAX_INTERRUPT_SRC 28
+#నిర్వచించు PLIC_పునాది_చిరునామా 0x0C000000 /*! PLIC Interface Start */
+#నిర్వచించు PLIC_అంతరాయం_1   1	/* PWM 0   */
+#నిర్వచించు PLIC_అంతరాయం_2   2	/* PWM 1   */
+#నిర్వచించు PLIC_అంతరాయం_3   3	/* PWM 2   */
+#నిర్వచించు PLIC_అంతరాయం_4   4	/* PWM 3   */
+#నిర్వచించు PLIC_అంతరాయం_5   5	/* PWM 4   */
+#నిర్వచించు PLIC_అంతరాయం_6   6	/* PWM 5   */
+#నిర్వచించు PLIC_అంతరాయం_7   7	/* GPIO 0  */
+#నిర్వచించు PLIC_అంతరాయం_8   8	/* GPIO 1  */
+#నిర్వచించు PLIC_అంతరాయం_9   9	/* GPIO 2  */
+#నిర్వచించు PLIC_అంతరాయం_10  10	/* GPIO 3  */
+#నిర్వచించు PLIC_అంతరాయం_11  11	/* GPIO 4  */
+#నిర్వచించు PLIC_అంతరాయం_12  12	/* GPIO 5  */
+#నిర్వచించు PLIC_అంతరాయం_13  13	/* GPIO 6  */
+#నిర్వచించు PLIC_అంతరాయం_14  14	/* GPIO 7  */
+#నిర్వచించు PLIC_అంతరాయం_15  15	/* GPIO 8  */
+#నిర్వచించు PLIC_అంతరాయం_16  16	/* GPIO 9  */
+#నిర్వచించు PLIC_అంతరాయం_17  17	/* GPIO 10 */
+#నిర్వచించు PLIC_అంతరాయం_18  18	/* GPIO 11 */
+#నిర్వచించు PLIC_అంతరాయం_19  19	/* GPIO 12 */
+#నిర్వచించు PLIC_అంతరాయం_20  20	/* GPIO 13 */
+#నిర్వచించు PLIC_అంతరాయం_21  21	/* GPIO 14 */
+#నిర్వచించు PLIC_అంతరాయం_22  22	/* GPIO 15 */
+#నిర్వచించు PLIC_అంతరాయం_23  23	/* I2C 0   */
+#నిర్వచించు PLIC_అంతరాయం_24  24	/* I2C 1   */
+#నిర్వచించు PLIC_అంతరాయం_25  25 	/* uart 0  */
+#నిర్వచించు PLIC_అంతరాయం_26  26 	/* uart 1  */
+#నిర్వచించు PLIC_అంతరాయం_27  27 	/* uart 2  */
+#నిర్వచించు PLIC_MAX_అంతరాయం_SRC 28
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x00040100 //GPIO Start Address */
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
-#define PLIC_GPIO_OFFSET 6
+#నిర్వచించు GPIO_ప్రారంభం 0x00040100 //GPIO Start Address */
+#నిర్వచించు GPIO_స్థానభ్రంశం 0x08 /*!Generic offset used to access GPIO registers*/
+#నిర్వచించు PLIC_GPIO_స్థానభ్రంశం 6
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
-#define GPIO16 (1 << 16)
-#define GPIO17 (1 << 17)
-#define GPIO18 (1 << 18)
-#define GPIO19 (1 << 19)
-#define GPIO20 (1 << 20)
-#define GPIO21 (1 << 21)
-#define GPIO22 (1 << 22)
-#define GPIO23 (1 << 23)
-#define GPIO24 (1 << 24)
-#define GPIO25 (1 << 25)
-#define GPIO26 (1 << 26)
-#define GPIO27 (1 << 27)
-#define GPIO28 (1 << 28)
-#define GPIO29 (1 << 29)
-#define GPIO30 (1 << 30)
-#define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#నిర్వచించు GPIO0  (1 <<  0)
+#నిర్వచించు GPIO1  (1 <<  1)
+#నిర్వచించు GPIO2  (1 <<  2)
+#నిర్వచించు GPIO3  (1 <<  3)
+#నిర్వచించు GPIO4  (1 <<  4)
+#నిర్వచించు GPIO5  (1 <<  5)
+#నిర్వచించు GPIO6  (1 <<  6)
+#నిర్వచించు GPIO7  (1 <<  7)
+#నిర్వచించు GPIO8  (1 <<  8)
+#నిర్వచించు GPIO9  (1 <<  9)
+#నిర్వచించు GPIO10 (1 << 10)
+#నిర్వచించు GPIO11 (1 << 11)
+#నిర్వచించు GPIO12 (1 << 12)
+#నిర్వచించు GPIO13 (1 << 13)
+#నిర్వచించు GPIO14 (1 << 14)
+#నిర్వచించు GPIO15 (1 << 15)
+#నిర్వచించు GPIO16 (1 << 16)
+#నిర్వచించు GPIO17 (1 << 17)
+#నిర్వచించు GPIO18 (1 << 18)
+#నిర్వచించు GPIO19 (1 << 19)
+#నిర్వచించు GPIO20 (1 << 20)
+#నిర్వచించు GPIO21 (1 << 21)
+#నిర్వచించు GPIO22 (1 << 22)
+#నిర్వచించు GPIO23 (1 << 23)
+#నిర్వచించు GPIO24 (1 << 24)
+#నిర్వచించు GPIO25 (1 << 25)
+#నిర్వచించు GPIO26 (1 << 26)
+#నిర్వచించు GPIO27 (1 << 27)
+#నిర్వచించు GPIO28 (1 << 28)
+#నిర్వచించు GPIO29 (1 << 29)
+#నిర్వచించు GPIO30 (1 << 30)
+#నిర్వచించు GPIO31 (1 << 31)
+#నిర్వచించు GPIO_లెక్క  0x20
 
-#endif
+#అయితే_ముగింపు

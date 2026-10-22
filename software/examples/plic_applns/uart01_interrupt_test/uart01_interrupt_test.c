@@ -23,77 +23,77 @@
 
  ***************************************************************************/
 //#include "gpiov2.h"
-#include "pinmux.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "uart.h"
+#అన్తర్భావ "pinmux.h"
+#అన్తర్భావ "traps.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "plic_driver.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "uart.h"
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+గుర్తులేని పూర్ణాంకం uart0_prev_rcv_isr_లెక్క_flag = 0;
+గుర్తులేని పూర్ణాంకం uart1_prev_rcv_isr_లెక్క_flag = 0;
+గుర్తులేని పూర్ణాంకం uart2_prev_rcv_isr_లెక్క_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+గుర్తులేని పూర్ణాంకం uart0_prev_tx_isr_లెక్క_flag = 0;
+గుర్తులేని పూర్ణాంకం uart1_prev_tx_isr_లెక్క_flag = 0;
+గుర్తులేని పూర్ణాంకం uart2_prev_tx_isr_లెక్క_flag = 0;
 
 
-void init_variables()
+శూన్య init_variables()
 {
 	uart0_complete = 0;
 	uart1_complete = 0;
 	uart2_complete = 0;
-	uart0_tx_isr_count = 0;
-	uart0_rcv_isr_count = 0;
-	uart1_tx_isr_count = 0;
-	uart1_rcv_isr_count = 0;
-	uart2_tx_isr_count = 0;
-	uart2_rcv_isr_count = 0;
-	memset(u0_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	memset(u2_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	uart0_prev_rcv_isr_count_flag = 0;
-	uart1_prev_rcv_isr_count_flag = 0;
-	uart2_prev_rcv_isr_count_flag = 0;
+	uart0_tx_isr_లెక్క = 0;
+	uart0_rcv_isr_లెక్క = 0;
+	uart1_tx_isr_లెక్క = 0;
+	uart1_rcv_isr_లెక్క = 0;
+	uart2_tx_isr_లెక్క = 0;
+	uart2_rcv_isr_లెక్క = 0;
+	memset(u0_rcv_char,'\0', UARTX_బఫరు_కొలత);
+	memset(u1_rcv_char,'\0', UARTX_బఫరు_కొలత);
+	memset(u2_rcv_char,'\0', UARTX_బఫరు_కొలత);
+	uart0_prev_rcv_isr_లెక్క_flag = 0;
+	uart1_prev_rcv_isr_లెక్క_flag = 0;
+	uart2_prev_rcv_isr_లెక్క_flag = 0;
 
-	uart0_prev_tx_isr_count_flag = 0;
-	uart1_prev_tx_isr_count_flag = 0;
-	uart2_prev_tx_isr_count_flag = 0;
+	uart0_prev_tx_isr_లెక్క_flag = 0;
+	uart1_prev_tx_isr_లెక్క_flag = 0;
+	uart2_prev_tx_isr_లెక్క_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+బాహ్య అస్థిర గుర్తులేని పూర్ణాంకం* pinmux_config_reg;
 
 
 
-int main(void){
+పూర్ణాంకం ప్రధాన(శూన్య){
 
 
-	register uint32_t retval;
-	int i;
+	నమోదు uint32_t retval;
+	పూర్ణాంకం i;
 	init_variables();
 
-	printf("\n---------------Uart 1 Interrupt Test---------------\n");
+	రాయి("\n---------------Uart 1 Interrupt Test---------------\n");
 
 	*(pinmux_config_reg) = 0x55;
-	set_baud_rate(uart_instance[0], 19200);
-	set_baud_rate(uart_instance[1], 19200);
+	సమితి_baud_రేటు(uart_instance[0], 19200);
+	సమితి_baud_రేటు(uart_instance[1], 19200);
 	plic_init();
 
-	configure_interrupt(PLIC_INTERRUPT_26);
-	isr_table[PLIC_INTERRUPT_26] = uart1_isr;
+	configure_అంతరాయం(PLIC_అంతరాయం_26);
+	isr_పట్టిక[PLIC_అంతరాయం_26] = uart1_isr;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm అస్థిర("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm అస్థిర("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm అస్థిర(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -101,8 +101,8 @@ int main(void){
 		     (retval)
 		    );
 
-	printf("\n retval = %x", retval);
-	asm volatile(
+	రాయి("\n retval = %x", retval);
+	asm అస్థిర(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -110,56 +110,56 @@ int main(void){
 		     (retval)
 		    );
 
-	printf("\t retval = %x", retval);
+	రాయి("\t retval = %x", retval);
 
-	asm volatile(
+	asm అస్థిర(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
 		     "=r"
 		     (retval)
 		    );
-	printf("\t retval = %x", retval);
+	రాయి("\t retval = %x", retval);
 
 
-	uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
-	uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+	uart1_prev_tx_isr_లెక్క_flag = uart1_tx_isr_లెక్క;
+	uart1_prev_rcv_isr_లెక్క_flag = uart1_rcv_isr_లెక్క;
 
 
-	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_EMPTY | ENABLE_RX_FULL);
-	printf("\n Before Tx: Status Register= %x \n", uart_instance[1]->status);
+	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_ఖాళీలు | ENABLE_RX_నిండిన);
+	రాయి("\n Before Tx: Status Register= %x \n", uart_instance[1]->స్థితి_3);
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	అయితే(1)
 	{
-#if 0
-		if(i % 2)
+#ఒకవేళ 0
+		ఒకవేళ(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		లేకపోతే
 			write_uart_string(uart_instance[1], "tEsT");
-#endif
+#అయితే_ముగింపు
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		ఒకవేళ(uart1_prev_tx_isr_లెక్క_flag != uart1_tx_isr_లెక్క)
 		{
-			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
+			uart1_prev_tx_isr_లెక్క_flag = uart1_tx_isr_లెక్క;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		ఒకవేళ(uart1_prev_rcv_isr_లెక్క_flag != uart1_rcv_isr_లెక్క)
 		{
-			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+			uart1_prev_rcv_isr_లెక్క_flag = uart1_rcv_isr_లెక్క;
 		}
-		if(i++ >= 10)
+		ఒకవేళ(i++ >= 10)
 		{
-			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
+			u1_rcv_char[++uart1_rcv_isr_లెక్క] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
-			printf("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_count-1);
+			రాయి("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_లెక్క-1);
 			i = 0;
-			uart1_rcv_isr_count = 0;
-			memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
+			uart1_rcv_isr_లెక్క = 0;
+			memset(u1_rcv_char,'\0', UARTX_బఫరు_కొలత);
 			//break;
 		}
 	};
 
 
-	return 0;
+	తిరిగి 0;
 }

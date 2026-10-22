@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#నిర్వచితం_కాకపోతే UTIL_H
+#నిర్వచించు UTIL_H
+#అన్తర్భావ <stdio.h>
+#అన్తర్భావ <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+శూన్య waitfor(గుర్తులేని పూర్ణాంకం secs);
+శూన్య delay(గుర్తులేని దీర్ఘ seconds);
+దశాంశం pow_10(గుర్తులేని పూర్ణాంకం y);
+శూన్య తిరగేయి(అక్షరం *str, పూర్ణాంకం len);
+శూన్య ftoa( దశాంశం, అక్షరం *, గుర్తులేని పూర్ణాంకం);
+శూన్య delay_loop(గుర్తులేని దీర్ఘ cntr1, గుర్తులేని దీర్ఘ cntr2);
+గుర్తులేని దీర్ఘ read_మాట(uint32_t *addr);
+శూన్య write_మాట(uint32_t *addr, గుర్తులేని దీర్ఘ val);
+పూర్ణాంకం int_గమ్యం_string(పూర్ణాంకం సంఖ్య, అక్షరం str[], గుర్తులేని పూర్ణాంకం afterpoint);
+శూన్య _printf_(స్థిరరాశి అక్షరం *fmt, va_list ap);
+పూర్ణాంకం రాయి(స్థిరరాశి అక్షరం* fmt, ...);
 
-#endif
+#అయితే_ముగింపు

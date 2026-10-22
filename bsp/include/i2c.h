@@ -26,52 +26,52 @@
  * @detail this is the header file for i2c_driver.c
  */
 
-#ifndef I2C_H
-#define I2C_H
+#నిర్వచితం_కాకపోతే I2C_H
+#నిర్వచించు I2C_H
 
-#include "platform.h"
+#అన్తర్భావ "platform.h"
 
-#define ETIMEOUT -60
-#define DEF_TIMEOUT 60
-#define ETIMEDOUT -80
-#define ENXIO -82
-#define EREMOTEIO -81
+#నిర్వచించు ETIMEOUT -60
+#నిర్వచించు DEF_TIMEOUT 60
+#నిర్వచించు ETIMEDOUT -80
+#నిర్వచించు ENXIO -82
+#నిర్వచించు EREMOTEIO -81
 
-#define I2C_SUCCESS 0
-#define EAXI_ERROR -1
-#define EI2C_BUS_ERROR -2
-#define EI2C_PIN_ERROR -3
-#define EI2C_LRB_ERROR -4
+#నిర్వచించు I2C_SUCCESS 0
+#నిర్వచించు EAXI_ERROR -1
+#నిర్వచించు EI2C_BUS_ERROR -2
+#నిర్వచించు EI2C_PIN_ERROR -3
+#నిర్వచించు EI2C_LRB_ERROR -4
 
-#define I2C_PIN	0x80
-#define I2C_ESO	0x40
-#define I2C_ES1	0x20
-#define I2C_ES2	0x10
-#define I2C_ENI	0x08
-#define I2C_STA	0x04
-#define I2C_STO	0x02
-#define I2C_ACK	0x01
+#నిర్వచించు I2C_PIN	0x80
+#నిర్వచించు I2C_ESO	0x40
+#నిర్వచించు I2C_ES1	0x20
+#నిర్వచించు I2C_ES2	0x10
+#నిర్వచించు I2C_ENI	0x08
+#నిర్వచించు I2C_STA	0x04
+#నిర్వచించు I2C_STO	0x02
+#నిర్వచించు I2C_ACK	0x01
 
-#define I2C_INI 0x40   /* 1 if not initialized */
-#define I2C_STS 0x20
-#define I2C_BER 0x10
-#define I2C_AD0 0x08
-#define I2C_LRB 0x08
-#define I2C_AAS 0x04
-#define I2C_LAB 0x02
-#define I2C_BB  0x01
+#నిర్వచించు I2C_INI 0x40   /* 1 if not initialized */
+#నిర్వచించు I2C_STS 0x20
+#నిర్వచించు I2C_BER 0x10
+#నిర్వచించు I2C_AD0 0x08
+#నిర్వచించు I2C_LRB 0x08
+#నిర్వచించు I2C_AAS 0x04
+#నిర్వచించు I2C_LAB 0x02
+#నిర్వచించు I2C_BB  0x01
 
-#define I2C_START         (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK)
-#define I2C_START_ENI     (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
-#define I2C_STOP          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK)
-#define I2C_REPSTART      (                 I2C_ESO | I2C_STA | I2C_ACK)
-#define I2C_REPSTART_ENI  (                 I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
-#define I2C_IDLE          (I2C_PIN | I2C_ESO                  | I2C_ACK)
-#define I2C_NACK          (I2C_ESO  )
-#define I2C_STOP_ENI          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK | I2C_ENI)
+#నిర్వచించు I2_C_ప్రారంభం         (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK)
+#నిర్వచించు I2_C_ప్రారంభం_ENI     (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
+#నిర్వచించు I2C_STOP          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK)
+#నిర్వచించు I2C_REPSTART      (                 I2C_ESO | I2C_STA | I2C_ACK)
+#నిర్వచించు I2C_REPSTART_ENI  (                 I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
+#నిర్వచించు I2C_IDLE          (I2C_PIN | I2C_ESO                  | I2C_ACK)
+#నిర్వచించు I2C_NACK          (I2C_ESO  )
+#నిర్వచించు I2C_STOP_ENI          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK | I2C_ENI)
 
-#define I2C_READ 1
-#define I2C_WRITE 0
+#నిర్వచించు I2C_READ 1
+#నిర్వచించు I2C_WRITE 0
 
 /*
 `define     S2             8'h00
@@ -84,65 +84,65 @@
 `define     SCL            8'h38
 */
 
-unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+గుర్తులేని అక్షరం i2c_complete_flag;
+గుర్తులేని పూర్ణాంకం i2c_read_విలువ;
 
 /* Struct to access I2C registers as 32 bit registers */
-typedef struct
+రకనిర్వచనం నిర్మాణం
 {
 /* 0x00 */
-	unsigned int  prescale;     /*! Prescale Register */
-	unsigned int   prescale_rsvd;
+	గుర్తులేని పూర్ణాంకం  prescale;     /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   prescale_rsvd;
 
 /* 0x08 */
-	unsigned int   control;
-	unsigned int   control_rsvd;
+	గుర్తులేని పూర్ణాంకం   control;
+	గుర్తులేని పూర్ణాంకం   control_rsvd;
 
 /* 0x10 */
-	unsigned int  data;	 /*! Prescale Register */
-	unsigned int   data_rsvd;
+	గుర్తులేని పూర్ణాంకం  దత్తాంశం_2;	 /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   దత్తాంశం_rsvd;
 
 /* 0x18 */
-	unsigned int  status;	 /*! Prescale Register */
-	unsigned int   status_rsvd;
+	గుర్తులేని పూర్ణాంకం  స్థితి_3;	 /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   స్థితి_rsvd;
 
 /* 0x20 */
-	unsigned int  s01;	 /*! Prescale Register */
-	unsigned int   s01_rsvd;
+	గుర్తులేని పూర్ణాంకం  s01;	 /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   s01_rsvd;
 
 /* 0x28 */
-	unsigned int  s3;	 /*! Prescale Register */
-	unsigned int   s3_rsvd;
+	గుర్తులేని పూర్ణాంకం  s3;	 /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   s3_rsvd;
 
 /* 0x30 */
-	unsigned int  time;	 /*! Prescale Register */
-	unsigned int   time_rsvd;
+	గుర్తులేని పూర్ణాంకం  సమయం;	 /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   సమయం_rsvd;
 
 /* 0x38 */
-	unsigned int  scl;	 /*! Prescale Register */
-	unsigned int   scl_rsvd;
+	గుర్తులేని పూర్ణాంకం  scl;	 /*! Prescale Register */
+	గుర్తులేని పూర్ణాంకం   scl_rsvd;
 } i2c_struct;
 
-void i2c_init(void);
-int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
-int wait_till_I2c_bus_free(i2c_struct *);
-int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
-int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
-			   char rdWrCntrl, unsigned long delay);
-int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
-int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
-				     slaveAddress, unsigned char rdWrCntrl,
-				     unsigned long delay);
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
-			    unsigned char delay, unsigned char last);
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
-			     unsigned char delay, unsigned char last);
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
-		       char delay);
+శూన్య i2c_init(శూన్య);
+పూర్ణాంకం config_i2c(i2c_struct *,గుర్తులేని అక్షరం prescale_div, గుర్తులేని అక్షరం scl_div);
+పూర్ణాంకం wait_till_I2c_bus_free(i2c_struct *);
+పూర్ణాంకం wait_till_txrx_operation_Completes(i2c_struct *,పూర్ణాంకం *స్థితి_3);
+పూర్ణాంకం sendbytes(i2c_struct *, స్థిరరాశి అక్షరం *buf, పూర్ణాంకం లెక్క, పూర్ణాంకం చివరి, పూర్ణాంకం eni);
+పూర్ణాంకం readbytes(i2c_struct *,అక్షరం *buf, పూర్ణాంకం లెక్క, పూర్ణాంకం చివరి);
+పూర్ణాంకం i2c_send_slave_చిరునామా(i2c_struct *,గుర్తులేని అక్షరం slave_చిరునామా, గుర్తులేని
+			   అక్షరం rdWrCntrl, గుర్తులేని దీర్ఘ delay);
+పూర్ణాంకం i2c_write_దత్తాంశం(i2c_struct *,గుర్తులేని అక్షరం write_దత్తాంశం, గుర్తులేని అక్షరం delay);
+పూర్ణాంకం i2c_read_దత్తాంశం(i2c_struct *,గుర్తులేని అక్షరం *read_దత్తాంశం_2, గుర్తులేని అక్షరం delay);
+పూర్ణాంకం i2c_send_అంతరాయం_slave_చిరునామా(i2c_struct * instance, గుర్తులేని అక్షరం
+				     slave_చిరునామా, గుర్తులేని అక్షరం rdWrCntrl,
+				     గుర్తులేని దీర్ఘ delay);
+పూర్ణాంకం i2c_read_అంతరాయం_దత్తాంశం(i2c_struct * instance, గుర్తులేని అక్షరం *read_దత్తాంశం_2,
+			    గుర్తులేని అక్షరం delay, గుర్తులేని అక్షరం చివరి);
+పూర్ణాంకం i2c_write_అంతరాయం_దత్తాంశం(i2c_struct * instance, గుర్తులేని అక్షరం write_దత్తాంశం,
+			     గుర్తులేని అక్షరం delay, గుర్తులేని అక్షరం చివరి);
+పూర్ణాంకం i2c_read_దత్తాంశం_nack(i2c_struct * instance, గుర్తులేని అక్షరం *read_దత్తాంశం_2, గుర్తులేని
+		       అక్షరం delay);
 
-extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
+బాహ్య i2c_struct *i2c_instance[MAX_I2_C_లెక్క];
 
-#endif
+#అయితే_ముగింపు

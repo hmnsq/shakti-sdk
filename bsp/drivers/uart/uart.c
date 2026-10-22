@@ -27,30 +27,30 @@
   and receive over UART interface.
  */
 
-#include "uart.h"
-#include "gpio.h"
-#include "utils.h"
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "utils.h"
 
-uart_struct *uart_instance[MAX_UART_COUNT];
+uart_struct *uart_instance[MAX_UART_లెక్క];
 
-#define RTS GPIO4
+#నిర్వచించు RTS GPIO4
 //#define USE_INTERRUPT 
 
-unsigned char uart0_complete = 0;
-unsigned char uart1_complete = 0;
-unsigned char uart2_complete = 0;
-unsigned int uart0_tx_isr_count = 0;
-unsigned int uart0_rcv_isr_count = 0;
-unsigned int uart1_tx_isr_count = 0;
-unsigned int uart1_rcv_isr_count = 0;
-unsigned int uart2_tx_isr_count = 0;
-unsigned int uart2_rcv_isr_count = 0;
+గుర్తులేని అక్షరం uart0_complete = 0;
+గుర్తులేని అక్షరం uart1_complete = 0;
+గుర్తులేని అక్షరం uart2_complete = 0;
+గుర్తులేని పూర్ణాంకం uart0_tx_isr_లెక్క = 0;
+గుర్తులేని పూర్ణాంకం uart0_rcv_isr_లెక్క = 0;
+గుర్తులేని పూర్ణాంకం uart1_tx_isr_లెక్క = 0;
+గుర్తులేని పూర్ణాంకం uart1_rcv_isr_లెక్క = 0;
+గుర్తులేని పూర్ణాంకం uart2_tx_isr_లెక్క = 0;
+గుర్తులేని పూర్ణాంకం uart2_rcv_isr_లెక్క = 0;
 
-#ifdef USE_INTERRUPT
-unsigned char u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-#endif
+#నిర్వచితమైతే USE_అంతరాయం
+గుర్తులేని అక్షరం u0_rcv_char[UARTX_బఫరు_కొలత] = {'\0'};
+గుర్తులేని అక్షరం u1_rcv_char[UARTX_బఫరు_కొలత] = {'\0'};
+గుర్తులేని అక్షరం u2_rcv_char[UARTX_బఫరు_కొలత] = {'\0'};
+#అయితే_ముగింపు
 
 /**
  * @fn void uart_init()
@@ -58,11 +58,11 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
  * @details Initialises given number of UART Arrays which has 
  *          complete set of UART registers.
  */
-void uart_init()
+శూన్య uart_init()
 {
-	for(int i=0; i< MAX_UART_COUNT; i++)
+	కొరకు(పూర్ణాంకం i=0; i< MAX_UART_లెక్క; i++)
 	{
-		uart_instance[i] = (uart_struct*) (UART0_START+i*UART_OFFSET);
+		uart_instance[i] = (uart_struct*) (UART0_ప్రారంభం+i*UART_స్థానభ్రంశం);
 	}
 }
 
@@ -72,11 +72,11 @@ void uart_init()
  * @details This function will be called to write a single character from the stdin.
  * @return integer equivalent of the received character.
  */
-#undef getchar
-int getchar()
+#నిర్వచనం_రద్దు getchar
+పూర్ణాంకం getchar()
 {
-	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
-	return (uart_instance[0]->rcv_reg);
+	అయితే((uart_instance[0]->స్థితి_3 & STS_RX_NOT_ఖాళీలు) == 0); 
+	తిరిగి (uart_instance[0]->rcv_reg);
 }
 
 /**
@@ -87,14 +87,14 @@ int getchar()
  * @param character as int.
  * @return Zero
  */
-#undef putchar
-int putchar(int ch)
+#నిర్వచనం_రద్దు అక్షరం_రాయి
+పూర్ణాంకం అక్షరం_రాయి(పూర్ణాంకం ch)
 {
-	while(uart_instance[0]->status & STS_TX_FULL);
+	అయితే(uart_instance[0]->స్థితి_3 & STS_TX_నిండిన);
 
 	uart_instance[0]->tx_reg = ch;
 
-	return 0;
+	తిరిగి 0;
 }
 
 /**
@@ -105,11 +105,11 @@ int putchar(int ch)
  * @param UART instance
  * @param unsigned int baudrate
  */
-void set_baud_rate(uart_struct *instance, unsigned int baudrate)
+శూన్య సమితి_baud_రేటు(uart_struct *instance, గుర్తులేని పూర్ణాంకం baudrate)
 {
-	unsigned int baud_count = 0;
-	baud_count = CLOCK_FREQUENCY / (16 * baudrate);
-	instance->baud = baud_count;
+	గుర్తులేని పూర్ణాంకం baud_లెక్క = 0;
+	baud_లెక్క = CLOCK_FREQUENCY / (16 * baudrate);
+	instance->baud = baud_లెక్క;
 }
 
 /**
@@ -120,12 +120,12 @@ void set_baud_rate(uart_struct *instance, unsigned int baudrate)
  * @param uart instance 
  * @param unsigned char interrupt
  */
-void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
+శూన్య enable_uart_interrupts(uart_struct * instance, గుర్తులేని అక్షరం అంతరాయం)
 {
-	instance->ien = interrupt; 
+	instance->ien = అంతరాయం; 
 }
 
-#ifdef USE_RX_THRESHOLD
+#నిర్వచితమైతే USE_RX_పరిమితి
 /**
  * @fn void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  * @brief Funtion to set the threshold value of the Rx FIFO.
@@ -134,11 +134,11 @@ void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
  * @param uart instance 
  * @param unsigned char rxthreshold
  */
-void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
+శూన్య సమితి_uart_rx_పరిమితి(uart_struct * instance, గుర్తులేని అక్షరం rxthreshold)
 {
-	instance->rx_threshold = rxthreshold;
+	instance->rx_పరిమితి = rxthreshold;
 }
-#endif
+#అయితే_ముగింపు
 
 /**
  * @fn uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
@@ -150,11 +150,11 @@ void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  */
 uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 {
-	while(instance->status & STS_TX_FULL);
+	అయితే(instance->స్థితి_3 & STS_TX_నిండిన);
 
 	instance->tx_reg = prn_character;
 
-	return 0;
+	తిరిగి 0;
 }
 
 /**
@@ -169,15 +169,15 @@ uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
 {
 	uint32_t i = 0;
-	uint8_t temp;
+	uint8_t తాత్కాలిక;
 
-	do
+	చేయి
 	{
-		temp = ptr_string[i++];
-		write_uart_character(instance, temp);
-	} while(temp != 0);
+		తాత్కాలిక = ptr_string[i++];
+		write_uart_character(instance, తాత్కాలిక);
+	} అయితే(తాత్కాలిక != 0);
 
-	return 0;
+	తిరిగి 0;
 }
 
 /**
@@ -189,16 +189,16 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
  * @param pointer to a character.
  * @return number of characters read
  */
-uint8_t read_uart_character(uart_struct * instance, char * prn_character)
+uint8_t read_uart_character(uart_struct * instance, అక్షరం * prn_character)
 {
-	uint8_t temp = 0;
+	uint8_t తాత్కాలిక = 0;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+	అయితే ((instance->స్థితి_3 & STS_RX_NOT_ఖాళీలు) == 0);
 
-	temp = instance->rcv_reg;
-	*prn_character = temp;
+	తాత్కాలిక = instance->rcv_reg;
+	*prn_character = తాత్కాలిక;
 
-	return 1;
+	తిరిగి 1;
 }
 
 /**
@@ -210,24 +210,24 @@ uint8_t read_uart_character(uart_struct * instance, char * prn_character)
  * @param pointer to an array of character.
  * @return length of the received string
  */
-uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
+uint8_t read_uart_string(uart_struct * instance, అక్షరం * ptr_string)
 {
 	uint32_t i = 0;
-	uint8_t temp = 0;
+	uint8_t తాత్కాలిక = 0;
 
-	while(1)
+	అయితే(1)
 	{
-		while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+		అయితే ((instance->స్థితి_3 & STS_RX_NOT_ఖాళీలు) == 0);
 
-		temp = instance->rcv_reg;
-		ptr_string[i++] = temp;
-		putchar(temp);
+		తాత్కాలిక = instance->rcv_reg;
+		ptr_string[i++] = తాత్కాలిక;
+		అక్షరం_రాయి(తాత్కాలిక);
 
-		if (temp == 0x0D)
+		ఒకవేళ (తాత్కాలిక == 0x0D)
 		{
 			ptr_string[i++] = 0x0A;
 			ptr_string[i++] = 0x00;
-			return(i);
+			తిరిగి(i);
 		}
 	}
 }
@@ -239,19 +239,19 @@ uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
  * passing UART number for different offset addresses.
  * @param UART instance.
  */
-void flush_uart(uart_struct * instance)
+శూన్య flush_uart(uart_struct * instance)
 {
-	__attribute__((unused)) char temp;
+	__attribute__((వాడని)) అక్షరం తాత్కాలిక;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) != 0)
+	అయితే ((instance->స్థితి_3 & STS_RX_NOT_ఖాళీలు) != 0)
 	{
-		temp = instance->rcv_reg ;
+		తాత్కాలిక = instance->rcv_reg ;
 	}
 }
 
 /*Enable USE_INTERRUPT in command line*/
 
-#ifdef USE_INTERRUPT
+#నిర్వచితమైతే USE_అంతరాయం
 /**
  * @fn unsigned char uart0_isr()
  * @brief Function to offer interrupt service routine for uart_instance[0].
@@ -260,39 +260,39 @@ void flush_uart(uart_struct * instance)
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart0_isr()
+గుర్తులేని అక్షరం uart0_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_విలువ = '\0';
 
-	if(uart_instance[0]->status & STS_RX_THRESHOLD)
+	ఒకవేళ(uart_instance[0]->స్థితి_3 & STS_RX_పరిమితి)
 	{
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		అయితే(uart_instance[0]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_విలువ = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_లెక్క++] = read_విలువ;
+			write_uart_character(uart_instance[0], read_విలువ);
 		}
 	}
-	else if(uart_instance[0]->status & STS_RX_FULL)
+	లేకపోతే ఒకవేళ(uart_instance[0]->స్థితి_3 & STS_RX_నిండిన)
 	{
-		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_మాట(GPIO_DIRECTION_CNTRL_REG, RTS);
+		write_మాట(GPIO_దత్తాంశం_REG, read_మాట(GPIO_దత్తాంశం_REG) | RTS);
 
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		అయితే(uart_instance[0]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_విలువ = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_లెక్క++] = read_విలువ;
+			write_uart_character(uart_instance[0], read_విలువ);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_మాట(GPIO_దత్తాంశం_REG, read_మాట(GPIO_దత్తాంశం_REG) & ~(RTS));
 	}
-	else if(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+	లేకపోతే ఒకవేళ(uart_instance[0]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 	{
-		read_value = uart_instance[0]->rcv_reg;
-		u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[0], read_value);
+		read_విలువ = uart_instance[0]->rcv_reg;
+		u0_rcv_char[uart0_rcv_isr_లెక్క++] = read_విలువ;
+		write_uart_character(uart_instance[0], read_విలువ);
 	}
-	return 0;
+	తిరిగి 0;
 }
 
 /**
@@ -303,39 +303,39 @@ unsigned char uart0_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart1_isr()
+గుర్తులేని అక్షరం uart1_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_విలువ = '\0';
 
-	if(uart_instance[1]->status & STS_RX_THRESHOLD)
+	ఒకవేళ(uart_instance[1]->స్థితి_3 & STS_RX_పరిమితి)
 	{
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		అయితే(uart_instance[1]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_విలువ = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_లెక్క++] = read_విలువ;
+			write_uart_character(uart_instance[1], read_విలువ);
 		}
 	}
-	else if(uart_instance[1]->status & STS_RX_FULL)
+	లేకపోతే ఒకవేళ(uart_instance[1]->స్థితి_3 & STS_RX_నిండిన)
 	{
-		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_మాట(GPIO_DIRECTION_CNTRL_REG, RTS);
+		write_మాట(GPIO_దత్తాంశం_REG, read_మాట(GPIO_దత్తాంశం_REG) | RTS);
 
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		అయితే(uart_instance[1]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_విలువ = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_లెక్క++] = read_విలువ;
+			write_uart_character(uart_instance[1], read_విలువ);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_మాట(GPIO_దత్తాంశం_REG, read_మాట(GPIO_దత్తాంశం_REG) & ~(RTS));
 	}
-	else if(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+	లేకపోతే ఒకవేళ(uart_instance[1]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 	{
-		read_value = uart_instance[1]->rcv_reg;
-		u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[1], read_value);
+		read_విలువ = uart_instance[1]->rcv_reg;
+		u1_rcv_char[uart1_rcv_isr_లెక్క++] = read_విలువ;
+		write_uart_character(uart_instance[1], read_విలువ);
 	}
-	return 0;
+	తిరిగి 0;
 }
 
 /**
@@ -346,38 +346,38 @@ unsigned char uart1_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart2_isr()
+గుర్తులేని అక్షరం uart2_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_విలువ = '\0';
 
-	if(uart_instance[2]->status & STS_RX_THRESHOLD)
+	ఒకవేళ(uart_instance[2]->స్థితి_3 & STS_RX_పరిమితి)
 	{
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		అయితే(uart_instance[2]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_విలువ = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_లెక్క++] = read_విలువ;
+			write_uart_character(uart_instance[2], read_విలువ);
 		}
 	}
-	else if(uart_instance[2]->status & STS_RX_FULL)
+	లేకపోతే ఒకవేళ(uart_instance[2]->స్థితి_3 & STS_RX_నిండిన)
 	{
-		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_మాట(GPIO_DIRECTION_CNTRL_REG, RTS);
+		write_మాట(GPIO_దత్తాంశం_REG, read_మాట(GPIO_దత్తాంశం_REG) | RTS);
 
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		అయితే(uart_instance[2]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_విలువ = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_లెక్క++] = read_విలువ;
+			write_uart_character(uart_instance[2], read_విలువ);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_మాట(GPIO_దత్తాంశం_REG, read_మాట(GPIO_దత్తాంశం_REG) & ~(RTS));
 	}
-	else if(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+	లేకపోతే ఒకవేళ(uart_instance[2]->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
 	{
-		read_value = uart_instance[2]->rcv_reg;
-		u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[2], read_value);
+		read_విలువ = uart_instance[2]->rcv_reg;
+		u2_rcv_char[uart2_rcv_isr_లెక్క++] = read_విలువ;
+		write_uart_character(uart_instance[2], read_విలువ);
 	}
-	return 0;
+	తిరిగి 0;
 }
-#endif
+#అయితే_ముగింపు

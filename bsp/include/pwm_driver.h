@@ -26,48 +26,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#అన్తర్భావ<stdbool.h>
 
 // PWM Registers 
-#define PERIOD_REGISTER     0x00000000	//16 bits (short)
-#define DUTY_REGISTER       0x00000004	//16 bits (short)
-#define CONTROL_REGISTER    0x00000008	//8 bits (char)
-#define CLOCK_REGISTER      0x0000000c	//16 bits (short)
+#నిర్వచించు PERIOD_రిజిస్టరు     0x00000000	//16 bits (short)
+#నిర్వచించు DUTY_రిజిస్టరు       0x00000004	//16 bits (short)
+#నిర్వచించు CONTROL_రిజిస్టరు    0x00000008	//8 bits (char)
+#నిర్వచించు CLOCK_రిజిస్టరు      0x0000000c	//16 bits (short)
 
 // Control Register Individual Bits 
-#define CLOCK_SELECTOR      0x00000001
-#define PWM_ENABLE          0x00000002
-#define PWM_START           0x00000004
-#define CONTINUOUS_ONCE     0x00000008
-#define PWM_OUTPUT_ENABLE   0x00000010
-#define INTERRUPT           0x00000020
-#define READ_ONLY           0x00000040
-#define RESET_COUNTER       0x00000080
+#నిర్వచించు CLOCK_SELECTOR      0x00000001
+#నిర్వచించు PWM_ENABLE          0x00000002
+#నిర్వచించు PWM_ప్రారంభం           0x00000004
+#నిర్వచించు CONTINUOUS_ONCE     0x00000008
+#నిర్వచించు PWM_OUTPUT_ENABLE   0x00000010
+#నిర్వచించు అంతరాయం_2           0x00000020
+#నిర్వచించు READ_ONLY           0x00000040
+#నిర్వచించు RESET_COUNTER       0x00000080
 
 // PWM Modules 
-#define PWM_0 0
-#define PWM_1 1
-#define PWM_2 2
-#define PWM_3 3
-#define PWM_4 4
-#define PWM_5 5
+#నిర్వచించు PWM_0 0
+#నిర్వచించు PWM_1 1
+#నిర్వచించు PWM_2 2
+#నిర్వచించు PWM_3 3
+#నిర్వచించు PWM_4 4
+#నిర్వచించు PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+శూన్య pwm_configure(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం clock_భాజకం, పూర్ణాంకం period, పూర్ణాంకం duty, bool external_clock);
+శూన్య pwm_ప్రారంభం(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం బహుళకం);
+పూర్ణాంకం pwm_check_continuous_బహుళకం(పూర్ణాంకం module_సంఖ్య);
+శూన్య pwm_clear_registers(పూర్ణాంకం module_సంఖ్య);
+శూన్య pwm_init(శూన్య);
+శూన్య pwm_సమితి_external_clock(పూర్ణాంకం module_సంఖ్య, bool విలువ);
+శూన్య pwm_సమితి_clock(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం clock_భాజకం);
+శూన్య pwm_సమితి_duty_చక్రం(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం duty);
+శూన్య pwm_సమితి_periodic_చక్రం(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం period);
+శూన్య pwm_stop(పూర్ణాంకం module_సంఖ్య);
+శూన్య show_రిజిస్టరు_విలువలు(పూర్ణాంకం module_సంఖ్య);
+పూర్ణాంకం సమితి_pwm_period_రిజిస్టరు(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం విలువ);
+పూర్ణాంకం సమితి_pwm_duty_రిజిస్టరు(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం విలువ);
+పూర్ణాంకం సమితి_pwm_control_రిజిస్టరు(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం విలువ);
+పూర్ణాంకం సమితి_pwm_clock_రిజిస్టరు(పూర్ణాంకం module_సంఖ్య, పూర్ణాంకం విలువ);
+పూర్ణాంకం configure_control_రిజిస్టరు_బహుళకం(పూర్ణాంకం బహుళకం);
+శూన్య pwm_use_external_clock(పూర్ణాంకం module_సంఖ్య, bool విలువ);
 

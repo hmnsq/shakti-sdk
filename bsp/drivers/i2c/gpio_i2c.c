@@ -27,16 +27,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 using gpio pins.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "gpio_i2c.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "gpio_i2c.h"
 
 /** @fn extern void delay_loop(unsigned long , unsigned long)
  * @brief Maintains the required delay to perform an operation
  * @param unsigned long 
  * @param unsigned long
  */
-extern void delay_loop(unsigned long , unsigned long);
+బాహ్య శూన్య delay_loop(గుర్తులేని దీర్ఘ , గుర్తులేని దీర్ఘ);
 
 /** @fn static void SetSCLAsOutput()
  * @brief Function for configure GPIO 0 as SCL output.
@@ -44,12 +44,12 @@ extern void delay_loop(unsigned long , unsigned long);
  *             macro as output.
  * @warning This bit value can be changed as per I2C_SCL macro.
  */
-static void SetSCLAsOutput()
+స్థిర శూన్య సమితి_SCLAs_Output()
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, (readData | I2C_SCL) );
-	printf("SCL set as output\n");
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+	read_దత్తాంశం = read_మాట(GPIO_DIRECTION_CNTRL_REG);
+	write_మాట(GPIO_DIRECTION_CNTRL_REG, (read_దత్తాంశం | I2C_SCL) );
+	రాయి("SCL set as output\n");
 }
 
 /** @fn static void SetSdaDirection(int inOutCntrl)
@@ -59,18 +59,18 @@ static void SetSCLAsOutput()
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param int inOutCntrl
  */
-static void SetSdaDirection(int inOutCntrl)
+స్థిర శూన్య సమితి_Sda_Direction(పూర్ణాంకం లోపల_బహిర్గతం_Cntrl)
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DIRECTION_CNTRL_REG);
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+	read_దత్తాంశం = read_మాట(GPIO_DIRECTION_CNTRL_REG);
 
-	if (inOutCntrl) { // output
-		write_word(GPIO_DIRECTION_CNTRL_REG, (readData | I2C_SDA) );
-		printf("\n\tSDA set as output\n");
+	ఒకవేళ (లోపల_బహిర్గతం_Cntrl) { // output
+		write_మాట(GPIO_DIRECTION_CNTRL_REG, (read_దత్తాంశం | I2C_SDA) );
+		రాయి("\n\tSDA set as output\n");
 	}
-    else {
-		write_word(GPIO_DIRECTION_CNTRL_REG, (readData & ~(I2C_SDA) ) );
-		printf("\n\tSDA set as input\n");
+    లేకపోతే {
+		write_మాట(GPIO_DIRECTION_CNTRL_REG, (read_దత్తాంశం & ~(I2C_SDA) ) );
+		రాయి("\n\tSDA set as input\n");
 	}
 }
 
@@ -80,28 +80,28 @@ static void SetSdaDirection(int inOutCntrl)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char delay
  */
-static void start(unsigned char delay)
+స్థిర శూన్య ప్రారంభం(గుర్తులేని అక్షరం delay)
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DATA_REG);
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+	read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG);
 
 //	sda=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA | I2C_SCL) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SDA | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //		scl=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //		sda=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SDA)) );
 	delay_loop(delay, delay);
 
 //		scl=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SCL) ) );
 	delay_loop(delay, delay);
 
-	printf("\n\tI2C: I2C Start condition sent\n");
+	రాయి("\n\tI2C: I2C Start condition sent\n");
 }
 
 /** @fn static void stop(unsigned char delay)
@@ -110,22 +110,22 @@ static void start(unsigned char delay)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char
  */
-static void stop(unsigned char delay)
+స్థిర శూన్య stop(గుర్తులేని అక్షరం delay)
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DATA_REG);
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+	read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG);
 //	sda=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SDA)) );
 	delay_loop(delay, delay);
 
 //	scl=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //	sda=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SDA) );
 	delay_loop(delay, delay);
-	printf("\n\tI2C: I2C Start condition sent\n");
+	రాయి("\n\tI2C: I2C Start condition sent\n");
 
 }
 
@@ -137,32 +137,32 @@ static void stop(unsigned char delay)
  * @param writeData --> Value that needs to be written.
  * @param unsigned char delay
  */
-void I2cWriteByte(unsigned char writeData, unsigned char delay)
+శూన్య I2cWriteByte(గుర్తులేని అక్షరం write_దత్తాంశం, గుర్తులేని అక్షరం delay)
 {
-	unsigned char j = 0,k;
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DATA_REG);
-	while (j < 8)
+	గుర్తులేని అక్షరం j = 0,k;
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+	read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG);
+	అయితే (j < 8)
 	{
-		k = writeData;
+		k = write_దత్తాంశం;
 		k = ( k << j ) & 0x80;
 //		printf("\n\r i: %d; j: %d; k: %d", i, j, k);
 //		sda=CY;
-		if (k == 0) {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+		ఒకవేళ (k == 0) {
+			write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SDA)) );
 			delay_loop(delay, delay);
 		}
-		else {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+		లేకపోతే {
+			write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SDA) );
 			delay_loop(delay, delay);
 		}
 
 	//	scl=1;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+		write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SCL) );
 		delay_loop(delay, delay);
 
 	//	scl=0;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+		write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SCL) ) );
 		delay_loop(delay, delay);
 		++j;
 	}
@@ -176,39 +176,39 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
  * @param unsigned char delay
  * @return unsigned char (returns the value of readData).
  */
-unsigned char I2cReadByte(unsigned char delay)
+గుర్తులేని అక్షరం I2cReadByte(గుర్తులేని అక్షరం delay)
 {
-	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
-	unsigned char readData = 0;
-  unsigned long readGpioData = 0;
-	readData = read_word(GPIO_DATA_REG);
+	గుర్తులేని అక్షరం j = 0, i = 0;
+	గుర్తులేని అక్షరం బిట్టు_విలువ;
+	గుర్తులేని అక్షరం read_దత్తాంశం = 0;
+  గుర్తులేని దీర్ఘ read_Gpio_దత్తాంశం = 0;
+	read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG);
 
 //	sda=1;
 //Make SDA high
-	while (j < 8) {
+	అయితే (j < 8) {
 	//	scl=1;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+		write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SCL) );
 		delay_loop(delay, delay);
 
 //		d1 = sda;
-		readGpioData = read_word(GPIO_DATA_REG)  & I2C_SDA;
-		if (readGpioData != 0)
-			bitValue = 1;
-		else
-			bitValue = 0;
-	    readData = readData << 1;
-		readData = readData | bitValue;
+		read_Gpio_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG)  & I2C_SDA;
+		ఒకవేళ (read_Gpio_దత్తాంశం != 0)
+			బిట్టు_విలువ = 1;
+		లేకపోతే
+			బిట్టు_విలువ = 0;
+	    read_దత్తాంశం = read_దత్తాంశం << 1;
+		read_దత్తాంశం = read_దత్తాంశం | బిట్టు_విలువ;
 		delay_loop(delay, delay);
 
 	//	scl=0;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+		write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SCL) ) );
 		delay_loop(delay, delay);
 
 		++j;
 	}
 
-	return readData;
+	తిరిగి read_దత్తాంశం;
 }
 
 /** @fn void ReadAckForWrite(unsigned char delay)
@@ -220,25 +220,25 @@ unsigned char I2cReadByte(unsigned char delay)
  *        responding.
  * @param unsigned char delay
  */
-void ReadAckForWrite(unsigned char delay)
+శూన్య ReadAckForWrite(గుర్తులేని అక్షరం delay)
 {
-	unsigned long readData = 0;
-	printf("\n\tI2C: I2C Read\n");
-	readData = read_word(GPIO_DATA_REG);
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+	రాయి("\n\tI2C: I2C Read\n");
+	read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG);
 	delay_loop(delay, delay);
 //	scl=1;delay
-	printf("\n\tI2C: I2C Write\n");
-	write_word(GPIO_DATA_REG, (readData | I2C_SCL) );
+	రాయి("\n\tI2C: I2C Write\n");
+	write_మాట(GPIO_దత్తాంశం_REG, (read_దత్తాంశం | I2C_SCL) );
 	delay_loop(delay, delay);
 
-		printf("\n\tI2C: I2C Write\n");
-		readData = read_word(GPIO_DATA_REG)  & I2C_SDA;
+		రాయి("\n\tI2C: I2C Write\n");
+		read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG)  & I2C_SDA;
 
 //	scl=0;
-	printf("\n\tI2C: I2C Write\n");
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+	రాయి("\n\tI2C: I2C Write\n");
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SCL) ) );
 	delay_loop(delay, delay);
-	printf("\n\tI2C: I2C ReadNackForWrite sent\n");
+	రాయి("\n\tI2C: I2C ReadNackForWrite sent\n");
 
 }
 
@@ -251,26 +251,26 @@ void ReadAckForWrite(unsigned char delay)
  *        responding.
  * @param unsigned char delay
  */
-void SendAckForRead(unsigned char delay)
+శూన్య SendAckForRead(గుర్తులేని అక్షరం delay)
 {
-	unsigned long readData = 0;
-  SetSdaDirection(GPIOD_IS_OUT);
+	గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+  సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
 
 //	readData = read_word(GPIO_DATA_REG);
 
 //	sda=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SDA)) );
 	delay_loop(delay, delay);
 
 //	scl=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //	scl=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+	write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SCL) ) );
 	delay_loop(delay, delay);
 
-  SetSdaDirection(GPIOD_IS_IN);
+  సమితి_Sda_Direction(GPIOD_IS_లోపల);
 }
 
 /** @fn void SendNackForRead(unsigned char delay)
@@ -282,26 +282,26 @@ void SendAckForRead(unsigned char delay)
  *         responding.
  * @param unsigned char delay
  */
-void SendNackForRead(unsigned char delay)
+శూన్య SendNackForRead(గుర్తులేని అక్షరం delay)
  {
-  unsigned long readData = 0;
-  SetSdaDirection(GPIOD_IS_OUT);
+  గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+  సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
 
  //	readData = read_word(GPIO_DATA_REG);
 
  //	sda=0;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG)  | (I2C_SDA)) );
+  write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG)  | (I2C_SDA)) );
   delay_loop(delay, delay);
 
  //	scl=1;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+  write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SCL) );
   delay_loop(delay, delay);
 
  //	scl=0;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+  write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) & ~(I2C_SCL) ) );
   delay_loop(delay, delay);
 
-  SetSdaDirection(GPIOD_IS_IN);
+  సమితి_Sda_Direction(GPIOD_IS_లోపల);
  }
 
 /** @fn void I2cInit()
@@ -311,11 +311,11 @@ void SendNackForRead(unsigned char delay)
  *      operation.
  * @warning This bit value can be changed as per I2C_SCL macro.
  */
-void I2cInit()
+శూన్య I2cInit()
 {
-  SetSCLAsOutput();
-  SetSdaDirection(GPIOD_IS_OUT);
-  printf("Initialization successfully done");
+  సమితి_SCLAs_Output();
+  సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
+  రాయి("Initialization successfully done");
 }
 
 /** @fn void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned char delay)
@@ -329,27 +329,27 @@ void I2cInit()
  * @param unsigned char (Read / Write Control (0 --> Write, 1 --> Read)).
  * @param unsigned char delay
  */
-void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned char delay)
+శూన్య I2c_Send_Slave_చిరునామా(గుర్తులేని అక్షరం slave_చిరునామా, గుర్తులేని అక్షరం rdWrCntrl, గుర్తులేని అక్షరం delay)
 {
-  SetSdaDirection(GPIOD_IS_OUT);
+  సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
 
-  printf("\n\tI2C: I2C Start\n");
-  start(delay);
-  printf("\n\tI2C: I2C Send Bytes\n");
-  if(rdWrCntrl) {
-     printf("\n\tI2C: I2C Write\n");
-    I2cWriteByte( (slaveAddress | I2C_READ), delay);
+  రాయి("\n\tI2C: I2C Start\n");
+  ప్రారంభం(delay);
+  రాయి("\n\tI2C: I2C Send Bytes\n");
+  ఒకవేళ(rdWrCntrl) {
+     రాయి("\n\tI2C: I2C Write\n");
+    I2cWriteByte( (slave_చిరునామా | I2C_READ), delay);
 	}
-  else {
-     printf("\n\tI2C: I2C Write\n");
-    I2cWriteByte( (slaveAddress | I2C_WRITE), delay);
+  లేకపోతే {
+     రాయి("\n\tI2C: I2C Write\n");
+    I2cWriteByte( (slave_చిరునామా | I2C_WRITE), delay);
 	}
   //	sda=1;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+  write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SDA) );
   delay_loop(delay, delay);
 
-  printf("\n\tI2C: I2C Write Ack\n");
-  SetSdaDirection(GPIOD_IS_IN);
+  రాయి("\n\tI2C: I2C Write Ack\n");
+  సమితి_Sda_Direction(GPIOD_IS_లోపల);
     ReadAckForWrite(delay);
 }
 
@@ -362,17 +362,17 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
  *    or register value.)
  * @param unsigned char delay
  */
-void I2cWriteData(unsigned char writeData, unsigned char delay)
+శూన్య I2c_Write_దత్తాంశం(గుర్తులేని అక్షరం write_దత్తాంశం, గుర్తులేని అక్షరం delay)
 {
-  SetSdaDirection(GPIOD_IS_OUT);
-  printf("\n\tI2C: I2C Write\n");
-  I2cWriteByte( writeData, delay);
+  సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
+  రాయి("\n\tI2C: I2C Write\n");
+  I2cWriteByte( write_దత్తాంశం, delay);
   //	sda=1;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+  write_మాట(GPIO_దత్తాంశం_REG, (read_మాట(GPIO_దత్తాంశం_REG) | I2C_SDA) );
   delay_loop(delay, delay);
 
-  printf("\n\tI2C: I2C Write Ack\n");
-  SetSdaDirection(GPIOD_IS_IN);
+  రాయి("\n\tI2C: I2C Write Ack\n");
+  సమితి_Sda_Direction(GPIOD_IS_లోపల);
   ReadAckForWrite(delay);
 }
 
@@ -384,16 +384,16 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
  * @param unsigned char delay
  * @return unsigned char (returns the value of readData)
  */
-unsigned char I2cReadDataAck(unsigned char delay)
+గుర్తులేని అక్షరం I2c_Read_దత్తాంశం_Ack(గుర్తులేని అక్షరం delay)
 {
-  unsigned char readData = 0;
-  SetSdaDirection(GPIOD_IS_IN);
-	printf("\n\tI2C: I2C Read\n");
-	readData = I2cReadByte(delay);
-	SetSdaDirection(GPIOD_IS_OUT);
-	printf("\n\tI2C: I2C Read Ack\n");
+  గుర్తులేని అక్షరం read_దత్తాంశం = 0;
+  సమితి_Sda_Direction(GPIOD_IS_లోపల);
+	రాయి("\n\tI2C: I2C Read\n");
+	read_దత్తాంశం = I2cReadByte(delay);
+	సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
+	రాయి("\n\tI2C: I2C Read Ack\n");
 	SendAckForRead(delay);
-  return readData;
+  తిరిగి read_దత్తాంశం;
 }
 
 /** @fn unsigned char I2cReadDataNack(unsigned char delay)
@@ -405,16 +405,16 @@ unsigned char I2cReadDataAck(unsigned char delay)
  * @param unsigned char delay
  * @return unsigned char (returns the value of readData)
  */
-unsigned char I2cReadDataNack(unsigned char delay)
+గుర్తులేని అక్షరం I2c_Read_దత్తాంశం_Nack(గుర్తులేని అక్షరం delay)
 {
-  unsigned char readData = 0;
-  SetSdaDirection(GPIOD_IS_IN);
- 	printf("\n\tI2C: I2C Read\n");
-  readData = I2cReadByte(delay);
-	SetSdaDirection(GPIOD_IS_OUT);
-  	printf("\n\tI2C: I2C Read NAck\n");
+  గుర్తులేని అక్షరం read_దత్తాంశం = 0;
+  సమితి_Sda_Direction(GPIOD_IS_లోపల);
+ 	రాయి("\n\tI2C: I2C Read\n");
+  read_దత్తాంశం = I2cReadByte(delay);
+	సమితి_Sda_Direction(GPIOD_IS_బహిర్గతం);
+  	రాయి("\n\tI2C: I2C Read NAck\n");
   	SendNackForRead(delay);
-    return readData;
+    తిరిగి read_దత్తాంశం;
 }
 
 /** @fn void I2cStart(unsigned char delay)
@@ -423,10 +423,10 @@ unsigned char I2cReadDataNack(unsigned char delay)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char delay
  */
-void I2cStart(unsigned char delay)
+శూన్య I2c_ప్రారంభం(గుర్తులేని అక్షరం delay)
 {
-  printf("\n\tI2C: I2C start\n");
-  start(delay);
+  రాయి("\n\tI2C: I2C start\n");
+  ప్రారంభం(delay);
 }
 
 /** @fn void I2cStop(unsigned char delay)
@@ -435,9 +435,9 @@ void I2cStart(unsigned char delay)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char delay
  */
-void I2cStop(unsigned char delay)
+శూన్య I2cStop(గుర్తులేని అక్షరం delay)
 {
-  printf("\n\tI2C: I2C stop\n");
+  రాయి("\n\tI2C: I2C stop\n");
   stop(delay);
 }
 
@@ -449,11 +449,11 @@ void I2cStop(unsigned char delay)
  * @param unsigned char data to be written
  * @param unsigned char delay
  */
-void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
+శూన్య I2c_Write_byte(గుర్తులేని అక్షరం slave_చిరునామా_2,గుర్తులేని అక్షరం reg_చిరునామా, గుర్తులేని అక్షరం దత్తాంశం_2, గుర్తులేని అక్షరం delay )
 {
-	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);
-	I2cWriteData(reg_address, delay);
-	I2cWriteData(data,delay);
+	I2c_Send_Slave_చిరునామా(slave_చిరునామా_2, I2C_WRITE, delay);
+	I2c_Write_దత్తాంశం(reg_చిరునామా, delay);
+	I2c_Write_దత్తాంశం(దత్తాంశం_2,delay);
 	I2cStop(delay);
 }
 
@@ -465,15 +465,15 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
  * @param unsigned char delay 
  * @return int (readdata)
  */
-int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
+పూర్ణాంకం I2c_Read_byte(గుర్తులేని అక్షరం slave_చిరునామా_2,గుర్తులేని అక్షరం reg_చిరునామా, గుర్తులేని అక్షరం delay)
 {
-	unsigned char readData;
-	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);//selecting slave to be read
-	I2cWriteData(reg_address, delay);//selecting register to be read
-	I2cSendSlaveAddress(slave_address, I2C_READ, delay);
-	readData = I2cReadDataAck(delay);
+	గుర్తులేని అక్షరం read_దత్తాంశం;
+	I2c_Send_Slave_చిరునామా(slave_చిరునామా_2, I2C_WRITE, delay);//selecting slave to be read
+	I2c_Write_దత్తాంశం(reg_చిరునామా, delay);//selecting register to be read
+	I2c_Send_Slave_చిరునామా(slave_చిరునామా_2, I2C_READ, delay);
+	read_దత్తాంశం = I2c_Read_దత్తాంశం_Ack(delay);
 	I2cStop(delay);
-	return (int) readData;
+	తిరిగి (పూర్ణాంకం) read_దత్తాంశం;
 }
 
  /** @fn int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
@@ -484,34 +484,34 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  * @param last decides whether to stop operation or not
  * @return int (No. of values(bytes) read)
  */
-int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
+పూర్ణాంకం I2c_shakti_readbytes(అక్షరం *buf, పూర్ణాంకం లెక్క, పూర్ణాంకం చివరి, గుర్తులేని అక్షరం delay)
 {
-	printf("start reading the slave device\n");
-	int i = 0;
-#ifdef PCF8584
-	for (i = 0; i <= count; i++) {
-		if (i != 0 && i < count) {
-			readbuf[i]=I2cReadDataAck(delay);
+	రాయి("start reading the slave device\n");
+	పూర్ణాంకం i = 0;
+#నిర్వచితమైతే PCF8584
+	కొరకు (i = 0; i <= లెక్క; i++) {
+		ఒకవేళ (i != 0 && i < లెక్క) {
+			readbuf[i]=I2c_Read_దత్తాంశం_Ack(delay);
 		}
-		else if(i==0) I2cReadDataAck(delay);//dummy read
-		else {
-			readbuf[i] = I2cReadDataNack(delay);
+		లేకపోతే ఒకవేళ(i==0) I2c_Read_దత్తాంశం_Ack(delay);//dummy read
+		లేకపోతే {
+			readbuf[i] = I2c_Read_దత్తాంశం_Nack(delay);
 		}
 		/*The following loop is useful only  for eeprom*/
-		if (last)  I2cStop(delay);
-		else  I2cStart(delay);//sending repeated start
+		ఒకవేళ (చివరి)  I2cStop(delay);
+		లేకపోతే  I2c_ప్రారంభం(delay);//sending repeated start
 	}
-	return i-1; //excluding the dummy read
-#else
-	for (i = 0; i < count-1; i++)
-		*(buf + i) = I2cReadDataAck(delay);
-	*(buf + i) = I2cReadDataNack(delay);
+	తిరిగి i-1; //excluding the dummy read
+#లేకపోతే
+	కొరకు (i = 0; i < లెక్క-1; i++)
+		*(buf + i) = I2c_Read_దత్తాంశం_Ack(delay);
+	*(buf + i) = I2c_Read_దత్తాంశం_Nack(delay);
 
 	/*The following loop is useful only  for eeprom*/
-	if (last)
+	ఒకవేళ (చివరి)
 		I2cStop(delay);
-	else
-		I2cStart(delay);//sending repeated start
-#endif
-	return i+1;
+	లేకపోతే
+		I2c_ప్రారంభం(delay);//sending repeated start
+#అయితే_ముగింపు
+	తిరిగి i+1;
 }

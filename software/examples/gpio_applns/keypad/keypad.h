@@ -26,24 +26,24 @@
  * @brief Declaration for keypad library.
  * @detail Include File Definitions	
  */
-#if !defined(KYPD_H)
-#define KYPD_H
+#ఒకవేళ !defined(KYPD_H)
+#నిర్వచించు KYPD_H
 
-#define ROWNUM 4
-#define COLNUM 4
+#నిర్వచించు ROWNUM 4
+#నిర్వచించు COLNUM 4
 
-#define OUTPINS_OFFSET 0
-#define INPINS_OFFSET 4
-#define OUTPINS (0xF << OUTPINS_OFFSET)
-#define INPINS  (0xF << INPINS_OFFSET)
+#నిర్వచించు OUTPINS_స్థానభ్రంశం 0
+#నిర్వచించు INPINS_స్థానభ్రంశం 4
+#నిర్వచించు OUTPINS (0xF << OUTPINS_స్థానభ్రంశం)
+#నిర్వచించు INPINS  (0xF << INPINS_స్థానభ్రంశం)
 
 //function prototype
-void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+శూన్య సమితి_pins(గుర్తులేని పూర్ణాంకం* అడ్డువరుస, గుర్తులేని పూర్ణాంకం* నిలువు);
+శూన్య సమితి_కీలకం_map(పూర్ణాంకం పట్టిక[COLNUM][ROWNUM]);
+పూర్ణాంకం get_కీలకం();
+పూర్ణాంకం get_నిలువు_అడ్డువరుస(శూన్య);
+గుర్తులేని పూర్ణాంకం అడ్డువరుస_pins[ROWNUM];
+గుర్తులేని పూర్ణాంకం నిలువు_pins[COLNUM];
+పూర్ణాంకం కీలకం_map[COLNUM][ROWNUM];
 
-#endif
+#అయితే_ముగింపు

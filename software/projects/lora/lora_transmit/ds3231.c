@@ -26,22 +26,22 @@
 @brief Contains the driver routines to configure and read DS3231.
 @detail I2C based routines to configures and read the RTC information from DS3231.
 */
-#include <string.h>
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#అన్తర్భావ <string.h>
+#అన్తర్భావ <stdint.h>//Includes the definitions of standard input/output functions//
+#అన్తర్భావ "i2c.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "uart.h"
 
-#define UPDATE_TIME 1
-#define I2C i2c_instance[1]
-#define DS3231_SLAVE_ADDRESS 0XD0
-#define DS3231_REG_OFFSET 0
-#define DS3231_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#నిర్వచించు UPDATE_సమయం 1
+#నిర్వచించు I2C i2c_instance[1]
+#నిర్వచించు DS3231_SLAVE_చిరునామా 0XD0
+#నిర్వచించు DS3231_REG_స్థానభ్రంశం 0
+#నిర్వచించు DS3231_DEC_గమ్యం_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
+#నిర్వచించు DELAY_విలువ 900
+#నిర్వచించు PRESCALER_లెక్క 0x1F
+#నిర్వచించు SCLK_లెక్క 0x91
 
-char sending_data[50];
+అక్షరం sending_దత్తాంశం[50];
 
 /** @fn int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the date and time field of DS3231 registers.
@@ -54,39 +54,39 @@ char sending_data[50];
  * @param delay
  * @return read status (Zero of success)
  */
-int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+పూర్ణాంకం read_ds3231_registers(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం reg_స్థానభ్రంశం, గుర్తులేని పూర్ణాంకం *read_తాత్కాలిక, గుర్తులేని అక్షరం నిడివి_2, గుర్తులేని దీర్ఘ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	గుర్తులేని అక్షరం read_buf[4] = {'\0'};
+	పూర్ణాంకం i = 0, j = 0,  k = 0, స్థితి_3=0;
+	గుర్తులేని అక్షరం తాత్కాలిక = 0;
 
 //Writes the slave address for write
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, 800);
+		i2c_send_slave_చిరునామా(i2c_instance, DS3231_SLAVE_చిరునామా, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-		i2c_write_data(i2c_instance, reg_offset, delay);
+		i2c_write_దత్తాంశం(i2c_instance, reg_స్థానభ్రంశం, delay);
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_READ, 800);
+		i2c_send_slave_చిరునామా(i2c_instance, DS3231_SLAVE_చిరునామా, I2C_READ, 800);
 
 
 /* Make a dummy read as per spec of the I2C controller */
-		i2c_read_data(i2c_instance, &temp, delay);
+		i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-		for(i = 0; i < length; i++)
+		కొరకు(i = 0; i < నిడివి_2; i++)
 		{
-			i2c_read_data(i2c_instance, &temp, delay);
-			*readTemp = temp;
+			i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
+			*read_తాత్కాలిక = తాత్కాలిక;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
-			if( i == (length - 2) )
+			ఒకవేళ( i == (నిడివి_2 - 2) )
 				i2c_instance->control = I2C_NACK;
-			*readTemp++;
+			*read_తాత్కాలిక++;
 		}
 		i2c_instance->control = I2C_STOP;
-		return 0;
+		తిరిగి 0;
 }
 
 /** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -100,22 +100,22 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+పూర్ణాంకం write_ds3231_registers(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం reg_స్థానభ్రంశం, గుర్తులేని పూర్ణాంకం *write_విలువ, గుర్తులేని అక్షరం నిడివి_2, గుర్తులేని దీర్ఘ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, delay);
-		i2c_write_data(i2c_instance, reg_offset, delay);
-		for(i = 0; i < length; i++)
+	పూర్ణాంకం i = 0, j = 0,  k = 0, స్థితి_3=0;
+	గుర్తులేని పూర్ణాంకం తాత్కాలిక = 0;
+		i2c_send_slave_చిరునామా(i2c_instance, DS3231_SLAVE_చిరునామా, I2C_WRITE, delay);
+		i2c_write_దత్తాంశం(i2c_instance, reg_స్థానభ్రంశం, delay);
+		కొరకు(i = 0; i < నిడివి_2; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_దత్తాంశం(i2c_instance,  ( *write_విలువ++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 //		delay_loop(800, 800);
 
 
-			return 0;
+			తిరిగి 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)
@@ -126,12 +126,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param y
  * @return Day of the week (0 - 6)
  */
-int dayofweek(int d, int m, int y)
+పూర్ణాంకం dayofweek(పూర్ణాంకం d, పూర్ణాంకం m, పూర్ణాంకం y)
 {
-    static int t[] = { 0, 3, 2, 5, 0, 3,
+    స్థిర పూర్ణాంకం t[] = { 0, 3, 2, 5, 0, 3,
                        5, 1, 4, 6, 2, 4 };
     y -= m < 3;
-    return ( y + y / 4 - y / 100 +
+    తిరిగి ( y + y / 4 - y / 100 +
              y / 400 + t[m - 1] + d) % 7;
 }
 
@@ -141,56 +141,56 @@ int dayofweek(int d, int m, int y)
  * @param decimal
  * @return Calculated hex value. 
  */
-unsigned int ds3231_decimal_to_hex(unsigned int decimal)
+గుర్తులేని పూర్ణాంకం ds3231_decimal_గమ్యం_hex(గుర్తులేని పూర్ణాంకం decimal)
 {
-	return( ((decimal / 10 ) << 4) | (decimal % 10) );
+	తిరిగి( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
 /** @fn void intermediate()
  * @brief Do setup for DS3231
  * @details Configures the DS3231 
  */
-void intermediate(void)
+శూన్య intermediate(శూన్య)
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
-	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-	unsigned char length;
-	unsigned int hour, minute, second, date, month, year;
+	పూర్ణాంకం timeout;
+	గుర్తులేని పూర్ణాంకం తాత్కాలిక_Read_విలువ = 0;
+	గుర్తులేని దీర్ఘ delay = 1000;
+	గుర్తులేని పూర్ణాంకం write_buf[7] = {0x00}, read_buf[7] = {0x00};
+	గుర్తులేని అక్షరం నిడివి_2;
+	గుర్తులేని పూర్ణాంకం hour, minute, రెండవ, date, month, year;
 
 	hour = 11;
 	minute = 46;
-	second = 30;
+	రెండవ = 30;
 
 	date = 25;
 	month = 01;
 	year = 2020;
 
-	write_buf[0] = DS3231_DEC_TO_HEX(second); //Seconds
-	write_buf[1] = DS3231_DEC_TO_HEX(minute); //Minutes
-	write_buf[2] = DS3231_DEC_TO_HEX(hour); //Hours
+	write_buf[0] = DS3231_DEC_గమ్యం_HEX(రెండవ); //Seconds
+	write_buf[1] = DS3231_DEC_గమ్యం_HEX(minute); //Minutes
+	write_buf[2] = DS3231_DEC_గమ్యం_HEX(hour); //Hours
 
-	write_buf[4] = DS3231_DEC_TO_HEX(date); //Seconds
-	write_buf[5] = DS3231_DEC_TO_HEX(month); //Minutes
-	write_buf[6] = DS3231_DEC_TO_HEX( (year % 100) ); //Hours
+	write_buf[4] = DS3231_DEC_గమ్యం_HEX(date); //Seconds
+	write_buf[5] = DS3231_DEC_గమ్యం_HEX(month); //Minutes
+	write_buf[6] = DS3231_DEC_గమ్యం_HEX( (year % 100) ); //Hours
 
 	write_buf[3] = dayofweek(date, month, year) + 1;
-	length = 7;
+	నిడివి_2 = 7;
 
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ఒకవేళ(config_i2c(I2C, PRESCALER_లెక్క, SCLK_లెక్క))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		తిరిగి -1;
 	}
-	else
+	లేకపోతే
 
-#ifdef UPDATE_TIME
-	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
-#endif
+#నిర్వచితమైతే UPDATE_సమయం
+	write_ds3231_registers(I2C, 0x00, &write_buf[0], నిడివి_2, delay);
+#అయితే_ముగింపు
 }
 
 
@@ -198,19 +198,19 @@ void intermediate(void)
  * @brief Configures the DS3231
  * @details Reads Date and time information and returns the in string
  */
-const char* values()
+స్థిరరాశి అక్షరం* విలువలు()
 {
-	unsigned int read_buf[7] = {0x00};
+	గుర్తులేని పూర్ణాంకం read_buf[7] = {0x00};
 
-	read_ds3231_registers(I2C, DS3231_REG_OFFSET, &read_buf[0], 7, 800);
+	read_ds3231_registers(I2C, DS3231_REG_స్థానభ్రంశం, &read_buf[0], 7, 800);
 	
 	// log_info("\n Date: %x-%x-20%x Day: ", read_buf[4], read_buf[5], read_buf[6]);
 	// log_info("\n Time: %x:%x:%x", read_buf[2], read_buf[1], read_buf[0]);
 
-	sprintf(sending_data, "AT+SEND=0,50, Date: %x-%x-20%x  Time: %x:%x:%x", read_buf[4], read_buf[5], read_buf[6], read_buf[2], read_buf[1], read_buf[0]);
+	sprintf(sending_దత్తాంశం, "AT+SEND=0,50, Date: %x-%x-20%x  Time: %x:%x:%x", read_buf[4], read_buf[5], read_buf[6], read_buf[2], read_buf[1], read_buf[0]);
 	// delay_loop(1500, 1500);		
 
-	return sending_data;
+	తిరిగి sending_దత్తాంశం;
 
 }
 

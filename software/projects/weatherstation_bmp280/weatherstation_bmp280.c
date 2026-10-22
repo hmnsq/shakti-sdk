@@ -40,21 +40,21 @@
 
 */
 
-#include "uart.h" //Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
-#include "bmp280.h"
+#అన్తర్భావ "uart.h" //Includes the definitions of uart communication protocol//
+#అన్తర్భావ "string.h"
+#అన్తర్భావ "pinmux.h"
+#అన్తర్భావ "i2c.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "bmp280.h"
 
 // Replace the API KEY
-#define API_KEY "PPI6OVOI1A2LGXMZ"
+#నిర్వచించు API_కీలకం "PPI6OVOI1A2LGXMZ"
 
 // UART 1 to communicate to ESP8266
-#define ESP_UART uart_instance[1]
+#నిర్వచించు ESP_UART uart_instance[1]
 
 // Using I2C 1 to connect to BMP280
-#define I2C i2c_instance[1]
+#నిర్వచించు I2C i2c_instance[1]
 
 /**
   * @fn int write_to_esp8266(char *data,uart_num sel,int baudrate)
@@ -64,12 +64,12 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+పూర్ణాంకం write_గమ్యం_esp8266(అక్షరం *దత్తాంశం_2)
 {
-	while (*data != '\0')
+	అయితే (*దత్తాంశం_2 != '\0')
 	{
-		write_uart_character(ESP_UART, *data);
-		data++;
+		write_uart_character(ESP_UART, *దత్తాంశం_2);
+		దత్తాంశం_2++;
 	}
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+పూర్ణాంకం write_enter_గమ్యం_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+పూర్ణాంకం read_from_esp8266(అక్షరం *దత్తాంశం_2)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 198; i++)
+	పూర్ణాంకం ch;
+	అక్షరం *str = దత్తాంశం_2;
+	అక్షరం *test = దత్తాంశం_2;
+	కొరకు (పూర్ణాంకం i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		ఒకవేళ (అక్షరశ్రేణి_శోధన(test, "OK") != ఖాళీ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			తిరిగి;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		ఒకవేళ (అక్షరశ్రేణి_శోధన(test, "ERROR") != ఖాళీ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			తిరిగి;
 		}
-		if (strstr(test, ">") != NULL)
+		ఒకవేళ (అక్షరశ్రేణి_శోధన(test, ">") != ఖాళీ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			తిరిగి;
 		}
-		if (strstr(test, "RECV") != NULL)
+		ఒకవేళ (అక్షరశ్రేణి_శోధన(test, "RECV") != ఖాళీ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			తిరిగి;
 		}
-		if (strstr(test, "IP") != NULL)
+		ఒకవేళ (అక్షరశ్రేణి_శోధన(test, "IP") != ఖాళీ)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			తిరిగి;
 		}
 	}
 	*str = '\0';
-	return 1;
+	తిరిగి 1;
 }
 
 /**
@@ -145,21 +145,21 @@ int read_from_esp8266(char *data)
   * @brief setup MUX mode in  esp8266
   * @details setup MUX mode in  esp8266
 */
-void setup_esp8266()
+శూన్య అమరిక_esp8266()
 {
-	char data[200];
-	write_to_esp8266("AT");
+	అక్షరం దత్తాంశం_2[200];
+	write_గమ్యం_esp8266("AT");
 	delay_loop(1000, 1000);
-	read_from_esp8266(data);
+	read_from_esp8266(దత్తాంశం_2);
 
-	printf("sending AT Echo off command to esp\n");
-	write_to_esp8266("ATE0");
+	రాయి("sending AT Echo off command to esp\n");
+	write_గమ్యం_esp8266("ATE0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
-	printf("write AT+CIPMUX\n");
-	write_to_esp8266("AT+CIPMUX=0");
+	read_from_esp8266(దత్తాంశం_2);
+	రాయి("write AT+CIPMUX\n");
+	write_గమ్యం_esp8266("AT+CIPMUX=0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
+	read_from_esp8266(దత్తాంశం_2);
 }
 /**
   * @fn void transmit_data(int temperature, int baudrate)
@@ -171,93 +171,93 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+శూన్య transmit_దత్తాంశం(పూర్ణాంకం temperature, పూర్ణాంకం pressure)
 {
-	char data[200];
-	char sendData[93];
-	char CIPSEND[14];
-	int length;
-	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
+	అక్షరం దత్తాంశం_2[200];
+	అక్షరం send_దత్తాంశం_2[93];
+	అక్షరం CIPSEND[14];
+	పూర్ణాంకం నిడివి_2;
+	sprintf(send_దత్తాంశం_2, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_కీలకం, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
-	length = strlen(sendData);
-	length = length + 2;
-	sprintf(CIPSEND, "AT+CIPSEND=%d", length);
+	నిడివి_2 = అక్షరశ్రేణి_పొడవు(send_దత్తాంశం_2);
+	నిడివి_2 = నిడివి_2 + 2;
+	sprintf(CIPSEND, "AT+CIPSEND=%d", నిడివి_2);
 	// Connect to Wifi using esp8266
 
 	// Connect to Wifi using esp8266
-	printf("\n Open connection to thingspeak.com\n");
-	printf("\n sending  %s\n", sendData);
+	రాయి("\n Open connection to thingspeak.com\n");
+	రాయి("\n sending  %s\n", send_దత్తాంశం_2);
 	flush_uart(ESP_UART);
-	write_to_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	write_గమ్యం_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
+	read_from_esp8266(దత్తాంశం_2);
+	రాయి(" data from esp :%s\n",దత్తాంశం_2);
 
 	//delay_loop(2000,2000);
-	printf("\n%s\n", CIPSEND);
+	రాయి("\n%s\n", CIPSEND);
 	flush_uart(ESP_UART);
-	write_to_esp8266(CIPSEND);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	write_గమ్యం_esp8266(CIPSEND);
+	read_from_esp8266(దత్తాంశం_2);
+	రాయి(" data from esp :%s\n",దత్తాంశం_2);
 
-	printf(" write Data\n");
+	రాయి(" write Data\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266(sendData);
+	write_గమ్యం_esp8266(send_దత్తాంశం_2);
 
 	//flush_uart(ESP_UART);
-	write_enter_to_esp8266();
+	write_enter_గమ్యం_esp8266();
 	//delay(100,100);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	read_from_esp8266(దత్తాంశం_2);
+	రాయి(" data from esp :%s\n",దత్తాంశం_2);
 	// disconnect from link
-	printf(" write AT+CIPCLOSE\n");
+	రాయి(" write AT+CIPCLOSE\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266("AT+CIPCLOSE");
-	read_from_esp8266(data);
+	write_గమ్యం_esp8266("AT+CIPCLOSE");
+	read_from_esp8266(దత్తాంశం_2);
 }
 
 /**
   * @fn void main()
   * @brief Entry point for the program
 */
-void main()
+శూన్య ప్రధాన()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
-	char data[200];
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
+	పూర్ణాంకం i = 0;
+	పూర్ణాంకం baudrate = 115200;
+	పూర్ణాంకం transmit_లెక్క = 0;
+	అక్షరం దత్తాంశం_2[200];
+	గుర్తులేని పూర్ణాంకం తాత్కాలిక_Read_విలువ = 0;
+	గుర్తులేని దీర్ఘ delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
-	printf("\n setting PIN MUX config to 2 .... \n");
+	రాయి("\n setting PIN MUX config to 2 .... \n");
 	*pinmux_config_reg = 0x5;
-	printf("\n set PIN MUX config to 2 .... \n");
-	set_baud_rate(ESP_UART, baudrate);
-	printf("\n Sending temperature data to cloud server!....\n");
-	printf("\n Baud rate set to %d \n", baudrate);
-	printf("\n Waiting to ESP8266 to initialize \n");
+	రాయి("\n set PIN MUX config to 2 .... \n");
+	సమితి_baud_రేటు(ESP_UART, baudrate);
+	రాయి("\n Sending temperature data to cloud server!....\n");
+	రాయి("\n Baud rate set to %d \n", baudrate);
+	రాయి("\n Waiting to ESP8266 to initialize \n");
 	delay_loop(1000, 1000);
-	setup_esp8266();
-	setup_bmp280();
+	అమరిక_esp8266();
+	అమరిక_bmp280();
 
-	while (1)
+	అయితే (1)
 	{
-		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
+		write_bmp280_రిజిస్టరు(I2C, BMP280_CTRL_MEANS, BMP280_సాధారణ_బహుళకం, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		ఒకవేళ (0 == read_bmp280_రిజిస్టరు(I2C, BMP280_స్థితి_రిజిస్టరు, &తాత్కాలిక_Read_విలువ, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			ఒకవేళ (!(తాత్కాలిక_Read_విలువ & 0x9))
 			{
 				//Read pressure and temperature values.
-				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
-				printf("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
-				printf("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
-				transmit_data(temperature, pressure);
+				read_bmp280_విలువలు(I2C, 0xF7, &pressure, &temperature, delay);
+				రాయి("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
+				రాయి("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
+				transmit_దత్తాంశం(temperature, pressure);
 			}
 		}
-		else
+		లేకపోతే
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

@@ -34,37 +34,37 @@
   * 5. Lora module receive the data 
 */
 
-#include <string.h>
-#include "uart.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
+#అన్తర్భావ <string.h>
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ "pinmux.h"
+#అన్తర్భావ "i2c.h"
+#అన్తర్భావ "log.h"
 
-#define LORA_UART uart_instance[1]
-#define BAUDRATE 9600
-#define LENGTH 100
+#నిర్వచించు LORA_UART uart_instance[1]
+#నిర్వచించు BAUDRATE 9600
+#నిర్వచించు నిడివి_3 100
 
 
 /** @fn int read_from_lora(char *data)
  * @brief Reads data sent by lora module.
  * @param data responses read from lora module, mainly used for logging
  */
-int read_from_lora(char *data)
+పూర్ణాంకం read_from_lora(అక్షరం *దత్తాంశం_2)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	పూర్ణాంకం ch;
+	అక్షరం *str = దత్తాంశం_2;
+	అక్షరం *test = దత్తాంశం_2;
+	కొరకు (పూర్ణాంకం i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		ఒకవేళ (ch == '\n')
 		{
-			break;
+			ఆపు;
 		}
 	}
-	return;	
+	తిరిగి;	
 }
 
 
@@ -73,11 +73,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+పూర్ణాంకం write_enter_గమ్యం_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	తిరిగి 0;
 }
 
 
@@ -85,14 +85,14 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+శూన్య write_గమ్యం_lora(అక్షరం *దత్తాంశం_2)
 {
-	while (*data != '\0')
+	అయితే (*దత్తాంశం_2 != '\0')
 	{
-		write_uart_character(LORA_UART, *data);
-		data++;
+		write_uart_character(LORA_UART, *దత్తాంశం_2);
+		దత్తాంశం_2++;
 	}
-	write_enter_to_lora();
+	write_enter_గమ్యం_lora();
 }
 
 
@@ -100,15 +100,15 @@ void write_to_lora(char *data)
  * @brief the data can be received to the LORA module
  * @details when another LORA module used to send data, it will receive the message.
  */
-void receive_data()
+శూన్య receive_దత్తాంశం()
 {
-	char data[LENGTH];
+	అక్షరం దత్తాంశం_2[నిడివి_3];
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Receiving DATA ...... ... .. .");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Receiving DATA ...... ... .. .");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 }
 
 
@@ -116,30 +116,30 @@ void receive_data()
  * @brief It helps to check the value set by the user, to the LORA module.
  * @details Through AT commands, the set values can be checked by these functions.
  */
-void check_set_lora_value()
+శూన్య check_సమితి_lora_విలువ()
 {
-	char data[LENGTH];
+	అక్షరం దత్తాంశం_2[నిడివి_3];
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Finding the Mode set for LORA module");
-	write_to_lora("AT+MODE?");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Finding the Mode set for LORA module");
+	write_గమ్యం_lora("AT+MODE?");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Finding the Address set to the LORA module");
-	write_to_lora("AT+ADDRESS?");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Finding the Address set to the LORA module");
+	write_గమ్యం_lora("AT+ADDRESS?");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Finding the BAND set for the LORA module");
-	write_to_lora("AT+BAND?");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Finding the BAND set for the LORA module");
+	write_గమ్యం_lora("AT+BAND?");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 }
 
 
@@ -147,9 +147,9 @@ void check_set_lora_value()
  * @brief all the necessary features can be set by thsese.
  * @details through AT commands the LORA module can be set and make it usable.
  */
-void setup_lora()
+శూన్య అమరిక_lora()
 {
-	char data[LENGTH];
+	అక్షరం దత్తాంశం_2[నిడివి_3];
 
 	// memset(data, 0, LENGTH);
 	// flush_uart(LORA_UART);
@@ -158,33 +158,33 @@ void setup_lora()
 	// read_from_lora(data);
 	// printf("\n Data from LORA module: %s", data);
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT");
-	write_to_lora("AT");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Writing AT");
+	write_గమ్యం_lora("AT");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT+MODE = 0");
-	write_to_lora("AT+MODE=0");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Writing AT+MODE = 0");
+	write_గమ్యం_lora("AT+MODE=0");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT+ADDRESS = 0");
-	write_to_lora("AT+ADDRESS=0");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Writing AT+ADDRESS = 0");
+	write_గమ్యం_lora("AT+ADDRESS=0");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 
-	memset(data, 0, LENGTH);
+	memset(దత్తాంశం_2, 0, నిడివి_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT+BAND = 865000000");
-	write_to_lora("AT+BAND=865000000");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	రాయి("\n Writing AT+BAND = 865000000");
+	write_గమ్యం_lora("AT+BAND=865000000");
+	read_from_lora(దత్తాంశం_2);
+	రాయి("\n Data from LORA module: %s", దత్తాంశం_2);
 }
 
 
@@ -194,13 +194,13 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Receive data 
  */
-void main()
+శూన్య ప్రధాన()
 {
-	printf("\n Setting PIN MUX config to 2 ...... \n");
+	రాయి("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;
 
-	printf("\n Setting the BAUDRATE to: %d .... \n", BAUDRATE);
-	set_baud_rate(LORA_UART, BAUDRATE);
+	రాయి("\n Setting the BAUDRATE to: %d .... \n", BAUDRATE);
+	సమితి_baud_రేటు(LORA_UART, BAUDRATE);
 
 	/* To setup the LORA Module */
 	// setup_lora();
@@ -209,9 +209,9 @@ void main()
 	// check_set_lora_value();
 
 	/* Receiving Data */
-	while (1) 
+	అయితే (1) 
 	{
-		receive_data();
+		receive_దత్తాంశం();
 		delay_loop(1000, 1000);
 	}
 	

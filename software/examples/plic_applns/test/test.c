@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ "utils.h"
+#అన్తర్భావ "traps.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "plic_driver.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "defines.h"
+#అన్తర్భావ "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+శూన్య handle_button_press(__attribute__((వాడని)) uint32_t అంకె);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+శూన్య handle_button_press(__attribute__((వాడని)) uint32_t అంకె)
 {
 	log_info("button pressed\n");
 }
@@ -55,52 +55,52 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+పూర్ణాంకం ప్రధాన(శూన్య){
+	నమోదు గుర్తులేని పూర్ణాంకం retval;
+	పూర్ణాంకం i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	కొరకు(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
-		interrupt_enable(i);
+		రాయి("i %d\n",i);
+		అంతరాయం_enable(i);
 	}
-	printf("\n");
+	రాయి("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	కొరకు(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
-		interrupt_disable(i);
+		రాయి("i %d\n",i);
+		అంతరాయం_disable(i);
 	}
-	printf("\n");
-
-	asm("ebreak");
-
-	for(i=1;i<33;i++)
-	{
-		printf("i %d\n",i);
-		interrupt_enable(i + 1);
-	}
-	printf("\n");
+	రాయి("\n");
 
 	asm("ebreak");
 
-	while(1){
+	కొరకు(i=1;i<33;i++)
+	{
+		రాయి("i %d\n",i);
+		అంతరాయం_enable(i + 1);
+	}
+	రాయి("\n");
+
+	asm("ebreak");
+
+	అయితే(1){
 		i++;
 
-		if((i%10000000) == 0){
+		ఒకవేళ((i%10000000) == 0){
 
-			asm volatile(
+			asm అస్థిర(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
 			     "=r"
 			     (retval)
 			    );
-			printf("mip = %u\n", retval);
+			రాయి("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	తిరిగి 0;
 }

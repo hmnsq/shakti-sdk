@@ -27,77 +27,77 @@
  * for the plic module is also defined here.
  */
 
-#ifndef PLIC_DRIVER_H
-#define PLIC_DRIVER_H
-#include "platform.h"
-#include "traps.h"
+#నిర్వచితం_కాకపోతే PLIC_DRIVER_H
+#నిర్వచించు PLIC_DRIVER_H
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "traps.h"
 
 /* Macros */
 
 /* Offsets for different registers in plic */
 
-#define PLIC_PRIORITY_OFFSET            0x0000UL
-#define PLIC_PENDING_OFFSET             0x1000UL
-#define PLIC_ENABLE_OFFSET              0x2000UL
-#define PLIC_THRESHOLD_OFFSET           0x10000UL
-#define PLIC_CLAIM_OFFSET               0x10010UL
+#నిర్వచించు PLIC_ప్రాధాన్యత_స్థానభ్రంశం            0x0000UL
+#నిర్వచించు PLIC_PENDING_స్థానభ్రంశం             0x1000UL
+#నిర్వచించు PLIC_ENABLE_స్థానభ్రంశం              0x2000UL
+#నిర్వచించు PLIC_పరిమితి_స్థానభ్రంశం           0x10000UL
+#నిర్వచించు PLIC_CLAIM_స్థానభ్రంశం               0x10010UL
 
 /* The priority value for each int src can be found at addresses 4 bytes apart
    starting from base address + priority offset */
 
-#define PLIC_PRIORITY_SHIFT_PER_INT  2
+#నిర్వచించు PLIC_ప్రాధాన్యత_జరుపు_చొప్పున_INT  2
 
 /* 7 priority levels are supported.
    PLIC_PRIORITY_1 means 'no interrupt */
 
-#define PLIC_PRIORITY_1 0X00
-#define PLIC_PRIORITY_2 0X01
-#define PLIC_PRIORITY_3 0X02
-#define PLIC_PRIORITY_4 0X04
-#define PLIC_PRIORITY_5 0X08
-#define PLIC_PRIORITY_6 0X10
-#define PLIC_PRIORITY_7 0X20
+#నిర్వచించు PLIC_ప్రాధాన్యత_1 0X00
+#నిర్వచించు PLIC_ప్రాధాన్యత_2 0X01
+#నిర్వచించు PLIC_ప్రాధాన్యత_3 0X02
+#నిర్వచించు PLIC_ప్రాధాన్యత_4 0X04
+#నిర్వచించు PLIC_ప్రాధాన్యత_5 0X08
+#నిర్వచించు PLIC_ప్రాధాన్యత_6 0X10
+#నిర్వచించు PLIC_ప్రాధాన్యత_7 0X20
 
-#define PLIC_PENDING_SHIFT_PER_SOURCE   0
+#నిర్వచించు PLIC_PENDING_జరుపు_చొప్పున_ఆధారం   0
 
 /* Enumerators */
 
-typedef enum
+రకనిర్వచనం గణన
 {
 	INACTIVE = 0,
-	ACTIVE   = 1,
+	చురుకైన   = 1,
 	SERVICED = 2,
 	MASKED
-}interrupt_status_e;
+}అంతరాయం_స్థితి_e;
 
 /* Structures and Unions */
 
-typedef struct
+రకనిర్వచనం నిర్మాణం
 {
 	uint32_t id; /*id of the interrupt target source*/
-	uint32_t priority; /*priority assigned to it*/
-	interrupt_status_e state; /*state of the interrupt*/
-	uint32_t count; /*number of times this interrupt occured*/
-} interrupt_data_t;
+	uint32_t ప్రాధాన్యత; /*priority assigned to it*/
+	అంతరాయం_స్థితి_e state; /*state of the interrupt*/
+	uint32_t లెక్క; /*number of times this interrupt occured*/
+} అంతరాయం_దత్తాంశం_t;
 
 /* Platform Level Interrupt Controller (PLIC) table
    Each entry in the table corresponds to an interrupt service routine */
 
-typedef void (*plic_fptr_t) (uint32_t);
-extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+రకనిర్వచనం శూన్య (*plic_fptr_t) (uint32_t);
+బాహ్య plic_fptr_t isr_పట్టిక[PLIC_MAX_అంతరాయం_SRC];
 
 /* Function prototypes */
 
-void interrupt_complete(uint32_t interrupt_id);
-uint32_t interrupt_claim_request(void);
-void isr_default(uint32_t interrupt_id);
-void interrupt_enable(uint32_t interrupt_id);
-void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
-void configure_interrupt_pin(uint32_t pin);
-void plic_init(void);
-void configure_interrupt(uint32_t int_id);
+శూన్య అంతరాయం_complete(uint32_t అంతరాయం_id);
+uint32_t అంతరాయం_claim_request(శూన్య);
+శూన్య isr_default(uint32_t అంతరాయం_id);
+శూన్య అంతరాయం_enable(uint32_t అంతరాయం_id);
+శూన్య mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+శూన్య అంతరాయం_disable(uint32_t అంతరాయం_id);
+శూన్య సమితి_అంతరాయం_పరిమితి(uint32_t ప్రాధాన్యత_విలువ);
+శూన్య సమితి_అంతరాయం_ప్రాధాన్యత(uint32_t ప్రాధాన్యత_విలువ, uint32_t int_id);
+శూన్య configure_అంతరాయం_pin(uint32_t pin);
+శూన్య plic_init(శూన్య);
+శూన్య configure_అంతరాయం(uint32_t int_id);
 
-#endif
+#అయితే_ముగింపు

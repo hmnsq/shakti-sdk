@@ -26,70 +26,70 @@
  * @brief  All the definitions are very specific to ARTY A7 (35T & 100T) boards
  */
 
-#ifndef LED_DRIVER_H
-#define LED_DRIVER_H
+#నిర్వచితం_కాకపోతే LED_DRIVER_H
+#నిర్వచించు LED_DRIVER_H
 
-#include "platform.h" //Contains arty a7 gpio definitions.
-#include "gpio.h"  //Contains the methods to Access GPIOs
+#అన్తర్భావ "platform.h" //Contains arty a7 gpio definitions.
+#అన్తర్భావ "gpio.h"  //Contains the methods to Access GPIOs
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ఒకవేళ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 /*! RGB LED 0 defines */
-#define LED0_R GPIO16 
-#define LED0_G GPIO17
-#define LED0_B GPIO18
+#నిర్వచించు LED0_R GPIO16 
+#నిర్వచించు LED0_G GPIO17
+#నిర్వచించు LED0_B GPIO18
 
 /*! RGB LED 1 defines */
-#define LED1_R GPIO19
-#define LED1_G GPIO20
-#define LED1_B GPIO21
+#నిర్వచించు LED1_R GPIO19
+#నిర్వచించు LED1_G GPIO20
+#నిర్వచించు LED1_B GPIO21
 
 /*! Normal LED 1 defines */
-#define LED2 GPIO22
+#నిర్వచించు LED2 GPIO22
 
 /*! Normal LED 2 defines */
-#define LED3 GPIO23
+#నిర్వచించు LED3 GPIO23
 
 
 /*! Combined RGB LED defines */
-#define RGB0 (LED0_R | LED0_G | LED0_B )
-#define RGB1 (LED1_R | LED1_G | LED1_B )
+#నిర్వచించు RGB0 (LED0_R | LED0_G | LED0_B )
+#నిర్వచించు RGB1 (LED1_R | LED1_G | LED1_B )
 
 /*! Combined Normal LED defines */
-#define NORMAL_LEDS ( LED2 | LED3 )
-#define RGB_LEDS ( RGB0 | RGB1 )
+#నిర్వచించు సాధారణ_LEDS ( LED2 | LED3 )
+#నిర్వచించు RGB_LEDS ( RGB0 | RGB1 )
 
 /*! Combines ALL LED defines */
-#define ALL_LEDS (RGB_LEDS | NORMAL_LEDS)
+#నిర్వచించు ALL_LEDS (RGB_LEDS | సాధారణ_LEDS)
 
 
 /*! Control for all LEDS */
-#define NORMAL_LED0 0
-#define NORMAL_LED1 1
+#నిర్వచించు సాధారణ_LED0 0
+#నిర్వచించు సాధారణ_LED1 1
 
-#define RGB_LED0 0
-#define RGB_LED1 1
+#నిర్వచించు RGB_LED0 0
+#నిర్వచించు RGB_LED1 1
 
 // function prototype
-void configure_ledx(unsigned long pin_cntrl);
-void configure_rgb_ledx(unsigned char led_no);
-void configure_normal_leds();
-void configure_rgb_leds();
-void configure_all_leds();
-void turn_on_ledx(unsigned long pin_cntrl);
-void turn_off_ledx(unsigned long pin_cntrl);
-void turn_on_normal_leds();
-void turn_off_normal_leds();
-void turn_on_rgb_ledx(unsigned char led_no);
-void turn_off_rgb_ledx(unsigned char led_no);
-void turn_on_rgb_leds();
-void turn_off_rgb_leds();
-void turn_on_all_leds();
-void turn_off_all_leds();
-void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2);
-void toggle_normal_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_all_leds( unsigned long delay1, unsigned long delay2);
+శూన్య configure_ledx(గుర్తులేని దీర్ఘ pin_cntrl);
+శూన్య configure_rgb_ledx(గుర్తులేని అక్షరం led_no);
+శూన్య configure_సాధారణ_leds();
+శూన్య configure_rgb_leds();
+శూన్య configure_all_leds();
+శూన్య turn_on_ledx(గుర్తులేని దీర్ఘ pin_cntrl);
+శూన్య turn_off_ledx(గుర్తులేని దీర్ఘ pin_cntrl);
+శూన్య turn_on_సాధారణ_leds();
+శూన్య turn_off_సాధారణ_leds();
+శూన్య turn_on_rgb_ledx(గుర్తులేని అక్షరం led_no);
+శూన్య turn_off_rgb_ledx(గుర్తులేని అక్షరం led_no);
+శూన్య turn_on_rgb_leds();
+శూన్య turn_off_rgb_leds();
+శూన్య turn_on_all_leds();
+శూన్య turn_off_all_leds();
+శూన్య toggle_ledx(గుర్తులేని దీర్ఘ pin_cntrl, గుర్తులేని దీర్ఘ delay1, గుర్తులేని దీర్ఘ delay2);
+శూన్య toggle_సాధారణ_leds( గుర్తులేని దీర్ఘ delay1, గుర్తులేని దీర్ఘ delay2 );
+శూన్య toggle_rgb_leds( గుర్తులేని దీర్ఘ delay1, గుర్తులేని దీర్ఘ delay2 );
+శూన్య toggle_all_leds( గుర్తులేని దీర్ఘ delay1, గుర్తులేని దీర్ఘ delay2);
 
 
-#endif
-#endif
+#అయితే_ముగింపు
+#అయితే_ముగింపు

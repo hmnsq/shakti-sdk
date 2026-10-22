@@ -27,24 +27,24 @@
 @detail Detects the pressed key/button and prints decoded keypad value (0 - 15).
 */
 
-#include "gpio.h"
-#include "platform.h"
-#include "keypad.h"//Includes the definitions of keypad function//
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "keypad.h"//Includes the definitions of keypad function//
 
 /* global variable definition*/
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
-int col_row = -1;
+పూర్ణాంకం కీలకం = -1;
+పూర్ణాంకం నిలువు_అడ్డువరుస = -1;
 
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-unsigned int col[4]={0, 1, 2, 3};
-unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+గుర్తులేని పూర్ణాంకం అడ్డువరుస_pins[ROWNUM];
+గుర్తులేని పూర్ణాంకం నిలువు_pins[COLNUM];
+గుర్తులేని పూర్ణాంకం నిలువు[4]={0, 1, 2, 3};
+గుర్తులేని పూర్ణాంకం అడ్డువరుస[4]={4, 5, 6, 7};
+పూర్ణాంకం కీలకం_map[COLNUM][ROWNUM];
 
 
-int  key_table[4][4] =
+పూర్ణాంకం  కీలకం_పట్టిక[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -58,15 +58,15 @@ int  key_table[4][4] =
  * @param unsigned int* row
  * @param unsigned int* col
  */
-void set_pins(unsigned int*  row, unsigned int* col)
+శూన్య సమితి_pins(గుర్తులేని పూర్ణాంకం*  అడ్డువరుస, గుర్తులేని పూర్ణాంకం* నిలువు)
 {
-	for(int i = 0 ; i < COLNUM ; i++)
+	కొరకు(పూర్ణాంకం i = 0 ; i < COLNUM ; i++)
 	{
-		col_pins[i] = col[i];// set col
+		నిలువు_pins[i] = నిలువు[i];// set col
 	}
-	for(int j = 0 ; j < ROWNUM ; j++) // set row
+	కొరకు(పూర్ణాంకం j = 0 ; j < ROWNUM ; j++) // set row
 	{
-		row_pins[j] = row[j];
+		అడ్డువరుస_pins[j] = అడ్డువరుస[j];
 	}
 }
 
@@ -75,13 +75,13 @@ void set_pins(unsigned int*  row, unsigned int* col)
  * @details Fills the passed array values into key_map array.
  * @param int table
  */
-void set_key_map(int table[COLNUM][ROWNUM])
+శూన్య సమితి_కీలకం_map(పూర్ణాంకం పట్టిక[COLNUM][ROWNUM])
 {
-	for(int i = 0 ; i < COLNUM ; i++)
+	కొరకు(పూర్ణాంకం i = 0 ; i < COLNUM ; i++)
 	{
-		for(int j = 0 ; j < ROWNUM ; j++)
+		కొరకు(పూర్ణాంకం j = 0 ; j < ROWNUM ; j++)
 		{
-			key_map[i][j] = table[i][j];
+			కీలకం_map[i][j] = పట్టిక[i][j];
 		}
 	}
 }
@@ -92,26 +92,26 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * and returns the decoded key value.
  * @return Key value pressed
  */
-int get_key_another_way()
+పూర్ణాంకం get_కీలకం_another_way()
 {
 
-	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+	write_మాట(GPIO_దత్తాంశం_REG, (0xF << OUTPINS_స్థానభ్రంశం) );
 
-	for (int i = 0 ; i < COLNUM ; i++)
+	కొరకు (పూర్ణాంకం i = 0 ; i < COLNUM ; i++)
 	{
-		write_word(GPIO_DATA_REG, ~(0x1 << (OUTPINS_OFFSET + i) )   );
+		write_మాట(GPIO_దత్తాంశం_REG, ~(0x1 << (OUTPINS_స్థానభ్రంశం + i) )   );
 
-		for (int j = 0 ; j < ROWNUM ; j++)
+		కొరకు (పూర్ణాంకం j = 0 ; j < ROWNUM ; j++)
 		{
-			if ( ( read_word(row_pins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
+			ఒకవేళ ( ( read_మాట(అడ్డువరుస_pins[j]) & (INPINS << INPINS_స్థానభ్రంశం )  ) == 0)
 			{
-				return key_map[i][j];
+				తిరిగి కీలకం_map[i][j];
 			}
 		}
-		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+		write_మాట(GPIO_దత్తాంశం_REG, (0xF << OUTPINS_స్థానభ్రంశం) );
 	}
 
-	return 0;
+	తిరిగి 0;
 }
 
 /** @fn int get_key(int col_row)
@@ -121,9 +121,9 @@ int get_key_another_way()
  * @param int col row
  * @return Key value pressed
  */
-int get_key(int col_row)
+పూర్ణాంకం get_కీలకం(పూర్ణాంకం నిలువు_అడ్డువరుస)
 {
-    return key_map[col_row>>16][0xFFFF & col_row];
+    తిరిగి కీలకం_map[నిలువు_అడ్డువరుస>>16][0xFFFF & నిలువు_అడ్డువరుస];
 }
 
 /** @fn int get_col_row(void)
@@ -132,45 +132,45 @@ int get_key(int col_row)
    low and reading the row values     
  * @return Column and row combination.
  */
-int get_col_row(void)
+పూర్ణాంకం get_నిలువు_అడ్డువరుస(శూన్య)
 {
-	int col_row = 0;
-	unsigned long read_value = 0;
+	పూర్ణాంకం నిలువు_అడ్డువరుస = 0;
+	గుర్తులేని దీర్ఘ read_విలువ = 0;
 
-	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+	write_మాట(GPIO_దత్తాంశం_REG, (0xF << OUTPINS_స్థానభ్రంశం) );
 
-	for(int i = 0 ; i < COLNUM ; i++)
+	కొరకు(పూర్ణాంకం i = 0 ; i < COLNUM ; i++)
 	{
-		write_word(GPIO_DATA_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
+		write_మాట(GPIO_దత్తాంశం_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
 
-		for(int j = 0 ; j < ROWNUM ; j++)
+		కొరకు(పూర్ణాంకం j = 0 ; j < ROWNUM ; j++)
 		{
-			read_value =  read_word(GPIO_DATA_REG);
+			read_విలువ =  read_మాట(GPIO_దత్తాంశం_REG);
 
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 )
+			ఒకవేళ( ( read_విలువ & (1 << అడ్డువరుస_pins[j] ) ) == 0 )
 			{
-					return key_map[i][j];
+					తిరిగి కీలకం_map[i][j];
 			}
 		}
 
-		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+		write_మాట(GPIO_దత్తాంశం_REG, (0xF << OUTPINS_స్థానభ్రంశం) );
 	}
 
-	return -1;
+	తిరిగి -1;
 }
 
 /** @fn void gpio_init()
  * @brief This maps the keypad from pins
  * @details  Initialises Rows pins and coloumn pins of the mapped GPIO lines to keypad.  
  */
-void gpio_init()
+శూన్య gpio_init()
 {
-	set_pins(row, col);
+	సమితి_pins(అడ్డువరుస, నిలువు);
 
-	set_key_map(key_table);
+	సమితి_కీలకం_map(కీలకం_పట్టిక);
 
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
-	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
+	write_మాట(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
 }
 
 /** @fn int main()
@@ -178,22 +178,22 @@ void gpio_init()
  * @details  Detects the pressed key and prints its decoded value.  
  * @return Zero 
  */
-int main()
+పూర్ణాంకం ప్రధాన()
 {
-	int prev_col_row = 0;
+	పూర్ణాంకం prev_నిలువు_అడ్డువరుస = 0;
 	gpio_init(); //Intialization of gpio //
 
-	printf("\nGPIO Init Done");
-	while(1)
+	రాయి("\nGPIO Init Done");
+	అయితే(1)
 	{
-		col_row = get_col_row();
+		నిలువు_అడ్డువరుస = get_నిలువు_అడ్డువరుస();
 
-		if( col_row != -1 )
+		ఒకవేళ( నిలువు_అడ్డువరుస != -1 )
 		{
-			log_info("\nThe %x Key Pressed", col_row);
+			log_info("\nThe %x Key Pressed", నిలువు_అడ్డువరుస);
 				delay_loop(600, 2000);
 		}
 	}
 
-	return 0;
+	తిరిగి 0;
 }

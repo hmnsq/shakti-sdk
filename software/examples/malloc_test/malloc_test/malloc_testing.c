@@ -26,121 +26,121 @@
  * @detail This file contains the tests to verify the working of malloc
  */
 
-extern char _free_space[];
-extern char _STACK_SIZE[];
-extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
-extern char __bss_end[];
-extern char __bss_start[];
-extern char __sbss_end[];
-extern char __sbss_start[];
+బాహ్య అక్షరం _free_space[];
+బాహ్య అక్షరం దొంతర_కొలత[];
+బాహ్య అక్షరం కుప్ప_కొలత[];
+బాహ్య అక్షరం దొంతర_చివర[];
+బాహ్య అక్షరం దొంతర[];
+బాహ్య అక్షరం కుప్ప[];
+బాహ్య అక్షరం కుప్ప_చివర[];
+బాహ్య అక్షరం __bss_end[];
+బాహ్య అక్షరం __bss_start[];
+బాహ్య అక్షరం __sbss_end[];
+బాహ్య అక్షరం __sbss_start[];
 
 
-char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
-char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
-char *test7=(char *)&_heap;
-char *test8=(char *)&_heap_end;
-char *test9=(char *)&__bss_end;
-char *test10=(char *)&__bss_start;
-char *test11=(char *)&__sbss_end;
-char *test12=(char *)&__sbss_start;
+అక్షరం *test1=(అక్షరం *)&_free_space;
+అక్షరం *test3=(అక్షరం *)&దొంతర_కొలత;
+అక్షరం *test4=(అక్షరం *)&కుప్ప_కొలత;
+అక్షరం *test5=(అక్షరం *)&దొంతర_చివర;
+అక్షరం *test6=(అక్షరం *)&దొంతర;
+అక్షరం *test7=(అక్షరం *)&కుప్ప;
+అక్షరం *test8=(అక్షరం *)&కుప్ప_చివర;
+అక్షరం *test9=(అక్షరం *)&__bss_end;
+అక్షరం *test10=(అక్షరం *)&__bss_start;
+అక్షరం *test11=(అక్షరం *)&__sbss_end;
+అక్షరం *test12=(అక్షరం *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+పూర్ణాంకం c1,c2,c3,c4,c5;
+పూర్ణాంకం *సూచిక_2;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+పూర్ణాంకం ప్రధాన()
 {
 
-  printf("\n\n\n\n\n\nTest Running");
-  printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
-  printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
+  రాయి("\n\n\n\n\n\nTest Running");
+  రాయి("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
+  రాయి("\n %x %d %x %x %x %x %x",&సూచిక_2,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
-  printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
+  స్థిర పూర్ణాంకం b1,b2,b3,b4,b5;
+  రాయి("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
-  printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
+  పూర్ణాంకం a1,a2,a3,a4,a5;
+  రాయి("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+పూర్ణాంకం **a;
+పూర్ణాంకం *b,*c,*d;
+పూర్ణాంకం i=0;పూర్ణాంకం n;
 
 //Enter Size of Array;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+రాయి("\n size of array %d %x",n,&n);
+b=జ్ఞాపకం_ఇవ్వు(n*పరిమాణం(పూర్ణాంకం))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+రాయి("\n B's address %x %x",b,&b);
+కొరకు(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+కొరకు(i=0;i<n;i++)
 {
-    printf("\n b[%d]'s address is : %x",i,&b[i]);
-    printf("\n b[%d]'s value is : %d",i,b[i]);
+    రాయి("\n b[%d]'s address is : %x",i,&b[i]);
+    రాయి("\n b[%d]'s value is : %d",i,b[i]);
 }
 
-free(b);
+విడుదల(b);
 
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
+రాయి("\nArray B is freed");
+రాయి("\nb=%x",b);
+రాయి("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
-printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
+c=జ్ఞాపకం_ఇవ్వు(n*పరిమాణం(పూర్ణాంకం))	;
+రాయి("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
-printf("\n C's address %x",c);
+రాయి("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+కొరకు(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+కొరకు(i=0;i<n;i++)
 {
-    printf("\n c[%d]'s address is : %x",i,&c[i]);
-    printf("\n c[%d]'s value is : %d",i,c[i]);
+    రాయి("\n c[%d]'s address is : %x",i,&c[i]);
+    రాయి("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+విడుదల(c);
 
-printf("\nc=%x",c);
+రాయి("\nc=%x",c);
 
-int x;
+పూర్ణాంకం x;
 x=30;
 
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+రాయి("\n\n\nx address is %x",&x);
+d=జ్ఞాపకం_ఇవ్వు(x*పరిమాణం(పూర్ణాంకం));
 
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+రాయి("\n D's address %x",d);
+కొరకు(i=0;i<x;i++)
 {
-    printf("\nSetting value %d , %x",i+1,&d[i]); 
+    రాయి("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+కొరకు(i=0;i<x;i++)
 {
-    printf("\n d[%d]'s address is : %x",i,&d[i]);
-    printf("\n d[%d]'s value is : %d",i,d[i]);
+    రాయి("\n d[%d]'s address is : %x",i,&d[i]);
+    రాయి("\n d[%d]'s value is : %d",i,d[i]);
 }
 
-free(d);
+విడుదల(d);
 
-printf("\nd=%x",d);
+రాయి("\nd=%x",d);
 
 }

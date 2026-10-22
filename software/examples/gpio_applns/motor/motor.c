@@ -27,30 +27,30 @@
 shakti. The demonstration is done using the gpio pins.
 */
 
-#include <stdio.h>/* Includes definitions of standard input/output functions*/
-#include "gpio.h"/*Incudes the defintions of gpio functions and registers*/
-#include "platform.h"
+#అన్తర్భావ <stdio.h>/* Includes definitions of standard input/output functions*/
+#అన్తర్భావ "gpio.h"/*Incudes the defintions of gpio functions and registers*/
+#అన్తర్భావ "platform.h"
 
-#define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
-#define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
+#నిర్వచించు MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
+#నిర్వచించు MOTOR_తిరగేయి_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
 
 /** @fn void main()
  * @brief Performs the intilization of the corresponding registers of gpio pins.
  */
-void main()
+శూన్య ప్రధాన()
 {
 	log_info("Motor Control\n");
-	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
+	write_మాట(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-	while(1) {
-		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
+	అయితే(1) {
+		write_మాట(GPIO_దత్తాంశం_REG, MOTOR_FORWARD_CNTRL);
 		log_info("Forward\n");
-		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
+		log_info("GPIO Data Register Value: %d\n",GPIO_దత్తాంశం_REG);
 		delay_loop(5000, 5000);
 
-		write_word(GPIO_DATA_REG, MOTOR_REVERSE_CNTRL);
+		write_మాట(GPIO_దత్తాంశం_REG, MOTOR_తిరగేయి_CNTRL);
 		log_info("Reverse\n");
-		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
+		log_info("GPIO Data Register Value: %d\n",GPIO_దత్తాంశం_REG);
 		delay_loop(5000, 5000);
 		}
 

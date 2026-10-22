@@ -30,36 +30,36 @@
 
 
 
-#include "ucam.h"
+#అన్తర్భావ "ucam.h"
 
 /** @fn assert_check(int bool,int track)
  * @brief assert function, exits if assert failed.
  * @param int bool-false or true
  * @param int track - 0 if host, 1 if camera
  */
-void assert_check(int bool,int track) {
-    if(bool) return;
-    if(track) 
-      printf("Camera response error!!\n");
-    else {
-      printf("Host response error!!\nIs host connected?");
-      return;
+శూన్య assert_check(పూర్ణాంకం bool,పూర్ణాంకం track) {
+    ఒకవేళ(bool) తిరిగి;
+    ఒకవేళ(track) 
+      రాయి("Camera response error!!\n");
+    లేకపోతే {
+      రాయి("Host response error!!\nIs host connected?");
+      తిరిగి;
     }
-    exit(-1);
+    నిష్క్రమించు(-1);
 }
 
 /** @fn delay_milli(unsigned long milli_seconds)
  * @brief delay function 
  * @param unsigned long milli_seconds - delay for given milliseconds
  */
-void delay_milli(unsigned long milli_seconds)
+శూన్య delay_milli(గుర్తులేని దీర్ఘ milli_seconds)
 {
-	unsigned long cntr1 = milli_seconds;
-	unsigned long tmpCntr;
+	గుర్తులేని దీర్ఘ cntr1 = milli_seconds;
+	గుర్తులేని దీర్ఘ tmpCntr;
 
-	while (cntr1--) {
+	అయితే (cntr1--) {
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		అయితే (tmpCntr--);
 	}
 }
 
@@ -68,10 +68,10 @@ void delay_milli(unsigned long milli_seconds)
  * @param const uint8_t* str-pointer to command string  
  * @param int len- length of command string
  */
-void send(const uint8_t* str,int len){
-  int i;
+శూన్య send(స్థిరరాశి uint8_t* str,పూర్ణాంకం len){
+  పూర్ణాంకం i;
   flush_uart(CAM);
-  for(i =0;i<len;i++){
+  కొరకు(i =0;i<len;i++){
     write_uart_character(CAM,*str);
     str++;
   }
@@ -82,11 +82,11 @@ void send(const uint8_t* str,int len){
  * @param int cmdno-command number of ACK 
  * @param int pid- packet ID
  */
-void recieve_ack(int cmdno,int pid)
+శూన్య recieve_ack(పూర్ణాంకం cmdno,పూర్ణాంకం pid)
 {
   uint8_t str[6]; 
-  int i = 0;
-  for(i=0;i<6;i++){
+  పూర్ణాంకం i = 0;
+  కొరకు(i=0;i<6;i++){
     read_uart_character(CAM,(str+i));
   }
   uint8_t cc = (uint8_t)cmdno; 
@@ -101,7 +101,7 @@ void recieve_ack(int cmdno,int pid)
  * @param int pid- packet ID 
  * @param uint8_t str[]- pointer to command string
  */
-void get_ack(int cmdno,int pid, uint8_t str[])
+శూన్య get_ack(పూర్ణాంకం cmdno,పూర్ణాంకం pid, uint8_t str[])
 {
   str[0] = (uint8_t)(0xAA);
   str[1] = (uint8_t)(0x0E);
@@ -116,10 +116,10 @@ void get_ack(int cmdno,int pid, uint8_t str[])
  * @param uint8_t str[]- pointer to string 
  * @param int len - number of bytes to recieve from camera
  */
-void recieve_gen(uint8_t str[],int len)
+శూన్య recieve_gen(uint8_t str[],పూర్ణాంకం len)
 {
-  int i;
-  for(i = 0;i < len; i++)
+  పూర్ణాంకం i;
+  కొరకు(i = 0;i < len; i++)
   {
     read_uart_character(CAM,str+i);
   }
@@ -130,20 +130,20 @@ void recieve_gen(uint8_t str[],int len)
  * @param int count- Packet ID of current packet 
  * @param int limit- number of bytes in current packet
  */ 
-void recieve_img(int count,int limit){
+శూన్య recieve_img(పూర్ణాంకం లెక్క,పూర్ణాంకం హద్దు){
   uint8_t ptr[256];
-  int i=0;
-  uint8_t ack_temp[6];
-  get_ack(0,count,ack_temp);
-  send(ack_temp, 6);
+  పూర్ణాంకం i=0;
+  uint8_t ack_తాత్కాలిక[6];
+  get_ack(0,లెక్క,ack_తాత్కాలిక);
+  send(ack_తాత్కాలిక, 6);
   // if limit=6 it means we don't expect any data bytes
-  if(limit==6) return;
-  while(1){
+  ఒకవేళ(హద్దు==6) తిరిగి;
+  అయితే(1){
     read_uart_character(CAM,(ptr+i));
     i++;
-    if(i==limit) break;
+    ఒకవేళ(i==హద్దు) ఆపు;
   }
-  for(int j=4;j<i-2;j++){
+  కొరకు(పూర్ణాంకం j=4;j<i-2;j++){
     write_uart_character(HOST,ptr[j]);
   }
 }
@@ -152,58 +152,58 @@ void recieve_img(int count,int limit){
  * @brief Function to wake up camera
  * @return int - 0 if success, -1 if error
  */ 
-int init_cam()
+పూర్ణాంకం init_cam()
 {
-  int delay_time = 4;
-  int no=0;
-  const uint8_t  sync_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0D), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  const uint8_t  ack_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0D),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  const uint8_t  ack_command_reply[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  start:
+  పూర్ణాంకం delay_సమయం = 4;
+  పూర్ణాంకం no=0;
+  స్థిరరాశి uint8_t  sync_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0D), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  స్థిరరాశి uint8_t  ack_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0D),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  స్థిరరాశి uint8_t  ack_command_జవాబు[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  ప్రారంభం:
   {
     no++;
-    printf("Round : %d\n",no);
+    రాయి("Round : %d\n",no);
     send(sync_command,6);
-    delay_milli(delay_time++); 
-    if(CAM->status & STS_RX_NOT_EMPTY)
+    delay_milli(delay_సమయం++); 
+    ఒకవేళ(CAM->స్థితి_3 & STS_RX_NOT_ఖాళీలు)
     {
         // code to read 12 characters from the buffer and if it matches with the ACK and sync commands go to succes
-        int i;
-        for(i = 0;i<6;i++) 
+        పూర్ణాంకం i;
+        కొరకు(i = 0;i<6;i++) 
         {
            uint8_t ch;
            read_uart_character(CAM,&ch);
-           if(i == 3)continue; // don't care xx thing
-           if(ch != ack_command[i]) goto fail;
+           ఒకవేళ(i == 3)కొనసాగు; // don't care xx thing
+           ఒకవేళ(ch != ack_command[i]) వెళ్ళు fail;
         }
-        for(i = 0;i<6;i++)
+        కొరకు(i = 0;i<6;i++)
         {
             uint8_t ch;
             read_uart_character(CAM,&ch);
-            if(ch != sync_command[i]) goto fail;
+            ఒకవేళ(ch != sync_command[i]) వెళ్ళు fail;
         }
-        goto success;
+        వెళ్ళు success;
     }
   }
   fail:
-  if(delay_time>15000) {
-    printf("Can't wake up camera! Is camera connected?\n");
-    return -1;
+  ఒకవేళ(delay_సమయం>15000) {
+    రాయి("Can't wake up camera! Is camera connected?\n");
+    తిరిగి -1;
   }
-  goto start;
+  వెళ్ళు ప్రారంభం;
   success:
   flush_uart(CAM);
-  send(ack_command_reply,6);
-  printf("\n synchronisation process done waiting for 2 seconds for stabilisation \n");
+  send(ack_command_జవాబు,6);
+  రాయి("\n synchronisation process done waiting for 2 seconds for stabilisation \n");
   delay(2);
-  printf("\n you are all set \n");
-  return 0;
+  రాయి("\n you are all set \n");
+  తిరిగి 0;
 }
 
 /** @fn send_full_reset()
  * @brief Send Full reset to camera
  */ 
-void send_full_reset() {
+శూన్య send_నిండిన_reset() {
   uint8_t reset_command[] = {(uint8_t)(0xAA),(uint8_t)(0x08),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
   send(reset_command,6);
   recieve_ack(8,0);
@@ -213,7 +213,7 @@ void send_full_reset() {
  * @brief Function to get picture
  * @param int mode - 0 for one image, 1 for continuous
  */ 
-void get_pic(int mode)
+శూన్య get_pic(పూర్ణాంకం బహుళకం)
 {
   //INITIAL_command : AA 01 00 07 xx 07 ( specific for JPEG,640x480 xx=don't care )
   uint8_t initial_command[] = {(uint8_t)(0xAA),(uint8_t)(0x1),(uint8_t)(0x0),(uint8_t)(0x7),(uint8_t)(0x3),(uint8_t)(0x7)};
@@ -221,53 +221,53 @@ void get_pic(int mode)
   recieve_ack(1,0);
 
   //SET_PACKAGE_SIZE_command : AA 06 08 00 01 00 (size=256)
-  uint8_t set_package_command[] = {(uint8_t)(0xAA),(uint8_t)(0x6),(uint8_t)(0x8),(uint8_t)(0x0),(uint8_t)(0x1),(uint8_t)(0x0)};
-  send(set_package_command,6);
+  uint8_t సమితి_package_command[] = {(uint8_t)(0xAA),(uint8_t)(0x6),(uint8_t)(0x8),(uint8_t)(0x0),(uint8_t)(0x1),(uint8_t)(0x0)};
+  send(సమితి_package_command,6);
   recieve_ack(6,0);
 
   //GET_PICTURE_command : AA 04 05 00 00 00 ( Current JPEG  )
   uint8_t get_pic_command[] = {(uint8_t)(0xAA),(uint8_t)(0x4),(uint8_t)(0x5),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
   
-  start : 
+  ప్రారంభం : 
   send(get_pic_command,6);
   recieve_ack(4,0);
-  uint8_t data[6];
-  recieve_gen(data,6);
+  uint8_t దత్తాంశం_2[6];
+  recieve_gen(దత్తాంశం_2,6);
 
   //DATA_command : AA 0A 05 xx yy zz ( current JPEG mode )
-  assert_check(data[0]==0xAA,1);
-  assert_check(data[1]==0xA,1);
-  assert_check(data[2]==0x5,1);
+  assert_check(దత్తాంశం_2[0]==0xAA,1);
+  assert_check(దత్తాంశం_2[1]==0xA,1);
+  assert_check(దత్తాంశం_2[2]==0x5,1);
 
-  long no_of_pg = (int)data[3] + (((long)data[4])<<8) + (((long)data[5])<<16) ;
-  printf("New size : %ld\n",no_of_pg);
+  దీర్ఘ no_యొక్క_pg = (పూర్ణాంకం)దత్తాంశం_2[3] + (((దీర్ఘ)దత్తాంశం_2[4])<<8) + (((దీర్ఘ)దత్తాంశం_2[5])<<16) ;
+  రాయి("New size : %ld\n",no_యొక్క_pg);
 
   // Send data to host
   flush_uart(HOST);
-  for(int i=0;i<6;i++)
-    write_uart_character(HOST,data[i]);
+  కొరకు(పూర్ణాంకం i=0;i<6;i++)
+    write_uart_character(HOST,దత్తాంశం_2[i]);
 
-  int counter = no_of_pg/250 ;
-  int i = 0;
-  char recv;
+  పూర్ణాంకం counter = no_యొక్క_pg/250 ;
+  పూర్ణాంకం i = 0;
+  అక్షరం recv;
   //Wait for HOST to confirm that DATA_command is recieved.
   //Host should reply with 'K'
   read_uart_character(HOST,&recv);
   assert_check(recv=='K',0);
-  for(i=0;i<counter;i++){
+  కొరకు(i=0;i<counter;i++){
     recieve_img(i,256);
   }
-  recieve_img(counter,6+(no_of_pg%250));
-  if(no_of_pg%250 != 0) {     
-    uint8_t ack_temp[6];
-    get_ack(0,counter+1,ack_temp);
-    send(ack_temp, 6);
+  recieve_img(counter,6+(no_యొక్క_pg%250));
+  ఒకవేళ(no_యొక్క_pg%250 != 0) {     
+    uint8_t ack_తాత్కాలిక[6];
+    get_ack(0,counter+1,ack_తాత్కాలిక);
+    send(ack_తాత్కాలిక, 6);
   }
   //Wait for HOST to confirm that image is recieved.
   //Host should reply with 'O'
   read_uart_character(HOST,&recv);
   assert_check(recv=='O',0);
-  printf("Imgdone\n");
+  రాయి("Imgdone\n");
 
-  if(mode) goto start;
+  ఒకవేళ(బహుళకం) వెళ్ళు ప్రారంభం;
 }

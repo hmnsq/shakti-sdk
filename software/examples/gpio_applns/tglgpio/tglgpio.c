@@ -26,22 +26,22 @@
 @brief Control an led with the help of a button, gpio based.
 */
 
-#include "platform.h"
-#include "utils.h" 
-#include "gpio.h" 
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "utils.h" 
+#అన్తర్భావ "gpio.h" 
 
 /** @fn tglgpio
  * @brief Performs the toggling operation  with the help of button.
  */
-void tglgpio()
+శూన్య tglgpio()
 {
 //Assumption 1 ---> output, 0 ---> input
-	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
+	write_మాట(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
 
-	while (1) {
-		write_word(GPIO_DATA_REG, 0x00FFFFFF);
+	అయితే (1) {
+		write_మాట(GPIO_దత్తాంశం_REG, 0x00FFFFFF);
 		delay_loop(1000, 5000);
-		write_word(GPIO_DATA_REG, 0x00);
+		write_మాట(GPIO_దత్తాంశం_REG, 0x00);
 		delay_loop(1000, 5000);
 	}
 }
@@ -49,9 +49,9 @@ void tglgpio()
 /** @fn main
  * @brief Initiates writing to gpio pins by calling tglgpio
  */ 
-void main()
+శూన్య ప్రధాన()
 {
 	tglgpio();
-	return 0;
+	తిరిగి 0;
 }
 

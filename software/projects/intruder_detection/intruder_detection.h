@@ -28,42 +28,42 @@
 */
 
 
-#ifndef INTRUDER_DETECTION_H
-#define INTRUDER_DETECTION_H
+#నిర్వచితం_కాకపోతే INTRUDER_DETECTION_H
+#నిర్వచించు INTRUDER_DETECTION_H
 
-#define ROWNUM              4
-#define COLNUM              4
-#define OUTPINS_OFFSET      0
-#define INPINS_OFFSET       4
-#define OUTPINS             (0xF << OUTPINS_OFFSET)
-#define INPINS              (0xF << INPINS_OFFSET)
+#నిర్వచించు ROWNUM              4
+#నిర్వచించు COLNUM              4
+#నిర్వచించు OUTPINS_స్థానభ్రంశం      0
+#నిర్వచించు INPINS_స్థానభ్రంశం       4
+#నిర్వచించు OUTPINS             (0xF << OUTPINS_స్థానభ్రంశం)
+#నిర్వచించు INPINS              (0xF << INPINS_స్థానభ్రంశం)
 
 //Peripheral Pins
-#define BUZZER              GPIO11
-#define LED_P1              GPIO16
-#define LED_P2              GPIO18
-#define LED_P3              GPIO19
-#define LED_P4              GPIO21
-#define POWER_SWITCH        GPIO24
-#define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
-#define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
-#define PIR_IN	            GPIO8
-#define PANIC_BUTTON_OFFSET 28
-#define PIR_OFFSET          8
-#define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#నిర్వచించు BUZZER              GPIO11
+#నిర్వచించు LED_P1              GPIO16
+#నిర్వచించు LED_P2              GPIO18
+#నిర్వచించు LED_P3              GPIO19
+#నిర్వచించు LED_P4              GPIO21
+#నిర్వచించు POWER_SWITCH        GPIO24
+#నిర్వచించు DEACTIVATE_SWITCH   GPIO25
+#నిర్వచించు PANIC_BUTTON        GPIO28          //ఆదానం
+#నిర్వచించు GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
+#నిర్వచించు PIR_లోపల	            GPIO8
+#నిర్వచించు PANIC_BUTTON_స్థానభ్రంశం 28
+#నిర్వచించు PIR_స్థానభ్రంశం          8
+#నిర్వచించు ALARM_TIMER         5
+#నిర్వచించు ఎగువ                1
+#నిర్వచించు దిగువ                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#నిర్వచించు PASS_అంకె            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+శూన్య సమితి_కీలకం_pins_map(గుర్తులేని పూర్ణాంకం* అడ్డువరుస, గుర్తులేని పూర్ణాంకం* నిలువు, పూర్ణాంకం పట్టిక[COLNUM][ROWNUM]);
+పూర్ణాంకం get_కీలకం();
+పూర్ణాంకం get_నిలువు_అడ్డువరుస(శూన్య);
+గుర్తులేని పూర్ణాంకం అడ్డువరుస_pins[ROWNUM];
+గుర్తులేని పూర్ణాంకం నిలువు_pins[COLNUM];
+పూర్ణాంకం కీలకం_map[COLNUM][ROWNUM];
 
-#endif
+#అయితే_ముగింపు

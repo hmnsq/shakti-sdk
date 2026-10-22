@@ -27,16 +27,16 @@
   @detail I2C based routines to write and read all locations of AT24C256.
  */
 
-#include <stdint.h>
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#అన్తర్భావ <stdint.h>
+#అన్తర్భావ "i2c.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "uart.h"
 
-#define AT24C256_SLAVE_ADDRESS 0xA0 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define I2C i2c_instance[0]
+#నిర్వచించు AT24_C256_SLAVE_చిరునామా 0xA0 
+#నిర్వచించు DELAY_విలువ 900
+#నిర్వచించు PRESCALER_లెక్క 0x1F
+#నిర్వచించు SCLK_లెక్క 0x91
+#నిర్వచించు I2C i2c_instance[0]
 
 /** @fn int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, unsigned long delay)
  * @brief Reads the data of the given address
@@ -46,35 +46,35 @@
  * @param delay
  * @return read status (zero on success)
  */
-int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, uint8_t *read_data, unsigned long delay)
+పూర్ణాంకం read_eeprom_చిరునామా(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం చిరునామా, uint8_t *read_దత్తాంశం_2, గుర్తులేని దీర్ఘ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned char temp = 0;
+	గుర్తులేని అక్షరం read_buf[4] = {'\0'};
+	పూర్ణాంకం i = 0, j = 0, k = 0, స్థితి_3=0;
+	గుర్తులేని అక్షరం తాత్కాలిక = 0;
 
 	//Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_చిరునామా(i2c_instance, AT24_C256_SLAVE_చిరునామా, I2C_WRITE, 800);
 
 	//Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, ( ( address >> 8 ) & 0xFF), delay);
+	i2c_write_దత్తాంశం(i2c_instance, ( ( చిరునామా >> 8 ) & 0xFF), delay);
 	//Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, ( ( address >> 0 ) & 0xFF), delay);
+	i2c_write_దత్తాంశం(i2c_instance, ( ( చిరునామా >> 0 ) & 0xFF), delay);
 
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 	//Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_READ, delay);
+	i2c_send_slave_చిరునామా(i2c_instance, AT24_C256_SLAVE_చిరునామా, I2C_READ, delay);
 
 	/* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
 
 	//Reads the MSB Byte of temperature [D9 - D1]
-	i2c_read_data(i2c_instance, &temp, delay);
-	*read_data = temp;
+	i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
+	*read_దత్తాంశం_2 = తాత్కాలిక;
 
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	తిరిగి 0;
 }
 
 /** @fn int read_eeprom_locations(i2c_struct * i2c_instance, unsigned int address, unsigned char *read_data, unsigned long delay)
@@ -85,49 +85,49 @@ int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, uint8_t
  * @param delay
  * @return read status (zero on success)
  */
-int read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_data, uint16_t length, uint32_t delay)
+పూర్ణాంకం read_eeprom_locations(i2c_struct * i2c_instance, uint16_t చిరునామా, uint8_t *write_దత్తాంశం_2, uint16_t నిడివి_2, uint32_t delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned char temp = 0;
+	పూర్ణాంకం i = 0, j = 0, k = 0, స్థితి_3=0;
+	గుర్తులేని అక్షరం తాత్కాలిక = 0;
 
 	//Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	కొరకు(i = 0; i < నిడివి_2; i++)
 	{
-		if (0 == (address % 64 ) )
+		ఒకవేళ (0 == (చిరునామా % 64 ) )
 		{
 			//Writes the slave address for write
-			i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, delay);
+			i2c_send_slave_చిరునామా(i2c_instance, AT24_C256_SLAVE_చిరునామా, I2C_WRITE, delay);
 
 			//Writes the pointer to msb address that needs to be read
-			i2c_write_data(i2c_instance, ( ( address >> 8 ) & 0xFF), delay);
+			i2c_write_దత్తాంశం(i2c_instance, ( ( చిరునామా >> 8 ) & 0xFF), delay);
 			//Writes the pointer to lsb address that needs to be read
-			i2c_write_data(i2c_instance, ( ( address >> 0 ) & 0xFF), delay);
+			i2c_write_దత్తాంశం(i2c_instance, ( ( చిరునామా >> 0 ) & 0xFF), delay);
 
 			//Stops the I2C transaction to start reading the temperature value.
 			i2c_instance->control = I2C_STOP;
 
 			//Writes the slave address for read
-			i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_READ, delay);
+			i2c_send_slave_చిరునామా(i2c_instance, AT24_C256_SLAVE_చిరునామా, I2C_READ, delay);
 			/* Make a dummy read as per spec of the I2C controller */
-			i2c_read_data(i2c_instance, &temp, delay);
+			i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
 		}
 
-		i2c_read_data(i2c_instance, write_data, delay);
-		printf("\nread Value: %x", *write_data);
+		i2c_read_దత్తాంశం(i2c_instance, write_దత్తాంశం_2, delay);
+		రాయి("\nread Value: %x", *write_దత్తాంశం_2);
 
-		if( i == (length - 2) )
+		ఒకవేళ( i == (నిడివి_2 - 2) )
 			i2c_instance->control = I2C_NACK;
 
-		*write_data++;
-		address ++;
+		*write_దత్తాంశం_2++;
+		చిరునామా ++;
 
-		if(0 == (address % 64) )
+		ఒకవేళ(0 == (చిరునామా % 64) )
 		{
 			i2c_instance->control = I2C_STOP;
 		}
 	}
 
-	return 0;
+	తిరిగి 0;
 }
 
 /** @fn int write_eeprom_address(i2c_struct * i2c_instance, unsigned int address, unsigned int *write_value, unsigned long delay)
@@ -139,22 +139,22 @@ int read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t write_value, unsigned long delay)
+పూర్ణాంకం write_eeprom_చిరునామా(i2c_struct * i2c_instance, uint16_t చిరునామా, uint8_t write_విలువ, గుర్తులేని దీర్ఘ delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, delay);
+	పూర్ణాంకం i = 0, j = 0, k = 0, స్థితి_3=0;
+	గుర్తులేని పూర్ణాంకం తాత్కాలిక = 0;
+	i2c_send_slave_చిరునామా(i2c_instance, AT24_C256_SLAVE_చిరునామా, I2C_WRITE, delay);
 
 	//Writes the pointer to msb address that needs to be read
-	i2c_write_data(i2c_instance, ( ( address >> 8 ) & 0xFF), delay);
+	i2c_write_దత్తాంశం(i2c_instance, ( ( చిరునామా >> 8 ) & 0xFF), delay);
 	//Writes the pointer to lsb address that needs to be read
-	i2c_write_data(i2c_instance, ( ( address >> 0 ) & 0xFF), delay);
+	i2c_write_దత్తాంశం(i2c_instance, ( ( చిరునామా >> 0 ) & 0xFF), delay);
 
-	i2c_write_data(i2c_instance, ( write_value & 0xff), delay);
+	i2c_write_దత్తాంశం(i2c_instance, ( write_విలువ & 0xff), delay);
 
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	తిరిగి 0;
 }
 
 /** @fn int write_eeprom_locations(i2c_struct * i2c_instance, unsigned int address, unsigned int *write_value, unsigned long delay)
@@ -166,34 +166,34 @@ int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t wr
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_value, uint16_t length, uint32_t delay)
+పూర్ణాంకం write_eeprom_locations(i2c_struct * i2c_instance, uint16_t చిరునామా, uint8_t *write_విలువ, uint16_t నిడివి_2, uint32_t delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned int temp = 0;
+	పూర్ణాంకం i = 0, j = 0, k = 0, స్థితి_3=0;
+	గుర్తులేని పూర్ణాంకం తాత్కాలిక = 0;
 
-	for(i = 0; i < length; i++)
+	కొరకు(i = 0; i < నిడివి_2; i++)
 	{
-		if(0 == (address % 64) )
+		ఒకవేళ(0 == (చిరునామా % 64) )
 		{
-			i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, delay);
+			i2c_send_slave_చిరునామా(i2c_instance, AT24_C256_SLAVE_చిరునామా, I2C_WRITE, delay);
 
 			//Writes the pointer to msb address that needs to be read
-			i2c_write_data(i2c_instance, (( address >> 8 ) & 0xFF), delay);
+			i2c_write_దత్తాంశం(i2c_instance, (( చిరునామా >> 8 ) & 0xFF), delay);
 
 			//Writes the pointer to lsb address that needs to be read
-			i2c_write_data(i2c_instance, (( address >> 0 ) & 0xFF), delay);
+			i2c_write_దత్తాంశం(i2c_instance, (( చిరునామా >> 0 ) & 0xFF), delay);
 		}
-		i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
-		address ++;
+		i2c_write_దత్తాంశం(i2c_instance, (*write_విలువ++ & 0xff), delay);
+		చిరునామా ++;
 
-		if(0 == (address % 64) )
+		ఒకవేళ(0 == (చిరునామా % 64) )
 		{
 			i2c_instance->control = I2C_STOP;
 		}
 
 	}
 
-	return 0;
+	తిరిగి 0;
 }
 
 /** @fn int main()
@@ -202,88 +202,88 @@ int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t 
  * prints the read values
  * @return Zero
  */
-int main()
+పూర్ణాంకం ప్రధాన()
 {
 	uint16_t i = 0;
 	uint16_t timeout;
 	uint32_t delay = 2000;
-	uint16_t length = 0;
-	uint16_t address = 0;
-	uint8_t read_data = 0;
-	uint8_t write_data = 0;
-	uint8_t count = 0;
-	uint8_t write_value[256] = {'\0'};
-	uint8_t read_value[256] = {'\0'};
-	uint32_t data_read = 0, data_write = 0;
+	uint16_t నిడివి_2 = 0;
+	uint16_t చిరునామా = 0;
+	uint8_t read_దత్తాంశం_2 = 0;
+	uint8_t write_దత్తాంశం_2 = 0;
+	uint8_t లెక్క = 0;
+	uint8_t write_విలువ[256] = {'\0'};
+	uint8_t read_విలువ[256] = {'\0'};
+	uint32_t దత్తాంశం_read = 0, దత్తాంశం_write = 0;
 
 	log_debug("\tI2C: AT24C256 - EEPROM test\n");
-	read_data = 0x55;
+	read_దత్తాంశం_2 = 0x55;
 
-	if(read_data != write_data)
-		printf("\n Values are not equal. RV: %x; WV: %x", read_data, write_data);
-	else
-		printf("\n Values are equal. RV: %x; WV: %x", read_data, write_data);
+	ఒకవేళ(read_దత్తాంశం_2 != write_దత్తాంశం_2)
+		రాయి("\n Values are not equal. RV: %x; WV: %x", read_దత్తాంశం_2, write_దత్తాంశం_2);
+	లేకపోతే
+		రాయి("\n Values are equal. RV: %x; WV: %x", read_దత్తాంశం_2, write_దత్తాంశం_2);
 
-	if(write_data != read_data)
-		printf("\n Values are not equal. RV: %x; WV: %x", read_data, write_data);
-	else
-		printf("\n Values are equal. RV: %x; WV: %x", read_data, write_data);
+	ఒకవేళ(write_దత్తాంశం_2 != read_దత్తాంశం_2)
+		రాయి("\n Values are not equal. RV: %x; WV: %x", read_దత్తాంశం_2, write_దత్తాంశం_2);
+	లేకపోతే
+		రాయి("\n Values are equal. RV: %x; WV: %x", read_దత్తాంశం_2, write_దత్తాంశం_2);
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ఒకవేళ(config_i2c(I2C, PRESCALER_లెక్క, SCLK_లెక్క))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		తిరిగి -1;
 	}
-	else
+	లేకపోతే
 		log_info("\tI2C Intilization Success\n");
 
-	length = 256;
-	address = 0x00;
-	write_data = 0x55;
-	read_data = 0x0;
+	నిడివి_2 = 256;
+	చిరునామా = 0x00;
+	write_దత్తాంశం_2 = 0x55;
+	read_దత్తాంశం_2 = 0x0;
 
-	write_eeprom_address(I2C, address , write_data, delay);
+	write_eeprom_చిరునామా(I2C, చిరునామా , write_దత్తాంశం_2, delay);
 	log_debug("\n Write complete");
 
-	read_eeprom_address(I2C, address, &read_data, delay);
+	read_eeprom_చిరునామా(I2C, చిరునామా, &read_దత్తాంశం_2, delay);
 	log_debug("\n Read Complete");
-	read_data = 0x0;
+	read_దత్తాంశం_2 = 0x0;
 
-	if(write_data == read_data)
+	ఒకవేళ(write_దత్తాంశం_2 == read_దత్తాంశం_2)
 		log_info("\n AT24C256 EEPROM RW Passed");
-	else
+	లేకపోతే
 	{
-		log_error("\n AT24C256 EEPROM RW Failed; RV: %x; WV: %x", read_data, write_data);
+		log_error("\n AT24C256 EEPROM RW Failed; RV: %x; WV: %x", read_దత్తాంశం_2, write_దత్తాంశం_2);
 	}
 
-	for(i = 0; i < length; i++)
+	కొరకు(i = 0; i < నిడివి_2; i++)
 	{
-		write_value[i] = i;
-		data_write = write_value[i];
-		log_error("\n Write Value: %x", data_write);
+		write_విలువ[i] = i;
+		దత్తాంశం_write = write_విలువ[i];
+		log_error("\n Write Value: %x", దత్తాంశం_write);
 	}
 
-	write_eeprom_locations(I2C, address, &write_value, length, delay);
-	address = 0;
-	read_eeprom_locations(I2C, address, &read_value, length, delay);
+	write_eeprom_locations(I2C, చిరునామా, &write_విలువ, నిడివి_2, delay);
+	చిరునామా = 0;
+	read_eeprom_locations(I2C, చిరునామా, &read_విలువ, నిడివి_2, delay);
 
-	for (i = 0; i < length; i++)
+	కొరకు (i = 0; i < నిడివి_2; i++)
 	{
-		data_write = write_value[i];
-		data_read = read_value[i];
+		దత్తాంశం_write = write_విలువ[i];
+		దత్తాంశం_read = read_విలువ[i];
 
-		log_info("\n wv: %x; rv: %x", data_write, data_read );
+		log_info("\n wv: %x; rv: %x", దత్తాంశం_write, దత్తాంశం_read );
 
-		if(write_value[i] != read_value[i])
-			count++;
+		ఒకవేళ(write_విలువ[i] != read_విలువ[i])
+			లెక్క++;
 	}
 
-	if(0 != count )
-		printf("\n Write failed");
-	else
-		printf("\n I2C test passed");
+	ఒకవేళ(0 != లెక్క )
+		రాయి("\n Write failed");
+	లేకపోతే
+		రాయి("\n I2C test passed");
 
-	return 0;
+	తిరిగి 0;
 }

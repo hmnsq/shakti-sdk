@@ -22,29 +22,29 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ <stdio.h>
+#అన్తర్భావ <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
-}*head;
+నిర్మాణం కణుపు {
+	పూర్ణాంకం అంకె;
+	నిర్మాణం కణుపు *nptr;
+}*తల;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+శూన్య create_list(పూర్ణాంకం n);
+శూన్య display_list();
+శూన్య delete_కణుపు(పూర్ణాంకం position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+శూన్య ప్రధాన()
 {
-	int n,position,m;
-	char t[15];
-	printf("\n Enter the number of nodes on the linked list:\n");
+	పూర్ణాంకం n,position,m;
+	అక్షరం t[15];
+	రాయి("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
 
@@ -52,23 +52,23 @@ void main()
 
 	create_list(n);
 
-	printf("\n\n\nData entered in the list\n");
+	రాయి("\n\n\nData entered in the list\n");
 
 	display_list();
 
-	printf("\n\n Deletion\n");
-	printf("\nEnter the Node Position to be Deleted:\n");
+	రాయి("\n\n Deletion\n");
+	రాయి("\nEnter the Node Position to be Deleted:\n");
 
 	read_uart_string(uart_instance[0],t);
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_కణుపు(position);
 
-	printf("\nLinked list after deletion\n");
+	రాయి("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	అయితే(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,48 +76,48 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+శూన్య create_list(పూర్ణాంకం n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	నిర్మాణం కణుపు *కణుపు, *tmp;
+	పూర్ణాంకం దత్తాంశం_2,m;
+	అక్షరం t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	తల = (నిర్మాణం కణుపు*)జ్ఞాపకం_ఇవ్వు(పరిమాణం(నిర్మాణం కణుపు));
 
-	if(head == NULL)
+	ఒకవేళ(తల == ఖాళీ)
 	{
-		printf("\n Memory cannot be allocated");
+		రాయి("\n Memory cannot be allocated");
 	}
-	else
+	లేకపోతే
 	{
-		printf("\n\nInput data for node 1:");
+		రాయి("\n\nInput data for node 1:");
 
 		read_uart_string(uart_instance[0],t);
 
-		data = atoi(t);
+		దత్తాంశం_2 = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
-		tmp = head;
+		తల->అంకె = దత్తాంశం_2;
+		తల->nptr = ఖాళీ;
+		tmp = తల;
 
-		for(int i = 2;i <= n; i++)
+		కొరకు(పూర్ణాంకం i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			కణుపు = (నిర్మాణం కణుపు*)జ్ఞాపకం_ఇవ్వు(పరిమాణం(నిర్మాణం కణుపు));
 
-			if(node == NULL)
+			ఒకవేళ(కణుపు == ఖాళీ)
 			{
-				printf("\n Memory Cannot be allocated");
+				రాయి("\n Memory Cannot be allocated");
 			}
-			else 
+			లేకపోతే 
 			{
-				printf("\n\nInput Data for node %d :",i);
+				రాయి("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
-				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				దత్తాంశం_2 = atoi(t);
+				కణుపు->అంకె = దత్తాంశం_2;
+				కణుపు->nptr = ఖాళీ;
 
-				tmp->nptr = node;
+				tmp->nptr = కణుపు;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,22 +129,22 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+శూన్య display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	పూర్ణాంకం i = 0;
+	నిర్మాణం కణుపు *tmp;
 
-	if(head == NULL)
+	ఒకవేళ(తల == ఖాళీ)
 	{
-		printf(" List is empty.");
+		రాయి(" List is empty.");
 	}
-	else
+	లేకపోతే
 	{
-		tmp = head;
-		while(tmp != NULL) 
+		tmp = తల;
+		అయితే(tmp != ఖాళీ) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
-			printf("->");
+			రాయి(" Node%d = %d",i,tmp->అంకె);
+			రాయి("->");
 			tmp = tmp->nptr;
 			i++;
 		}
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+శూన్య delete_కణుపు(పూర్ణాంకం position)
 {
-	struct node *temp;
+	నిర్మాణం కణుపు *తాత్కాలిక;
 
-	if(head == NULL)
+	ఒకవేళ(తల == ఖాళీ)
 	{
-		printf(" List is empty.");
+		రాయి(" List is empty.");
 	}
-	else 
+	లేకపోతే 
 	{
-		temp = head;
+		తాత్కాలిక = తల;
 
-		if (position == 0)//Delete head node
+		ఒకవేళ (position == 0)//Delete head node
 		{
-			head = temp->nptr;
-			free(temp);
-			return;
+			తల = తాత్కాలిక->nptr;
+			విడుదల(తాత్కాలిక);
+			తిరిగి;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		కొరకు (పూర్ణాంకం i = 0; తాత్కాలిక != ఖాళీ && i < position-1; i++)//store previous of to be deleted node
 		{
-			temp = temp->nptr;
+			తాత్కాలిక = తాత్కాలిక->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		ఒకవేళ (తాత్కాలిక == ఖాళీ || తాత్కాలిక->nptr == ఖాళీ)
+			తిరిగి;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		నిర్మాణం కణుపు *nptr = తాత్కాలిక->nptr->nptr;
 
-		free(temp->nptr);
-		temp->nptr = nptr; 
+		విడుదల(తాత్కాలిక->nptr);
+		తాత్కాలిక->nptr = nptr; 
 	}
 }

@@ -24,29 +24,29 @@
 
 ***************************************************************************/
 
-#define I2C i2c_instance[1]
+#నిర్వచించు I2C i2c_instance[1]
 
-#define BMP280_SLAVE_ADDRESS 0xEC       //Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define BMP280_CTRL_MEANS 0xF4
-#define BMP280_NORMAL_MODE 0x26
-#define BMP280_STATUS_REGISTER 0xF3
-#define BMP280_CONFIG_REGISTER 0xF5
-#define BMP280_RESET_REGISTER 0xE0
+#నిర్వచించు BMP280_SLAVE_చిరునామా 0xEC       //Defines the Starting address of slave//
+#నిర్వచించు DELAY_విలువ 900
+#నిర్వచించు PRESCALER_లెక్క 0x1F
+#నిర్వచించు SCLK_లెక్క 0x91
+#నిర్వచించు BMP280_CTRL_MEANS 0xF4
+#నిర్వచించు BMP280_సాధారణ_బహుళకం 0x26
+#నిర్వచించు BMP280_స్థితి_రిజిస్టరు 0xF3
+#నిర్వచించు BMP280_CONFIG_రిజిస్టరు 0xF5
+#నిర్వచించు BMP280_RESET_రిజిస్టరు 0xE0
 
-#define BMP280_REG_DIG_T1 0x88
-#define BMP280_REG_DIG_T2 0x8A
-#define BMP280_REG_DIG_T3 0x8C
+#నిర్వచించు BMP280_REG_DIG_T1 0x88
+#నిర్వచించు BMP280_REG_DIG_T2 0x8A
+#నిర్వచించు BMP280_REG_DIG_T3 0x8C
 
-#define BMP280_REG_DIG_P1 0x8E
-#define BMP280_REG_DIG_P2 0x90
-#define BMP280_REG_DIG_P3 0x92
-#define BMP280_REG_DIG_P4 0x94
-#define BMP280_REG_DIG_P5 0x96
-#define BMP280_REG_DIG_P6 0x98
-#define BMP280_REG_DIG_P7 0x9A
-#define BMP280_REG_DIG_P8 0x9C
-#define BMP280_REG_DIG_P9 0x9E
+#నిర్వచించు BMP280_REG_DIG_P1 0x8E
+#నిర్వచించు BMP280_REG_DIG_P2 0x90
+#నిర్వచించు BMP280_REG_DIG_P3 0x92
+#నిర్వచించు BMP280_REG_DIG_P4 0x94
+#నిర్వచించు BMP280_REG_DIG_P5 0x96
+#నిర్వచించు BMP280_REG_DIG_P6 0x98
+#నిర్వచించు BMP280_REG_DIG_P7 0x9A
+#నిర్వచించు BMP280_REG_DIG_P8 0x9C
+#నిర్వచించు BMP280_REG_DIG_P9 0x9E
 

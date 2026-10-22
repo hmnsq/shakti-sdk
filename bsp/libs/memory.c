@@ -26,9 +26,9 @@
 @brief A library to display the memory contents at byte and word level.
 */
 
-#include "log.h"
-#include "memory.h"
-#include <stdint.h>
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "memory.h"
+#అన్తర్భావ <stdint.h>
 
 /** @fn void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @brief dump contents of word addressabe location in the memory,
@@ -37,17 +37,17 @@
  * @param uint32_t word_length
  */
 
-void dump_word_memory(uint32_t* start, uint32_t word_length)
+శూన్య dump_మాట_జ్ఞాపకం(uint32_t* ప్రారంభం, uint32_t మాట_నిడివి)
 {
 	uint32_t i=0;
-	void *address;
+	శూన్య *చిరునామా;
 
-	address = (uint32_t *) start;
+	చిరునామా = (uint32_t *) ప్రారంభం;
 
-	while(i++< word_length)
+	అయితే(i++< మాట_నిడివి)
 	{
-		log_info("address = %x data = %x\n", address, *(uint32_t *) address);
-		address += 4;
+		log_info("address = %x data = %x\n", చిరునామా, *(uint32_t *) చిరునామా);
+		చిరునామా += 4;
 	}
 }
 
@@ -58,17 +58,17 @@ void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @param uint32_t word_length
  */
 
-void dump_byte_memory(uint32_t* start, uint32_t word_length)
+శూన్య dump_byte_జ్ఞాపకం(uint32_t* ప్రారంభం, uint32_t మాట_నిడివి)
 {
 	uint32_t i=0;
-	void *address;
+	శూన్య *చిరునామా;
 
-	address = (unsigned char *) start;
+	చిరునామా = (గుర్తులేని అక్షరం *) ప్రారంభం;
 
-	while(i++< word_length)
+	అయితే(i++< మాట_నిడివి)
 	{
-		log_info("address = %x data = %x\n", address, *(unsigned char
-							       *) address);
-		address += 1;
+		log_info("address = %x data = %x\n", చిరునామా, *(గుర్తులేని అక్షరం
+							       *) చిరునామా);
+		చిరునామా += 1;
 	}
 }

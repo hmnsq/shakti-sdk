@@ -32,28 +32,28 @@
 * </pre>
 *
 ******************************************************************************/
-#ifndef POLL_EG_H
-#define POLL_EG_H
+#నిర్వచితం_కాకపోతే POLL_EG_H
+#నిర్వచించు POLL_EG_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#నిర్వచితమైతే __cplusplus
+బాహ్య "C" {
+#అయితే_ముగింపు
 
 /***************************** Include Files *********************************/
 
 
 /************************** Constant Definitions ****************************/
 
-#define PHY_REG0_OFFSET		0 /* Register 0 of PHY device */
-#define PHY_REG1_OFFSET 	1 /* Register 1 of PHY device */
+#నిర్వచించు PHY_REG0_స్థానభ్రంశం		0 /* Register 0 of PHY device */
+#నిర్వచించు PHY_REG1_స్థానభ్రంశం 	1 /* Register 1 of PHY device */
 
-#define PHY_REG0_RESET_MASK	0x8000  /* Reset Phy device */
-#define PHY_REG0_LOOPBACK_MASK	0x4000  /* Loopback Enable in Phy */
-#define PHY_REG0_SPD_100_MASK	0x2000  /* Speed of 100Mbps for Phy */
+#నిర్వచించు PHY_REG0_RESET_ముసుగు	0x8000  /* Reset Phy device */
+#నిర్వచించు PHY_REG0_LOOPBACK_ముసుగు	0x4000  /* Loopback Enable in Phy */
+#నిర్వచించు PHY_REG0_SPD_100_ముసుగు	0x2000  /* Speed of 100Mbps for Phy */
 
-#define PHY_REG1_DETECT_MASK	0x1808	/* Mask to detect PHY device */
+#నిర్వచించు PHY_REG1_DETECT_ముసుగు	0x1808	/* Mask to detect PHY device */
 
-#define EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
+#నిర్వచించు EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
 					 * PHY to reset.
 					 */
 
@@ -62,7 +62,7 @@ extern "C" {
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID		XPAR_EMACLITE_0_DEVICE_ID
+#నిర్వచించు EMAC_DEVICE_ID		XPAR_EMACLITE_0_DEVICE_ID
 
 /***************** Macros (Inline Functions) Definitions *********************/
 
@@ -73,10 +73,10 @@ extern "C" {
 /*
  * Utility functions implemented in xemaclite_example_util.c
  */
-void EmacLitePhyDelay(unsigned int Seconds);
+శూన్య EmacLitePhyDelay(గుర్తులేని పూర్ణాంకం Seconds);
 u32 EmacLitePhyDetect(XEmacLite *InstancePtr);
-int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
-int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+పూర్ణాంకం Emac_Lite_Enable_Phy_Loop_వెనుక(XEmacLite *InstancePtr, u32 Phy_చిరునామా);
+పూర్ణాంకం Emac_Lite_Disable_Phy_Loop_వెనుక(XEmacLite *InstancePtr, u32 Phy_చిరునామా);
 
 /************************** Variable Definitions ****************************/
 /*
@@ -84,23 +84,23 @@ int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
  * both as a source and destination MAC address.
  */
 
-extern XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
+బాహ్య XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
 
 /*
  * Buffers used for Transmission and Reception of Packets. These are declared
  * as global so that they are not a part of the stack.
  */
-extern u8 TxFrame[XEL_MAX_FRAME_SIZE];
-extern u8 RxFrame[XEL_MAX_FRAME_SIZE];
+బాహ్య u8 Tx_చట్రం[XEL_MAX_చట్రం_కొలత];
+బాహ్య u8 Rx_చట్రం[XEL_MAX_చట్రం_కొలత];
 
-extern volatile u32 RecvFrameLength;	/* Indicates the length of the
+బాహ్య అస్థిర u32 Recv_చట్రం_నిడివి;	/* Indicates the length of the
 					 * Received packet
 					 */
-extern volatile int TransmitComplete;	/* Flag to indicate that the
+బాహ్య అస్థిర పూర్ణాంకం TransmitComplete;	/* Flag to indicate that the
 					 * Transmission is complete
 					 */
-#ifdef __cplusplus
+#నిర్వచితమైతే __cplusplus
 }
-#endif
+#అయితే_ముగింపు
 
-#endif /* POLL_EG_H */
+#అయితే_ముగింపు /* POLL_EG_H */

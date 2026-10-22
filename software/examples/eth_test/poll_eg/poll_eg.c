@@ -31,13 +31,13 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
-#include "poll_eg.h"
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ "traps.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "eth_driver.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "poll_eg.h"
 
 
 
@@ -46,13 +46,13 @@
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID			240
-#define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+#నిర్వచించు EMAC_DEVICE_ID			240
+#నిర్వచించు ETH_పునాది_REG 0x44000
+అస్థిర గుర్తులేని పూర్ణాంకం* eth_పునాది_reg = ETH_పునాది_REG;
 /*
  * The Size of the Test Frame.
  */
-#define EMACLITE_TEST_FRAME_SIZE	1000
+#నిర్వచించు EMACLITE_TEST_చట్రం_కొలత	1000
 
 /**************************** Type Definitions *******************************/
 
@@ -60,13 +60,13 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-int EmacLitePolledExample(u16 DeviceId);
+పూర్ణాంకం EmacLitePolledExample(u16 DeviceId);
 
-static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize);
+స్థిర పూర్ణాంకం Emac_Lite_Send_చట్రం(XEmacLite *InstancePtr, u32 Payload_కొలత);
 
-static int EmacLiteRecvFrame(u32 PayloadSize);
+స్థిర పూర్ణాంకం Emac_Lite_Recv_చట్రం(u32 Payload_కొలత);
 
-extern u16 Xil_EndianSwap16(u16 Data);
+బాహ్య u16 Xil_EndianSwap16(u16 దత్తాంశం);
 
 /************************** Variable Definitions *****************************/
 
@@ -74,23 +74,23 @@ extern u16 Xil_EndianSwap16(u16 Data);
  * Set up valid local and remote MAC addresses. This loop back test uses the
  * LocalAddress both as a source and destination MAC address.
  */
-static u8 LocalAddress[XEL_MAC_ADDR_SIZE] =
+స్థిర u8 Local_చిరునామా[XEL_MAC_ADDR_కొలత] =
 {
 	0x00, 0x0A, 0x35, 0x01, 0x02, 0x03
 };
-static u8 RemoteAddress[XEL_MAC_ADDR_SIZE] =
+స్థిర u8 Remote_చిరునామా[XEL_MAC_ADDR_కొలత] =
 {
 	0x00, 0x10, 0xa4, 0xb6, 0xfd, 0x09
 };
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
+బాహ్య XEmacLite_Config XEmac_Lite_Config_పట్టిక;
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+స్థిర XEmacLite EmacLite;
 
 /****************************************************************************/
 /**
@@ -104,22 +104,22 @@ static XEmacLite EmacLite;
 * @note		None.
 *
 *****************************************************************************/
-int main()
+పూర్ణాంకం ప్రధాన()
 {
-	int Status;
+	పూర్ణాంకం స్థితి_2;
 
 	/*
 	 * Run the EmacLite Polled example, specify the Device ID that is
 	 * generated in xparameters.h.
 	 */
-	Status = EmacLitePolledExample(EMAC_DEVICE_ID);
-	if (Status != SUCCESS) {
+	స్థితి_2 = EmacLitePolledExample(EMAC_DEVICE_ID);
+	ఒకవేళ (స్థితి_2 != SUCCESS) {
 		log_debug("Emaclite polled Example Failed\r\n");
-		return FAILURE;
+		తిరిగి FAILURE;
 	}
 
 	log_debug("Successfully ran Emaclite polled Example\r\n");
-	return SUCCESS;
+	తిరిగి SUCCESS;
 }
 
 
@@ -142,61 +142,61 @@ int main()
 * @note		None.
 *
 ******************************************************************************/
-int EmacLitePolledExample(u16 DeviceId)
+పూర్ణాంకం EmacLitePolledExample(u16 DeviceId)
 {
-	int Status;
+	పూర్ణాంకం స్థితి_2;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
-	u32 PhyAddress = 0;
-	RecvFrameLength = 0;
+	u32 Phy_చిరునామా = 0;
+	Recv_చట్రం_నిడివి = 0;
 	XEmacLite_Config *ConfigPtr;
 
-	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	ConfigPtr = &XEmac_Lite_Config_పట్టిక;
+	ఒకవేళ (ConfigPtr == ఖాళీ) {
+		తిరిగి -1;
 	}
-	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
+	ConfigPtr->పునాది_చిరునామా = (UINTPTR *) 0X44000;
 	ConfigPtr->RxPingPong = XPAR_EMACLITE_0_RX_PING_PONG;
 	ConfigPtr->MdioInclude = XPAR_EMACLITE_0_INCLUDE_MDIO;
 	ConfigPtr->TxPingPong = XPAR_EMACLITE_0_TX_PING_PONG;
-	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->BaseAddress);
+	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->పునాది_చిరునామా);
 	log_debug("\n ConfigPtr: DeviceId: %x", ConfigPtr->DeviceId);
 	log_debug("\n ConfigPtr: TxPingPong: %x", ConfigPtr->TxPingPong);
 	log_debug("\n ConfigPtr: RxPingPong: %x", ConfigPtr->RxPingPong);
 	log_debug("\n ConfigPtr: MdioInclude: %x", ConfigPtr->MdioInclude);
 	log_debug("\n ConfigPtr: Loopback: %x", ConfigPtr->Loopback);
-	Status = XEmacLite_CfgInitialize(EmacLiteInstPtr,
+	స్థితి_2 = XEmacLite_CfgInitialize(EmacLiteInstPtr,
 					ConfigPtr,
-					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+					ConfigPtr->పునాది_చిరునామా);
+	ఒకవేళ (స్థితి_2 != 0) {
+		తిరిగి -1;
 	}
 
 	/*
 	 * Set the MAC address.
 	 */
-	XEmacLite_SetMacAddress(EmacLiteInstPtr, LocalAddress);
+	XEmac_Lite_సమితి_Mac_చిరునామా(EmacLiteInstPtr, Local_చిరునామా);
 
 	/*
 	 * Check if there is a TX buffer available, if there isn't it is an
 	 * error.
 	 */
-	if (XEmacLite_TxBufferAvailable(EmacLiteInstPtr) != TRUE) {
-		return FAILURE;
+	ఒకవేళ (XEmac_Lite_Tx_బఫరు_అందుబాటు(EmacLiteInstPtr) != TRUE) {
+		తిరిగి FAILURE;
 	}
 
 	/*
 	 * If the MDIO is configured in the device.
 	 */
-	if (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+	ఒకవేళ (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
 		/*
 		 * Detect the PHY device and enable the MAC Loop back
 		 * in the PHY.
 		 */
-		PhyAddress = EmacLitePhyDetect(EmacLiteInstPtr);
-		Status = EmacLiteEnablePhyLoopBack(EmacLiteInstPtr,
-							 PhyAddress);
-		if (Status != SUCCESS) {
-			return FAILURE;
+		Phy_చిరునామా = EmacLitePhyDetect(EmacLiteInstPtr);
+		స్థితి_2 = Emac_Lite_Enable_Phy_Loop_వెనుక(EmacLiteInstPtr,
+							 Phy_చిరునామా);
+		ఒకవేళ (స్థితి_2 != SUCCESS) {
+			తిరిగి FAILURE;
 		}
 	}
 
@@ -208,16 +208,16 @@ int EmacLitePolledExample(u16 DeviceId)
 	/*
 	 * Reset the receive frame length to zero.
 	 */
-	RecvFrameLength = 0;
-	Status = EmacLiteSendFrame(EmacLiteInstPtr, EMACLITE_TEST_FRAME_SIZE);
-	if (Status != SUCCESS) {
-		if (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+	Recv_చట్రం_నిడివి = 0;
+	స్థితి_2 = Emac_Lite_Send_చట్రం(EmacLiteInstPtr, EMACLITE_TEST_చట్రం_కొలత);
+	ఒకవేళ (స్థితి_2 != SUCCESS) {
+		ఒకవేళ (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
 			/*
 			 * Disable the MAC Loop back in the PHY.
 			 */
-			EmacLiteDisablePhyLoopBack(EmacLiteInstPtr,
-							 PhyAddress);
-			return FAILURE;
+			Emac_Lite_Disable_Phy_Loop_వెనుక(EmacLiteInstPtr,
+							 Phy_చిరునామా);
+			తిరిగి FAILURE;
 		}
 	}
 
@@ -225,38 +225,38 @@ int EmacLitePolledExample(u16 DeviceId)
 	 * If the MDIO is not configured in the core then return SUCCESS
 	 * as the frame has been transmitted.
 	 */
-	if (!XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
-		return SUCCESS;
+	ఒకవేళ (!XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+		తిరిగి SUCCESS;
 	}
 
 
 	/*
 	 * Poll for receive packet.
 	 */
-	while ((volatile u32)RecvFrameLength == 0)  {
-		RecvFrameLength = XEmacLite_Recv(EmacLiteInstPtr,
-						(u8 *)RxFrame);
+	అయితే ((అస్థిర u32)Recv_చట్రం_నిడివి == 0)  {
+		Recv_చట్రం_నిడివి = XEmacLite_Recv(EmacLiteInstPtr,
+						(u8 *)Rx_చట్రం);
 	}
 
 	/*
 	 * Check the received frame.
 	 */
-	Status = EmacLiteRecvFrame(EMACLITE_TEST_FRAME_SIZE);
-	if ((Status != SUCCESS) && (Status != NO_DATA)) {
+	స్థితి_2 = Emac_Lite_Recv_చట్రం(EMACLITE_TEST_చట్రం_కొలత);
+	ఒకవేళ ((స్థితి_2 != SUCCESS) && (స్థితి_2 != NO_దత్తాంశం)) {
 		/*
 		 * Disable the MAC Loop back in the PHY.
 		 */
-		EmacLiteDisablePhyLoopBack(EmacLiteInstPtr, PhyAddress);
-		return FAILURE;
+		Emac_Lite_Disable_Phy_Loop_వెనుక(EmacLiteInstPtr, Phy_చిరునామా);
+		తిరిగి FAILURE;
 	}
 
 
 	/*
 	 * Disable the MAC Loop back in the PHY.
 	 */
-	EmacLiteDisablePhyLoopBack(EmacLiteInstPtr, PhyAddress);
+	Emac_Lite_Disable_Phy_Loop_వెనుక(EmacLiteInstPtr, Phy_చిరునామా);
 
-	return SUCCESS;
+	తిరిగి SUCCESS;
 }
 
 /******************************************************************************/
@@ -274,67 +274,67 @@ int EmacLitePolledExample(u16 DeviceId)
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
+స్థిర పూర్ణాంకం Emac_Lite_Send_చట్రం(XEmacLite *InstancePtr, u32 Payload_కొలత)
 {
-	u8 *FramePtr;
-	int Index;
-	FramePtr = (u8 *)TxFrame;
+	u8 *చట్రం_Ptr;
+	పూర్ణాంకం సూచీ;
+	చట్రం_Ptr = (u8 *)Tx_చట్రం;
 
 	/*
 	 * Set up the destination address as the local address for
 	 * Phy Loopback.
 	 */
-	if (XEmacLite_IsMdioConfigured(InstancePtr)) {
+	ఒకవేళ (XEmacLite_IsMdioConfigured(InstancePtr)) {
 
-		*FramePtr++ = LocalAddress[0];
-		*FramePtr++ = LocalAddress[1];
-		*FramePtr++ = LocalAddress[2];
-		*FramePtr++ = LocalAddress[3];
-		*FramePtr++ = LocalAddress[4];
-		*FramePtr++ = LocalAddress[5];
-	} else {
+		*చట్రం_Ptr++ = Local_చిరునామా[0];
+		*చట్రం_Ptr++ = Local_చిరునామా[1];
+		*చట్రం_Ptr++ = Local_చిరునామా[2];
+		*చట్రం_Ptr++ = Local_చిరునామా[3];
+		*చట్రం_Ptr++ = Local_చిరునామా[4];
+		*చట్రం_Ptr++ = Local_చిరునామా[5];
+	} లేకపోతే {
 		/*
 		 * Fill in the valid Destination MAC address if
 		 * the Loopback is not enabled.
 		 */
-		*FramePtr++ = RemoteAddress[0];
-		*FramePtr++ = RemoteAddress[1];
-		*FramePtr++ = RemoteAddress[2];
-		*FramePtr++ = RemoteAddress[3];
-		*FramePtr++ = RemoteAddress[4];
-		*FramePtr++ = RemoteAddress[5];
+		*చట్రం_Ptr++ = Remote_చిరునామా[0];
+		*చట్రం_Ptr++ = Remote_చిరునామా[1];
+		*చట్రం_Ptr++ = Remote_చిరునామా[2];
+		*చట్రం_Ptr++ = Remote_చిరునామా[3];
+		*చట్రం_Ptr++ = Remote_చిరునామా[4];
+		*చట్రం_Ptr++ = Remote_చిరునామా[5];
 	}
 
 	/*
 	 * Fill in the source MAC address.
 	 */
-	*FramePtr++ = LocalAddress[0];
-	*FramePtr++ = LocalAddress[1];
-	*FramePtr++ = LocalAddress[2];
-	*FramePtr++ = LocalAddress[3];
-	*FramePtr++ = LocalAddress[4];
-	*FramePtr++ = LocalAddress[5];
+	*చట్రం_Ptr++ = Local_చిరునామా[0];
+	*చట్రం_Ptr++ = Local_చిరునామా[1];
+	*చట్రం_Ptr++ = Local_చిరునామా[2];
+	*చట్రం_Ptr++ = Local_చిరునామా[3];
+	*చట్రం_Ptr++ = Local_చిరునామా[4];
+	*చట్రం_Ptr++ = Local_చిరునామా[5];
 
 	/*
 	 * Set up the type/length field - be sure its in network order.
 	 */
-    *((u16 *)FramePtr) = Xil_EndianSwap16(PayloadSize);
-	FramePtr++;
-	FramePtr++;
+    *((u16 *)చట్రం_Ptr) = Xil_EndianSwap16(Payload_కొలత);
+	చట్రం_Ptr++;
+	చట్రం_Ptr++;
 
 	/*
 	 * Now fill in the data field with known values so we can verify them
 	 * on receive.
 	 */
-	for (Index = 0; Index < PayloadSize; Index++) {
-		*FramePtr++ = (u8)Index;
+	కొరకు (సూచీ = 0; సూచీ < Payload_కొలత; సూచీ++) {
+		*చట్రం_Ptr++ = (u8)సూచీ;
 	}
 
 	/*
 	 * Now send the frame.
 	 */
-	return XEmacLite_Send(InstancePtr, (u8 *)TxFrame,
-				PayloadSize + XEL_HEADER_SIZE);
+	తిరిగి XEmacLite_Send(InstancePtr, (u8 *)Tx_చట్రం,
+				Payload_కొలత + XEL_శీర్షిక_కొలత);
 
 }
 
@@ -354,36 +354,36 @@ static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLiteRecvFrame(u32 PayloadSize)
+స్థిర పూర్ణాంకం Emac_Lite_Recv_చట్రం(u32 Payload_కొలత)
 {
-	u8 *FramePtr;
+	u8 *చట్రం_Ptr;
 
 	/*
 	 * This assumes MAC does not strip padding or CRC.
 	 */
-	if (RecvFrameLength != 0) {
-		int Index;
+	ఒకవేళ (Recv_చట్రం_నిడివి != 0) {
+		పూర్ణాంకం సూచీ;
 
 		/*
 		 * Verify length, which should be the payload size.
 		 */
-		if ((RecvFrameLength- (XEL_HEADER_SIZE + XEL_FCS_SIZE)) !=
-				PayloadSize) {
-			return XST_LOOPBACK_ERROR;
+		ఒకవేళ ((Recv_చట్రం_నిడివి- (XEL_శీర్షిక_కొలత + XEL_FCS_కొలత)) !=
+				Payload_కొలత) {
+			తిరిగి XST_LOOPBACK_ERROR;
 		}
 
 		/*
 		 * Verify the contents of the Received Frame.
 		 */
-		FramePtr = (u8 *)RxFrame;
-		FramePtr += XEL_HEADER_SIZE;	/* Get past the header */
+		చట్రం_Ptr = (u8 *)Rx_చట్రం;
+		చట్రం_Ptr += XEL_శీర్షిక_కొలత;	/* Get past the header */
 
-		for (Index = 0; Index < PayloadSize; Index++) {
-			if (*FramePtr++ != (u8)Index) {
-				return XST_LOOPBACK_ERROR;
+		కొరకు (సూచీ = 0; సూచీ < Payload_కొలత; సూచీ++) {
+			ఒకవేళ (*చట్రం_Ptr++ != (u8)సూచీ) {
+				తిరిగి XST_LOOPBACK_ERROR;
 			}
 		}
 	}
 
-	return SUCCESS;
+	తిరిగి SUCCESS;
 }

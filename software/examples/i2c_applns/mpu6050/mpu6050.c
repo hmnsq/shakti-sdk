@@ -26,80 +26,80 @@
 @detail I2C based routines to write and read all locations of mpu6050.
 */
 
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#అన్తర్భావ <stdint.h>//Includes the definitions of standard input/output functions//
+#అన్తర్భావ "i2c.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "uart.h"
 
-#define DELAY1 100
-#define DELAY2 50
+#నిర్వచించు DELAY1 100
+#నిర్వచించు DELAY2 50
 
 
-#define DELAY_VALUE 900
-#if 1
-#define PRESCALER_COUNT 24
-#define SCLK_COUNT 9
-#else
-#define PRESCALER_COUNT 8
-#define SCLK_COUNT 6
-#endif
-#define I2C i2c_instance[1]
-#define RD_DATA_CNT 14
+#నిర్వచించు DELAY_విలువ 900
+#ఒకవేళ 1
+#నిర్వచించు PRESCALER_లెక్క 24
+#నిర్వచించు SCLK_లెక్క 9
+#లేకపోతే
+#నిర్వచించు PRESCALER_లెక్క 8
+#నిర్వచించు SCLK_లెక్క 6
+#అయితే_ముగింపు
+#నిర్వచించు I2C i2c_instance[1]
+#నిర్వచించు RD_దత్తాంశం_CNT 14
 
-#define MPU6050_SLAVE_ADDRESS 0xD0
-#define MPU_6050_OUTPUT_BEGIN 0x3B
-#define MPU6050_DLPF_CFG 0x20
-#define MPU6050_SMPL_DIV 0x19
-#define MPU6050_ADDRESS   0x68
-#define DEV_IDENTITY  0X68
-#define DEV_IDENTITY_DATA_REG 0X75
-#define MPU6050_REG_PWR_MGMT 0X6B
-#define MPU6050_RESET         0x80
-#define MPU6050_ACC_SENS_2G         0x00
-#define MPU6050_ACC_SENS_4G         0x08
-#define MPU6050_ACC_SENS_8G         0x10
-#define MPU6050_REG_GYRO_CONFIG      0x1B // Gyroscope Configuration
-#define MPU6050_REG_ACCEL_CONFIG     0x1C // Accelerometer Configuration
-#define MPU6050_GYRO_SENS_500D       0x08
+#నిర్వచించు MPU6050_SLAVE_చిరునామా 0xD0
+#నిర్వచించు MPU_6050_OUTPUT_BEGIN 0x3B
+#నిర్వచించు MPU6050_DLPF_CFG 0x20
+#నిర్వచించు MPU6050_SMPL_DIV 0x19
+#నిర్వచించు MPU6050_చిరునామా   0x68
+#నిర్వచించు DEV_తటస్థం  0X68
+#నిర్వచించు DEV_తటస్థం_దత్తాంశం_REG 0X75
+#నిర్వచించు MPU6050_REG_PWR_MGMT 0X6B
+#నిర్వచించు MPU6050_RESET         0x80
+#నిర్వచించు MPU6050_ACC_SENS_2G         0x00
+#నిర్వచించు MPU6050_ACC_SENS_4G         0x08
+#నిర్వచించు MPU6050_ACC_SENS_8G         0x10
+#నిర్వచించు MPU6050_REG_GYRO_CONFIG      0x1B // Gyroscope Configuration
+#నిర్వచించు MPU6050_REG_ACCEL_CONFIG     0x1C // Accelerometer Configuration
+#నిర్వచించు MPU6050_GYRO_SENS_500D       0x08
 
-#define PI 3.141592654
+#నిర్వచించు PI 3.141592654
 
-char readbuf[RD_DATA_CNT];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
+అక్షరం readbuf[RD_దత్తాంశం_CNT];
+పూర్ణాంకం AccX,AccY,AccZ;
+పూర్ణాంకం accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+పూర్ణాంకం roll, pitch, yaw;
+పూర్ణాంకం AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+పూర్ణాంకం AccErrorX,AccErrory;
+పూర్ణాంకం GyroX, GyroY, GyroZ;
+పూర్ణాంకం c = 0;
+పూర్ణాంకం i=0;
 
-int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *read_data, unsigned char length, unsigned long delay)
+పూర్ణాంకం read_mpu6050_రిజిస్టరు(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం reg_స్థానభ్రంశం, గుర్తులేని అక్షరం *read_దత్తాంశం_2, గుర్తులేని అక్షరం నిడివి_2, గుర్తులేని దీర్ఘ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	గుర్తులేని అక్షరం read_buf[4] = {'\0'};
+	పూర్ణాంకం i = 0, j = 0,  k = 0, స్థితి_3=0;
+	గుర్తులేని అక్షరం తాత్కాలిక = 0;
 
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_చిరునామా(i2c_instance, MPU6050_SLAVE_చిరునామా, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_దత్తాంశం(i2c_instance, reg_స్థానభ్రంశం, delay);
 //Restarts the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_REPSTART;
 	delay_loop(DELAY1, DELAY2);
 //Writes the slave address for read
-	i2c_write_data(i2c_instance, MPU6050_SLAVE_ADDRESS | I2C_READ, delay);
+	i2c_write_దత్తాంశం(i2c_instance, MPU6050_SLAVE_చిరునామా | I2C_READ, delay);
 /* Make a dummy read as per spec of the I2C controller */
 	i2c_instance->control = I2C_NACK;
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
 //	printf("\n Reading the data");
 
-	i2c_read_data_nack(i2c_instance, &temp, delay);
-	*read_data = temp;
+	i2c_read_దత్తాంశం_nack(i2c_instance, &తాత్కాలిక, delay);
+	*read_దత్తాంశం_2 = తాత్కాలిక;
 //	delay_loop(DELAY1, DELAY2);
 	i2c_instance->control = I2C_STOP;
 	delay_loop(DELAY1, DELAY2);
-	return 0;
+	తిరిగి 0;
 }
 
 /** @fn int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -112,51 +112,51 @@ int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return read status (zero on success)
  */
-int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *readTemp, unsigned char length, unsigned long delay)
+పూర్ణాంకం read_mpu6050_registers(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం reg_స్థానభ్రంశం, గుర్తులేని అక్షరం *read_తాత్కాలిక, గుర్తులేని అక్షరం నిడివి_2, గుర్తులేని దీర్ఘ delay)
 {
 //	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	పూర్ణాంకం i = 0, j = 0,  k = 0, స్థితి_3=0;
+	గుర్తులేని అక్షరం తాత్కాలిక = 0;
 
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
+	i2c_send_slave_చిరునామా(i2c_instance, MPU6050_SLAVE_చిరునామా, I2C_WRITE, delay);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_దత్తాంశం(i2c_instance, reg_స్థానభ్రంశం, delay);
 //	delay_loop(DELAY1, DELAY2);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_REPSTART;
 	delay_loop(DELAY1, DELAY2);
 
 //Writes the slave address for read
-	i2c_write_data(i2c_instance, MPU6050_SLAVE_ADDRESS + I2C_READ, delay);
+	i2c_write_దత్తాంశం(i2c_instance, MPU6050_SLAVE_చిరునామా + I2C_READ, delay);
 //	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_READ, delay);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	కొరకు(i = 0; i < నిడివి_2; i++)
 	{
-		if(i == (length - 1) )
+		ఒకవేళ(i == (నిడివి_2 - 1) )
 		{
 			log_debug("\nSending nack");
 			i2c_instance->control = I2C_NACK;
 //			i2c_read_data_nack(i2c_instance, &temp, delay);
-			i2c_read_data(i2c_instance, &temp, delay);
-			break;
+			i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
+			ఆపు;
 			}
-		else
+		లేకపోతే
 		{
-			i2c_read_data(i2c_instance, &temp, delay);
+			i2c_read_దత్తాంశం(i2c_instance, &తాత్కాలిక, delay);
 		}
-		log_debug("\n read data[%x]: %x", i, temp);
-		*readTemp = temp;
-		*readTemp++;
+		log_debug("\n read data[%x]: %x", i, తాత్కాలిక);
+		*read_తాత్కాలిక = తాత్కాలిక;
+		*read_తాత్కాలిక++;
 	}
 	
 	log_debug("\n Sending Stop condition");
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	తిరిగి 0;
 }
 
 
@@ -172,16 +172,16 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned long delay)
+పూర్ణాంకం write_mpu6050_రిజిస్టరు(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం reg_స్థానభ్రంశం, గుర్తులేని పూర్ణాంకం *write_విలువ, గుర్తులేని దీర్ఘ delay)
 {
 	i2c_instance->control = I2C_IDLE;
 	delay_loop(DELAY1, DELAY2);
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
+	i2c_send_slave_చిరునామా(i2c_instance, MPU6050_SLAVE_చిరునామా, I2C_WRITE, delay);
 //	delay_loop(DELAY1, DELAY2);
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_దత్తాంశం(i2c_instance, reg_స్థానభ్రంశం, delay);
 //	delay_loop(DELAY1, DELAY2);
-	log_debug("\n write value: %x", *write_value);
-	i2c_write_data(i2c_instance,  ( *write_value & 0xff), delay);
+	log_debug("\n write value: %x", *write_విలువ);
+	i2c_write_దత్తాంశం(i2c_instance,  ( *write_విలువ & 0xff), delay);
 	//Stops the I2C transaction to start reading the temperature value.
 //	delay_loop(DELAY1, DELAY2);
 	i2c_instance->control = I2C_STOP;
@@ -201,24 +201,24 @@ int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+పూర్ణాంకం write_mpu6050_registers(i2c_struct * i2c_instance, గుర్తులేని పూర్ణాంకం reg_స్థానభ్రంశం, గుర్తులేని పూర్ణాంకం *write_విలువ, గుర్తులేని అక్షరం నిడివి_2, గుర్తులేని దీర్ఘ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	పూర్ణాంకం i = 0, j = 0,  k = 0, స్థితి_3=0;
+	గుర్తులేని పూర్ణాంకం తాత్కాలిక = 0;
 	
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_send_slave_చిరునామా(i2c_instance, MPU6050_SLAVE_చిరునామా, I2C_WRITE, delay);
+	i2c_write_దత్తాంశం(i2c_instance, reg_స్థానభ్రంశం, delay);
 	delay_loop(DELAY1, DELAY2);
 	
-	if(1 == length)
+	ఒకవేళ(1 == నిడివి_2)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value	& 0xff), delay);
+		i2c_write_దత్తాంశం(i2c_instance,  ( *write_విలువ	& 0xff), delay);
 	}
-	else
+	లేకపోతే
 	{
-		for(i = 0; i < length; i++)
+		కొరకు(i = 0; i < నిడివి_2; i++)
 		{
-			i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
+			i2c_write_దత్తాంశం(i2c_instance, (*write_విలువ++ & 0xff), delay);
 
 		}
 	}
@@ -226,18 +226,18 @@ int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 	delay_loop(DELAY1, DELAY2);
-	return 0;
+	తిరిగి 0;
 }
 
 /*
    soft float library need to be added, if hardfloat not there
  */
-void measuring_value(unsigned long delay)
+శూన్య measuring_విలువ(గుర్తులేని దీర్ఘ delay)
 {
 	// read accelerometer data
-	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_DATA_CNT, delay);
-	printf("\n Read Buf: { ");
-	for(i = 0; i < RD_DATA_CNT; i++)
+	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_దత్తాంశం_CNT, delay);
+	రాయి("\n Read Buf: { ");
+	కొరకు(i = 0; i < RD_దత్తాంశం_CNT; i++)
 	{
 		log_info(" %x, ", readbuf[i] );
 		}
@@ -258,18 +258,18 @@ void measuring_value(unsigned long delay)
 }
 
 
-void calculate_imu_error(unsigned long delay)
+శూన్య calculate_imu_error(గుర్తులేని దీర్ఘ delay)
 {
-	int c=0;
-	int yaw;
-	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+	పూర్ణాంకం c=0;
+	పూర్ణాంకం yaw;
+	దశాంశం accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while(c<200)
+	అయితే(c<200)
 	{
-		measuring_value(delay);
+		measuring_విలువ(delay);
 
-		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2)))* 180 / PI;
-		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2)))* 180 / PI;
+		AccErrorX = AccErrorX + (atan(AccY / వర్గమూలం(ఘాతం(AccX, 2)) + ఘాతం(AccZ, 2)))* 180 / PI;
+		AccErrorY = AccErrorY + (atan(AccY / వర్గమూలం(ఘాతం(AccX, 2)) + ఘాతం(AccZ, 2)))* 180 / PI;
 
 		GyroErrorX = GyroErrorX + (GyroX / 65.5);
 		GyroErrorY = GyroErrorY + (GyroY / 65.5);
@@ -280,8 +280,8 @@ void calculate_imu_error(unsigned long delay)
 	AccErrorX = AccErrorX / 200;
 	AccErrorY = AccErrorY / 200;
 
-	accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorX; // AccErrorX
-	accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorY; // AccErrory
+	accAngleX = (atan(AccY / వర్గమూలం(ఘాతం(AccX, 2) + ఘాతం(AccZ, 2))) * 180 / PI) - AccErrorX; // AccErrorX
+	accAngleY = (atan(-1 * AccX / వర్గమూలం(ఘాతం(AccY, 2) + ఘాతం(AccZ, 2))) * 180 / PI) - AccErrorY; // AccErrory
 	// sum all reading
 	GyroErrorX = GyroErrorX / 200;
 	GyroErrorY = GyroErrorY / 200;
@@ -292,62 +292,62 @@ void calculate_imu_error(unsigned long delay)
 	GyroZ = GyroZ - GyroErrorZ; // GyroErrorZ
 }
 
-unsigned char CheckForDeviceId(unsigned long delay)
+గుర్తులేని అక్షరం CheckForDeviceId(గుర్తులేని దీర్ఘ delay)
 {
-	unsigned char readBuf = 0xFF;
-	read_mpu6050_register(I2C, DEV_IDENTITY_DATA_REG, &readBuf, 1, delay);
+	గుర్తులేని అక్షరం readBuf = 0xFF;
+	read_mpu6050_రిజిస్టరు(I2C, DEV_తటస్థం_దత్తాంశం_REG, &readBuf, 1, delay);
 	log_debug("\n Read Buf Value: %x", readBuf);
-	return readBuf;
+	తిరిగి readBuf;
 }
 
-int main()
+పూర్ణాంకం ప్రధాన()
 {
-	unsigned char i = 0;
-	int timeout;
-	unsigned long delay = 500;
-	unsigned int write_buf[7] = {0x00};
-	unsigned char length = 0;
+	గుర్తులేని అక్షరం i = 0;
+	పూర్ణాంకం timeout;
+	గుర్తులేని దీర్ఘ delay = 500;
+	గుర్తులేని పూర్ణాంకం write_buf[7] = {0x00};
+	గుర్తులేని అక్షరం నిడివి_2 = 0;
 
 	log_debug("\tI2C: MPU6050 - ACC test\n");
 
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ఒకవేళ(config_i2c(I2C, PRESCALER_లెక్క, SCLK_లెక్క))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+			తిరిగి -1;
 	}
-	else
+	లేకపోతే
 		log_info("\tIntilization Happened Fine\n");
 
-		if(DEV_IDENTITY == CheckForDeviceId(delay))
+		ఒకవేళ(DEV_తటస్థం == CheckForDeviceId(delay))
 		{
 			log_info("Device ID Check Success");
 		}
-		else
+		లేకపోతే
 		{
 			log_error("Could not verify Device identity");
 		}
 		write_buf[0] = 1;
-		write_mpu6050_register(I2C, MPU6050_REG_PWR_MGMT, &write_buf[0],  delay);
+		write_mpu6050_రిజిస్టరు(I2C, MPU6050_REG_PWR_MGMT, &write_buf[0],  delay);
 		write_buf[0] = MPU6050_GYRO_SENS_500D;
-		write_mpu6050_register(I2C, MPU6050_REG_GYRO_CONFIG, &write_buf[0], delay);
+		write_mpu6050_రిజిస్టరు(I2C, MPU6050_REG_GYRO_CONFIG, &write_buf[0], delay);
 		write_buf[0] = 0x01;
-		write_mpu6050_register(I2C, 0x1B, &write_buf[0], delay);
+		write_mpu6050_రిజిస్టరు(I2C, 0x1B, &write_buf[0], delay);
 		write_buf[0] = 0x01;
-		write_mpu6050_register(I2C, 0x1C, &write_buf[0], delay);
+		write_mpu6050_రిజిస్టరు(I2C, 0x1C, &write_buf[0], delay);
 		write_buf[0] = 0x01;
-		write_mpu6050_register(I2C, 0x6B, &write_buf[0], delay);
+		write_mpu6050_రిజిస్టరు(I2C, 0x6B, &write_buf[0], delay);
 
 
 	log_debug("\n Entering While loop");
-	while(1)
+	అయితే(1)
 	{
-		measuring_value(delay);
+		measuring_విలువ(delay);
 		delay_loop(2000, 1000);
 	}
 
-	return 0;
+	తిరిగి 0;
 }
 

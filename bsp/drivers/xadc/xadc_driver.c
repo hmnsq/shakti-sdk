@@ -27,8 +27,8 @@
  setup each xadc registers, isr routine and xadc interrupt handler are here.
 */
 
-#include<stdio.h>
-#include "xadc_driver.h"
+#అన్తర్భావ<stdio.h>
+#అన్తర్భావ "xadc_driver.h"
 
 //Dedicated mode
 
@@ -38,9 +38,9 @@
  * @param unsigned int (32-bit) address
  * @return unsigned int (32-bit) *address
  */
-uint32_t xadc_read_data(uint32_t *address)
+uint32_t xadc_read_దత్తాంశం(uint32_t *చిరునామా)
 {
-	return(*address);
+	తిరిగి(*చిరునామా);
 }
 
 /**
@@ -49,9 +49,9 @@ uint32_t xadc_read_data(uint32_t *address)
  * @param unsigned int (32-bit) address
  * @param unsigned int (32-bit) data
  */
-void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
+శూన్య xadc_write_ctrl_reg(uint32_t *చిరునామా, uint32_t దత్తాంశం_2)
 {
-	*address = data;
+	*చిరునామా = దత్తాంశం_2;
 }
 
 /**
@@ -61,9 +61,9 @@ void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_voltage(uint32_t value)
+దశాంశం xadc_onchip_voltage(uint32_t విలువ)
 {
-	return (((value >> 4)*3.0f)/4096.0f );
+	తిరిగి (((విలువ >> 4)*3.0f)/4096.0f );
 }
 
 /**
@@ -74,9 +74,9 @@ float xadc_onchip_voltage(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_temp(uint32_t value)
+దశాంశం xadc_onchip_తాత్కాలిక(uint32_t విలువ)
 {
-	return (((value/65536.0f)/0.00198421639f ) - 273.15f);
+	తిరిగి (((విలువ/65536.0f)/0.00198421639f ) - 273.15f);
 }
 
 /**
@@ -85,7 +85,7 @@ float xadc_onchip_temp(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_dedicated_channel(uint32_t value)
+దశాంశం xadc_dedicated_channel(uint32_t విలువ)
 {
-	return ((value >> 4)/4096.0f );
+	తిరిగి ((విలువ >> 4)/4096.0f );
 }

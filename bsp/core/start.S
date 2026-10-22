@@ -39,7 +39,7 @@ csrw mtvec, t0
 
 #disable interrupts
 li      t0, 0xb
-csrrc   zero, mstatus, t0 #disable global interrupt for all modes
+csrrc   zero, mstatus, t0 #disable వైశ్విక interrupt for all modes
 li      t0, 0x888
 csrrc   zero, mie, t0  # disable machine level interrupt
 
@@ -92,7 +92,7 @@ li  x29,0
 li  x30,0
 li  x31,0
 
-# initialize global pointer
+# initialize వైశ్విక pointer
 .option push
 .option norelax
 la gp, __global_pointer$

@@ -26,18 +26,18 @@
 @brief Create hex array of the contents in elf.
 */
 
-#include <stdio.h>
+#అన్తర్భావ <stdio.h>
 
 /** @fn void convert_hex_array()
  * @brief Converts the hex code to an array of hex code
  * @details reads code.mem file and coverts the hex code into an array of hex
  *     codes in the flashdata.h, first entry in the array tells the size of file.
  */
-void convert_hex_array()
+శూన్య convert_hex_array()
 {
-	unsigned int  i= 0;
-	int write_data;
-	int count=0;
+	గుర్తులేని పూర్ణాంకం  i= 0;
+	పూర్ణాంకం write_దత్తాంశం_2;
+	పూర్ణాంకం లెక్క=0;
 
 	FILE *myFile;
 	FILE *Cypress;
@@ -45,43 +45,43 @@ void convert_hex_array()
 	myFile = fopen(FILEPATH "/output/code.mem", "r");
 	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
 
-	if(!myFile) {
-		printf(" unable to read code.mem\n");
-		return;
+	ఒకవేళ(!myFile) {
+		రాయి(" unable to read code.mem\n");
+		తిరిగి;
 	}
 
-	if(!Cypress) {
-		printf(" unable to open flashdata.h\n");
-		return;
+	ఒకవేళ(!Cypress) {
+		రాయి(" unable to open flashdata.h\n");
+		తిరిగి;
 	}
 	
-	while (fscanf(myFile, "%x", &write_data) != EOF) {
-		count++;
+	అయితే (fscanf(myFile, "%x", &write_దత్తాంశం_2) != EOF) {
+		లెక్క++;
 	}
 
 	rewind(myFile);
 
-	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
+	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", లెక్క + 1, లెక్క); 
 
-	while (fscanf(myFile, "%x", &write_data) != EOF)
+	అయితే (fscanf(myFile, "%x", &write_దత్తాంశం_2) != EOF)
 	{
-		fprintf(Cypress,"\n ,0x%x", write_data);
+		fprintf(Cypress,"\n ,0x%x", write_దత్తాంశం_2);
 	}
 
 	fprintf(Cypress,"};\n\n");
 
-	fprintf(Cypress,"#define SIZE %d", count);
+	fprintf(Cypress,"#define SIZE %d", లెక్క);
 
 	fclose(Cypress);
 	fclose(myFile);
-	printf("\n Converted codemem to array\n");
+	రాయి("\n Converted codemem to array\n");
 }
 /** @fn void main()
  * @brief Initiates conversion by calling convert_hex_array
  */
-void main()
+శూన్య ప్రధాన()
 {
-	printf(" Converting codemem to array\n");
+	రాయి(" Converting codemem to array\n");
 	convert_hex_array();
 }
 

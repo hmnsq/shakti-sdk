@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#అన్తర్భావ <stdint.h>
+#అన్తర్భావ <stdarg.h>
+#అన్తర్భావ "utils.h"
+#అన్తర్భావ "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,30 +39,30 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+స్థిర అంతఃవరుస శూన్య itoa (గుర్తులేని దీర్ఘ దీర్ఘ పూర్ణాంకం సంఖ్య, గుర్తులేని పునాది)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	పూర్ణాంకం i = 0;
+	గుర్తులేని పూర్ణాంకం intermediate = 0;
+	గుర్తులేని పూర్ణాంకం digits[పరిమాణం(సంఖ్య)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	అయితే (1) {
+		digits[i] = సంఖ్య % పునాది;
 
-		if (number < base)
-			break;
+		ఒకవేళ (సంఖ్య < పునాది)
+			ఆపు;
 
-		number /= base;
+		సంఖ్య /= పునాది;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	అయితే (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		ఒకవేళ (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		లేకపోతే
 			intermediate = '0';
 
-		putchar(digits[i] + intermediate);
+		అక్షరం_రాయి(digits[i] + intermediate);
 	}
 }
 
@@ -72,151 +72,151 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+శూన్య _printf_(స్థిరరాశి అక్షరం *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	నమోదు స్థిరరాశి అక్షరం* p;
+	స్థిరరాశి అక్షరం* చివరి_fmt;
+	నమోదు పూర్ణాంకం ch;
+	గుర్తులేని దీర్ఘ దీర్ఘ అంకె;
+	పూర్ణాంకం పునాది, lflag, i;
+	దశాంశం float_అంకె = 0;
+	అక్షరం float_arr[30] = {'\0'};
+	పూర్ణాంకం backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
-			putchar(ch);
+	కొరకు (;;) {
+		కొరకు (;(ch = *(గుర్తులేని అక్షరం *) fmt) != '%'; fmt++) {
+			ఒకవేళ (ch == '\0')
+				తిరిగి;
+			అక్షరం_రాయి(ch);
 		}
 		fmt++;
 
 		// Process a %-escape sequence
-		last_fmt = fmt;
+		చివరి_fmt = fmt;
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		కొరకు (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			ఎంపిక (ch = *(గుర్తులేని అక్షరం *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				స్థితి 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					ఆపు;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				స్థితి 'c':
+					అక్షరం_రాయి(va_arg(ap, పూర్ణాంకం));
+					ఆపు;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				స్థితి 's':
+					ఒకవేళ ((p = va_arg(ap, అక్షరం *)) == ఖాళీ)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
-						putchar(ch);
+					కొరకు (; (ch = *p) != '\0' ;) {
+						అక్షరం_రాయి(ch);
 						p++;
 					}
-					break;
+					ఆపు;
 
 					// (signed) decimal
-				case 'd':
-					base = 10;
+				స్థితి 'd':
+					పునాది = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					ఒకవేళ (lflag >= 2)
+						అంకె = va_arg(ap, దీర్ఘ దీర్ఘ);
+					లేకపోతే ఒకవేళ (lflag ==1)
+						అంకె = va_arg(ap, దీర్ఘ);
+					లేకపోతే
+						అంకె = va_arg(ap, పూర్ణాంకం);
 
-					if ((long long) num < 0) {
-						putchar('-');
-						num = -(long long) num;
+					ఒకవేళ ((దీర్ఘ దీర్ఘ) అంకె < 0) {
+						అక్షరం_రాయి('-');
+						అంకె = -(దీర్ఘ దీర్ఘ) అంకె;
 					}
 
-					itoa( num, base);
+					itoa( అంకె, పునాది);
 
-					break;
+					ఆపు;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				స్థితి 'f':
+					float_అంకె =  va_arg(ap, ద్విగుణ);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_అంకె, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					కొరకు( i = 0; float_arr[i] != '\0'; i++)
 					{
-						putchar(float_arr[i]);
-						if(i > 29) break;
+						అక్షరం_రాయి(float_arr[i]);
+						ఒకవేళ(i > 29) ఆపు;
 					}
-					break;
+					ఆపు;
 
 					// unsigned decimal
-				case 'u':
-					base = 10;
+				స్థితి 'u':
+					పునాది = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					ఒకవేళ (lflag >= 2)
+						అంకె = va_arg(ap, గుర్తులేని దీర్ఘ దీర్ఘ);
+					లేకపోతే ఒకవేళ (lflag)
+						అంకె = va_arg(ap, గుర్తులేని దీర్ఘ);
+					లేకపోతే
+						అంకె = va_arg(ap, గుర్తులేని పూర్ణాంకం);
 
-					itoa( num, base);
+					itoa( అంకె, పునాది);
 
-					break;
+					ఆపు;
 
 					// (unsigned) octal
-				case 'o':
+				స్థితి 'o':
 					// should do something with padding so it's always 3 octits
-					base = 8;
+					పునాది = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					ఒకవేళ (lflag >= 2)
+						అంకె = va_arg(ap, గుర్తులేని దీర్ఘ దీర్ఘ);
+					లేకపోతే ఒకవేళ (lflag)
+						అంకె = va_arg(ap, గుర్తులేని దీర్ఘ);
+					లేకపోతే
+						అంకె = va_arg(ap, గుర్తులేని పూర్ణాంకం);
 
-					itoa( num, base);
+					itoa( అంకె, పునాది);
 
-					break;
+					ఆపు;
 
-				case 'x':
-					base = 16;
+				స్థితి 'x':
+					పునాది = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					ఒకవేళ (lflag >= 2)
+						అంకె = va_arg(ap, గుర్తులేని దీర్ఘ దీర్ఘ);
+					లేకపోతే ఒకవేళ (lflag)
+						అంకె = va_arg(ap, గుర్తులేని దీర్ఘ);
+					లేకపోతే
+						అంకె = va_arg(ap, గుర్తులేని పూర్ణాంకం);
 
-					itoa( num, base);
+					itoa( అంకె, పునాది);
 
-					break;
+					ఆపు;
 
 					// escaped '%' character
-				case '%':
-					putchar(ch);
-					break;
+				స్థితి '%':
+					అక్షరం_రాయి(ch);
+					ఆపు;
 
 					// unrecognized escape sequence - just print it literally
-				default:
-					putchar('%');
-					fmt = last_fmt;
-					break;
+				అప్రమేయ:
+					అక్షరం_రాయి('%');
+					fmt = చివరి_fmt;
+					ఆపు;
 			}
 
-			if (backtothebeginning)
+			ఒకవేళ (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				కొనసాగు;
 			}
-			else
-				break;
+			లేకపోతే
+				ఆపు;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+పూర్ణాంకం రాయి(స్థిరరాశి అక్షరం* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	తిరిగి 0;// incorrect return value, but who cares, anyway?
 }

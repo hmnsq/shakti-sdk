@@ -26,31 +26,31 @@
 @detail It helps to detect the presence of human within a certain range.
 */
 
-#include <stdio.h>
-#include "gpio.h"
-#include "platform.h"
-#include "utils.h"
+#అన్తర్భావ <stdio.h>
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "utils.h"
 
 /** @fn void main()
  * @brief Used to read through Human Detection Sensors
  * @details Printing the presence of a person near it
  * @warning We have to set the potentiometer correctly to get the correct result
  */
-void main()
+శూన్య ప్రధాన()
 {
-    unsigned long readData = 0;
-    write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
+    గుర్తులేని దీర్ఘ read_దత్తాంశం = 0;
+    write_మాట(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
     
-    while (1){
-        	readData = read_word(GPIO_DATA_REG);
+    అయితే (1){
+        	read_దత్తాంశం = read_మాట(GPIO_దత్తాంశం_REG);
 
-	        if (readData == 0x00000001){
+	        ఒకవేళ (read_దత్తాంశం == 0x00000001){
 
- 		printf("\nHuman Detected");
+ 		రాయి("\nHuman Detected");
                 }
 
-                else{
-		printf("\nNo one detected");
+                లేకపోతే{
+		రాయి("\nNo one detected");
              	}
           
 	      	delay_loop(1000, 1000);

@@ -7,17 +7,17 @@
  * @brief UART LOOPBACK application.
  */
 
-#include<uart.h>
+#అన్తర్భావ<uart.h>
 
 /*
  * @fn void main()
  * @brief Uart loopback application
  */
-void main()
+శూన్య ప్రధాన()
 {
-    printf("-- UART Loopback Test --\n");
-    while(1) {
-        int val = getchar();
-        putchar(val);
+    రాయి("-- UART Loopback Test --\n");
+    అయితే(1) {
+        పూర్ణాంకం val = getchar();
+        అక్షరం_రాయి(val);
     };
 }

@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#అన్తర్భావ "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#నిర్వచించు LM75_SLAVE_చిరునామా 0x90
+#నిర్వచించు DELAY_లెక్క 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+గుర్తులేని పూర్ణాంకం Lm75ReadTemperature(గుర్తులేని దీర్ఘ delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
-	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	గుర్తులేని అక్షరం readBuf = 0;
+	గుర్తులేని పొట్టి read_విలువ_2 = 0;
+	I2c_Send_Slave_చిరునామా(LM75_SLAVE_చిరునామా, I2C_READ, delay);
+	readBuf = I2c_Read_దత్తాంశం_Ack(delay);
+	read_విలువ_2 = (readBuf << 1);
+	readBuf = I2c_Read_దత్తాంశం_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_విలువ_2 = (readBuf >> 7) | read_విలువ_2;
+	తిరిగి read_విలువ_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+శూన్య ప్రధాన() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	గుర్తులేని పొట్టి తాత్కాలిక_Read = 0;
+	గుర్తులేని పొట్టి తాత్కాలిక = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	రాయి("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	తాత్కాలిక_Read = Lm75ReadTemperature(DELAY_లెక్క);
+	ఒకవేళ(తాత్కాలిక_Read & 0x100) {
+		తాత్కాలిక_Read = ( (~తాత్కాలిక_Read) + 1 ) >> 1;
+		రాయి("\n\t Current Temperature:=-%u°C",తాత్కాలిక_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	లేకపోతే {
+		తాత్కాలిక_Read = తాత్కాలిక_Read >> 1;
+		రాయి("\n\t Current Temperature:=+%u°C",తాత్కాలిక_Read);
 	 }
 	delay_loop(10000,20000);
 }

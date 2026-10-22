@@ -219,89 +219,89 @@ q
 
 */
 
-#include <stdio.h>
-#define NOSIGNAL
-#define NOPAUSE
-#ifndef NOSIGNAL
-#include <signal.h>
-#endif
-#include <setjmp.h>
-#ifdef Single
-#define FLOAT float
-#define FABS(x) (float)fabs((double)(x))
-#define FLOOR(x) (float)floor((double)(x))
-#define LOG(x) (float)log((double)(x))
-#define POW(x,y) (float)pow((double)(x),(double)(y))
-#define SQRT(x) (float)sqrt((double)(x))
-#else
-#define FLOAT double
-#define FABS(x) fabs(x)
-#define FLOOR(x) floor(x)
-#define LOG(x) log(x)
-#define POW(x,y) pow(x,y)
-#define SQRT(x) sqrt(x)
-#endif
+#అన్తర్భావ <stdio.h>
+#నిర్వచించు NOSIGNAL
+#నిర్వచించు NOPAUSE
+#నిర్వచితం_కాకపోతే NOSIGNAL
+#అన్తర్భావ <signal.h>
+#అయితే_ముగింపు
+#అన్తర్భావ <setjmp.h>
+#నిర్వచితమైతే Single
+#నిర్వచించు FLOAT దశాంశం
+#నిర్వచించు FABS(x) (దశాంశం)fabs((ద్విగుణ)(x))
+#నిర్వచించు FLOOR(x) (దశాంశం)floor((ద్విగుణ)(x))
+#నిర్వచించు LOG(x) (దశాంశం)సంవర్గమానం((ద్విగుణ)(x))
+#నిర్వచించు POW(x,y) (దశాంశం)ఘాతం((ద్విగుణ)(x),(ద్విగుణ)(y))
+#నిర్వచించు SQRT(x) (దశాంశం)వర్గమూలం((ద్విగుణ)(x))
+#లేకపోతే
+#నిర్వచించు FLOAT ద్విగుణ
+#నిర్వచించు FABS(x) fabs(x)
+#నిర్వచించు FLOOR(x) floor(x)
+#నిర్వచించు LOG(x) సంవర్గమానం(x)
+#నిర్వచించు POW(x,y) ఘాతం(x,y)
+#నిర్వచించు SQRT(x) వర్గమూలం(x)
+#అయితే_ముగింపు
 
 jmp_buf ovfl_buf;
-#ifdef KR_headers
-#define VOID /* void */
-#define INT /* int */
-#define FP /* FLOAT */
-#define CHARP /* char * */
-#define CHARPP /* char ** */
-extern double fabs(), floor(), log(), pow(), sqrt();
-extern void exit();
-typedef void (*Sig_type)();
+#నిర్వచితమైతే KR_శీర్షికలు
+#నిర్వచించు VOID /* void */
+#నిర్వచించు INT /* int */
+#నిర్వచించు FP /* FLOAT */
+#నిర్వచించు CHARP /* char * */
+#నిర్వచించు CHARPP /* char ** */
+బాహ్య ద్విగుణ fabs(), floor(), సంవర్గమానం(), ఘాతం(), వర్గమూలం();
+బాహ్య శూన్య నిష్క్రమించు();
+రకనిర్వచనం శూన్య (*Sig_type)();
 FLOAT Sign(), Random();
-extern void BadCond();
-extern void SqXMinX();
-extern void TstCond();
-extern void notify();
-extern int read();
-#else
-#define VOID void
-#define INT int
-#define FP FLOAT
-#define CHARP char *
-#define CHARPP char **
-#ifdef __STDC__
-#include <stdlib.h>
-#include <math.h>
-#else
-#ifdef __cplusplus
-extern "C" {
-#endif
-extern double fabs(double), floor(double), log(double);
-extern double pow(double,double), sqrt(double);
-extern void exit(INT);
-#ifdef __cplusplus
+బాహ్య శూన్య BadCond();
+బాహ్య శూన్య SqXMinX();
+బాహ్య శూన్య TstCond();
+బాహ్య శూన్య notify();
+బాహ్య పూర్ణాంకం పఠ();
+#లేకపోతే
+#నిర్వచించు VOID శూన్య
+#నిర్వచించు INT పూర్ణాంకం
+#నిర్వచించు FP FLOAT
+#నిర్వచించు CHARP అక్షరం *
+#నిర్వచించు CHARPP అక్షరం **
+#నిర్వచితమైతే __STDC__
+#అన్తర్భావ <stdlib.h>
+#అన్తర్భావ <math.h>
+#లేకపోతే
+#నిర్వచితమైతే __cplusplus
+బాహ్య "C" {
+#అయితే_ముగింపు
+బాహ్య ద్విగుణ fabs(ద్విగుణ), floor(ద్విగుణ), సంవర్గమానం(ద్విగుణ);
+బాహ్య ద్విగుణ ఘాతం(ద్విగుణ,ద్విగుణ), వర్గమూలం(ద్విగుణ);
+బాహ్య శూన్య నిష్క్రమించు(INT);
+#నిర్వచితమైతే __cplusplus
 	}
-#endif
-#endif
-typedef void (*Sig_type)(int);
-FLOAT Sign(FLOAT), Random(void);
-extern void BadCond(int, char*);
-extern void SqXMinX(int);
-extern void TstCond(int, int, char*);
-extern void notify(char*);
-extern int read(int, char*, int);
-#endif
-#undef V9
-extern void Characteristics(VOID);
-extern void Heading(VOID);
-extern void History(VOID);
-extern void Instructions(VOID);
-extern void IsYeqX(VOID);
-extern void NewD(VOID);
-extern void Pause(VOID);
-extern void PrintIfNPositive(VOID);
-extern void SR3750(VOID);
-extern void SR3980(VOID);
-extern void TstPtUf(VOID);
+#అయితే_ముగింపు
+#అయితే_ముగింపు
+రకనిర్వచనం శూన్య (*Sig_type)(పూర్ణాంకం);
+FLOAT Sign(FLOAT), Random(శూన్య);
+బాహ్య శూన్య BadCond(పూర్ణాంకం, అక్షరం*);
+బాహ్య శూన్య SqXMinX(పూర్ణాంకం);
+బాహ్య శూన్య TstCond(పూర్ణాంకం, పూర్ణాంకం, అక్షరం*);
+బాహ్య శూన్య notify(అక్షరం*);
+బాహ్య పూర్ణాంకం పఠ(పూర్ణాంకం, అక్షరం*, పూర్ణాంకం);
+#అయితే_ముగింపు
+#నిర్వచనం_రద్దు V9
+బాహ్య శూన్య Characteristics(VOID);
+బాహ్య శూన్య Heading(VOID);
+బాహ్య శూన్య History(VOID);
+బాహ్య శూన్య Instructions(VOID);
+బాహ్య శూన్య IsYeqX(VOID);
+బాహ్య శూన్య NewD(VOID);
+బాహ్య శూన్య Pause(VOID);
+బాహ్య శూన్య PrintIfNPositive(VOID);
+బాహ్య శూన్య SR3750(VOID);
+బాహ్య శూన్య SR3980(VOID);
+బాహ్య శూన్య TstPtUf(VOID);
 
 Sig_type sigsave;
 
-#define KEYBOARD 0
+#నిర్వచించు KEYBOARD 0
 
 FLOAT Radix, BInvrse, RadixD2, BMinusU2;
 
@@ -321,9 +321,9 @@ FLOAT TwoForty = 240.0;
 FLOAT MinusOne = -1.0;
 FLOAT OneAndHalf = 1.5;
 /*Integer constants*/
-int NoTrials = 20; /*Number of tests for commutativity. */
-#define False 0
-#define True 1
+పూర్ణాంకం NoTrials = 20; /*Number of tests for commutativity. */
+#నిర్వచించు False 0
+#నిర్వచించు True 1
 
 /* Definitions for declared types 
 	Guard == (Yes, No);
@@ -331,31 +331,31 @@ int NoTrials = 20; /*Number of tests for commutativity. */
 	Message == packed array [1..40] of char;
 	Class == (Flaw, Defect, Serious, Failure);
 	  */
-#define Yes 1
-#define No  0
-#define Chopped 2
-#define Rounded 1
-#define Other   0
-#define Flaw    3
-#define Defect  2
-#define Serious 1
-#define Failure 0
-typedef int Guard, Rounding, Class;
-typedef char Message;
+#నిర్వచించు Yes 1
+#నిర్వచించు No  0
+#నిర్వచించు Chopped 2
+#నిర్వచించు Rounded 1
+#నిర్వచించు Other   0
+#నిర్వచించు Flaw    3
+#నిర్వచించు Defect  2
+#నిర్వచించు Serious 1
+#నిర్వచించు Failure 0
+రకనిర్వచనం పూర్ణాంకం Guard, Rounding, Class;
+రకనిర్వచనం అక్షరం సందేశం;
 
 /* Declarations of Variables */
-int Indx;
-char ch[8];
+పూర్ణాంకం Indx;
+అక్షరం ch[8];
 FLOAT AInvrse, A1;
 FLOAT C, CInvrse;
 FLOAT D, FourD;
 FLOAT E0, E1, Exp2, E3, MinSqEr;
 FLOAT SqEr, MaxSqEr, E9;
-FLOAT Third;
+FLOAT మూడవ;
 FLOAT F6, F9;
 FLOAT H, HInvrse;
-int I;
-FLOAT StickyBit, J;
+పూర్ణాంకం I;
+FLOAT Sticky_బిట్టు, J;
 FLOAT MyZero;
 FLOAT Precision;
 FLOAT Q, Q9;
@@ -367,37 +367,37 @@ FLOAT W;
 FLOAT X, X1, X2, X8, Random1;
 FLOAT Y, Y1, Y2, Random2;
 FLOAT Z, PseudoZero, Z1, Z2, Z9;
-int ErrCnt[4];
-int fpecount;
-int Milestone;
-int PageNo;
-int M, N, N1;
+పూర్ణాంకం ErrCnt[4];
+పూర్ణాంకం fpecount;
+పూర్ణాంకం Milestone;
+పూర్ణాంకం పుట_No;
+పూర్ణాంకం M, N, N1;
 Guard GMult, GDiv, GAddSub;
 Rounding RMult, RDiv, RAddSub, RSqrt;
-int Break, Done, NotMonot, Monot, Anomaly, IEEE,
+పూర్ణాంకం Break, పూర్తి, NotMonot, Monot, Anomaly, IEEE,
 		SqRWrng, UfNGrad;
 /* Computed constants. */
 /*U1  gap below 1.0, i.e, 1.0-U1 is next number below 1.0 */
 /*U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0 */
 
 /* floating point exception receiver */
- void
+ శూన్య
 sigfpe(INT x)
 {
 	fpecount++;
-	printf("\n* * * FLOATING-POINT ERROR %d * * *\n", x);
+	రాయి("\n* * * FLOATING-POINT ERROR %d * * *\n", x);
 	fflush(stdout);
-	if (sigsave) {
-#ifndef NOSIGNAL
-		signal(SIGFPE, sigsave);
-#endif
+	ఒకవేళ (sigsave) {
+#నిర్వచితం_కాకపోతే NOSIGNAL
+		సంకేతం(SIGFPE, sigsave);
+#అయితే_ముగింపు
 		sigsave = 0;
 		longjmp(ovfl_buf, 1);
 		}
-	exit(1);
+	నిష్క్రమించు(1);
 }
 
-main(VOID)
+ప్రధాన(VOID)
 {
 	/* First two assignments use integer right-hand sides. */
   uart_init();
@@ -419,13 +419,13 @@ main(VOID)
 	ErrCnt[Serious] = 0;
 	ErrCnt[Defect] = 0;
 	ErrCnt[Flaw] = 0;
-	PageNo = 1;
+	పుట_No = 1;
 	/*=============================================*/
 	Milestone = 0;
 	/*=============================================*/
-#ifndef NOSIGNAL
-	signal(SIGFPE, sigfpe);
-#endif
+#నిర్వచితం_కాకపోతే NOSIGNAL
+	సంకేతం(SIGFPE, sigfpe);
+#అయితే_ముగింపు
 	Instructions();
 	Pause();
 	Heading();
@@ -437,15 +437,15 @@ main(VOID)
 	/*=============================================*/
 	Milestone = 7;
 	/*=============================================*/
-	printf("Program is now RUNNING tests on small integers:\n");
+	రాయి("Program is now RUNNING tests on small integers:\n");
 	
 	TstCond (Failure, (Zero + Zero == Zero) && (One - One == Zero)
 		   && (One > Zero) && (One + One == Two),
 			"0+0 != 0, 1-1 != 0, 1 <= 0, or 1+1 != 2");
 	Z = - Zero;
-	if (Z != 0.0) {
+	ఒకవేళ (Z != 0.0) {
 		ErrCnt[Failure] = ErrCnt[Failure] + 1;
-		printf("Comparison alleges that -0.0 is Non-zero!\n");
+		రాయి("Comparison alleges that -0.0 is Non-zero!\n");
 		U2 = 0.001;
 		Radix = 1;
 		TstPtUf();
@@ -462,7 +462,7 @@ main(VOID)
 	TstCond (Failure, Half + MinusOne + Half == Zero,
 		  "1/2 + (-1) + 1/2 != 0");
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	{
 		extern void part2(VOID), part3(VOID), part4(VOID),
 			part5(VOID), part6(VOID), part7(VOID);
@@ -493,42 +493,42 @@ void part2(VOID){
 		   && ( TwoForty / Four - Five * Three * Four == Zero)
 		   && ( TwoForty / Five - Four * Three * Four == Zero),
 		  "5 != 4+1, 240/3 != 80, 240/4 != 60, or 240/5 != 48");
-	if (ErrCnt[Failure] == 0) {
-		printf("-1, 0, 1/2, 1, 2, 3, 4, 5, 9, 27, 32 & 240 are O.K.\n");
-		printf("\n");
+	ఒకవేళ (ErrCnt[Failure] == 0) {
+		రాయి("-1, 0, 1/2, 1, 2, 3, 4, 5, 9, 27, 32 & 240 are O.K.\n");
+		రాయి("\n");
 		}
-	printf("Searching for Radix and Precision.\n");
+	రాయి("Searching for Radix and Precision.\n");
 	W = One;
-	do  {
+	చేయి  {
 		W = W + W;
 		Y = W + One;
 		Z = Y - W;
 		Y = Z - One;
-		} while (MinusOne + FABS(Y) < Zero);
+		} అయితే (MinusOne + FABS(Y) < Zero);
 	/*.. now W is just big enough that |((W+1)-W)-1| >= 1 ...*/
 	Precision = Zero;
 	Y = One;
-	do  {
+	చేయి  {
 		Radix = W + Y;
 		Y = Y + Y;
 		Radix = Radix - W;
-		} while ( Radix == Zero);
-	if (Radix < Two) Radix = One;
-	printf("Radix = %d .\n", Radix);
-	if (Radix != 1) {
+		} అయితే ( Radix == Zero);
+	ఒకవేళ (Radix < Two) Radix = One;
+	రాయి("Radix = %d .\n", Radix);
+	ఒకవేళ (Radix != 1) {
 		W = One;
-		do  {
+		చేయి  {
 			Precision = Precision + One;
 			W = W * Radix;
 			Y = W + One;
-			} while ((Y - W) == One);
+			} అయితే ((Y - W) == One);
 		}
 	/*... now W == Radix^Precision is barely too big to satisfy (W+1)-W == 1
 			                              ...*/
 	U1 = One / W;
 	U2 = Radix * U1;
-	printf("Closest relative separation found is U1 = %d .\n\n", U1);
-	printf("Recalculating radix and precision\n ");
+	రాయి("Closest relative separation found is U1 = %d .\n\n", U1);
+	రాయి("Recalculating radix and precision\n ");
 	
 	/*save old values*/
 	E0 = Radix;
@@ -537,45 +537,45 @@ void part2(VOID){
 	E3 = Precision;
 	
 	X = Four / Three;
-	Third = X - One;
-	F6 = Half - Third;
+	మూడవ = X - One;
+	F6 = Half - మూడవ;
 	X = F6 + F6;
-	X = FABS(X - Third);
-	if (X < U2) X = U2;
+	X = FABS(X - మూడవ);
+	ఒకవేళ (X < U2) X = U2;
 	
 	/*... now X = (unknown no.) ulps of 1+...*/
-	do  {
+	చేయి  {
 		U2 = X;
 		Y = Half * U2 + ThirtyTwo * U2 * U2;
 		Y = One + Y;
 		X = Y - One;
-		} while ( ! ((U2 <= X) || (X <= Zero)));
+		} అయితే ( ! ((U2 <= X) || (X <= Zero)));
 	
 	/*... now U2 == 1 ulp of 1 + ... */
 	X = Two / Three;
 	F6 = X - Half;
-	Third = F6 + F6;
-	X = Third - Half;
+	మూడవ = F6 + F6;
+	X = మూడవ - Half;
 	X = FABS(X + F6);
-	if (X < U1) X = U1;
+	ఒకవేళ (X < U1) X = U1;
 	
 	/*... now  X == (unknown no.) ulps of 1 -... */
-	do  {
+	చేయి  {
 		U1 = X;
 		Y = Half * U1 + ThirtyTwo * U1 * U1;
 		Y = Half - Y;
 		X = Half + Y;
 		Y = Half - X;
 		X = Half + Y;
-		} while ( ! ((U1 <= X) || (X <= Zero)));
+		} అయితే ( ! ((U1 <= X) || (X <= Zero)));
 	/*... now U1 == 1 ulp of 1 - ... */
-	if (U1 == E1) printf("confirms closest relative separation U1 .\n");
-	else printf("gets better closest relative separation U1 = %d .\n", U1);
+	ఒకవేళ (U1 == E1) రాయి("confirms closest relative separation U1 .\n");
+	లేకపోతే రాయి("gets better closest relative separation U1 = %d .\n", U1);
 	W = One / U1;
 	F9 = (Half - U1) + Half;
 	Radix = FLOOR(0.01 + U2 / U1);
-	if (Radix == E0) printf("Radix confirmed.\n");
-	else printf("MYSTERY: recalculated Radix = %d .\n", Radix);
+	ఒకవేళ (Radix == E0) రాయి("Radix confirmed.\n");
+	లేకపోతే రాయి("MYSTERY: recalculated Radix = %d .\n", Radix);
 	TstCond (Defect, Radix <= Eight + Eight,
 		   "Radix is too big: roundoff problems");
 	TstCond (Flaw, (Radix == Two) || (Radix == 10)
@@ -600,21 +600,21 @@ void part2(VOID){
 	BMinusU2 = Radix - One;
 	BMinusU2 = (BMinusU2 - U2) + One;
 	/* Purify Integers */
-	if (Radix != One)  {
+	ఒకవేళ (Radix != One)  {
 		X = - TwoForty * LOG(U1) / LOG(Radix);
 		Y = FLOOR(Half + X);
-		if (FABS(X - Y) * Four < One) X = Y;
+		ఒకవేళ (FABS(X - Y) * Four < One) X = Y;
 		Precision = X / TwoForty;
 		Y = FLOOR(Half + Precision);
-		if (FABS(Precision - Y) * TwoForty < Half) Precision = Y;
+		ఒకవేళ (FABS(Precision - Y) * TwoForty < Half) Precision = Y;
 		}
-	if ((Precision != FLOOR(Precision)) || (Radix == One)) {
-		printf("Precision cannot be characterized by an Integer number\n");
-		printf("of significant digits but, by itself, this is a minor flaw.\n");
+	ఒకవేళ ((Precision != FLOOR(Precision)) || (Radix == One)) {
+		రాయి("Precision cannot be characterized by an Integer number\n");
+		రాయి("of significant digits but, by itself, this is a minor flaw.\n");
 		}
-	if (Radix == One) 
-		printf("logarithmic encoding has precision characterized solely by U1.\n");
-	else printf("The number of significant digits of the Radix is %d .\n",
+	ఒకవేళ (Radix == One) 
+		రాయి("logarithmic encoding has precision characterized solely by U1.\n");
+	లేకపోతే రాయి("The number of significant digits of the Radix is %d .\n",
 			Precision);
 	TstCond (Serious, U2 * Nine * Nine * TwoForty < One,
 		   "Precision worse than 5 decimal figures  ");
@@ -623,74 +623,74 @@ void part2(VOID){
 	/*=============================================*/
 	/* Test for extra-precise subepressions */
 	X = FABS(((Four / Three - One) - One / Four) * Three - One / Four);
-	do  {
+	చేయి  {
 		Z2 = X;
 		X = (One + (Half * Z2 + ThirtyTwo * Z2 * Z2)) - One;
-		} while ( ! ((Z2 <= X) || (X <= Zero)));
+		} అయితే ( ! ((Z2 <= X) || (X <= Zero)));
 	X = Y = Z = FABS((Three / Four - Two / Three) * Three - One / Four);
-	do  {
+	చేయి  {
 		Z1 = Z;
 		Z = (One / Two - ((One / Two - (Half * Z1 + ThirtyTwo * Z1 * Z1))
 			+ One / Two)) + One / Two;
-		} while ( ! ((Z1 <= Z) || (Z <= Zero)));
-	do  {
-		do  {
+		} అయితే ( ! ((Z1 <= Z) || (Z <= Zero)));
+	చేయి  {
+		చేయి  {
 			Y1 = Y;
 			Y = (Half - ((Half - (Half * Y1 + ThirtyTwo * Y1 * Y1)) + Half
 				)) + Half;
-			} while ( ! ((Y1 <= Y) || (Y <= Zero)));
+			} అయితే ( ! ((Y1 <= Y) || (Y <= Zero)));
 		X1 = X;
 		X = ((Half * X1 + ThirtyTwo * X1 * X1) - F9) + F9;
-		} while ( ! ((X1 <= X) || (X <= Zero)));
-	if ((X1 != Y1) || (X1 != Z1)) {
+		} అయితే ( ! ((X1 <= X) || (X <= Zero)));
+	ఒకవేళ ((X1 != Y1) || (X1 != Z1)) {
 		BadCond(Serious, "Disagreements among the values X1, Y1, Z1,\n");
-		printf("respectively  %d,  %016x,  %016x,\n", X1, Y1, Z1);
-		printf("are symptoms of inconsistencies introduced\n");
-		printf("by extra-precise evaluation of arithmetic subexpressions.\n");
+		రాయి("respectively  %d,  %016x,  %016x,\n", X1, Y1, Z1);
+		రాయి("are symptoms of inconsistencies introduced\n");
+		రాయి("by extra-precise evaluation of arithmetic subexpressions.\n");
 		notify("Possibly some part of this");
-		if ((X1 == U1) || (Y1 == U1) || (Z1 == U1))  printf(
+		ఒకవేళ ((X1 == U1) || (Y1 == U1) || (Z1 == U1))  రాయి(
 			"That feature is not tested further by this program.\n") ;
 		}
-	else  {
-		if ((Z1 != U1) || (Z2 != U2)) {
-			if ((Z1 >= U1) || (Z2 >= U2)) {
+	లేకపోతే  {
+		ఒకవేళ ((Z1 != U1) || (Z2 != U2)) {
+			ఒకవేళ ((Z1 >= U1) || (Z2 >= U2)) {
 				BadCond(Failure, "");
 				notify("Precision");
-				printf("\tU1 = %d, Z1 - U1 = %016x\n",U1,Z1-U1);
-				printf("\tU2 = %d, Z2 - U2 = %016x\n",U2,Z2-U2);
+				రాయి("\tU1 = %d, Z1 - U1 = %016x\n",U1,Z1-U1);
+				రాయి("\tU2 = %d, Z2 - U2 = %016x\n",U2,Z2-U2);
 				}
-			else {
-				if ((Z1 <= Zero) || (Z2 <= Zero)) {
-					printf("Because of unusual Radix = %d", Radix);
-					printf(", or exact rational arithmetic a result\n");
-					printf("Z1 = %d, or Z2 = %016x ", Z1, Z2);
+			లేకపోతే {
+				ఒకవేళ ((Z1 <= Zero) || (Z2 <= Zero)) {
+					రాయి("Because of unusual Radix = %d", Radix);
+					రాయి(", or exact rational arithmetic a result\n");
+					రాయి("Z1 = %d, or Z2 = %016x ", Z1, Z2);
 					notify("of an\nextra-precision");
 					}
-				if (Z1 != Z2 || Z1 > Zero) {
+				ఒకవేళ (Z1 != Z2 || Z1 > Zero) {
 					X = Z1 / U1;
 					Y = Z2 / U2;
-					if (Y > X) X = Y;
+					ఒకవేళ (Y > X) X = Y;
 					Q = - LOG(X);
-					printf("Some subexpressions appear to be calculated extra\n");
-					printf("precisely with about %d extra B-digits, i.e.\n",
+					రాయి("Some subexpressions appear to be calculated extra\n");
+					రాయి("precisely with about %d extra B-digits, i.e.\n",
 						(Q / LOG(Radix)));
-					printf("roughly %d extra significant decimals.\n",
+					రాయి("roughly %d extra significant decimals.\n",
 						Q / LOG(10.));
 					}
-				printf("That feature is not tested further by this program.\n");
+				రాయి("That feature is not tested further by this program.\n");
 				}
 			}
 		}
 	Pause();
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	}
 #include "paranoia.h"
 void part3(VOID){
 */
 	Milestone = 35;
 	/*=============================================*/
-	if (Radix >= Two) {
+	ఒకవేళ (Radix >= Two) {
 		X = W / (Radix * Radix);
 		Y = X + One;
 		Z = Y - X;
@@ -698,10 +698,10 @@ void part3(VOID){
 		X = T - Z;
 		TstCond (Failure, X == U2,
 			"Subtraction is not normalized X=Y,X+Z != Y+Z!");
-		if (X == U2) printf(
+		ఒకవేళ (X == U2) రాయి(
 			"Subtraction appears to be normalized, as it should be.");
 		}
-	printf("\nChecking for guard digit in *, /, and -.\n");
+	రాయి("\nChecking for guard digit in *, /, and -.\n");
 	Y = F9 * One;
 	Z = One * F9;
 	X = F9 - Half;
@@ -716,8 +716,8 @@ void part3(VOID){
 	T = T - Radix * U2;
 	X = X * (Radix - One);
 	T = T * (Radix - One);
-	if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)) GMult = Yes;
-	else {
+	ఒకవేళ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)) GMult = Yes;
+	లేకపోతే {
 		GMult = No;
 		TstCond (Serious, False,
 			"* lacks a Guard Digit, so 1*X != X");
@@ -747,8 +747,8 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	X = One + U2;
 	T = X / One;
 	X = T - X;
-	if ((X == Zero) && (Y == Zero) && (Z == Zero)) GDiv = Yes;
-	else {
+	ఒకవేళ ((X == Zero) && (Y == Zero) && (Z == Zero)) GDiv = Yes;
+	లేకపోతే {
 		GDiv = No;
 		TstCond (Serious, False,
 			"Division lacks a Guard Digit, so X/1 != X");
@@ -762,9 +762,9 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	Z = X * Radix;
 	T = Y * Radix;
 	R = Z / Radix;
-	StickyBit = T / Radix;
+	Sticky_బిట్టు = T / Radix;
 	X = R - X;
-	Y = StickyBit - Y;
+	Y = Sticky_బిట్టు - Y;
 	TstCond (Failure, X == Zero && Y == Zero,
 			"* and/or / gets too many last digits wrong");
 	Y = One - U1;
@@ -773,53 +773,53 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	T = Radix - U2;
 	Z = Radix - BMinusU2;
 	T = Radix - T;
-	if ((X == U1) && (Y == U1) && (Z == U2) && (T == U2)) GAddSub = Yes;
-	else {
+	ఒకవేళ ((X == U1) && (Y == U1) && (Z == U2) && (T == U2)) GAddSub = Yes;
+	లేకపోతే {
 		GAddSub = No;
 		TstCond (Serious, False,
 			"- lacks Guard Digit, so cancellation is obscured");
 		}
-	if (F9 != One && F9 - One >= Zero) {
+	ఒకవేళ (F9 != One && F9 - One >= Zero) {
 		BadCond(Serious, "comparison alleges  (1-U1) < 1  although\n");
-		printf("  subtraction yields  (1-U1) - 1 = 0 , thereby vitiating\n");
-		printf("  such precautions against division by zero as\n");
-		printf("  ...  if (X == 1.0) {.....} else {.../(X-1.0)...}\n");
+		రాయి("  subtraction yields  (1-U1) - 1 = 0 , thereby vitiating\n");
+		రాయి("  such precautions against division by zero as\n");
+		రాయి("  ...  if (X == 1.0) {.....} else {.../(X-1.0)...}\n");
 		}
-	if (GMult == Yes && GDiv == Yes && GAddSub == Yes) printf(
+	ఒకవేళ (GMult == Yes && GDiv == Yes && GAddSub == Yes) రాయి(
 		"     *, /, and - appear to have guard digits, as they should.\n");
 	/*=============================================*/
 	Milestone = 40;
 	/*=============================================*/
 	Pause();
-	printf("Checking rounding on multiply, divide and add/subtract.\n");
+	రాయి("Checking rounding on multiply, divide and add/subtract.\n");
 	RMult = Other;
 	RDiv = Other;
 	RAddSub = Other;
 	RadixD2 = Radix / Two;
 	A1 = Two;
-	Done = False;
-	do  {
+	పూర్తి = False;
+	చేయి  {
 		AInvrse = Radix;
-		do  {
+		చేయి  {
 			X = AInvrse;
 			AInvrse = AInvrse / A1;
-			} while ( ! (FLOOR(AInvrse) != AInvrse));
-		Done = (X == One) || (A1 > Three);
-		if (! Done) A1 = Nine + One;
-		} while ( ! (Done));
-	if (X == One) A1 = Radix;
+			} అయితే ( ! (FLOOR(AInvrse) != AInvrse));
+		పూర్తి = (X == One) || (A1 > Three);
+		ఒకవేళ (! పూర్తి) A1 = Nine + One;
+		} అయితే ( ! (పూర్తి));
+	ఒకవేళ (X == One) A1 = Radix;
 	AInvrse = One / A1;
 	X = A1;
 	Y = AInvrse;
-	Done = False;
-	do  {
+	పూర్తి = False;
+	చేయి  {
 		Z = X * Y - Half;
 		TstCond (Failure, Z == Half,
 			"X * (1/X) differs from 1");
-		Done = X == Radix;
+		పూర్తి = X == Radix;
 		X = Radix;
 		Y = One / X;
-		} while ( ! (Done));
+		} అయితే ( ! (పూర్తి));
 	Y2 = One + U2;
 	Y1 = One - U2;
 	X = OneAndHalf - U2;
@@ -832,36 +832,36 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	Y = (Y + U2) * Y1;
 	X = X - OneAndHalf;
 	Y = Y - OneAndHalf;
-	if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T <= Zero)) {
+	ఒకవేళ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T <= Zero)) {
 		X = (OneAndHalf + U2) * Y2;
 		Y = OneAndHalf - U2 - U2;
 		Z = OneAndHalf + U2 + U2;
 		T = (OneAndHalf - U2) * Y1;
 		X = X - (Z + U2);
-		StickyBit = Y * Y1;
+		Sticky_బిట్టు = Y * Y1;
 		S = Z * Y2;
 		T = T - Y;
-		Y = (U2 - Y) + StickyBit;
+		Y = (U2 - Y) + Sticky_బిట్టు;
 		Z = S - (Z + U2 + U2);
-		StickyBit = (Y2 + U2) * Y1;
+		Sticky_బిట్టు = (Y2 + U2) * Y1;
 		Y1 = Y2 * Y1;
-		StickyBit = StickyBit - Y2;
+		Sticky_బిట్టు = Sticky_బిట్టు - Y2;
 		Y1 = Y1 - Half;
-		if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
-			&& ( StickyBit == Zero) && (Y1 == Half)) {
+		ఒకవేళ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
+			&& ( Sticky_బిట్టు == Zero) && (Y1 == Half)) {
 			RMult = Rounded;
-			printf("Multiplication appears to round correctly.\n");
+			రాయి("Multiplication appears to round correctly.\n");
 			}
-		else	if ((X + U2 == Zero) && (Y < Zero) && (Z + U2 == Zero)
-				&& (T < Zero) && (StickyBit + U2 == Zero)
+		లేకపోతే	ఒకవేళ ((X + U2 == Zero) && (Y < Zero) && (Z + U2 == Zero)
+				&& (T < Zero) && (Sticky_బిట్టు + U2 == Zero)
 				&& (Y1 < Half)) {
 				RMult = Chopped;
-				printf("Multiplication appears to chop.\n");
+				రాయి("Multiplication appears to chop.\n");
 				}
-			else printf("* is neither chopped nor correctly rounded.\n");
-		if ((RMult == Rounded) && (GMult == No)) notify("Multiplication");
+			లేకపోతే రాయి("* is neither chopped nor correctly rounded.\n");
+		ఒకవేళ ((RMult == Rounded) && (GMult == No)) notify("Multiplication");
 		}
-	else printf("* is neither chopped nor correctly rounded.\n");
+	లేకపోతే రాయి("* is neither chopped nor correctly rounded.\n");
 	/*=============================================*/
 	Milestone = 45;
 	/*=============================================*/
@@ -877,7 +877,7 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	T = T / Y1;
 	Z = Z - (OneAndHalf + U2);
 	T = (U2 - OneAndHalf) + T;
-	if (! ((X > Zero) || (Y > Zero) || (Z > Zero) || (T > Zero))) {
+	ఒకవేళ (! ((X > Zero) || (Y > Zero) || (Z > Zero) || (T > Zero))) {
 		X = OneAndHalf / Y2;
 		Y = OneAndHalf - U2;
 		Z = OneAndHalf + U2;
@@ -891,25 +891,25 @@ or  1/3  and  3/9  and  9/27 may disagree");
 		Z = Z - OneAndHalf;
 		Y2 = Y1 - Y2;
 		Y1 = (F9 - U1) / F9;
-		if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
+		ఒకవేళ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
 			&& (Y2 == Zero) && (Y2 == Zero)
 			&& (Y1 - Half == F9 - Half )) {
 			RDiv = Rounded;
-			printf("Division appears to round correctly.\n");
-			if (GDiv == No) notify("Division");
+			రాయి("Division appears to round correctly.\n");
+			ఒకవేళ (GDiv == No) notify("Division");
 			}
-		else if ((X < Zero) && (Y < Zero) && (Z < Zero) && (T < Zero)
+		లేకపోతే ఒకవేళ ((X < Zero) && (Y < Zero) && (Z < Zero) && (T < Zero)
 			&& (Y2 < Zero) && (Y1 - Half < F9 - Half)) {
 			RDiv = Chopped;
-			printf("Division appears to chop.\n");
+			రాయి("Division appears to chop.\n");
 			}
 		}
-	if (RDiv == Other) printf("/ is neither chopped nor correctly rounded.\n");
+	ఒకవేళ (RDiv == Other) రాయి("/ is neither chopped nor correctly rounded.\n");
 	BInvrse = One / Radix;
 	TstCond (Failure, (BInvrse * Radix - Half == Half),
 		   "Radix * ( 1 / Radix ) differs from 1");
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	}
 #include "paranoia.h"
 void part4(VOID){
@@ -924,108 +924,108 @@ void part4(VOID){
 	Z = F9 - Half;
 	X = (X - Half) - Z;
 	Y = Y - One;
-	if ((X == Zero) && (Y == Zero)) {
+	ఒకవేళ ((X == Zero) && (Y == Zero)) {
 		RAddSub = Chopped;
-		printf("Add/Subtract appears to be chopped.\n");
+		రాయి("Add/Subtract appears to be chopped.\n");
 		}
-	if (GAddSub == Yes) {
+	ఒకవేళ (GAddSub == Yes) {
 		X = (Half + U2) * U2;
 		Y = (Half - U2) * U2;
 		X = One + X;
 		Y = One + Y;
 		X = (One + U2) - X;
 		Y = One - Y;
-		if ((X == Zero) && (Y == Zero)) {
+		ఒకవేళ ((X == Zero) && (Y == Zero)) {
 			X = (Half + U2) * U1;
 			Y = (Half - U2) * U1;
 			X = One - X;
 			Y = One - Y;
 			X = F9 - X;
 			Y = One - Y;
-			if ((X == Zero) && (Y == Zero)) {
+			ఒకవేళ ((X == Zero) && (Y == Zero)) {
 				RAddSub = Rounded;
-				printf("Addition/Subtraction appears to round correctly.\n");
-				if (GAddSub == No) notify("Add/Subtract");
+				రాయి("Addition/Subtraction appears to round correctly.\n");
+				ఒకవేళ (GAddSub == No) notify("Add/Subtract");
 				}
-			else printf("Addition/Subtraction neither rounds nor chops.\n");
+			లేకపోతే రాయి("Addition/Subtraction neither rounds nor chops.\n");
 			}
-		else printf("Addition/Subtraction neither rounds nor chops.\n");
+		లేకపోతే రాయి("Addition/Subtraction neither rounds nor chops.\n");
 		}
-	else printf("Addition/Subtraction neither rounds nor chops.\n");
+	లేకపోతే రాయి("Addition/Subtraction neither rounds nor chops.\n");
 	S = One;
 	X = One + Half * (One + Half);
 	Y = (One + U2) * Half;
 	Z = X - Y;
 	T = Y - X;
-	StickyBit = Z + T;
-	if (StickyBit != Zero) {
+	Sticky_బిట్టు = Z + T;
+	ఒకవేళ (Sticky_బిట్టు != Zero) {
 		S = Zero;
 		BadCond(Flaw, "(X - Y) + (Y - X) is non zero!\n");
 		}
-	StickyBit = Zero;
-	if ((GMult == Yes) && (GDiv == Yes) && (GAddSub == Yes)
+	Sticky_బిట్టు = Zero;
+	ఒకవేళ ((GMult == Yes) && (GDiv == Yes) && (GAddSub == Yes)
 		&& (RMult == Rounded) && (RDiv == Rounded)
 		&& (RAddSub == Rounded) && (FLOOR(RadixD2) == RadixD2)) {
-		printf("Checking for sticky bit.\n");
+		రాయి("Checking for sticky bit.\n");
 		X = (Half + U1) * U2;
 		Y = Half * U2;
 		Z = One + Y;
 		T = One + X;
-		if ((Z - One <= Zero) && (T - One >= U2)) {
+		ఒకవేళ ((Z - One <= Zero) && (T - One >= U2)) {
 			Z = T + Y;
 			Y = Z - X;
-			if ((Z - T >= U2) && (Y - T == Zero)) {
+			ఒకవేళ ((Z - T >= U2) && (Y - T == Zero)) {
 				X = (Half + U1) * U1;
 				Y = Half * U1;
 				Z = One - Y;
 				T = One - X;
-				if ((Z - One == Zero) && (T - F9 == Zero)) {
+				ఒకవేళ ((Z - One == Zero) && (T - F9 == Zero)) {
 					Z = (Half - U1) * U1;
 					T = F9 - Z;
 					Q = F9 - Y;
-					if ((T - F9 == Zero) && (F9 - U1 - Q == Zero)) {
+					ఒకవేళ ((T - F9 == Zero) && (F9 - U1 - Q == Zero)) {
 						Z = (One + U2) * OneAndHalf;
 						T = (OneAndHalf + U2) - Z + U2;
 						X = One + Half / Radix;
 						Y = One + Radix * U2;
 						Z = X * Y;
-						if (T == Zero && X + Radix * U2 - Z == Zero) {
-							if (Radix != Two) {
+						ఒకవేళ (T == Zero && X + Radix * U2 - Z == Zero) {
+							ఒకవేళ (Radix != Two) {
 								X = Two + U2;
 								Y = X / Two;
-								if ((Y - One == Zero)) StickyBit = S;
+								ఒకవేళ ((Y - One == Zero)) Sticky_బిట్టు = S;
 								}
-							else StickyBit = S;
+							లేకపోతే Sticky_బిట్టు = S;
 							}
 						}
 					}
 				}
 			}
 		}
-	if (StickyBit == One) printf("Sticky bit apparently used correctly.\n");
-	else printf("Sticky bit used incorrectly or not at all.\n");
+	ఒకవేళ (Sticky_బిట్టు == One) రాయి("Sticky bit apparently used correctly.\n");
+	లేకపోతే రాయి("Sticky bit used incorrectly or not at all.\n");
 	TstCond (Flaw, !(GMult == No || GDiv == No || GAddSub == No ||
 			RMult == Other || RDiv == Other || RAddSub == Other),
-		"lack(s) of guard digits or failure(s) to correctly round or chop\n\
-(noted above) count as one flaw in the final tally below");
+		"lack(s) యొక్క guard digits or failure(s) గమ్యం correctly round or chop\n\
+(noted above) లెక్క as one flaw లోపల the final tally క్రింద");
 	/*=============================================*/
 	Milestone = 60;
 	/*=============================================*/
-	printf("\n");
-	printf("Does Multiplication commute?  ");
-	printf("Testing on %d random pairs.\n", NoTrials);
+	రాయి("\n");
+	రాయి("Does Multiplication commute?  ");
+	రాయి("Testing on %d random pairs.\n", NoTrials);
 	Random9 = SQRT(3.0);
-	Random1 = Third;
+	Random1 = మూడవ;
 	I = 1;
-	do  {
+	చేయి  {
 		X = Random();
 		Y = Random();
 		Z9 = Y * X;
 		Z = X * Y;
 		Z9 = Z - Z9;
 		I = I + 1;
-		} while ( ! ((I > NoTrials) || (Z9 != Zero)));
-	if (I == NoTrials) {
+		} అయితే ( ! ((I > NoTrials) || (Z9 != Zero)));
+	ఒకవేళ (I == NoTrials) {
 		Random1 = One + Half / Three;
 		Random2 = (U2 + U1) + One;
 		Z = Random1 * Random2;
@@ -1033,13 +1033,13 @@ void part4(VOID){
 		Z9 = (One + Half / Three) * ((U2 + U1) + One) - (One + Half /
 			Three) * ((U2 + U1) + One);
 		}
-	if (! ((I == NoTrials) || (Z9 == Zero)))
+	ఒకవేళ (! ((I == NoTrials) || (Z9 == Zero)))
 		BadCond(Defect, "X * Y == Y * X trial fails.\n");
-	else printf("     No failures found in %d integer pairs.\n", NoTrials);
+	లేకపోతే రాయి("     No failures found in %d integer pairs.\n", NoTrials);
 	/*=============================================*/
 	Milestone = 70;
 	/*=============================================*/
-	printf("\nRunning test of square root(x).\n");
+	రాయి("\nRunning test of square root(x).\n");
 	TstCond (Failure, (Zero == SQRT(Zero))
 		   && (- Zero == SQRT(- Zero))
 		   && (One == SQRT(One)), "Square root of 0.0, -0.0 or 1.0 wrong");
@@ -1055,61 +1055,61 @@ void part4(VOID){
 	X = U1;
 	OneUlp = U1 * U1;
 	SqXMinX (Serious);
-	if (J != Zero) Pause();
-	printf("Testing if sqrt(X * X) == X for %d Integers X.\n", NoTrials);
+	ఒకవేళ (J != Zero) Pause();
+	రాయి("Testing if sqrt(X * X) == X for %d Integers X.\n", NoTrials);
 	J = Zero;
 	X = Two;
 	Y = Radix;
-	if ((Radix != One)) do  {
+	ఒకవేళ ((Radix != One)) చేయి  {
 		X = Y;
 		Y = Radix * Y;
-		} while ( ! ((Y - X >= NoTrials)));
+		} అయితే ( ! ((Y - X >= NoTrials)));
 	OneUlp = X * U2;
 	I = 1;
-	while (I <= NoTrials) {
+	అయితే (I <= NoTrials) {
 		X = X + One;
 		SqXMinX (Defect);
-		if (J > Zero) break;
+		ఒకవేళ (J > Zero) ఆపు;
 		I = I + 1;
 		}
-	printf("Test for sqrt monotonicity.\n");
+	రాయి("Test for sqrt monotonicity.\n");
 	I = - 1;
 	X = BMinusU2;
 	Y = Radix;
 	Z = Radix + Radix * U2;
 	NotMonot = False;
 	Monot = False;
-	while ( ! (NotMonot || Monot)) {
+	అయితే ( ! (NotMonot || Monot)) {
 		I = I + 1;
 		X = SQRT(X);
 		Q = SQRT(Y);
 		Z = SQRT(Z);
-		if ((X > Q) || (Q > Z)) NotMonot = True;
-		else {
+		ఒకవేళ ((X > Q) || (Q > Z)) NotMonot = True;
+		లేకపోతే {
 			Q = FLOOR(Q + Half);
-			if (!(I > 0 || Radix == Q * Q)) Monot = True;
-			else if (I > 0) {
-			if (I > 1) Monot = True;
-			else {
+			ఒకవేళ (!(I > 0 || Radix == Q * Q)) Monot = True;
+			లేకపోతే ఒకవేళ (I > 0) {
+			ఒకవేళ (I > 1) Monot = True;
+			లేకపోతే {
 				Y = Y * BInvrse;
 				X = Y - U1;
 				Z = Y + U1;
 				}
 			}
-			else {
+			లేకపోతే {
 				Y = Q;
 				X = Y - U2;
 				Z = Y + U2;
 				}
 			}
 		}
-	if (Monot) printf("sqrt has passed a test for Monotonicity.\n");
-	else {
+	ఒకవేళ (Monot) రాయి("sqrt has passed a test for Monotonicity.\n");
+	లేకపోతే {
 		BadCond(Defect, "");
-		printf("sqrt(X) is non-monotonic for X near %d .\n", Y);
+		రాయి("sqrt(X) is non-monotonic for X near %d .\n", Y);
 		}
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	}
 #include "paranoia.h"
 void part5(VOID){
@@ -1120,27 +1120,27 @@ void part5(VOID){
 	MaxSqEr = MaxSqEr - Half;
 	Y = (SQRT(One + U2) - One) / U2;
 	SqEr = (Y - One) + U2 / Eight;
-	if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+	ఒకవేళ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 	SqEr = Y + U2 / Eight;
-	if (SqEr < MinSqEr) MinSqEr = SqEr;
+	ఒకవేళ (SqEr < MinSqEr) MinSqEr = SqEr;
 	Y = ((SQRT(F9) - U2) - (One - U2)) / U1;
 	SqEr = Y + U1 / Eight;
-	if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+	ఒకవేళ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 	SqEr = (Y + One) + U1 / Eight;
-	if (SqEr < MinSqEr) MinSqEr = SqEr;
+	ఒకవేళ (SqEr < MinSqEr) MinSqEr = SqEr;
 	OneUlp = U2;
 	X = OneUlp;
-	for( Indx = 1; Indx <= 3; ++Indx) {
+	కొరకు( Indx = 1; Indx <= 3; ++Indx) {
 		Y = SQRT((X + U1 + X) + F9);
 		Y = ((Y - U2) - ((One - U2) + X)) / OneUlp;
 		Z = ((U1 - X) + F9) * Half * X * X / OneUlp;
 		SqEr = (Y + Half) + Z;
-		if (SqEr < MinSqEr) MinSqEr = SqEr;
+		ఒకవేళ (SqEr < MinSqEr) MinSqEr = SqEr;
 		SqEr = (Y - Half) + Z;
-		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
-		if (((Indx == 1) || (Indx == 3))) 
+		ఒకవేళ (SqEr > MaxSqEr) MaxSqEr = SqEr;
+		ఒకవేళ (((Indx == 1) || (Indx == 3))) 
 			X = OneUlp * Sign (X) * FLOOR(Eight / (Nine * SQRT(OneUlp)));
-		else {
+		లేకపోతే {
 			OneUlp = U1;
 			X = - OneUlp;
 			}
@@ -1151,32 +1151,32 @@ void part5(VOID){
 	SqRWrng = False;
 	Anomaly = False;
 	RSqrt = Other; /* ~dgh */
-	if (Radix != One) {
-		printf("Testing whether sqrt is rounded or chopped.\n");
+	ఒకవేళ (Radix != One) {
+		రాయి("Testing whether sqrt is rounded or chopped.\n");
 		D = FLOOR(Half + POW(Radix, One + Precision - FLOOR(Precision)));
 	/* ... == Radix^(1 + fract) if (Precision == Integer + fract. */
 		X = D / Radix;
 		Y = D / A1;
-		if ((X != FLOOR(X)) || (Y != FLOOR(Y))) {
+		ఒకవేళ ((X != FLOOR(X)) || (Y != FLOOR(Y))) {
 			Anomaly = True;
 			}
-		else {
+		లేకపోతే {
 			X = Zero;
 			Z2 = X;
 			Y = One;
 			Y2 = Y;
 			Z1 = Radix - One;
 			FourD = Four * D;
-			do  {
-				if (Y2 > Z2) {
+			చేయి  {
+				ఒకవేళ (Y2 > Z2) {
 					Q = Radix;
 					Y1 = Y;
-					do  {
+					చేయి  {
 						X1 = FABS(Q + FLOOR(Half - Q / Y1) * Y1);
 						Q = Y1;
 						Y1 = X1;
-						} while ( ! (X1 <= Zero));
-					if (Q <= One) {
+						} అయితే ( ! (X1 <= Zero));
+					ఒకవేళ (Q <= One) {
 						Z2 = Y2;
 						Z = Y;
 						}
@@ -1184,30 +1184,30 @@ void part5(VOID){
 				Y = Y + Two;
 				X = X + Eight;
 				Y2 = Y2 + X;
-				if (Y2 >= FourD) Y2 = Y2 - FourD;
-				} while ( ! (Y >= D));
+				ఒకవేళ (Y2 >= FourD) Y2 = Y2 - FourD;
+				} అయితే ( ! (Y >= D));
 			X8 = FourD - Z2;
 			Q = (X8 + Z * Z) / FourD;
 			X8 = X8 / Eight;
-			if (Q != FLOOR(Q)) Anomaly = True;
-			else {
+			ఒకవేళ (Q != FLOOR(Q)) Anomaly = True;
+			లేకపోతే {
 				Break = False;
-				do  {
+				చేయి  {
 					X = Z1 * Z;
 					X = X - FLOOR(X / Radix) * Radix;
-					if (X == One) 
+					ఒకవేళ (X == One) 
 						Break = True;
-					else
+					లేకపోతే
 						Z1 = Z1 - One;
-					} while ( ! (Break || (Z1 <= Zero)));
-				if ((Z1 <= Zero) && (! Break)) Anomaly = True;
-				else {
-					if (Z1 > RadixD2) Z1 = Z1 - Radix;
-					do  {
+					} అయితే ( ! (Break || (Z1 <= Zero)));
+				ఒకవేళ ((Z1 <= Zero) && (! Break)) Anomaly = True;
+				లేకపోతే {
+					ఒకవేళ (Z1 > RadixD2) Z1 = Z1 - Radix;
+					చేయి  {
 						NewD();
-						} while ( ! (U2 * D >= F9));
-					if (D * Radix - D != W - D) Anomaly = True;
-					else {
+						} అయితే ( ! (U2 * D >= F9));
+					ఒకవేళ (D * Radix - D != W - D) Anomaly = True;
+					లేకపోతే {
 						Z2 = D;
 						I = 0;
 						Y = D + (One + Z) * Half;
@@ -1218,45 +1218,45 @@ void part5(VOID){
 						X = X + Q + X;
 						SR3750();
 						NewD();
-						if (D - Z2 != W - Z2) Anomaly = True;
-						else {
+						ఒకవేళ (D - Z2 != W - Z2) Anomaly = True;
+						లేకపోతే {
 							Y = (D - Z2) + (Z2 + (One - Z) * Half);
 							X = (D - Z2) + (Z2 - Z + Q);
 							SR3750();
 							Y = (One + Z) * Half;
 							X = Q;
 							SR3750();
-							if (I == 0) Anomaly = True;
+							ఒకవేళ (I == 0) Anomaly = True;
 							}
 						}
 					}
 				}
 			}
-		if ((I == 0) || Anomaly) {
+		ఒకవేళ ((I == 0) || Anomaly) {
 			BadCond(Failure, "Anomalous arithmetic with Integer < ");
-			printf("Radix^Precision = %d\n", W);
-			printf(" fails test whether sqrt rounds or chops.\n");
+			రాయి("Radix^Precision = %d\n", W);
+			రాయి(" fails test whether sqrt rounds or chops.\n");
 			SqRWrng = True;
 			}
 		}
-	if (! Anomaly) {
-		if (! ((MinSqEr < Zero) || (MaxSqEr > Zero))) {
+	ఒకవేళ (! Anomaly) {
+		ఒకవేళ (! ((MinSqEr < Zero) || (MaxSqEr > Zero))) {
 			RSqrt = Rounded;
-			printf("Square root appears to be correctly rounded.\n");
+			రాయి("Square root appears to be correctly rounded.\n");
 			}
-		else  {
-			if ((MaxSqEr + U2 > U2 - Half) || (MinSqEr > Half)
+		లేకపోతే  {
+			ఒకవేళ ((MaxSqEr + U2 > U2 - Half) || (MinSqEr > Half)
 				|| (MinSqEr + Radix < Half)) SqRWrng = True;
-			else {
+			లేకపోతే {
 				RSqrt = Chopped;
-				printf("Square root appears to be chopped.\n");
+				రాయి("Square root appears to be chopped.\n");
 				}
 			}
 		}
-	if (SqRWrng) {
-		printf("Square root is neither chopped nor correctly rounded.\n");
-		printf("Observed errors run from %d ", MinSqEr - Half);
-		printf("to %d ulps.\n", Half + MaxSqEr);
+	ఒకవేళ (SqRWrng) {
+		రాయి("Square root is neither chopped nor correctly rounded.\n");
+		రాయి("Observed errors run from %d ", MinSqEr - Half);
+		రాయి("to %d ulps.\n", Half + MaxSqEr);
 		TstCond (Serious, MaxSqEr - MinSqEr < Radix * Radix,
 			"sqrt gets too many last digits wrong");
 		}
@@ -1264,40 +1264,40 @@ void part5(VOID){
 	Milestone = 90;
 	/*=============================================*/
 	Pause();
-	printf("Testing powers Z^i for small Integers Z and i.\n");
+	రాయి("Testing powers Z^i for small Integers Z and i.\n");
 	N = 0;
 	/* ... test powers of zero. */
 	I = 0;
 	Z = -Zero;
 	M = 3;
 	Break = False;
-	do  {
+	చేయి  {
 		X = One;
 		SR3980();
-		if (I <= 10) {
+		ఒకవేళ (I <= 10) {
 			I = 1023;
 			SR3980();
 			}
-		if (Z == MinusOne) Break = True;
-		else {
+		ఒకవేళ (Z == MinusOne) Break = True;
+		లేకపోతే {
 			Z = MinusOne;
 			/* .. if(-1)^N is invalid, replace MinusOne by One. */
 			I = - 4;
 			}
-		} while ( ! Break);
+		} అయితే ( ! Break);
 	PrintIfNPositive();
 	N1 = N;
 	N = 0;
 	Z = A1;
-	M = (int)FLOOR(Two * LOG(W) / LOG(A1));
+	M = (పూర్ణాంకం)FLOOR(Two * LOG(W) / LOG(A1));
 	Break = False;
-	do  {
+	చేయి  {
 		X = Z;
 		I = 1;
 		SR3980();
-		if (Z == AInvrse) Break = True;
-		else Z = AInvrse;
-		} while ( ! (Break));
+		ఒకవేళ (Z == AInvrse) Break = True;
+		లేకపోతే Z = AInvrse;
+		} అయితే ( ! (Break));
 	/*=============================================*/
 		Milestone = 100;
 	/*=============================================*/
@@ -1305,80 +1305,80 @@ void part5(VOID){
 	/*         next try a few primes     */
 	M = NoTrials;
 	Z = Three;
-	do  {
+	చేయి  {
 		X = Z;
 		I = 1;
 		SR3980();
-		do  {
+		చేయి  {
 			Z = Z + Two;
-			} while ( Three * FLOOR(Z / Three) == Z );
-		} while ( Z < Eight * Three );
-	if (N > 0) {
-		printf("Errors like this may invalidate financial calculations\n");
-		printf("\tinvolving interest rates.\n");
+			} అయితే ( Three * FLOOR(Z / Three) == Z );
+		} అయితే ( Z < Eight * Three );
+	ఒకవేళ (N > 0) {
+		రాయి("Errors like this may invalidate financial calculations\n");
+		రాయి("\tinvolving interest rates.\n");
 		}
 	PrintIfNPositive();
 	N += N1;
-	if (N == 0) printf("... no discrepancies found.\n");
-	if (N > 0) Pause();
-	else printf("\n");
+	ఒకవేళ (N == 0) రాయి("... no discrepancies found.\n");
+	ఒకవేళ (N > 0) Pause();
+	లేకపోతే రాయి("\n");
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	}
 #include "paranoia.h"
 void part6(VOID){
 */
 	Milestone = 110;
 	/*=============================================*/
-	printf("Seeking Underflow thresholds UfThold and E0.\n");
+	రాయి("Seeking Underflow thresholds UfThold and E0.\n");
 	D = U1;
-	if (Precision != FLOOR(Precision)) {
+	ఒకవేళ (Precision != FLOOR(Precision)) {
 		D = BInvrse;
 		X = Precision;
-		do  {
+		చేయి  {
 			D = D * BInvrse;
 			X = X - One;
-			} while ( X > Zero);
+			} అయితే ( X > Zero);
 		}
 	Y = One;
 	Z = D;
 	/* ... D is power of 1/Radix < 1. */
-	do  {
+	చేయి  {
 		C = Y;
 		Y = Z;
 		Z = Y * Y;
-		} while ((Y > Z) && (Z + Z > Z));
+		} అయితే ((Y > Z) && (Z + Z > Z));
 	Y = C;
 	Z = Y * D;
-	do  {
+	చేయి  {
 		C = Y;
 		Y = Z;
 		Z = Y * D;
-		} while ((Y > Z) && (Z + Z > Z));
-	if (Radix < Two) HInvrse = Two;
-	else HInvrse = Radix;
+		} అయితే ((Y > Z) && (Z + Z > Z));
+	ఒకవేళ (Radix < Two) HInvrse = Two;
+	లేకపోతే HInvrse = Radix;
 	H = One / HInvrse;
 	/* ... 1/HInvrse == H == Min(1/Radix, 1/2) */
 	CInvrse = One / C;
 	E0 = C;
 	Z = E0 * H;
 	/* ...1/Radix^(BIG Integer) << 1 << CInvrse == 1/C */
-	do  {
+	చేయి  {
 		Y = E0;
 		E0 = Z;
 		Z = E0 * H;
-		} while ((E0 > Z) && (Z + Z > Z));
+		} అయితే ((E0 > Z) && (Z + Z > Z));
 	UfThold = E0;
 	E1 = Zero;
 	Q = Zero;
 	E9 = U2;
 	S = One + E9;
 	D = C * S;
-	if (D <= C) {
+	ఒకవేళ (D <= C) {
 		E9 = Radix * U2;
 		S = One + E9;
 		D = C * S;
-		if (D <= C) {
+		ఒకవేళ (D <= C) {
 			BadCond(Failure, "multiplication gets too many last digits wrong.\n");
 			Underflow = E0;
 			Y1 = Zero;
@@ -1386,106 +1386,106 @@ void part6(VOID){
 			Pause();
 			}
 		}
-	else {
+	లేకపోతే {
 		Underflow = D;
 		PseudoZero = Underflow * H;
 		UfThold = Zero;
-		do  {
+		చేయి  {
 			Y1 = Underflow;
 			Underflow = PseudoZero;
-			if (E1 + E1 <= E1) {
+			ఒకవేళ (E1 + E1 <= E1) {
 				Y2 = Underflow * HInvrse;
 				E1 = FABS(Y1 - Y2);
 				Q = Y1;
-				if ((UfThold == Zero) && (Y1 != Y2)) UfThold = Y1;
+				ఒకవేళ ((UfThold == Zero) && (Y1 != Y2)) UfThold = Y1;
 				}
 			PseudoZero = PseudoZero * H;
-			} while ((Underflow > PseudoZero)
+			} అయితే ((Underflow > PseudoZero)
 				&& (PseudoZero + PseudoZero > PseudoZero));
 		}
 	/* Comment line 4530 .. 4560 */
-	if (PseudoZero != Zero) {
-		printf("\n");
+	ఒకవేళ (PseudoZero != Zero) {
+		రాయి("\n");
 		Z = PseudoZero;
 	/* ... Test PseudoZero for "phoney- zero" violates */
 	/* ... PseudoZero < Underflow or PseudoZero < PseudoZero + PseudoZero
 		   ... */
-		if (PseudoZero <= Zero) {
+		ఒకవేళ (PseudoZero <= Zero) {
 			BadCond(Failure, "Positive expressions can underflow to an\n");
-			printf("allegedly negative value\n");
-			printf("PseudoZero that prints out as: %d .\n", PseudoZero);
+			రాయి("allegedly negative value\n");
+			రాయి("PseudoZero that prints out as: %d .\n", PseudoZero);
 			X = - PseudoZero;
-			if (X <= Zero) {
-				printf("But -PseudoZero, which should be\n");
-				printf("positive, isn't; it prints out as  %d .\n", X);
+			ఒకవేళ (X <= Zero) {
+				రాయి("But -PseudoZero, which should be\n");
+				రాయి("positive, isn't; it prints out as  %d .\n", X);
 				}
 			}
-		else {
+		లేకపోతే {
 			BadCond(Flaw, "Underflow can stick at an allegedly positive\n");
-			printf("value PseudoZero that prints out as %d .\n", PseudoZero);
+			రాయి("value PseudoZero that prints out as %d .\n", PseudoZero);
 			}
 		TstPtUf();
 		}
 	/*=============================================*/
 	Milestone = 120;
 	/*=============================================*/
-	if (CInvrse * Y > CInvrse * Y1) {
+	ఒకవేళ (CInvrse * Y > CInvrse * Y1) {
 		S = H * S;
 		E0 = Underflow;
 		}
-	if (! ((E1 == Zero) || (E1 == E0))) {
+	ఒకవేళ (! ((E1 == Zero) || (E1 == E0))) {
 		BadCond(Defect, "");
-		if (E1 < E0) {
-			printf("Products underflow at a higher");
-			printf(" threshold than differences.\n");
-			if (PseudoZero == Zero) 
+		ఒకవేళ (E1 < E0) {
+			రాయి("Products underflow at a higher");
+			రాయి(" threshold than differences.\n");
+			ఒకవేళ (PseudoZero == Zero) 
 			E0 = E1;
 			}
-		else {
-			printf("Difference underflows at a higher");
-			printf(" threshold than products.\n");
+		లేకపోతే {
+			రాయి("Difference underflows at a higher");
+			రాయి(" threshold than products.\n");
 			}
 		}
-	printf("Smallest strictly positive number found is E0 = %d .\n", E0);
+	రాయి("Smallest strictly positive number found is E0 = %d .\n", E0);
 	Z = E0;
 	TstPtUf();
 	Underflow = E0;
-	if (N == 1) Underflow = Y;
+	ఒకవేళ (N == 1) Underflow = Y;
 	I = 4;
-	if (E1 == Zero) I = 3;
-	if (UfThold == Zero) I = I - 2;
+	ఒకవేళ (E1 == Zero) I = 3;
+	ఒకవేళ (UfThold == Zero) I = I - 2;
 	UfNGrad = True;
-	switch (I)  {
-		case	1:
+	ఎంపిక (I)  {
+		స్థితి	1:
 		UfThold = Underflow;
-		if ((CInvrse * Q) != ((CInvrse * Y) * S)) {
+		ఒకవేళ ((CInvrse * Q) != ((CInvrse * Y) * S)) {
 			UfThold = Y;
 			BadCond(Failure, "Either accuracy deteriorates as numbers\n");
-			printf("approach a threshold = %d\n", UfThold);;
-			printf(" coming down from %d\n", C);
-			printf(" or else multiplication gets too many last digits wrong.\n");
+			రాయి("approach a threshold = %d\n", UfThold);;
+			రాయి(" coming down from %d\n", C);
+			రాయి(" or else multiplication gets too many last digits wrong.\n");
 			}
 		Pause();
-		break;
+		ఆపు;
 	
-		case	2:
+		స్థితి	2:
 		BadCond(Failure, "Underflow confuses Comparison, which alleges that\n");
-		printf("Q == Y while denying that |Q - Y| == 0; these values\n");
-		printf("print out as Q = %d, Y = %016x .\n", Q, Y2);
-		printf ("|Q - Y| = %d .\n" , FABS(Q - Y2));
+		రాయి("Q == Y while denying that |Q - Y| == 0; these values\n");
+		రాయి("print out as Q = %d, Y = %016x .\n", Q, Y2);
+		రాయి ("|Q - Y| = %d .\n" , FABS(Q - Y2));
 		UfThold = Q;
-		break;
+		ఆపు;
 	
-		case	3:
+		స్థితి	3:
 		X = X;
-		break;
+		ఆపు;
 	
-		case	4:
-		if ((Q == UfThold) && (E1 == E0)
+		స్థితి	4:
+		ఒకవేళ ((Q == UfThold) && (E1 == E0)
 			&& (FABS( UfThold - E1 / E9) <= E1)) {
 			UfNGrad = False;
-			printf("Underflow is gradual; it incurs Absolute Error =\n");
-			printf("(roundoff in UfThold) < E0.\n");
+			రాయి("Underflow is gradual; it incurs Absolute Error =\n");
+			రాయి("(roundoff in UfThold) < E0.\n");
 			Y = E0 * CInvrse;
 			Y = Y * (OneAndHalf + U2);
 			X = CInvrse * (One + U2);
@@ -1493,60 +1493,60 @@ void part6(VOID){
 			IEEE = (Y == E0);
 			}
 		}
-	if (UfNGrad) {
-		printf("\n");
+	ఒకవేళ (UfNGrad) {
+		రాయి("\n");
 		sigsave = sigfpe;
-		if (setjmp(ovfl_buf)) {
-			printf("Underflow / UfThold failed!\n");
+		ఒకవేళ (setjmp(ovfl_buf)) {
+			రాయి("Underflow / UfThold failed!\n");
 			R = H + H;
 			}
-		else R = SQRT(Underflow / UfThold);
+		లేకపోతే R = SQRT(Underflow / UfThold);
 		sigsave = 0;
-		if (R <= H) {
+		ఒకవేళ (R <= H) {
 			Z = R * UfThold;
 			X = Z * (One + R * H * (One + H));
 			}
-		else {
+		లేకపోతే {
 			Z = UfThold;
 			X = Z * (One + H * H * (One + H));
 			}
-		if (! ((X == Z) || (X - Z != Zero))) {
+		ఒకవేళ (! ((X == Z) || (X - Z != Zero))) {
 			BadCond(Flaw, "");
-			printf("X = %d\n\tis not equal to Z = %016x .\n", X, Z);
+			రాయి("X = %d\n\tis not equal to Z = %016x .\n", X, Z);
 			Z9 = X - Z;
-			printf("yet X - Z yields %d .\n", Z9);
-			printf("    Should this NOT signal Underflow, ");
-			printf("this is a SERIOUS DEFECT\nthat causes ");
-			printf("confusion when innocent statements like\n");;
-			printf("    if (X == Z)  ...  else");
-			printf("  ... (f(X) - f(Z)) / (X - Z) ...\n");
-			printf("encounter Division by Zero although actually\n");
+			రాయి("yet X - Z yields %d .\n", Z9);
+			రాయి("    Should this NOT signal Underflow, ");
+			రాయి("this is a SERIOUS DEFECT\nthat causes ");
+			రాయి("confusion when innocent statements like\n");;
+			రాయి("    if (X == Z)  ...  else");
+			రాయి("  ... (f(X) - f(Z)) / (X - Z) ...\n");
+			రాయి("encounter Division by Zero although actually\n");
 			sigsave = sigfpe;
-			if (setjmp(ovfl_buf)) printf("X / Z fails!\n");
-			else printf("X / Z = 1 + %d .\n", (X / Z - Half) - Half);
+			ఒకవేళ (setjmp(ovfl_buf)) రాయి("X / Z fails!\n");
+			లేకపోతే రాయి("X / Z = 1 + %d .\n", (X / Z - Half) - Half);
 			sigsave = 0;
 			}
 		}
-	printf("The Underflow threshold is %d, %s\n", UfThold,
+	రాయి("The Underflow threshold is %d, %s\n", UfThold,
 		   " below which");
-	printf("calculation may suffer larger Relative error than ");
-	printf("merely roundoff.\n");
+	రాయి("calculation may suffer larger Relative error than ");
+	రాయి("merely roundoff.\n");
 	Y2 = U1 * U1;
 	Y = Y2 * Y2;
 	Y2 = Y * U1;
-	if (Y2 <= UfThold) {
-		if (Y > E0) {
+	ఒకవేళ (Y2 <= UfThold) {
+		ఒకవేళ (Y > E0) {
 			BadCond(Defect, "");
 			I = 5;
 			}
-		else {
+		లేకపోతే {
 			BadCond(Serious, "");
 			I = 4;
 			}
-		printf("Range is too narrow; U1^%d Underflows.\n", I);
+		రాయి("Range is too narrow; U1^%d Underflows.\n", I);
 		}
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	}
 #include "paranoia.h"
 void part7(VOID){
@@ -1555,84 +1555,84 @@ void part7(VOID){
 	/*=============================================*/
 	Y = - FLOOR(Half - TwoForty * LOG(UfThold) / LOG(HInvrse)) / TwoForty;
 	Y2 = Y + Y;
-	printf("Since underflow occurs below the threshold\n");
-	printf("UfThold = (%d) ^ (%016x)\nonly underflow ", HInvrse, Y);
-	printf("should afflict the expression\n\t(%d) ^ (%016x);\n",
+	రాయి("Since underflow occurs below the threshold\n");
+	రాయి("UfThold = (%d) ^ (%016x)\nonly underflow ", HInvrse, Y);
+	రాయి("should afflict the expression\n\t(%d) ^ (%016x);\n",
 		HInvrse, Y2);
-	printf("actually calculating yields:");
-	if (setjmp(ovfl_buf)) {
+	రాయి("actually calculating yields:");
+	ఒకవేళ (setjmp(ovfl_buf)) {
 		sigsave = 0;
 		BadCond(Serious, "trap on underflow.\n");
 		}
-	else {
+	లేకపోతే {
 		sigsave = sigfpe;
 		V9 = POW(HInvrse, Y2);
 		sigsave = 0;
-		printf(" %d .\n", V9);
-		if (! ((V9 >= Zero) && (V9 <= (Radix + Radix + E9) * UfThold))) {
+		రాయి(" %d .\n", V9);
+		ఒకవేళ (! ((V9 >= Zero) && (V9 <= (Radix + Radix + E9) * UfThold))) {
 			BadCond(Serious, "this is not between 0 and underflow\n");
-		printf("   threshold = %d .\n", UfThold);
+		రాయి("   threshold = %d .\n", UfThold);
 		}
-		else if (! (V9 > UfThold * (One + E9)))
-			printf("This computed value is O.K.\n");
-		else {
+		లేకపోతే ఒకవేళ (! (V9 > UfThold * (One + E9)))
+			రాయి("This computed value is O.K.\n");
+		లేకపోతే {
 			BadCond(Defect, "this is not between 0 and underflow\n");
-			printf("   threshold = %d .\n", UfThold);
+			రాయి("   threshold = %d .\n", UfThold);
 			}
 		}
 	/*=============================================*/
 	Milestone = 140;
 	/*=============================================*/
-	printf("\n");
+	రాయి("\n");
 	/* ...calculate Exp2 == exp(2) == 7.389056099... */
 	X = Zero;
 	I = 2;
 	Y = Two * Three;
 	Q = Zero;
 	N = 0;
-	do  {
+	చేయి  {
 		Z = X;
 		I = I + 1;
 		Y = Y / (I + I);
 		R = Y + Q;
 		X = Z + R;
 		Q = (Z - X) + R;
-		} while(X > Z);
+		} అయితే(X > Z);
 	Z = (OneAndHalf + One / Eight) + X / (OneAndHalf * ThirtyTwo);
 	X = Z * Z;
 	Exp2 = X * X;
 	X = F9;
 	Y = X - U1;
-	printf("Testing X^((X + 1) / (X - 1)) vs. exp(2) = %d as X -> 1.\n",
+	రాయి("Testing X^((X + 1) / (X - 1)) vs. exp(2) = %d as X -> 1.\n",
 		Exp2);
-	for(I = 1;;) {
+	కొరకు(I = 1;;) {
 		Z = X - BInvrse;
 		Z = (X + One) / (Z - (One - BInvrse));
 		Q = POW(X, Z) - Exp2;
-		if (FABS(Q) > TwoForty * U2) {
+		ఒకవేళ (FABS(Q) > TwoForty * U2) {
 			N = 1;
 	 		V9 = (X - BInvrse) - (One - BInvrse);
 			BadCond(Defect, "Calculated");
-			printf(" %d for\n", POW(X,Z));
-			printf("\t(1 + (%d) ^ (%016x);\n", V9, Z);
-			printf("\tdiffers from correct value by %d .\n", Q);
-			printf("\tThis much error may spoil financial\n");
-			printf("\tcalculations involving tiny interest rates.\n");
-			break;
+			రాయి(" %d for\n", POW(X,Z));
+			రాయి("\t(1 + (%d) ^ (%016x);\n", V9, Z);
+			రాయి("\tdiffers from correct value by %d .\n", Q);
+			రాయి("\tThis much error may spoil financial\n");
+			రాయి("\tcalculations involving tiny interest rates.\n");
+			ఆపు;
 			}
-		else {
+		లేకపోతే {
 			Z = (Y - X) * Two + Y;
 			X = Y;
 			Y = Z;
 			Z = One + (X - F9)*(X - F9);
-			if (Z > One && I < NoTrials) I++;
-			else  {
-				if (X > One) {
-					if (N == 0)
-					   printf("Accuracy seems adequate.\n");
-					break;
+			ఒకవేళ (Z > One && I < NoTrials) I++;
+			లేకపోతే  {
+				ఒకవేళ (X > One) {
+					ఒకవేళ (N == 0)
+					   రాయి("Accuracy seems adequate.\n");
+					ఆపు;
 					}
-				else {
+				లేకపోతే {
 					X = One + U2;
 					Y = U2 + U2;
 					Y += X;
@@ -1644,12 +1644,12 @@ void part7(VOID){
 	/*=============================================*/
 	Milestone = 150;
 	/*=============================================*/
-	printf("Testing powers Z^Q at four nearly extreme values.\n");
+	రాయి("Testing powers Z^Q at four nearly extreme values.\n");
 	N = 0;
 	Z = A1;
 	Q = FLOOR(Half - LOG(C) / LOG(A1));
 	Break = False;
-	do  {
+	చేయి  {
 		X = CInvrse;
 		Y = POW(Z, Q);
 		IsYeqX();
@@ -1657,115 +1657,115 @@ void part7(VOID){
 		X = C;
 		Y = POW(Z, Q);
 		IsYeqX();
-		if (Z < One) Break = True;
-		else Z = AInvrse;
-		} while ( ! (Break));
+		ఒకవేళ (Z < One) Break = True;
+		లేకపోతే Z = AInvrse;
+		} అయితే ( ! (Break));
 	PrintIfNPositive();
-	if (N == 0) printf(" ... no discrepancies found.\n");
-	printf("\n");
+	ఒకవేళ (N == 0) రాయి(" ... no discrepancies found.\n");
+	రాయి("\n");
 	
 	/*=============================================*/
 	Milestone = 160;
 	/*=============================================*/
 	Pause();
-	printf("Searching for Overflow threshold:\n");
-	printf("This may generate an error.\n");
+	రాయి("Searching for Overflow threshold:\n");
+	రాయి("This may generate an error.\n");
 	Y = - CInvrse;
 	V9 = HInvrse * Y;
 	sigsave = sigfpe;
-	if (setjmp(ovfl_buf)) { I = 0; V9 = Y; goto overflow; }
-	do {
+	ఒకవేళ (setjmp(ovfl_buf)) { I = 0; V9 = Y; వెళ్ళు అధికప్రవాహం; }
+	చేయి {
 		V = Y;
 		Y = V9;
 		V9 = HInvrse * Y;
-		} while(V9 < Y);
+		} అయితే(V9 < Y);
 	I = 1;
-overflow:
+అధికప్రవాహం:
 	sigsave = 0;
 	Z = V9;
-	printf("Can `Z = -Y' overflow?\n");
-	printf("Trying it on Y = %d .\n", Y);
+	రాయి("Can `Z = -Y' overflow?\n");
+	రాయి("Trying it on Y = %d .\n", Y);
 	V9 = - Y;
 	V0 = V9;
-	if (V - Y == V + V0) printf("Seems O.K.\n");
-	else {
-		printf("finds a ");
+	ఒకవేళ (V - Y == V + V0) రాయి("Seems O.K.\n");
+	లేకపోతే {
+		రాయి("finds a ");
 		BadCond(Flaw, "-(-Y) differs from Y.\n");
 		}
-	if (Z != Y) {
+	ఒకవేళ (Z != Y) {
 		BadCond(Serious, "");
-		printf("overflow past %d\n\tshrinks to %016x .\n", Y, Z);
+		రాయి("overflow past %d\n\tshrinks to %016x .\n", Y, Z);
 		}
-	if (I) {
+	ఒకవేళ (I) {
 		Y = V * (HInvrse * U2 - HInvrse);
 		Z = Y + ((One - HInvrse) * U2) * V;
-		if (Z < V0) Y = Z;
-		if (Y < V0) V = Y;
-		if (V0 - V < V0) V = V0;
+		ఒకవేళ (Z < V0) Y = Z;
+		ఒకవేళ (Y < V0) V = Y;
+		ఒకవేళ (V0 - V < V0) V = V0;
 		}
-	else {
+	లేకపోతే {
 		V = Y * (HInvrse * U2 - HInvrse);
 		V = V + ((One - HInvrse) * U2) * Y;
 		}
-	printf("Overflow threshold is V  = %d .\n", V);
-	if (I) printf("Overflow saturates at V0 = %d .\n", V0);
-	else printf("There is no saturation value because \
-the system traps on overflow.\n");
+	రాయి("Overflow threshold is V  = %d .\n", V);
+	ఒకవేళ (I) రాయి("Overflow saturates at V0 = %d .\n", V0);
+	లేకపోతే రాయి("There is no saturation విలువ because \
+the system traps on అధికప్రవాహం.\n");
 	V9 = V * One;
-	printf("No Overflow should be signaled for V * 1 = %d\n", V9);
+	రాయి("No Overflow should be signaled for V * 1 = %d\n", V9);
 	V9 = V / One;
-	printf("                           nor for V / 1 = %d .\n", V9);
-	printf("Any overflow signal separating this * from the one\n");
-	printf("above is a DEFECT.\n");
+	రాయి("                           nor for V / 1 = %d .\n", V9);
+	రాయి("Any overflow signal separating this * from the one\n");
+	రాయి("above is a DEFECT.\n");
 	/*=============================================*/
 	Milestone = 170;
 	/*=============================================*/
-	if (!(-V < V && -V0 < V0 && -UfThold < V && UfThold < V)) {
+	ఒకవేళ (!(-V < V && -V0 < V0 && -UfThold < V && UfThold < V)) {
 		BadCond(Failure, "Comparisons involving ");
-		printf("+-%d, +-%016x\nand +-%016x are confused by Overflow.",
+		రాయి("+-%d, +-%016x\nand +-%016x are confused by Overflow.",
 			V, V0, UfThold);
 		}
 	/*=============================================*/
 	Milestone = 175;
 	/*=============================================*/
-	printf("\n");
-	for(Indx = 1; Indx <= 3; ++Indx) {
-		switch (Indx)  {
-			case 1: Z = UfThold; break;
-			case 2: Z = E0; break;
-			case 3: Z = PseudoZero; break;
+	రాయి("\n");
+	కొరకు(Indx = 1; Indx <= 3; ++Indx) {
+		ఎంపిక (Indx)  {
+			స్థితి 1: Z = UfThold; ఆపు;
+			స్థితి 2: Z = E0; ఆపు;
+			స్థితి 3: Z = PseudoZero; ఆపు;
 			}
-		if (Z != Zero) {
+		ఒకవేళ (Z != Zero) {
 			V9 = SQRT(Z);
 			Y = V9 * V9;
-			if (Y / (One - Radix * E9) < Z
+			ఒకవేళ (Y / (One - Radix * E9) < Z
 			   || Y > (One + Radix * E9) * Z) { /* dgh: + E9 --> * E9 */
-				if (V9 > U1) BadCond(Serious, "");
-				else BadCond(Defect, "");
-				printf("Comparison alleges that what prints as Z = %d\n", Z);
-				printf(" is too far from sqrt(Z) ^ 2 = %d .\n", Y);
+				ఒకవేళ (V9 > U1) BadCond(Serious, "");
+				లేకపోతే BadCond(Defect, "");
+				రాయి("Comparison alleges that what prints as Z = %d\n", Z);
+				రాయి(" is too far from sqrt(Z) ^ 2 = %d .\n", Y);
 				}
 			}
 		}
 	/*=============================================*/
 	Milestone = 180;
 	/*=============================================*/
-	for(Indx = 1; Indx <= 2; ++Indx) {
-		if (Indx == 1) Z = V;
-		else Z = V0;
+	కొరకు(Indx = 1; Indx <= 2; ++Indx) {
+		ఒకవేళ (Indx == 1) Z = V;
+		లేకపోతే Z = V0;
 		V9 = SQRT(Z);
 		X = (One - Radix * E9) * V9;
 		V9 = V9 * X;
-		if (((V9 < (One - Two * Radix * E9) * Z) || (V9 > Z))) {
+		ఒకవేళ (((V9 < (One - Two * Radix * E9) * Z) || (V9 > Z))) {
 			Y = V9;
-			if (X < W) BadCond(Serious, "");
-			else BadCond(Defect, "");
-			printf("Comparison alleges that Z = %d\n", Z);
-			printf(" is too far from sqrt(Z) ^ 2 (%d) .\n", Y);
+			ఒకవేళ (X < W) BadCond(Serious, "");
+			లేకపోతే BadCond(Defect, "");
+			రాయి("Comparison alleges that Z = %d\n", Z);
+			రాయి(" is too far from sqrt(Z) ^ 2 (%d) .\n", Y);
 			}
 		}
 	/*=============================================*/
-	/*SPLIT
+	/*విభజించు
 	}
 #include "paranoia.h"
 int part8(VOID){
@@ -1775,35 +1775,35 @@ int part8(VOID){
 	Pause();
 	X = UfThold * V;
 	Y = Radix * Radix;
-	if (X*Y < One || X > Y) {
-		if (X * Y < U1 || X > Y/U1) BadCond(Defect, "Badly");
-		else BadCond(Flaw, "");
+	ఒకవేళ (X*Y < One || X > Y) {
+		ఒకవేళ (X * Y < U1 || X > Y/U1) BadCond(Defect, "Badly");
+		లేకపోతే BadCond(Flaw, "");
 			
-		printf(" unbalanced range; UfThold * V = %d\n\t%s\n",
+		రాయి(" unbalanced range; UfThold * V = %d\n\t%s\n",
 			X, "is too far from 1.\n");
 		}
 	/*=============================================*/
 	Milestone = 200;
 	/*=============================================*/
-	for (Indx = 1; Indx <= 5; ++Indx)  {
+	కొరకు (Indx = 1; Indx <= 5; ++Indx)  {
 		X = F9;
-		switch (Indx)  {
-			case 2: X = One + U2; break;
-			case 3: X = V; break;
-			case 4: X = UfThold; break;
-			case 5: X = Radix;
+		ఎంపిక (Indx)  {
+			స్థితి 2: X = One + U2; ఆపు;
+			స్థితి 3: X = V; ఆపు;
+			స్థితి 4: X = UfThold; ఆపు;
+			స్థితి 5: X = Radix;
 			}
 		Y = X;
 		sigsave = sigfpe;
-		if (setjmp(ovfl_buf))
-			printf("  X / X  traps when X = %d\n", X);
-		else {
+		ఒకవేళ (setjmp(ovfl_buf))
+			రాయి("  X / X  traps when X = %d\n", X);
+		లేకపోతే {
 			V9 = (Y / X - Half) - Half;
-			if (V9 == Zero) continue;
-			if (V9 == - U1 && Indx < 5) BadCond(Flaw, "");
-			else BadCond(Serious, "");
-			printf("  X / X differs from 1 when X = %d\n", X);
-			printf("  instead, X / X - 1/2 - 1/2 = %d .\n", V9);
+			ఒకవేళ (V9 == Zero) కొనసాగు;
+			ఒకవేళ (V9 == - U1 && Indx < 5) BadCond(Flaw, "");
+			లేకపోతే BadCond(Serious, "");
+			రాయి("  X / X differs from 1 when X = %d\n", X);
+			రాయి("  instead, X / X - 1/2 - 1/2 = %d .\n", V9);
 			}
 		sigsave = 0;
 		}
@@ -1811,103 +1811,103 @@ int part8(VOID){
 	Milestone = 210;
 	/*=============================================*/
 	MyZero = Zero;
-	printf("\n");
-	printf("What message and/or values does Division by Zero produce?\n") ;
-#ifndef NOPAUSE
-	printf("This can interupt your program.  You can ");
-	printf("skip this part if you wish.\n");
-	printf("Do you wish to compute 1 / 0? ");
+	రాయి("\n");
+	రాయి("What message and/or values does Division by Zero produce?\n") ;
+#నిర్వచితం_కాకపోతే NOPAUSE
+	రాయి("This can interupt your program.  You can ");
+	రాయి("skip this part if you wish.\n");
+	రాయి("Do you wish to compute 1 / 0? ");
 	fflush(stdout);
-	read (KEYBOARD, ch, 8);
-	if ((ch[0] == 'Y') || (ch[0] == 'y')) {
-#endif
+	పఠ (KEYBOARD, ch, 8);
+	ఒకవేళ ((ch[0] == 'Y') || (ch[0] == 'y')) {
+#అయితే_ముగింపు
 		sigsave = sigfpe;
-		printf("    Trying to compute 1 / 0 produces ...");
-		if (!setjmp(ovfl_buf)) printf("  %d .\n", One / MyZero);
+		రాయి("    Trying to compute 1 / 0 produces ...");
+		ఒకవేళ (!setjmp(ovfl_buf)) రాయి("  %d .\n", One / MyZero);
 		sigsave = 0;
-#ifndef NOPAUSE
+#నిర్వచితం_కాకపోతే NOPAUSE
 		}
-	else printf("O.K.\n");
-	printf("\nDo you wish to compute 0 / 0? ");
+	లేకపోతే రాయి("O.K.\n");
+	రాయి("\nDo you wish to compute 0 / 0? ");
 	fflush(stdout);
-	read (KEYBOARD, ch, 80);
-	if ((ch[0] == 'Y') || (ch[0] == 'y')) {
-#endif
+	పఠ (KEYBOARD, ch, 80);
+	ఒకవేళ ((ch[0] == 'Y') || (ch[0] == 'y')) {
+#అయితే_ముగింపు
 		sigsave = sigfpe;
-		printf("\n    Trying to compute 0 / 0 produces ...");
-		if (!setjmp(ovfl_buf)) printf("  %d .\n", Zero / MyZero);
+		రాయి("\n    Trying to compute 0 / 0 produces ...");
+		ఒకవేళ (!setjmp(ovfl_buf)) రాయి("  %d .\n", Zero / MyZero);
 		sigsave = 0;
-#ifndef NOPAUSE
+#నిర్వచితం_కాకపోతే NOPAUSE
 		}
-	else printf("O.K.\n");
-#endif
+	లేకపోతే రాయి("O.K.\n");
+#అయితే_ముగింపు
 	/*=============================================*/
 	Milestone = 220;
 	/*=============================================*/
 	Pause();
-	printf("\n");
+	రాయి("\n");
 	{
-		static char *msg[] = {
+		స్థిర అక్షరం *సందేశం_2[] = {
 			"FAILUREs  encountered =",
 			"SERIOUS DEFECTs  discovered =",
 			"DEFECTs  discovered =",
 			"FLAWs  discovered =" };
-		int i;
-		for(i = 0; i < 4; i++) if (ErrCnt[i])
-			printf("The number of  %-29s %d.\n",
-				msg[i], ErrCnt[i]);
+		పూర్ణాంకం i;
+		కొరకు(i = 0; i < 4; i++) ఒకవేళ (ErrCnt[i])
+			రాయి("The number of  %-29s %d.\n",
+				సందేశం_2[i], ErrCnt[i]);
 		}
-	printf("\n");
-	if ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[Defect]
+	రాయి("\n");
+	ఒకవేళ ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[Defect]
 			+ ErrCnt[Flaw]) > 0) {
-		if ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[
+		ఒకవేళ ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[
 			Defect] == 0) && (ErrCnt[Flaw] > 0)) {
-			printf("The arithmetic diagnosed seems ");
-			printf("Satisfactory though flawed.\n");
+			రాయి("The arithmetic diagnosed seems ");
+			రాయి("Satisfactory though flawed.\n");
 			}
-		if ((ErrCnt[Failure] + ErrCnt[Serious] == 0)
+		ఒకవేళ ((ErrCnt[Failure] + ErrCnt[Serious] == 0)
 			&& ( ErrCnt[Defect] > 0)) {
-			printf("The arithmetic diagnosed may be Acceptable\n");
-			printf("despite inconvenient Defects.\n");
+			రాయి("The arithmetic diagnosed may be Acceptable\n");
+			రాయి("despite inconvenient Defects.\n");
 			}
-		if ((ErrCnt[Failure] + ErrCnt[Serious]) > 0) {
-			printf("The arithmetic diagnosed has ");
-			printf("unacceptable Serious Defects.\n");
+		ఒకవేళ ((ErrCnt[Failure] + ErrCnt[Serious]) > 0) {
+			రాయి("The arithmetic diagnosed has ");
+			రాయి("unacceptable Serious Defects.\n");
 			}
-		if (ErrCnt[Failure] > 0) {
-			printf("Potentially fatal FAILURE may have spoiled this");
-			printf(" program's subsequent diagnoses.\n");
+		ఒకవేళ (ErrCnt[Failure] > 0) {
+			రాయి("Potentially fatal FAILURE may have spoiled this");
+			రాయి(" program's subsequent diagnoses.\n");
 			}
 		}
-	else {
-		printf("No failures, defects nor flaws have been discovered.\n");
-		if (! ((RMult == Rounded) && (RDiv == Rounded)
+	లేకపోతే {
+		రాయి("No failures, defects nor flaws have been discovered.\n");
+		ఒకవేళ (! ((RMult == Rounded) && (RDiv == Rounded)
 			&& (RAddSub == Rounded) && (RSqrt == Rounded))) 
-			printf("The arithmetic diagnosed seems Satisfactory.\n");
-		else {
-			if (StickyBit >= One &&
+			రాయి("The arithmetic diagnosed seems Satisfactory.\n");
+		లేకపోతే {
+			ఒకవేళ (Sticky_బిట్టు >= One &&
 				(Radix - Two) * (Radix - Nine - One) == Zero) {
-				printf("Rounding appears to conform to ");
-				printf("the proposed IEEE standard P");
-				if ((Radix == Two) &&
+				రాయి("Rounding appears to conform to ");
+				రాయి("the proposed IEEE standard P");
+				ఒకవేళ ((Radix == Two) &&
 					 ((Precision - Four * Three * Two) *
 					  ( Precision - TwentySeven -
 					   TwentySeven + One) == Zero)) 
-					printf("754");
-				else printf("854");
-				if (IEEE) printf(".\n");
-				else {
-					printf(",\nexcept for possibly Double Rounding");
-					printf(" during Gradual Underflow.\n");
+					రాయి("754");
+				లేకపోతే రాయి("854");
+				ఒకవేళ (IEEE) రాయి(".\n");
+				లేకపోతే {
+					రాయి(",\nexcept for possibly Double Rounding");
+					రాయి(" during Gradual Underflow.\n");
 					}
 				}
-			printf("The arithmetic diagnosed appears to be Excellent!\n");
+			రాయి("The arithmetic diagnosed appears to be Excellent!\n");
 			}
 		}
-	if (fpecount)
-		printf("\nA total of %d floating point exceptions were registered.\n",
+	ఒకవేళ (fpecount)
+		రాయి("\nA total of %d floating point exceptions were registered.\n",
 			fpecount);
-	printf("END OF TEST $\n");
+	రాయి("END OF TEST $\n");
   __asm__("ebreak");
 	//return 0;
 	}
@@ -1918,46 +1918,46 @@ int part8(VOID){
 
  FLOAT
 Sign (FP X)
-#ifdef KR_headers
+#నిర్వచితమైతే KR_శీర్షికలు
 FLOAT X;
-#endif
-{ return X >= 0. ? 1.0 : -1.0; }
+#అయితే_ముగింపు
+{ తిరిగి X >= 0. ? 1.0 : -1.0; }
 
- void
+ శూన్య
 Pause(VOID)
 {
-#ifndef NOPAUSE
-	char ch[8];
+#నిర్వచితం_కాకపోతే NOPAUSE
+	అక్షరం ch[8];
 
-	printf("\nTo continue, press RETURN");
+	రాయి("\nTo continue, press RETURN");
 	fflush(stdout);
-	read(KEYBOARD, ch, 8);
-#endif
-	printf("\nDiagnosis resumes after milestone Number %d", Milestone);
-	printf("          Page: %d\n\n", PageNo);
+	పఠ(KEYBOARD, ch, 8);
+#అయితే_ముగింపు
+	రాయి("\nDiagnosis resumes after milestone Number %d", Milestone);
+	రాయి("          Page: %d\n\n", పుట_No);
 	++Milestone;
-	++PageNo;
+	++పుట_No;
 	}
 
- void
+ శూన్య
 TstCond (INT K, INT Valid, CHARP T)
-#ifdef KR_headers
-int K, Valid;
-char *T;
-#endif
-{ if (! Valid) { BadCond(K,T); printf(".\n"); } }
+#నిర్వచితమైతే KR_శీర్షికలు
+పూర్ణాంకం K, Valid;
+అక్షరం *T;
+#అయితే_ముగింపు
+{ ఒకవేళ (! Valid) { BadCond(K,T); రాయి(".\n"); } }
 
- void
+ శూన్య
 BadCond(INT K, CHARP T)
-#ifdef KR_headers
-int K;
-char *T;
-#endif
+#నిర్వచితమైతే KR_శీర్షికలు
+పూర్ణాంకం K;
+అక్షరం *T;
+#అయితే_ముగింపు
 {
-	static char *msg[] = { "FAILURE", "SERIOUS DEFECT", "DEFECT", "FLAW" };
+	స్థిర అక్షరం *సందేశం_2[] = { "FAILURE", "SERIOUS DEFECT", "DEFECT", "FLAW" };
 
 	ErrCnt [K] = ErrCnt [K] + 1;
-	printf("%s:  %s", msg[K], T);
+	రాయి("%s:  %s", సందేశం_2[K], T);
 	}
 
 
@@ -1977,123 +1977,123 @@ Random(VOID)
 	X = X * Y;
 	Y = X - FLOOR(X);
 	Random1 = Y + X * 0.000005;
-	return(Random1);
+	తిరిగి(Random1);
 	}
 
- void
-SqXMinX (INT ErrKind)
-#ifdef KR_headers
-int ErrKind;
-#endif
+ శూన్య
+SqXMinX (INT Err_రకం)
+#నిర్వచితమైతే KR_శీర్షికలు
+పూర్ణాంకం Err_రకం;
+#అయితే_ముగింపు
 {
 	FLOAT XA, XB;
 	
 	XB = X * BInvrse;
 	XA = X - XB;
 	SqEr = ((SQRT(X * X) - XB) - XA) / OneUlp;
-	if (SqEr != Zero) {
-		if (SqEr < MinSqEr) MinSqEr = SqEr;
-		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+	ఒకవేళ (SqEr != Zero) {
+		ఒకవేళ (SqEr < MinSqEr) MinSqEr = SqEr;
+		ఒకవేళ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 		J = J + 1.0;
-		BadCond(ErrKind, "\n");
-		printf("sqrt( %d) - %016x  = %016x\n", X * X, X, OneUlp * SqEr);
-		printf("\tinstead of correct value 0 .\n");
+		BadCond(Err_రకం, "\n");
+		రాయి("sqrt( %d) - %016x  = %016x\n", X * X, X, OneUlp * SqEr);
+		రాయి("\tinstead of correct value 0 .\n");
 		}
 	}
 
- void
+ శూన్య
 NewD(VOID)
 {
 	X = Z1 * Q;
 	X = FLOOR(Half - X / Radix) * Radix + X;
 	Q = (Q - X * Z) / Radix + X * X * (D / Radix);
 	Z = Z - Two * X * D;
-	if (Z <= Zero) {
+	ఒకవేళ (Z <= Zero) {
 		Z = - Z;
 		Z1 = - Z1;
 		}
 	D = Radix * D;
 	}
 
- void
+ శూన్య
 SR3750(VOID)
 {
-	if (! ((X - Radix < Z2 - Radix) || (X - Z2 > W - Z2))) {
+	ఒకవేళ (! ((X - Radix < Z2 - Radix) || (X - Z2 > W - Z2))) {
 		I = I + 1;
 		X2 = SQRT(X * D);
 		Y2 = (X2 - Z2) - (Y - Z2);
 		X2 = X8 / (Y - Half);
 		X2 = X2 - Half * X2 * X2;
 		SqEr = (Y2 + Half) + (Half - X2);
-		if (SqEr < MinSqEr) MinSqEr = SqEr;
+		ఒకవేళ (SqEr < MinSqEr) MinSqEr = SqEr;
 		SqEr = Y2 - X2;
-		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+		ఒకవేళ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 		}
 	}
 
- void
+ శూన్య
 IsYeqX(VOID)
 {
-	if (Y != X) {
-		if (N <= 0) {
-			if (Z == Zero && Q <= Zero)
-				printf("WARNING:  computing\n");
-			else BadCond(Defect, "computing\n");
-			printf("\t(%d) ^ (%016x)\n", Z, Q);
-			printf("\tyielded %d;\n", Y);
-			printf("\twhich compared unequal to correct %d ;\n",
+	ఒకవేళ (Y != X) {
+		ఒకవేళ (N <= 0) {
+			ఒకవేళ (Z == Zero && Q <= Zero)
+				రాయి("WARNING:  computing\n");
+			లేకపోతే BadCond(Defect, "computing\n");
+			రాయి("\t(%d) ^ (%016x)\n", Z, Q);
+			రాయి("\tyielded %d;\n", Y);
+			రాయి("\twhich compared unequal to correct %d ;\n",
 				X);
-			printf("\t\tthey differ by %d .\n", Y - X);
+			రాయి("\t\tthey differ by %d .\n", Y - X);
 			}
 		N = N + 1; /* ... count discrepancies. */
 		}
 	}
 
- void
+ శూన్య
 SR3980(VOID)
 {
-	do {
+	చేయి {
 		Q = (FLOAT) I;
 		Y = POW(Z, Q);
 		IsYeqX();
-		if (++I > M) break;
+		ఒకవేళ (++I > M) ఆపు;
 		X = Z * X;
-		} while ( X < W );
+		} అయితే ( X < W );
 	}
 
- void
+ శూన్య
 PrintIfNPositive(VOID)
 {
-	if (N > 0) printf("Similar discrepancies have occurred %d times.\n", N);
+	ఒకవేళ (N > 0) రాయి("Similar discrepancies have occurred %d times.\n", N);
 	}
 
- void
+ శూన్య
 TstPtUf(VOID)
 {
 	N = 0;
-	if (Z != Zero) {
-		printf("Since comparison denies Z = 0, evaluating ");
-		printf("(Z + Z) / Z should be safe.\n");
+	ఒకవేళ (Z != Zero) {
+		రాయి("Since comparison denies Z = 0, evaluating ");
+		రాయి("(Z + Z) / Z should be safe.\n");
 		sigsave = sigfpe;
-		if (setjmp(ovfl_buf)) goto very_serious;
+		ఒకవేళ (setjmp(ovfl_buf)) వెళ్ళు very_serious;
 		Q9 = (Z + Z) / Z;
-		printf("What the machine gets for (Z + Z) / Z is  %d .\n",
+		రాయి("What the machine gets for (Z + Z) / Z is  %d .\n",
 			Q9);
-		if (FABS(Q9 - Two) < Radix * U2) {
-			printf("This is O.K., provided Over/Underflow");
-			printf(" has NOT just been signaled.\n");
+		ఒకవేళ (FABS(Q9 - Two) < Radix * U2) {
+			రాయి("This is O.K., provided Over/Underflow");
+			రాయి(" has NOT just been signaled.\n");
 			}
-		else {
-			if ((Q9 < One) || (Q9 > Two)) {
+		లేకపోతే {
+			ఒకవేళ ((Q9 < One) || (Q9 > Two)) {
 very_serious:
 				N = 1;
 				ErrCnt [Serious] = ErrCnt [Serious] + 1;
-				printf("This is a VERY SERIOUS DEFECT!\n");
+				రాయి("This is a VERY SERIOUS DEFECT!\n");
 				}
-			else {
+			లేకపోతే {
 				N = 1;
 				ErrCnt [Defect] = ErrCnt [Defect] + 1;
-				printf("This is a DEFECT!\n");
+				రాయి("This is a DEFECT!\n");
 				}
 			}
 		sigsave = 0;
@@ -2102,55 +2102,55 @@ very_serious:
 		V9 = One * Z;
 		Random2 = V9;
 		V9 = Z / One;
-		if ((Z == Random1) && (Z == Random2) && (Z == V9)) {
-			if (N > 0) Pause();
+		ఒకవేళ ((Z == Random1) && (Z == Random2) && (Z == V9)) {
+			ఒకవేళ (N > 0) Pause();
 			}
-		else {
+		లేకపోతే {
 			N = 1;
 			BadCond(Defect, "What prints as Z = ");
-			printf("%d\n\tcompares different from  ", Z);
-			if (Z != Random1) printf("Z * 1 = %d ", Random1);
-			if (! ((Z == Random2)
+			రాయి("%d\n\tcompares different from  ", Z);
+			ఒకవేళ (Z != Random1) రాయి("Z * 1 = %d ", Random1);
+			ఒకవేళ (! ((Z == Random2)
 				|| (Random2 == Random1)))
-				printf("1 * Z == %d\n", Random2);
-			if (! (Z == V9)) printf("Z / 1 = %d\n", V9);
-			if (Random2 != Random1) {
+				రాయి("1 * Z == %d\n", Random2);
+			ఒకవేళ (! (Z == V9)) రాయి("Z / 1 = %d\n", V9);
+			ఒకవేళ (Random2 != Random1) {
 				ErrCnt [Defect] = ErrCnt [Defect] + 1;
 				BadCond(Defect, "Multiplication does not commute!\n");
-				printf("\tComparison alleges that 1 * Z = %d\n",
+				రాయి("\tComparison alleges that 1 * Z = %d\n",
 					Random2);
-				printf("\tdiffers from Z * 1 = %d\n", Random1);
+				రాయి("\tdiffers from Z * 1 = %d\n", Random1);
 				}
 			Pause();
 			}
 		}
 	}
 
- void
+ శూన్య
 notify(CHARP s)
-#ifdef KR_headers
- char *s;
-#endif
+#నిర్వచితమైతే KR_శీర్షికలు
+ అక్షరం *s;
+#అయితే_ముగింపు
 {
-	printf("%s test appears to be inconsistent...\n", s);
-	printf("   PLEASE NOTIFY KARPINKSI!\n");
+	రాయి("%s test appears to be inconsistent...\n", s);
+	రాయి("   PLEASE NOTIFY KARPINKSI!\n");
 	}
 
 /*SPLIT msgs.c
 #include "paranoia.h"
 */
 
- void
+ శూన్య
 msglist(CHARPP s)
-#ifdef KR_headers
-char **s;
-#endif
-{ while(*s) printf("%s\n", *s++); }
+#నిర్వచితమైతే KR_శీర్షికలు
+అక్షరం **s;
+#అయితే_ముగింపు
+{ అయితే(*s) రాయి("%s\n", *s++); }
 
- void
+ శూన్య
 Instructions(VOID)
 {
-  static char *instr[] = {
+  స్థిర అక్షరం *instr[] = {
 	"Lest this program stop prematurely, i.e. before displaying\n",
 	"    `END OF TEST',\n",
 	"try to persuade the computer NOT to terminate execution when an",
@@ -2165,10 +2165,10 @@ Instructions(VOID)
 	msglist(instr);
 	}
 
- void
+ శూన్య
 Heading(VOID)
 {
-  static char *head[] = {
+  స్థిర అక్షరం *తల[] = {
 	"Users are invited to help debug and augment this program so it will",
 	"cope with unanticipated and newly uncovered arithmetic pathologies.\n",
 	"Please send suggestions and interesting results to",
@@ -2177,11 +2177,11 @@ Heading(VOID)
 	"\tUniversity of California",
 	"\tSan Francisco, CA 94143-0704, USA\n",
 	"In doing so, please include the following information:",
-#ifdef Single
+#నిర్వచితమైతే Single
 	"\tPrecision:\tsingle;",
-#else
+#లేకపోతే
 	"\tPrecision:\tdouble;",
-#endif
+#అయితే_ముగింపు
 	"\tVersion:\t10 February 1989;",
 	"\tComputer:\n",
 	"\tCompiler:\n",
@@ -2189,13 +2189,13 @@ Heading(VOID)
 	"\tOther relevant compiler options:",
 	0};
 
-	msglist(head);
+	msglist(తల);
 	}
 
- void
+ శూన్య
 Characteristics(VOID)
 {
-	static char *chars[] = {
+	స్థిర అక్షరం *chars[] = {
 	 "Running this program should reveal these characteristics:",
 	"     Radix = 1, 2, 4, 8, 10, 16, 100, 256 ...",
 	"     Precision = number of significant digits carried.",
@@ -2220,13 +2220,13 @@ Characteristics(VOID)
 	msglist(chars);
 	}
 
- void
+ శూన్య
 History(VOID)
 { /* History */
  /* Converted from Brian Wichmann's Pascal version to C by Thos Sumner,
 	with further massaging by David M. Gay. */
 
-  static char *hist[] = {
+  స్థిర అక్షరం *hist[] = {
 	"The program attempts to discriminate among",
 	"   FLAWs, like lack of a sticky bit,",
 	"   Serious DEFECTs, like lack of a guard digit, and",

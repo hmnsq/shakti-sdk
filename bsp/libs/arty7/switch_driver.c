@@ -26,12 +26,12 @@
 @detail Configures Switches and maps to the gpio pins 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ఒకవేళ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
-#include "switch_driver.h"
-#include "utils.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "switch_driver.h"
+#అన్తర్భావ "utils.h"
 
 /** @fn void configure_switch(unsigned long pinCntrl)
  * @brief Function for configure Individual Switch pins as input.
@@ -39,11 +39,11 @@
  * each SW as input pin.
  * @param unsigned long (Pin that needs to be configured as SW.)
  */
-void configure_switch(unsigned long pinCntrl)
+శూన్య configure_switch(గుర్తులేని దీర్ఘ pinCntrl)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(pinCntrl) ) );
+	గుర్తులేని దీర్ఘ read_దత్తాంశం_2 = 0;
+	read_దత్తాంశం_2 = read_మాట(GPIO_DIRECTION_CNTRL_REG);
+	write_మాట(GPIO_DIRECTION_CNTRL_REG, ( read_దత్తాంశం_2 | ~(pinCntrl) ) );
 }
 
 /** @fn  void configure_all_switchs()
@@ -51,11 +51,11 @@ void configure_switch(unsigned long pinCntrl)
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  *          all SWs as input pin.
  */
-void configure_all_switchs()
+శూన్య configure_all_switchs()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(ALL_SWITCHES) ) );
+	గుర్తులేని దీర్ఘ read_దత్తాంశం_2 = 0;
+	read_దత్తాంశం_2 = read_మాట(GPIO_DIRECTION_CNTRL_REG);
+	write_మాట(GPIO_DIRECTION_CNTRL_REG, ( read_దత్తాంశం_2 | ~(ALL_SWITCHES) ) );
 }
 
-#endif
+#అయితే_ముగింపు

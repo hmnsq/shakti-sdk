@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+పూర్ణాంకం ప్రధాన()
 {
-printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+రాయి("\nTest Running");
+పూర్ణాంకం *b,*c,*d;
+పూర్ణాంకం i=0;పూర్ణాంకం n;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+రాయి("\n size of array %d %x",n,&n);
+b=జ్ఞాపకం_ఇవ్వు(n*పరిమాణం(పూర్ణాంకం))	;
+రాయి("\n B's address %x %x",b,&b);
+కొరకు(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+కొరకు(i=0;i<n;i++)
 {
-printf("\n b[%d]'s address is : %x",i,&b[i]);
-printf("\n b[%d]'s value is : %d",i,b[i]);
+రాయి("\n b[%d]'s address is : %x",i,&b[i]);
+రాయి("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
-printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+విడుదల(b);
+రాయి("\nArray B is freed");
+రాయి("\nb=%x",b);
+రాయి("\n size of array %d",n);
+c=జ్ఞాపకం_ఇవ్వు(n*పరిమాణం(పూర్ణాంకం))	;
+రాయి("\n C's address %x",c);
+కొరకు(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+కొరకు(i=0;i<n;i++)
 {
-printf("\n c[%d]'s address is : %x",i,&c[i]);
-printf("\n c[%d]'s value is : %d",i,c[i]);
+రాయి("\n c[%d]'s address is : %x",i,&c[i]);
+రాయి("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
-printf("\nc=%x",c);
-int x;
+విడుదల(c);
+రాయి("\nc=%x",c);
+పూర్ణాంకం x;
 x=30;
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+రాయి("\n\n\nx address is %x",&x);
+d=జ్ఞాపకం_ఇవ్వు(x*పరిమాణం(పూర్ణాంకం));
+రాయి("\n D's address %x",d);
+కొరకు(i=0;i<x;i++)
 {
-printf("\nSetting value %d , %x",i+1,&d[i]); 
+రాయి("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+కొరకు(i=0;i<x;i++)
 {
-printf("\n d[%d]'s address is : %x",i,&d[i]);
-printf("\n d[%d]'s value is : %d",i,d[i]);
+రాయి("\n d[%d]'s address is : %x",i,&d[i]);
+రాయి("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
-printf("\nd=%x",d);
+విడుదల(d);
+రాయి("\nd=%x",d);
 
-return 0;
+తిరిగి 0;
 }
 

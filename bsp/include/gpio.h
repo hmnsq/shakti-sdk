@@ -25,13 +25,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @brief  header file for gpio_applns
  */
 
-#ifndef GPIO_H
-#define GPIO_H
+#నిర్వచితం_కాకపోతే GPIO_H
+#నిర్వచించు GPIO_H
 
-#include "platform.h"
-#include "stdint.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "stdint.h"
 
-#define GPIO_DIRECTION_CNTRL_REG (uint32_t*) (GPIO_START  + (0 * GPIO_OFFSET ))
-#define GPIO_DATA_REG (uint32_t*) (GPIO_START + (1 * GPIO_OFFSET ))
+#నిర్వచించు GPIO_DIRECTION_CNTRL_REG (uint32_t*) (GPIO_ప్రారంభం  + (0 * GPIO_స్థానభ్రంశం ))
+#నిర్వచించు GPIO_దత్తాంశం_REG (uint32_t*) (GPIO_ప్రారంభం + (1 * GPIO_స్థానభ్రంశం ))
 
-#endif
+#అయితే_ముగింపు

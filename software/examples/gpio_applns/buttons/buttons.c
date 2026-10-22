@@ -27,239 +27,239 @@
 @detail Detects the pressed key/button and prints pressed button.
 */
 
-#include <stdio.h>        
-#include "platform.h"
-#include "gpio.h"         
-#include "button_driver.h"
-#include "utils.h"
+#అన్తర్భావ <stdio.h>        
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "gpio.h"         
+#అన్తర్భావ "button_driver.h"
+#అన్తర్భావ "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
-#define READ_INDIVIDUAL_BTNS /*! Read each button value */
+#నిర్వచించు READ_INDIVIDUAL_BTNS /*! Read each button value */
 //#define READ_ALL_BTNS /*! Read All button values */
 
-unsigned long read_data = 0;
+గుర్తులేని దీర్ఘ read_దత్తాంశం_2 = 0;
 
 /** @fn void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
  */
-void main()
+శూన్య ప్రధాన()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ఒకవేళ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	అయితే (1) {
 
-#ifdef READ_INDIVIDUAL_BTNS
+#నిర్వచితమైతే READ_INDIVIDUAL_BTNS
 
 		/*! Define any one button from below at a time */
-#define BTN_0  /*! Read BTN0 value */
+#నిర్వచించు BTN_0  /*! Read BTN0 value */
 		//#define BTN_1 /*! Read BTN1 value */
 		//#define BTN_2 /*! Read BTN2 value */
 		//#define BTN_3 /*! Read BTN3 value */
 
-#ifdef BTN_0
+#నిర్వచితమైతే BTN_0
 		configure_btn(BTN0);
-#endif
+#అయితే_ముగింపు
 
-#ifdef BTN_1
+#నిర్వచితమైతే BTN_1
 		configure_btn(BTN1);
-#endif
+#అయితే_ముగింపు
 
-#ifdef BTN_2
+#నిర్వచితమైతే BTN_2
 		configure_btn(BTN2);
-#endif
+#అయితే_ముగింపు
 
-#ifdef BTN_3
+#నిర్వచితమైతే BTN_3
 		configure_btn(BTN3);
-#endif
+#అయితే_ముగింపు
 
-#endif
+#అయితే_ముగింపు
 
-#ifdef READ_ALL_BTNS
+#నిర్వచితమైతే READ_ALL_BTNS
 
 		configure_all_btn();
 
-#endif
+#అయితే_ముగింపు
 
-#ifdef READ_INDIVIDUAL_BTNS
+#నిర్వచితమైతే READ_INDIVIDUAL_BTNS
 
-#ifdef BTN_0
-		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x10000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
-			printf("\n BTN0: HIGH"); 		
-		else
-			printf("\n BTN0: LOW");
-#endif
+#నిర్వచితమైతే BTN_0
+		read_దత్తాంశం_2 = read_మాట(GPIO_దత్తాంశం_REG); /* Copies the GPIO_DATA_REG Register contents */
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		read_దత్తాంశం_2 = (read_దత్తాంశం_2 & 0x10000000);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		ఒకవేళ(read_దత్తాంశం_2 == 0x10000000)
+			రాయి("\n BTN0: HIGH"); 		
+		లేకపోతే
+			రాయి("\n BTN0: LOW");
+#అయితే_ముగింపు
 
-#ifdef BTN_1
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x20000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
-			printf("\n BTN1: HIGH"); 		
-		else
-			printf("\n BTN1: LOW");
-#endif
+#నిర్వచితమైతే BTN_1
+		read_దత్తాంశం_2 = read_మాట(GPIO_దత్తాంశం_REG);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		read_దత్తాంశం_2 = (read_దత్తాంశం_2 & 0x20000000);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		ఒకవేళ(read_దత్తాంశం_2 == 0x20000000)
+			రాయి("\n BTN1: HIGH"); 		
+		లేకపోతే
+			రాయి("\n BTN1: LOW");
+#అయితే_ముగింపు
 
-#ifdef BTN_2
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x40000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
-			printf("\n BTN2: HIGH"); 		
-		else
-			printf("\n BTN2: LOW");
-#endif
+#నిర్వచితమైతే BTN_2
+		read_దత్తాంశం_2 = read_మాట(GPIO_దత్తాంశం_REG);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		read_దత్తాంశం_2 = (read_దత్తాంశం_2 & 0x40000000);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		ఒకవేళ(read_దత్తాంశం_2 == 0x40000000)
+			రాయి("\n BTN2: HIGH"); 		
+		లేకపోతే
+			రాయి("\n BTN2: LOW");
+#అయితే_ముగింపు
 
-#ifdef BTN_3
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x80000000);
-		printf("\n Read Data is :0x%x", read_data);
+#నిర్వచితమైతే BTN_3
+		read_దత్తాంశం_2 = read_మాట(GPIO_దత్తాంశం_REG);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		read_దత్తాంశం_2 = (read_దత్తాంశం_2 & 0x80000000);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
 
-		if(read_data == 0x80000000)
-			printf("\n BTN3: HIGH"); 		
-		else
-			printf("\n BTN3: LOW");
-#endif
+		ఒకవేళ(read_దత్తాంశం_2 == 0x80000000)
+			రాయి("\n BTN3: HIGH"); 		
+		లేకపోతే
+			రాయి("\n BTN3: LOW");
+#అయితే_ముగింపు
 
 		delay_loop(500, 500);
 
-#endif
+#అయితే_ముగింపు
 
-#ifdef READ_ALL_BTNS	
+#నిర్వచితమైతే READ_ALL_BTNS	
 
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
+		read_దత్తాంశం_2 = read_మాట(GPIO_దత్తాంశం_REG);
+		రాయి("\n Read Data is :0x%x", read_దత్తాంశం_2);
 
-		switch(read_data)
+		ఎంపిక(read_దత్తాంశం_2)
 		{
 
-		case 0x00000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x00000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x10000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x10000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x20000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x20000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x30000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x30000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x40000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x40000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x50000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x50000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x60000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x60000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x70000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		స్థితి 0x70000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: LOW");
+			ఆపు;
 
-		case 0x80000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0x80000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0x90000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0x90000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0xA0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0xA0000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0xB0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0xB0000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: LOW");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0xC0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0xC0000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0xD0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0xD0000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: LOW");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0xE0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0xE0000000:
+			రాయి("\n BTN0: LOW");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 
-		case 0xF0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		స్థితి 0xF0000000:
+			రాయి("\n BTN0: HIGH");
+			రాయి("\n BTN1: HIGH");
+			రాయి("\n BTN2: HIGH");
+			రాయి("\n BTN3: HIGH");
+			ఆపు;
 		}
 
 		delay_loop(500, 500);
-#endif
+#అయితే_ముగింపు
 	}
 	delay_loop(500, 500);
-#endif
+#అయితే_ముగింపు
 }
 

@@ -27,22 +27,22 @@
 interrupt handler, configure the counter and support for e and c class clint timers. 
 */
 
-#include "clint_driver.h"
-#include "log.h"
-#include "platform.h"
-#include "defines.h"
+#అన్తర్భావ "clint_driver.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "defines.h"
 
-volatile uint64_t* mtime    =  (MTIME);
-volatile uint64_t* mtimecmp =  (MTIMECMP);
+అస్థిర uint64_t* mtime    =  (MTIME);
+అస్థిర uint64_t* mtimecmp =  (MTIMECMP);
 
 /** @fn static unsigned long mtime_low( )
  * @brief return the lower 32bit of mtime.
  * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines.
  * @return unsigned long
  */
-static uint32_t mtime_low(void)
+స్థిర uint32_t mtime_దిగువ(శూన్య)
 {
-  return *(uint32_t *)(MTIME);
+  తిరిగి *(uint32_t *)(MTIME);
 }
 
 /*
@@ -55,9 +55,9 @@ Get each 32 bit and append for full timer value
  *          Incase of 64 bit core this has to be appended with lower 32 bits adn sent.
  * @return unsigned 32bit int
  */
-static uint32_t mtime_high(void)
+స్థిర uint32_t mtime_ఎగువ(శూన్య)
 {
-  return *(volatile uint32_t *)(MTIME + 4);
+  తిరిగి *(అస్థిర uint32_t *)(MTIME + 4);
 }
 
 /** @fn uint64_t get_timer_value()
@@ -66,14 +66,14 @@ static uint32_t mtime_high(void)
  *          and lower 32 bits of mtime and return
  * @return unsigned 64bit int
  */
-uint64_t get_timer_value()
+uint64_t get_timer_విలువ()
 {
 
-#if __riscv_xlen == 64
-   return ( ((uint64_t)mtime_high() << 32) | mtime_low());
-#else
-  return mtime_low();
-#endif
+#ఒకవేళ __riscv_xlen == 64
+   తిరిగి ( ((uint64_t)mtime_ఎగువ() << 32) | mtime_దిగువ());
+#లేకపోతే
+  తిరిగి mtime_దిగువ();
+#అయితే_ముగింపు
 }
 
 /** @fn void configure_counter( uint64_t value)
@@ -81,11 +81,11 @@ uint64_t get_timer_value()
  * @details sets the mtimecmp to current mtime + delta
  * @param unsigned 64bit int (delta value after which interrupt happens)
  */
-void configure_counter( uint64_t value)
+శూన్య configure_counter( uint64_t విలువ)
 {
 	log_trace("\nconfigure_counter entered\n");
 
-	*mtimecmp = *mtime + value;
+	*mtimecmp = *mtime + విలువ;
 
 	log_debug("mtimecmp value = %d\n", *mtimecmp);
 	log_debug("mtime value = %d\n", *mtime);
@@ -99,7 +99,7 @@ void configure_counter( uint64_t value)
  * @param unsigned int ptr int_id
  * @param unsigned int ptr epc
  */
-void mach_clint_handler( __attribute__((unused)) uintptr_t int_id,  __attribute__((unused)) uintptr_t epc)
+శూన్య mach_clint_handler( __attribute__((వాడని)) uintptr_t int_id,  __attribute__((వాడని)) uintptr_t epc)
 {
 	log_trace("\nmach_clint_handler entered\n");
 

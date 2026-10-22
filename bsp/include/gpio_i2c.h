@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#నిర్వచితం_కాకపోతే GPIO_I2C_H
+#నిర్వచించు GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#నిర్వచించు I2C_SCL GPIO0 
+#నిర్వచించు I2C_SDA GPIO1
+#నిర్వచించు GPIOD_IS_లోపల 0
+#నిర్వచించు GPIOD_IS_బహిర్గతం 1
+#నిర్వచించు I2C_WRITE 0
+#నిర్వచించు I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+శూన్య I2cInit();
+శూన్య I2c_Send_Slave_చిరునామా(గుర్తులేని అక్షరం , గుర్తులేని అక్షరం , గుర్తులేని అక్షరం );
+శూన్య I2cWriteByte(గుర్తులేని అక్షరం , గుర్తులేని అక్షరం );
+గుర్తులేని అక్షరం I2cReadByte(గుర్తులేని అక్షరం );
+శూన్య I2c_Write_దత్తాంశం(గుర్తులేని అక్షరం , గుర్తులేని అక్షరం );
+గుర్తులేని అక్షరం I2c_Read_దత్తాంశం_Ack(గుర్తులేని అక్షరం );
+గుర్తులేని అక్షరం I2c_Read_దత్తాంశం_Nack(గుర్తులేని అక్షరం );
+శూన్య I2c_ప్రారంభం(గుర్తులేని అక్షరం );
+శూన్య I2cStop(గుర్తులేని అక్షరం );
+శూన్య I2c_Write_byte(గుర్తులేని అక్షరం, గుర్తులేని అక్షరం, గుర్తులేని అక్షరం, గుర్తులేని అక్షరం);
+పూర్ణాంకం I2c_Read_byte(గుర్తులేని అక్షరం ,గుర్తులేని అక్షరం , గుర్తులేని అక్షరం );
+పూర్ణాంకం I2c_shakti_readbytes(అక్షరం *, పూర్ణాంకం , పూర్ణాంకం , గుర్తులేని అక్షరం );
+శూన్య ReadAckForWrite(గుర్తులేని అక్షరం delay);
+శూన్య SendNackForRead(గుర్తులేని అక్షరం delay);
+శూన్య SendAckForRead(గుర్తులేని అక్షరం delay);
 
-#endif
+#అయితే_ముగింపు

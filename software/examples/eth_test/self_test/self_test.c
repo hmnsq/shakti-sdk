@@ -31,12 +31,12 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
+#అన్తర్భావ "gpio.h"
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ "traps.h"
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "eth_driver.h"
+#అన్తర్భావ "log.h"
 
 
 
@@ -46,9 +46,9 @@
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID			240
-#define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+#నిర్వచించు EMAC_DEVICE_ID			240
+#నిర్వచించు ETH_పునాది_REG 0x44000
+అస్థిర గుర్తులేని పూర్ణాంకం* eth_పునాది_reg = ETH_పునాది_REG;
 
 /**************************** Type Definitions *******************************/
 
@@ -56,15 +56,15 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-int EMACLiteSelfTestExample(u16 DeviceId);
-extern XEmacLite_Config XEmacLite_ConfigTable;
+పూర్ణాంకం EMACLiteSelfTestExample(u16 DeviceId);
+బాహ్య XEmacLite_Config XEmac_Lite_Config_పట్టిక;
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+స్థిర XEmacLite EmacLite;
 
 /*****************************************************************************/
 /**
@@ -85,158 +85,158 @@ static XEmacLite EmacLite;
 * @note		None.
 *
 ******************************************************************************/
-int XEmacLite_SelfTest(XEmacLite * InstancePtr)
+పూర్ణాంకం XEmacLite_SelfTest(XEmacLite * InstancePtr)
 {
-	UINTPTR BaseAddress;
-	volatile uint32_t * TempAddress;
-	u8 Index;
-#if 0
+	UINTPTR పునాది_చిరునామా;
+	అస్థిర uint32_t * తాత్కాలిక_చిరునామా;
+	u8 సూచీ;
+#ఒకవేళ 0
 	u8 TestString[4] = { 0xDE, 0xAD, 0xBE, 0xEF };
 	u8 ReturnString[4] = { 0x0, 0x0, 0x0, 0x0 };
-#else
+#లేకపోతే
 	u32 TestString[4] = { 0xDEADBEEF, 0xABCDABCD, 0xAABBCCDD, 0x12345678 };
 	u32 ReturnString[4] = { 0x0, 0x0, 0x0, 0x0 };
 
-#endif
+#అయితే_ముగింపు
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	ఒకవేళ (InstancePtr == ఖాళీ) {
+		తిరిగి -1;
 	}
 
 	/*
 	 * Determine the TX buffer address
 	 */
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
-			XEL_TXBUFF_OFFSET;
-#if 0
-	log_info("\n Base Address is %x",  BaseAddress);
-	TempAddress = (volatile uint32_t *)BaseAddress;
-	*TempAddress = 0x12345678;
-	*(TempAddress++) = 0x9abcdef;
-	*(TempAddress++) = 0x11223344;
-	*(TempAddress++) = 0x55667788;
-	*(TempAddress++) = 0x99aabbcc;
-	*(TempAddress++) = 0xddeeff00;
+	పునాది_చిరునామా = InstancePtr->EmacLiteConfig.పునాది_చిరునామా +
+			XEL_TXBUFF_స్థానభ్రంశం;
+#ఒకవేళ 0
+	log_info("\n Base Address is %x",  పునాది_చిరునామా);
+	తాత్కాలిక_చిరునామా = (అస్థిర uint32_t *)పునాది_చిరునామా;
+	*తాత్కాలిక_చిరునామా = 0x12345678;
+	*(తాత్కాలిక_చిరునామా++) = 0x9abcdef;
+	*(తాత్కాలిక_చిరునామా++) = 0x11223344;
+	*(తాత్కాలిక_చిరునామా++) = 0x55667788;
+	*(తాత్కాలిక_చిరునామా++) = 0x99aabbcc;
+	*(తాత్కాలిక_చిరునామా++) = 0xddeeff00;
 
-	TempAddress = (volatile uint32_t *)BaseAddress;
-	printf("\n Value at %x: %x", TempAddress , *TempAddress );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
+	తాత్కాలిక_చిరునామా = (అస్థిర uint32_t *)పునాది_చిరునామా;
+	రాయి("\n Value at %x: %x", తాత్కాలిక_చిరునామా , *తాత్కాలిక_చిరునామా );
+	రాయి("\n Value at %x: %x", (తాత్కాలిక_చిరునామా) , *తాత్కాలిక_చిరునామా++ );
+	రాయి("\n Value at %x: %x", తాత్కాలిక_చిరునామా , *తాత్కాలిక_చిరునామా++ );
+	రాయి("\n Value at %x: %x", (తాత్కాలిక_చిరునామా) , *తాత్కాలిక_చిరునామా++ );
+	రాయి("\n Value at %x: %x", తాత్కాలిక_చిరునామా , *తాత్కాలిక_చిరునామా++ );
+	రాయి("\n Value at %x: %x", (తాత్కాలిక_చిరునామా) , *తాత్కాలిక_చిరునామా++ );
+	రాయి("\n Value at %x: %x", తాత్కాలిక_చిరునామా , *తాత్కాలిక_చిరునామా++ );
+	రాయి("\n Value at %x: %x", (తాత్కాలిక_చిరునామా) , *తాత్కాలిక_చిరునామా++ );
 
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
-			(XEL_TXBUFF_OFFSET + 4);
-#endif
+	పునాది_చిరునామా = InstancePtr->EmacLiteConfig.పునాది_చిరునామా +
+			(XEL_TXBUFF_స్థానభ్రంశం + 4);
+#అయితే_ముగింపు
 	/*
 	 * Write the TestString to the TX buffer in EMAC Lite then
 	 * back from the EMAC Lite and verify
 	 */
-	XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-			       sizeof(TestString));
-	XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-			      sizeof(ReturnString));
-	for (Index = 0; Index < 4; Index++) {
+	XEmacLite_AlignedWrite(TestString, (UINTPTR *) పునాది_చిరునామా,
+			       పరిమాణం(TestString));
+	XEmacLite_AlignedRead((UINTPTR *) పునాది_చిరునామా, ReturnString,
+			      పరిమాణం(ReturnString));
+	కొరకు (సూచీ = 0; సూచీ < 4; సూచీ++) {
 
-		printf("\n TestString[%x]: %x; ReturnString[%x]: %x", Index, TestString[Index], Index, ReturnString[Index]);
-		if (ReturnString[Index] != TestString[Index]) {
-			return FAILURE;
+		రాయి("\n TestString[%x]: %x; ReturnString[%x]: %x", సూచీ, TestString[సూచీ], సూచీ, ReturnString[సూచీ]);
+		ఒకవేళ (ReturnString[సూచీ] != TestString[సూచీ]) {
+			తిరిగి FAILURE;
 		}
 
 		/*
 		 * Zero the return string for the next test
 		 */
-		ReturnString[Index] = 0;
+		ReturnString[సూచీ] = 0;
 	}
 
 	/*
 	 * If the second buffer is configured, test it also
 	 */
-	if (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
-		BaseAddress += XEL_BUFFER_OFFSET;
+	ఒకవేళ (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
+		పునాది_చిరునామా += XEL_బఫరు_స్థానభ్రంశం;
 		/*
 		 * Write the TestString to the optional TX buffer in EMAC Lite
 		 * then back from the EMAC Lite and verify
 		 */
-		XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-				       sizeof(TestString));
-		XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-				      sizeof(ReturnString));
+		XEmacLite_AlignedWrite(TestString, (UINTPTR *) పునాది_చిరునామా,
+				       పరిమాణం(TestString));
+		XEmacLite_AlignedRead((UINTPTR *) పునాది_చిరునామా, ReturnString,
+				      పరిమాణం(ReturnString));
 
-		for (Index = 0; Index < 4; Index++) {
+		కొరకు (సూచీ = 0; సూచీ < 4; సూచీ++) {
 
-			if (ReturnString[Index] != TestString[Index]) {
-				return FAILURE;
+			ఒకవేళ (ReturnString[సూచీ] != TestString[సూచీ]) {
+				తిరిగి FAILURE;
 			}
 
 			/*
 			 * Zero the return string for the next test
 			 */
-			ReturnString[Index] = 0;
+			ReturnString[సూచీ] = 0;
 		}
 	}
 
 	/*
 	 * Determine the RX buffer address
 	 */
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
-				XEL_RXBUFF_OFFSET;
+	పునాది_చిరునామా = InstancePtr->EmacLiteConfig.పునాది_చిరునామా +
+				XEL_RXBUFF_స్థానభ్రంశం;
 
 	/*
 	 * Write the TestString to the RX buffer in EMAC Lite then
 	 * back from the EMAC Lite and verify
 	 */
-	XEmacLite_AlignedWrite(TestString, (UINTPTR *) (BaseAddress),
-			       sizeof(TestString));
-	XEmacLite_AlignedRead((UINTPTR *) (BaseAddress), ReturnString,
-			      sizeof(ReturnString));
+	XEmacLite_AlignedWrite(TestString, (UINTPTR *) (పునాది_చిరునామా),
+			       పరిమాణం(TestString));
+	XEmacLite_AlignedRead((UINTPTR *) (పునాది_చిరునామా), ReturnString,
+			      పరిమాణం(ReturnString));
 
-	for (Index = 0; Index < 4; Index++) {
+	కొరకు (సూచీ = 0; సూచీ < 4; సూచీ++) {
 
-		if (ReturnString[Index] != TestString[Index]) {
-			return FAILURE;
+		ఒకవేళ (ReturnString[సూచీ] != TestString[సూచీ]) {
+			తిరిగి FAILURE;
 		}
 
 		/*
 		 * Zero the return string for the next test
 		 */
-		ReturnString[Index] = 0;
+		ReturnString[సూచీ] = 0;
 	}
 
 	/*
 	 * If the second buffer is configured, test it also
 	 */
-	if (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
-		BaseAddress += XEL_BUFFER_OFFSET;
+	ఒకవేళ (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
+		పునాది_చిరునామా += XEL_బఫరు_స్థానభ్రంశం;
 		/*
 		 * Write the TestString to the optional RX buffer in EMAC Lite
 		 * then back from the EMAC Lite and verify
 		 */
-		XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-				       sizeof(TestString));
-		XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-				      sizeof(ReturnString));
+		XEmacLite_AlignedWrite(TestString, (UINTPTR *) పునాది_చిరునామా,
+				       పరిమాణం(TestString));
+		XEmacLite_AlignedRead((UINTPTR *) పునాది_చిరునామా, ReturnString,
+				      పరిమాణం(ReturnString));
 
-		for (Index = 0; Index < 4; Index++) {
+		కొరకు (సూచీ = 0; సూచీ < 4; సూచీ++) {
 
-			if (ReturnString[Index] != TestString[Index]) {
-				return FAILURE;
+			ఒకవేళ (ReturnString[సూచీ] != TestString[సూచీ]) {
+				తిరిగి FAILURE;
 			}
 
 			/*
 			 * Zero the return string for the next test
 			 */
-			ReturnString[Index] = 0;
+			ReturnString[సూచీ] = 0;
 		}
 	}
 
-	return SUCCESS;
+	తిరిగి SUCCESS;
 }
 
 
@@ -253,22 +253,22 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 * @note		None
 *
 *****************************************************************************/
-int main(void)
+పూర్ణాంకం ప్రధాన(శూన్య)
 {
-	int Status;
+	పూర్ణాంకం స్థితి_2;
 
 	/*
 	 * Run the EmacLite Self test example, specify the Device ID that is
 	 * generated in xparameters.h
 	 */
-	Status = EMACLiteSelfTestExample(EMAC_DEVICE_ID);
-	if (Status != SUCCESS) {
+	స్థితి_2 = EMACLiteSelfTestExample(EMAC_DEVICE_ID);
+	ఒకవేళ (స్థితి_2 != SUCCESS) {
 		log_error("Emaclite selftest Example Failed\r\n");
-		return FAILURE;
+		తిరిగి FAILURE;
 	}
 
 	log_debug("Successfully ran Emaclite selftest Example\r\n");
-	return SUCCESS;
+	తిరిగి SUCCESS;
 
 }
 
@@ -285,42 +285,42 @@ int main(void)
 * @note		None.
 *
 ******************************************************************************/
-int EMACLiteSelfTestExample(u16 DeviceId)
+పూర్ణాంకం EMACLiteSelfTestExample(u16 DeviceId)
 {
-	int Status;
+	పూర్ణాంకం స్థితి_2;
 	XEmacLite_Config *ConfigPtr;
 	XEmacLite *InstancePtr = &EmacLite;
 	log_debug("\n Inside EMACLiteSelfTestExample");
 	/*
 	 * Initialize the EmacLite device.
 	 */
-	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	ConfigPtr = &XEmac_Lite_Config_పట్టిక;
+	ఒకవేళ (ConfigPtr == ఖాళీ) {
+		తిరిగి -1;
 	}
-	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
-	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->BaseAddress);
+	ConfigPtr->పునాది_చిరునామా = (UINTPTR *) 0X44000;
+	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->పునాది_చిరునామా);
 	log_debug("\n ConfigPtr: DeviceId: %x", ConfigPtr->DeviceId);
 	log_debug("\n ConfigPtr: TxPingPong: %x", ConfigPtr->TxPingPong);
 	log_debug("\n ConfigPtr: RxPingPong: %x", ConfigPtr->RxPingPong);
 	log_debug("\n ConfigPtr: MdioInclude: %x", ConfigPtr->MdioInclude);
 	log_debug("\n ConfigPtr: Loopback: %x", ConfigPtr->Loopback);
-	Status = XEmacLite_CfgInitialize(InstancePtr,
+	స్థితి_2 = XEmacLite_CfgInitialize(InstancePtr,
 					ConfigPtr,
-					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+					ConfigPtr->పునాది_చిరునామా);
+	ఒకవేళ (స్థితి_2 != 0) {
+		తిరిగి -1;
 	}
 	
 	/*
 	 * Run the Self Test
 	 */
 	log_debug("\n Calling self test function.");
-	Status = XEmacLite_SelfTest(InstancePtr);
-	if (Status != SUCCESS) {
-		return FAILURE;
+	స్థితి_2 = XEmacLite_SelfTest(InstancePtr);
+	ఒకవేళ (స్థితి_2 != SUCCESS) {
+		తిరిగి FAILURE;
 	}
 
-	return SUCCESS;
+	తిరిగి SUCCESS;
 }
 

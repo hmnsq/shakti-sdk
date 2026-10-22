@@ -25,33 +25,33 @@
   @brief read data from the flash by spi
   @detail Contains driver codes to read and write flash using SPI interface.
  */
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#అన్తర్భావ "spi.h"
+#అన్తర్భావ "uart.h"
+#అన్తర్భావ "utils.h"
 
 /** @fn void main()
  * @brief Configures the SPI flash and reads the flash.
  * @details Configures the SPI flash, Confirms the flash device id,
             then read 10 addresses in flash and prints the value.
  */
-int main(void){
+పూర్ణాంకం ప్రధాన(శూన్య){
 
-	configure_spi(SPI0_OFFSET);
+	configure_spi(SPI0_స్థానభ్రంశం);
 
 	spi_init();
-	printf("SPI init done\n");
+	రాయి("SPI init done\n");
 	flash_device_id();
 	waitfor(200);
-	int total_data = 10; //total data you want to read/write
-	int read_address = 0x00b00000;  //read from this address
+	పూర్ణాంకం మొత్తం_దత్తాంశం = 10; //total data you want to read/write
+	పూర్ణాంకం read_చిరునామా = 0x00b00000;  //read from this address
 
-	for(int i = 0; i < total_data; ++i)
+	కొరకు(పూర్ణాంకం i = 0; i < మొత్తం_దత్తాంశం; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("Reading from adddress %x and data \
-		       %x\n",read_address,read_value);
-		read_address=read_address+4;
+		పూర్ణాంకం read_విలువ= flash_read(read_చిరునామా);
+		రాయి("Reading from adddress %x and దత్తాంశం_2 \
+		       %x\n",read_చిరునామా,read_విలువ);
+		read_చిరునామా=read_చిరునామా+4;
 	}
-	asm volatile ("ebreak");
-	return 0;
+	asm అస్థిర ("ebreak");
+	తిరిగి 0;
 }

@@ -26,24 +26,24 @@
 @detail This algorithm implements the malloc function using the first-fit algorithm. It allocates and frees blocks of memory for usage.
 */ 
 
-#include<unistd.h>
-#include<sys/types.h>
-#include "platform.h"
-#include "defines.h"
-#include "log.h"
+#అన్తర్భావ<unistd.h>
+#అన్తర్భావ<sys/types.h>
+#అన్తర్భావ "platform.h"
+#అన్తర్భావ "defines.h"
+#అన్తర్భావ "log.h"
 
-extern char* _HEAP_SIZE[];
-char* HEAP_SIZE = (char *)&_HEAP_SIZE;
+బాహ్య అక్షరం* కుప్ప_కొలత[];
+అక్షరం* కుప్ప_కొలత_2 = (అక్షరం *)&కుప్ప_కొలత;
 
 //Header block denotes start of the segment
-struct Header
+నిర్మాణం శీర్షిక
 {
-	size_t size;
-	int free;
-	struct Header* next;
+	size_t కొలత;
+	పూర్ణాంకం విడుదల;
+	నిర్మాణం శీర్షిక* తదుపరి;
 };
 
-struct Header* global_base=NULL;
+నిర్మాణం శీర్షిక* global_పునాది=ఖాళీ;
 
 /** @fn  struct Header* allocate_block(struct Header* last, size_t size)
  * @brief it allocates a block of given size 
@@ -53,18 +53,18 @@ struct Header* global_base=NULL;
  * @return returns a pointer to the newly allocated block
  *         returns null if mmemory allocated or block allocation fails
  */
-struct Header* allocate_block(struct Header* last, size_t size)
+నిర్మాణం శీర్షిక* allocate_ఖండం(నిర్మాణం శీర్షిక* చివరి, size_t కొలత)
 {
 	uintptr_t x=0;
 
 	log_trace("\nFunction allocate_block entered");
 
-	if(last->size > size)
+	ఒకవేళ(చివరి->కొలత > కొలత)
 	{
-		struct Header* newblock;
-		void *p = last;
+		నిర్మాణం శీర్షిక* newblock;
+		శూన్య *p = చివరి;
 
-		p += size + sizeof(struct Header);
+		p += కొలత + పరిమాణం(నిర్మాణం శీర్షిక);
 		x = p;
 
 		x = ((( x) + ((REGSIZE) - 1)) & ~((REGSIZE) - 1));
@@ -73,19 +73,19 @@ struct Header* allocate_block(struct Header* last, size_t size)
 
 		newblock = p;
 
-		newblock->size = last->size - size - sizeof(struct Header);
+		newblock->కొలత = చివరి->కొలత - కొలత - పరిమాణం(నిర్మాణం శీర్షిక);
 
-		last->size = size;
-		last->free = 0;
-		last->next = newblock;
+		చివరి->కొలత = కొలత;
+		చివరి->విడుదల = 0;
+		చివరి->తదుపరి = newblock;
 
-		newblock->free = 1;
-		newblock->next = NULL;
+		newblock->విడుదల = 1;
+		newblock->తదుపరి = ఖాళీ;
 
-		return last;
+		తిరిగి చివరి;
 	}
-	else
-		return NULL;
+	లేకపోతే
+		తిరిగి ఖాళీ;
 	log_trace("\nFunction allocate_block entered");
 }
 
@@ -98,29 +98,29 @@ struct Header* allocate_block(struct Header* last, size_t size)
  * @return returns a free block if available
  *         returns null if unavailable
  */
-struct Header *find_free_block(struct Header **last, size_t size)
+నిర్మాణం శీర్షిక *కనుగొను_free_ఖండం(నిర్మాణం శీర్షిక **చివరి, size_t కొలత)
 {
 	log_trace("\nfind free entered");
 
-	struct Header *current = global_base;
+	నిర్మాణం శీర్షిక *current = global_పునాది;
 
-	while (current && !(current->free && current->size >= size))
+	అయితే (current && !(current->విడుదల && current->కొలత >= కొలత))
 	{
 
-		log_debug("\n Inside Loop %d %d %x %x",current->size,size,current,*last);
-		*last = current;
-		current = current->next;
+		log_debug("\n Inside Loop %d %d %x %x",current->కొలత,కొలత,current,*చివరి);
+		*చివరి = current;
+		current = current->తదుపరి;
 	}
 
-	log_debug("\n After Loop %d %d %x %x",current->size,size,current,*last);
+	log_debug("\n After Loop %d %d %x %x",current->కొలత,కొలత,current,*చివరి);
 
-	if(current && current->size>=size)
+	ఒకవేళ(current && current->కొలత>=కొలత)
 	{
-		*last=current;
-		return current;
+		*చివరి=current;
+		తిరిగి current;
 	}
-	else
-		return NULL;
+	లేకపోతే
+		తిరిగి ఖాళీ;
 
 	log_trace("\nfind free exited");
 }
@@ -132,31 +132,31 @@ struct Header *find_free_block(struct Header **last, size_t size)
  * @return returns a pointer to the allocated heap
  *         returns NULL if heap is unable to be allocated
  */
-struct Header* request_heap()
+నిర్మాణం శీర్షిక* request_కుప్ప()
 {
-	struct Header *block;
+	నిర్మాణం శీర్షిక *ఖండం;
 
-	block = m_sbrk(0);
+	ఖండం = m_sbrk(0);
 
-	void *request = m_sbrk(HEAP_SIZE);
+	శూన్య *request = m_sbrk(కుప్ప_కొలత_2);
 
-	if((void*)block == request); // Not thread safe.
-	block=request;
+	ఒకవేళ((శూన్య*)ఖండం == request); // Not thread safe.
+	ఖండం=request;
 
-	log_debug("\nInitial Heap start address =%x",block);
+	log_debug("\nInitial Heap start address =%x",ఖండం);
 
-	if (request == (void*) -1) {
+	ఒకవేళ (request == (శూన్య*) -1) {
 		log_error("\nNo space left to allocate memory");
-		return NULL; // sbrk failed.
+		తిరిగి ఖాళీ; // sbrk failed.
 	}
 
-	block->size = HEAP_SIZE;
-	block->next = NULL;
-	block->free = 1;
+	ఖండం->కొలత = కుప్ప_కొలత_2;
+	ఖండం->తదుపరి = ఖాళీ;
+	ఖండం->విడుదల = 1;
 
 	log_debug("\nBlock Assigned");
 
-	return block;
+	తిరిగి ఖండం;
 }
 
 //malloc function to allocate space
@@ -167,62 +167,62 @@ struct Header* request_heap()
  * @return  returns a pointer to the assigned block
  *          returns NULL if allocation fails
  */
-void *malloc(size_t size)
+శూన్య *జ్ఞాపకం_ఇవ్వు(size_t కొలత)
 {
-	struct Header *block;
+	నిర్మాణం శీర్షిక *ఖండం;
 
-	if (size <= 0) {
-               return NULL;
+	ఒకవేళ (కొలత <= 0) {
+               తిరిగి ఖాళీ;
 	}
 
-	log_info("\n global_base: %x",global_base);
+	log_info("\n global_base: %x",global_పునాది);
 
-	if(global_base==0x00000000)
+	ఒకవేళ(global_పునాది==0x00000000)
 	{
 		// First call. global_base is empty
 		log_debug("\n Requesting block");
 
-		block = request_heap();
+		ఖండం = request_కుప్ప();
 
-		log_debug("\n block=%x",block);
+		log_debug("\n block=%x",ఖండం);
 
-		if (!block)
+		ఒకవేళ (!ఖండం)
 		{
-			return NULL;
+			తిరిగి ఖాళీ;
 		}
-		global_base = block;
+		global_పునాది = ఖండం;
 	}
 
-	struct Header *last = global_base;
+	నిర్మాణం శీర్షిక *చివరి = global_పునాది;
 
-	block = find_free_block(&last, size);
+	ఖండం = కనుగొను_free_ఖండం(&చివరి, కొలత);
 
-	if(!block)
+	ఒకవేళ(!ఖండం)
 	{
 		log_error("\n No free blocks");
-		return NULL;
+		తిరిగి ఖాళీ;
 	}
 
-	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
+	log_debug("\nBlock = %x Block Size = %d Size = %d",ఖండం,ఖండం->కొలత,కొలత);
 
-	if (block->size>size)
+	ఒకవేళ (ఖండం->కొలత>కొలత)
 	{
 		// Failed to find free block.
-		block = allocate_block(last,size);
+		ఖండం = allocate_ఖండం(చివరి,కొలత);
 
-		if (!block)
+		ఒకవేళ (!ఖండం)
 		{
-			return NULL;
+			తిరిగి ఖాళీ;
 		}
 	}
-	else if(block->size==size)
+	లేకపోతే ఒకవేళ(ఖండం->కొలత==కొలత)
 	{
 		// Found free block
 		log_debug("\nFound free block of same size");
-		block->free = 0;
+		ఖండం->విడుదల = 0;
 	}
 
-  return(block+1);
+  తిరిగి(ఖండం+1);
 }
 
 /** @fn  struct Header *get_block_ptr(void *ptr)
@@ -231,9 +231,9 @@ void *malloc(size_t size)
  * @param void* ptr - pointer to the block
  * @return returns pointer to the block
  */
-struct Header *get_block_ptr(void *ptr)
+నిర్మాణం శీర్షిక *get_ఖండం_ptr(శూన్య *ptr)
 {
-  return (struct Header*)ptr - 1;
+  తిరిగి (నిర్మాణం శీర్షిక*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
@@ -242,18 +242,18 @@ struct Header *get_block_ptr(void *ptr)
  * @detail  frees the memory assigned by malloc and when freed this memory is added back to the list to be reused
  * @param void *ptr - pointer to the memory assigned by malloc
  */
-void free(void *ptr)
+శూన్య విడుదల(శూన్య *ptr)
 {
-	if (!ptr)
+	ఒకవేళ (!ptr)
 	{
 		log_error("\n Wrong value passed to free");
-		return;
+		తిరిగి;
 	}
 
-	struct Header* block_ptr = get_block_ptr(ptr);
+	నిర్మాణం శీర్షిక* ఖండం_ptr = get_ఖండం_ptr(ptr);
 
-	log_debug("\n %x is freed",block_ptr);
+	log_debug("\n %x is freed",ఖండం_ptr);
 
-	if(block_ptr->free==0)
-		block_ptr->free = 1;
+	ఒకవేళ(ఖండం_ptr->విడుదల==0)
+		ఖండం_ptr->విడుదల = 1;
 }

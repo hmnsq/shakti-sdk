@@ -27,32 +27,32 @@
 used to achieve higher level objectives.
 */
 
-#include "log.h"
-#include "utils.h"
-#include "string.h"
+#అన్తర్భావ "log.h"
+#అన్తర్భావ "utils.h"
+#అన్తర్భావ "string.h"
 
 /** @fn  void waitfor(unsigned int secs)
  * @brief stall the process for given time
  * @param unsigned int secs
  */
-void waitfor(unsigned int secs)
+శూన్య waitfor(గుర్తులేని పూర్ణాంకం secs)
 {
-	unsigned int time = 0;
-	while (time++ < secs);
+	గుర్తులేని పూర్ణాంకం సమయం = 0;
+	అయితే (సమయం++ < secs);
 }
 
 /** @fn void delay(unsigned long count)
  * @brief  sleeps for number of "count"
  * @param unsigned long (number of count)
  */
-void delay(unsigned long count)
+శూన్య delay(గుర్తులేని దీర్ఘ లెక్క)
 {
-	unsigned long cntr1 = count *1000;
-	unsigned long tmpCntr;
+	గుర్తులేని దీర్ఘ cntr1 = లెక్క *1000;
+	గుర్తులేని దీర్ఘ tmpCntr;
 
-	while (cntr1--){
+	అయితే (cntr1--){
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		అయితే (tmpCntr--);
 	}
 }
 
@@ -61,29 +61,29 @@ void delay(unsigned long count)
  * @param unsigned int y
  * @return return result in float 
  */
-float pow_10(unsigned int y)
+దశాంశం pow_10(గుర్తులేని పూర్ణాంకం y)
 {
-	unsigned int x=1;
+	గుర్తులేని పూర్ణాంకం x=1;
 
-	for (unsigned int i=0; i <y; i++)
+	కొరకు (గుర్తులేని పూర్ణాంకం i=0; i <y; i++)
 	{
 		x *= 10;
 	}
 
-	return ((float) x);
+	తిరిగి ((దశాంశం) x);
 }
 /** @fn void reverse(char *str, int length)
  * @brief reverse a string and store in the same string
  * @param char *str
  * @param int length
  */
-void reverse(char *str, int length)
+శూన్య తిరగేయి(అక్షరం *str, పూర్ణాంకం నిడివి_2)
 {
-	int i = 0;
-	int j = length - 1;
-	char tmp;
+	పూర్ణాంకం i = 0;
+	పూర్ణాంకం j = నిడివి_2 - 1;
+	అక్షరం tmp;
 
-	while (i<j)
+	అయితే (i<j)
 	{
 		tmp = str[i];
 		str[i] = str[j];
@@ -105,22 +105,22 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+పూర్ణాంకం int_గమ్యం_string(పూర్ణాంకం సంఖ్య, అక్షరం str[], గుర్తులేని పూర్ణాంకం afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	అయితే (సంఖ్య != 0)
 	{
-		str[i] = ((number%10) + '0');
+		str[i] = ((సంఖ్య%10) + '0');
 		i++;
-		number = number/10;
+		సంఖ్య = సంఖ్య/10;
 	}
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint)
+	అయితే (i < afterpoint)
 	{
 		str[i] = '0';
 		i++;
@@ -130,10 +130,10 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 	   zeroth digit is in oth position in array,
 	   To read digits properly, reverse array
 	 */
-	reverse(str, i);
+	తిరగేయి(str, i);
 	str[i] = '\0';
 
-	return i;
+	తిరిగి i;
 }
 /** @fn void ftoa(float n, char *res, int afterpoint)
  * @brief converts float to string
@@ -144,62 +144,62 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
  * @param char* (float in string - res)
  * @param int (precision - afterpoint)
  */
-void ftoa(float n, char *res, unsigned int afterpoint)
+శూన్య ftoa(దశాంశం n, అక్షరం *res, గుర్తులేని పూర్ణాంకం afterpoint)
 {
-	int i=0;
-	char temp[30]={'\0'};
+	పూర్ణాంకం i=0;
+	అక్షరం తాత్కాలిక[30]={'\0'};
 	n += 0.0000001;
 
 	// Extract integer part
-	int ipart = (int)n;
+	పూర్ణాంకం ipart = (పూర్ణాంకం)n;
 
 	// Extract floating part
-	float fpart = (float) (n - (float)ipart);
-	int j=0;
+	దశాంశం fpart = (దశాంశం) (n - (దశాంశం)ipart);
+	పూర్ణాంకం j=0;
 
-	if(n < (0/1))
+	ఒకవేళ(n < (0/1))
 	{
 		res[j]='-';
 		j=1;
 	}
 
-	if (ipart == 0)
+	ఒకవేళ (ipart == 0)
 	{
 		res[j]='0';
 		j=j+1;
 	}
-	else{
-		if (ipart <0)
+	లేకపోతే{
+		ఒకవేళ (ipart <0)
 		{
 			ipart =(-1)*ipart;
 		}
 
-		i = int_to_string(ipart, temp, 0);
+		i = int_గమ్యం_string(ipart, తాత్కాలిక, 0);
 
-		strcpy(res+j,temp);
+		strcpy(res+j,తాత్కాలిక);
 	}
 
 	i = i+j;
 
 	// check for display option after point
-	if (afterpoint != 0)
+	ఒకవేళ (afterpoint != 0)
 	{
 		res[i] = '.';// add dot
 
-		if (fpart < 0/1)
+		ఒకవేళ (fpart < 0/1)
 		{
 
 			fpart = (-1)*fpart;
 
 		}
-		else if (fpart == 0/1)
+		లేకపోతే ఒకవేళ (fpart == 0/1)
 		{
 			fpart = fpart;
 		}
 
 		fpart = fpart * pow_10( afterpoint);
 
-		int_to_string((int)fpart, res + i + 1, afterpoint);
+		int_గమ్యం_string((పూర్ణాంకం)fpart, res + i + 1, afterpoint);
 	}
 }
 
@@ -208,15 +208,15 @@ void ftoa(float n, char *res, unsigned int afterpoint)
  * @param unsigned long cntr1 - one counter value
  * @param unsigned long cntr2 - another counter value
  */
-void delay_loop(unsigned long cntr1, unsigned long cntr2)
+శూన్య delay_loop(గుర్తులేని దీర్ఘ cntr1, గుర్తులేని దీర్ఘ cntr2)
 {
-	unsigned long tmpCntr = cntr2;
+	గుర్తులేని దీర్ఘ tmpCntr = cntr2;
 
-	while (cntr1--)
+	అయితే (cntr1--)
 	{
 		tmpCntr = cntr2;
 
-		while (tmpCntr--);
+		అయితే (tmpCntr--);
 	}
 }
 
@@ -226,10 +226,10 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  * @param int* addr
  * @return long int
  */
-unsigned long read_word(uint32_t *addr)
+గుర్తులేని దీర్ఘ read_మాట(uint32_t *addr)
 {
 	log_debug("addr = %x data = %x\n", addr, *addr);
-	return *addr;
+	తిరిగి *addr;
 }
 
 /** @fn void write_word(int *addr, unsigned long val)
@@ -237,7 +237,7 @@ unsigned long read_word(uint32_t *addr)
  * @param int*
  * @param unsigned long
  */
-void write_word(uint32_t *addr, unsigned long val)
+శూన్య write_మాట(uint32_t *addr, గుర్తులేని దీర్ఘ val)
 {
 	*addr = val;
 	log_debug("addr = %x data = %x\n", addr, *addr);

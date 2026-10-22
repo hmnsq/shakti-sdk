@@ -30,7 +30,7 @@ platform.h - header file for Artix 100T C class SoC
 #define CLINT_BASE 0x020000000
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   256
+#define CLINT_دابەشکەر   256
 
 #define CLOCK_FREQUENCY 20000000
 
@@ -49,7 +49,7 @@ platform.h - header file for Artix 100T C class SoC
 #define TCM_MEM_SIZE 0x8000000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#define کەڵەکە_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
 #define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
@@ -61,7 +61,7 @@ platform.h - header file for Artix 100T C class SoC
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
 #define UART0_START 0x00011300 /*! UART 0 */
 #define UART_OFFSET 0x100
-#define MAX_UART_COUNT 1
+#define MAX_UART_ژماردن 1
 
 #define PINMUX_CONFIGURE_REG 0x40310
 
@@ -71,7 +71,7 @@ platform.h - header file for Artix 100T C class SoC
 /*! Inter Integrated Circuit (I2C) Interface */
 #define I2C0_BASE 0x020C0000 /*! I2C Start Address */
 #define I2C_OFFSET 0x000
-#define MAX_I2C_COUNT 1
+#define MAX_I2_C_ژماردن 1
 
 /*! Programmable Logic Interrupt Interface */
 #define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
@@ -135,7 +135,7 @@ platform.h - header file for Artix 100T C class SoC
 #define GPIO29 (1 << 29)
 #define GPIO30 (1 << 30)
 #define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#define GPIO_ژماردن  0x20
 //#define PLIC_GPIO_OFFSET 0
 
 #endif

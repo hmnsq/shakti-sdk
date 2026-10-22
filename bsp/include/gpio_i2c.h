@@ -29,8 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
@@ -42,20 +42,20 @@ add a method to set the GPIO pins that are to be used  */
 #define I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+فراغ I2cInit();
+فراغ I2cSendSlaveAddress(unsigned حرف , unsigned حرف , unsigned حرف );
+فراغ I2cWriteByte(unsigned حرف , unsigned حرف );
+unsigned حرف I2cReadByte(unsigned حرف );
+فراغ I2cWriteData(unsigned حرف , unsigned حرف );
+unsigned حرف I2cReadDataAck(unsigned حرف );
+unsigned حرف I2cReadDataNack(unsigned حرف );
+فراغ I2cStart(unsigned حرف );
+فراغ I2cStop(unsigned حرف );
+فراغ I2c_Write_byte(unsigned حرف, unsigned حرف, unsigned حرف, unsigned حرف);
+صحيح I2c_Read_byte(unsigned حرف ,unsigned حرف , unsigned حرف );
+صحيح I2c_shakti_readbytes(حرف *, صحيح , صحيح , unsigned حرف );
+فراغ ReadAckForWrite(unsigned حرف delay);
+فراغ SendNackForRead(unsigned حرف delay);
+فراغ SendAckForRead(unsigned حرف delay);
 
 #endif

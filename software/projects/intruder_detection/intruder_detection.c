@@ -61,37 +61,37 @@
 #include "log.h" 
 /* global variable definition*/
 
-int pir_present_state = 0;
-int pir_previous_state = 0;
+цяло pir_present_state = 0;
+цяло pir_previous_state = 0;
 
-int panic_present_state=0;
-int panic_previous_state=0;
+цяло panic_present_state=0;
+цяло panic_previous_state=0;
 
-int alarm_present_state=0;
-int alarm_previous_state=0;
+цяло alarm_present_state=0;
+цяло alarm_previous_state=0;
 
-int first_flag = 1; 
-int alarm_flag = 0;
-int deactivate_flag = 0;
-int alarm_counter_flag=1; //Default value 1
-int keypad_password_flag=0;
+цяло first_flag = 1; 
+цяло alarm_flag = 0;
+цяло deactivate_flag = 0;
+цяло alarm_counter_flag=1; //Default value 1
+цяло keypad_password_flag=0;
 
-int alarm_counter = 0;
-int keypad_counter= 0;
+цяло alarm_counter = 0;
+цяло keypad_counter= 0;
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
-int col_row = -1;
+цяло key = -1;
+цяло col_row = -1;
 
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-unsigned int col[4]={0, 1, 2, 3};
-unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+unsigned цяло row_pins[ROWNUM];
+unsigned цяло col_pins[COLNUM];
+unsigned цяло col[4]={0, 1, 2, 3};
+unsigned цяло row[4]={4, 5, 6, 7};
+цяло key_map[COLNUM][ROWNUM];
 //Password
-int pass_data[PASS_NUM];
+цяло pass_data[PASS_NUM];
 
-int  keyTable[4][4] =
+цяло  keyTable[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -105,16 +105,16 @@ int  keyTable[4][4] =
  * @param  gpio_pin The pin number for which the function sets HIGH or LOW
  * @param gpio_pin_mode Mode = 0 - Sets the GPIO Pin to LOW, 1- Sets the GPIO Pin to HIGH 
  */
-void write_gpio(unsigned long gpio_pin, int gpio_pin_mode )
+void write_gpio(unsigned long gpio_pin, цяло gpio_pin_mode )
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
 
-	if(gpio_pin_mode == 1)
+	ако(gpio_pin_mode == 1)
 	{
 		write_word (GPIO_DATA_REG, ( read_data | (gpio_pin ) ) );
 	}
-	else
+	иначе
 	{
                 write_word(GPIO_DATA_REG, ( read_data & ( ~gpio_pin ) ) );  
 	}
@@ -127,27 +127,27 @@ void write_gpio(unsigned long gpio_pin, int gpio_pin_mode )
  * @param temp_read_data Present Register Data of GPIO 
  * @return 0- State (1->0 or 0->0); 1- State (0->1);2- State (1->1) 
  */
-int pir_read_state(unsigned long temp_read_data)
+цяло pir_read_state(unsigned long temp_read_data)
 {
   pir_present_state= ((PIR_IN & temp_read_data) >>PIR_OFFSET);  
 
-  if( (pir_present_state == 1) && (pir_previous_state == 0) ){
+  ако( (pir_present_state == 1) && (pir_previous_state == 0) ){
 	//State of 0->1
    	log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_previous_state);
 	pir_previous_state = pir_present_state;
-    return 1;
+    върни 1;
   }
-  else if((pir_present_state == 1) && (pir_previous_state == 1)) {
+  иначе ако((pir_present_state == 1) && (pir_previous_state == 1)) {
 	//State of 1 -> 1
 	log_debug("\nPIR Code 2 %x -- %x ",pir_present_state,pir_previous_state);
 	pir_previous_state = pir_present_state;
-	return 2;
+	върни 2;
   }
-  else {
+  иначе {
 	//State of 1->0 and 0->0
    	log_debug("\nPIR Code 0 %x -- %x",pir_present_state,pir_previous_state);
     pir_previous_state = pir_present_state;
-    return 0;
+    върни 0;
   }
 }
 
@@ -158,26 +158,26 @@ int pir_read_state(unsigned long temp_read_data)
  * @param temp_read_data Present Register Data of GPIO 
  * @return 0 - State (0->0 & 1->0) ;1 - State (0->1);2 - State (1->1) 
  */
-int panic_button_read_state(unsigned long temp_read_data)
+цяло panic_button_read_state(unsigned long temp_read_data)
 {
   panic_present_state= ( (PANIC_BUTTON & temp_read_data) >> PANIC_BUTTON_OFFSET);  
 
-  if( (panic_present_state == 1) && (panic_previous_state == 0) ) {
+  ако( (panic_present_state == 1) && (panic_previous_state == 0) ) {
 	  log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_previous_state);
 	  log_debug("\nSOS -Panic Button Activated");
 	  panic_previous_state = panic_present_state;
-	  return 1;
+	  върни 1;
   }
-  else if( (panic_previous_state == 1) && (panic_present_state == 1) ) {
+  иначе ако( (panic_previous_state == 1) && (panic_present_state == 1) ) {
 	  //Function Returns 2 when mode is 1-1 (present and prev state)
 	  log_debug("\nPanic -Code 2 %x -- %x ",pir_present_state,pir_previous_state);
 	  panic_previous_state = panic_present_state;
-	  return 2;
+	  върни 2;
   }
-  else {
+  иначе {
 	  log_debug("\nPanic -Code 0 %x -- %x",pir_present_state,pir_previous_state);
 	  panic_previous_state = panic_present_state;
-	  return 0;
+	  върни 0;
   }
 }
 
@@ -187,9 +187,9 @@ int panic_button_read_state(unsigned long temp_read_data)
  */
 void buzzer_tone()
 {
-	int i=0;
+	цяло i=0;
 
-	for (i = 0; i < 4; i++) {
+	за (i = 0; i < 4; i++) {
 		write_gpio(BUZZER,HIGH);	//Buzzer generates sound
 		delay(1);
 		write_gpio(BUZZER,LOW);		//No tone
@@ -206,17 +206,17 @@ void buzzer_tone()
  * @param col pointer address which sets column pins
  * @param table Array which maps the table to the key map 
  */
-void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM][ROWNUM] )
+void  set_key_pins_map( unsigned цяло*  row, unsigned цяло* col, цяло table[COLNUM][ROWNUM] )
 {
-	for(int i = 0 ; i < COLNUM ; i++)	{
+	за(цяло i = 0 ; i < COLNUM ; i++)	{
 		col_pins[i] = col[i]; // set col
 	}
-	for(int j = 0 ; j < ROWNUM ; j++) 	{
+	за(цяло j = 0 ; j < ROWNUM ; j++) 	{
 		row_pins[j] = row[j]; 	// set row
 	}
 	//Mapping table to its key map 
-	for(int i = 0 ; i < COLNUM ; i++) {
-		for(int j = 0 ; j < ROWNUM ; j++) {
+	за(цяло i = 0 ; i < COLNUM ; i++) {
+		за(цяло j = 0 ; j < ROWNUM ; j++) {
 			key_map[i][j] = table[i][j];
 		}
 	}
@@ -228,9 +228,9 @@ void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM]
  * @param col_row The input to return the correspoding mapped value in key_map table 
  * @return Returns the corresponding value based on the input from the key_map table
  */
-int get_key(int col_row)
+цяло get_key(цяло col_row)
 {
-	return key_map[col_row>>16][0xFFFF & col_row];
+	върни key_map[col_row>>16][0xFFFF & col_row];
 }
 
 /** @fn get_col_row
@@ -239,9 +239,9 @@ int get_key(int col_row)
    low and reading the row values     
  * @return -1 - No keys pressed ; else - Returns the key pressed by the Keypad
  */
-int get_col_row(void)
+цяло get_col_row(void)
 {
-	int col_row = 0;
+	цяло col_row = 0;
 	unsigned long read_value = 0;
 	unsigned long temp_read_data = 0;
 
@@ -249,24 +249,24 @@ int get_col_row(void)
 	temp_read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG,( temp_read_data | (0xF << OUTPINS_OFFSET) ) );
 
-	for(int i= 0 ; i < COLNUM ; i++)
+	за(цяло i= 0 ; i < COLNUM ; i++)
 	{
 		temp_read_data = read_word(GPIO_DATA_REG);
 		write_word(GPIO_DATA_REG, ((0xF << OUTPINS_OFFSET) & (~(0x1 <<i))));
 
-		for(int j = 0 ; j < ROWNUM ; j++) {
+		за(цяло j = 0 ; j < ROWNUM ; j++) {
 			read_value =  read_word(GPIO_DATA_REG);
 			log_debug("\n The read value is %lx; row_pins: %x", (read_value), row_pins[j]);
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 ) {
+			ако( ( read_value & (1 << row_pins[j] ) ) == 0 ) {
 				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_value, i, j, row_pins[j], key_map[i][j]);
-				return key_map[i][j];
+				върни key_map[i][j];
 			}
 		}
 
 		temp_read_data = read_word(GPIO_DATA_REG);
 		write_word(GPIO_DATA_REG,(temp_read_data | (0xF << OUTPINS_OFFSET)));
 	}
-	return -1;
+	върни -1;
 }
 
 /** @fn gpio_init
@@ -301,23 +301,23 @@ void gpio_init()
  * @details Initializes the necessary devices and pins and then runs the main intruder detection program   
  * @return 0 
  */
-int main()
+цяло main()
 {
 	//Clearing the Data Register
 	unsigned long read_data = 0;
-	int prev_col_row = 0;
+	цяло prev_col_row = 0;
 
 	printf("\n\n\tIntrusion Detection System");
 	gpio_init(); //Intialization of gpio 
 
 	printf("\nInitialising...");
 
-	while(1)
+	докато(1)
 	{
 		read_data = read_word(GPIO_DATA_REG);
 
-		if(POWER_SWITCH & read_data) {
-			if(first_flag){
+		ако(POWER_SWITCH & read_data) {
+			ако(first_flag){
 				//First time giving the sensor to calibrate 
 				delay(30);
 				printf("\nIntruder System activated");
@@ -328,24 +328,24 @@ int main()
 			write_gpio(LED_P2,HIGH);
 			//Deactivation of Alarm Switch
 		
-			if(DEACTIVATE_SWITCH & read_data) {
+			ако(DEACTIVATE_SWITCH & read_data) {
 				deactivate_flag =1;
 			}
-			else {
+			иначе {
 				deactivate_flag =0;
 			}
 
-			int temp_read_PIR  = pir_read_state(read_data);
-			int temp_read_panic = panic_button_read_state(read_data);
+			цяло temp_read_PIR  = pir_read_state(read_data);
+			цяло temp_read_panic = panic_button_read_state(read_data);
 	
 			alarm_present_state= ((temp_read_PIR > 0) || (temp_read_panic == 1) || alarm_flag == 1 ) && (deactivate_flag == 0);
 
-			if(alarm_present_state == 1 && alarm_previous_state == 0) {
+			ако(alarm_present_state == 1 && alarm_previous_state == 0) {
 				log_debug("\nAlarm state- %x   %x",alarm_previous_state,alarm_present_state);
 
-				if(temp_read_PIR == 1)
+				ако(temp_read_PIR == 1)
 					printf("\nHuman Detection\nDeactivate to stop Alarm");
-				else if(temp_read_panic == 1)
+				иначе ако(temp_read_panic == 1)
 					printf("\nPanic Button\nDeactivate to stop Alarm");
 				//else {printf("\nDeactivate the Alarm to stop...");}
 
@@ -355,7 +355,7 @@ int main()
 				alarm_previous_state = alarm_present_state;
 
 			}
-			else if(alarm_present_state == 1 && alarm_previous_state == 1) {
+			иначе ако(alarm_present_state == 1 && alarm_previous_state == 1) {
 				log_debug("\n%x   %x",alarm_previous_state,alarm_present_state);
 				write_gpio(LED_P1,HIGH);
 				buzzer_tone();
@@ -364,7 +364,7 @@ int main()
 				alarm_counter++;
 				//printf("\n\t\t\t%x",alarm_counter);
 
-				if(alarm_counter == ALARM_TIMER & ( alarm_counter_flag == 1 ))
+				ако(alarm_counter == ALARM_TIMER & ( alarm_counter_flag == 1 ))
 				{
 					write_gpio(LED_P3,HIGH);
 					printf("\nContacting Police for Assistance");
@@ -372,13 +372,13 @@ int main()
 					alarm_counter_flag = 0;
 					alarm_counter = 0;
 				}
-				else if(alarm_counter == ALARM_TIMER) {
+				иначе ако(alarm_counter == ALARM_TIMER) {
 					//Making Sure the alarm counter does not overflow
 					alarm_counter = 0;
 				}
 
 			}
-			else if(alarm_present_state == 0 && alarm_previous_state == 1)
+			иначе ако(alarm_present_state == 0 && alarm_previous_state == 1)
 			{
 				alarm_flag = 0;
 				write_gpio(LED_P1,LOW);
@@ -391,7 +391,7 @@ int main()
 				printf("\nAlarm deactivated successfully");
 				alarm_previous_state = alarm_present_state;
 			}
-			else {
+			иначе {
 				//Flags
 				alarm_flag = 0;
 				alarm_counter= 0;
@@ -404,21 +404,21 @@ int main()
 
 			col_row = get_col_row();
 			//KeyPad Sensor 
-			if( col_row != -1 ) {
+			ако( col_row != -1 ) {
 				printf("\nThe %x Key Pressed", col_row);
 
-				if( col_row == key_map[3][3]) {
+				ако( col_row == key_map[3][3]) {
 					printf("\nEnter Password-");
 				}
 				delay(1);
 			}
 		}
-		else {
+		иначе {
 			//Intruder System Off
 			write_gpio(LED_P2,LOW);
 			first_flag = 1;
 		}
 		//end of infinite while loop
 	}
-	return 0;
+	върни 0;
 }

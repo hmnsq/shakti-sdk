@@ -41,7 +41,7 @@
  */
 void log_trace(const char* fmt, ...)
 {
-	if (TRACE <= LOG_LEVEL) {
+	ако (TRACE <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -58,7 +58,7 @@ void log_trace(const char* fmt, ...)
  */
 void log_info(const char* fmt, ...)
 {
-	if (INFO <= LOG_LEVEL) {
+	ако (INFO <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -75,7 +75,7 @@ void log_info(const char* fmt, ...)
  */
 void log_debug(const char* fmt, ...)
 {
-	if (DEBUG <= LOG_LEVEL) {
+	ако (DEBUG <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -92,7 +92,7 @@ void log_debug(const char* fmt, ...)
  */
 void log_warn(const char* fmt, ...)
 {
-	if (WARN <= LOG_LEVEL) {
+	ако (WARN <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -109,7 +109,7 @@ void log_warn(const char* fmt, ...)
  */
 void log_error(const char* fmt, ...)
 {
-	if (ERROR <= LOG_LEVEL) {
+	ако (ERROR <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -126,7 +126,7 @@ void log_error(const char* fmt, ...)
  */
 void log_fatal(const char* fmt, ...)
 {
-	if (FATAL <= LOG_LEVEL) {
+	ако (FATAL <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -136,5 +136,5 @@ void log_fatal(const char* fmt, ...)
 	}
 
 	log_info("\n panic \n");
-	while (1);
+	докато (1);
 }

@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
+void configure_spi(цяло offset);
 void spi_init(void);
-void set_spi(int* addr, int val);
+void set_spi(цяло* addr, цяло val);
 void bin(unsigned n);
 void spi_tx_rx_start(void);
 void spi_enable(void);
 void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+void flash_cmd_addr_data(цяло command, цяло addr, цяло data);
+void flash_write(цяло address, цяло data);
+void flash_erase(цяло address);
+цяло get_spi(цяло* addr);
+цяло bitExtracted(цяло number, цяло k, цяло p) ;
+цяло concat(цяло x, цяло y) ;
+цяло spi_rxne_enable(void);
+цяло spi_notbusy(void);
+цяло flash_write_enable(void);
+цяло flash_clear_sr(void);
+цяло flash_cmd_addr(цяло command, цяло addr);
+цяло flash_cmd_to_read(цяло command, цяло addr);
+цяло flash_read(цяло address);
+цяло flash_cmd_read(цяло command);
+цяло flash_status_register_read(void);
+цяло flash_device_id(void);
 
 #endif

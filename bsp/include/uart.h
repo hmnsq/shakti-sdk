@@ -40,8 +40,8 @@ typedef struct
 {
 	unsigned short baud;	 /*! Baud rate configuration Register -- 16 bits*/
 	unsigned short reserv0;	 /*! reserved */
-	unsigned int  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
-	unsigned int  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
+	unsigned цяло  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
+	unsigned цяло  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
 	unsigned char  status;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
 	unsigned char  reserv1;	 /*! reserved */
 	unsigned short  reserv2; /*! reserved */
@@ -93,12 +93,12 @@ extern uart_struct *uart_instance[MAX_UART_COUNT];
 extern unsigned char uart0_complete;
 extern unsigned char uart1_complete;
 extern unsigned char uart2_complete;
-extern unsigned int uart0_tx_isr_count ;
-extern unsigned int uart0_rcv_isr_count ;
-extern unsigned int uart1_tx_isr_count ;
-extern unsigned int uart1_rcv_isr_count ;
-extern unsigned int uart2_tx_isr_count ;
-extern unsigned int uart2_rcv_isr_count ;
+extern unsigned цяло uart0_tx_isr_count ;
+extern unsigned цяло uart0_rcv_isr_count ;
+extern unsigned цяло uart1_tx_isr_count ;
+extern unsigned цяло uart1_rcv_isr_count ;
+extern unsigned цяло uart2_tx_isr_count ;
+extern unsigned цяло uart2_rcv_isr_count ;
 
 #ifdef USE_INTERRUPT
 extern unsigned char u0_rcv_char[UARTX_BUFFER_SIZE];
@@ -107,7 +107,7 @@ extern unsigned char u2_rcv_char[UARTX_BUFFER_SIZE];
 #endif
 
 void uart_init(void);
-void set_baud_rate(uart_struct * uart_instance, unsigned int baudrate);
+void set_baud_rate(uart_struct * uart_instance, unsigned цяло baudrate);
 void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt);
 void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold);
 uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character);
@@ -122,12 +122,12 @@ unsigned char uart1_isr(void);
 unsigned char uart2_isr(void);
 #endif
 
-int is_empty(void);
+цяло is_empty(void);
 
 #undef putchar
-int putchar(int ch);
+цяло putchar(цяло ch);
 
 #undef getchar
-int getchar(void);
+цяло getchar(void);
 
 #endif

@@ -47,9 +47,9 @@ unsigned long read_data = 0;
 void main()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ако defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	докато (1) {
 
 #ifdef READ_INDIVIDUAL_BTNS
 
@@ -90,9 +90,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x10000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
+		ако(read_data == 0x10000000)
 			printf("\n BTN0: HIGH"); 		
-		else
+		иначе
 			printf("\n BTN0: LOW");
 #endif
 
@@ -101,9 +101,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x20000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
+		ако(read_data == 0x20000000)
 			printf("\n BTN1: HIGH"); 		
-		else
+		иначе
 			printf("\n BTN1: LOW");
 #endif
 
@@ -112,9 +112,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x40000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
+		ако(read_data == 0x40000000)
 			printf("\n BTN2: HIGH"); 		
-		else
+		иначе
 			printf("\n BTN2: LOW");
 #endif
 
@@ -124,9 +124,9 @@ void main()
 		read_data = (read_data & 0x80000000);
 		printf("\n Read Data is :0x%x", read_data);
 
-		if(read_data == 0x80000000)
+		ако(read_data == 0x80000000)
 			printf("\n BTN3: HIGH"); 		
-		else
+		иначе
 			printf("\n BTN3: LOW");
 #endif
 

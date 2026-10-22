@@ -32,13 +32,13 @@
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+unsigned цяло uart0_prev_rcv_isr_count_flag = 0;
+unsigned цяло uart1_prev_rcv_isr_count_flag = 0;
+unsigned цяло uart2_prev_rcv_isr_count_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+unsigned цяло uart0_prev_tx_isr_count_flag = 0;
+unsigned цяло uart1_prev_tx_isr_count_flag = 0;
+unsigned цяло uart2_prev_tx_isr_count_flag = 0;
 
 
 void init_variables()
@@ -63,15 +63,15 @@ void init_variables()
 	uart1_prev_tx_isr_count_flag = 0;
 	uart2_prev_tx_isr_count_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+extern volatile unsigned цяло* pinmux_config_reg;
 
 
 
-int main(void){
+цяло main(void){
 
 
 	register uint32_t retval;
-	int i;
+	цяло i;
 	init_variables();
 
 	printf("\n---------------Uart 1 Interrupt Test---------------\n");
@@ -131,24 +131,24 @@ int main(void){
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	докато(1)
 	{
-#if 0
-		if(i % 2)
+#ако 0
+		ако(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		иначе
 			write_uart_string(uart_instance[1], "tEsT");
 #endif
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		ако(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
 		{
 			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		ако(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
 		{
 			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
 		}
-		if(i++ >= 10)
+		ако(i++ >= 10)
 		{
 			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
@@ -161,5 +161,5 @@ int main(void){
 	};
 
 
-	return 0;
+	върни 0;
 }

@@ -59,16 +59,16 @@ static void SetSCLAsOutput()
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param int inOutCntrl
  */
-static void SetSdaDirection(int inOutCntrl)
+static void SetSdaDirection(цяло inOutCntrl)
 {
 	unsigned long readData = 0;
 	readData = read_word(GPIO_DIRECTION_CNTRL_REG);
 
-	if (inOutCntrl) { // output
+	ако (inOutCntrl) { // output
 		write_word(GPIO_DIRECTION_CNTRL_REG, (readData | I2C_SDA) );
 		printf("\n\tSDA set as output\n");
 	}
-    else {
+    иначе {
 		write_word(GPIO_DIRECTION_CNTRL_REG, (readData & ~(I2C_SDA) ) );
 		printf("\n\tSDA set as input\n");
 	}
@@ -142,17 +142,17 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
 	unsigned char j = 0,k;
 	unsigned long readData = 0;
 	readData = read_word(GPIO_DATA_REG);
-	while (j < 8)
+	докато (j < 8)
 	{
 		k = writeData;
 		k = ( k << j ) & 0x80;
 //		printf("\n\r i: %d; j: %d; k: %d", i, j, k);
 //		sda=CY;
-		if (k == 0) {
+		ако (k == 0) {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
 			delay_loop(delay, delay);
 		}
-		else {
+		иначе {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
 			delay_loop(delay, delay);
 		}
@@ -186,16 +186,16 @@ unsigned char I2cReadByte(unsigned char delay)
 
 //	sda=1;
 //Make SDA high
-	while (j < 8) {
+	докато (j < 8) {
 	//	scl=1;
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
 		delay_loop(delay, delay);
 
 //		d1 = sda;
 		readGpioData = read_word(GPIO_DATA_REG)  & I2C_SDA;
-		if (readGpioData != 0)
+		ако (readGpioData != 0)
 			bitValue = 1;
-		else
+		иначе
 			bitValue = 0;
 	    readData = readData << 1;
 		readData = readData | bitValue;
@@ -208,7 +208,7 @@ unsigned char I2cReadByte(unsigned char delay)
 		++j;
 	}
 
-	return readData;
+	върни readData;
 }
 
 /** @fn void ReadAckForWrite(unsigned char delay)
@@ -336,11 +336,11 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
   printf("\n\tI2C: I2C Start\n");
   start(delay);
   printf("\n\tI2C: I2C Send Bytes\n");
-  if(rdWrCntrl) {
+  ако(rdWrCntrl) {
      printf("\n\tI2C: I2C Write\n");
     I2cWriteByte( (slaveAddress | I2C_READ), delay);
 	}
-  else {
+  иначе {
      printf("\n\tI2C: I2C Write\n");
     I2cWriteByte( (slaveAddress | I2C_WRITE), delay);
 	}
@@ -393,7 +393,7 @@ unsigned char I2cReadDataAck(unsigned char delay)
 	SetSdaDirection(GPIOD_IS_OUT);
 	printf("\n\tI2C: I2C Read Ack\n");
 	SendAckForRead(delay);
-  return readData;
+  върни readData;
 }
 
 /** @fn unsigned char I2cReadDataNack(unsigned char delay)
@@ -414,7 +414,7 @@ unsigned char I2cReadDataNack(unsigned char delay)
 	SetSdaDirection(GPIOD_IS_OUT);
   	printf("\n\tI2C: I2C Read NAck\n");
   	SendNackForRead(delay);
-    return readData;
+    върни readData;
 }
 
 /** @fn void I2cStart(unsigned char delay)
@@ -465,7 +465,7 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
  * @param unsigned char delay 
  * @return int (readdata)
  */
-int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
+цяло I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
 {
 	unsigned char readData;
 	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);//selecting slave to be read
@@ -473,7 +473,7 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
 	I2cSendSlaveAddress(slave_address, I2C_READ, delay);
 	readData = I2cReadDataAck(delay);
 	I2cStop(delay);
-	return (int) readData;
+	върни (цяло) readData;
 }
 
  /** @fn int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
@@ -484,34 +484,34 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  * @param last decides whether to stop operation or not
  * @return int (No. of values(bytes) read)
  */
-int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
+цяло I2c_shakti_readbytes(char *buf, цяло count, цяло last, unsigned char delay)
 {
 	printf("start reading the slave device\n");
-	int i = 0;
+	цяло i = 0;
 #ifdef PCF8584
-	for (i = 0; i <= count; i++) {
-		if (i != 0 && i < count) {
+	за (i = 0; i <= count; i++) {
+		ако (i != 0 && i < count) {
 			readbuf[i]=I2cReadDataAck(delay);
 		}
-		else if(i==0) I2cReadDataAck(delay);//dummy read
-		else {
+		иначе ако(i==0) I2cReadDataAck(delay);//dummy read
+		иначе {
 			readbuf[i] = I2cReadDataNack(delay);
 		}
 		/*The following loop is useful only  for eeprom*/
-		if (last)  I2cStop(delay);
-		else  I2cStart(delay);//sending repeated start
+		ако (last)  I2cStop(delay);
+		иначе  I2cStart(delay);//sending repeated start
 	}
-	return i-1; //excluding the dummy read
-#else
-	for (i = 0; i < count-1; i++)
+	върни i-1; //excluding the dummy read
+#иначе
+	за (i = 0; i < count-1; i++)
 		*(buf + i) = I2cReadDataAck(delay);
 	*(buf + i) = I2cReadDataNack(delay);
 
 	/*The following loop is useful only  for eeprom*/
-	if (last)
+	ако (last)
 		I2cStop(delay);
-	else
+	иначе
 		I2cStart(delay);//sending repeated start
 #endif
-	return i+1;
+	върни i+1;
 }

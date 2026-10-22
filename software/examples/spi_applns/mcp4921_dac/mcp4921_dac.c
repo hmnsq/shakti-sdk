@@ -32,10 +32,10 @@
 #include "platform.h"
 #include "pinmux.h"
 
-extern volatile unsigned int* pinmux_config_reg;
-extern int* spi_cr1 ;
-extern int* spi_dr1 ;
-extern int* spi_dr5;
+extern volatile unsigned цяло* pinmux_config_reg;
+extern цяло* spi_cr1 ;
+extern цяло* spi_dr1 ;
+extern цяло* spi_dr5;
 
 /** @fn void spi_dac()
  * @brief Configures DAC and write digital value to DAC.
@@ -55,7 +55,7 @@ void spi_dac()
 
 	log_debug("\nDac Value Written\n");
 
-	while(1)
+	докато(1)
 	{
 		write_dac_value(0xFFF);
 		log_debug("Dac Value Written - 4096\n");
@@ -74,9 +74,9 @@ void spi_dac()
  * @param dac_value
  * @return One.
  */
-int write_dac_value(unsigned dac_value)
+цяло write_dac_value(unsigned dac_value)
 {
-	int data1 = ((0x3 << 28) | (dac_value << 16));
+	цяло data1 = ((0x3 << 28) | (dac_value << 16));
 
 	log_info("\n Data value written: %x", data1);
 
@@ -87,7 +87,7 @@ int write_dac_value(unsigned dac_value)
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	върни 1;
 }
 
 /** @fn void main()

@@ -85,62 +85,62 @@
 */
 
 unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+unsigned цяло i2c_read_value;
 
 /* Struct to access I2C registers as 32 bit registers */
 typedef struct
 {
 /* 0x00 */
-	unsigned int  prescale;     /*! Prescale Register */
-	unsigned int   prescale_rsvd;
+	unsigned цяло  prescale;     /*! Prescale Register */
+	unsigned цяло   prescale_rsvd;
 
 /* 0x08 */
-	unsigned int   control;
-	unsigned int   control_rsvd;
+	unsigned цяло   control;
+	unsigned цяло   control_rsvd;
 
 /* 0x10 */
-	unsigned int  data;	 /*! Prescale Register */
-	unsigned int   data_rsvd;
+	unsigned цяло  data;	 /*! Prescale Register */
+	unsigned цяло   data_rsvd;
 
 /* 0x18 */
-	unsigned int  status;	 /*! Prescale Register */
-	unsigned int   status_rsvd;
+	unsigned цяло  status;	 /*! Prescale Register */
+	unsigned цяло   status_rsvd;
 
 /* 0x20 */
-	unsigned int  s01;	 /*! Prescale Register */
-	unsigned int   s01_rsvd;
+	unsigned цяло  s01;	 /*! Prescale Register */
+	unsigned цяло   s01_rsvd;
 
 /* 0x28 */
-	unsigned int  s3;	 /*! Prescale Register */
-	unsigned int   s3_rsvd;
+	unsigned цяло  s3;	 /*! Prescale Register */
+	unsigned цяло   s3_rsvd;
 
 /* 0x30 */
-	unsigned int  time;	 /*! Prescale Register */
-	unsigned int   time_rsvd;
+	unsigned цяло  time;	 /*! Prescale Register */
+	unsigned цяло   time_rsvd;
 
 /* 0x38 */
-	unsigned int  scl;	 /*! Prescale Register */
-	unsigned int   scl_rsvd;
+	unsigned цяло  scl;	 /*! Prescale Register */
+	unsigned цяло   scl_rsvd;
 } i2c_struct;
 
 void i2c_init(void);
-int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
-int wait_till_I2c_bus_free(i2c_struct *);
-int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
-int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
+цяло config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
+цяло wait_till_I2c_bus_free(i2c_struct *);
+цяло wait_till_txrx_operation_Completes(i2c_struct *,цяло *status);
+цяло sendbytes(i2c_struct *, const char *buf, цяло count, цяло last, цяло eni);
+цяло readbytes(i2c_struct *,char *buf, цяло count, цяло last);
+цяло i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
 			   char rdWrCntrl, unsigned long delay);
-int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
-int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
+цяло i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
+цяло i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
+цяло i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
 				     slaveAddress, unsigned char rdWrCntrl,
 				     unsigned long delay);
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
+цяло i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
 			    unsigned char delay, unsigned char last);
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
+цяло i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
 			     unsigned char delay, unsigned char last);
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
+цяло i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
 		       char delay);
 
 extern i2c_struct *i2c_instance[MAX_I2C_COUNT];

@@ -16,8 +16,8 @@
 void main()
 {
     printf("-- UART Loopback Test --\n");
-    while(1) {
-        int val = getchar();
+    докато(1) {
+        цяло val = getchar();
         putchar(val);
     };
 }

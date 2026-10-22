@@ -58,7 +58,7 @@ typedef int16_t s16;
 typedef int32_t s32;
 typedef int64_t s64;
 typedef uint64_t u64;
-typedef int sint32;
+typedef цяло sint32;
 
 typedef intptr_t INTPTR;
 typedef uintptr_t UINTPTR;
@@ -171,11 +171,11 @@ typedef struct {
 extern volatile u32 RecvFrameLength;
 extern UINTPTR TxBuffPtr;
 extern UINTPTR RxBuffPtr;
-extern volatile int FramesTx;
-extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
-extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+extern volatile цяло FramesTx;
+extern volatile цяло FramesRx;
+extern volatile цяло TxCount;
+extern volatile цяло RxCount;
+extern volatile цяло Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 #endif
 
 
@@ -264,7 +264,7 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
 void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
 
 extern XEmacLite_Config XEmacLite_ConfigTable;
-extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+extern цяло XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr);
 

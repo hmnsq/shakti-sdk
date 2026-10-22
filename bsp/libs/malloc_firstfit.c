@@ -39,7 +39,7 @@ char* HEAP_SIZE = (char *)&_HEAP_SIZE;
 struct Header
 {
 	size_t size;
-	int free;
+	цяло free;
 	struct Header* next;
 };
 
@@ -59,7 +59,7 @@ struct Header* allocate_block(struct Header* last, size_t size)
 
 	log_trace("\nFunction allocate_block entered");
 
-	if(last->size > size)
+	ако(last->size > size)
 	{
 		struct Header* newblock;
 		void *p = last;
@@ -82,10 +82,10 @@ struct Header* allocate_block(struct Header* last, size_t size)
 		newblock->free = 1;
 		newblock->next = NULL;
 
-		return last;
+		върни last;
 	}
-	else
-		return NULL;
+	иначе
+		върни NULL;
 	log_trace("\nFunction allocate_block entered");
 }
 
@@ -104,7 +104,7 @@ struct Header *find_free_block(struct Header **last, size_t size)
 
 	struct Header *current = global_base;
 
-	while (current && !(current->free && current->size >= size))
+	докато (current && !(current->free && current->size >= size))
 	{
 
 		log_debug("\n Inside Loop %d %d %x %x",current->size,size,current,*last);
@@ -114,13 +114,13 @@ struct Header *find_free_block(struct Header **last, size_t size)
 
 	log_debug("\n After Loop %d %d %x %x",current->size,size,current,*last);
 
-	if(current && current->size>=size)
+	ако(current && current->size>=size)
 	{
 		*last=current;
-		return current;
+		върни current;
 	}
-	else
-		return NULL;
+	иначе
+		върни NULL;
 
 	log_trace("\nfind free exited");
 }
@@ -140,14 +140,14 @@ struct Header* request_heap()
 
 	void *request = m_sbrk(HEAP_SIZE);
 
-	if((void*)block == request); // Not thread safe.
+	ако((void*)block == request); // Not thread safe.
 	block=request;
 
 	log_debug("\nInitial Heap start address =%x",block);
 
-	if (request == (void*) -1) {
+	ако (request == (void*) -1) {
 		log_error("\nNo space left to allocate memory");
-		return NULL; // sbrk failed.
+		върни NULL; // sbrk failed.
 	}
 
 	block->size = HEAP_SIZE;
@@ -156,7 +156,7 @@ struct Header* request_heap()
 
 	log_debug("\nBlock Assigned");
 
-	return block;
+	върни block;
 }
 
 //malloc function to allocate space
@@ -171,13 +171,13 @@ void *malloc(size_t size)
 {
 	struct Header *block;
 
-	if (size <= 0) {
-               return NULL;
+	ако (size <= 0) {
+               върни NULL;
 	}
 
 	log_info("\n global_base: %x",global_base);
 
-	if(global_base==0x00000000)
+	ако(global_base==0x00000000)
 	{
 		// First call. global_base is empty
 		log_debug("\n Requesting block");
@@ -186,9 +186,9 @@ void *malloc(size_t size)
 
 		log_debug("\n block=%x",block);
 
-		if (!block)
+		ако (!block)
 		{
-			return NULL;
+			върни NULL;
 		}
 		global_base = block;
 	}
@@ -197,32 +197,32 @@ void *malloc(size_t size)
 
 	block = find_free_block(&last, size);
 
-	if(!block)
+	ако(!block)
 	{
 		log_error("\n No free blocks");
-		return NULL;
+		върни NULL;
 	}
 
 	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
 
-	if (block->size>size)
+	ако (block->size>size)
 	{
 		// Failed to find free block.
 		block = allocate_block(last,size);
 
-		if (!block)
+		ако (!block)
 		{
-			return NULL;
+			върни NULL;
 		}
 	}
-	else if(block->size==size)
+	иначе ако(block->size==size)
 	{
 		// Found free block
 		log_debug("\nFound free block of same size");
 		block->free = 0;
 	}
 
-  return(block+1);
+  върни(block+1);
 }
 
 /** @fn  struct Header *get_block_ptr(void *ptr)
@@ -233,7 +233,7 @@ void *malloc(size_t size)
  */
 struct Header *get_block_ptr(void *ptr)
 {
-  return (struct Header*)ptr - 1;
+  върни (struct Header*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
@@ -244,16 +244,16 @@ struct Header *get_block_ptr(void *ptr)
  */
 void free(void *ptr)
 {
-	if (!ptr)
+	ако (!ptr)
 	{
 		log_error("\n Wrong value passed to free");
-		return;
+		върни;
 	}
 
 	struct Header* block_ptr = get_block_ptr(ptr);
 
 	log_debug("\n %x is freed",block_ptr);
 
-	if(block_ptr->free==0)
+	ако(block_ptr->free==0)
 		block_ptr->free = 1;
 }

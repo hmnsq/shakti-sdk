@@ -52,22 +52,22 @@ const char* values();
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+цяло read_from_lora(char *data)
 {
-	int ch;
+	цяло ch;
 	char *str = data;
 	char *test = data;
-	for (int i = 0; i < 98; i++)
+	за (цяло i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		ако (ch == '\n')
 		{
 			break;
 		}
 	}
-	return;	
+	върни;	
 }
 
 
@@ -76,11 +76,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+цяло write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	върни 0;
 }
 
 
@@ -90,7 +90,7 @@ int write_enter_to_lora()
  */
 void write_to_lora(char *data)
 {
-	while (*data != '\0')
+	докато (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -213,7 +213,7 @@ void main()
 	intermediate();
 
 	/* Sending Time and date consequtively */
-	while (1)
+	докато (1)
 	{
 		send_data(values());
 		delay_loop(1500,1500);

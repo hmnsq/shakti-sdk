@@ -42,15 +42,15 @@ void main(void){
 
 	uint64_t value = ( CLOCK_FREQUENCY / CLINT_DIVISOR );
 
-	asm volatile("li      t0, 0x80\t\n"
+	asm ca_ncala("li      t0, 0x80\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 8\t\n"
+	asm ca_ncala("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 	printf("Configuring 1 second timer interrupt\n");
 	configure_counter(value);
 
-	while(1);
+	ၶၢဝ်း(1);
 }

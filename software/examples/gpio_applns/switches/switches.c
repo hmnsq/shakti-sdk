@@ -47,10 +47,10 @@ unsigned long read_data = 0;
 void main()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ပေႃး defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 
-	while(1){	
+	ၶၢဝ်း(1){	
 #ifdef READ_INDIVIDUAL_SWITCHES		
 		/*! Define any one button from below at a time */
 #define SW_0 /*! Read SW0 value */
@@ -89,9 +89,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x01000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x01000000)
+		ပေႃး(read_data == 0x01000000)
 			printf("\n SW0: HIGH"); 		
-		else
+		ပေႃးဢမ်ႇ
 			printf("\n SW0: LOW");
 #endif
 
@@ -100,9 +100,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x02000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x02000000)
+		ပေႃး(read_data == 0x02000000)
 			printf("\n SW1: HIGH"); 		
-		else
+		ပေႃးဢမ်ႇ
 			printf("\n SW1: LOW");
 #endif
 
@@ -111,9 +111,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x04000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x04000000)
+		ပေႃး(read_data == 0x04000000)
 			printf("\n SW2: HIGH"); 		
-		else
+		ပေႃးဢမ်ႇ
 			printf("\n SW2: LOW");
 #endif
 
@@ -121,9 +121,9 @@ void main()
 		read_data = read_word(GPIO_DATA_REG);
 		printf("\n Read Data is :0x%x", read_data);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x08000000)
+		ပေႃး(read_data == 0x08000000)
 			printf("\n SW3: HIGH"); 		
-		else
+		ပေႃးဢမ်ႇ
 			printf("\n SW3: LOW");
 #endif
 
@@ -140,117 +140,117 @@ void main()
 		switch(read_data)
 		{
 
-		case 0x00000000:
+		pak_sa 0x00000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x01000000:
+		pak_sa 0x01000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x02000000:
+		pak_sa 0x02000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x03000000:
+		pak_sa 0x03000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x04000000:
+		pak_sa 0x04000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x05000000:
+		pak_sa 0x05000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x06000000:
+		pak_sa 0x06000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x07000000:
+		pak_sa 0x07000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			bha_nga;
 
-		case 0x08000000:
+		pak_sa 0x08000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x09000000:
+		pak_sa 0x09000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x0A000000:
+		pak_sa 0x0A000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x0B000000:
+		pak_sa 0x0B000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x0C000000:
+		pak_sa 0x0C000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x0D000000:
+		pak_sa 0x0D000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x0E000000:
+		pak_sa 0x0E000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x0F000000:
+		pak_sa 0x0F000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			bha_nga;
 
 		}
 

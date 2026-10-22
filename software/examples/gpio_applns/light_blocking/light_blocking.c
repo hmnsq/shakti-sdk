@@ -40,14 +40,14 @@ void main()
     unsigned long readData = 0;
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x0000);
 
-    while (1) {
+    ၶၢဝ်း (1) {
         	readData = read_word(GPIO_DATA_REG);
 
-        	if(readData == 0x00000001) {
+        	ပေႃး(readData == 0x00000001) {
 
 		 printf("\n Blocked");
         	 }
-        	else {
+        	ပေႃးဢမ်ႇ {
             
 		printf("\n Not Blocked");
         	 }

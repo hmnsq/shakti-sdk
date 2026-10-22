@@ -29,20 +29,20 @@
 
 
 
-#include <stdio.h>
-#include "camera/ucam.h"
-#include "pinmux.h"
+#ضمن <stdio.h>
+#ضمن "camera/ucam.h"
+#ضمن "pinmux.h"
 
 
-int main(void) {
+صحيح main(فراغ) {
   *pinmux_config_reg = 85;
-  int brate = 115200;
+  صحيح brate = 115200;
   set_baud_rate(uart_instance[1],brate);
   set_baud_rate(uart_instance[2],brate);
-  if( init_cam() < 0) 
-      return -1;
+  إذا( init_cam() < 0) 
+      أرجع -1;
   get_pic(1);
-  return 0;
+  أرجع 0;
 }
 
 

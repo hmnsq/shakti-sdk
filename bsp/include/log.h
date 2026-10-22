@@ -28,7 +28,7 @@
  Level 3 is the default level of logging.
  */
 
-#include <stdarg.h>
+#ضمن <stdarg.h>
 
 // Log Levels
 #define TRACE 5
@@ -38,12 +38,12 @@
 #define ERROR 1
 #define FATAL 0
 
-extern void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap);
+خارجي فراغ vprintfmt(فراغ (*putch)(صحيح, فراغ**), فراغ **putdat, ثابت حرف *fmt, va_list ap);
 
 //function prototype
-void log_trace(const char*fmt, ...);
-void log_info(const char*fmt, ...);
-void log_debug(const char*fmt, ...);
-void log_warn(const char*fmt, ...);
-void log_error(const char*fmt, ...);
-void log_fatal(const char*fmt, ...);
+فراغ log_trace(ثابت حرف*fmt, ...);
+فراغ log_info(ثابت حرف*fmt, ...);
+فراغ log_debug(ثابت حرف*fmt, ...);
+فراغ log_warn(ثابت حرف*fmt, ...);
+فراغ log_error(ثابت حرف*fmt, ...);
+فراغ log_fatal(ثابت حرف*fmt, ...);

@@ -27,11 +27,11 @@
 @detail 
 */
 
-#include <stdio.h> //includes the definitions of standard input/output functions
-#include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
-#include "switch_driver.h"
-#include "utils.h"
+#ضمن <stdio.h> //includes the definitions of standard input/output functions
+#ضمن "platform.h"
+#ضمن "gpio.h" // includes definitions of gpio pins and read, write functions//
+#ضمن "switch_driver.h"
+#ضمن "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
 #define READ_INDIVIDUAL_SWITCHES /*! Read each switch value */
@@ -44,13 +44,13 @@ unsigned long read_data = 0;
  * @details 
  * @warning 
  */
-void main()
+فراغ main()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#إذا defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 
-	while(1){	
+	طالما(1){	
 #ifdef READ_INDIVIDUAL_SWITCHES		
 		/*! Define any one button from below at a time */
 #define SW_0 /*! Read SW0 value */
@@ -89,9 +89,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x01000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x01000000)
+		إذا(read_data == 0x01000000)
 			printf("\n SW0: HIGH"); 		
-		else
+		وإلا
 			printf("\n SW0: LOW");
 #endif
 
@@ -100,9 +100,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x02000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x02000000)
+		إذا(read_data == 0x02000000)
 			printf("\n SW1: HIGH"); 		
-		else
+		وإلا
 			printf("\n SW1: LOW");
 #endif
 
@@ -111,9 +111,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x04000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x04000000)
+		إذا(read_data == 0x04000000)
 			printf("\n SW2: HIGH"); 		
-		else
+		وإلا
 			printf("\n SW2: LOW");
 #endif
 
@@ -121,9 +121,9 @@ void main()
 		read_data = read_word(GPIO_DATA_REG);
 		printf("\n Read Data is :0x%x", read_data);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x08000000)
+		إذا(read_data == 0x08000000)
 			printf("\n SW3: HIGH"); 		
-		else
+		وإلا
 			printf("\n SW3: LOW");
 #endif
 
@@ -137,120 +137,120 @@ void main()
 		read_data = read_word(GPIO_DATA_REG);
 		printf("\n Read Data is :0x%x", read_data);
 
-		switch(read_data)
+		بدل(read_data)
 		{
 
-		case 0x00000000:
+		حالة 0x00000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x01000000:
+		حالة 0x01000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x02000000:
+		حالة 0x02000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x03000000:
+		حالة 0x03000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x04000000:
+		حالة 0x04000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x05000000:
+		حالة 0x05000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x06000000:
+		حالة 0x06000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x07000000:
+		حالة 0x07000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: LOW");
-			break;
+			اكسر;
 
-		case 0x08000000:
+		حالة 0x08000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x09000000:
+		حالة 0x09000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x0A000000:
+		حالة 0x0A000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x0B000000:
+		حالة 0x0B000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: LOW");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x0C000000:
+		حالة 0x0C000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x0D000000:
+		حالة 0x0D000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: LOW");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x0E000000:
+		حالة 0x0E000000:
 			printf("\n SW0: LOW");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
-		case 0x0F000000:
+		حالة 0x0F000000:
 			printf("\n SW0: HIGH");
 			printf("\n SW1: HIGH");
 			printf("\n SW2: HIGH");
 			printf("\n SW3: HIGH");
-			break;
+			اكسر;
 
 		}
 

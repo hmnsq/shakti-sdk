@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#অন্তর্ভাব <stdint.h>
+#অন্তর্ভাব <stdarg.h>
+#অন্তর্ভাব "utils.h"
+#অন্তর্ভাব "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+স্থির অন্তঃস্থ শূন্য itoa (unsigned long long পূর্ণাঙ্ক সংখ্যা, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	পূর্ণাঙ্ক i = 0;
+	unsigned পূর্ণাঙ্ক intermediate = 0;
+	unsigned পূর্ণাঙ্ক digits[পরিমাণ(সংখ্যা)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	যাবত্ (1) {
+		digits[i] = সংখ্যা % base;
 
-		if (number < base)
-			break;
+		যদি (সংখ্যা < base)
+			ভঙ্গ;
 
-		number /= base;
+		সংখ্যা /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	যাবত্ (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		যদি (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		অন্যথা
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -72,21 +72,21 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+শূন্য _printf_(ধ্রুব বর্ণ *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	পঞ্জিকা ধ্রুব বর্ণ* p;
+	ধ্রুব বর্ণ* last_fmt;
+	পঞ্জিকা পূর্ণাঙ্ক ch;
+	unsigned long long অঙ্ক;
+	পূর্ণাঙ্ক base, lflag, i;
+	ভিন্ন float_অঙ্ক = 0;
+	বর্ণ float_arr[30] = {'\0'};
+	পূর্ণাঙ্ক backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	প্রতি (;;) {
+		প্রতি (;(ch = *(unsigned বর্ণ *) fmt) != '%'; fmt++) {
+			যদি (ch == '\0')
+				প্রত্যাগম;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,127 +96,127 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		প্রতি (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			বিকল্প (ch = *(unsigned বর্ণ *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				পক্ষ 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					ভঙ্গ;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				পক্ষ 'c':
+					putchar(va_arg(ap, পূর্ণাঙ্ক));
+					ভঙ্গ;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				পক্ষ 's':
+					যদি ((p = va_arg(ap, বর্ণ *)) == রিক্ত)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					প্রতি (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
-					break;
+					ভঙ্গ;
 
 					// (signed) decimal
-				case 'd':
+				পক্ষ 'd':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					যদি (lflag >= 2)
+						অঙ্ক = va_arg(ap, long long);
+					অন্যথা যদি (lflag ==1)
+						অঙ্ক = va_arg(ap, long);
+					অন্যথা
+						অঙ্ক = va_arg(ap, পূর্ণাঙ্ক);
 
-					if ((long long) num < 0) {
+					যদি ((long long) অঙ্ক < 0) {
 						putchar('-');
-						num = -(long long) num;
+						অঙ্ক = -(long long) অঙ্ক;
 					}
 
-					itoa( num, base);
+					itoa( অঙ্ক, base);
 
-					break;
+					ভঙ্গ;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				পক্ষ 'f':
+					float_অঙ্ক =  va_arg(ap, দ্বিগুণ);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_অঙ্ক, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					প্রতি( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						যদি(i > 29) ভঙ্গ;
 					}
-					break;
+					ভঙ্গ;
 
 					// unsigned decimal
-				case 'u':
+				পক্ষ 'u':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					যদি (lflag >= 2)
+						অঙ্ক = va_arg(ap, unsigned long long);
+					অন্যথা যদি (lflag)
+						অঙ্ক = va_arg(ap, unsigned long);
+					অন্যথা
+						অঙ্ক = va_arg(ap, unsigned পূর্ণাঙ্ক);
 
-					itoa( num, base);
+					itoa( অঙ্ক, base);
 
-					break;
+					ভঙ্গ;
 
 					// (unsigned) octal
-				case 'o':
+				পক্ষ 'o':
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					যদি (lflag >= 2)
+						অঙ্ক = va_arg(ap, unsigned long long);
+					অন্যথা যদি (lflag)
+						অঙ্ক = va_arg(ap, unsigned long);
+					অন্যথা
+						অঙ্ক = va_arg(ap, unsigned পূর্ণাঙ্ক);
 
-					itoa( num, base);
+					itoa( অঙ্ক, base);
 
-					break;
+					ভঙ্গ;
 
-				case 'x':
+				পক্ষ 'x':
 					base = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					যদি (lflag >= 2)
+						অঙ্ক = va_arg(ap, unsigned long long);
+					অন্যথা যদি (lflag)
+						অঙ্ক = va_arg(ap, unsigned long);
+					অন্যথা
+						অঙ্ক = va_arg(ap, unsigned পূর্ণাঙ্ক);
 
-					itoa( num, base);
+					itoa( অঙ্ক, base);
 
-					break;
+					ভঙ্গ;
 
 					// escaped '%' character
-				case '%':
+				পক্ষ '%':
 					putchar(ch);
-					break;
+					ভঙ্গ;
 
 					// unrecognized escape sequence - just print it literally
-				default:
+				স্বভাব:
 					putchar('%');
 					fmt = last_fmt;
-					break;
+					ভঙ্গ;
 			}
 
-			if (backtothebeginning)
+			যদি (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				অনুবর্ত;
 			}
-			else
-				break;
+			অন্যথা
+				ভঙ্গ;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+পূর্ণাঙ্ক printf(ধ্রুব বর্ণ* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	প্রত্যাগম 0;// incorrect return value, but who cares, anyway?
 }

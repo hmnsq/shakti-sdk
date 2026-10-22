@@ -32,28 +32,28 @@
            bytewise. We transfer all those to our laptop, where this code is run.
 **/
 
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
-#include <stdlib.h>
-#include <string.h>
+#অন্তর্ভাব <stdio.h>
+#অন্তর্ভাব <string.h>
+#অন্তর্ভাব <assert.h>
+#অন্তর্ভাব <stdlib.h>
+#অন্তর্ভাব <string.h>
 // Linux headers
-#include <fcntl.h> // Contains file controls like O_RDWR
-#include <errno.h> // Error integer and strerror() function
-#include <termios.h> // Contains POSIX terminal control definitions
-#include <unistd.h> // write(), read(), close()
+#অন্তর্ভাব <fcntl.h> // Contains file controls like O_RDWR
+#অন্তর্ভাব <errno.h> // Error integer and strerror() function
+#অন্তর্ভাব <termios.h> // Contains POSIX terminal control definitions
+#অন্তর্ভাব <unistd.h> // write(), read(), close()
 
-int main(int argc,char *argv[]) {
+পূর্ণাঙ্ক main(পূর্ণাঙ্ক argc,বর্ণ *argv[]) {
   // Open the serial port. Change device path as needed (currently set to an standard FTDI USB-UART cable type device)
-    int serial_port1 = open(argv[1], O_RDWR);
+    পূর্ণাঙ্ক serial_port1 = open(argv[1], O_RDWR);
     printf("%s\n",argv[1]);
     // Create new termios struc, we call it 'tty1' for convention
-    struct termios tty1;
+    সংরচনা termios tty1;
 
     // Read in existing settings, and handle any error
-    if(tcgetattr(serial_port1, &tty1) != 0) {
+    যদি(tcgetattr(serial_port1, &tty1) != 0) {
         printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
-        return 1;
+        প্রত্যাগম 1;
     }
     tty1.c_cflag &= ~PARENB; // Clear parity bit, disabling parity (most common)
     tty1.c_cflag &= ~CSTOPB; // Clear stop field, only one stop bit used in communication (most common)
@@ -84,73 +84,73 @@ int main(int argc,char *argv[]) {
     printf("\n Baud rate is set to 115200");
 
   // Save tty1 settings, also checking for error
-    if (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
+    যদি (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
         printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
-        return 1;
+        প্রত্যাগম 1;
     }
-    else
+    অন্যথা
         printf("\n  BaudRate = 115200 \n  StopBits = 1 \n  Parity   = none\n");
 
   // Allocate memory for read buffer, set size according to your needs
-    int loop=0;
-    while(1){
+    পূর্ণাঙ্ক loop=0;
+    যাবত্(1){
       loop++;
-      unsigned char read_buf [7];
-      memset(&read_buf, '\0', sizeof(read_buf));
+      unsigned বর্ণ read_buf [7];
+      memset(&read_buf, '\0', পরিমাণ(read_buf));
       start:
       // From Shakti we expect 6 bytes : 0xAA 0xA 0x5 a b c where a b c represent size of image
 
-      while(read_buf[0]!=(unsigned char)0xAA){
-          read(serial_port1, &read_buf[0], sizeof(read_buf[0]));
+      যাবত্(read_buf[0]!=(unsigned বর্ণ)0xAA){
+          পঠ(serial_port1, &read_buf[0], পরিমাণ(read_buf[0]));
       }
-      read(serial_port1, &read_buf[1], sizeof(read_buf[0]));
-      if(read_buf[1]!=(unsigned char)0xA){
-        goto start;
+      পঠ(serial_port1, &read_buf[1], পরিমাণ(read_buf[0]));
+      যদি(read_buf[1]!=(unsigned বর্ণ)0xA){
+        গচ্ছ start;
       }
-      read(serial_port1, &read_buf[2], sizeof(read_buf[0]));
-      if(read_buf[2]!=(unsigned char)0x5){
-        goto start;
+      পঠ(serial_port1, &read_buf[2], পরিমাণ(read_buf[0]));
+      যদি(read_buf[2]!=(unsigned বর্ণ)0x5){
+        গচ্ছ start;
       }
-      read(serial_port1, &read_buf[3], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[4], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[5], sizeof(read_buf[0]));
+      পঠ(serial_port1, &read_buf[3], পরিমাণ(read_buf[0]));
+      পঠ(serial_port1, &read_buf[4], পরিমাণ(read_buf[0]));
+      পঠ(serial_port1, &read_buf[5], পরিমাণ(read_buf[0]));
       unsigned long size = 0;
       size = (unsigned long)read_buf[3] + (((unsigned long)read_buf[4])<<8) + (((unsigned long)read_buf[5])<<16) ;
       printf("Size : %ld\n",size);
-      char* temp = (char*) malloc(size*sizeof(char));
-      if(temp==NULL) {
+      বর্ণ* temp = (বর্ণ*) malloc(size*পরিমাণ(বর্ণ));
+      যদি(temp==রিক্ত) {
         printf("Malloc failed\n");
         exit(1);
       }
-      char write_buff;
+      বর্ণ write_buff;
       write_buff='K';
       //Send a conformation 'K'
       tcflush(serial_port1,TCIOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
-      for(long i=0;i<size;i++){
-          read(serial_port1, (temp + i) , sizeof(read_buf[0]));
+      লিখ(serial_port1,&write_buff,পরিমাণ(write_buff));
+      প্রতি(long i=0;i<size;i++){
+          পঠ(serial_port1, (temp + i) , পরিমাণ(read_buf[0]));
       }
       tcflush(serial_port1,TCIOFLUSH);
       FILE *f1;
-      char str[]="Images/image";
-      char inte[20];
+      বর্ণ str[]="Images/image";
+      বর্ণ inte[20];
       sprintf(inte, "%d", loop);
       strcat(str,inte);
       strcat(str,".jpeg");
       f1=fopen(str,"w");
-      for(long i=0;i<size;i++)
+      প্রতি(long i=0;i<size;i++)
       {
         fputc(*(temp+i),f1);
       }
-      free(temp);
+      মুক্ত(temp);
       fclose(f1);
       write_buff='O';
       //Send a conformation 'O'
       tcflush(serial_port1,TCOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
+      লিখ(serial_port1,&write_buff,পরিমাণ(write_buff));
       tcflush(serial_port1,TCIOFLUSH);
       printf("Image %d done",loop);
     }
     close(serial_port1);
-    return 0; // success
+    প্রত্যাগম 0; // success
 }

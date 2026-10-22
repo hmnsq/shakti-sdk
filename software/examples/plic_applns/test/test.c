@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#অন্তর্ভাব "gpio.h"
+#অন্তর্ভাব "uart.h"
+#অন্তর্ভাব "utils.h"
+#অন্তর্ভাব "traps.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "plic_driver.h"
+#অন্তর্ভাব "log.h"
+#অন্তর্ভাব "defines.h"
+#অন্তর্ভাব "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+শূন্য handle_button_press(__attribute__((unused)) uint32_t অঙ্ক);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+শূন্য handle_button_press(__attribute__((unused)) uint32_t অঙ্ক)
 {
 	log_info("button pressed\n");
 }
@@ -55,13 +55,13 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+পূর্ণাঙ্ক main(শূন্য){
+	পঞ্জিকা unsigned পূর্ণাঙ্ক retval;
+	পূর্ণাঙ্ক i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	প্রতি(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i);
@@ -69,7 +69,7 @@ int main(void){
 	printf("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	প্রতি(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_disable(i);
@@ -78,7 +78,7 @@ int main(void){
 
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	প্রতি(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i + 1);
@@ -87,12 +87,12 @@ int main(void){
 
 	asm("ebreak");
 
-	while(1){
+	যাবত্(1){
 		i++;
 
-		if((i%10000000) == 0){
+		যদি((i%10000000) == 0){
 
-			asm volatile(
+			asm চঞ্চল(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -102,5 +102,5 @@ int main(void){
 			printf("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	প্রত্যাগম 0;
 }

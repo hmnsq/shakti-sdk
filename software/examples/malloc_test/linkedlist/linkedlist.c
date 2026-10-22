@@ -22,28 +22,28 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#অন্তর্ভাব "uart.h"
+#অন্তর্ভাব <stdio.h>
+#অন্তর্ভাব <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+সংরচনা গ্রন্থি {
+	পূর্ণাঙ্ক অঙ্ক;
+	সংরচনা গ্রন্থি *nptr;
 }*head;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+শূন্য create_list(পূর্ণাঙ্ক n);
+শূন্য display_list();
+শূন্য delete_গ্রন্থি(পূর্ণাঙ্ক position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+শূন্য main()
 {
-	int n,position,m;
-	char t[15];
+	পূর্ণাঙ্ক n,position,m;
+	বর্ণ t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -63,12 +63,12 @@ void main()
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_গ্রন্থি(position);
 
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	যাবত্(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+শূন্য create_list(পূর্ণাঙ্ক n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	সংরচনা গ্রন্থি *গ্রন্থি, *tmp;
+	পূর্ণাঙ্ক data,m;
+	বর্ণ t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (সংরচনা গ্রন্থি*)malloc(পরিমাণ(সংরচনা গ্রন্থি));
 
-	if(head == NULL)
+	যদি(head == রিক্ত)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	অন্যথা
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -96,28 +96,28 @@ void create_list(int n)
 
 		data = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
+		head->অঙ্ক = data;
+		head->nptr = রিক্ত;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		প্রতি(পূর্ণাঙ্ক i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			গ্রন্থি = (সংরচনা গ্রন্থি*)malloc(পরিমাণ(সংরচনা গ্রন্থি));
 
-			if(node == NULL)
+			যদি(গ্রন্থি == রিক্ত)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			অন্যথা 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
 				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				গ্রন্থি->অঙ্ক = data;
+				গ্রন্থি->nptr = রিক্ত;
 
-				tmp->nptr = node;
+				tmp->nptr = গ্রন্থি;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,21 +129,21 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+শূন্য display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	পূর্ণাঙ্ক i = 0;
+	সংরচনা গ্রন্থি *tmp;
 
-	if(head == NULL)
+	যদি(head == রিক্ত)
 	{
 		printf(" List is empty.");
 	}
-	else
+	অন্যথা
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		যাবত্(tmp != রিক্ত) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
+			printf(" Node%d = %d",i,tmp->অঙ্ক);
 			printf("->");
 			tmp = tmp->nptr;
 			i++;
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+শূন্য delete_গ্রন্থি(পূর্ণাঙ্ক position)
 {
-	struct node *temp;
+	সংরচনা গ্রন্থি *temp;
 
-	if(head == NULL)
+	যদি(head == রিক্ত)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	অন্যথা 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		যদি (position == 0)//Delete head node
 		{
 			head = temp->nptr;
-			free(temp);
-			return;
+			মুক্ত(temp);
+			প্রত্যাগম;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		প্রতি (পূর্ণাঙ্ক i = 0; temp != রিক্ত && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		যদি (temp == রিক্ত || temp->nptr == রিক্ত)
+			প্রত্যাগম;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		সংরচনা গ্রন্থি *nptr = temp->nptr->nptr;
 
-		free(temp->nptr);
+		মুক্ত(temp->nptr);
 		temp->nptr = nptr; 
 	}
 }

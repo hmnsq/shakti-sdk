@@ -34,11 +34,11 @@
   * 5. Lora module send the data by specifing the length
 */
 
-#include <string.h>
-#include "uart.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
+#অন্তর্ভাব <string.h>
+#অন্তর্ভাব "uart.h"
+#অন্তর্ভাব "pinmux.h"
+#অন্তর্ভাব "i2c.h"
+#অন্তর্ভাব "log.h"
 
 #define LORA_UART uart_instance[1]
 #define BAUDRATE 9600
@@ -48,22 +48,22 @@
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+পূর্ণাঙ্ক read_from_lora(বর্ণ *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	পূর্ণাঙ্ক ch;
+	বর্ণ *str = data;
+	বর্ণ *test = data;
+	প্রতি (পূর্ণাঙ্ক i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		যদি (ch == '\n')
 		{
-			break;
+			ভঙ্গ;
 		}
 	}
-	return;	
+	প্রত্যাগম;	
 }
 
 
@@ -72,11 +72,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+পূর্ণাঙ্ক write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	প্রত্যাগম 0;
 }
 
 
@@ -84,9 +84,9 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+শূন্য write_to_lora(বর্ণ *data)
 {
-	while (*data != '\0')
+	যাবত্ (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -99,9 +99,9 @@ void write_to_lora(char *data)
  * @brief It helps to send the required data or message to another LORA module
  * @details Through AT commands the message can be send from one LORA to another LORA module.
  */
-void send_data()
+শূন্য send_data()
 {
-	char data[LENGTH];
+	বর্ণ data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -117,9 +117,9 @@ void send_data()
  * @brief It helps to check the value set by the user, to the LORA module.
  * @details Through AT commands, the set values can be checked by these functions.
  */
-void check_set_lora_value()
+শূন্য check_set_lora_মান()
 {
-	char data[LENGTH];
+	বর্ণ data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -148,9 +148,9 @@ void check_set_lora_value()
  * @brief all the necessary features can be set by thsese.
  * @details through AT commands the LORA module can be set and make it usable.
  */
-void setup_lora()
+শূন্য setup_lora()
 {
-	char data[LENGTH];
+	বর্ণ data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -188,7 +188,7 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Send data 
  */
-void main()
+শূন্য main()
 {
 	printf("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;
@@ -200,7 +200,7 @@ void main()
 	setup_lora();
 
 	/* If you want to check that value is set correctly or not.*/
-	check_set_lora_value();
+	check_set_lora_মান();
 	
 	send_data();
 }

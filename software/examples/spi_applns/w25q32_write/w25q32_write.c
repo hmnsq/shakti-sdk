@@ -33,18 +33,18 @@ d0 - spi miso
 clk -spi clk
 cs  -spi cs
 *************************************************/
-#include <stdint.h>
-#include "spi.h"
-#include "pinmux.h"
+#অন্তর্ভাব <stdint.h>
+#অন্তর্ভাব "spi.h"
+#অন্তর্ভাব "pinmux.h"
 
 /** @fn void w25q32()
  * @brief Writes the spi value to w25q32
  * @details Writes SPI over w25q32 interface
  */
-void w25q32()
+শূন্য w25q32()
 {
-	int tmp = 0x00;//32 bits of data can be written at a time
-	int write_address = 0x0000100;  // read/write from/to this address
+	পূর্ণাঙ্ক tmp = 0x00;//32 bits of data can be written at a time
+	পূর্ণাঙ্ক write_address = 0x0000100;  // read/write from/to this address
 
 	*pinmux_config_reg = 0x154000;	
 
@@ -56,7 +56,7 @@ void w25q32()
 	
 	flash_device_id(); 
 
-	for ( int data=0;  data<=100;  data++)
+	প্রতি ( পূর্ণাঙ্ক data=0;  data<=100;  data++)
 	{
 	  flash_erase(write_address); //erases an entire sector
 	  flash_status_register_read();
@@ -77,8 +77,8 @@ void w25q32()
  * @details Configures the SPI Write FLASH values, Write the same 
  * prints the write values.
  */
-void main()
+শূন্য main()
 {
 	w25q32();
-	while (1);
+	যাবত্ (1);
 }

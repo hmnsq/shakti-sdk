@@ -30,8 +30,8 @@
 #ifndef XADC_DRIVER
 #define XADC_DRIVER
 
-#include "platform.h"
-#include "traps.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "traps.h"
 
 /**@name Register offsets
  * The following constants provide access to each of the registers of the
@@ -119,7 +119,7 @@
 
 /* @name System Monitor/ADC Software Reset Register (SRR) mask(s) */
 
-#define XADC_SRR_RESET_VALUE	0x0000000A   /**< Device Reset Mask */
+#define XADC_SRR_RESET_মান	0x0000000A   /**< Device Reset Mask */
 
 /* @name System Monitor/ADC Reset Register (ARR) mask(s) */
 
@@ -131,11 +131,11 @@
 
 /************************** Function Prototypes ******************************/
 
-void xadc_write_ctrl_reg(uint32_t *address, uint32_t data);
+শূন্য xadc_write_ctrl_reg(uint32_t *address, uint32_t data);
 uint32_t xadc_read_ctrl_reg(uint32_t *address);
 uint32_t xadc_read_data(uint32_t *address);
-float xadc_onchip_temp(uint32_t value);
-float xadc_onchip_voltage(uint32_t value);
-float xadc_dedicated_channel(uint32_t value);
+ভিন্ন xadc_onchip_temp(uint32_t মান);
+ভিন্ন xadc_onchip_voltage(uint32_t মান);
+ভিন্ন xadc_dedicated_channel(uint32_t মান);
 
 #endif

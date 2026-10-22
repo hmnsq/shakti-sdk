@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(ကိန်းပြည့် module_number, ကိန်းပြည့် clock_divisor, ကိန်းပြည့် period, ကိန်းပြည့် duty, bool external_clock);
+void pwm_start(ကိန်းပြည့် module_number, ကိန်းပြည့် mode);
+ကိန်းပြည့် pwm_check_continuous_mode(ကိန်းပြည့် module_number);
+void pwm_clear_registers(ကိန်းပြည့် module_number);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_set_external_clock(ကိန်းပြည့် module_number, bool value);
+void pwm_set_clock(ကိန်းပြည့် module_number, ကိန်းပြည့် clock_divisor);
+void pwm_set_duty_cycle(ကိန်းပြည့် module_number, ကိန်းပြည့် duty);
+void pwm_set_periodic_cycle(ကိန်းပြည့် module_number, ကိန်းပြည့် period);
+void pwm_stop(ကိန်းပြည့် module_number);
+void show_register_values(ကိန်းပြည့် module_number);
+ကိန်းပြည့် set_pwm_period_register(ကိန်းပြည့် module_number, ကိန်းပြည့် value);
+ကိန်းပြည့် set_pwm_duty_register(ကိန်းပြည့် module_number, ကိန်းပြည့် value);
+ကိန်းပြည့် set_pwm_control_register(ကိန်းပြည့် module_number, ကိန်းပြည့် value);
+ကိန်းပြည့် set_pwm_clock_register(ကိန်းပြည့် module_number, ကိန်းပြည့် value);
+ကိန်းပြည့် configure_control_register_mode(ကိန်းပြည့် mode);
+void pwm_use_external_clock(ကိန်းပြည့် module_number, bool value);
 

@@ -32,8 +32,8 @@ interrupt handler, configure the counter and support for e and c class clint tim
 #include "platform.h"
 #include "defines.h"
 
-volatile uint64_t* mtime    =  (MTIME);
-volatile uint64_t* mtimecmp =  (MTIMECMP);
+ca_ncala uint64_t* mtime    =  (MTIME);
+ca_ncala uint64_t* mtimecmp =  (MTIMECMP);
 
 /** @fn static unsigned long mtime_low( )
  * @brief return the lower 32bit of mtime.
@@ -42,7 +42,7 @@ volatile uint64_t* mtimecmp =  (MTIMECMP);
  */
 static uint32_t mtime_low(void)
 {
-  return *(uint32_t *)(MTIME);
+  ပြန်ပေး *(uint32_t *)(MTIME);
 }
 
 /*
@@ -57,7 +57,7 @@ Get each 32 bit and append for full timer value
  */
 static uint32_t mtime_high(void)
 {
-  return *(volatile uint32_t *)(MTIME + 4);
+  ပြန်ပေး *(ca_ncala uint32_t *)(MTIME + 4);
 }
 
 /** @fn uint64_t get_timer_value()
@@ -69,10 +69,10 @@ static uint32_t mtime_high(void)
 uint64_t get_timer_value()
 {
 
-#if __riscv_xlen == 64
-   return ( ((uint64_t)mtime_high() << 32) | mtime_low());
-#else
-  return mtime_low();
+#အကယ်၍ __riscv_xlen == 64
+   ပြန်ပေး ( ((uint64_t)mtime_high() << 32) | mtime_low());
+#မဟုတ်ပါက
+  ပြန်ပေး mtime_low();
 #endif
 }
 

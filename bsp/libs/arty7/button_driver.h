@@ -28,7 +28,7 @@
 #ifndef BUTTON_DRIVER_H
 #define BUTTON_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#အကယ်၍ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #include "platform.h"
 #include "gpio.h"

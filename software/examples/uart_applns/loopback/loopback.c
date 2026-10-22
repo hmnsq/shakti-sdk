@@ -16,8 +16,8 @@
 void main()
 {
     printf("-- UART Loopback Test --\n");
-    while(1) {
-        int val = getchar();
+    နေစဉ်(1) {
+        ကိန်းပြည့် val = getchar();
         putchar(val);
     };
 }

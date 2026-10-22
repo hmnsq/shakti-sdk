@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+static anta_hstha void itoa (unsigned long long ကိန်းပြည့် number, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	ကိန်းပြည့် i = 0;
+	unsigned ကိန်းပြည့် intermediate = 0;
+	unsigned ကိန်းပြည့် digits[parimaa_na(number)*8];
 
-	while (1) {
+	နေစဉ် (1) {
 		digits[i] = number % base;
 
-		if (number < base)
-			break;
+		အကယ်၍ (number < base)
+			bha_nga;
 
 		number /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	နေစဉ် (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		အကယ်၍ (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		မဟုတ်ပါက
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -72,21 +72,21 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+void _printf_(const var_na *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
+	pa_njikaa const var_na* p;
+	const var_na* last_fmt;
+	pa_njikaa ကိန်းပြည့် ch;
 	unsigned long long num;
-	int base, lflag, i;
+	ကိန်းပြည့် base, lflag, i;
 	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	var_na float_arr[30] = {'\0'};
+	ကိန်းပြည့် backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	အတွက် (;;) {
+		အတွက် (;(ch = *(unsigned var_na *) fmt) != '%'; fmt++) {
+			အကယ်၍ (ch == '\0')
+				ပြန်ပေး;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,127 +96,127 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		အတွက် (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			switch (ch = *(unsigned var_na *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				pak_sa 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					bha_nga;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				pak_sa 'c':
+					putchar(va_arg(ap, ကိန်းပြည့်));
+					bha_nga;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				pak_sa 's':
+					အကယ်၍ ((p = va_arg(ap, var_na *)) == NULL)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					အတွက် (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
-					break;
+					bha_nga;
 
 					// (signed) decimal
-				case 'd':
+				pak_sa 'd':
 					base = 10;
 
-					if (lflag >= 2)
+					အကယ်၍ (lflag >= 2)
 						num = va_arg(ap, long long);
-					else if (lflag ==1)
+					မဟုတ်ပါက အကယ်၍ (lflag ==1)
 						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					မဟုတ်ပါက
+						num = va_arg(ap, ကိန်းပြည့်);
 
-					if ((long long) num < 0) {
+					အကယ်၍ ((long long) num < 0) {
 						putchar('-');
 						num = -(long long) num;
 					}
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				pak_sa 'f':
+					float_num =  va_arg(ap, dviguu_na);
 
 					ftoa(float_num, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					အတွက်( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						အကယ်၍(i > 29) bha_nga;
 					}
-					break;
+					bha_nga;
 
 					// unsigned decimal
-				case 'u':
+				pak_sa 'u':
 					base = 10;
 
-					if (lflag >= 2)
+					အကယ်၍ (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					မဟုတ်ပါက အကယ်၍ (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					မဟုတ်ပါက
+						num = va_arg(ap, unsigned ကိန်းပြည့်);
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
 					// (unsigned) octal
-				case 'o':
+				pak_sa 'o':
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
+					အကယ်၍ (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					မဟုတ်ပါက အကယ်၍ (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					မဟုတ်ပါက
+						num = va_arg(ap, unsigned ကိန်းပြည့်);
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
-				case 'x':
+				pak_sa 'x':
 					base = 16;
 
-					if (lflag >= 2)
+					အကယ်၍ (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					မဟုတ်ပါက အကယ်၍ (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					မဟုတ်ပါက
+						num = va_arg(ap, unsigned ကိန်းပြည့်);
 
 					itoa( num, base);
 
-					break;
+					bha_nga;
 
 					// escaped '%' character
-				case '%':
+				pak_sa '%':
 					putchar(ch);
-					break;
+					bha_nga;
 
 					// unrecognized escape sequence - just print it literally
 				default:
 					putchar('%');
 					fmt = last_fmt;
-					break;
+					bha_nga;
 			}
 
-			if (backtothebeginning)
+			အကယ်၍ (backtothebeginning)
 			{
 				backtothebeginning = 0;
 				continue;
 			}
-			else
-				break;
+			မဟုတ်ပါက
+				bha_nga;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+ကိန်းပြည့် printf(const var_na* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	ပြန်ပေး 0;// incorrect return value, but who cares, anyway?
 }

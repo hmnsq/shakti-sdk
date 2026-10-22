@@ -35,10 +35,10 @@ used to achieve higher level objectives.
  * @brief stall the process for given time
  * @param unsigned int secs
  */
-void waitfor(unsigned int secs)
+void waitfor(unsigned ကိန်းပြည့် secs)
 {
-	unsigned int time = 0;
-	while (time++ < secs);
+	unsigned ကိန်းပြည့် time = 0;
+	နေစဉ် (time++ < secs);
 }
 
 /** @fn void delay(unsigned long count)
@@ -50,9 +50,9 @@ void delay(unsigned long count)
 	unsigned long cntr1 = count *1000;
 	unsigned long tmpCntr;
 
-	while (cntr1--){
+	နေစဉ် (cntr1--){
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		နေစဉ် (tmpCntr--);
 	}
 }
 
@@ -61,29 +61,29 @@ void delay(unsigned long count)
  * @param unsigned int y
  * @return return result in float 
  */
-float pow_10(unsigned int y)
+float pow_10(unsigned ကိန်းပြည့် y)
 {
-	unsigned int x=1;
+	unsigned ကိန်းပြည့် x=1;
 
-	for (unsigned int i=0; i <y; i++)
+	အတွက် (unsigned ကိန်းပြည့် i=0; i <y; i++)
 	{
 		x *= 10;
 	}
 
-	return ((float) x);
+	ပြန်ပေး ((float) x);
 }
 /** @fn void reverse(char *str, int length)
  * @brief reverse a string and store in the same string
  * @param char *str
  * @param int length
  */
-void reverse(char *str, int length)
+void reverse(var_na *str, ကိန်းပြည့် length)
 {
-	int i = 0;
-	int j = length - 1;
-	char tmp;
+	ကိန်းပြည့် i = 0;
+	ကိန်းပြည့် j = length - 1;
+	var_na tmp;
 
-	while (i<j)
+	နေစဉ် (i<j)
 	{
 		tmp = str[i];
 		str[i] = str[j];
@@ -105,13 +105,13 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+ကိန်းပြည့် int_to_string(ကိန်းပြည့် number, var_na str[], unsigned ကိန်းပြည့် afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	နေစဉ် (number != 0)
 	{
 		str[i] = ((number%10) + '0');
 		i++;
@@ -120,7 +120,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint)
+	နေစဉ် (i < afterpoint)
 	{
 		str[i] = '0';
 		i++;
@@ -133,7 +133,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 	reverse(str, i);
 	str[i] = '\0';
 
-	return i;
+	ပြန်ပေး i;
 }
 /** @fn void ftoa(float n, char *res, int afterpoint)
  * @brief converts float to string
@@ -144,32 +144,32 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
  * @param char* (float in string - res)
  * @param int (precision - afterpoint)
  */
-void ftoa(float n, char *res, unsigned int afterpoint)
+void ftoa(float n, var_na *res, unsigned ကိန်းပြည့် afterpoint)
 {
-	int i=0;
-	char temp[30]={'\0'};
+	ကိန်းပြည့် i=0;
+	var_na temp[30]={'\0'};
 	n += 0.0000001;
 
 	// Extract integer part
-	int ipart = (int)n;
+	ကိန်းပြည့် ipart = (ကိန်းပြည့်)n;
 
 	// Extract floating part
 	float fpart = (float) (n - (float)ipart);
-	int j=0;
+	ကိန်းပြည့် j=0;
 
-	if(n < (0/1))
+	အကယ်၍(n < (0/1))
 	{
 		res[j]='-';
 		j=1;
 	}
 
-	if (ipart == 0)
+	အကယ်၍ (ipart == 0)
 	{
 		res[j]='0';
 		j=j+1;
 	}
-	else{
-		if (ipart <0)
+	မဟုတ်ပါက{
+		အကယ်၍ (ipart <0)
 		{
 			ipart =(-1)*ipart;
 		}
@@ -182,24 +182,24 @@ void ftoa(float n, char *res, unsigned int afterpoint)
 	i = i+j;
 
 	// check for display option after point
-	if (afterpoint != 0)
+	အကယ်၍ (afterpoint != 0)
 	{
 		res[i] = '.';// add dot
 
-		if (fpart < 0/1)
+		အကယ်၍ (fpart < 0/1)
 		{
 
 			fpart = (-1)*fpart;
 
 		}
-		else if (fpart == 0/1)
+		မဟုတ်ပါက အကယ်၍ (fpart == 0/1)
 		{
 			fpart = fpart;
 		}
 
 		fpart = fpart * pow_10( afterpoint);
 
-		int_to_string((int)fpart, res + i + 1, afterpoint);
+		int_to_string((ကိန်းပြည့်)fpart, res + i + 1, afterpoint);
 	}
 }
 
@@ -212,11 +212,11 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
 	unsigned long tmpCntr = cntr2;
 
-	while (cntr1--)
+	နေစဉ် (cntr1--)
 	{
 		tmpCntr = cntr2;
 
-		while (tmpCntr--);
+		နေစဉ် (tmpCntr--);
 	}
 }
 
@@ -229,7 +229,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 unsigned long read_word(uint32_t *addr)
 {
 	log_debug("addr = %x data = %x\n", addr, *addr);
-	return *addr;
+	ပြန်ပေး *addr;
 }
 
 /** @fn void write_word(int *addr, unsigned long val)

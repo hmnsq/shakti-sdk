@@ -34,15 +34,15 @@
 #include "pinmux.h"
 
 
-int main(void) {
+ကိန်းပြည့် main(void) {
   *pinmux_config_reg = 85;
-  int brate = 115200;
+  ကိန်းပြည့် brate = 115200;
   set_baud_rate(uart_instance[1],brate);
   set_baud_rate(uart_instance[2],brate);
-  if( init_cam() < 0) 
-      return -1;
+  အကယ်၍( init_cam() < 0) 
+      ပြန်ပေး -1;
   get_pic(1);
-  return 0;
+  ပြန်ပေး 0;
 }
 
 

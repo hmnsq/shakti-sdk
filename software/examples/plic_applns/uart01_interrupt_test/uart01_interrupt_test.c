@@ -23,25 +23,25 @@
 
  ***************************************************************************/
 //#include "gpiov2.h"
-#include "pinmux.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "uart.h"
+#ضمن "pinmux.h"
+#ضمن "traps.h"
+#ضمن "platform.h"
+#ضمن "plic_driver.h"
+#ضمن "log.h"
+#ضمن "uart.h"
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+unsigned صحيح uart0_prev_rcv_isr_count_flag = 0;
+unsigned صحيح uart1_prev_rcv_isr_count_flag = 0;
+unsigned صحيح uart2_prev_rcv_isr_count_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+unsigned صحيح uart0_prev_tx_isr_count_flag = 0;
+unsigned صحيح uart1_prev_tx_isr_count_flag = 0;
+unsigned صحيح uart2_prev_tx_isr_count_flag = 0;
 
 
-void init_variables()
+فراغ init_variables()
 {
 	uart0_complete = 0;
 	uart1_complete = 0;
@@ -63,15 +63,15 @@ void init_variables()
 	uart1_prev_tx_isr_count_flag = 0;
 	uart2_prev_tx_isr_count_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+خارجي متطاير unsigned صحيح* pinmux_config_reg;
 
 
 
-int main(void){
+صحيح main(فراغ){
 
 
-	register uint32_t retval;
-	int i;
+	سجل uint32_t retval;
+	صحيح i;
 	init_variables();
 
 	printf("\n---------------Uart 1 Interrupt Test---------------\n");
@@ -85,15 +85,15 @@ int main(void){
 	isr_table[PLIC_INTERRUPT_26] = uart1_isr;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm متطاير("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm متطاير("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm متطاير(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -102,7 +102,7 @@ int main(void){
 		    );
 
 	printf("\n retval = %x", retval);
-	asm volatile(
+	asm متطاير(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -112,7 +112,7 @@ int main(void){
 
 	printf("\t retval = %x", retval);
 
-	asm volatile(
+	asm متطاير(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -131,24 +131,24 @@ int main(void){
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	طالما(1)
 	{
-#if 0
-		if(i % 2)
+#𐤀𐤌 0
+		𐤀𐤌(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		وإلا
 			write_uart_string(uart_instance[1], "tEsT");
 #endif
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		𐤀𐤌(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
 		{
 			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		𐤀𐤌(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
 		{
 			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
 		}
-		if(i++ >= 10)
+		𐤀𐤌(i++ >= 10)
 		{
 			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
@@ -161,5 +161,5 @@ int main(void){
 	};
 
 
-	return 0;
+	أرجع 0;
 }

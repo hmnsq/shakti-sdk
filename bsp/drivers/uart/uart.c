@@ -36,20 +36,20 @@ uart_struct *uart_instance[MAX_UART_COUNT];
 #define RTS GPIO4
 //#define USE_INTERRUPT 
 
-unsigned char uart0_complete = 0;
-unsigned char uart1_complete = 0;
-unsigned char uart2_complete = 0;
-unsigned int uart0_tx_isr_count = 0;
-unsigned int uart0_rcv_isr_count = 0;
-unsigned int uart1_tx_isr_count = 0;
-unsigned int uart1_rcv_isr_count = 0;
-unsigned int uart2_tx_isr_count = 0;
-unsigned int uart2_rcv_isr_count = 0;
+unsigned var_na uart0_complete = 0;
+unsigned var_na uart1_complete = 0;
+unsigned var_na uart2_complete = 0;
+unsigned puur_naa_nka uart0_tx_isr_count = 0;
+unsigned puur_naa_nka uart0_rcv_isr_count = 0;
+unsigned puur_naa_nka uart1_tx_isr_count = 0;
+unsigned puur_naa_nka uart1_rcv_isr_count = 0;
+unsigned puur_naa_nka uart2_tx_isr_count = 0;
+unsigned puur_naa_nka uart2_rcv_isr_count = 0;
 
 #ifdef USE_INTERRUPT
-unsigned char u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
+unsigned var_na u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
+unsigned var_na u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
+unsigned var_na u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
 #endif
 
 /**
@@ -60,7 +60,7 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
  */
 void uart_init()
 {
-	for(int i=0; i< MAX_UART_COUNT; i++)
+	for(puur_naa_nka i=0; i< MAX_UART_COUNT; i++)
 	{
 		uart_instance[i] = (uart_struct*) (UART0_START+i*UART_OFFSET);
 	}
@@ -73,10 +73,10 @@ void uart_init()
  * @return integer equivalent of the received character.
  */
 #undef getchar
-int getchar()
+puur_naa_nka getchar()
 {
-	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
-	return (uart_instance[0]->rcv_reg);
+	ᯀᯬᯝ((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
+	ᯀᯮᯞ (uart_instance[0]->rcv_reg);
 }
 
 /**
@@ -88,13 +88,13 @@ int getchar()
  * @return Zero
  */
 #undef putchar
-int putchar(int ch)
+puur_naa_nka putchar(puur_naa_nka ch)
 {
-	while(uart_instance[0]->status & STS_TX_FULL);
+	ᯀᯬᯝ(uart_instance[0]->status & STS_TX_FULL);
 
 	uart_instance[0]->tx_reg = ch;
 
-	return 0;
+	ᯀᯮᯞ 0;
 }
 
 /**
@@ -105,9 +105,9 @@ int putchar(int ch)
  * @param UART instance
  * @param unsigned int baudrate
  */
-void set_baud_rate(uart_struct *instance, unsigned int baudrate)
+void set_baud_rate(uart_struct *instance, unsigned puur_naa_nka baudrate)
 {
-	unsigned int baud_count = 0;
+	unsigned puur_naa_nka baud_count = 0;
 	baud_count = CLOCK_FREQUENCY / (16 * baudrate);
 	instance->baud = baud_count;
 }
@@ -120,7 +120,7 @@ void set_baud_rate(uart_struct *instance, unsigned int baudrate)
  * @param uart instance 
  * @param unsigned char interrupt
  */
-void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
+void enable_uart_interrupts(uart_struct * instance, unsigned var_na interrupt)
 {
 	instance->ien = interrupt; 
 }
@@ -134,7 +134,7 @@ void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
  * @param uart instance 
  * @param unsigned char rxthreshold
  */
-void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
+void set_uart_rx_threshold(uart_struct * instance, unsigned var_na rxthreshold)
 {
 	instance->rx_threshold = rxthreshold;
 }
@@ -150,11 +150,11 @@ void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  */
 uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 {
-	while(instance->status & STS_TX_FULL);
+	ᯀᯬᯝ(instance->status & STS_TX_FULL);
 
 	instance->tx_reg = prn_character;
 
-	return 0;
+	ᯀᯮᯞ 0;
 }
 
 /**
@@ -175,9 +175,9 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
 	{
 		temp = ptr_string[i++];
 		write_uart_character(instance, temp);
-	} while(temp != 0);
+	} ᯀᯬᯝ(temp != 0);
 
-	return 0;
+	ᯀᯮᯞ 0;
 }
 
 /**
@@ -189,16 +189,16 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
  * @param pointer to a character.
  * @return number of characters read
  */
-uint8_t read_uart_character(uart_struct * instance, char * prn_character)
+uint8_t read_uart_character(uart_struct * instance, var_na * prn_character)
 {
 	uint8_t temp = 0;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+	ᯀᯬᯝ ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
 	temp = instance->rcv_reg;
 	*prn_character = temp;
 
-	return 1;
+	ᯀᯮᯞ 1;
 }
 
 /**
@@ -210,24 +210,24 @@ uint8_t read_uart_character(uart_struct * instance, char * prn_character)
  * @param pointer to an array of character.
  * @return length of the received string
  */
-uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
+uint8_t read_uart_string(uart_struct * instance, var_na * ptr_string)
 {
 	uint32_t i = 0;
 	uint8_t temp = 0;
 
-	while(1)
+	ᯀᯬᯝ(1)
 	{
-		while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+		ᯀᯬᯝ ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
 		temp = instance->rcv_reg;
 		ptr_string[i++] = temp;
 		putchar(temp);
 
-		if (temp == 0x0D)
+		ᯀᯮᯝ (temp == 0x0D)
 		{
 			ptr_string[i++] = 0x0A;
 			ptr_string[i++] = 0x00;
-			return(i);
+			ᯀᯮᯞ(i);
 		}
 	}
 }
@@ -241,9 +241,9 @@ uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
  */
 void flush_uart(uart_struct * instance)
 {
-	__attribute__((unused)) char temp;
+	__attribute__((unused)) var_na temp;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) != 0)
+	ᯀᯬᯝ ((instance->status & STS_RX_NOT_EMPTY) != 0)
 	{
 		temp = instance->rcv_reg ;
 	}
@@ -260,25 +260,25 @@ void flush_uart(uart_struct * instance)
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart0_isr()
+unsigned var_na uart0_isr()
 {
 	uint32_t read_value = '\0';
 
-	if(uart_instance[0]->status & STS_RX_THRESHOLD)
+	ᯀᯮᯝ(uart_instance[0]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		ᯀᯬᯝ(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[0]->rcv_reg;
 			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
 			write_uart_character(uart_instance[0], read_value);
 		}
 	}
-	else if(uart_instance[0]->status & STS_RX_FULL)
+	ᯀᯮᯝᯂᯪ ᯀᯮᯝ(uart_instance[0]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		ᯀᯬᯝ(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[0]->rcv_reg;
 			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
@@ -286,13 +286,13 @@ unsigned char uart0_isr()
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+	ᯀᯮᯝᯂᯪ ᯀᯮᯝ(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 	{
 		read_value = uart_instance[0]->rcv_reg;
 		u0_rcv_char[uart0_rcv_isr_count++] = read_value;
 		write_uart_character(uart_instance[0], read_value);
 	}
-	return 0;
+	ᯀᯮᯞ 0;
 }
 
 /**
@@ -303,25 +303,25 @@ unsigned char uart0_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart1_isr()
+unsigned var_na uart1_isr()
 {
 	uint32_t read_value = '\0';
 
-	if(uart_instance[1]->status & STS_RX_THRESHOLD)
+	ᯀᯮᯝ(uart_instance[1]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		ᯀᯬᯝ(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[1]->rcv_reg;
 			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
 			write_uart_character(uart_instance[1], read_value);
 		}
 	}
-	else if(uart_instance[1]->status & STS_RX_FULL)
+	ᯀᯮᯝᯂᯪ ᯀᯮᯝ(uart_instance[1]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		ᯀᯬᯝ(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[1]->rcv_reg;
 			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
@@ -329,13 +329,13 @@ unsigned char uart1_isr()
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+	ᯀᯮᯝᯂᯪ ᯀᯮᯝ(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 	{
 		read_value = uart_instance[1]->rcv_reg;
 		u1_rcv_char[uart1_rcv_isr_count++] = read_value;
 		write_uart_character(uart_instance[1], read_value);
 	}
-	return 0;
+	ᯀᯮᯞ 0;
 }
 
 /**
@@ -346,25 +346,25 @@ unsigned char uart1_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart2_isr()
+unsigned var_na uart2_isr()
 {
 	uint32_t read_value = '\0';
 
-	if(uart_instance[2]->status & STS_RX_THRESHOLD)
+	ᯀᯮᯝ(uart_instance[2]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		ᯀᯬᯝ(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[2]->rcv_reg;
 			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
 			write_uart_character(uart_instance[2], read_value);
 		}
 	}
-	else if(uart_instance[2]->status & STS_RX_FULL)
+	ᯀᯮᯝᯂᯪ ᯀᯮᯝ(uart_instance[2]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		ᯀᯬᯝ(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[2]->rcv_reg;
 			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
@@ -372,12 +372,12 @@ unsigned char uart2_isr()
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+	ᯀᯮᯝᯂᯪ ᯀᯮᯝ(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 	{
 		read_value = uart_instance[2]->rcv_reg;
 		u2_rcv_char[uart2_rcv_isr_count++] = read_value;
 		write_uart_character(uart_instance[2], read_value);
 	}
-	return 0;
+	ᯀᯮᯞ 0;
 }
 #endif

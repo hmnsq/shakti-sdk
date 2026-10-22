@@ -38,7 +38,7 @@ void main()
     //Assume  0 for INPUT and  1 for OUTPUT
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000FFF);
 
-    while (1) {
+    ᯀᯬᯝ (1) {
         write_word(GPIO_DATA_REG, GPIO0);
 	    delay_loop(1000, 1000);
 	printf("\nRED LIGHT");			//RED LIGHT.

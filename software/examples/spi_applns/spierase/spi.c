@@ -28,21 +28,21 @@
 protocol.
 */
 
-#include <stdint.h>
-#include "spi.h"
-#include "uart.h"
+#अन्तर्भाव <stdint.h>
+#अन्तर्भाव "spi.h"
+#अन्तर्भाव "uart.h"
 
 /** @fn void main()
  * @brief Configures the SPI flash and writes into a flash location.
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+शून्य मुख्यम्()
 {
-	configure_spi(SPI0_OFFSET);
+	configure_spi(SPI0_विस्थापनम्);
 	spi_init();
 
-	printf("SPI init done\n");
+	प्रारूप_लिख("SPI init done\n");
 
 	flash_device_id();
 
@@ -50,8 +50,8 @@ void main()
 
 	flash_write_enable();
 	flash_erase(0x00b00000); //erases an entire sector
-	flash_status_register_read();
-	printf("\nErase complete");
+	flash_स्थितिः_पञ्जिकाकोशः_read();
+	प्रारूप_लिख("\nErase complete");
 
-	asm volatile ("ebreak");
+	asm चञ्चल ("ebreak");
 }

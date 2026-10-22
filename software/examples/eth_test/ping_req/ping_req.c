@@ -31,12 +31,12 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "uart.h"
+#अन्तर्भाव "traps.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "eth_driver.h"
+#अन्तर्भाव "log.h"
 
 
 
@@ -46,9 +46,9 @@
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID			240
-#define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+#परिभाषय EMAC_DEVICE_ID			240
+#परिभाषय ETH_आधारः_REG 0x44000
+चञ्चल अचिह्नित पूर्णाङ्क* eth_आधारः_reg = ETH_आधारः_REG;
 
 /**************************** Type Definitions *******************************/
 
@@ -56,71 +56,71 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
+बाह्य XEmacLite_Config XEmac_Lite_Config_सारणी;
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+स्थिर XEmacLite EmacLite;
 
 
 /*
  * Change this parameter to limit the number of ping requests sent by this
  * program.
  */
-#define NUM_OF_PING_REQ_PKTS	100	/* Number of ping req it generates */
+#परिभाषय अङ्कः_सम्बन्धि_PING_REQ_PKTS	100	/* Number of ping req it generates */
 
-#define ECHO_REPLY		0x00	/* Echo reply */
-#define HW_TYPE			0x01	/* Hardware type (10/100 Mbps) */
-#define ARP_REQUEST 		0x01	/* ARP Request bits in Rx packet */
-#define ARP_REPLY 		0x02 	/* ARP status bits indicating reply */
-#define IDEN_NUM		0x02	/* ICMP identifier number */
-#define IP_VERSION		0x0604	/* IP version ipv4/ipv6 */
-#define BROADCAST_ADDR 		0xFFFF 	/* Broadcast Address */
-#define CORRECT_CHECKSUM_VALUE	0xFFFF	/* Correct checksum value */
-#define ARP_REQ_PKT_SIZE	0x2A	/* ARP request packet size */
-#define ICMP_PKT_SIZE 		0x4A	/* ICMP packet length 74 Bytes
+#परिभाषय ECHO_प्रत्युत्तरम्		0x00	/* Echo reply */
+#परिभाषय HW_TYPE			0x01	/* Hardware type (10/100 Mbps) */
+#परिभाषय ARP_REQUEST 		0x01	/* ARP Request bits in Rx packet */
+#परिभाषय ARP_प्रत्युत्तरम् 		0x02 	/* ARP status bits indicating reply */
+#परिभाषय IDEN_अङ्कः		0x02	/* ICMP identifier number */
+#परिभाषय IP_संस्करणम्		0x0604	/* IP version ipv4/ipv6 */
+#परिभाषय प्रसारणम्_ADDR 		0xFFFF 	/* Broadcast Address */
+#परिभाषय CORRECT_CHECKSUM_मानम्	0xFFFF	/* Correct checksum value */
+#परिभाषय ARP_REQ_PKT_आकार	0x2A	/* ARP request packet size */
+#परिभाषय ICMP_PKT_आकार 		0x4A	/* ICMP packet length 74 Bytes
 					including Src and dest MAC Add */
-#define IP_ADDR_SIZE		4	/* IP Address size in Bytes */
-#define NUM_RX_PACK_CHECK_REQ	10	/* Max num of Rx pack to be checked
+#परिभाषय IP_ADDR_आकार		4	/* IP Address size in Bytes */
+#परिभाषय अङ्कः_RX_PACK_CHECK_REQ	10	/* Max num of Rx pack to be checked
 					before sending another request */
-#define NUM_PACK_CHECK_RX_PACK	100	/* Max number of pack to be checked
+#परिभाषय अङ्कः_PACK_CHECK_RX_PACK	100	/* Max number of pack to be checked
 					before to identify a Rx packet */
-#define DELAY			5000000 /* Used to introduce delay */
+#परिभाषय DELAY			5000000 /* Used to introduce delay */
 
 /*
  * Definitions for the locations and length of some of the fields in a
  * IP packet. The lengths are defined in Half-Words (2 bytes).
  */
 
-#define SRC_MAC_ADDR_LOC	3	/* Src MAC address location */
-#define MAC_ADDR_LEN 		3	/* MAC address length */
-#define ETHER_PROTO_TYPE_LOC	6	/* Ethernet Proto type loc */
+#परिभाषय SRC_MAC_ADDR_LOC	3	/* Src MAC address location */
+#परिभाषय MAC_ADDR_LEN 		3	/* MAC address length */
+#परिभाषय ETHER_PROTO_TYPE_LOC	6	/* Ethernet Proto type loc */
 
-#define IP_ADDR_LEN 		2	/* Size of IP address */
-#define IP_START_LOC 		7	/* IP header start location */
-#define IP_HEADER_INFO_LEN	7	/* IP header information length */
-#define IP_HEADER_LEN 		10 	/* IP header length */
-#define IP_CHECKSUM_LOC		12	/* IP header checksum location */
-#define IP_REQ_SRC_IP_LOC 	13	/* Src IP add loc of ICMP req */
-#define IP_REQ_DEST_IP_LOC	15	/* Dest IP add loc of ICMP req */
+#परिभाषय IP_ADDR_LEN 		2	/* Size of IP address */
+#परिभाषय IP_START_LOC 		7	/* IP header start location */
+#परिभाषय IP_शीर्षकम्_INFO_LEN	7	/* IP header information length */
+#परिभाषय IP_शीर्षकम्_LEN 		10 	/* IP header length */
+#परिभाषय IP_CHECKSUM_LOC		12	/* IP header checksum location */
+#परिभाषय IP_REQ_SRC_IP_LOC 	13	/* Src IP add loc of ICMP req */
+#परिभाषय IP_REQ_DEST_IP_LOC	15	/* Dest IP add loc of ICMP req */
 
-#define ICMP_KNOWN_DATA_LEN	64	/* ICMP known data length */
-#define ICMP_ECHO_FIELD_LOC 	17	/* Echo field loc */
-#define ICMP_DATA_START_LOC 	17	/* Data field start location */
-#define ICMP_DATA_LEN 		18	/* ICMP data length */
-#define ICMP_DATA_CHECKSUM_LOC	18	/* ICMP data checksum location */
-#define ICMP_IDEN_FIELD_LOC	19	/* Identifier field loc */
-#define ICMP_DATA_LOC 		19	/* ICMP data loc including
+#परिभाषय ICMP_ज्ञातम्_दत्त_LEN	64	/* ICMP known data length */
+#परिभाषय ICMP_ECHO_क्षेत्रम्_LOC 	17	/* Echo field loc */
+#परिभाषय ICMP_दत्त_START_LOC 	17	/* Data field start location */
+#परिभाषय ICMP_दत्त_LEN 		18	/* ICMP data length */
+#परिभाषय ICMP_दत्त_CHECKSUM_LOC	18	/* ICMP data checksum location */
+#परिभाषय ICMP_IDEN_क्षेत्रम्_LOC	19	/* Identifier field loc */
+#परिभाषय ICMP_दत्त_LOC 		19	/* ICMP data loc including
 					identifier number and sequence number */
-#define ICMP_SEQ_NO_LOC		20	/* sequence number location */
-#define ICMP_DATA_FIELD_LEN 	20 	/* Data field length */
-#define ICMP_KNOWN_DATA_LOC	21	/* ICMP known data start loc */
+#परिभाषय ICMP_SEQ_NO_LOC		20	/* sequence number location */
+#परिभाषय ICMP_दत्त_क्षेत्रम्_LEN 	20 	/* Data field length */
+#परिभाषय ICMP_ज्ञातम्_दत्त_LOC	21	/* ICMP known data start loc */
 
-#define ARP_REQ_STATUS_LOC 	10	/* ARP request loc */
-#define ARP_REQ_SRC_IP_LOC 	14	/* Src IP add loc of ARP req Packet */
+#परिभाषय ARP_REQ_स्थितिः_LOC 	10	/* ARP request loc */
+#परिभाषय ARP_REQ_SRC_IP_LOC 	14	/* Src IP add loc of ARP req Packet */
 
 /**************************** Type Definitions *******************************/
 
@@ -130,25 +130,25 @@ static XEmacLite EmacLite;
 
 /************************** Function Prototypes ******************************/
 
-static int EmacLitePingReqExample(u16 DeviceId);
+स्थिर पूर्णाङ्क EmacLitePingReqExample(u16 DeviceId);
 
-static void SendArpReqFrame(XEmacLite *InstancePtr);
+स्थिर शून्य SendArpReqFrame(XEmacLite *InstancePtr);
 
-static void SendEchoReqFrame(XEmacLite *InstancePtr);
+स्थिर शून्य SendEchoReqFrame(XEmacLite *InstancePtr);
 
-static int ProcessRecvFrame(XEmacLite *InstancePtr);
+स्थिर पूर्णाङ्क ProcessRecvFrame(XEmacLite *InstancePtr);
 
-static u16 CheckSumCalculation(u16 *RxFramePtr16, int StartLoc, int Length);
+स्थिर u16 Check_योग_Calculation(u16 *RxFramePtr16, पूर्णाङ्क StartLoc, पूर्णाङ्क दीर्घता);
 
-static int CompareData(u16 *LhsPtr, u16 *RhsPtr, int LhsLoc, int RhsLoc,
-			int Count);
+स्थिर पूर्णाङ्क Compare_दत्त(u16 *LhsPtr, u16 *RhsPtr, पूर्णाङ्क LhsLoc, पूर्णाङ्क RhsLoc,
+			पूर्णाङ्क गणनम्_2);
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Set up a local MAC address.
  */
-static u8 LocalMacAddr[XEL_MAC_ADDR_SIZE] =
+स्थिर u8 LocalMacAddr[XEL_MAC_ADDR_आकार] =
 {
 	0x00, 0x0A, 0x35, 0x03, 0x02, 0x01
 };
@@ -157,7 +157,7 @@ static u8 LocalMacAddr[XEL_MAC_ADDR_SIZE] =
  * The IP address was set to 172.16.63.121. User need to set a free IP address
  * based on the network on which this example is to be run.
  */
-static u8 LocalIpAddress[IP_ADDR_SIZE] =
+स्थिर u8 Local_Ip_स्थानाङ्कः[IP_ADDR_आकार] =
 {
 	192, 168, 1, 26
 };
@@ -166,18 +166,18 @@ static u8 LocalIpAddress[IP_ADDR_SIZE] =
  * Set up a Destination IP address. Currently it is set to 172.16.63.61.
  */
 /* ifconfig enp1s0 172.16.63.61 netmask 255.255.255.0 up */
-static u8 DestIpAddress[IP_ADDR_SIZE] =
+स्थिर u8 Dest_Ip_स्थानाङ्कः[IP_ADDR_आकार] =
 {
 	192, 168, 1, 25
 };
 
-static u16 DestMacAddr[MAC_ADDR_LEN]; 	/* Destination MAC Address */
-static XEmacLite EmacLiteInstance;	/* Instance of the EmacLite driver */
+स्थिर u16 DestMacAddr[MAC_ADDR_LEN]; 	/* Destination MAC Address */
+स्थिर XEmacLite EmacLiteInstance;	/* Instance of the EmacLite driver */
 
 /*
  * Known data transmitted in Echo request.
  */
-u16 IcmpData[ICMP_KNOWN_DATA_LEN] =
+u16 Icmp_दत्त[ICMP_ज्ञातम्_दत्त_LEN] =
 {
 	0x2122, 0x2324, 0x2526, 0x2728, 0x292A, 0x2B2C, 0x2D2E, 0x2F30,
 	0x3132, 0x3334, 0x3536, 0x3738, 0x393A, 0x3B3C, 0x3D3E, 0x3F40,
@@ -194,7 +194,7 @@ u16 IcmpData[ICMP_KNOWN_DATA_LEN] =
  * Icmp type, ipv4 typelength, packet length, identification field
  * Fragment type, time to live and ICM, checksum.
  */
-u16 IpHeaderInfo[IP_HEADER_INFO_LEN] =
+u16 Ip_शीर्षकम्_Info[IP_शीर्षकम्_INFO_LEN] =
 {
 	0x0800,	0x4500, 0x003C,	0x5566,	0x0000,	0x8001, 0x0000
 };
@@ -203,23 +203,23 @@ u16 IpHeaderInfo[IP_HEADER_INFO_LEN] =
  * Buffers used for Transmission and Reception of Packets. These are declared as
  * global so that they are not a part of the stack.
  */
-static u8 RxFrame[XEL_MAX_FRAME_SIZE];
-static u8 TxFrame[XEL_MAX_FRAME_SIZE];
+स्थिर u8 RxFrame[XEL_MAX_FRAME_आकार];
+स्थिर u8 TxFrame[XEL_MAX_FRAME_आकार];
 
 /*
  * Variable used to indicate the length of the received frame.
  */
-extern volatile u32 RecvFrameLength;
+बाह्य चञ्चल u32 Recv_Frame_दीर्घता;
 
 /*
  * Variable used to indicate the sequence number of the ICMP(echo) packet.
  */
-int SeqNum;
+पूर्णाङ्क Seq_अङ्कः;
 
 /*
  * Variable used to indicate the number of ping request packets to be send.
  */
-int NumOfPingReqPkts;
+पूर्णाङ्क अङ्कः_सम्बन्धि_Ping_Req_Pkts;
 
 /****************************************************************************/
 /**
@@ -235,21 +235,21 @@ int NumOfPingReqPkts;
 * @note		None.
 *
 *****************************************************************************/
-int main()
+पूर्णाङ्क मुख्यम्()
 {
-	int Status;
+	पूर्णाङ्क स्थितिः;
 
 	/*
 	 * Run the EmacLite Ping request example.
 	 */
-	Status = EmacLitePingReqExample(EMAC_DEVICE_ID);
-	if (Status != XST_SUCCESS) {
+	स्थितिः = EmacLitePingReqExample(EMAC_DEVICE_ID);
+	यदि (स्थितिः != XST_SUCCESS) {
 		xil_printf("Emaclite ping request Example Failed\r\n");
-		return XST_FAILURE;
+		प्रत्यागम XST_FAILURE;
 	}
 
 	xil_printf("Successfully ran Emaclite ping request Example\r\n");
-	return XST_SUCCESS;
+	प्रत्यागम XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -267,85 +267,85 @@ int main()
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLitePingReqExample(u16 DeviceId)
+स्थिर पूर्णाङ्क EmacLitePingReqExample(u16 DeviceId)
 {
-	int Status;
-	int Index;
-	int Count;
-	int EchoReplyStatus;
+	पूर्णाङ्क स्थितिः;
+	पूर्णाङ्क सूचकांक;
+	पूर्णाङ्क गणनम्_2;
+	पूर्णाङ्क Echo_प्रत्युत्तरम्_स्थितिः;
 	XEmacLite_Config *ConfigPtr;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
-	SeqNum = 0;
-	RecvFrameLength = 0;
-	EchoReplyStatus = XST_FAILURE;
-	NumOfPingReqPkts = NUM_OF_PING_REQ_PKTS;
+	Seq_अङ्कः = 0;
+	Recv_Frame_दीर्घता = 0;
+	Echo_प्रत्युत्तरम्_स्थितिः = XST_FAILURE;
+	अङ्कः_सम्बन्धि_Ping_Req_Pkts = अङ्कः_सम्बन्धि_PING_REQ_PKTS;
 
 	/*
 	 * Initialize the EmacLite device.
 	 */
-	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	ConfigPtr = &XEmac_Lite_Config_सारणी;
+	यदि (ConfigPtr == रिक्त) {
+		प्रत्यागम -1;
 	}
-	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
+	ConfigPtr->आधारः_स्थानाङ्कः = (UINTPTR *) 0X44000;
 	ConfigPtr->RxPingPong = XPAR_EMACLITE_0_RX_PING_PONG;
 	ConfigPtr->MdioInclude = XPAR_EMACLITE_0_INCLUDE_MDIO;
 	ConfigPtr->TxPingPong = XPAR_EMACLITE_0_TX_PING_PONG;
-#if 0
-	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->BaseAddress);
+#यदि 0
+	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->आधारः_स्थानाङ्कः);
 	log_debug("\n ConfigPtr: DeviceId: %x", ConfigPtr->DeviceId);
 	log_debug("\n ConfigPtr: TxPingPong: %x", ConfigPtr->TxPingPong);
 	log_debug("\n ConfigPtr: RxPingPong: %x", ConfigPtr->RxPingPong);
 	log_debug("\n ConfigPtr: MdioInclude: %x", ConfigPtr->MdioInclude);
 	log_debug("\n ConfigPtr: Loopback: %x", ConfigPtr->Loopback);
-#endif	
-	Status = XEmacLite_CfgInitialize(EmacLiteInstPtr,
+#यदि_अन्तः	
+	स्थितिः = XEmacLite_CfgInitialize(EmacLiteInstPtr,
 					ConfigPtr,
-					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+					ConfigPtr->आधारः_स्थानाङ्कः);
+	यदि (स्थितिः != 0) {
+		प्रत्यागम -1;
 	}
 	
 
 	/*
 	 * Set the MAC address.
 	 */
-	XEmacLite_SetMacAddress(EmacLiteInstPtr, LocalMacAddr);
+	XEmac_Lite_समुच्चयः_Mac_स्थानाङ्कः(EmacLiteInstPtr, LocalMacAddr);
 
 	/*
 	 * Empty any existing receive frames.
 	 */
 	XEmacLite_FlushReceive(EmacLiteInstPtr);
-	while (NumOfPingReqPkts--) {
+	यावत् (अङ्कः_सम्बन्धि_Ping_Req_Pkts--) {
 
 		/*
 		 * Introduce delay.
 		 */
-		Count = DELAY;
-		while (Count--) {
+		गणनम्_2 = DELAY;
+		यावत् (गणनम्_2--) {
 		}
 
 		/*
 		 * Send an ARP or an ICMP packet based on receive packet.
 		 */
-		if (SeqNum == 0) {
+		यदि (Seq_अङ्कः == 0) {
 			SendArpReqFrame(EmacLiteInstPtr);
-		} else {
+		} अन्यथा {
 			SendEchoReqFrame(EmacLiteInstPtr);
 		}
 
 		/*
 		 * Check next 10 packets for the correct reply.
 		 */
-		Index = NUM_RX_PACK_CHECK_REQ;
-		while (Index--) {
+		सूचकांक = अङ्कः_RX_PACK_CHECK_REQ;
+		यावत् (सूचकांक--) {
 
 			/*
 			 * Wait for a Receive packet.
 			 */
-			Count = NUM_PACK_CHECK_RX_PACK;
-			while (RecvFrameLength == 0) {
-				RecvFrameLength = XEmacLite_Recv(
+			गणनम्_2 = अङ्कः_PACK_CHECK_RX_PACK;
+			यावत् (Recv_Frame_दीर्घता == 0) {
+				Recv_Frame_दीर्घता = XEmacLite_Recv(
 							EmacLiteInstPtr,
 							(u8 *)RxFrame);
 
@@ -353,26 +353,26 @@ static int EmacLitePingReqExample(u16 DeviceId)
 				 * To avoid infinite loop when no packet is
 				 * received.
 				 */
-				if (Count-- == 0) {
-					break;
+				यदि (गणनम्_2-- == 0) {
+					भङ्ग;
 				}
 			}
 
 			/*
 			 * Process the Receive frame.
 			 */
-			if (RecvFrameLength != 0) {
-				EchoReplyStatus = ProcessRecvFrame(
+			यदि (Recv_Frame_दीर्घता != 0) {
+				Echo_प्रत्युत्तरम्_स्थितिः = ProcessRecvFrame(
 							EmacLiteInstPtr);
 			}
-			RecvFrameLength = 0;
+			Recv_Frame_दीर्घता = 0;
 
 			/*
 			 * Comes out of loop when an echo reply packet is
 			 * received.
 			 */
-			if (EchoReplyStatus == XST_SUCCESS) {
-				break;
+			यदि (Echo_प्रत्युत्तरम्_स्थितिः == XST_SUCCESS) {
+				भङ्ग;
 			}
 		}
 
@@ -380,14 +380,14 @@ static int EmacLitePingReqExample(u16 DeviceId)
 		 * If no echo reply packet is received, it reports
 		 * request timed out.
 		 */
-		if (EchoReplyStatus == XST_FAILURE) {
+		यदि (Echo_प्रत्युत्तरम्_स्थितिः == XST_FAILURE) {
 			xil_printf("Packet No: %d",
-				NUM_OF_PING_REQ_PKTS - NumOfPingReqPkts);
+				अङ्कः_सम्बन्धि_PING_REQ_PKTS - अङ्कः_सम्बन्धि_Ping_Req_Pkts);
 			xil_printf(" Seq NO %d Request timed out\r\n",
-							SeqNum);
+							Seq_अङ्कः);
 		}
 	}
-	return XST_SUCCESS;
+	प्रत्यागम XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -402,36 +402,36 @@ static int EmacLitePingReqExample(u16 DeviceId)
 * @note		None.
 *
 ******************************************************************************/
-static void SendArpReqFrame(XEmacLite *InstancePtr)
+स्थिर शून्य SendArpReqFrame(XEmacLite *InstancePtr)
 {
-	u16 *TempPtr;
+	u16 *अस्थायी_Ptr;
 	u16 *TxFramePtr;
-	u32 NextTxBuffBaseAddr;
-	int Index;
+	u32 अग्र_Tx_Buff_आधारः_Addr;
+	पूर्णाङ्क सूचकांक;
 
 	TxFramePtr = (u16 *)TxFrame;
 
 	/*
 	 * Determine the next expected transmit buffer base address.
 	 */
-	NextTxBuffBaseAddr = XEmacLite_NextTransmitAddr(InstancePtr);
+	अग्र_Tx_Buff_आधारः_Addr = XEmac_Lite_अग्र_Transmit_Addr(InstancePtr);
 
 	/*
 	 * Add broadcast address.
 	 */
-	Index = MAC_ADDR_LEN;
-	while (Index--) {
-		*TxFramePtr++ = BROADCAST_ADDR;
+	सूचकांक = MAC_ADDR_LEN;
+	यावत् (सूचकांक--) {
+		*TxFramePtr++ = प्रसारणम्_ADDR;
 	}
 
 	/*
 	 * Add local MAC address.
 	 */
-	Index = 0;
-	TempPtr = (u16 *)LocalMacAddr;
-	while (Index < MAC_ADDR_LEN) {
-		*TxFramePtr++ = *(TempPtr + Index);
-		Index++;
+	सूचकांक = 0;
+	अस्थायी_Ptr = (u16 *)LocalMacAddr;
+	यावत् (सूचकांक < MAC_ADDR_LEN) {
+		*TxFramePtr++ = *(अस्थायी_Ptr + सूचकांक);
+		सूचकांक++;
 	}
 
 	/*
@@ -445,52 +445,52 @@ static void SendArpReqFrame(XEmacLite *InstancePtr)
 	*TxFramePtr++ = Xil_Htons(XEL_ETHER_PROTO_TYPE_ARP);
 	*TxFramePtr++ = Xil_Htons(HW_TYPE);
 	*TxFramePtr++ = Xil_Htons(XEL_ETHER_PROTO_TYPE_IP);
-	*TxFramePtr++ = Xil_Htons(IP_VERSION);
+	*TxFramePtr++ = Xil_Htons(IP_संस्करणम्);
 	*TxFramePtr++ = Xil_Htons(ARP_REQUEST);
 
 	/*
 	 * Add local MAC address.
 	 */
-	Index = 0;
-	TempPtr = (u16 *)LocalMacAddr;
-	while (Index < MAC_ADDR_LEN) {
-		*TxFramePtr++ = *(TempPtr + Index);
-		Index++;
+	सूचकांक = 0;
+	अस्थायी_Ptr = (u16 *)LocalMacAddr;
+	यावत् (सूचकांक < MAC_ADDR_LEN) {
+		*TxFramePtr++ = *(अस्थायी_Ptr + सूचकांक);
+		सूचकांक++;
 	}
 
 	/*
 	 * Add local IP address.
 	 */
-	Index = 0;
-	TempPtr = (u16 *)LocalIpAddress;
-	while (Index < IP_ADDR_LEN) {
-		*TxFramePtr++ = *(TempPtr + Index);
-		Index++;
+	सूचकांक = 0;
+	अस्थायी_Ptr = (u16 *)Local_Ip_स्थानाङ्कः;
+	यावत् (सूचकांक < IP_ADDR_LEN) {
+		*TxFramePtr++ = *(अस्थायी_Ptr + सूचकांक);
+		सूचकांक++;
 	}
 
 	/*
 	 * Fills 6 bytes of information with zeros as per protocol.
 	 */
-	Index = 0;
-	while (Index < 3) {
+	सूचकांक = 0;
+	यावत् (सूचकांक < 3) {
 		*TxFramePtr++ = 0x0000;
-		Index++;
+		सूचकांक++;
 	}
 
 	/*
 	 * Add Destination IP address.
 	 */
-	Index = 0;
-	TempPtr = (u16 *)DestIpAddress;
-	while (Index < IP_ADDR_LEN) {
-		*TxFramePtr++ = *(TempPtr + Index);
-		Index++;
+	सूचकांक = 0;
+	अस्थायी_Ptr = (u16 *)Dest_Ip_स्थानाङ्कः;
+	यावत् (सूचकांक < IP_ADDR_LEN) {
+		*TxFramePtr++ = *(अस्थायी_Ptr + सूचकांक);
+		सूचकांक++;
 	}
 
 	/*
 	 * Transmit the Frame.
 	 */
-	XEmacLite_Send(InstancePtr, (u8 *)&TxFrame, ARP_REQ_PKT_SIZE);
+	XEmacLite_Send(InstancePtr, (u8 *)&TxFrame, ARP_REQ_PKT_आकार);
 }
 
 /*****************************************************************************/
@@ -505,14 +505,14 @@ static void SendArpReqFrame(XEmacLite *InstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-static void SendEchoReqFrame(XEmacLite *InstancePtr)
+स्थिर शून्य SendEchoReqFrame(XEmacLite *InstancePtr)
 {
-	u16 *TempPtr;
+	u16 *अस्थायी_Ptr;
 	u16 *TxFramePtr;
 	u16 *RxFramePtr;
-	u16 CheckSum;
-	u32 NextTxBuffBaseAddr;
-	int Index;
+	u16 Check_योग;
+	u32 अग्र_Tx_Buff_आधारः_Addr;
+	पूर्णाङ्क सूचकांक;
 
 	TxFramePtr = (u16 *)TxFrame;
 	RxFramePtr = (u16 *)RxFrame;
@@ -520,100 +520,100 @@ static void SendEchoReqFrame(XEmacLite *InstancePtr)
 	/*
 	 * Determine the next expected transmit buffer base address.
 	 */
-	NextTxBuffBaseAddr = XEmacLite_NextTransmitAddr(InstancePtr);
+	अग्र_Tx_Buff_आधारः_Addr = XEmac_Lite_अग्र_Transmit_Addr(InstancePtr);
 
 	/*
 	 * Add Destination MAC Address.
 	 */
-	Index = MAC_ADDR_LEN;
-	while (Index--) {
-		*(TxFramePtr + Index) = *(DestMacAddr + Index);
+	सूचकांक = MAC_ADDR_LEN;
+	यावत् (सूचकांक--) {
+		*(TxFramePtr + सूचकांक) = *(DestMacAddr + सूचकांक);
 	}
 
 	/*
 	 * Add Source MAC Address.
 	 */
-	Index = MAC_ADDR_LEN;
-	TempPtr = (u16 *)LocalMacAddr;
-	while (Index--) {
-		*(TxFramePtr + (Index + SRC_MAC_ADDR_LOC )) =
-							*(TempPtr + Index);
+	सूचकांक = MAC_ADDR_LEN;
+	अस्थायी_Ptr = (u16 *)LocalMacAddr;
+	यावत् (सूचकांक--) {
+		*(TxFramePtr + (सूचकांक + SRC_MAC_ADDR_LOC )) =
+							*(अस्थायी_Ptr + सूचकांक);
 	}
 
 	/*
 	 * Add IP header information.
 	 */
-	Index = IP_START_LOC;
-	while (Index--) {
-		*(TxFramePtr + (Index + ETHER_PROTO_TYPE_LOC )) =
-				Xil_Htons(*(IpHeaderInfo + Index));
+	सूचकांक = IP_START_LOC;
+	यावत् (सूचकांक--) {
+		*(TxFramePtr + (सूचकांक + ETHER_PROTO_TYPE_LOC )) =
+				Xil_Htons(*(Ip_शीर्षकम्_Info + सूचकांक));
 	}
 
 	/*
 	 * Add Source IP address.
 	 */
-	Index = IP_ADDR_LEN;
-	TempPtr = (u16 *)LocalIpAddress;
-	while (Index--) {
-		*(TxFramePtr + (Index + IP_REQ_SRC_IP_LOC )) =
-						*(TempPtr + Index);
+	सूचकांक = IP_ADDR_LEN;
+	अस्थायी_Ptr = (u16 *)Local_Ip_स्थानाङ्कः;
+	यावत् (सूचकांक--) {
+		*(TxFramePtr + (सूचकांक + IP_REQ_SRC_IP_LOC )) =
+						*(अस्थायी_Ptr + सूचकांक);
 	}
 
 	/*
 	 * Add Destination IP address.
 	 */
-	Index = IP_ADDR_LEN;
-	TempPtr = (u16 *)DestIpAddress;
-	while (Index--) {
-		*(TxFramePtr + (Index + IP_REQ_DEST_IP_LOC )) =
-						*(TempPtr + Index);
+	सूचकांक = IP_ADDR_LEN;
+	अस्थायी_Ptr = (u16 *)Dest_Ip_स्थानाङ्कः;
+	यावत् (सूचकांक--) {
+		*(TxFramePtr + (सूचकांक + IP_REQ_DEST_IP_LOC )) =
+						*(अस्थायी_Ptr + सूचकांक);
 	}
 
 	/*
 	 * Checksum is calculated for IP field and added in the frame.
 	 */
-	CheckSum = CheckSumCalculation((u16 *)TxFrame, IP_START_LOC,
-							IP_HEADER_LEN);
-	CheckSum = ~CheckSum;
-	*(TxFramePtr + IP_CHECKSUM_LOC) = Xil_Htons(CheckSum);
+	Check_योग = Check_योग_Calculation((u16 *)TxFrame, IP_START_LOC,
+							IP_शीर्षकम्_LEN);
+	Check_योग = ~Check_योग;
+	*(TxFramePtr + IP_CHECKSUM_LOC) = Xil_Htons(Check_योग);
 
 	/*
 	 * Add echo field information.
 	 */
-	*(TxFramePtr + ICMP_ECHO_FIELD_LOC) = Xil_Htons(XEL_ETHER_PROTO_TYPE_IP);
+	*(TxFramePtr + ICMP_ECHO_क्षेत्रम्_LOC) = Xil_Htons(XEL_ETHER_PROTO_TYPE_IP);
 
 	/*
 	 * Checksum value is initialized to zeros.
 	 */
-	*(TxFramePtr + ICMP_DATA_LEN) = 0x0000;
+	*(TxFramePtr + ICMP_दत्त_LEN) = 0x0000;
 
 	/*
 	 * Add identifier and sequence number to the frame.
 	 */
-	*(TxFramePtr + ICMP_IDEN_FIELD_LOC) = (IDEN_NUM);
-	*(TxFramePtr + (ICMP_IDEN_FIELD_LOC + 1)) = Xil_Htons((u16)(++SeqNum));
+	*(TxFramePtr + ICMP_IDEN_क्षेत्रम्_LOC) = (IDEN_अङ्कः);
+	*(TxFramePtr + (ICMP_IDEN_क्षेत्रम्_LOC + 1)) = Xil_Htons((u16)(++Seq_अङ्कः));
 
 	/*
 	 * Add known data to the frame.
 	 */
-	Index = ICMP_KNOWN_DATA_LEN;
-	while (Index--) {
-		*(TxFramePtr + (Index + ICMP_KNOWN_DATA_LOC)) =
-				Xil_Htons(*(IcmpData + Index));
+	सूचकांक = ICMP_ज्ञातम्_दत्त_LEN;
+	यावत् (सूचकांक--) {
+		*(TxFramePtr + (सूचकांक + ICMP_ज्ञातम्_दत्त_LOC)) =
+				Xil_Htons(*(Icmp_दत्त + सूचकांक));
 	}
 
 	/*
 	 * Checksum is calculated for Data Field and added in the frame.
 	 */
-	CheckSum = CheckSumCalculation((u16 *)TxFrame, ICMP_DATA_START_LOC,
-						ICMP_DATA_FIELD_LEN );
-	CheckSum = ~CheckSum;
-	*(TxFramePtr + ICMP_DATA_CHECKSUM_LOC) = Xil_Htons(CheckSum);
+	Check_योग = Check_योग_Calculation((u16 *)TxFrame, ICMP_दत्त_START_LOC,
+						ICMP_दत्त_क्षेत्रम्_LEN );
+	Check_योग = ~Check_योग;
+	*(TxFramePtr + ICMP_दत्त_CHECKSUM_LOC) = Xil_Htons(Check_योग);
 
 	/*
 	 * Transmit the Frame.
 	 */
-	XEmacLite_Send(InstancePtr, (u8 *)&TxFrame, ICMP_PKT_SIZE);
+	XEmacLite_Send(InstancePtr, (u8 *)&TxFrame, ICMP_PKT_आकार);
 }
 
 /*****************************************************************************/
@@ -630,56 +630,56 @@ static void SendEchoReqFrame(XEmacLite *InstancePtr)
 * @note		This assumes MAC does not strip padding or CRC.
 *
 ******************************************************************************/
-static int ProcessRecvFrame(XEmacLite *InstancePtr)
+स्थिर पूर्णाङ्क ProcessRecvFrame(XEmacLite *InstancePtr)
 {
 	u16 *RxFramePtr;
-	u16 *TempPtr;
-	u16 CheckSum;
-	int Index;
-	int Match = 0;
-	int DataWrong = 0;
+	u16 *अस्थायी_Ptr;
+	u16 Check_योग;
+	पूर्णाङ्क सूचकांक;
+	पूर्णाङ्क मेलनम् = 0;
+	पूर्णाङ्क दत्त_Wrong = 0;
 
 	RxFramePtr = (u16 *)RxFrame;
-	TempPtr = (u16 *)LocalMacAddr;
+	अस्थायी_Ptr = (u16 *)LocalMacAddr;
 
 	/*
 	 * Check Dest Mac address of the packet with the LocalMac address.
 	 */
-	Match = CompareData(RxFramePtr, TempPtr, 0, 0, MAC_ADDR_LEN);
-	if (Match == XST_SUCCESS) {
+	मेलनम् = Compare_दत्त(RxFramePtr, अस्थायी_Ptr, 0, 0, MAC_ADDR_LEN);
+	यदि (मेलनम् == XST_SUCCESS) {
 
 		/*
 		 * Check ARP type.
 		 */
-		if (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
+		यदि (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
 				XEL_ETHER_PROTO_TYPE_ARP ) {
 
 			/*
 			 * Check ARP status.
 			 */
-			if (Xil_Ntohs(*(RxFramePtr + ARP_REQ_STATUS_LOC)) == ARP_REPLY) {
+			यदि (Xil_Ntohs(*(RxFramePtr + ARP_REQ_स्थितिः_LOC)) == ARP_प्रत्युत्तरम्) {
 
 				/*
 				 * Check destination IP address with
 				 * packet's source IP address.
 				 */
-				TempPtr = (u16 *)DestIpAddress;
-				Match = CompareData(RxFramePtr,
-						TempPtr, ARP_REQ_SRC_IP_LOC,
+				अस्थायी_Ptr = (u16 *)Dest_Ip_स्थानाङ्कः;
+				मेलनम् = Compare_दत्त(RxFramePtr,
+						अस्थायी_Ptr, ARP_REQ_SRC_IP_LOC,
 						0, IP_ADDR_LEN);
-				if (Match == XST_SUCCESS) {
+				यदि (मेलनम् == XST_SUCCESS) {
 
 					/*
 					 * Copy src Mac address of the received
 					 * packet.
 					 */
-					Index = MAC_ADDR_LEN;
-					TempPtr = (u16 *)DestMacAddr;
-					while (Index--) {
-						*(TempPtr + Index) =
+					सूचकांक = MAC_ADDR_LEN;
+					अस्थायी_Ptr = (u16 *)DestMacAddr;
+					यावत् (सूचकांक--) {
+						*(अस्थायी_Ptr + सूचकांक) =
 							*(RxFramePtr +
 							(SRC_MAC_ADDR_LOC +
-								Index));
+								सूचकांक));
 					}
 
 					/*
@@ -693,47 +693,47 @@ static int ProcessRecvFrame(XEmacLite *InstancePtr)
 		/*
 		 * Check for IP type.
 		 */
-		else if (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
+		अन्यथा यदि (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
 						XEL_ETHER_PROTO_TYPE_IP) {
 
 			/*
 			 * Calculate checksum.
 			 */
-			CheckSum = CheckSumCalculation(RxFramePtr,
-							ICMP_DATA_START_LOC,
-							ICMP_DATA_FIELD_LEN);
+			Check_योग = Check_योग_Calculation(RxFramePtr,
+							ICMP_दत्त_START_LOC,
+							ICMP_दत्त_क्षेत्रम्_LEN);
 
 			/*
 			 * Verify checksum, echo reply, identifier number and
 			 * sequence number of the received packet.
 			 */
-			if ((CheckSum == CORRECT_CHECKSUM_VALUE) &&
-			(Xil_Ntohs(*(RxFramePtr + ICMP_ECHO_FIELD_LOC)) == ECHO_REPLY) &&
-			(Xil_Ntohs(*(RxFramePtr + ICMP_IDEN_FIELD_LOC)) == IDEN_NUM) &&
-			(Xil_Ntohs(*(RxFramePtr + (ICMP_SEQ_NO_LOC))) == SeqNum)) {
+			यदि ((Check_योग == CORRECT_CHECKSUM_मानम्) &&
+			(Xil_Ntohs(*(RxFramePtr + ICMP_ECHO_क्षेत्रम्_LOC)) == ECHO_प्रत्युत्तरम्) &&
+			(Xil_Ntohs(*(RxFramePtr + ICMP_IDEN_क्षेत्रम्_LOC)) == IDEN_अङ्कः) &&
+			(Xil_Ntohs(*(RxFramePtr + (ICMP_SEQ_NO_LOC))) == Seq_अङ्कः)) {
 
 				/*
 				 * Verify data in the received packet with known
 				 * data.
 				 */
-				TempPtr = IcmpData;
-				Match = CompareData(RxFramePtr,
-						TempPtr, ICMP_KNOWN_DATA_LOC,
-							0, ICMP_KNOWN_DATA_LEN);
-				if (Match == XST_FAILURE) {
-					DataWrong = 1;
+				अस्थायी_Ptr = Icmp_दत्त;
+				मेलनम् = Compare_दत्त(RxFramePtr,
+						अस्थायी_Ptr, ICMP_ज्ञातम्_दत्त_LOC,
+							0, ICMP_ज्ञातम्_दत्त_LEN);
+				यदि (मेलनम् == XST_FAILURE) {
+					दत्त_Wrong = 1;
 				}
 			}
-			if (DataWrong != 1) {
+			यदि (दत्त_Wrong != 1) {
 				xil_printf("Packet No: %d ",
-				NUM_OF_PING_REQ_PKTS - NumOfPingReqPkts);
+				अङ्कः_सम्बन्धि_PING_REQ_PKTS - अङ्कः_सम्बन्धि_Ping_Req_Pkts);
 				xil_printf("Seq NO %d Echo Packet received\r\n",
-								SeqNum);
-				return XST_SUCCESS;
+								Seq_अङ्कः);
+				प्रत्यागम XST_SUCCESS;
 			}
 		}
 	}
-	return XST_FAILURE;
+	प्रत्यागम XST_FAILURE;
 }
 /*****************************************************************************/
 /**
@@ -753,28 +753,28 @@ static int ProcessRecvFrame(XEmacLite *InstancePtr)
 * 		complement of this return value will give the final checksum.
 *
 ******************************************************************************/
-static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length)
+स्थिर u16 Check_योग_Calculation(u16 *RxFramePtr, पूर्णाङ्क StartLoc, पूर्णाङ्क दीर्घता)
 {
-	u32 Sum = 0;
-	u16 CheckSum = 0;
-	int Index;
+	u32 योग = 0;
+	u16 Check_योग = 0;
+	पूर्णाङ्क सूचकांक;
 
 	/*
 	 * Add all the 16 bit data.
 	 */
-	Index = StartLoc;
-	while (Index < (StartLoc + Length)) {
-		Sum = Sum + Xil_Htons(*(RxFramePtr + Index));
-		Index++;
+	सूचकांक = StartLoc;
+	यावत् (सूचकांक < (StartLoc + दीर्घता)) {
+		योग = योग + Xil_Htons(*(RxFramePtr + सूचकांक));
+		सूचकांक++;
 	}
 
 	/*
 	 * Add upper 16 bits to lower 16 bits.
 	 */
-	CheckSum = Sum;
-	Sum = Sum>>16;
-	CheckSum = Sum + CheckSum;
-	return CheckSum;
+	Check_योग = योग;
+	योग = योग>>16;
+	Check_योग = योग + Check_योग;
+	प्रत्यागम Check_योग;
 }
 /*****************************************************************************/
 /**
@@ -793,17 +793,17 @@ static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length)
 * @note		None.
 *
 ******************************************************************************/
-static int CompareData(u16 *LhsPtr, u16 *RhsPtr, int LhsLoc, int RhsLoc,
-								int Count)
+स्थिर पूर्णाङ्क Compare_दत्त(u16 *LhsPtr, u16 *RhsPtr, पूर्णाङ्क LhsLoc, पूर्णाङ्क RhsLoc,
+								पूर्णाङ्क गणनम्_2)
 {
-	int Result;
-	while (Count--) {
-		if (*(LhsPtr + LhsLoc + Count) == *(RhsPtr + RhsLoc + Count)) {
-			Result = XST_SUCCESS;
-		} else {
-			Result = XST_FAILURE;
-			break;
+	पूर्णाङ्क परिणाम;
+	यावत् (गणनम्_2--) {
+		यदि (*(LhsPtr + LhsLoc + गणनम्_2) == *(RhsPtr + RhsLoc + गणनम्_2)) {
+			परिणाम = XST_SUCCESS;
+		} अन्यथा {
+			परिणाम = XST_FAILURE;
+			भङ्ग;
 		}
 	}
-	return Result;
+	प्रत्यागम परिणाम;
 }

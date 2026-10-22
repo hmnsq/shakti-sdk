@@ -26,12 +26,12 @@
   @detail  Configures leds and maps to the gpio pins.
  */
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#यदि defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
-#include "led_driver.h"
-#include "utils.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "led_driver.h"
+#अन्तर्भाव "utils.h"
 
  /** @fn void configure_ledx(unsigned long pin_cntrl)
  * @brief Configures Individual LED pins as output.
@@ -39,12 +39,12 @@
  *          each LED as output pin.
  * @param unsigned long (pin_cntrl- Pin that needs to be configured as LED.)
  */
-void configure_ledx(unsigned long pin_cntrl)
+शून्य configure_ledx(अचिह्नित दीर्घ pin_cntrl)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | pin_cntrl ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | pin_cntrl ) );
+	प्रत्यागम ;
 }
 
 /** @fn void configure_rgb_ledx(unsigned char led_no)
@@ -53,17 +53,17 @@ void configure_ledx(unsigned long pin_cntrl)
  *          each LED as output pin.
  * @param unsigned char (led_no - RGB LED that needs to be configured.)
  */
-void configure_rgb_ledx(unsigned char led_no)
+शून्य configure_rgb_ledx(अचिह्नित वर्ण led_no)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  if (0 == led_no)
-    write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB0 ) );
-  else if (1 == led_no)
-    write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB1  ) );
-  else
-    printf("\nInvalid LED No. Permissable values [0,1]");
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+  यदि (0 == led_no)
+    write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | RGB0 ) );
+  अन्यथा यदि (1 == led_no)
+    write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | RGB1  ) );
+  अन्यथा
+    प्रारूप_लिख("\nInvalid LED No. Permissable values [0,1]");
+	प्रत्यागम ;
 }
 
 /*
@@ -72,12 +72,12 @@ void configure_rgb_ledx(unsigned char led_no)
  * @details This function configures GPIO pins mapped to 
  *          Normal LEDs as output pins.
  */
-void configure_normal_leds()
+शून्य configure_प्रसामान्यम्_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | NORMAL_LEDS ) ) ;
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | प्रसामान्यम्_LEDS ) ) ;
+	प्रत्यागम ;
 }
 
 /*
@@ -86,12 +86,12 @@ void configure_normal_leds()
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          gpio pins mapped to both RGB LEDs as output pins.
  */
-void configure_rgb_leds()
+शून्य configure_rgb_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ( RGB_LEDS ) ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | ( RGB_LEDS ) ) );
+	प्रत्यागम ;
 }
 
 /** @fn void configure_all_leds()
@@ -99,12 +99,12 @@ void configure_rgb_leds()
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          all GPIO pins mapped to all the LEDs as output pins.
  */
-void configure_all_leds()
+शून्य configure_all_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ALL_LEDS ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | ALL_LEDS ) );
+	प्रत्यागम ;
 }
 
 /** @fn static void turn_on_ledx()
@@ -113,12 +113,12 @@ void configure_all_leds()
  *          the GPIO pin position passed.
  * @param pin_cntrl - GPIO Pin position of the LED that needs to be switched ON.
  */
-void turn_on_ledx(unsigned long pin_cntrl)
+शून्य turn_on_ledx(अचिह्नित दीर्घ pin_cntrl)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data | pin_cntrl ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 | pin_cntrl ) );
+	प्रत्यागम ;
 }
 
  /** @fn void turn_off_ledx(unsigned long pin_cntrl)
@@ -127,36 +127,36 @@ void turn_on_ledx(unsigned long pin_cntrl)
  *          the GPIO pin position passed.
  * @param pin_cntrl - GPIO Pin position of the LED that needs to be switched OFF.
  */
-void turn_off_ledx(unsigned long pin_cntrl)
+शून्य turn_off_ledx(अचिह्नित दीर्घ pin_cntrl)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data & (~pin_cntrl) )   );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~pin_cntrl) )   );
+	प्रत्यागम ;
 }
 
 /** @fn  void turn_on_normal_leds()
  * @brief turn ON the all Normal LEDs.
  * @details This function switches ON the Normal LEDs
  */
-void turn_on_normal_leds()
+शून्य turn_on_प्रसामान्यम्_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
- 	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+ 	write_word(GPIO_दत्त_REG, ( read_दत्त_2 | प्रसामान्यम्_LEDS ) );
+	प्रत्यागम ;
 }
 
 /** @fn void turn_off_normal_leds()
  * @brief turn OFF the all Normal LEDs.
  * @details This function switches ON both RGB LED.
  */
-void turn_off_normal_leds()
+शून्य turn_off_प्रसामान्यम्_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data & (~NORMAL_LEDS) ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~प्रसामान्यम्_LEDS) ) );
+	प्रत्यागम ;
 }
 
 /** @fn void turn_on_rgb_ledx(unsigned char led_no)
@@ -165,17 +165,17 @@ void turn_off_normal_leds()
  *          on passed RGB LED.
  * @param unsigned char (RGB LED that needs to be switched On[0,1].)
  */
-void turn_on_rgb_ledx(unsigned char led_no)
+शून्य turn_on_rgb_ledx(अचिह्नित वर्ण led_no)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-  if (0 == led_no)
-    write_word(GPIO_DATA_REG, ( read_data | RGB0 ) );
-  else if (1 == led_no)
-    write_word(GPIO_DATA_REG, ( read_data | RGB1 ) );
-  else
-    printf("\n RGB Led number is not valid [0,1]");
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+  यदि (0 == led_no)
+    write_word(GPIO_दत्त_REG, ( read_दत्त_2 | RGB0 ) );
+  अन्यथा यदि (1 == led_no)
+    write_word(GPIO_दत्त_REG, ( read_दत्त_2 | RGB1 ) );
+  अन्यथा
+    प्रारूप_लिख("\n RGB Led number is not valid [0,1]");
+	प्रत्यागम ;
 }
 
 /** @fn void turn_off_rgb_ledx(unsigned char led_no)
@@ -184,17 +184,17 @@ void turn_on_rgb_ledx(unsigned char led_no)
  *          OFF passed RGB LED.
  * @param unsigned char (RGB LED that needs to be switched OFF[0,1].)
  */
-void turn_off_rgb_ledx(unsigned char led_no)
+शून्य turn_off_rgb_ledx(अचिह्नित वर्ण led_no)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-  if (0 == led_no)
-	 write_word(GPIO_DATA_REG, ( read_data & (~RGB0) ) );
-  else if (1 == led_no)
- 	  write_word(GPIO_DATA_REG, ( read_data & (~RGB1) ) );
-  else
-    printf("\n RGB Led number is not valid [0,1]");
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+  यदि (0 == led_no)
+	 write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~RGB0) ) );
+  अन्यथा यदि (1 == led_no)
+ 	  write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~RGB1) ) );
+  अन्यथा
+    प्रारूप_लिख("\n RGB Led number is not valid [0,1]");
+	प्रत्यागम ;
 }
 
 /** @fn void turn_on_rgb_leds()
@@ -202,48 +202,48 @@ void turn_off_rgb_ledx(unsigned char led_no)
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function switches
  *          ON both RGB LED.
  */
-void turn_on_rgb_leds()
+शून्य turn_on_rgb_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-    write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+    write_word(GPIO_दत्त_REG, ( read_दत्त_2 | RGB_LEDS ) );
+	प्रत्यागम ;
 }
 
 /** @fn void turn_off_rgb_leds()
  * @brief turn ON the all RGB LEDs.
  * @details This function switches ON both RGB LED.
  */
-void turn_off_rgb_leds()
+शून्य turn_off_rgb_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
- 	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+ 	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~RGB_LEDS) ) );
+	प्रत्यागम ;
 }
 
 /** @fn void turn_on_all_leds()
  * @brief turn ON the all LEDs.
  * @details This function switches ON all LEDs.
  */
-void turn_on_all_leds()
+शून्य turn_on_all_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 | ALL_LEDS ) );
+	प्रत्यागम ;
 }
 
 /** @fn void turn_off_all_leds()
  * @brief turn OFF the all LEDs.
  * @details This function switches OFF all LEDs.
  */
-void turn_off_all_leds()
+शून्य turn_off_all_leds()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-  write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
-	return ;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+  write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~ALL_LEDS) ) );
+	प्रत्यागम ;
 }
 
  /** @fn void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
@@ -253,15 +253,15 @@ void turn_off_all_leds()
  * @param unsigned long delay1
  * @param unsigned long delay2(Led that needs to be toggled, delay.)
  */
-void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
+शून्य toggle_ledx(अचिह्नित दीर्घ pin_cntrl, अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word (GPIO_DATA_REG, ( read_data | (pin_cntrl ) ) );
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word (GPIO_दत्त_REG, ( read_दत्त_2 | (pin_cntrl ) ) );
 	delay_loop(delay1, delay2);
-	write_word(GPIO_DATA_REG, ( read_data & (~pin_cntrl) ) );
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~pin_cntrl) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	प्रत्यागम ;
 }
 
  /** @fn void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
@@ -271,15 +271,15 @@ void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long de
  * @param unsigned long delay1
  * @param unsigned long delay2
  */
-void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
+शून्य toggle_प्रसामान्यम्_leds( अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2 )
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 | प्रसामान्यम्_LEDS ) );
 	delay_loop(delay1, delay2);
- 	write_word(GPIO_DATA_REG, ( read_data & (~NORMAL_LEDS) ) );
+ 	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~प्रसामान्यम्_LEDS) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	प्रत्यागम ;
 }
 
 /** @fn void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
@@ -288,15 +288,15 @@ void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
  * @param unsigned long delay1
  * @param unsigned long delay2
  */
-void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
+शून्य toggle_rgb_leds( अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2 )
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 | RGB_LEDS ) );
 	delay_loop(delay1, delay2);
- 	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
+ 	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~RGB_LEDS) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	प्रत्यागम ;
 }
 
 /** @fn void toggle_all_leds( unsigned long delay1, unsigned long delay2)
@@ -305,14 +305,14 @@ void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
  * @param unsigned long delay1
  * @param unsigned long delay2
  */
-void toggle_all_leds( unsigned long delay1, unsigned long delay2)
+शून्य toggle_all_leds( अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 | ALL_LEDS ) );
 	delay_loop(delay1, delay2);
-	write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
+	write_word(GPIO_दत्त_REG, ( read_दत्त_2 & (~ALL_LEDS) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	प्रत्यागम ;
 }
-#endif
+#यदि_अन्तः

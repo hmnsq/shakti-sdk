@@ -25,33 +25,33 @@
   @brief read data from the flash by spi
   @detail Contains driver codes to read and write flash using SPI interface.
  */
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#अन्तर्भाव "spi.h"
+#अन्तर्भाव "uart.h"
+#अन्तर्भाव "utils.h"
 
 /** @fn void main()
  * @brief Configures the SPI flash and reads the flash.
  * @details Configures the SPI flash, Confirms the flash device id,
             then read 10 addresses in flash and prints the value.
  */
-int main(void){
+पूर्णाङ्क मुख्यम्(शून्य){
 
-	configure_spi(SPI0_OFFSET);
+	configure_spi(SPI0_विस्थापनम्);
 
 	spi_init();
-	printf("SPI init done\n");
+	प्रारूप_लिख("SPI init done\n");
 	flash_device_id();
 	waitfor(200);
-	int total_data = 10; //total data you want to read/write
-	int read_address = 0x00b00000;  //read from this address
+	पूर्णाङ्क योग_दत्त = 10; //total data you want to read/write
+	पूर्णाङ्क read_स्थानाङ्कः = 0x00b00000;  //read from this address
 
-	for(int i = 0; i < total_data; ++i)
+	प्रति(पूर्णाङ्क i = 0; i < योग_दत्त; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("Reading from adddress %x and data \
-		       %x\n",read_address,read_value);
-		read_address=read_address+4;
+		पूर्णाङ्क read_मानम्= flash_read(read_स्थानाङ्कः);
+		प्रारूप_लिख("Reading from adddress %x and दत्त_2 \
+		       %x\n",read_स्थानाङ्कः,read_मानम्);
+		read_स्थानाङ्कः=read_स्थानाङ्कः+4;
 	}
-	asm volatile ("ebreak");
-	return 0;
+	asm चञ्चल ("ebreak");
+	प्रत्यागम 0;
 }

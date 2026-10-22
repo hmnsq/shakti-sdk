@@ -27,28 +27,28 @@
 @detail It will buzzer at a predefined frequency on its own, when applying HIGH signal.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "utils.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "utils.h"
 
 /** @fn void main()
  * @brief Correspondingly making GPIO0 as HIGH and LOW.
  * @details It will make sound when you give HIGH signal
  */
-void main()
+शून्य मुख्यम्()
 {
     //Assumption 1 ---> output, 0 ---> input
     write_word(GPIO_DIRECTION_CNTRL_REG, GPIO0);
 
-    while (1) {
-        write_word(GPIO_DATA_REG, 0x0000);
+    यावत् (1) {
+        write_word(GPIO_दत्त_REG, 0x0000);
 
         delay_loop(1000, 1000);
 
-        write_word(GPIO_DATA_REG, GPIO0);
+        write_word(GPIO_दत्त_REG, GPIO0);
 
         delay_loop(1000,1000);
 
-        printf("\nWORKED SUCCESSFULLY");
+        प्रारूप_लिख("\nWORKED SUCCESSFULLY");
     }
 }

@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#अन्तर्भाव <stdint.h>
+#अन्तर्भाव <stdarg.h>
+#अन्तर्भाव "utils.h"
+#अन्तर्भाव "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,30 +39,30 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+स्थिर अन्तःस्थ शून्य itoa (अचिह्नित दीर्घ दीर्घ पूर्णाङ्क सङ्ख्या, अचिह्नित आधारः)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	पूर्णाङ्क i = 0;
+	अचिह्नित पूर्णाङ्क intermediate = 0;
+	अचिह्नित पूर्णाङ्क digits[परिमाण(सङ्ख्या)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	यावत् (1) {
+		digits[i] = सङ्ख्या % आधारः;
 
-		if (number < base)
-			break;
+		यदि (सङ्ख्या < आधारः)
+			भङ्ग;
 
-		number /= base;
+		सङ्ख्या /= आधारः;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	यावत् (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		यदि (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		अन्यथा
 			intermediate = '0';
 
-		putchar(digits[i] + intermediate);
+		अक्षरं_लिख(digits[i] + intermediate);
 	}
 }
 
@@ -72,151 +72,151 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+शून्य _printf_(ध्रुव वर्ण *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	पञ्जिका ध्रुव वर्ण* p;
+	ध्रुव वर्ण* चरमः_fmt;
+	पञ्जिका पूर्णाङ्क ch;
+	अचिह्नित दीर्घ दीर्घ अङ्कः;
+	पूर्णाङ्क आधारः, lflag, i;
+	भिन्न float_अङ्कः = 0;
+	वर्ण float_arr[30] = {'\0'};
+	पूर्णाङ्क backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
-			putchar(ch);
+	प्रति (;;) {
+		प्रति (;(ch = *(अचिह्नित वर्ण *) fmt) != '%'; fmt++) {
+			यदि (ch == '\0')
+				प्रत्यागम;
+			अक्षरं_लिख(ch);
 		}
 		fmt++;
 
 		// Process a %-escape sequence
-		last_fmt = fmt;
+		चरमः_fmt = fmt;
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		प्रति (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			विकल्प (ch = *(अचिह्नित वर्ण *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				पक्ष 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					भङ्ग;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				पक्ष 'c':
+					अक्षरं_लिख(va_arg(ap, पूर्णाङ्क));
+					भङ्ग;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				पक्ष 's':
+					यदि ((p = va_arg(ap, वर्ण *)) == रिक्त)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
-						putchar(ch);
+					प्रति (; (ch = *p) != '\0' ;) {
+						अक्षरं_लिख(ch);
 						p++;
 					}
-					break;
+					भङ्ग;
 
 					// (signed) decimal
-				case 'd':
-					base = 10;
+				पक्ष 'd':
+					आधारः = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					यदि (lflag >= 2)
+						अङ्कः = va_arg(ap, दीर्घ दीर्घ);
+					अन्यथा यदि (lflag ==1)
+						अङ्कः = va_arg(ap, दीर्घ);
+					अन्यथा
+						अङ्कः = va_arg(ap, पूर्णाङ्क);
 
-					if ((long long) num < 0) {
-						putchar('-');
-						num = -(long long) num;
+					यदि ((दीर्घ दीर्घ) अङ्कः < 0) {
+						अक्षरं_लिख('-');
+						अङ्कः = -(दीर्घ दीर्घ) अङ्कः;
 					}
 
-					itoa( num, base);
+					itoa( अङ्कः, आधारः);
 
-					break;
+					भङ्ग;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				पक्ष 'f':
+					float_अङ्कः =  va_arg(ap, द्विगुण);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_अङ्कः, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					प्रति( i = 0; float_arr[i] != '\0'; i++)
 					{
-						putchar(float_arr[i]);
-						if(i > 29) break;
+						अक्षरं_लिख(float_arr[i]);
+						यदि(i > 29) भङ्ग;
 					}
-					break;
+					भङ्ग;
 
 					// unsigned decimal
-				case 'u':
-					base = 10;
+				पक्ष 'u':
+					आधारः = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					यदि (lflag >= 2)
+						अङ्कः = va_arg(ap, अचिह्नित दीर्घ दीर्घ);
+					अन्यथा यदि (lflag)
+						अङ्कः = va_arg(ap, अचिह्नित दीर्घ);
+					अन्यथा
+						अङ्कः = va_arg(ap, अचिह्नित पूर्णाङ्क);
 
-					itoa( num, base);
+					itoa( अङ्कः, आधारः);
 
-					break;
+					भङ्ग;
 
 					// (unsigned) octal
-				case 'o':
+				पक्ष 'o':
 					// should do something with padding so it's always 3 octits
-					base = 8;
+					आधारः = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					यदि (lflag >= 2)
+						अङ्कः = va_arg(ap, अचिह्नित दीर्घ दीर्घ);
+					अन्यथा यदि (lflag)
+						अङ्कः = va_arg(ap, अचिह्नित दीर्घ);
+					अन्यथा
+						अङ्कः = va_arg(ap, अचिह्नित पूर्णाङ्क);
 
-					itoa( num, base);
+					itoa( अङ्कः, आधारः);
 
-					break;
+					भङ्ग;
 
-				case 'x':
-					base = 16;
+				पक्ष 'x':
+					आधारः = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					यदि (lflag >= 2)
+						अङ्कः = va_arg(ap, अचिह्नित दीर्घ दीर्घ);
+					अन्यथा यदि (lflag)
+						अङ्कः = va_arg(ap, अचिह्नित दीर्घ);
+					अन्यथा
+						अङ्कः = va_arg(ap, अचिह्नित पूर्णाङ्क);
 
-					itoa( num, base);
+					itoa( अङ्कः, आधारः);
 
-					break;
+					भङ्ग;
 
 					// escaped '%' character
-				case '%':
-					putchar(ch);
-					break;
+				पक्ष '%':
+					अक्षरं_लिख(ch);
+					भङ्ग;
 
 					// unrecognized escape sequence - just print it literally
-				default:
-					putchar('%');
-					fmt = last_fmt;
-					break;
+				स्वभाव:
+					अक्षरं_लिख('%');
+					fmt = चरमः_fmt;
+					भङ्ग;
 			}
 
-			if (backtothebeginning)
+			यदि (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				अनुवर्त;
 			}
-			else
-				break;
+			अन्यथा
+				भङ्ग;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+पूर्णाङ्क प्रारूप_लिख(ध्रुव वर्ण* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	प्रत्यागम 0;// incorrect return value, but who cares, anyway?
 }

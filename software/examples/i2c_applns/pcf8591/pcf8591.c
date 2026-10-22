@@ -26,20 +26,20 @@
 @detail I2C based routines to configures and read the adc value from pcf8591.
 */
 
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#अन्तर्भाव <stdint.h>//Includes the definitions of standard input/output functions//
+#अन्तर्भाव "i2c.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "uart.h"
 
-#define PCF8591_SLAVE_ADDRESS 0x90 // I2C bus address //doubt
-#define PCF8591_CONTROL_REGISTER_VALUE 0x04
-#define PCF8591_REG_OFFSET 0
+#परिभाषय PCF8591_SLAVE_स्थानाङ्कः 0x90 // I2C bus address //doubt
+#परिभाषय PCF8591_CONTROL_पञ्जिकाकोशः_मानम् 0x04
+#परिभाषय PCF8591_REG_विस्थापनम् 0
 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#परिभाषय DELAY_मानम् 900
+#परिभाषय PRESCALER_गणनम् 0x1F
+#परिभाषय SCLK_गणनम् 0x91
 
-#define I2C i2c_instance[0]
+#परिभाषय I2C i2c_instance[0]
 
 /** @fn int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the ADC value from PCF8591
@@ -51,37 +51,37 @@
  * @param delay
  * @return read status (zero on success)
  */
-int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+पूर्णाङ्क read_pcf8591_registers(i2c_struct * i2c_instance, अचिह्नित पूर्णाङ्क reg_विस्थापनम्, अचिह्नित पूर्णाङ्क *read_अस्थायी, अचिह्नित वर्ण दीर्घता_2, अचिह्नित दीर्घ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	अचिह्नित वर्ण read_buf[4] = {'\0'};
+	पूर्णाङ्क i = 0, j = 0,  k = 0, स्थितिः_2=0;
+	अचिह्नित वर्ण अस्थायी = 0;
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_स्थानाङ्कः(i2c_instance, PCF8591_SLAVE_स्थानाङ्कः, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_दत्त(i2c_instance, reg_विस्थापनम्, delay);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_स्थानाङ्कः(i2c_instance, PCF8591_SLAVE_स्थानाङ्कः, I2C_READ, 800);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_दत्त(i2c_instance, &अस्थायी, delay);
 
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	प्रति(i = 0; i < दीर्घता_2; i++)
 	{
-		i2c_read_data(i2c_instance, &temp, delay);
-		*readTemp = temp;
-		if( i == (length - 2) )
+		i2c_read_दत्त(i2c_instance, &अस्थायी, delay);
+		*read_अस्थायी = अस्थायी;
+		यदि( i == (दीर्घता_2 - 2) )
 		i2c_instance->control = I2C_NACK;
-		*readTemp++;
+		*read_अस्थायी++;
 	}
 	
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	प्रत्यागम 0;
 }
 
 /** @fn int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -94,19 +94,19 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+पूर्णाङ्क write_pcf8591_registers(i2c_struct * i2c_instance, अचिह्नित पूर्णाङ्क reg_विस्थापनम्, अचिह्नित पूर्णाङ्क *write_मानम्, अचिह्नित वर्ण दीर्घता_2, अचिह्नित दीर्घ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset, delay);
-	for(i = 0; i < length; i++)
+	पूर्णाङ्क i = 0, j = 0,  k = 0, स्थितिः_2=0;
+	अचिह्नित पूर्णाङ्क अस्थायी = 0;
+	i2c_send_slave_स्थानाङ्कः(i2c_instance, PCF8591_SLAVE_स्थानाङ्कः, I2C_WRITE, delay);
+	i2c_write_दत्त(i2c_instance, reg_विस्थापनम्, delay);
+	प्रति(i = 0; i < दीर्घता_2; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_दत्त(i2c_instance,  ( *write_मानम्++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;;
-	return 0;
+	प्रत्यागम 0;
 }
 
 /** @fn int main()
@@ -115,40 +115,40 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
  * prints the read values
  * @return Zero
  */
-int main()
+पूर्णाङ्क मुख्यम्()
 {
-	unsigned char i = 0;
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
-	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-	unsigned char length = 0;
+	अचिह्नित वर्ण i = 0;
+	पूर्णाङ्क timeout;
+	अचिह्नित पूर्णाङ्क अस्थायी_Read_मानम् = 0;
+	अचिह्नित दीर्घ delay = 1000;
+	अचिह्नित पूर्णाङ्क write_buf[7] = {0x00}, read_buf[7] = {0x00};
+	अचिह्नित वर्ण दीर्घता_2 = 0;
 	
 	log_debug("\tI2C: PCF8591 - ADC test\n");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	यदि(config_i2c(I2C, PRESCALER_गणनम्, SCLK_गणनम्))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+			प्रत्यागम -1;
 	}
-	else
+	अन्यथा
 		log_info("\tIntilization Happened Fine\n");
-		length = 1;
-		write_buf[0] = PCF8591_CONTROL_REGISTER_VALUE;
-		write_pcf8591_registers(I2C, 0x00, &write_buf[0], length, delay);
+		दीर्घता_2 = 1;
+		write_buf[0] = PCF8591_CONTROL_पञ्जिकाकोशः_मानम्;
+		write_pcf8591_registers(I2C, 0x00, &write_buf[0], दीर्घता_2, delay);
 		log_debug("\n Write complete");
-		length = 5;
-	while(1)
+		दीर्घता_2 = 5;
+	यावत्(1)
 	{
-			read_pcf8591_registers(I2C, PCF8591_CONTROL_REGISTER_VALUE, &read_buf[0], length, 800);
+			read_pcf8591_registers(I2C, PCF8591_CONTROL_पञ्जिकाकोशः_मानम्, &read_buf[0], दीर्घता_2, 800);
 			log_info("\n");
-			for( i = 1; i < length; i++)
+			प्रति( i = 1; i < दीर्घता_2; i++)
 			log_info("\nADC Input[%d]: %x", i, read_buf[i]);
 			delay_loop(3000, 2000);
 	}
 
-	return 0;
+	प्रत्यागम 0;
 }
 

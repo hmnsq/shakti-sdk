@@ -26,159 +26,159 @@
  * @detail this is the header file for qspi_micron.c
  */
 
-#ifndef QSPI_H
-#define QSPI_H
+#यदि_अपरिभाषितम् QSPI_H
+#परिभाषय QSPI_H
 
 //#define BOOT
-#ifndef BOOT
+#यदि_अपरिभाषितम् BOOT
 
-#include<stdlib.h>
-#endif
-#include<stdint.h>
+#अन्तर्भाव<stdlib.h>
+#यदि_अन्तः
+#अन्तर्भाव<stdint.h>
 
-#define DEF_TIMEOUT 60
-#define BASE_ADDR 0x00000100 
+#परिभाषय DEF_TIMEOUT 60
+#परिभाषय आधारः_ADDR 0x00000100 
                                                                                 
 //Memory Maps                                                                                       
-#define CR      0x00000100                                                      
-#define DCR     0x00000104                                                      
-#define SR      0x00000108                                                      
-#define FCR     0x0000010c                                                      
-#define DLR     0x00000110                                                      
-#define CCR     0x00000114                                                      
-#define AR      0x00000118                                                      
-#define ABR     0x0000011c                                                      
-#define DR      0x00000120                                                      
-#define PSMKR   0x00000124                                                      
-#define PSMAR   0x00000128                                                      
-#define PIR     0x0000012c                                                      
-#define LPRT    0x00000130                                                      
-#define STARTMM 0x90000000                                                      
-#define ENDMM   0x9FFFFFFF     
+#परिभाषय CR      0x00000100                                                      
+#परिभाषय DCR     0x00000104                                                      
+#परिभाषय SR      0x00000108                                                      
+#परिभाषय FCR     0x0000010c                                                      
+#परिभाषय DLR     0x00000110                                                      
+#परिभाषय CCR     0x00000114                                                      
+#परिभाषय AR      0x00000118                                                      
+#परिभाषय ABR     0x0000011c                                                      
+#परिभाषय DR      0x00000120                                                      
+#परिभाषय PSMKR   0x00000124                                                      
+#परिभाषय PSMAR   0x00000128                                                      
+#परिभाषय PIR     0x0000012c                                                      
+#परिभाषय LPRT    0x00000130                                                      
+#परिभाषय STARTMM 0x90000000                                                      
+#परिभाषय ENDMM   0x9FFFFFFF     
 
 //Defines for configuring the registers at ease
 //Bit vectors for all the parameters in the CR
-#define CR_PRESCALER(x)   (x<<24)
-#define CR_PMM            (1<<23)
-#define CR_APMS           (1<<22)
-#define CR_TOIE           (1<<20)
-#define CR_SMIE           (1<<19)
-#define CR_FTIE           (1<<18)
-#define CR_TCIE           (1<<17)
-#define CR_TEIE           (1<<16)
-#define CR_FTHRES(x)      (x<<8 )
-#define CR_FSEL           (1<<7 )
-#define CR_DFM            (1<<6 )
-#define CR_SSHIFT         (1<<4 )
-#define CR_TCEN           (1<<3 )
-#define CR_DMAEN          (1<<2 )
-#define CR_ABORT          (1<<1 )
-#define CR_EN             (1<<0 )
+#परिभाषय CR_PRESCALER(x)   (x<<24)
+#परिभाषय CR_PMM            (1<<23)
+#परिभाषय CR_APMS           (1<<22)
+#परिभाषय CR_TOIE           (1<<20)
+#परिभाषय CR_SMIE           (1<<19)
+#परिभाषय CR_FTIE           (1<<18)
+#परिभाषय CR_TCIE           (1<<17)
+#परिभाषय CR_TEIE           (1<<16)
+#परिभाषय CR_FTHRES(x)      (x<<8 )
+#परिभाषय CR_FSEL           (1<<7 )
+#परिभाषय CR_DFM            (1<<6 )
+#परिभाषय CR_SSHIFT         (1<<4 )
+#परिभाषय CR_TCEN           (1<<3 )
+#परिभाषय CR_DMAEN          (1<<2 )
+#परिभाषय CR_ABORT          (1<<1 )
+#परिभाषय CR_EN             (1<<0 )
 
 //Bit vectors for DCR 
-#define DCR_FSIZE(x)       (x<<16) 
-#define DCR_MODE_BYTE(x)   (x<<21)
-#define DCR_CSHT(x)        (x<<8 )
-#define DCR_CKMODE(x)        (x) 
+#परिभाषय DCR_FSIZE(x)       (x<<16) 
+#परिभाषय DCR_बहुलकम्_BYTE(x)   (x<<21)
+#परिभाषय DCR_CSHT(x)        (x<<8 )
+#परिभाषय DCR_CKMODE(x)        (x) 
 
 //Bit vectors for status register
-#define SR_FLEVEL(x)      (x<<8) 
-#define SR_TOF            (1<<4)
-#define SR_SMF            (1<<3)
-#define SR_FTF            (1<<2)
-#define SR_TCF            (1<<1)
-#define SR_TEF            (1<<0)
+#परिभाषय SR_FLEVEL(x)      (x<<8) 
+#परिभाषय SR_TOF            (1<<4)
+#परिभाषय SR_SMF            (1<<3)
+#परिभाषय SR_FTF            (1<<2)
+#परिभाषय SR_TCF            (1<<1)
+#परिभाषय SR_TEF            (1<<0)
 
 //Bit vectors for flag clear register 
-#define FCR_CTOF (1<<4)
-#define FCR_CSMF (1<<3)
-#define FCR_CTCF (1<<1)
-#define FCR_CTEF (1<<0)
+#परिभाषय FCR_CTOF (1<<4)
+#परिभाषय FCR_CSMF (1<<3)
+#परिभाषय FCR_CTCF (1<<1)
+#परिभाषय FCR_CTEF (1<<0)
 
 //Bit vectors for DLR
-#define DL(x)  x  //Useless -- but for better readability of the code
+#परिभाषय DL(x)  x  //Useless -- but for better readability of the code
 
 //Bit vectors for CCR
-#define CCR_DDRM                   (1<<31) 
-#define CCR_DHHC                   (1<<30)
-#define CCR_DUMMY_BIT              (1<<29) // Needed by Micron Flash Memories
-#define CCR_SIOO                   (1<<28)
-#define CCR_FMODE(x)               (x<<26)
-#define CCR_DMODE(x)               (x<<24)
-#define CCR_DUMMY_CONFIRMATION     (1<<23) // Needed by Micron Flash Memories
-#define CCR_DCYC(x)                (x<<18)
-#define CCR_ABSIZE(x)              (x<<16)
-#define CCR_ABMODE(x)              (x<<14)
-#define CCR_ADSIZE(x)              (x<<12)
-#define CCR_ADMODE(x)              (x<<10)
-#define CCR_IMODE(x)               (x<<8 )
-#define CCR_INSTRUCTION(x)         (x<<0 )
+#परिभाषय CCR_DDRM                   (1<<31) 
+#परिभाषय CCR_DHHC                   (1<<30)
+#परिभाषय CCR_DUMMY_BIT              (1<<29) // Needed by Micron Flash Memories
+#परिभाषय CCR_SIOO                   (1<<28)
+#परिभाषय CCR_FMODE(x)               (x<<26)
+#परिभाषय CCR_DMODE(x)               (x<<24)
+#परिभाषय CCR_DUMMY_CONFIRMATION     (1<<23) // Needed by Micron Flash Memories
+#परिभाषय CCR_DCYC(x)                (x<<18)
+#परिभाषय CCR_ABSIZE(x)              (x<<16)
+#परिभाषय CCR_ABMODE(x)              (x<<14)
+#परिभाषय CCR_ADSIZE(x)              (x<<12)
+#परिभाषय CCR_ADMODE(x)              (x<<10)
+#परिभाषय CCR_IMODE(x)               (x<<8 )
+#परिभाषय CCR_INSTRUCTION(x)         (x<<0 )
 
-#define CCR_FMODE_INDWR 0x0
-#define CCR_FMODE_INDRD 0x1
-#define CCR_FMODE_APOLL 0x2
-#define CCR_FMODE_MMAPD 0x3
+#परिभाषय CCR_FMODE_INDWR 0x0
+#परिभाषय CCR_FMODE_INDRD 0x1
+#परिभाषय CCR_FMODE_APOLL 0x2
+#परिभाषय CCR_FMODE_MMAPD 0x3
 
-#define NDATA  0x0
-#define SINGLE 0x1
-#define DOUBLE 0x2
-#define QUAD   0x3
+#परिभाषय NDATA  0x0
+#परिभाषय SINGLE 0x1
+#परिभाषय DOUBLE 0x2
+#परिभाषय QUAD   0x3
 
-#define BYTE      0x0
-#define TWOBYTE   0x1
-#define THREEBYTE 0x2
-#define FOURBYTE  0x3
+#परिभाषय BYTE      0x0
+#परिभाषय TWOBYTE   0x1
+#परिभाषय THREEBYTE 0x2
+#परिभाषय FOURBYTE  0x3
 
-extern int* cr      ;
- extern int* dcr    ;
- extern int* sr     ; 
- extern int* fcr    ;
- extern int* ccr    ;
- extern int* ar     ; 
- extern int* abr    ;
- extern int* dr     ; 
- extern int* dlr    ;
- extern int* psmkr  ;
- extern int* pir    ;
- extern int* lprt   ;
- extern int* startmm;
- extern int* endmm ;
+बाह्य पूर्णाङ्क* cr      ;
+ बाह्य पूर्णाङ्क* dcr    ;
+ बाह्य पूर्णाङ्क* sr     ; 
+ बाह्य पूर्णाङ्क* fcr    ;
+ बाह्य पूर्णाङ्क* ccr    ;
+ बाह्य पूर्णाङ्क* ar     ; 
+ बाह्य पूर्णाङ्क* abr    ;
+ बाह्य पूर्णाङ्क* dr     ; 
+ बाह्य पूर्णाङ्क* dlr    ;
+ बाह्य पूर्णाङ्क* psmkr  ;
+ बाह्य पूर्णाङ्क* pir    ;
+ बाह्य पूर्णाङ्क* lprt   ;
+ बाह्य पूर्णाङ्क* startmm;
+ बाह्य पूर्णाङ्क* endmm ;
 
-void set_qspi_shakti32(int* addr, const int val);
-void set_qspi_shakti16(int16_t* addr, int16_t val);
-void set_qspi_shakti8(char* addr, char val);
-int get_qspi_shakti( int* addr);
-int check_fail_bit(void);
-void reset_interrupt_flags(void);
-int micron_write_enable(int status);
-int flashSingleSPIDDRXip(int addr, int* dest_addr);
-int wait_for_tcf(int status);
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode);
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address);
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address);
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int flashReadDualSPI(int address, int data_length);
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int micron_disable_xip_volatile(int,int);
-int flashSingleSPIXip(int addr, int* dest_addr);
-int flashMemInit(void);
-int flashDualSPIXip(int addr, int* dest_addr);
-int flashDualSPIDDRXip(int addr, int* dest_addr);
-int flashWriteVolatileConfigReg(int value);
-int flashQuadSPIXip(int addr, int* dest_addr);
-int flashQuadSPIDDRXip(int addr, int* dest_addr);
-int eraseSector(int command, int address);
-int micron_volatile_write_enable(int status);
-int micron_enable_4byte_addressing(int status);
-int micron_configure_xip_volatile(int status, int value);
-int micron_read_configuration_register(int status, int value);
-int micron_read_id_cmd(int status, int value);
-int wait_for_wip(void);
-int flashIdentificationDevice(void);
-int flashReadFlagRegister(void);
-int flashWriteEnable(void);
-int flashEnable4ByteAddressingMode(void);
-int flash_Write_disable(void);
+शून्य समुच्चयः_qspi_shakti32(पूर्णाङ्क* addr, ध्रुव पूर्णाङ्क val);
+शून्य समुच्चयः_qspi_shakti16(int16_t* addr, int16_t val);
+शून्य समुच्चयः_qspi_shakti8(वर्ण* addr, वर्ण val);
+पूर्णाङ्क get_qspi_shakti( पूर्णाङ्क* addr);
+पूर्णाङ्क check_fail_bit(शून्य);
+शून्य reset_व्यवधानम्_flags(शून्य);
+पूर्णाङ्क micron_write_enable(पूर्णाङ्क स्थितिः_2);
+पूर्णाङ्क flashSingleSPIDDRXip(पूर्णाङ्क addr, पूर्णाङ्क* dest_addr);
+पूर्णाङ्क wait_for_tcf(पूर्णाङ्क स्थितिः_2);
+शून्य qspi_init(पूर्णाङ्क fsize, पूर्णाङ्क csht, पूर्णाङ्क prescaler, पूर्णाङ्क enable_interrupts, पूर्णाङ्क fthreshold, पूर्णाङ्क ck_बहुलकम्);
+पूर्णाङ्क page_क्रमादेशः_Single_SPI(पूर्णाङ्क value1, पूर्णाङ्क value2, पूर्णाङ्क value3, पूर्णाङ्क value4, पूर्णाङ्क स्थानाङ्कः);
+पूर्णाङ्क page_क्रमादेशः_Quad_SPI(पूर्णाङ्क value1, पूर्णाङ्क value2, पूर्णाङ्क value3, पूर्णाङ्क value4, पूर्णाङ्क स्थानाङ्कः);
+पूर्णाङ्क flashReadSingleSPI(पूर्णाङ्क dummy_आवृत्तयः, पूर्णाङ्क read_स्थानाङ्कः, पूर्णाङ्क instruction, पूर्णाङ्क दत्त_शब्दाः, पूर्णाङ्क adsize);
+पूर्णाङ्क flashReadDualSPI(पूर्णाङ्क स्थानाङ्कः, पूर्णाङ्क दत्त_दीर्घता);
+पूर्णाङ्क flashReadQuadSPI(पूर्णाङ्क dummy_आवृत्तयः, पूर्णाङ्क read_स्थानाङ्कः, पूर्णाङ्क instruction, पूर्णाङ्क दत्त_शब्दाः, पूर्णाङ्क adsize);
+पूर्णाङ्क micron_disable_xip_volatile(पूर्णाङ्क,पूर्णाङ्क);
+पूर्णाङ्क flashSingleSPIXip(पूर्णाङ्क addr, पूर्णाङ्क* dest_addr);
+पूर्णाङ्क flashMemInit(शून्य);
+पूर्णाङ्क flashDualSPIXip(पूर्णाङ्क addr, पूर्णाङ्क* dest_addr);
+पूर्णाङ्क flashDualSPIDDRXip(पूर्णाङ्क addr, पूर्णाङ्क* dest_addr);
+पूर्णाङ्क flashWriteVolatileConfigReg(पूर्णाङ्क मानम्);
+पूर्णाङ्क flashQuadSPIXip(पूर्णाङ्क addr, पूर्णाङ्क* dest_addr);
+पूर्णाङ्क flashQuadSPIDDRXip(पूर्णाङ्क addr, पूर्णाङ्क* dest_addr);
+पूर्णाङ्क eraseSector(पूर्णाङ्क command, पूर्णाङ्क स्थानाङ्कः);
+पूर्णाङ्क micron_volatile_write_enable(पूर्णाङ्क स्थितिः_2);
+पूर्णाङ्क micron_enable_4byte_addressing(पूर्णाङ्क स्थितिः_2);
+पूर्णाङ्क micron_configure_xip_volatile(पूर्णाङ्क स्थितिः_2, पूर्णाङ्क मानम्);
+पूर्णाङ्क micron_read_configuration_पञ्जिकाकोशः(पूर्णाङ्क स्थितिः_2, पूर्णाङ्क मानम्);
+पूर्णाङ्क micron_read_id_cmd(पूर्णाङ्क स्थितिः_2, पूर्णाङ्क मानम्);
+पूर्णाङ्क wait_for_wip(शून्य);
+पूर्णाङ्क flashIdentificationDevice(शून्य);
+पूर्णाङ्क flash_Read_Flag_पञ्जिकाकोशः(शून्य);
+पूर्णाङ्क flashWriteEnable(शून्य);
+पूर्णाङ्क flash_Enable4_Byte_Addressing_बहुलकम्(शून्य);
+पूर्णाङ्क flash_Write_disable(शून्य);
 
 
-#endif
+#यदि_अन्तः

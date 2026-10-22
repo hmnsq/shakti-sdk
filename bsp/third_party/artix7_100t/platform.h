@@ -20,122 +20,122 @@ platform.h - header file for Artix 100T C class SoC
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#यदि_अपरिभाषितम् PLATFORM_H
+#परिभाषय PLATFORM_H
 
 /*
  *@brief RISCV - C CLASS SOC Memory mapping
  */
 
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   256
+#परिभाषय CLINT_आधारः 0x020000000
+#परिभाषय MTIME      0x0200BFF8
+#परिभाषय MTIMECMP   0x02004000
+#परिभाषय CLINT_भाजकः   256
 
-#define CLOCK_FREQUENCY 20000000
+#परिभाषय CLOCK_FREQUENCY 20000000
 
-#define MCAUSE_INT         0x80000000
-#define MCAUSE_CAUSE       0x7FFFFFFF
+#परिभाषय MCAUSE_INT         0x80000000
+#परिभाषय MCAUSE_CAUSE       0x7FFFFFFF
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#परिभाषय PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000000
+#परिभाषय DBG_MEM_START 0x00000000
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 128mB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
+#परिभाषय TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
 
 /*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x8000000 /*! DDR3 Memory Size */
+#परिभाषय TCM_MEM_आकार 0x8000000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#परिभाषय राशिः_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#परिभाषय HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#परिभाषय PWM_आधारः_स्थानाङ्कः 0x00030000 /*PWM Base address*/
+#परिभाषय PWM_MODULE_विस्थापनम् 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART_OFFSET 0x100
-#define MAX_UART_COUNT 1
+#परिभाषय UART0_START 0x00011300 /*! UART 0 */
+#परिभाषय UART_विस्थापनम् 0x100
+#परिभाषय MAX_UART_गणनम् 1
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#परिभाषय PINMUX_CONFIGURE_REG 0x40310
 
 /*! Core Local Interruptor CLINT */
 
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x020C0000 /*! I2C Start Address */
-#define I2C_OFFSET 0x000
-#define MAX_I2C_COUNT 1
+#परिभाषय I2_C0_आधारः 0x020C0000 /*! I2C Start Address */
+#परिभाषय I2_C_विस्थापनम् 0x000
+#परिभाषय MAX_I2_C_गणनम् 1
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1
-#define PLIC_INTERRUPT_2   2
-#define PLIC_INTERRUPT_3   3
-#define PLIC_INTERRUPT_4   4
-#define PLIC_INTERRUPT_5   5
-#define PLIC_INTERRUPT_6   6
-#define PLIC_INTERRUPT_7   7
-#define PLIC_INTERRUPT_8   8
-#define PLIC_INTERRUPT_9   9
-#define PLIC_INTERRUPT_10  10
-#define PLIC_INTERRUPT_11  11
-#define PLIC_INTERRUPT_12  12
-#define PLIC_INTERRUPT_13  13
-#define PLIC_INTERRUPT_14  14
-#define PLIC_INTERRUPT_15  15
-#define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_26  26
+#परिभाषय PLIC_आधारः_स्थानाङ्कः 0x0C000000 /*! PLIC Interface Start */
+#परिभाषय PLIC_व्यवधानम्_1   1
+#परिभाषय PLIC_व्यवधानम्_2   2
+#परिभाषय PLIC_व्यवधानम्_3   3
+#परिभाषय PLIC_व्यवधानम्_4   4
+#परिभाषय PLIC_व्यवधानम्_5   5
+#परिभाषय PLIC_व्यवधानम्_6   6
+#परिभाषय PLIC_व्यवधानम्_7   7
+#परिभाषय PLIC_व्यवधानम्_8   8
+#परिभाषय PLIC_व्यवधानम्_9   9
+#परिभाषय PLIC_व्यवधानम्_10  10
+#परिभाषय PLIC_व्यवधानम्_11  11
+#परिभाषय PLIC_व्यवधानम्_12  12
+#परिभाषय PLIC_व्यवधानम्_13  13
+#परिभाषय PLIC_व्यवधानम्_14  14
+#परिभाषय PLIC_व्यवधानम्_15  15
+#परिभाषय PLIC_व्यवधानम्_16  16
+#परिभाषय PLIC_व्यवधानम्_26  26
 
-#define PLIC_MAX_INTERRUPT_SRC 26
+#परिभाषय PLIC_MAX_व्यवधानम्_SRC 26
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x020D0000 //GPIO Start Address */
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
+#परिभाषय GPIO_START 0x020D0000 //GPIO Start Address */
+#परिभाषय GPIO_विस्थापनम् 0x08 /*!Generic offset used to access GPIO registers*/
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
-#define GPIO16 (1 << 16)
-#define GPIO17 (1 << 17)
-#define GPIO18 (1 << 18)
-#define GPIO19 (1 << 19)
-#define GPIO20 (1 << 20)
-#define GPIO21 (1 << 21)
-#define GPIO22 (1 << 22)
-#define GPIO23 (1 << 23)
-#define GPIO24 (1 << 24)
-#define GPIO25 (1 << 25)
-#define GPIO26 (1 << 26)
-#define GPIO27 (1 << 27)
-#define GPIO28 (1 << 28)
-#define GPIO29 (1 << 29)
-#define GPIO30 (1 << 30)
-#define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#परिभाषय GPIO0  (1 <<  0)
+#परिभाषय GPIO1  (1 <<  1)
+#परिभाषय GPIO2  (1 <<  2)
+#परिभाषय GPIO3  (1 <<  3)
+#परिभाषय GPIO4  (1 <<  4)
+#परिभाषय GPIO5  (1 <<  5)
+#परिभाषय GPIO6  (1 <<  6)
+#परिभाषय GPIO7  (1 <<  7)
+#परिभाषय GPIO8  (1 <<  8)
+#परिभाषय GPIO9  (1 <<  9)
+#परिभाषय GPIO10 (1 << 10)
+#परिभाषय GPIO11 (1 << 11)
+#परिभाषय GPIO12 (1 << 12)
+#परिभाषय GPIO13 (1 << 13)
+#परिभाषय GPIO14 (1 << 14)
+#परिभाषय GPIO15 (1 << 15)
+#परिभाषय GPIO16 (1 << 16)
+#परिभाषय GPIO17 (1 << 17)
+#परिभाषय GPIO18 (1 << 18)
+#परिभाषय GPIO19 (1 << 19)
+#परिभाषय GPIO20 (1 << 20)
+#परिभाषय GPIO21 (1 << 21)
+#परिभाषय GPIO22 (1 << 22)
+#परिभाषय GPIO23 (1 << 23)
+#परिभाषय GPIO24 (1 << 24)
+#परिभाषय GPIO25 (1 << 25)
+#परिभाषय GPIO26 (1 << 26)
+#परिभाषय GPIO27 (1 << 27)
+#परिभाषय GPIO28 (1 << 28)
+#परिभाषय GPIO29 (1 << 29)
+#परिभाषय GPIO30 (1 << 30)
+#परिभाषय GPIO31 (1 << 31)
+#परिभाषय GPIO_गणनम्  0x20
 //#define PLIC_GPIO_OFFSET 0
 
-#endif
+#यदि_अन्तः

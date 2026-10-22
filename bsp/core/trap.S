@@ -29,14 +29,14 @@
 
 #include "defines.h"
 
-  .global trap_entry
+  .वैश्विक trap_entry
   .align 2
 
   trap_entry:
 
   /*
      If trap comes, do
-     1. push all x* register values to stack
+     1. निक्षिप all x* register values to stack
      2. handle trap
      3. restore x* register values from stack
    */

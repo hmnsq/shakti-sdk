@@ -26,24 +26,24 @@
  * @brief Declaration for keypad library.
  * @detail Include File Definitions	
  */
-#if !defined(KYPD_H)
-#define KYPD_H
+#यदि !defined(KYPD_H)
+#परिभाषय KYPD_H
 
-#define ROWNUM 4
-#define COLNUM 4
+#परिभाषय ROWNUM 4
+#परिभाषय COLNUM 4
 
-#define OUTPINS_OFFSET 0
-#define INPINS_OFFSET 4
-#define OUTPINS (0xF << OUTPINS_OFFSET)
-#define INPINS  (0xF << INPINS_OFFSET)
+#परिभाषय OUTPINS_विस्थापनम् 0
+#परिभाषय INPINS_विस्थापनम् 4
+#परिभाषय OUTPINS (0xF << OUTPINS_विस्थापनम्)
+#परिभाषय INPINS  (0xF << INPINS_विस्थापनम्)
 
 //function prototype
-void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+शून्य समुच्चयः_pins(अचिह्नित पूर्णाङ्क* row, अचिह्नित पूर्णाङ्क* col);
+शून्य समुच्चयः_कुञ्चिका_map(पूर्णाङ्क सारणी[COLNUM][ROWNUM]);
+पूर्णाङ्क get_कुञ्चिका();
+पूर्णाङ्क get_col_row(शून्य);
+अचिह्नित पूर्णाङ्क row_pins[ROWNUM];
+अचिह्नित पूर्णाङ्क col_pins[COLNUM];
+पूर्णाङ्क कुञ्चिका_map[COLNUM][ROWNUM];
 
-#endif
+#यदि_अन्तः

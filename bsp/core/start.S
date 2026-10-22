@@ -29,7 +29,7 @@
 
 #include "defines.h"
 
-.section ".text.init"
+.खण्डः ".text.init"
 .globl _start
 
 _start:
@@ -39,7 +39,7 @@ csrw mtvec, t0
 
 #disable interrupts
 li      t0, 0xb
-csrrc   zero, mstatus, t0 #disable global interrupt for all modes
+csrrc   zero, mstatus, t0 #disable वैश्विक interrupt for all modes
 li      t0, 0x888
 csrrc   zero, mie, t0  # disable machine level interrupt
 
@@ -92,16 +92,16 @@ li  x29,0
 li  x30,0
 li  x31,0
 
-# initialize global pointer
-.option push
+# initialize वैश्विक pointer
+.option निक्षिप
 .option norelax
 la gp, __global_pointer$
-.option pop
+.option उद्धर
 
 init_bss:
-    /* init bss section */
+    /* init bss खण्डः */
     la	a0, __bss_start
-    la	a1, __bss_end-4 /* section end is actually the start of the next section */
+    la	a1, __bss_end-4 /* खण्डः end is actually the start of the next खण्डः */
     li	a2, 0x0
   1:
     sw		a2, 0(a0)
@@ -110,9 +110,9 @@ init_bss:
     j	        1b
 
 init_sbss:
-    /* init bss section */
+    /* init bss खण्डः */
     la	a0, __sbss_start
-    la	a1, __sbss_end-4 /* section end is actually the start of the next section */
+    la	a1, __sbss_end-4 /* खण्डः end is actually the start of the next खण्डः */
     li	a2, 0x0
    1:
     sw		a2, 0(a0)
@@ -122,10 +122,10 @@ init_sbss:
 
 1:
 # initialize stack pointer
-.option push
+.option निक्षिप
 .option norelax
 la sp, __stack_pointer$
-.option pop
+.option उद्धर
 
 la  tp, _end + 63
 and tp, tp, -64
@@ -135,14 +135,14 @@ j init
 1:
   j 1b
 
-.section ".tdata.begin"
+.खण्डः ".tdata.begin"
 .globl _tdata_begin
 _tdata_begin:
 
-.section ".tdata.end"
+.खण्डः ".tdata.end"
 .globl _tdata_end
 _tdata_end:
 
-.section ".tbss.end"
+.खण्डः ".tbss.end"
 .globl _tbss_end
 _tbss_end:

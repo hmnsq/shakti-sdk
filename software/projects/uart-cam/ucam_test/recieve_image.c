@@ -32,28 +32,28 @@
            bytewise. We transfer all those to our laptop, where this code is run.
 **/
 
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
-#include <stdlib.h>
-#include <string.h>
+#अन्तर्भाव <stdio.h>
+#अन्तर्भाव <string.h>
+#अन्तर्भाव <assert.h>
+#अन्तर्भाव <stdlib.h>
+#अन्तर्भाव <string.h>
 // Linux headers
-#include <fcntl.h> // Contains file controls like O_RDWR
-#include <errno.h> // Error integer and strerror() function
-#include <termios.h> // Contains POSIX terminal control definitions
-#include <unistd.h> // write(), read(), close()
+#अन्तर्भाव <fcntl.h> // Contains file controls like O_RDWR
+#अन्तर्भाव <errno.h> // Error integer and strerror() function
+#अन्तर्भाव <termios.h> // Contains POSIX terminal control definitions
+#अन्तर्भाव <unistd.h> // write(), read(), close()
 
-int main(int argc,char *argv[]) {
+पूर्णाङ्क मुख्यम्(पूर्णाङ्क argc,वर्ण *argv[]) {
   // Open the serial port. Change device path as needed (currently set to an standard FTDI USB-UART cable type device)
-    int serial_port1 = open(argv[1], O_RDWR);
-    printf("%s\n",argv[1]);
+    पूर्णाङ्क serial_port1 = उद्घाटय(argv[1], O_RDWR);
+    प्रारूप_लिख("%s\n",argv[1]);
     // Create new termios struc, we call it 'tty1' for convention
-    struct termios tty1;
+    संरचना termios tty1;
 
     // Read in existing settings, and handle any error
-    if(tcgetattr(serial_port1, &tty1) != 0) {
-        printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
-        return 1;
+    यदि(tcgetattr(serial_port1, &tty1) != 0) {
+        प्रारूप_लिख("Error %i from tcgetattr: %s\n", errno, strerror(errno));
+        प्रत्यागम 1;
     }
     tty1.c_cflag &= ~PARENB; // Clear parity bit, disabling parity (most common)
     tty1.c_cflag &= ~CSTOPB; // Clear stop field, only one stop bit used in communication (most common)
@@ -81,76 +81,76 @@ int main(int argc,char *argv[]) {
     // Set in/out baud rate to be 19200
     cfsetispeed(&tty1, B115200);
     cfsetospeed(&tty1, B115200);
-    printf("\n Baud rate is set to 115200");
+    प्रारूप_लिख("\n Baud rate is set to 115200");
 
   // Save tty1 settings, also checking for error
-    if (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
-        printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
-        return 1;
+    यदि (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
+        प्रारूप_लिख("Error %i from tcsetattr: %s\n", errno, strerror(errno));
+        प्रत्यागम 1;
     }
-    else
-        printf("\n  BaudRate = 115200 \n  StopBits = 1 \n  Parity   = none\n");
+    अन्यथा
+        प्रारूप_लिख("\n  BaudRate = 115200 \n  StopBits = 1 \n  Parity   = none\n");
 
   // Allocate memory for read buffer, set size according to your needs
-    int loop=0;
-    while(1){
+    पूर्णाङ्क loop=0;
+    यावत्(1){
       loop++;
-      unsigned char read_buf [7];
-      memset(&read_buf, '\0', sizeof(read_buf));
+      अचिह्नित वर्ण read_buf [7];
+      स्मृतिं_पूरय(&read_buf, '\0', परिमाण(read_buf));
       start:
       // From Shakti we expect 6 bytes : 0xAA 0xA 0x5 a b c where a b c represent size of image
 
-      while(read_buf[0]!=(unsigned char)0xAA){
-          read(serial_port1, &read_buf[0], sizeof(read_buf[0]));
+      यावत्(read_buf[0]!=(अचिह्नित वर्ण)0xAA){
+          पठ(serial_port1, &read_buf[0], परिमाण(read_buf[0]));
       }
-      read(serial_port1, &read_buf[1], sizeof(read_buf[0]));
-      if(read_buf[1]!=(unsigned char)0xA){
-        goto start;
+      पठ(serial_port1, &read_buf[1], परिमाण(read_buf[0]));
+      यदि(read_buf[1]!=(अचिह्नित वर्ण)0xA){
+        गच्छ start;
       }
-      read(serial_port1, &read_buf[2], sizeof(read_buf[0]));
-      if(read_buf[2]!=(unsigned char)0x5){
-        goto start;
+      पठ(serial_port1, &read_buf[2], परिमाण(read_buf[0]));
+      यदि(read_buf[2]!=(अचिह्नित वर्ण)0x5){
+        गच्छ start;
       }
-      read(serial_port1, &read_buf[3], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[4], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[5], sizeof(read_buf[0]));
-      unsigned long size = 0;
-      size = (unsigned long)read_buf[3] + (((unsigned long)read_buf[4])<<8) + (((unsigned long)read_buf[5])<<16) ;
-      printf("Size : %ld\n",size);
-      char* temp = (char*) malloc(size*sizeof(char));
-      if(temp==NULL) {
-        printf("Malloc failed\n");
-        exit(1);
+      पठ(serial_port1, &read_buf[3], परिमाण(read_buf[0]));
+      पठ(serial_port1, &read_buf[4], परिमाण(read_buf[0]));
+      पठ(serial_port1, &read_buf[5], परिमाण(read_buf[0]));
+      अचिह्नित दीर्घ आकार = 0;
+      आकार = (अचिह्नित दीर्घ)read_buf[3] + (((अचिह्नित दीर्घ)read_buf[4])<<8) + (((अचिह्नित दीर्घ)read_buf[5])<<16) ;
+      प्रारूप_लिख("Size : %ld\n",आकार);
+      वर्ण* अस्थायी = (वर्ण*) स्मृतिं_देहि(आकार*परिमाण(वर्ण));
+      यदि(अस्थायी==रिक्त) {
+        प्रारूप_लिख("Malloc failed\n");
+        निर्गच्छ(1);
       }
-      char write_buff;
+      वर्ण write_buff;
       write_buff='K';
       //Send a conformation 'K'
       tcflush(serial_port1,TCIOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
-      for(long i=0;i<size;i++){
-          read(serial_port1, (temp + i) , sizeof(read_buf[0]));
+      लिख(serial_port1,&write_buff,परिमाण(write_buff));
+      प्रति(दीर्घ i=0;i<आकार;i++){
+          पठ(serial_port1, (अस्थायी + i) , परिमाण(read_buf[0]));
       }
       tcflush(serial_port1,TCIOFLUSH);
       FILE *f1;
-      char str[]="Images/image";
-      char inte[20];
+      वर्ण str[]="Images/image";
+      वर्ण inte[20];
       sprintf(inte, "%d", loop);
-      strcat(str,inte);
-      strcat(str,".jpeg");
+      वाक्यं_योजय(str,inte);
+      वाक्यं_योजय(str,".jpeg");
       f1=fopen(str,"w");
-      for(long i=0;i<size;i++)
+      प्रति(दीर्घ i=0;i<आकार;i++)
       {
-        fputc(*(temp+i),f1);
+        fputc(*(अस्थायी+i),f1);
       }
-      free(temp);
+      मुक्त(अस्थायी);
       fclose(f1);
       write_buff='O';
       //Send a conformation 'O'
       tcflush(serial_port1,TCOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
+      लिख(serial_port1,&write_buff,परिमाण(write_buff));
       tcflush(serial_port1,TCIOFLUSH);
-      printf("Image %d done",loop);
+      प्रारूप_लिख("Image %d done",loop);
     }
     close(serial_port1);
-    return 0; // success
+    प्रत्यागम 0; // success
 }

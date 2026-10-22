@@ -26,70 +26,70 @@
  * @brief  All the definitions are very specific to ARTY A7 (35T & 100T) boards
  */
 
-#ifndef LED_DRIVER_H
-#define LED_DRIVER_H
+#यदि_अपरिभाषितम् LED_DRIVER_H
+#परिभाषय LED_DRIVER_H
 
-#include "platform.h" //Contains arty a7 gpio definitions.
-#include "gpio.h"  //Contains the methods to Access GPIOs
+#अन्तर्भाव "platform.h" //Contains arty a7 gpio definitions.
+#अन्तर्भाव "gpio.h"  //Contains the methods to Access GPIOs
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#यदि defined(ARTIX7_35T) || defined(ARTIX7_100T)
 /*! RGB LED 0 defines */
-#define LED0_R GPIO16 
-#define LED0_G GPIO17
-#define LED0_B GPIO18
+#परिभाषय LED0_R GPIO16 
+#परिभाषय LED0_G GPIO17
+#परिभाषय LED0_B GPIO18
 
 /*! RGB LED 1 defines */
-#define LED1_R GPIO19
-#define LED1_G GPIO20
-#define LED1_B GPIO21
+#परिभाषय LED1_R GPIO19
+#परिभाषय LED1_G GPIO20
+#परिभाषय LED1_B GPIO21
 
 /*! Normal LED 1 defines */
-#define LED2 GPIO22
+#परिभाषय LED2 GPIO22
 
 /*! Normal LED 2 defines */
-#define LED3 GPIO23
+#परिभाषय LED3 GPIO23
 
 
 /*! Combined RGB LED defines */
-#define RGB0 (LED0_R | LED0_G | LED0_B )
-#define RGB1 (LED1_R | LED1_G | LED1_B )
+#परिभाषय RGB0 (LED0_R | LED0_G | LED0_B )
+#परिभाषय RGB1 (LED1_R | LED1_G | LED1_B )
 
 /*! Combined Normal LED defines */
-#define NORMAL_LEDS ( LED2 | LED3 )
-#define RGB_LEDS ( RGB0 | RGB1 )
+#परिभाषय प्रसामान्यम्_LEDS ( LED2 | LED3 )
+#परिभाषय RGB_LEDS ( RGB0 | RGB1 )
 
 /*! Combines ALL LED defines */
-#define ALL_LEDS (RGB_LEDS | NORMAL_LEDS)
+#परिभाषय ALL_LEDS (RGB_LEDS | प्रसामान्यम्_LEDS)
 
 
 /*! Control for all LEDS */
-#define NORMAL_LED0 0
-#define NORMAL_LED1 1
+#परिभाषय प्रसामान्यम्_LED0 0
+#परिभाषय प्रसामान्यम्_LED1 1
 
-#define RGB_LED0 0
-#define RGB_LED1 1
+#परिभाषय RGB_LED0 0
+#परिभाषय RGB_LED1 1
 
 // function prototype
-void configure_ledx(unsigned long pin_cntrl);
-void configure_rgb_ledx(unsigned char led_no);
-void configure_normal_leds();
-void configure_rgb_leds();
-void configure_all_leds();
-void turn_on_ledx(unsigned long pin_cntrl);
-void turn_off_ledx(unsigned long pin_cntrl);
-void turn_on_normal_leds();
-void turn_off_normal_leds();
-void turn_on_rgb_ledx(unsigned char led_no);
-void turn_off_rgb_ledx(unsigned char led_no);
-void turn_on_rgb_leds();
-void turn_off_rgb_leds();
-void turn_on_all_leds();
-void turn_off_all_leds();
-void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2);
-void toggle_normal_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_all_leds( unsigned long delay1, unsigned long delay2);
+शून्य configure_ledx(अचिह्नित दीर्घ pin_cntrl);
+शून्य configure_rgb_ledx(अचिह्नित वर्ण led_no);
+शून्य configure_प्रसामान्यम्_leds();
+शून्य configure_rgb_leds();
+शून्य configure_all_leds();
+शून्य turn_on_ledx(अचिह्नित दीर्घ pin_cntrl);
+शून्य turn_off_ledx(अचिह्नित दीर्घ pin_cntrl);
+शून्य turn_on_प्रसामान्यम्_leds();
+शून्य turn_off_प्रसामान्यम्_leds();
+शून्य turn_on_rgb_ledx(अचिह्नित वर्ण led_no);
+शून्य turn_off_rgb_ledx(अचिह्नित वर्ण led_no);
+शून्य turn_on_rgb_leds();
+शून्य turn_off_rgb_leds();
+शून्य turn_on_all_leds();
+शून्य turn_off_all_leds();
+शून्य toggle_ledx(अचिह्नित दीर्घ pin_cntrl, अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2);
+शून्य toggle_प्रसामान्यम्_leds( अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2 );
+शून्य toggle_rgb_leds( अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2 );
+शून्य toggle_all_leds( अचिह्नित दीर्घ delay1, अचिह्नित दीर्घ delay2);
 
 
-#endif
-#endif
+#यदि_अन्तः
+#यदि_अन्तः

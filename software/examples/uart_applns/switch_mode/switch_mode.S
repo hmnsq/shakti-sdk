@@ -61,7 +61,7 @@ trap_handler:
 	li t3, 0x80000000
 	and t0,t0,t3
 	beqz t0, exception_handler
-1:      ret
+1:      प्रत्यागच्छ
 
 
 exception_handler:
@@ -75,7 +75,7 @@ exception_handler:
 	j 1b
 
 .p2align 2
-trap_entry:     # currently trap_entry has a nop. Later we will add actual instrns
+trap_entry:     # currently trap_entry has a nop. Later we will योजय actual instrns
 addi sp, sp, -32*8
  #x0 is always 0
 sd x1, 1*8(sp)
@@ -147,7 +147,7 @@ ld x31, 31*8(sp)
 mret
 
 .p2align 0x2
-.section .data 
+.खण्डः .data 
 _data1:
 .word 	0
 .word 	0

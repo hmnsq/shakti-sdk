@@ -25,96 +25,96 @@
  * @brief Header to spi spansion driver
  * @detail this is the header file for spi_flash_w25q32.c,spi_spansion.c
  */
-#ifndef SPI_H
-#define SPI_H
+#यदि_अपरिभाषितम् SPI_H
+#परिभाषय SPI_H
 
-#include<stdlib.h>
+#अन्तर्भाव<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
-#define SPI0_OFFSET 0x00000000
-#define SPI1_OFFSET 0x00000100
-#define SPI2_OFFSET 0x00000200
+#परिभाषय SPI0_विस्थापनम् 0x00000000
+#परिभाषय SPI1_विस्थापनम् 0x00000100
+#परिभाषय SPI2_विस्थापनम् 0x00000200
 
-#define SPI_CR1	     0x00020000
-#define SPI_CR2	     0x00020004
-#define SPI_SR       0x00020008
-#define SPI_DR1	     0x0002000C
-#define SPI_DR2	     0x00020010
-#define SPI_DR3	     0x00020014
-#define SPI_DR4	     0x00020018
-#define SPI_DR5      0x0002001C
-#define SPI_CRCPR    0x00020020
-#define SPI_RXCRCR   0x00020024
-#define SPI_TXCRCR   0x00020028
+#परिभाषय SPI_CR1	     0x00020000
+#परिभाषय SPI_CR2	     0x00020004
+#परिभाषय SPI_SR       0x00020008
+#परिभाषय SPI_DR1	     0x0002000C
+#परिभाषय SPI_DR2	     0x00020010
+#परिभाषय SPI_DR3	     0x00020014
+#परिभाषय SPI_DR4	     0x00020018
+#परिभाषय SPI_DR5      0x0002001C
+#परिभाषय SPI_CRCPR    0x00020020
+#परिभाषय SPI_RXCRCR   0x00020024
+#परिभाषय SPI_TXCRCR   0x00020028
 
 // defining SPI_CR1 register
-#define SPI_CPHA	      (1 << 0)
-#define SPI_CPOL	      (1 << 1)
-#define SPI_MSTR	      (1 << 2)
-#define SPI_BR(x)	      (x << 3)
-#define SPI_SPE		      (1 << 6)
-#define SPI_LSBFIRST	      (1 << 7)
-#define SPI_SSI		      (1 << 8)
-#define SPI_SSM		      (1 << 9)
-#define SPI_RXONLY	      (1 << 10)
-#define SPI_CRCL	      (1 << 11)
-#define SPI_CCRCNEXT	      (1 << 12)
-#define SPI_CRCEN	      (1 << 13)
-#define SPI_BIDIOE	      (1 << 14)
-#define SPI_BIDIMODE	      (1 << 15)
-#define SPI_TOTAL_BITS_TX(x)  (x << 16)
-#define SPI_TOTAL_BITS_RX(x)  (x << 24)
+#परिभाषय SPI_CPHA	      (1 << 0)
+#परिभाषय SPI_CPOL	      (1 << 1)
+#परिभाषय SPI_MSTR	      (1 << 2)
+#परिभाषय SPI_BR(x)	      (x << 3)
+#परिभाषय SPI_SPE		      (1 << 6)
+#परिभाषय SPI_LSBFIRST	      (1 << 7)
+#परिभाषय SPI_SSI		      (1 << 8)
+#परिभाषय SPI_SSM		      (1 << 9)
+#परिभाषय SPI_RXONLY	      (1 << 10)
+#परिभाषय SPI_CRCL	      (1 << 11)
+#परिभाषय SPI_CCRCNEXT	      (1 << 12)
+#परिभाषय SPI_CRCEN	      (1 << 13)
+#परिभाषय SPI_BIDIOE	      (1 << 14)
+#परिभाषय SPI_BIDIMODE	      (1 << 15)
+#परिभाषय SPI_योग_द्वयङ्काः_TX(x)  (x << 16)
+#परिभाषय SPI_योग_द्वयङ्काः_RX(x)  (x << 24)
 
 // defining SPI_CR2 register
-#define SPI_RX_IMM_START   (1 << 16)
-#define SPI_RX_START	   (1 << 15)
-#define SPI_LDMA_TX	   (1 << 14)
-#define SPI_LDMA_RX	   (1 << 13)
-#define SPI_FRXTH	   (1 << 12)
-#define SPI_DS(x)	   (x << 8)
-#define SPI_TXEIE	   (1 << 7)
-#define SPI_RXNEIE	   (1 << 6)
-#define SPI_ERRIE	   (1 << 5)
-#define SPI_FRF		   (1 << 4)
-#define SPI_NSSP	   (1 << 3)
-#define SPI_SSOE	   (1 << 2)
-#define SPI_TXDMAEN	   (1 << 1)
-#define SPI_RXDMAEN	   (1 << 0)
+#परिभाषय SPI_RX_IMM_START   (1 << 16)
+#परिभाषय SPI_RX_START	   (1 << 15)
+#परिभाषय SPI_LDMA_TX	   (1 << 14)
+#परिभाषय SPI_LDMA_RX	   (1 << 13)
+#परिभाषय SPI_FRXTH	   (1 << 12)
+#परिभाषय SPI_DS(x)	   (x << 8)
+#परिभाषय SPI_TXEIE	   (1 << 7)
+#परिभाषय SPI_RXNEIE	   (1 << 6)
+#परिभाषय SPI_ERRIE	   (1 << 5)
+#परिभाषय SPI_FRF		   (1 << 4)
+#परिभाषय SPI_NSSP	   (1 << 3)
+#परिभाषय SPI_SSOE	   (1 << 2)
+#परिभाषय SPI_TXDMAEN	   (1 << 1)
+#परिभाषय SPI_RXDMAEN	   (1 << 0)
 
 //defining SR register
-#define SPI_FTLVL(x)	(x << 11)
-#define SPI_FRLVL(x)	(x << 9)
-#define SPI_FRE		(1 << 8)
-#define SPI_OVR		(1 << 6)
-#define SPI_MODF	(1 << 5)
-#define SPI_CRCERR	(1 << 4)
-#define TXE		(1 << 1)
-#define RXNE		(1 << 0)
+#परिभाषय SPI_FTLVL(x)	(x << 11)
+#परिभाषय SPI_FRLVL(x)	(x << 9)
+#परिभाषय SPI_FRE		(1 << 8)
+#परिभाषय SPI_OVR		(1 << 6)
+#परिभाषय SPI_MODF	(1 << 5)
+#परिभाषय SPI_CRCERR	(1 << 4)
+#परिभाषय TXE		(1 << 1)
+#परिभाषय RXNE		(1 << 0)
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+शून्य configure_spi(पूर्णाङ्क विस्थापनम्);
+शून्य spi_init(शून्य);
+शून्य समुच्चयः_spi(पूर्णाङ्क* addr, पूर्णाङ्क val);
+शून्य bin(अचिह्नित n);
+शून्य spi_tx_rx_start(शून्य);
+शून्य spi_enable(शून्य);
+शून्य spi_rx_enable(शून्य);
+शून्य flash_cmd_addr_दत्त(पूर्णाङ्क command, पूर्णाङ्क addr, पूर्णाङ्क दत्त_2);
+शून्य flash_write(पूर्णाङ्क स्थानाङ्कः, पूर्णाङ्क दत्त_2);
+शून्य flash_erase(पूर्णाङ्क स्थानाङ्कः);
+पूर्णाङ्क get_spi(पूर्णाङ्क* addr);
+पूर्णाङ्क bitExtracted(पूर्णाङ्क सङ्ख्या, पूर्णाङ्क k, पूर्णाङ्क p) ;
+पूर्णाङ्क concat(पूर्णाङ्क x, पूर्णाङ्क y) ;
+पूर्णाङ्क spi_rxne_enable(शून्य);
+पूर्णाङ्क spi_notbusy(शून्य);
+पूर्णाङ्क flash_write_enable(शून्य);
+पूर्णाङ्क flash_clear_sr(शून्य);
+पूर्णाङ्क flash_cmd_addr(पूर्णाङ्क command, पूर्णाङ्क addr);
+पूर्णाङ्क flash_cmd_गन्तव्यम्_read(पूर्णाङ्क command, पूर्णाङ्क addr);
+पूर्णाङ्क flash_read(पूर्णाङ्क स्थानाङ्कः);
+पूर्णाङ्क flash_cmd_read(पूर्णाङ्क command);
+पूर्णाङ्क flash_स्थितिः_पञ्जिकाकोशः_read(शून्य);
+पूर्णाङ्क flash_device_id(शून्य);
 
-#endif
+#यदि_अन्तः

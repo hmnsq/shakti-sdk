@@ -40,21 +40,21 @@
 
 */
 
-#include "uart.h" //Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
-#include "bmp280.h"
+#अन्तर्भाव "uart.h" //Includes the definitions of uart communication protocol//
+#अन्तर्भाव "string.h"
+#अन्तर्भाव "pinmux.h"
+#अन्तर्भाव "i2c.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "bmp280.h"
 
 // Replace the API KEY
-#define API_KEY "PPI6OVOI1A2LGXMZ"
+#परिभाषय API_कुञ्चिका "PPI6OVOI1A2LGXMZ"
 
 // UART 1 to communicate to ESP8266
-#define ESP_UART uart_instance[1]
+#परिभाषय ESP_UART uart_instance[1]
 
 // Using I2C 1 to connect to BMP280
-#define I2C i2c_instance[1]
+#परिभाषय I2C i2c_instance[1]
 
 /**
   * @fn int write_to_esp8266(char *data,uart_num sel,int baudrate)
@@ -64,12 +64,12 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+पूर्णाङ्क write_गन्तव्यम्_esp8266(वर्ण *दत्त_2)
 {
-	while (*data != '\0')
+	यावत् (*दत्त_2 != '\0')
 	{
-		write_uart_character(ESP_UART, *data);
-		data++;
+		write_uart_character(ESP_UART, *दत्त_2);
+		दत्त_2++;
 	}
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+पूर्णाङ्क write_enter_गन्तव्यम्_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+पूर्णाङ्क read_from_esp8266(वर्ण *दत्त_2)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 198; i++)
+	पूर्णाङ्क ch;
+	वर्ण *str = दत्त_2;
+	वर्ण *test = दत्त_2;
+	प्रति (पूर्णाङ्क i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		यदि (वाक्ये_अन्विष(test, "OK") != रिक्त)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			प्रत्यागम;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		यदि (वाक्ये_अन्विष(test, "ERROR") != रिक्त)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			प्रत्यागम;
 		}
-		if (strstr(test, ">") != NULL)
+		यदि (वाक्ये_अन्विष(test, ">") != रिक्त)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			प्रत्यागम;
 		}
-		if (strstr(test, "RECV") != NULL)
+		यदि (वाक्ये_अन्विष(test, "RECV") != रिक्त)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			प्रत्यागम;
 		}
-		if (strstr(test, "IP") != NULL)
+		यदि (वाक्ये_अन्विष(test, "IP") != रिक्त)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			प्रत्यागम;
 		}
 	}
 	*str = '\0';
-	return 1;
+	प्रत्यागम 1;
 }
 
 /**
@@ -145,21 +145,21 @@ int read_from_esp8266(char *data)
   * @brief setup MUX mode in  esp8266
   * @details setup MUX mode in  esp8266
 */
-void setup_esp8266()
+शून्य सज्जता_esp8266()
 {
-	char data[200];
-	write_to_esp8266("AT");
+	वर्ण दत्त_2[200];
+	write_गन्तव्यम्_esp8266("AT");
 	delay_loop(1000, 1000);
-	read_from_esp8266(data);
+	read_from_esp8266(दत्त_2);
 
-	printf("sending AT Echo off command to esp\n");
-	write_to_esp8266("ATE0");
+	प्रारूप_लिख("sending AT Echo off command to esp\n");
+	write_गन्तव्यम्_esp8266("ATE0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
-	printf("write AT+CIPMUX\n");
-	write_to_esp8266("AT+CIPMUX=0");
+	read_from_esp8266(दत्त_2);
+	प्रारूप_लिख("write AT+CIPMUX\n");
+	write_गन्तव्यम्_esp8266("AT+CIPMUX=0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
+	read_from_esp8266(दत्त_2);
 }
 /**
   * @fn void transmit_data(int temperature, int baudrate)
@@ -171,93 +171,93 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+शून्य transmit_दत्त(पूर्णाङ्क temperature, पूर्णाङ्क pressure)
 {
-	char data[200];
-	char sendData[93];
-	char CIPSEND[14];
-	int length;
-	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
+	वर्ण दत्त_2[200];
+	वर्ण send_दत्त_2[93];
+	वर्ण CIPSEND[14];
+	पूर्णाङ्क दीर्घता_2;
+	sprintf(send_दत्त_2, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_कुञ्चिका, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
-	length = strlen(sendData);
-	length = length + 2;
-	sprintf(CIPSEND, "AT+CIPSEND=%d", length);
+	दीर्घता_2 = वाक्यदैर्घ्यम्(send_दत्त_2);
+	दीर्घता_2 = दीर्घता_2 + 2;
+	sprintf(CIPSEND, "AT+CIPSEND=%d", दीर्घता_2);
 	// Connect to Wifi using esp8266
 
 	// Connect to Wifi using esp8266
-	printf("\n Open connection to thingspeak.com\n");
-	printf("\n sending  %s\n", sendData);
+	प्रारूप_लिख("\n Open connection to thingspeak.com\n");
+	प्रारूप_लिख("\n sending  %s\n", send_दत्त_2);
 	flush_uart(ESP_UART);
-	write_to_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	write_गन्तव्यम्_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
+	read_from_esp8266(दत्त_2);
+	प्रारूप_लिख(" data from esp :%s\n",दत्त_2);
 
 	//delay_loop(2000,2000);
-	printf("\n%s\n", CIPSEND);
+	प्रारूप_लिख("\n%s\n", CIPSEND);
 	flush_uart(ESP_UART);
-	write_to_esp8266(CIPSEND);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	write_गन्तव्यम्_esp8266(CIPSEND);
+	read_from_esp8266(दत्त_2);
+	प्रारूप_लिख(" data from esp :%s\n",दत्त_2);
 
-	printf(" write Data\n");
+	प्रारूप_लिख(" write Data\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266(sendData);
+	write_गन्तव्यम्_esp8266(send_दत्त_2);
 
 	//flush_uart(ESP_UART);
-	write_enter_to_esp8266();
+	write_enter_गन्तव्यम्_esp8266();
 	//delay(100,100);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	read_from_esp8266(दत्त_2);
+	प्रारूप_लिख(" data from esp :%s\n",दत्त_2);
 	// disconnect from link
-	printf(" write AT+CIPCLOSE\n");
+	प्रारूप_लिख(" write AT+CIPCLOSE\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266("AT+CIPCLOSE");
-	read_from_esp8266(data);
+	write_गन्तव्यम्_esp8266("AT+CIPCLOSE");
+	read_from_esp8266(दत्त_2);
 }
 
 /**
   * @fn void main()
   * @brief Entry point for the program
 */
-void main()
+शून्य मुख्यम्()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
-	char data[200];
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
+	पूर्णाङ्क i = 0;
+	पूर्णाङ्क baudrate = 115200;
+	पूर्णाङ्क transmit_गणनम् = 0;
+	वर्ण दत्त_2[200];
+	अचिह्नित पूर्णाङ्क अस्थायी_Read_मानम् = 0;
+	अचिह्नित दीर्घ delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
-	printf("\n setting PIN MUX config to 2 .... \n");
+	प्रारूप_लिख("\n setting PIN MUX config to 2 .... \n");
 	*pinmux_config_reg = 0x5;
-	printf("\n set PIN MUX config to 2 .... \n");
-	set_baud_rate(ESP_UART, baudrate);
-	printf("\n Sending temperature data to cloud server!....\n");
-	printf("\n Baud rate set to %d \n", baudrate);
-	printf("\n Waiting to ESP8266 to initialize \n");
+	प्रारूप_लिख("\n set PIN MUX config to 2 .... \n");
+	समुच्चयः_baud_दरः(ESP_UART, baudrate);
+	प्रारूप_लिख("\n Sending temperature data to cloud server!....\n");
+	प्रारूप_लिख("\n Baud rate set to %d \n", baudrate);
+	प्रारूप_लिख("\n Waiting to ESP8266 to initialize \n");
 	delay_loop(1000, 1000);
-	setup_esp8266();
-	setup_bmp280();
+	सज्जता_esp8266();
+	सज्जता_bmp280();
 
-	while (1)
+	यावत् (1)
 	{
-		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
+		write_bmp280_पञ्जिकाकोशः(I2C, BMP280_CTRL_MEANS, BMP280_प्रसामान्यम्_बहुलकम्, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		यदि (0 == read_bmp280_पञ्जिकाकोशः(I2C, BMP280_स्थितिः_पञ्जिकाकोशः, &अस्थायी_Read_मानम्, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			यदि (!(अस्थायी_Read_मानम् & 0x9))
 			{
 				//Read pressure and temperature values.
-				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
-				printf("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
-				printf("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
-				transmit_data(temperature, pressure);
+				read_bmp280_मानानि(I2C, 0xF7, &pressure, &temperature, delay);
+				प्रारूप_लिख("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
+				प्रारूप_लिख("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
+				transmit_दत्त(temperature, pressure);
 			}
 		}
-		else
+		अन्यथा
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

@@ -27,77 +27,77 @@
  * for the plic module is also defined here.
  */
 
-#ifndef PLIC_DRIVER_H
-#define PLIC_DRIVER_H
-#include "platform.h"
-#include "traps.h"
+#यदि_अपरिभाषितम् PLIC_DRIVER_H
+#परिभाषय PLIC_DRIVER_H
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "traps.h"
 
 /* Macros */
 
 /* Offsets for different registers in plic */
 
-#define PLIC_PRIORITY_OFFSET            0x0000UL
-#define PLIC_PENDING_OFFSET             0x1000UL
-#define PLIC_ENABLE_OFFSET              0x2000UL
-#define PLIC_THRESHOLD_OFFSET           0x10000UL
-#define PLIC_CLAIM_OFFSET               0x10010UL
+#परिभाषय PLIC_प्राथमिकता_विस्थापनम्            0x0000UL
+#परिभाषय PLIC_PENDING_विस्थापनम्             0x1000UL
+#परिभाषय PLIC_ENABLE_विस्थापनम्              0x2000UL
+#परिभाषय PLIC_देहली_विस्थापनम्           0x10000UL
+#परिभाषय PLIC_CLAIM_विस्थापनम्               0x10010UL
 
 /* The priority value for each int src can be found at addresses 4 bytes apart
    starting from base address + priority offset */
 
-#define PLIC_PRIORITY_SHIFT_PER_INT  2
+#परिभाषय PLIC_प्राथमिकता_सरणम्_प्रत्येकम्_INT  2
 
 /* 7 priority levels are supported.
    PLIC_PRIORITY_1 means 'no interrupt */
 
-#define PLIC_PRIORITY_1 0X00
-#define PLIC_PRIORITY_2 0X01
-#define PLIC_PRIORITY_3 0X02
-#define PLIC_PRIORITY_4 0X04
-#define PLIC_PRIORITY_5 0X08
-#define PLIC_PRIORITY_6 0X10
-#define PLIC_PRIORITY_7 0X20
+#परिभाषय PLIC_प्राथमिकता_1 0X00
+#परिभाषय PLIC_प्राथमिकता_2 0X01
+#परिभाषय PLIC_प्राथमिकता_3 0X02
+#परिभाषय PLIC_प्राथमिकता_4 0X04
+#परिभाषय PLIC_प्राथमिकता_5 0X08
+#परिभाषय PLIC_प्राथमिकता_6 0X10
+#परिभाषय PLIC_प्राथमिकता_7 0X20
 
-#define PLIC_PENDING_SHIFT_PER_SOURCE   0
+#परिभाषय PLIC_PENDING_सरणम्_प्रत्येकम्_SOURCE   0
 
 /* Enumerators */
 
-typedef enum
+प्रकारनिर्देश गणना
 {
 	INACTIVE = 0,
-	ACTIVE   = 1,
+	सक्रिय   = 1,
 	SERVICED = 2,
 	MASKED
-}interrupt_status_e;
+}व्यवधानम्_स्थितिः_e;
 
 /* Structures and Unions */
 
-typedef struct
+प्रकारनिर्देश संरचना
 {
 	uint32_t id; /*id of the interrupt target source*/
-	uint32_t priority; /*priority assigned to it*/
-	interrupt_status_e state; /*state of the interrupt*/
-	uint32_t count; /*number of times this interrupt occured*/
-} interrupt_data_t;
+	uint32_t प्राथमिकता; /*priority assigned to it*/
+	व्यवधानम्_स्थितिः_e state; /*state of the interrupt*/
+	uint32_t गणनम्; /*number of times this interrupt occured*/
+} व्यवधानम्_दत्त_t;
 
 /* Platform Level Interrupt Controller (PLIC) table
    Each entry in the table corresponds to an interrupt service routine */
 
-typedef void (*plic_fptr_t) (uint32_t);
-extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+प्रकारनिर्देश शून्य (*plic_fptr_t) (uint32_t);
+बाह्य plic_fptr_t isr_सारणी[PLIC_MAX_व्यवधानम्_SRC];
 
 /* Function prototypes */
 
-void interrupt_complete(uint32_t interrupt_id);
-uint32_t interrupt_claim_request(void);
-void isr_default(uint32_t interrupt_id);
-void interrupt_enable(uint32_t interrupt_id);
-void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
-void configure_interrupt_pin(uint32_t pin);
-void plic_init(void);
-void configure_interrupt(uint32_t int_id);
+शून्य व्यवधानम्_complete(uint32_t व्यवधानम्_id);
+uint32_t व्यवधानम्_claim_request(शून्य);
+शून्य isr_default(uint32_t व्यवधानम्_id);
+शून्य व्यवधानम्_enable(uint32_t व्यवधानम्_id);
+शून्य mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+शून्य व्यवधानम्_disable(uint32_t व्यवधानम्_id);
+शून्य समुच्चयः_व्यवधानम्_देहली(uint32_t प्राथमिकता_मानम्);
+शून्य समुच्चयः_व्यवधानम्_प्राथमिकता(uint32_t प्राथमिकता_मानम्, uint32_t int_id);
+शून्य configure_व्यवधानम्_pin(uint32_t pin);
+शून्य plic_init(शून्य);
+शून्य configure_व्यवधानम्(uint32_t int_id);
 
-#endif
+#यदि_अन्तः

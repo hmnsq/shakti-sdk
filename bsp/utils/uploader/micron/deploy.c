@@ -27,84 +27,84 @@
 @detail Writes an array of hex values into the flash memory using QSPI.
 */
 
-#include <stdint.h>
-#include "uart.h"
-#include "qspi.h"
-#include "flashdata.h"
+#अन्तर्भाव <stdint.h>
+#अन्तर्भाव "uart.h"
+#अन्तर्भाव "qspi.h"
+#अन्तर्भाव "flashdata.h"
 
-#define DEBUG 1
-#define ERASE 1024
+#परिभाषय DEBUG 1
+#परिभाषय ERASE 1024
 
-extern int  status;
+बाह्य पूर्णाङ्क  स्थितिः_2;
 
 /** @fn void deploy()
  * @brief Deploys the hex file for a project to the flash device using QSPI
  * protocol. 
  */
-void deploy()
+शून्य deploy()
 {
-	int ar_read,dum_data,i;
-	int write_address = 0x0;
-	int size_byte=0;
-	int *config_string = (const int*)0x80000000;
-	int* read_data = (int*)(0x90000000);
+	पूर्णाङ्क ar_read,dum_दत्त,i;
+	पूर्णाङ्क write_स्थानाङ्कः = 0x0;
+	पूर्णाङ्क आकार_byte=0;
+	पूर्णाङ्क *config_string = (ध्रुव पूर्णाङ्क*)0x80000000;
+	पूर्णाङ्क* read_दत्त_2 = (पूर्णाङ्क*)(0x90000000);
 
 	qspi_init(27,0,3,1,15,1);
 	waitfor(400);
 
-	if(flashMemInit())
-		return -1;
+	यदि(flashMemInit())
+		प्रत्यागम -1;
 
-	status=flashReadStatusRegister();
+	स्थितिः_2=flash_Read_स्थितिः_पञ्जिकाकोशः();
 
-	printf("\t qspi status register %08x\n",status);
+	प्रारूप_लिख("\t qspi status register %08x\n",स्थितिः_2);
 
-	if(flashWriteVolatileConfigReg(0x40404040)){
-		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+	यदि(flashWriteVolatileConfigReg(0x40404040)){
+		प्रारूप_लिख("\t Volatile Configuration Register not Set -- Diagnose\n");
+		प्रत्यागम -1;
 	}
 
-	status = wait_for_wip();
-	printf("\t qspi write  status register %08x\n",status);
+	स्थितिः_2 = wait_for_wip();
+	प्रारूप_लिख("\t qspi write  status register %08x\n",स्थितिः_2);
 
-	for(i=0;i<= write_data[0];i+=4)
+	प्रति(i=0;i<= write_दत्त_2[0];i+=4)
 	{
-		if(i%ERASE==0)
+		यदि(i%ERASE==0)
 		{
-			eraseSector(0x21, write_address);
+			eraseSector(0x21, write_स्थानाङ्कः);
 		}
 
-		printf("%x %x %x %x %d\n", write_data[i], write_data[i+1],
-		       write_data[i+2], write_data[i+3], write_address);
+		प्रारूप_लिख("%x %x %x %x %d\n", write_दत्त_2[i], write_दत्त_2[i+1],
+		       write_दत्त_2[i+2], write_दत्त_2[i+3], write_स्थानाङ्कः);
 
-		pageProgramQuadSPI(write_data[i], write_data[i+1],
-				   write_data[i+2], write_data[i+3],
-				   write_address);
-		write_address+=16;
+		page_क्रमादेशः_Quad_SPI(write_दत्त_2[i], write_दत्त_2[i+1],
+				   write_दत्त_2[i+2], write_दत्त_2[i+3],
+				   write_स्थानाङ्कः);
+		write_स्थानाङ्कः+=16;
 	}
 
-#if DEBUG
+#यदि DEBUG
 	waitfor(400);
 
-	flashEnable4ByteAddressingMode();
+	flash_Enable4_Byte_Addressing_बहुलकम्();
 	flashQuadSPIDDRXip(0x000000, config_string);
 
-	for(i=0;i<write_data[0];++i)
+	प्रति(i=0;i<write_दत्त_2[0];++i)
 	{
-		dum_data = get_qspi_shakti(read_data);
+		dum_दत्त = get_qspi_shakti(read_दत्त_2);
 		waitfor(100);
 
-		printf("\n dum_data  %x \n",dum_data);
+		प्रारूप_लिख("\n dum_data  %x \n",dum_दत्त);
 
-		*config_string = dum_data;
+		*config_string = dum_दत्त;
 
 		config_string++;
 
-		read_data++;
+		read_दत्त_2++;
 
 		waitfor(100);
 
-		reset_interrupt_flags();
+		reset_व्यवधानम्_flags();
 
 		waitfor(10);
 	}
@@ -113,15 +113,15 @@ void deploy()
 	micron_disable_xip_volatile(0,0);
 	waitfor(400);
 	flashMemInit();
-#endif
+#यदि_अन्तः
 
-	asm volatile ("ebreak");
+	asm चञ्चल ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function 
  */
-void main(){
+शून्य मुख्यम्(){
 
 	deploy();
 }

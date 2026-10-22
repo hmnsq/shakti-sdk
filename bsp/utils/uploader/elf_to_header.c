@@ -26,18 +26,18 @@
 @brief Create hex array of the contents in elf.
 */
 
-#include <stdio.h>
+#अन्तर्भाव <stdio.h>
 
 /** @fn void convert_hex_array()
  * @brief Converts the hex code to an array of hex code
  * @details reads code.mem file and coverts the hex code into an array of hex
  *     codes in the flashdata.h, first entry in the array tells the size of file.
  */
-void convert_hex_array()
+शून्य convert_hex_array()
 {
-	unsigned int  i= 0;
-	int write_data;
-	int count=0;
+	अचिह्नित पूर्णाङ्क  i= 0;
+	पूर्णाङ्क write_दत्त_2;
+	पूर्णाङ्क गणनम्=0;
 
 	FILE *myFile;
 	FILE *Cypress;
@@ -45,43 +45,43 @@ void convert_hex_array()
 	myFile = fopen(FILEPATH "/output/code.mem", "r");
 	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
 
-	if(!myFile) {
-		printf(" unable to read code.mem\n");
-		return;
+	यदि(!myFile) {
+		प्रारूप_लिख(" unable to read code.mem\n");
+		प्रत्यागम;
 	}
 
-	if(!Cypress) {
-		printf(" unable to open flashdata.h\n");
-		return;
+	यदि(!Cypress) {
+		प्रारूप_लिख(" unable to open flashdata.h\n");
+		प्रत्यागम;
 	}
 	
-	while (fscanf(myFile, "%x", &write_data) != EOF) {
-		count++;
+	यावत् (fscanf(myFile, "%x", &write_दत्त_2) != EOF) {
+		गणनम्++;
 	}
 
 	rewind(myFile);
 
-	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
+	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", गणनम् + 1, गणनम्); 
 
-	while (fscanf(myFile, "%x", &write_data) != EOF)
+	यावत् (fscanf(myFile, "%x", &write_दत्त_2) != EOF)
 	{
-		fprintf(Cypress,"\n ,0x%x", write_data);
+		fprintf(Cypress,"\n ,0x%x", write_दत्त_2);
 	}
 
 	fprintf(Cypress,"};\n\n");
 
-	fprintf(Cypress,"#define SIZE %d", count);
+	fprintf(Cypress,"#define SIZE %d", गणनम्);
 
 	fclose(Cypress);
 	fclose(myFile);
-	printf("\n Converted codemem to array\n");
+	प्रारूप_लिख("\n Converted codemem to array\n");
 }
 /** @fn void main()
  * @brief Initiates conversion by calling convert_hex_array
  */
-void main()
+शून्य मुख्यम्()
 {
-	printf(" Converting codemem to array\n");
+	प्रारूप_लिख(" Converting codemem to array\n");
 	convert_hex_array();
 }
 

@@ -55,43 +55,43 @@
 /***********************************************************
 *		Include File Definitions
 ************************************************************/
-#include "gpio.h"
-#include "platform.h"
-#include "intruder_detection.h" 
-#include "log.h" 
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "intruder_detection.h" 
+#अन्तर्भाव "log.h" 
 /* global variable definition*/
 
-int pir_present_state = 0;
-int pir_previous_state = 0;
+पूर्णाङ्क pir_present_state = 0;
+पूर्णाङ्क pir_previous_state = 0;
 
-int panic_present_state=0;
-int panic_previous_state=0;
+पूर्णाङ्क panic_present_state=0;
+पूर्णाङ्क panic_previous_state=0;
 
-int alarm_present_state=0;
-int alarm_previous_state=0;
+पूर्णाङ्क alarm_present_state=0;
+पूर्णाङ्क alarm_previous_state=0;
 
-int first_flag = 1; 
-int alarm_flag = 0;
-int deactivate_flag = 0;
-int alarm_counter_flag=1; //Default value 1
-int keypad_password_flag=0;
+पूर्णाङ्क first_flag = 1; 
+पूर्णाङ्क alarm_flag = 0;
+पूर्णाङ्क deactivate_flag = 0;
+पूर्णाङ्क alarm_गणक_flag=1; //Default value 1
+पूर्णाङ्क keypad_password_flag=0;
 
-int alarm_counter = 0;
-int keypad_counter= 0;
+पूर्णाङ्क alarm_गणक = 0;
+पूर्णाङ्क keypad_गणक= 0;
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
-int col_row = -1;
+पूर्णाङ्क कुञ्चिका = -1;
+पूर्णाङ्क col_row = -1;
 
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-unsigned int col[4]={0, 1, 2, 3};
-unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+अचिह्नित पूर्णाङ्क row_pins[ROWNUM];
+अचिह्नित पूर्णाङ्क col_pins[COLNUM];
+अचिह्नित पूर्णाङ्क col[4]={0, 1, 2, 3};
+अचिह्नित पूर्णाङ्क row[4]={4, 5, 6, 7};
+पूर्णाङ्क कुञ्चिका_map[COLNUM][ROWNUM];
 //Password
-int pass_data[PASS_NUM];
+पूर्णाङ्क pass_दत्त[PASS_अङ्कः];
 
-int  keyTable[4][4] =
+पूर्णाङ्क  कुञ्चिका_सारणी_2[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -105,18 +105,18 @@ int  keyTable[4][4] =
  * @param  gpio_pin The pin number for which the function sets HIGH or LOW
  * @param gpio_pin_mode Mode = 0 - Sets the GPIO Pin to LOW, 1- Sets the GPIO Pin to HIGH 
  */
-void write_gpio(unsigned long gpio_pin, int gpio_pin_mode )
+शून्य write_gpio(अचिह्नित दीर्घ gpio_pin, पूर्णाङ्क gpio_pin_बहुलकम् )
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	read_दत्त_2 = read_word(GPIO_दत्त_REG);
 
-	if(gpio_pin_mode == 1)
+	यदि(gpio_pin_बहुलकम् == 1)
 	{
-		write_word (GPIO_DATA_REG, ( read_data | (gpio_pin ) ) );
+		write_word (GPIO_दत्त_REG, ( read_दत्त_2 | (gpio_pin ) ) );
 	}
-	else
+	अन्यथा
 	{
-                write_word(GPIO_DATA_REG, ( read_data & ( ~gpio_pin ) ) );  
+                write_word(GPIO_दत्त_REG, ( read_दत्त_2 & ( ~gpio_pin ) ) );  
 	}
 
 }
@@ -127,27 +127,27 @@ void write_gpio(unsigned long gpio_pin, int gpio_pin_mode )
  * @param temp_read_data Present Register Data of GPIO 
  * @return 0- State (1->0 or 0->0); 1- State (0->1);2- State (1->1) 
  */
-int pir_read_state(unsigned long temp_read_data)
+पूर्णाङ्क pir_read_state(अचिह्नित दीर्घ अस्थायी_read_दत्त)
 {
-  pir_present_state= ((PIR_IN & temp_read_data) >>PIR_OFFSET);  
+  pir_present_state= ((PIR_अन्तर् & अस्थायी_read_दत्त) >>PIR_विस्थापनम्);  
 
-  if( (pir_present_state == 1) && (pir_previous_state == 0) ){
+  यदि( (pir_present_state == 1) && (pir_previous_state == 0) ){
 	//State of 0->1
    	log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_previous_state);
 	pir_previous_state = pir_present_state;
-    return 1;
+    प्रत्यागम 1;
   }
-  else if((pir_present_state == 1) && (pir_previous_state == 1)) {
+  अन्यथा यदि((pir_present_state == 1) && (pir_previous_state == 1)) {
 	//State of 1 -> 1
 	log_debug("\nPIR Code 2 %x -- %x ",pir_present_state,pir_previous_state);
 	pir_previous_state = pir_present_state;
-	return 2;
+	प्रत्यागम 2;
   }
-  else {
+  अन्यथा {
 	//State of 1->0 and 0->0
    	log_debug("\nPIR Code 0 %x -- %x",pir_present_state,pir_previous_state);
     pir_previous_state = pir_present_state;
-    return 0;
+    प्रत्यागम 0;
   }
 }
 
@@ -158,26 +158,26 @@ int pir_read_state(unsigned long temp_read_data)
  * @param temp_read_data Present Register Data of GPIO 
  * @return 0 - State (0->0 & 1->0) ;1 - State (0->1);2 - State (1->1) 
  */
-int panic_button_read_state(unsigned long temp_read_data)
+पूर्णाङ्क panic_button_read_state(अचिह्नित दीर्घ अस्थायी_read_दत्त)
 {
-  panic_present_state= ( (PANIC_BUTTON & temp_read_data) >> PANIC_BUTTON_OFFSET);  
+  panic_present_state= ( (PANIC_BUTTON & अस्थायी_read_दत्त) >> PANIC_BUTTON_विस्थापनम्);  
 
-  if( (panic_present_state == 1) && (panic_previous_state == 0) ) {
+  यदि( (panic_present_state == 1) && (panic_previous_state == 0) ) {
 	  log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_previous_state);
 	  log_debug("\nSOS -Panic Button Activated");
 	  panic_previous_state = panic_present_state;
-	  return 1;
+	  प्रत्यागम 1;
   }
-  else if( (panic_previous_state == 1) && (panic_present_state == 1) ) {
+  अन्यथा यदि( (panic_previous_state == 1) && (panic_present_state == 1) ) {
 	  //Function Returns 2 when mode is 1-1 (present and prev state)
 	  log_debug("\nPanic -Code 2 %x -- %x ",pir_present_state,pir_previous_state);
 	  panic_previous_state = panic_present_state;
-	  return 2;
+	  प्रत्यागम 2;
   }
-  else {
+  अन्यथा {
 	  log_debug("\nPanic -Code 0 %x -- %x",pir_present_state,pir_previous_state);
 	  panic_previous_state = panic_present_state;
-	  return 0;
+	  प्रत्यागम 0;
   }
 }
 
@@ -185,14 +185,14 @@ int panic_button_read_state(unsigned long temp_read_data)
  * @brief Outputs the Buzzer Tone
  * @details Generates a tone for the buzzer module
  */
-void buzzer_tone()
+शून्य buzzer_tone()
 {
-	int i=0;
+	पूर्णाङ्क i=0;
 
-	for (i = 0; i < 4; i++) {
-		write_gpio(BUZZER,HIGH);	//Buzzer generates sound
+	प्रति (i = 0; i < 4; i++) {
+		write_gpio(BUZZER,उच्चः);	//Buzzer generates sound
 		delay(1);
-		write_gpio(BUZZER,LOW);		//No tone
+		write_gpio(BUZZER,नीचः);		//No tone
 		delay(1);
     }
 }
@@ -206,18 +206,18 @@ void buzzer_tone()
  * @param col pointer address which sets column pins
  * @param table Array which maps the table to the key map 
  */
-void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM][ROWNUM] )
+शून्य  समुच्चयः_कुञ्चिका_pins_map( अचिह्नित पूर्णाङ्क*  row, अचिह्नित पूर्णाङ्क* col, पूर्णाङ्क सारणी[COLNUM][ROWNUM] )
 {
-	for(int i = 0 ; i < COLNUM ; i++)	{
+	प्रति(पूर्णाङ्क i = 0 ; i < COLNUM ; i++)	{
 		col_pins[i] = col[i]; // set col
 	}
-	for(int j = 0 ; j < ROWNUM ; j++) 	{
+	प्रति(पूर्णाङ्क j = 0 ; j < ROWNUM ; j++) 	{
 		row_pins[j] = row[j]; 	// set row
 	}
 	//Mapping table to its key map 
-	for(int i = 0 ; i < COLNUM ; i++) {
-		for(int j = 0 ; j < ROWNUM ; j++) {
-			key_map[i][j] = table[i][j];
+	प्रति(पूर्णाङ्क i = 0 ; i < COLNUM ; i++) {
+		प्रति(पूर्णाङ्क j = 0 ; j < ROWNUM ; j++) {
+			कुञ्चिका_map[i][j] = सारणी[i][j];
 		}
 	}
 }
@@ -228,9 +228,9 @@ void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM]
  * @param col_row The input to return the correspoding mapped value in key_map table 
  * @return Returns the corresponding value based on the input from the key_map table
  */
-int get_key(int col_row)
+पूर्णाङ्क get_कुञ्चिका(पूर्णाङ्क col_row)
 {
-	return key_map[col_row>>16][0xFFFF & col_row];
+	प्रत्यागम कुञ्चिका_map[col_row>>16][0xFFFF & col_row];
 }
 
 /** @fn get_col_row
@@ -239,61 +239,61 @@ int get_key(int col_row)
    low and reading the row values     
  * @return -1 - No keys pressed ; else - Returns the key pressed by the Keypad
  */
-int get_col_row(void)
+पूर्णाङ्क get_col_row(शून्य)
 {
-	int col_row = 0;
-	unsigned long read_value = 0;
-	unsigned long temp_read_data = 0;
+	पूर्णाङ्क col_row = 0;
+	अचिह्नित दीर्घ read_मानम् = 0;
+	अचिह्नित दीर्घ अस्थायी_read_दत्त = 0;
 
 	//Masking Data Reg 
-	temp_read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG,( temp_read_data | (0xF << OUTPINS_OFFSET) ) );
+	अस्थायी_read_दत्त = read_word(GPIO_दत्त_REG);
+	write_word(GPIO_दत्त_REG,( अस्थायी_read_दत्त | (0xF << OUTPINS_विस्थापनम्) ) );
 
-	for(int i= 0 ; i < COLNUM ; i++)
+	प्रति(पूर्णाङ्क i= 0 ; i < COLNUM ; i++)
 	{
-		temp_read_data = read_word(GPIO_DATA_REG);
-		write_word(GPIO_DATA_REG, ((0xF << OUTPINS_OFFSET) & (~(0x1 <<i))));
+		अस्थायी_read_दत्त = read_word(GPIO_दत्त_REG);
+		write_word(GPIO_दत्त_REG, ((0xF << OUTPINS_विस्थापनम्) & (~(0x1 <<i))));
 
-		for(int j = 0 ; j < ROWNUM ; j++) {
-			read_value =  read_word(GPIO_DATA_REG);
-			log_debug("\n The read value is %lx; row_pins: %x", (read_value), row_pins[j]);
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 ) {
-				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_value, i, j, row_pins[j], key_map[i][j]);
-				return key_map[i][j];
+		प्रति(पूर्णाङ्क j = 0 ; j < ROWNUM ; j++) {
+			read_मानम् =  read_word(GPIO_दत्त_REG);
+			log_debug("\n The read value is %lx; row_pins: %x", (read_मानम्), row_pins[j]);
+			यदि( ( read_मानम् & (1 << row_pins[j] ) ) == 0 ) {
+				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_मानम्, i, j, row_pins[j], कुञ्चिका_map[i][j]);
+				प्रत्यागम कुञ्चिका_map[i][j];
 			}
 		}
 
-		temp_read_data = read_word(GPIO_DATA_REG);
-		write_word(GPIO_DATA_REG,(temp_read_data | (0xF << OUTPINS_OFFSET)));
+		अस्थायी_read_दत्त = read_word(GPIO_दत्त_REG);
+		write_word(GPIO_दत्त_REG,(अस्थायी_read_दत्त | (0xF << OUTPINS_विस्थापनम्)));
 	}
-	return -1;
+	प्रत्यागम -1;
 }
 
 /** @fn gpio_init
  * @brief This function initializes the GPIOs, Keypad and PIR Sensor. 
  * @details Initializing the GPIOs used by the sensors and keypad to its mode.    
  */
-void gpio_init()
+शून्य gpio_init()
 {
-	set_key_pins_map(row, col,keyTable);
+	समुच्चयः_कुञ्चिका_pins_map(row, col,कुञ्चिका_सारणी_2);
 
 	//Configuring the Pin mode for pins for keypad
-	unsigned long read_data = 0;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
 
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word (GPIO_DIRECTION_CNTRL_REG, ( read_data | (OUTPINS ) ) );
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+	write_word (GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | (OUTPINS ) ) );
 
 	//Configuring the Pin mode for GPIO pins for other peripherals
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | GPIO_OUTPINS ) );
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_दत्त_2 | GPIO_OUTPINS ) );
 
 	//All the LED initially set to LOW
-	write_gpio(LED_P1,LOW);
-	write_gpio(LED_P2,LOW);
-	write_gpio(LED_P3,LOW);
-	write_gpio(LED_P4,LOW);
-	write_gpio(BUZZER,LOW);
+	write_gpio(LED_P1,नीचः);
+	write_gpio(LED_P2,नीचः);
+	write_gpio(LED_P3,नीचः);
+	write_gpio(LED_P4,नीचः);
+	write_gpio(BUZZER,नीचः);
 }
 
 /** @fn main
@@ -301,124 +301,124 @@ void gpio_init()
  * @details Initializes the necessary devices and pins and then runs the main intruder detection program   
  * @return 0 
  */
-int main()
+पूर्णाङ्क मुख्यम्()
 {
 	//Clearing the Data Register
-	unsigned long read_data = 0;
-	int prev_col_row = 0;
+	अचिह्नित दीर्घ read_दत्त_2 = 0;
+	पूर्णाङ्क पूर्व_col_row = 0;
 
-	printf("\n\n\tIntrusion Detection System");
+	प्रारूप_लिख("\n\n\tIntrusion Detection System");
 	gpio_init(); //Intialization of gpio 
 
-	printf("\nInitialising...");
+	प्रारूप_लिख("\nInitialising...");
 
-	while(1)
+	यावत्(1)
 	{
-		read_data = read_word(GPIO_DATA_REG);
+		read_दत्त_2 = read_word(GPIO_दत्त_REG);
 
-		if(POWER_SWITCH & read_data) {
-			if(first_flag){
+		यदि(POWER_SWITCH & read_दत्त_2) {
+			यदि(first_flag){
 				//First time giving the sensor to calibrate 
 				delay(30);
-				printf("\nIntruder System activated");
+				प्रारूप_लिख("\nIntruder System activated");
 				first_flag=0;
-				alarm_counter_flag =1;
+				alarm_गणक_flag =1;
 			}
 			//Intruder System - ON
-			write_gpio(LED_P2,HIGH);
+			write_gpio(LED_P2,उच्चः);
 			//Deactivation of Alarm Switch
 		
-			if(DEACTIVATE_SWITCH & read_data) {
+			यदि(DEACTIVATE_SWITCH & read_दत्त_2) {
 				deactivate_flag =1;
 			}
-			else {
+			अन्यथा {
 				deactivate_flag =0;
 			}
 
-			int temp_read_PIR  = pir_read_state(read_data);
-			int temp_read_panic = panic_button_read_state(read_data);
+			पूर्णाङ्क अस्थायी_read_PIR  = pir_read_state(read_दत्त_2);
+			पूर्णाङ्क अस्थायी_read_panic = panic_button_read_state(read_दत्त_2);
 	
-			alarm_present_state= ((temp_read_PIR > 0) || (temp_read_panic == 1) || alarm_flag == 1 ) && (deactivate_flag == 0);
+			alarm_present_state= ((अस्थायी_read_PIR > 0) || (अस्थायी_read_panic == 1) || alarm_flag == 1 ) && (deactivate_flag == 0);
 
-			if(alarm_present_state == 1 && alarm_previous_state == 0) {
+			यदि(alarm_present_state == 1 && alarm_previous_state == 0) {
 				log_debug("\nAlarm state- %x   %x",alarm_previous_state,alarm_present_state);
 
-				if(temp_read_PIR == 1)
-					printf("\nHuman Detection\nDeactivate to stop Alarm");
-				else if(temp_read_panic == 1)
-					printf("\nPanic Button\nDeactivate to stop Alarm");
+				यदि(अस्थायी_read_PIR == 1)
+					प्रारूप_लिख("\nHuman Detection\nDeactivate to stop Alarm");
+				अन्यथा यदि(अस्थायी_read_panic == 1)
+					प्रारूप_लिख("\nPanic Button\nDeactivate to stop Alarm");
 				//else {printf("\nDeactivate the Alarm to stop...");}
 
-				write_gpio(LED_P1,HIGH);
+				write_gpio(LED_P1,उच्चः);
 				buzzer_tone();
 				alarm_flag = 1;
 				alarm_previous_state = alarm_present_state;
 
 			}
-			else if(alarm_present_state == 1 && alarm_previous_state == 1) {
+			अन्यथा यदि(alarm_present_state == 1 && alarm_previous_state == 1) {
 				log_debug("\n%x   %x",alarm_previous_state,alarm_present_state);
-				write_gpio(LED_P1,HIGH);
+				write_gpio(LED_P1,उच्चः);
 				buzzer_tone();
 				alarm_flag =1;
 				alarm_previous_state = alarm_present_state;
-				alarm_counter++;
+				alarm_गणक++;
 				//printf("\n\t\t\t%x",alarm_counter);
 
-				if(alarm_counter == ALARM_TIMER & ( alarm_counter_flag == 1 ))
+				यदि(alarm_गणक == ALARM_TIMER & ( alarm_गणक_flag == 1 ))
 				{
-					write_gpio(LED_P3,HIGH);
-					printf("\nContacting Police for Assistance");
+					write_gpio(LED_P3,उच्चः);
+					प्रारूप_लिख("\nContacting Police for Assistance");
 
-					alarm_counter_flag = 0;
-					alarm_counter = 0;
+					alarm_गणक_flag = 0;
+					alarm_गणक = 0;
 				}
-				else if(alarm_counter == ALARM_TIMER) {
+				अन्यथा यदि(alarm_गणक == ALARM_TIMER) {
 					//Making Sure the alarm counter does not overflow
-					alarm_counter = 0;
+					alarm_गणक = 0;
 				}
 
 			}
-			else if(alarm_present_state == 0 && alarm_previous_state == 1)
+			अन्यथा यदि(alarm_present_state == 0 && alarm_previous_state == 1)
 			{
 				alarm_flag = 0;
-				write_gpio(LED_P1,LOW);
+				write_gpio(LED_P1,नीचः);
 
 
-				write_gpio(LED_P3,LOW);
-				alarm_counter_flag = 1;
-				alarm_counter= 0;
+				write_gpio(LED_P3,नीचः);
+				alarm_गणक_flag = 1;
+				alarm_गणक= 0;
 
-				printf("\nAlarm deactivated successfully");
+				प्रारूप_लिख("\nAlarm deactivated successfully");
 				alarm_previous_state = alarm_present_state;
 			}
-			else {
+			अन्यथा {
 				//Flags
 				alarm_flag = 0;
-				alarm_counter= 0;
-				alarm_counter_flag = 1;
+				alarm_गणक= 0;
+				alarm_गणक_flag = 1;
 
 				//write_gpio(LED_P3,LOW);
-				write_gpio(LED_P1,LOW);
+				write_gpio(LED_P1,नीचः);
 				alarm_previous_state = alarm_present_state ;
 			}
 
 			col_row = get_col_row();
 			//KeyPad Sensor 
-			if( col_row != -1 ) {
-				printf("\nThe %x Key Pressed", col_row);
+			यदि( col_row != -1 ) {
+				प्रारूप_लिख("\nThe %x Key Pressed", col_row);
 
-				if( col_row == key_map[3][3]) {
-					printf("\nEnter Password-");
+				यदि( col_row == कुञ्चिका_map[3][3]) {
+					प्रारूप_लिख("\nEnter Password-");
 				}
 				delay(1);
 			}
 		}
-		else {
+		अन्यथा {
 			//Intruder System Off
-			write_gpio(LED_P2,LOW);
+			write_gpio(LED_P2,नीचः);
 			first_flag = 1;
 		}
 		//end of infinite while loop
 	}
-	return 0;
+	प्रत्यागम 0;
 }

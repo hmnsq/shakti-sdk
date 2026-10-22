@@ -98,7 +98,7 @@ returning:
 	andi t4,t4,0
 	addi t4,t4,2
 begin:	li t3, 0x0C000000    #plic priority address
-	add t3,t3, t6
+	योजय t3,t3, t6
 	sw t4, 0(t3)
 	addi t6, t6, 4
 	bge  t5, t6, begin
@@ -117,7 +117,7 @@ begin:	li t3, 0x0C000000    #plic priority address
 	li t3, 0x0c010000 #set threshold priority
 	li t4, 0x1
 	sw t4, 0(t3)
-	ret
+	प्रत्यागच्छ
 
 .p2align 2
 trap_handler:
@@ -127,7 +127,7 @@ trap_handler:
 	and t0,t0,t3
 	beqz t0, exception_handler // it is a exception
 	beq t0, t3, interrupt_handler
-1:      ret
+1:      प्रत्यागच्छ
 
 .p2align 2
 exception_handler:
@@ -136,13 +136,13 @@ exception_handler:
 	lw t2, 0(t1)  # offset value
 	addi t2,t2,4 #t1 holds base address for storing trap occurences
 	sw t2,0(t1)  
-	add t1, t1,t2
+	योजय t1, t1,t2
 	sw t0,0(t1)  
 	j 1b
 
 
 .p2align 2
-trap_entry:     # currently trap_entry has a nop. Later we will add actual instrns
+trap_entry:     # currently trap_entry has a nop. Later we will योजय actual instrns
 addi sp, sp, -32*REGBYTES
  nop
 #x0 is always 0
@@ -215,7 +215,7 @@ LREG x31, 31*REGBYTES(sp)
 mret
 
 .p2align 0x2
-.section .data 
+.खण्डः .data 
 _data1:
 .word 	0
 .word 	0
@@ -230,7 +230,7 @@ uarts:	lb s1, 12(s2)
 	andi s1,s1,0x2
 	bnez s1, uarts
 	andi s1,s1,0
-	add s1,s1,t4          // print int id
+	योजय s1,s1,t4          // print int id
 	sb s1, 4(s2)
 	sw t4, 0(t3)            // int complete
 	ebreak

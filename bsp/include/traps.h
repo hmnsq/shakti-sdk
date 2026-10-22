@@ -27,9 +27,9 @@
  * handling traps are declared.
  */
 
-#ifndef TRAPS_H
-#define TRAPS_H
-#include <stdint.h>
+#यदि_अपरिभाषितम् TRAPS_H
+#परिभाषय TRAPS_H
+#अन्तर्भाव <stdint.h>
 
 /*
    Table 3.6 risc v priv spec v1.10 chapter 7
@@ -72,59 +72,59 @@
    Off the 32 entries in the table, some index positions reserved for future use
  */
 
-#define MAX_MCAUSE_VALUE               32
+#परिभाषय MAX_MCAUSE_मानम्               32
 
 
 /*  Interrupts */
-#define MAX_INTERRUPT_VALUE            16
+#परिभाषय MAX_व्यवधानम्_मानम्            16
 
-#define USER_SW_INTERRUPT               0
-#define SUPER_SW_INTERRUPT              1
-#define RESERVED_INTERRUPT0             2
-#define MACH_SW_INTERRUPT               3
-#define USER_TIMER_INTERRUPT            4
-#define SUPER_TIMER_INTERRUPT           5
-#define RESERVED_INTERRUPT1             6
-#define MACH_TIMER_INTERRUPT            7
-#define USER_EXT_INTERRUPT              8
-#define SUPERVISOR_EXT_INTERRUPT        9
-#define RESERVED_INTERRUPT2            10
-#define MACH_EXTERNAL_INTERRUPT        11
-#define RESERVED_INTERRUPT3            12
-#define RESERVED_INTERRUPT4            13
-#define RESERVED_INTERRUPT5            14
-#define RESERVED_INTERRUPT6            15
+#परिभाषय USER_SW_व्यवधानम्               0
+#परिभाषय SUPER_SW_व्यवधानम्              1
+#परिभाषय RESERVED_INTERRUPT0             2
+#परिभाषय MACH_SW_व्यवधानम्               3
+#परिभाषय USER_TIMER_व्यवधानम्            4
+#परिभाषय SUPER_TIMER_व्यवधानम्           5
+#परिभाषय RESERVED_INTERRUPT1             6
+#परिभाषय MACH_TIMER_व्यवधानम्            7
+#परिभाषय USER_EXT_व्यवधानम्              8
+#परिभाषय SUPERVISOR_EXT_व्यवधानम्        9
+#परिभाषय RESERVED_INTERRUPT2            10
+#परिभाषय MACH_EXTERNAL_व्यवधानम्        11
+#परिभाषय RESERVED_INTERRUPT3            12
+#परिभाषय RESERVED_INTERRUPT4            13
+#परिभाषय RESERVED_INTERRUPT5            14
+#परिभाषय RESERVED_INTERRUPT6            15
 
 /* Traps */
-#define MAX_TRAP_VALUE                 16
+#परिभाषय MAX_TRAP_मानम्                 16
 
-#define INSTRUCTION_ADDRESS_MISALIGNED  0
-#define INSTRUCTION_ACCESS_FAULT        1
-#define ILLEGAL_INSTRUCTION             2
-#define BREAKPOINT                      3
-#define LOAD_ADDRESS_MISALIGNED         4
-#define LOAD_ACCESS_FAULT               5
-#define STORE_AMO_ADDRESS_MISALIGNED    6
-#define STORE_AMO_ACCESS_FAULT          7
-#define ENVIRONMENT_CALL_FROM_U_MODE    8
-#define ENVIRONMENT_CALL_FROM_S_MODE    9
-#define RESERVED_TRAP1                 10
-#define ENVIRONMENT_CALL_FROM_M_MODE   11
-#define INSTRUCTION_PAGE_FAULT         12
-#define LOAD_PAGE_FAULT                13
-#define RESERVED_TRAP2                 14
-#define STORE_AMO_PAGE_FAULT           15
+#परिभाषय INSTRUCTION_स्थानाङ्कः_MISALIGNED  0
+#परिभाषय INSTRUCTION_ACCESS_FAULT        1
+#परिभाषय ILLEGAL_INSTRUCTION             2
+#परिभाषय BREAKPOINT                      3
+#परिभाषय आरोपय_स्थानाङ्कः_MISALIGNED         4
+#परिभाषय आरोपय_ACCESS_FAULT               5
+#परिभाषय STORE_AMO_स्थानाङ्कः_MISALIGNED    6
+#परिभाषय STORE_AMO_ACCESS_FAULT          7
+#परिभाषय ENVIRONMENT_CALL_FROM_U_बहुलकम्    8
+#परिभाषय ENVIRONMENT_CALL_FROM_S_बहुलकम्    9
+#परिभाषय RESERVED_TRAP1                 10
+#परिभाषय ENVIRONMENT_CALL_FROM_M_बहुलकम्   11
+#परिभाषय INSTRUCTION_PAGE_FAULT         12
+#परिभाषय आरोपय_PAGE_FAULT                13
+#परिभाषय RESERVED_TRAP2                 14
+#परिभाषय STORE_AMO_PAGE_FAULT           15
 
 /*
    Trap table -  Each entry in the table corresponds to a service routine for a Trap
  */
 
-typedef void (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
-extern mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-extern mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+प्रकारनिर्देश शून्य (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
+बाह्य mtrap_fptr_t mcause_trap_सारणी[MAX_TRAP_मानम्];
+बाह्य mtrap_fptr_t mcause_व्यवधानम्_सारणी[MAX_व्यवधानम्_मानम्];
 
-void default_handler(uintptr_t cause, uintptr_t epc);
-unsigned int extract_ie_code(unsigned int num);
+शून्य default_handler(uintptr_t cause, uintptr_t epc);
+अचिह्नित पूर्णाङ्क extract_ie_संहिता(अचिह्नित पूर्णाङ्क अङ्कः);
 uintptr_t handle_trap(uintptr_t cause, uintptr_t epc);
 
-#endif
+#यदि_अन्तः

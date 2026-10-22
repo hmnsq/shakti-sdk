@@ -27,46 +27,46 @@
   setup each plic registers, isr routine and plic interrupt handler are here.
  */
 
-#include "pwm_driver.h"
-#include "plic_driver.h"
-#include "platform.h"
-#include "log.h"
-#include "stddef.h"
-#include "gpio.h"
-#include "utils.h"
+#अन्तर्भाव "pwm_driver.h"
+#अन्तर्भाव "plic_driver.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "stddef.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "utils.h"
 
 /*
    Global interrupt data maintenance structure
  */
 
-plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
-interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
+plic_fptr_t isr_सारणी[PLIC_MAX_व्यवधानम्_SRC];
+व्यवधानम्_दत्त_t hart0_व्यवधानम्_matrix[PLIC_MAX_व्यवधानम्_SRC];
 
 /** @fn void interrupt_complete(uint32_t interrupt_id)
  * @brief write the int_id to complete register
  * @details Signals completion of interrupt. From s/w side the interrupt claim/complete register is written with the interrupt id.
  * @param uint32_t interrupt_id
  */
-void interrupt_complete(uint32_t interrupt_id)
+शून्य व्यवधानम्_complete(uint32_t व्यवधानम्_id)
 {
 	log_trace("\ninterrupt_complete entered\n");
 
-	uint32_t *claim_addr =  (uint32_t *) (PLIC_BASE_ADDRESS +
-					      PLIC_CLAIM_OFFSET);
+	uint32_t *claim_addr =  (uint32_t *) (PLIC_आधारः_स्थानाङ्कः +
+					      PLIC_CLAIM_विस्थापनम्);
 
-	*claim_addr = interrupt_id;
-	hart0_interrupt_matrix[interrupt_id].state = SERVICED;
-	hart0_interrupt_matrix[interrupt_id].count++;
+	*claim_addr = व्यवधानम्_id;
+	hart0_व्यवधानम्_matrix[व्यवधानम्_id].state = SERVICED;
+	hart0_व्यवधानम्_matrix[व्यवधानम्_id].गणनम्++;
 
-	log_debug("interrupt id %d, state changed to %d\n", interrupt_id,
-		  hart0_interrupt_matrix[interrupt_id].state);
+	log_debug("interrupt id %d, state changed to %d\n", व्यवधानम्_id,
+		  hart0_व्यवधानम्_matrix[व्यवधानम्_id].state);
 
-	log_debug("interrupt id = %x \n reset to default values state = %x \
-		  \n priority = %x\n count = %x\n", \
-		  hart0_interrupt_matrix[interrupt_id].id, \
-		  hart0_interrupt_matrix[interrupt_id].state, \
-		  hart0_interrupt_matrix[interrupt_id].priority, \
-		  hart0_interrupt_matrix[interrupt_id].count);
+	log_debug("व्यवधानम् id = %x \n reset गन्तव्यम् स्वभाव मानानि state = %x \
+		  \n प्राथमिकता = %x\n गणनम् = %x\n", \
+		  hart0_व्यवधानम्_matrix[व्यवधानम्_id].id, \
+		  hart0_व्यवधानम्_matrix[व्यवधानम्_id].state, \
+		  hart0_व्यवधानम्_matrix[व्यवधानम्_id].प्राथमिकता, \
+		  hart0_व्यवधानम्_matrix[व्यवधानम्_id].गणनम्);
 
 	log_trace("interrupt_complete exited\n");
 }
@@ -77,10 +77,10 @@ void interrupt_complete(uint32_t interrupt_id)
  *           of the highest priority pending interrupt
  * @return uint32_t
  */
-uint32_t interrupt_claim_request()
+uint32_t व्यवधानम्_claim_request()
 {
-	uint32_t *interrupt_claim_address = NULL;
-	uint32_t interrupt_id;
+	uint32_t *व्यवधानम्_claim_स्थानाङ्कः = रिक्त;
+	uint32_t व्यवधानम्_id;
 
 	log_trace("\ninterrupt_claim_request entered\n");
 
@@ -91,17 +91,17 @@ uint32_t interrupt_claim_request()
 	   refer https://gitlab.com/shaktiproject/uncore/devices/blob/master/plic/plic.bsv as on 26/8/2019
 	 */
 
-	interrupt_claim_address = (uint32_t *)(PLIC_BASE_ADDRESS +
-					       PLIC_CLAIM_OFFSET);
+	व्यवधानम्_claim_स्थानाङ्कः = (uint32_t *)(PLIC_आधारः_स्थानाङ्कः +
+					       PLIC_CLAIM_विस्थापनम्);
 
-	interrupt_id = *interrupt_claim_address;
+	व्यवधानम्_id = *व्यवधानम्_claim_स्थानाङ्कः;
 
-	log_debug("interrupt id [%x] claimed  at address %x\n", interrupt_id,
-		  interrupt_claim_address );
+	log_debug("interrupt id [%x] claimed  at address %x\n", व्यवधानम्_id,
+		  व्यवधानम्_claim_स्थानाङ्कः );
 
 	log_trace("interrupt_claim_request exited\n");
 
-	return interrupt_id;
+	प्रत्यागम व्यवधानम्_id;
 }
 
 /** @fn void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
@@ -111,19 +111,19 @@ uint32_t interrupt_claim_request()
  * @param uintptr_t int_id
  * @param uintptr_t epc
  */
-void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__((unused)) uintptr_t epc)
+शून्य mach_plic_handler( __attribute__((अप्रयुक्तम्)) uintptr_t int_id, __attribute__((अप्रयुक्तम्)) uintptr_t epc)
 {
-	uint32_t  interrupt_id;
+	uint32_t  व्यवधानम्_id;
 
 	log_trace("\nmach_plic_handler entered\n");
 
-	interrupt_id = interrupt_claim_request();
+	व्यवधानम्_id = व्यवधानम्_claim_request();
 
-	log_debug("interrupt id claimed = %x\n", interrupt_id);
+	log_debug("interrupt id claimed = %x\n", व्यवधानम्_id);
 
-	if (interrupt_id <= 0 || interrupt_id > PLIC_MAX_INTERRUPT_SRC)
+	यदि (व्यवधानम्_id <= 0 || व्यवधानम्_id > PLIC_MAX_व्यवधानम्_SRC)
 	{
-		log_fatal("Fatal error, interrupt id [%x] claimed is wrong\n", interrupt_id);
+		log_fatal("Fatal error, interrupt id [%x] claimed is wrong\n", व्यवधानम्_id);
 	}
 
 	/*
@@ -137,17 +137,17 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
 	 */
 
 	/*change state to active*/
-	hart0_interrupt_matrix[interrupt_id].state = ACTIVE;
+	hart0_व्यवधानम्_matrix[व्यवधानम्_id].state = सक्रिय;
 
 	log_debug("interrupt id %d, state changed to %d\n",
-		  interrupt_id,hart0_interrupt_matrix[interrupt_id].state);
+		  व्यवधानम्_id,hart0_व्यवधानम्_matrix[व्यवधानम्_id].state);
 
 	/*call relevant interrupt service routine*/
-	isr_table[interrupt_id](interrupt_id);
+	isr_सारणी[व्यवधानम्_id](व्यवधानम्_id);
 
-	interrupt_complete(interrupt_id);
+	व्यवधानम्_complete(व्यवधानम्_id);
 
-	log_debug("interrupt id %d complete \n", interrupt_id);
+	log_debug("interrupt id %d complete \n", व्यवधानम्_id);
 
 	log_trace("\nmach_plic_handler exited\n");
 }
@@ -158,23 +158,23 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
  * @param uint32_t interrupt_id
  * @return uint32_t
  */
-void isr_default(uint32_t interrupt_id)
+शून्य isr_default(uint32_t व्यवधानम्_id)
 {
 	log_trace("\nisr_default entered\n");
 
-	if( interrupt_id > 0 && interrupt_id < 7 )  //PWM Interrupts
+	यदि( व्यवधानम्_id > 0 && व्यवधानम्_id < 7 )  //PWM Interrupts
 	{
 		/*
 		   Assuming 6 pwm's are there
 		 */
 
-		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
+		यदि(pwm_check_continuous_बहुलकम्((6-व्यवधानम्_id)) == 0)
 		{
-			set_pwm_control_register((6-interrupt_id),0x80);
+			समुच्चयः_pwm_control_पञ्जिकाकोशः((6-व्यवधानम्_id),0x80);
 		}
 	}
 
-	log_info("interrupt [%d] serviced\n",interrupt_id);
+	log_info("interrupt [%d] serviced\n",व्यवधानम्_id);
 
 	log_trace("\nisr_default exited\n");
 }
@@ -184,32 +184,32 @@ void isr_default(uint32_t interrupt_id)
  * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
  * @param uint32_t interrupt_id
  */
-void interrupt_enable(uint32_t interrupt_id)
+शून्य व्यवधानम्_enable(uint32_t व्यवधानम्_id)
 {
-	uint8_t *interrupt_enable_addr;
-	uint8_t current_value = 0x00, new_value;
+	uint8_t *व्यवधानम्_enable_addr;
+	uint8_t current_मानम् = 0x00, new_मानम्;
 
 	log_trace("\ninterrupt_enable entered \n");
 
-	log_debug("interrupt_id = %x\n", interrupt_id);
+	log_debug("interrupt_id = %x\n", व्यवधानम्_id);
 
 	log_debug("PLIC BASE ADDRESS = %x, PLIC ENABLE OFFSET = %x\n" \
-			,PLIC_BASE_ADDRESS, PLIC_ENABLE_OFFSET);
-	interrupt_enable_addr = (uint8_t *) (PLIC_BASE_ADDRESS +
-			PLIC_ENABLE_OFFSET +
-			((interrupt_id) >> 3));
+			,PLIC_आधारः_स्थानाङ्कः, PLIC_ENABLE_विस्थापनम्);
+	व्यवधानम्_enable_addr = (uint8_t *) (PLIC_आधारः_स्थानाङ्कः +
+			PLIC_ENABLE_विस्थापनम् +
+			((व्यवधानम्_id) >> 3));
 
-	current_value = *interrupt_enable_addr;
+	current_मानम् = *व्यवधानम्_enable_addr;
 
 	log_debug("interrupt_enable_addr = %x current_value = %x \n", \
-			interrupt_enable_addr, current_value);
+			व्यवधानम्_enable_addr, current_मानम्);
 
 	/*set the bit corresponding to the interrupt src*/
-	new_value = current_value | (0x1 << (interrupt_id % 8));
+	new_मानम् = current_मानम् | (0x1 << (व्यवधानम्_id % 8));
 
-	*((uint8_t*)interrupt_enable_addr) = new_value;
+	*((uint8_t*)व्यवधानम्_enable_addr) = new_मानम्;
 
-	log_debug("value read: new_value = %x\n", new_value);
+	log_debug("value read: new_value = %x\n", new_मानम्);
 
 	log_trace("\ninterrupt_enable exited \n");
 }
@@ -220,36 +220,36 @@ void interrupt_enable(uint32_t interrupt_id)
  *          The bit position corresponds to the interrupt id
  * @param uint32_t interrupt_id
  */
-void interrupt_disable(uint32_t interrupt_id)
+शून्य व्यवधानम्_disable(uint32_t व्यवधानम्_id)
 {
-	uint8_t *interrupt_disable_addr = 0;
-	uint8_t current_value = 0x00, new_value;
+	uint8_t *व्यवधानम्_disable_addr = 0;
+	uint8_t current_मानम् = 0x00, new_मानम्;
 
 	log_trace("\ninterrupt_disable entered \n");
 
-	log_debug("interrupt_id = %x\n", interrupt_id);
+	log_debug("interrupt_id = %x\n", व्यवधानम्_id);
 
 	log_debug("PLIC BASE ADDRESS = %x, PLIC ENABLE OFFSET = %x interrupt_id = %x\n",
-		  PLIC_BASE_ADDRESS, PLIC_ENABLE_OFFSET, interrupt_id);
+		  PLIC_आधारः_स्थानाङ्कः, PLIC_ENABLE_विस्थापनम्, व्यवधानम्_id);
 
-	interrupt_disable_addr = (uint8_t *) (PLIC_BASE_ADDRESS +
-					      PLIC_ENABLE_OFFSET +
-					      (interrupt_id >> 3));
+	व्यवधानम्_disable_addr = (uint8_t *) (PLIC_आधारः_स्थानाङ्कः +
+					      PLIC_ENABLE_विस्थापनम् +
+					      (व्यवधानम्_id >> 3));
 
-	current_value = *interrupt_disable_addr;
+	current_मानम् = *व्यवधानम्_disable_addr;
 
 	log_debug("interrupt_disable_addr = %x current_value = %x \n",
-		  interrupt_disable_addr, current_value);
+		  व्यवधानम्_disable_addr, current_मानम्);
 
 	/*unset the bit corresponding to the interrupt src*/
-	new_value = current_value & (~(0x1 << (interrupt_id % 8)));
+	new_मानम् = current_मानम् & (~(0x1 << (व्यवधानम्_id % 8)));
 
-	*interrupt_disable_addr = new_value;
+	*व्यवधानम्_disable_addr = new_मानम्;
 
-	hart0_interrupt_matrix[interrupt_id].state = INACTIVE;
+	hart0_व्यवधानम्_matrix[व्यवधानम्_id].state = INACTIVE;
 
 	log_debug("interrupt id %d, state changed to %d\n",
-		  interrupt_id,hart0_interrupt_matrix[interrupt_id].state);
+		  व्यवधानम्_id,hart0_व्यवधानम्_matrix[व्यवधानम्_id].state);
 
 	log_trace("interrupt_disable exited\n");
 }
@@ -259,18 +259,18 @@ void interrupt_disable(uint32_t interrupt_id)
  * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is ignored.
  * @param uint32_t priority_value
  */
-void set_interrupt_threshold(uint32_t priority_value)
+शून्य समुच्चयः_व्यवधानम्_देहली(uint32_t प्राथमिकता_मानम्)
 {
 	log_trace("\nset interrupt_threshold entered\n");
 
-	uint32_t *interrupt_threshold_priority = NULL;
+	uint32_t *व्यवधानम्_देहली_प्राथमिकता = रिक्त;
 
-	interrupt_threshold_priority = (uint32_t *) (PLIC_BASE_ADDRESS +
-						     PLIC_THRESHOLD_OFFSET);
+	व्यवधानम्_देहली_प्राथमिकता = (uint32_t *) (PLIC_आधारः_स्थानाङ्कः +
+						     PLIC_देहली_विस्थापनम्);
 
-	*interrupt_threshold_priority = priority_value;
+	*व्यवधानम्_देहली_प्राथमिकता = प्राथमिकता_मानम्;
 
-	log_debug("plic threshold set to %d\n", *interrupt_threshold_priority);
+	log_debug("plic threshold set to %d\n", *व्यवधानम्_देहली_प्राथमिकता);
 
 	log_trace("set interrupt_threshold exited\n");
 }
@@ -281,28 +281,28 @@ void set_interrupt_threshold(uint32_t priority_value)
  * @param uint32_t priority_value
  * @param uint32_t int_id
  */
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
+शून्य समुच्चयः_व्यवधानम्_प्राथमिकता(uint32_t प्राथमिकता_मानम्, uint32_t int_id)
 {
-	log_trace("\n set interrupt priority entered %x\n", priority_value);
+	log_trace("\n set interrupt priority entered %x\n", प्राथमिकता_मानम्);
 
-	uint32_t * interrupt_priority_address;
+	uint32_t * व्यवधानम्_प्राथमिकता_स्थानाङ्कः;
 
 	/*
 	   base address + priority offset + 4*interruptId
 	 */
 
-	interrupt_priority_address = (uint32_t *) (PLIC_BASE_ADDRESS +
-						   PLIC_PRIORITY_OFFSET +
+	व्यवधानम्_प्राथमिकता_स्थानाङ्कः = (uint32_t *) (PLIC_आधारः_स्थानाङ्कः +
+						   PLIC_प्राथमिकता_विस्थापनम् +
 						   (int_id <<
-						    PLIC_PRIORITY_SHIFT_PER_INT));
+						    PLIC_प्राथमिकता_सरणम्_प्रत्येकम्_INT));
 
-	log_debug("interrupt_priority_address = %x\n", interrupt_priority_address);
+	log_debug("interrupt_priority_address = %x\n", व्यवधानम्_प्राथमिकता_स्थानाङ्कः);
 
-	log_debug("current data at interrupt_priority_address = %x\n", *interrupt_priority_address);
+	log_debug("current data at interrupt_priority_address = %x\n", *व्यवधानम्_प्राथमिकता_स्थानाङ्कः);
 
-	*interrupt_priority_address = priority_value;
+	*व्यवधानम्_प्राथमिकता_स्थानाङ्कः = प्राथमिकता_मानम्;
 
-	log_debug(" new data at interrupt_priority_address = %x\n", *interrupt_priority_address);
+	log_debug(" new data at interrupt_priority_address = %x\n", *व्यवधानम्_प्राथमिकता_स्थानाङ्कः);
 
 	log_trace("set interrupt priority exited\n");
 }
@@ -312,11 +312,11 @@ void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
  * @details enable the corresponding gpio pin for a interrupt as read.
  * @param uint32_t id
  */
-void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
+शून्य configure_व्यवधानम्_pin( __attribute__((अप्रयुक्तम्)) uint32_t id)
 {
 	log_trace("\nconfigure interrupt pin entered\n");
 
-	uint32_t read_data;
+	uint32_t read_दत्त_2;
 
 	/*
 	   GPIO0 -> Int id 7
@@ -324,11 +324,11 @@ void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
 	   Refer platform.h for full memory map.
 	 */
 
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
+	read_दत्त_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
 
-	log_debug("GPIO DIRECTION REGISTER VALUE = %x\n", read_data);
+	log_debug("GPIO DIRECTION REGISTER VALUE = %x\n", read_दत्त_2);
 
-	write_word(GPIO_DIRECTION_CNTRL_REG, (read_data) & \
+	write_word(GPIO_DIRECTION_CNTRL_REG, (read_दत्त_2) & \
 		   (0xFFFFFFFF & ~(1 << (id-7))));
 
 	log_debug("Data written to GPIO DIRECTION CTRL REG = %x\n", \
@@ -343,16 +343,16 @@ void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
  *          Sets up the plic meta data table. Assigns the plic
  *          handler to mcause_interrupt_table.,By default interrupts are disabled.
  */
-void plic_init()
+शून्य plic_init()
 {
 	uint32_t int_id = 0;
 
 	log_trace("\nplic_init entered\n");
 
 	/*Assign service routine for external interrupt in machine mode*/
-	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT] = mach_plic_handler;
+	mcause_व्यवधानम्_सारणी[MACH_EXTERNAL_व्यवधानम्] = mach_plic_handler;
 
-	log_debug("Assigned mach_plic_handler to trap id : %d\n", MACH_EXTERNAL_INTERRUPT);
+	log_debug("Assigned mach_plic_handler to trap id : %d\n", MACH_EXTERNAL_व्यवधानम्);
 
 	/*
 	   risc v priv spec v1.10 section 7.5 onwards
@@ -364,37 +364,37 @@ void plic_init()
 	   and interrupt priority increases with increasing integer values.
 	 */
 
-	hart0_interrupt_matrix[0].state = INACTIVE;
-	hart0_interrupt_matrix[0].id = 0;
-	hart0_interrupt_matrix[0].priority = 0;
-	hart0_interrupt_matrix[0].count = 0;
+	hart0_व्यवधानम्_matrix[0].state = INACTIVE;
+	hart0_व्यवधानम्_matrix[0].id = 0;
+	hart0_व्यवधानम्_matrix[0].प्राथमिकता = 0;
+	hart0_व्यवधानम्_matrix[0].गणनम् = 0;
 
-	for(int_id = 1; int_id < PLIC_MAX_INTERRUPT_SRC; int_id++)
+	प्रति(int_id = 1; int_id < PLIC_MAX_व्यवधानम्_SRC; int_id++)
 	{
-		hart0_interrupt_matrix[int_id].state = INACTIVE;
-		hart0_interrupt_matrix[int_id].id = int_id;
-		hart0_interrupt_matrix[int_id].priority = PLIC_PRIORITY_3;
-		hart0_interrupt_matrix[int_id].count = 0;
+		hart0_व्यवधानम्_matrix[int_id].state = INACTIVE;
+		hart0_व्यवधानम्_matrix[int_id].id = int_id;
+		hart0_व्यवधानम्_matrix[int_id].प्राथमिकता = PLIC_प्राथमिकता_3;
+		hart0_व्यवधानम्_matrix[int_id].गणनम् = 0;
 
 		log_debug("\n************************************************");
 
 		/*Disable all interrupts at the beginning*/
-		interrupt_disable(int_id);
+		व्यवधानम्_disable(int_id);
 
 		/*assign a default isr for all interrupts*/
-		isr_table[int_id] = isr_default;
+		isr_सारणी[int_id] = isr_default;
 
 		/*set priority for all interrupts*/
 
-		set_interrupt_priority(PLIC_PRIORITY_3, int_id);
+		समुच्चयः_व्यवधानम्_प्राथमिकता(PLIC_प्राथमिकता_3, int_id);
 
-		log_debug("\ninterrupt id = %x \nreset to default values state = %x \
+		log_debug("\ninterrupt id = %x \nreset गन्तव्यम् स्वभाव मानानि state = %x \
 			  \npriority = %x\ncount = %x\n \
 			  \n*************************************************",
-			  hart0_interrupt_matrix[int_id].id, \
-			  hart0_interrupt_matrix[int_id].state, \
-			  hart0_interrupt_matrix[int_id].priority, \
-			  hart0_interrupt_matrix[int_id].count);
+			  hart0_व्यवधानम्_matrix[int_id].id, \
+			  hart0_व्यवधानम्_matrix[int_id].state, \
+			  hart0_व्यवधानम्_matrix[int_id].प्राथमिकता, \
+			  hart0_व्यवधानम्_matrix[int_id].गणनम्);
 	}
 
 	/* An isr for each and every unique interrupt source has to be added explicitly at init time*/
@@ -403,7 +403,7 @@ void plic_init()
 	  interrupt_enable(int_id);
 	 */
 	/*set threshold value for interrupts*/
-	set_interrupt_threshold(PLIC_PRIORITY_2);
+	समुच्चयः_व्यवधानम्_देहली(PLIC_प्राथमिकता_2);
 
 	log_trace("plic_init exited \n");
 }
@@ -416,19 +416,19 @@ void plic_init()
  *          between interrupt enable bit and interrupt pin
  * @param uint32_t int_id
  */
-void configure_interrupt(uint32_t int_id)
+शून्य configure_व्यवधानम्(uint32_t int_id)
 {
 	log_trace("\nconfigure_interrupt entered \n");
 
 	/*
 	   Call only for GPIO pins
 	 */
-	if(int_id >6 && int_id < 22)
+	यदि(int_id >6 && int_id < 22)
 	{
-		configure_interrupt_pin(int_id);
+		configure_व्यवधानम्_pin(int_id);
 	}
 
-	interrupt_enable(int_id);
+	व्यवधानम्_enable(int_id);
 
 	log_trace("configure_interrupt exited \n");
 }

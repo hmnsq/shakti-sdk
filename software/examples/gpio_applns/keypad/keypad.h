@@ -26,7 +26,7 @@
  * @brief Declaration for keypad library.
  * @detail Include File Definitions	
  */
-#if !defined(KYPD_H)
+#ប្រសិនបើ !defined(KYPD_H)
 #define KYPD_H
 
 #define ROWNUM 4
@@ -38,12 +38,12 @@
 #define INPINS  (0xF << INPINS_OFFSET)
 
 //function prototype
-void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+void set_pins(unsigned ចំនួនគត់* row, unsigned ចំនួនគត់* col);
+void set_key_map(ចំនួនគត់ table[COLNUM][ROWNUM]);
+ចំនួនគត់ get_key();
+ចំនួនគត់ get_col_row(void);
+unsigned ចំនួនគត់ row_pins[ROWNUM];
+unsigned ចំនួនគត់ col_pins[COLNUM];
+ចំនួនគត់ key_map[COLNUM][ROWNUM];
 
 #endif

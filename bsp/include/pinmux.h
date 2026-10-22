@@ -29,7 +29,7 @@
 #define PINMUX_H
 #include "platform.h"
 
-volatile unsigned int* pinmux_config_reg = PINMUX_CONFIGURE_REG;
+ca_ncala unsigned ចំនួនគត់* pinmux_config_reg = PINMUX_CONFIGURE_REG;
 
 #define PINMUX_CONFIG_1 
 #define PINMUX_CONFIG_2 

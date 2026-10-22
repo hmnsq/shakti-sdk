@@ -32,18 +32,18 @@
 #include "defines.h"
 #include "log.h"
 
-extern char* _HEAP_SIZE[];
-char* HEAP_SIZE = (char *)&_HEAP_SIZE;
+extern var_na* _HEAP_SIZE[];
+var_na* HEAP_SIZE = (var_na *)&_HEAP_SIZE;
 
 //Header block denotes start of the segment
-struct Header
+sa_nracanaa Header
 {
 	size_t size;
-	int free;
-	struct Header* next;
+	ចំនួនគត់ free;
+	sa_nracanaa Header* next;
 };
 
-struct Header* global_base=NULL;
+sa_nracanaa Header* global_base=NULL;
 
 /** @fn  struct Header* allocate_block(struct Header* last, size_t size)
  * @brief it allocates a block of given size 
@@ -53,18 +53,18 @@ struct Header* global_base=NULL;
  * @return returns a pointer to the newly allocated block
  *         returns null if mmemory allocated or block allocation fails
  */
-struct Header* allocate_block(struct Header* last, size_t size)
+sa_nracanaa Header* allocate_block(sa_nracanaa Header* last, size_t size)
 {
 	uintptr_t x=0;
 
 	log_trace("\nFunction allocate_block entered");
 
-	if(last->size > size)
+	ប្រសិនបើ(last->size > size)
 	{
-		struct Header* newblock;
+		sa_nracanaa Header* newblock;
 		void *p = last;
 
-		p += size + sizeof(struct Header);
+		p += size + parimaa_na(sa_nracanaa Header);
 		x = p;
 
 		x = ((( x) + ((REGSIZE) - 1)) & ~((REGSIZE) - 1));
@@ -73,7 +73,7 @@ struct Header* allocate_block(struct Header* last, size_t size)
 
 		newblock = p;
 
-		newblock->size = last->size - size - sizeof(struct Header);
+		newblock->size = last->size - size - parimaa_na(sa_nracanaa Header);
 
 		last->size = size;
 		last->free = 0;
@@ -82,10 +82,10 @@ struct Header* allocate_block(struct Header* last, size_t size)
 		newblock->free = 1;
 		newblock->next = NULL;
 
-		return last;
+		ត្រឡប់ last;
 	}
-	else
-		return NULL;
+	បើមិនដូច្នេះ
+		ត្រឡប់ NULL;
 	log_trace("\nFunction allocate_block entered");
 }
 
@@ -98,13 +98,13 @@ struct Header* allocate_block(struct Header* last, size_t size)
  * @return returns a free block if available
  *         returns null if unavailable
  */
-struct Header *find_free_block(struct Header **last, size_t size)
+sa_nracanaa Header *find_free_block(sa_nracanaa Header **last, size_t size)
 {
 	log_trace("\nfind free entered");
 
-	struct Header *current = global_base;
+	sa_nracanaa Header *current = global_base;
 
-	while (current && !(current->free && current->size >= size))
+	ខណៈពេល (current && !(current->free && current->size >= size))
 	{
 
 		log_debug("\n Inside Loop %d %d %x %x",current->size,size,current,*last);
@@ -114,13 +114,13 @@ struct Header *find_free_block(struct Header **last, size_t size)
 
 	log_debug("\n After Loop %d %d %x %x",current->size,size,current,*last);
 
-	if(current && current->size>=size)
+	ប្រសិនបើ(current && current->size>=size)
 	{
 		*last=current;
-		return current;
+		ត្រឡប់ current;
 	}
-	else
-		return NULL;
+	បើមិនដូច្នេះ
+		ត្រឡប់ NULL;
 
 	log_trace("\nfind free exited");
 }
@@ -132,22 +132,22 @@ struct Header *find_free_block(struct Header **last, size_t size)
  * @return returns a pointer to the allocated heap
  *         returns NULL if heap is unable to be allocated
  */
-struct Header* request_heap()
+sa_nracanaa Header* request_heap()
 {
-	struct Header *block;
+	sa_nracanaa Header *block;
 
 	block = m_sbrk(0);
 
 	void *request = m_sbrk(HEAP_SIZE);
 
-	if((void*)block == request); // Not thread safe.
+	ប្រសិនបើ((void*)block == request); // Not thread safe.
 	block=request;
 
 	log_debug("\nInitial Heap start address =%x",block);
 
-	if (request == (void*) -1) {
+	ប្រសិនបើ (request == (void*) -1) {
 		log_error("\nNo space left to allocate memory");
-		return NULL; // sbrk failed.
+		ត្រឡប់ NULL; // sbrk failed.
 	}
 
 	block->size = HEAP_SIZE;
@@ -156,7 +156,7 @@ struct Header* request_heap()
 
 	log_debug("\nBlock Assigned");
 
-	return block;
+	ត្រឡប់ block;
 }
 
 //malloc function to allocate space
@@ -169,15 +169,15 @@ struct Header* request_heap()
  */
 void *malloc(size_t size)
 {
-	struct Header *block;
+	sa_nracanaa Header *block;
 
-	if (size <= 0) {
-               return NULL;
+	ប្រសិនបើ (size <= 0) {
+               ត្រឡប់ NULL;
 	}
 
 	log_info("\n global_base: %x",global_base);
 
-	if(global_base==0x00000000)
+	ប្រសិនបើ(global_base==0x00000000)
 	{
 		// First call. global_base is empty
 		log_debug("\n Requesting block");
@@ -186,43 +186,43 @@ void *malloc(size_t size)
 
 		log_debug("\n block=%x",block);
 
-		if (!block)
+		ប្រសិនបើ (!block)
 		{
-			return NULL;
+			ត្រឡប់ NULL;
 		}
 		global_base = block;
 	}
 
-	struct Header *last = global_base;
+	sa_nracanaa Header *last = global_base;
 
 	block = find_free_block(&last, size);
 
-	if(!block)
+	ប្រសិនបើ(!block)
 	{
 		log_error("\n No free blocks");
-		return NULL;
+		ត្រឡប់ NULL;
 	}
 
 	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
 
-	if (block->size>size)
+	ប្រសិនបើ (block->size>size)
 	{
 		// Failed to find free block.
 		block = allocate_block(last,size);
 
-		if (!block)
+		ប្រសិនបើ (!block)
 		{
-			return NULL;
+			ត្រឡប់ NULL;
 		}
 	}
-	else if(block->size==size)
+	បើមិនដូច្នេះ ប្រសិនបើ(block->size==size)
 	{
 		// Found free block
 		log_debug("\nFound free block of same size");
 		block->free = 0;
 	}
 
-  return(block+1);
+  ត្រឡប់(block+1);
 }
 
 /** @fn  struct Header *get_block_ptr(void *ptr)
@@ -231,9 +231,9 @@ void *malloc(size_t size)
  * @param void* ptr - pointer to the block
  * @return returns pointer to the block
  */
-struct Header *get_block_ptr(void *ptr)
+sa_nracanaa Header *get_block_ptr(void *ptr)
 {
-  return (struct Header*)ptr - 1;
+  ត្រឡប់ (sa_nracanaa Header*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
@@ -244,16 +244,16 @@ struct Header *get_block_ptr(void *ptr)
  */
 void free(void *ptr)
 {
-	if (!ptr)
+	ប្រសិនបើ (!ptr)
 	{
 		log_error("\n Wrong value passed to free");
-		return;
+		ត្រឡប់;
 	}
 
-	struct Header* block_ptr = get_block_ptr(ptr);
+	sa_nracanaa Header* block_ptr = get_block_ptr(ptr);
 
 	log_debug("\n %x is freed",block_ptr);
 
-	if(block_ptr->free==0)
+	ប្រសិនបើ(block_ptr->free==0)
 		block_ptr->free = 1;
 }

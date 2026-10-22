@@ -35,7 +35,7 @@
 #define DEBUG 1
 #define ERASE 1024
 
-extern int  status;
+extern ចំនួនគត់  status;
 
 /** @fn void deploy()
  * @brief Deploys the hex file for a project to the flash device using QSPI
@@ -43,33 +43,33 @@ extern int  status;
  */
 void deploy()
 {
-	int ar_read,dum_data,i;
-	int write_address = 0x0;
-	int size_byte=0;
-	int *config_string = (const int*)0x80000000;
-	int* read_data = (int*)(0x90000000);
+	ចំនួនគត់ ar_read,dum_data,i;
+	ចំនួនគត់ write_address = 0x0;
+	ចំនួនគត់ size_byte=0;
+	ចំនួនគត់ *config_string = (const ចំនួនគត់*)0x80000000;
+	ចំនួនគត់* read_data = (ចំនួនគត់*)(0x90000000);
 
 	qspi_init(27,0,3,1,15,1);
 	waitfor(400);
 
-	if(flashMemInit())
-		return -1;
+	ប្រសិនបើ(flashMemInit())
+		ត្រឡប់ -1;
 
 	status=flashReadStatusRegister();
 
 	printf("\t qspi status register %08x\n",status);
 
-	if(flashWriteVolatileConfigReg(0x40404040)){
+	ប្រសិនបើ(flashWriteVolatileConfigReg(0x40404040)){
 		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+		ត្រឡប់ -1;
 	}
 
 	status = wait_for_wip();
 	printf("\t qspi write  status register %08x\n",status);
 
-	for(i=0;i<= write_data[0];i+=4)
+	សម្រាប់(i=0;i<= write_data[0];i+=4)
 	{
-		if(i%ERASE==0)
+		ប្រសិនបើ(i%ERASE==0)
 		{
 			eraseSector(0x21, write_address);
 		}
@@ -83,13 +83,13 @@ void deploy()
 		write_address+=16;
 	}
 
-#if DEBUG
+#ប្រសិនបើ DEBUG
 	waitfor(400);
 
 	flashEnable4ByteAddressingMode();
 	flashQuadSPIDDRXip(0x000000, config_string);
 
-	for(i=0;i<write_data[0];++i)
+	សម្រាប់(i=0;i<write_data[0];++i)
 	{
 		dum_data = get_qspi_shakti(read_data);
 		waitfor(100);
@@ -115,7 +115,7 @@ void deploy()
 	flashMemInit();
 #endif
 
-	asm volatile ("ebreak");
+	asm ca_ncala ("ebreak");
 }
 
 /** @fn void main()

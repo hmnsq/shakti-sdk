@@ -35,9 +35,9 @@
  */
 void convert_hex_array()
 {
-	unsigned int  i= 0;
-	int write_data;
-	int count=0;
+	unsigned ចំនួនគត់  i= 0;
+	ចំនួនគត់ write_data;
+	ចំនួនគត់ count=0;
 
 	FILE *myFile;
 	FILE *Cypress;
@@ -45,17 +45,17 @@ void convert_hex_array()
 	myFile = fopen(FILEPATH "/output/code.mem", "r");
 	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
 
-	if(!myFile) {
+	ប្រសិនបើ(!myFile) {
 		printf(" unable to read code.mem\n");
-		return;
+		ត្រឡប់;
 	}
 
-	if(!Cypress) {
+	ប្រសិនបើ(!Cypress) {
 		printf(" unable to open flashdata.h\n");
-		return;
+		ត្រឡប់;
 	}
 	
-	while (fscanf(myFile, "%x", &write_data) != EOF) {
+	ខណៈពេល (fscanf(myFile, "%x", &write_data) != EOF) {
 		count++;
 	}
 
@@ -63,7 +63,7 @@ void convert_hex_array()
 
 	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
 
-	while (fscanf(myFile, "%x", &write_data) != EOF)
+	ខណៈពេល (fscanf(myFile, "%x", &write_data) != EOF)
 	{
 		fprintf(Cypress,"\n ,0x%x", write_data);
 	}

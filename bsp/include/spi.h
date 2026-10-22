@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
+void configure_spi(ចំនួនគត់ offset);
 void spi_init(void);
-void set_spi(int* addr, int val);
+void set_spi(ចំនួនគត់* addr, ចំនួនគត់ val);
 void bin(unsigned n);
 void spi_tx_rx_start(void);
 void spi_enable(void);
 void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+void flash_cmd_addr_data(ចំនួនគត់ command, ចំនួនគត់ addr, ចំនួនគត់ data);
+void flash_write(ចំនួនគត់ address, ចំនួនគត់ data);
+void flash_erase(ចំនួនគត់ address);
+ចំនួនគត់ get_spi(ចំនួនគត់* addr);
+ចំនួនគត់ bitExtracted(ចំនួនគត់ number, ចំនួនគត់ k, ចំនួនគត់ p) ;
+ចំនួនគត់ concat(ចំនួនគត់ x, ចំនួនគត់ y) ;
+ចំនួនគត់ spi_rxne_enable(void);
+ចំនួនគត់ spi_notbusy(void);
+ចំនួនគត់ flash_write_enable(void);
+ចំនួនគត់ flash_clear_sr(void);
+ចំនួនគត់ flash_cmd_addr(ចំនួនគត់ command, ចំនួនគត់ addr);
+ចំនួនគត់ flash_cmd_to_read(ចំនួនគត់ command, ចំនួនគត់ addr);
+ចំនួនគត់ flash_read(ចំនួនគត់ address);
+ចំនួនគត់ flash_cmd_read(ចំនួនគត់ command);
+ចំនួនគត់ flash_status_register_read(void);
+ចំនួនគត់ flash_device_id(void);
 
 #endif

@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(ចំនួនគត់ module_number, ចំនួនគត់ clock_divisor, ចំនួនគត់ period, ចំនួនគត់ duty, bool external_clock);
+void pwm_start(ចំនួនគត់ module_number, ចំនួនគត់ mode);
+ចំនួនគត់ pwm_check_continuous_mode(ចំនួនគត់ module_number);
+void pwm_clear_registers(ចំនួនគត់ module_number);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_set_external_clock(ចំនួនគត់ module_number, bool value);
+void pwm_set_clock(ចំនួនគត់ module_number, ចំនួនគត់ clock_divisor);
+void pwm_set_duty_cycle(ចំនួនគត់ module_number, ចំនួនគត់ duty);
+void pwm_set_periodic_cycle(ចំនួនគត់ module_number, ចំនួនគត់ period);
+void pwm_stop(ចំនួនគត់ module_number);
+void show_register_values(ចំនួនគត់ module_number);
+ចំនួនគត់ set_pwm_period_register(ចំនួនគត់ module_number, ចំនួនគត់ value);
+ចំនួនគត់ set_pwm_duty_register(ចំនួនគត់ module_number, ចំនួនគត់ value);
+ចំនួនគត់ set_pwm_control_register(ចំនួនគត់ module_number, ចំនួនគត់ value);
+ចំនួនគត់ set_pwm_clock_register(ចំនួនគត់ module_number, ចំនួនគត់ value);
+ចំនួនគត់ configure_control_register_mode(ចំនួនគត់ mode);
+void pwm_use_external_clock(ចំនួនគត់ module_number, bool value);
 

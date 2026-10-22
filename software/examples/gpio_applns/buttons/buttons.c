@@ -47,9 +47,9 @@ unsigned long read_data = 0;
 void main()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ប្រសិនបើ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	ខណៈពេល (1) {
 
 #ifdef READ_INDIVIDUAL_BTNS
 
@@ -90,9 +90,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x10000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
+		ប្រសិនបើ(read_data == 0x10000000)
 			printf("\n BTN0: HIGH"); 		
-		else
+		បើមិនដូច្នេះ
 			printf("\n BTN0: LOW");
 #endif
 
@@ -101,9 +101,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x20000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
+		ប្រសិនបើ(read_data == 0x20000000)
 			printf("\n BTN1: HIGH"); 		
-		else
+		បើមិនដូច្នេះ
 			printf("\n BTN1: LOW");
 #endif
 
@@ -112,9 +112,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x40000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
+		ប្រសិនបើ(read_data == 0x40000000)
 			printf("\n BTN2: HIGH"); 		
-		else
+		បើមិនដូច្នេះ
 			printf("\n BTN2: LOW");
 #endif
 
@@ -124,9 +124,9 @@ void main()
 		read_data = (read_data & 0x80000000);
 		printf("\n Read Data is :0x%x", read_data);
 
-		if(read_data == 0x80000000)
+		ប្រសិនបើ(read_data == 0x80000000)
 			printf("\n BTN3: HIGH"); 		
-		else
+		បើមិនដូច្នេះ
 			printf("\n BTN3: LOW");
 #endif
 
@@ -143,117 +143,117 @@ void main()
 		switch(read_data)
 		{
 
-		case 0x00000000:
+		pak_sa 0x00000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x10000000:
+		pak_sa 0x10000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x20000000:
+		pak_sa 0x20000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x30000000:
+		pak_sa 0x30000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x40000000:
+		pak_sa 0x40000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x50000000:
+		pak_sa 0x50000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x60000000:
+		pak_sa 0x60000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x70000000:
+		pak_sa 0x70000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			bha_nga;
 
-		case 0x80000000:
+		pak_sa 0x80000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0x90000000:
+		pak_sa 0x90000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0xA0000000:
+		pak_sa 0xA0000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0xB0000000:
+		pak_sa 0xB0000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0xC0000000:
+		pak_sa 0xC0000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0xD0000000:
+		pak_sa 0xD0000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0xE0000000:
+		pak_sa 0xE0000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 
-		case 0xF0000000:
+		pak_sa 0xF0000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			bha_nga;
 		}
 
 		delay_loop(500, 500);

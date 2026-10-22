@@ -1,0 +1,535 @@
+# What is still missing
+
+76 languages. Each line says in how many languages it is missing.
+
+## Files in languages BURP cannot read yet
+
+- `.sh`: 1 files
+
+## Keywords with no word in a language's table
+
+- guru:asm: 71
+- guru:va_arg: 71
+- guru:va_list: 71
+- guru:setjmp: 71
+- guru:va_start: 71
+- guru:va_end: 71
+- guru:sprintf: 71
+- guru:size_t: 71
+- guru:fprintf: 71
+- guru:fabs: 71
+- guru:floor: 71
+- guru:fflush: 71
+- guru:stdout: 71
+- guru:atoi: 71
+- guru:errno: 71
+- guru:time: 71
+- guru:FILE: 71
+- guru:fopen: 71
+- guru:fclose: 71
+- guru:fscanf: 71
+- guru:EOF: 71
+- guru:SIGFPE: 71
+- guru:strerror: 71
+- soochee:close: 71
+- guru:rewind: 71
+- guru:jmp_buf: 71
+- guru:longjmp: 71
+- guru:system: 71
+- guru:fputc: 71
+- guru:close: 71
+- guru:memset: 70
+- guru:getchar: 70
+- guru:strcat: 70
+- guru:strcpy: 70
+- guru:strcmp: 70
+- guru:open: 70
+- soochee:None: 67
+- soochee:def: 67
+- soochee:is: 67
+- soochee:print: 67
+- guru:log: 67
+- soochee:len: 67
+- soochee:range: 67
+- guru:#define: 66
+- guru:#endif: 66
+- guru:#ifdef: 66
+- guru:#ifndef: 66
+- guru:#undef: 66
+- guru:printf: 62
+- guru:unsigned: 62
+- guru:long: 62
+- guru:short: 62
+- guru:pow: 62
+- guru:putchar: 62
+- guru:sqrt: 62
+- guru:malloc: 62
+- guru:strstr: 62
+- guru:exit: 62
+- guru:strlen: 62
+- guru:main: 54
+- yantra:global: 45
+- soochee:False: 26
+- soochee:assert: 26
+- soochee:True: 26
+- guru:void: 25
+- guru:extern: 25
+- guru:static: 25
+- guru:NULL: 25
+- guru:do: 25
+- guru:const: 25
+- guru:typedef: 25
+- guru:float: 25
+- guru:free: 25
+- guru:read: 25
+- guru:goto: 25
+- guru:switch: 25
+- soochee:import: 25
+- guru:continue: 25
+- guru:default: 25
+- soochee:write: 25
+- guru:write: 25
+- soochee:class: 25
+- soochee:from: 10
+- soochee:in: 10
+- guru:for: 9
+- soochee:for: 9
+- guru:char: 9
+- guru:volatile: 9
+- guru:break: 9
+- guru:case: 9
+- guru:struct: 9
+- guru:sizeof: 9
+- guru:double: 9
+- guru:register: 9
+- guru:inline: 9
+- guru:signal: 9
+- guru:enum: 9
+- soochee:break: 9
+- soochee:sleep: 9
+- guru:int: 1
+- guru:if: 1
+- guru:return: 1
+- guru:else: 1
+- guru:while: 1
+- guru:#if: 1
+- guru:#else: 1
+- soochee:if: 1
+- soochee:return: 1
+
+## Names with no dictionary entry (the most common first)
+
+- `i`: 76
+- `delay`: 76
+- `X`: 76
+- `Y`: 76
+- `i2c_instance`: 76
+- `Z`: 76
+- `One`: 76
+- `InstancePtr`: 76
+- `delay_loop`: 76
+- `Zero`: 76
+- `log_debug`: 76
+- `u16`: 76
+- `U2`: 76
+- `instance`: 76
+- `x`: 76
+- `u32`: 76
+- `Radix`: 76
+- `read_buf`: 76
+- `Half`: 76
+- `j`: 76
+- `control`: 76
+- `I2C`: 76
+- `log_info`: 76
+- `UINTPTR`: 76
+- `u8`: 76
+- `addr`: 76
+- `uart_instance`: 76
+- `U1`: 76
+- `waitfor`: 76
+- `T`: 76
+- `GPIO_DIRECTION_CNTRL_REG`: 76
+- `str`: 76
+- `EmacLiteConfig`: 76
+- `I2C_STOP`: 76
+- `LORA_UART`: 76
+- `i2c_struct`: 76
+- `I`: 76
+- `Addr`: 76
+- `Q`: 76
+- `ConfigPtr`: 76
+- `log_error`: 76
+- `XEmacLite`: 76
+- `SINGLE`: 76
+- `ch`: 76
+- `FLOAT`: 76
+- `DELAY1`: 76
+- `DELAY2`: 76
+- `retval`: 76
+- `ap`: 76
+- `n`: 76
+- `flush_uart`: 76
+- `Y2`: 76
+- `V9`: 76
+- `p`: 76
+- `Y1`: 76
+- `log_trace`: 76
+- `command`: 76
+- `k`: 76
+- `BadCond`: 76
+- `I2C_WRITE`: 76
+- `var1`: 76
+- `ccr`: 76
+- `write_uart_character`: 76
+- `fmt`: 76
+- `Two`: 76
+- `D`: 76
+- `timeout`: 76
+- `Three`: 76
+- `read_from_lora`: 76
+- `define`: 76
+- `F9`: 76
+- `ret`: 76
+- `Four`: 76
+- `default_handler`: 76
+- `INLINE`: 76
+- `CCR_IMODE`: 76
+- `Failure`: 76
+- `SqEr`: 76
+- `ErrCnt`: 76
+- `Milestone`: 76
+- `write_buf`: 76
+- `dr`: 76
+- `defined`: 76
+- `EmacLiteInstPtr`: 76
+- `int_id`: 76
+- `Z1`: 76
+- `Z2`: 76
+- `TstCond`: 76
+- `UfThold`: 76
+- `wait_for_tcf`: 76
+- `CCR_INSTRUCTION`: 76
+- `spi_dr5`: 76
+- `CCR_FMODE`: 76
+- `VOID`: 76
+- `Serious`: 76
+- `c`: 76
+- `read_bmp280_values16`: 76
+- `test`: 76
+- `I2C_READ`: 76
+- `CCR_DMODE`: 76
+- `CCR_ADSIZE`: 76
+- `OneAndHalf`: 76
+- `FLOOR`: 76
+- `Defect`: 76
+- `W`: 76
+- `N`: 76
+- `var2`: 76
+- `ESP_UART`: 76
+- `spi_cr1`: 76
+- `E0`: 76
+- `V`: 76
+- `To32Ptr`: 76
+- `SUCCESS`: 76
+- `get_qspi_shakti`: 76
+- `FOURBYTE`: 76
+- `d`: 76
+- `tty1`: 76
+- `uart_struct`: 76
+- `XEmacLite_ReadReg`: 76
+- `dlr`: 76
+- `CCR_ADMODE`: 76
+- `spi_dr1`: 76
+- `sigsave`: 76
+- `ROWNUM`: 76
+- `COLNUM`: 76
+- `temperature`: 76
+- `Xil_Htons`: 76
+- `XEmacLite_WriteReg`: 76
+- `dest_addr`: 76
+- `y`: 76
+- `readbuf`: 76
+- `i2c_complete_flag`: 76
+- `dcr`: 76
+- `val`: 76
+- `SPI_BR`: 76
+- `SPI_CPHA`: 76
+- `SPI_CPOL`: 76
+- `Indx`: 76
+- `MinSqEr`: 76
+- `Precision`: 76
+- `ReturnString`: 76
+- `From32Ptr`: 76
+- `XST_SUCCESS`: 76
+- `putchar`: 76
+- `configure_ledx`: 76
+- `tmp`: 76
+- `FABS`: 76
+- `SQRT`: 76
+- `Pause`: 76
+- `MaxSqEr`: 76
+- `PseudoZero`: 76
+- `b`: 76
+- `Xil_Ntohs`: 76
+- `DeviceId`: 76
+- `CCR_DCYC`: 76
+- `SPI_SPE`: 76
+- `flash_write`: 76
+- `True`: 76
+- `HInvrse`: 76
+- `MAC_ADDR_LEN`: 76
+- `serial_port1`: 76
+- `LocalAddr`: 76
+- `I2C_SCL`: 76
+- `ar`: 76
+- `XIntc`: 76
+- `delay1`: 76
+- `delay2`: 76
+- `Eight`: 76
+- `E1`: 76
+- `write_gpio`: 76
+- `read_from_esp8266`: 76
+- `FAILURE`: 76
+- `I2C_SDA`: 76
+- `CCR_FMODE_INDRD`: 76
+- `read_uart_character`: 76
+- `I2C_NACK`: 76
+- `pinmux_config_reg`: 76
+- `current`: 76
+- `False`: 76
+- `H`: 76
+- `OneUlp`: 76
+- `Random1`: 76
+- `TestString`: 76
+- `readBuf`: 76
+- `pressure`: 76
+- `decimal`: 76
+- `nptr`: 76
+- `epc`: 76
+- `To8Ptr`: 76
+- `DCR_FSIZE`: 76
+- `DCR_CKMODE`: 76
+- `QUAD`: 76
+- `CCR_DUMMY_CONFIRMATION`: 76
+- `rcv_reg`: 76
+- `S`: 76
+- `Break`: 76
+- `AccErrorX`: 76
+- `t`: 76
+- `XEmacLite_Config`: 76
+- `TxPingPong`: 76
+- `RxPingPong`: 76
+- `spi_notbusy`: 76
+- `GPIO0`: 76
+- `pin_cntrl`: 76
+- `LOG`: 76
+- `BInvrse`: 76
+- `TwoForty`: 76
+- `MinusOne`: 76
+- `Rounded`: 76
+- `A1`: 76
+- `C`: 76
+- `E9`: 76
+- `R`: 76
+- `Underflow`: 76
+- `V0`: 76
+- `X1`: 76
+- `GyroErrorX`: 76
+- `GyroErrorY`: 76
+- `GyroErrorZ`: 76
+- `pir_present_state`: 76
+- `Xil_EndianSwap16`: 76
+- `MdioInclude`: 76
+- `XST_FAILURE`: 76
+- `i2c_init`: 76
+- `config_i2c`: 76
+- `data1`: 76
+- `dr5`: 76
+- `led_no`: 76
+- `PLATFORM_H`: 76
+- `gdbmi`: 76
+- `Nine`: 76
+- `Flaw`: 76
+- `AInvrse`: 76
+- `LocalMacAddr`: 76
+- `AccErrorY`: 76
+- `BAUDRATE`: 76
+- `DestPtr`: 76
+- `From8Ptr`: 76
+- `TRUE`: 76
+- `xil_printf`: 76
+- `DOUBLE`: 76
+- `configure_spi`: 76
+- `spi_init`: 76
+- `flash_write_enable`: 76
+- `address2`: 76
+- `lflag`: 76
+- `ThirtyTwo`: 76
+- `NoTrials`: 76
+- `Yes`: 76
+- `Random2`: 76
+- `ETHER_PROTO_TYPE_LOC`: 76
+- `IP_ADDR_LEN`: 76
+- `write_buf1`: 76
+- `write_buf2`: 76
+- `AccX`: 76
+- `AccY`: 76
+- `AccZ`: 76
+- `GyroX`: 76
+- `GyroY`: 76
+- `GyroZ`: 76
+- `bmp280_calib_dig_T1`: 76
+- `alarm_present_state`: 76
+- `Xil_EndianSwap32`: 76
+- `XEmacLite_AlignedWrite`: 76
+- `SrcPtr`: 76
+- `MdioCtrlReg`: 76
+- `buf`: 76
+- `wait_till_txrx_operation_Completes`: 76
+- `I2C_ESO`: 76
+- `spi_dr2`: 76
+- `flash_device_id`: 76
+- `RTS`: 76
+- `PINMUX_CONFIGURE_REG`: 76
+- `turn_off_ledx`: 76
+- `toggle_ledx`: 76
+- `fpart`: 76
+- `response`: 76
+- `ovfl_buf`: 76
+- `No`: 76
+- `CInvrse`: 76
+- `X2`: 76
+- `Anomaly`: 76
+- `sigfpe`: 76
+- `SRC_MAC_ADDR_LOC`: 76
+- `PI`: 76
+- `adc_T`: 76
+- `CAM`: 76
+- `mcause`: 76
+- `MTIME`: 76
+- `Loopback`: 76
+- `XEmacLite_Handler`: 76
+- `I2cStop`: 76
+- `I2C_PIN`: 76
+- `id`: 76
+- `wait_for_wip`: 76
+- `spi_rxne_enable`: 76
+- `u1_rcv_char`: 76
+- `baudrate`: 76
+- `_printf_`: 76
+- `ARTIX7_35T`: 76
+
+## Comments with no translation
+
+- Stops the I2C transaction to start reading the temperature value.: 76
+- Make a dummy read as per spec of the I2C controller: 76
+- ! DDR3 Memory Size: 76
+- Writes the slave address for write: 76
+- Writes the pointer to address that needs to be read: 76
+- Writes the slave address for read: 76
+- * Verify that each of the inputs are valid.: 76
+- function prototype: 76
+- !Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap: 76
+- Reads the MSB Byte of temperature [D9 - D1]: 76
+- ! reserved: 76
+- ************************* Function Prototypes *****************************: 76
+- **************** Macros (Inline Functions) Definitions ********************: 76
+- LM75_TEMP_REG_OFFSET: 76
+- ************************* Variable Definitions ****************************: 76
+- Includes the definitions of standard input/output functions//: 76
+- Display the error: 76
+- ! Prescale Register: 76
+- scl=1;: 76
+- scl=0;: 76
+- Address where the Config_string is situated in the micron nand flash memory: 76
+- *************************** Type Definitions ******************************: 76
+- !Debugger Offset: 76
+- ! DDR3 Memory Start address: 76
+- !Pulse Width Modulation Start Offsets: 76
+- PWM Base address: 76
+- Offset value to be incremented for each interface: 76
+- !Universal Synchronous Receiver Transmitter Interface Offsets: 76
+- ! UART 0: 76
+- ! Core Local Interruptor CLINT: 76
+- ! Inter Integrated Circuit (I2C) Interface: 76
+- ! Programmable Logic Interrupt Interface: 76
+- ! PLIC Interface Start: 76
+- GPIO Start Address: 76
+- !Generic offset used to access GPIO registers: 76
+- * General Purpose IOs supported: 76
+- Display Temperature value: 76
+- sda=1;: 76
+- Indicating the completion of command -- Currently polling: 76
+- ! I2C Start Address: 76
+- !General Purpose Input / Output: 76
+- !Serial Peripheral Interface Offsets: 76
+- Serial Peripheral Interface 0: 76
+- Serial Peripheral Interface 1: 76
+- uart 0: 76
+- uart 1: 76
+- uart 2: 76
+- *
+@file pwminterrupt
+@brief A application to demonstrate working of pwm interrupts
+@detail This file: 76
+- * The following constants map to the XPAR parameters created in the
+ * xparameters.h file. They are : 76
+- delay_loop(DELAY1, DELAY2);: 76
+- sda=0;: 76
+- Sending the slave address to the I2C slave: 76
+- !Tightly Coupled Memory(TCM) Size. Size 128kB: 76
+- *@brief RISCV - E CLASS SOC Memory mapping: 76
+- erases an entire sector: 76
+- * Instance of the driver: 76
+- * Empty any existing receive frames.: 76
+- * Zero the return string for the next test: 76
+- Defines the Starting address of slave//: 76
+- Initialises I2C Controller: 76
+- Seconds: 76
+- Minutes: 76
+- Hours: 76
+- printf("\nTemperature read value is %x", tempReadValue);: 76
+- * @fn int write_enter_to_lora()
+ * @brief sends carriage return and new line charector to lora.
+ * @: 76
+- * @fn int write_to_lora(char *data) 
+ * @brief sends data to Lora using UART.
+ * @param data send da: 76
+- * @fn void check_set_lora_value()
+ * @brief It helps to check the value set by the user, to the LORA: 76
+- * @fn void setup_lora()
+ * @brief all the necessary features can be set by thsese.
+ * @details throu: 76
+- Connect to Wifi using esp8266: 76
+- * Variable used to indicate the length of the received frame.: 76
+- readData = read_word(GPIO_DATA_REG);: 76
+- wait for 100 us: 76
+- What error is this?: 76
+- **************************** Include Files ********************************: 76
+- 16 bits (short): 76
+- !Tightly Coupled Memory(TCM) Offset. Size 128kB: 76
+- ! Xilinx Analog to Digital converter: 76
+- ! pinmux: 76
+- PWM 0: 76
+- PWM 1: 76
+- PWM 2: 76
+- PWM 3: 76
+- PWM 4: 76
+- PWM 5: 76
+- GPIO 0: 76
+- GPIO 1: 76
+- GPIO 2: 76
+- GPIO 3: 76
+- GPIO 4: 76
+- GPIO 5: 76
+- GPIO 6: 76
+- GPIO 7: 76
+- GPIO 8: 76
+- GPIO 9: 76
+- GPIO 10: 76
+- GPIO 11: 76
+- GPIO 12: 76
+- GPIO 13: 76
+- GPIO 14: 76
+- GPIO 15: 76

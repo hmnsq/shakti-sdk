@@ -27,49 +27,49 @@
 @detail Writes an array of hex values into the flash memory using QSPI.
 */
 
-#include <stdint.h>
-#include "uart.h"
-#include "qspi.h"
-#include "flashdata.h"
+#ಅನ್ತರ್ಭಾವ <stdint.h>
+#ಅನ್ತರ್ಭಾವ "uart.h"
+#ಅನ್ತರ್ಭಾವ "qspi.h"
+#ಅನ್ತರ್ಭಾವ "flashdata.h"
 
 #define DEBUG 1
 #define ERASE 1024
 
-extern int  status;
+ಬಾಹ್ಯ ಪೂರ್ಣಾಙ್ಕ  status;
 
 /** @fn void deploy()
  * @brief Deploys the hex file for a project to the flash device using QSPI
  * protocol. 
  */
-void deploy()
+ಶೂನ್ಯ deploy()
 {
-	int ar_read,dum_data,i;
-	int write_address = 0x0;
-	int size_byte=0;
-	int *config_string = (const int*)0x80000000;
-	int* read_data = (int*)(0x90000000);
+	ಪೂರ್ಣಾಙ್ಕ ar_read,dum_data,i;
+	ಪೂರ್ಣಾಙ್ಕ write_address = 0x0;
+	ಪೂರ್ಣಾಙ್ಕ size_byte=0;
+	ಪೂರ್ಣಾಙ್ಕ *config_string = (ಧ್ರುವ ಪೂರ್ಣಾಙ್ಕ*)0x80000000;
+	ಪೂರ್ಣಾಙ್ಕ* read_data = (ಪೂರ್ಣಾಙ್ಕ*)(0x90000000);
 
 	qspi_init(27,0,3,1,15,1);
 	waitfor(400);
 
-	if(flashMemInit())
-		return -1;
+	ಯದಿ(flashMemInit())
+		ಪ್ರತ್ಯಾಗಮ -1;
 
 	status=flashReadStatusRegister();
 
 	printf("\t qspi status register %08x\n",status);
 
-	if(flashWriteVolatileConfigReg(0x40404040)){
+	ಯದಿ(flashWriteVolatileConfigReg(0x40404040)){
 		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+		ಪ್ರತ್ಯಾಗಮ -1;
 	}
 
 	status = wait_for_wip();
 	printf("\t qspi write  status register %08x\n",status);
 
-	for(i=0;i<= write_data[0];i+=4)
+	ಪ್ರತಿ(i=0;i<= write_data[0];i+=4)
 	{
-		if(i%ERASE==0)
+		ಯದಿ(i%ERASE==0)
 		{
 			eraseSector(0x21, write_address);
 		}
@@ -83,13 +83,13 @@ void deploy()
 		write_address+=16;
 	}
 
-#if DEBUG
+#ಯದಿ DEBUG
 	waitfor(400);
 
 	flashEnable4ByteAddressingMode();
 	flashQuadSPIDDRXip(0x000000, config_string);
 
-	for(i=0;i<write_data[0];++i)
+	ಪ್ರತಿ(i=0;i<write_data[0];++i)
 	{
 		dum_data = get_qspi_shakti(read_data);
 		waitfor(100);
@@ -115,13 +115,13 @@ void deploy()
 	flashMemInit();
 #endif
 
-	asm volatile ("ebreak");
+	asm ಚಞ್ಚಲ ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function 
  */
-void main(){
+ಶೂನ್ಯ main(){
 
 	deploy();
 }

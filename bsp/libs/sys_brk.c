@@ -26,13 +26,13 @@
 @detail This file is used to the set the brk which specifies the start of the heap and the end of the text section.
 */ 
 
-#include "platform.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
 
-extern char _end[];                /* _end is set in the linker file */
-extern char _heap_end[];	   /* _heap_end is set in the linker file */
+ಬಾಹ್ಯ ವರ್ಣ _end[];                /* _end is set in the linker file */
+ಬಾಹ್ಯ ವರ್ಣ _heap_end[];	   /* _heap_end is set in the linker file */
 
-char *heap_ptr=(char *)&_end;
-char *end_of_heap=(char *)&_heap_end;
+ವರ್ಣ *heap_ptr=(ವರ್ಣ *)&_end;
+ವರ್ಣ *end_of_heap=(ವರ್ಣ *)&_heap_end;
 
 /* OS LESS IMPLEMENTATION OF SBRK
  * sbrk -- changes heap size. Get nbytes more RAM.
@@ -46,25 +46,25 @@ char *end_of_heap=(char *)&_heap_end;
  * @param int nbytes - specifies the size of the heap 
  * @return  returns a pointer to the start of the heap
  */
-char * m_sbrk (nbytes)
-	int nbytes;
+ವರ್ಣ * m_sbrk (nbytes)
+	ಪೂರ್ಣಾಙ್ಕ nbytes;
 {
-	char *base;
+	ವರ್ಣ *base;
 
 	log_debug("\nHeap pointer is %x",heap_ptr);
 
-	if(!heap_ptr)
-		heap_ptr = (char *)&_end;
+	ಯದಿ(!heap_ptr)
+		heap_ptr = (ವರ್ಣ *)&_end;
 
 	base = heap_ptr;
 	heap_ptr += nbytes;
 
 	log_debug("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
 
-	if(heap_ptr>end_of_heap)
+	ಯದಿ(heap_ptr>end_of_heap)
 	{
 		log_error("\nMemory allocation error: Insufficient Space");
-		return -1;
+		ಪ್ರತ್ಯಾಗಮ -1;
 	}
-	return base;
+	ಪ್ರತ್ಯಾಗಮ base;
 }

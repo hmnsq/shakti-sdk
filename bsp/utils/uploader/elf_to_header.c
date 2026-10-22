@@ -26,18 +26,18 @@
 @brief Create hex array of the contents in elf.
 */
 
-#include <stdio.h>
+#ಅನ್ತರ್ಭಾವ <stdio.h>
 
 /** @fn void convert_hex_array()
  * @brief Converts the hex code to an array of hex code
  * @details reads code.mem file and coverts the hex code into an array of hex
  *     codes in the flashdata.h, first entry in the array tells the size of file.
  */
-void convert_hex_array()
+ಶೂನ್ಯ convert_hex_array()
 {
-	unsigned int  i= 0;
-	int write_data;
-	int count=0;
+	unsigned ಪೂರ್ಣಾಙ್ಕ  i= 0;
+	ಪೂರ್ಣಾಙ್ಕ write_data;
+	ಪೂರ್ಣಾಙ್ಕ ಎಣಿಕೆ=0;
 
 	FILE *myFile;
 	FILE *Cypress;
@@ -45,32 +45,32 @@ void convert_hex_array()
 	myFile = fopen(FILEPATH "/output/code.mem", "r");
 	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
 
-	if(!myFile) {
+	ಯದಿ(!myFile) {
 		printf(" unable to read code.mem\n");
-		return;
+		ಪ್ರತ್ಯಾಗಮ;
 	}
 
-	if(!Cypress) {
+	ಯದಿ(!Cypress) {
 		printf(" unable to open flashdata.h\n");
-		return;
+		ಪ್ರತ್ಯಾಗಮ;
 	}
 	
-	while (fscanf(myFile, "%x", &write_data) != EOF) {
-		count++;
+	ಯಾವತ್ (fscanf(myFile, "%x", &write_data) != EOF) {
+		ಎಣಿಕೆ++;
 	}
 
 	rewind(myFile);
 
-	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
+	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", ಎಣಿಕೆ + 1, ಎಣಿಕೆ); 
 
-	while (fscanf(myFile, "%x", &write_data) != EOF)
+	ಯಾವತ್ (fscanf(myFile, "%x", &write_data) != EOF)
 	{
 		fprintf(Cypress,"\n ,0x%x", write_data);
 	}
 
 	fprintf(Cypress,"};\n\n");
 
-	fprintf(Cypress,"#define SIZE %d", count);
+	fprintf(Cypress,"#define SIZE %d", ಎಣಿಕೆ);
 
 	fclose(Cypress);
 	fclose(myFile);
@@ -79,7 +79,7 @@ void convert_hex_array()
 /** @fn void main()
  * @brief Initiates conversion by calling convert_hex_array
  */
-void main()
+ಶೂನ್ಯ main()
 {
 	printf(" Converting codemem to array\n");
 	convert_hex_array();

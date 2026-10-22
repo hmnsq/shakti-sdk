@@ -26,120 +26,120 @@
  * @detail This file contains the tests to verify the working of malloc
  */
 
-extern char _free_space[];
-extern char _STACK_SIZE[];
-extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
-extern char __bss_end[];
-extern char __bss_start[];
-extern char __sbss_end[];
-extern char __sbss_start[];
+ಬಾಹ್ಯ ವರ್ಣ _free_space[];
+ಬಾಹ್ಯ ವರ್ಣ ರಾಶಿ_SIZE[];
+ಬಾಹ್ಯ ವರ್ಣ _HEAP_SIZE[];
+ಬಾಹ್ಯ ವರ್ಣ ರಾಶಿ_end[];
+ಬಾಹ್ಯ ವರ್ಣ ರಾಶಿ[];
+ಬಾಹ್ಯ ವರ್ಣ _heap[];
+ಬಾಹ್ಯ ವರ್ಣ _heap_end[];
+ಬಾಹ್ಯ ವರ್ಣ __bss_end[];
+ಬಾಹ್ಯ ವರ್ಣ __bss_start[];
+ಬಾಹ್ಯ ವರ್ಣ __sbss_end[];
+ಬಾಹ್ಯ ವರ್ಣ __sbss_start[];
 
 
-char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
-char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
-char *test7=(char *)&_heap;
-char *test8=(char *)&_heap_end;
-char *test9=(char *)&__bss_end;
-char *test10=(char *)&__bss_start;
-char *test11=(char *)&__sbss_end;
-char *test12=(char *)&__sbss_start;
+ವರ್ಣ *test1=(ವರ್ಣ *)&_free_space;
+ವರ್ಣ *test3=(ವರ್ಣ *)&ರಾಶಿ_SIZE;
+ವರ್ಣ *test4=(ವರ್ಣ *)&_HEAP_SIZE;
+ವರ್ಣ *test5=(ವರ್ಣ *)&ರಾಶಿ_end;
+ವರ್ಣ *test6=(ವರ್ಣ *)&ರಾಶಿ;
+ವರ್ಣ *test7=(ವರ್ಣ *)&_heap;
+ವರ್ಣ *test8=(ವರ್ಣ *)&_heap_end;
+ವರ್ಣ *test9=(ವರ್ಣ *)&__bss_end;
+ವರ್ಣ *test10=(ವರ್ಣ *)&__bss_start;
+ವರ್ಣ *test11=(ವರ್ಣ *)&__sbss_end;
+ವರ್ಣ *test12=(ವರ್ಣ *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+ಪೂರ್ಣಾಙ್ಕ c1,c2,c3,c4,c5;
+ಪೂರ್ಣಾಙ್ಕ *pointer;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+ಪೂರ್ಣಾಙ್ಕ main()
 {
 
   printf("\n\n\n\n\n\nTest Running");
   printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
   printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
+  ಸ್ಥಿರ ಪೂರ್ಣಾಙ್ಕ b1,b2,b3,b4,b5;
   printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
+  ಪೂರ್ಣಾಙ್ಕ a1,a2,a3,a4,a5;
   printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+ಪೂರ್ಣಾಙ್ಕ **a;
+ಪೂರ್ಣಾಙ್ಕ *b,*c,*d;
+ಪೂರ್ಣಾಙ್ಕ i=0;ಪೂರ್ಣಾಙ್ಕ n;
 
 //Enter Size of Array;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*ಪರಿಮಾಣ(ಪೂರ್ಣಾಙ್ಕ))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
     printf("\n b[%d]'s address is : %x",i,&b[i]);
     printf("\n b[%d]'s value is : %d",i,b[i]);
 }
 
-free(b);
+ಮುಕ್ತ(b);
 
 printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
+c=malloc(n*ಪರಿಮಾಣ(ಪೂರ್ಣಾಙ್ಕ))	;
 printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
 printf("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
     printf("\n c[%d]'s address is : %x",i,&c[i]);
     printf("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+ಮುಕ್ತ(c);
 
 printf("\nc=%x",c);
 
-int x;
+ಪೂರ್ಣಾಙ್ಕ x;
 x=30;
 
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*ಪರಿಮಾಣ(ಪೂರ್ಣಾಙ್ಕ));
 
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+ಪ್ರತಿ(i=0;i<x;i++)
 {
     printf("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+ಪ್ರತಿ(i=0;i<x;i++)
 {
     printf("\n d[%d]'s address is : %x",i,&d[i]);
     printf("\n d[%d]'s value is : %d",i,d[i]);
 }
 
-free(d);
+ಮುಕ್ತ(d);
 
 printf("\nd=%x",d);
 

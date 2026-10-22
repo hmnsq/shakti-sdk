@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+ಪೂರ್ಣಾಙ್ಕ main()
 {
 printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+ಪೂರ್ಣಾಙ್ಕ *b,*c,*d;
+ಪೂರ್ಣಾಙ್ಕ i=0;ಪೂರ್ಣಾಙ್ಕ n;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*ಪರಿಮಾಣ(ಪೂರ್ಣಾಙ್ಕ))	;
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
 printf("\n b[%d]'s address is : %x",i,&b[i]);
 printf("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
+ಮುಕ್ತ(b);
 printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
+c=malloc(n*ಪರಿಮಾಣ(ಪೂರ್ಣಾಙ್ಕ))	;
 printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+ಪ್ರತಿ(i=0;i<n;i++)
 {
 printf("\n c[%d]'s address is : %x",i,&c[i]);
 printf("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+ಮುಕ್ತ(c);
 printf("\nc=%x",c);
-int x;
+ಪೂರ್ಣಾಙ್ಕ x;
 x=30;
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*ಪರಿಮಾಣ(ಪೂರ್ಣಾಙ್ಕ));
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+ಪ್ರತಿ(i=0;i<x;i++)
 {
 printf("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+ಪ್ರತಿ(i=0;i<x;i++)
 {
 printf("\n d[%d]'s address is : %x",i,&d[i]);
 printf("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
+ಮುಕ್ತ(d);
 printf("\nd=%x",d);
 
-return 0;
+ಪ್ರತ್ಯಾಗಮ 0;
 }
 

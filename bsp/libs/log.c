@@ -26,8 +26,8 @@
 @detail This file contains implementation of different log levels.
 */ 
 
-#include "log.h"
-#include "utils.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
+#ಅನ್ತರ್ಭಾವ "utils.h"
 
 /*Use -D compiler flag to set the LOG_LEVEL; default value is 1*/
 #ifndef LOG_LEVEL
@@ -39,9 +39,9 @@
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_trace(const char* fmt, ...)
+ಶೂನ್ಯ log_trace(ಧ್ರುವ ವರ್ಣ* fmt, ...)
 {
-	if (TRACE <= LOG_LEVEL) {
+	ಯದಿ (TRACE <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -56,9 +56,9 @@ void log_trace(const char* fmt, ...)
  * @details This function print info logs if the LOG_LEVEL allows info logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_info(const char* fmt, ...)
+ಶೂನ್ಯ log_info(ಧ್ರುವ ವರ್ಣ* fmt, ...)
 {
-	if (INFO <= LOG_LEVEL) {
+	ಯದಿ (INFO <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -73,9 +73,9 @@ void log_info(const char* fmt, ...)
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_debug(const char* fmt, ...)
+ಶೂನ್ಯ log_debug(ಧ್ರುವ ವರ್ಣ* fmt, ...)
 {
-	if (DEBUG <= LOG_LEVEL) {
+	ಯದಿ (DEBUG <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -90,9 +90,9 @@ void log_debug(const char* fmt, ...)
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_warn(const char* fmt, ...)
+ಶೂನ್ಯ log_warn(ಧ್ರುವ ವರ್ಣ* fmt, ...)
 {
-	if (WARN <= LOG_LEVEL) {
+	ಯದಿ (WARN <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -107,9 +107,9 @@ void log_warn(const char* fmt, ...)
  * @details This function print error logs if the LOG_LEVEL allows error logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_error(const char* fmt, ...)
+ಶೂನ್ಯ log_error(ಧ್ರುವ ವರ್ಣ* fmt, ...)
 {
-	if (ERROR <= LOG_LEVEL) {
+	ಯದಿ (ERROR <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -124,9 +124,9 @@ void log_error(const char* fmt, ...)
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_fatal(const char* fmt, ...)
+ಶೂನ್ಯ log_fatal(ಧ್ರುವ ವರ್ಣ* fmt, ...)
 {
-	if (FATAL <= LOG_LEVEL) {
+	ಯದಿ (FATAL <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -136,5 +136,5 @@ void log_fatal(const char* fmt, ...)
 	}
 
 	log_info("\n panic \n");
-	while (1);
+	ಯಾವತ್ (1);
 }

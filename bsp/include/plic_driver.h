@@ -29,8 +29,8 @@
 
 #ifndef PLIC_DRIVER_H
 #define PLIC_DRIVER_H
-#include "platform.h"
-#include "traps.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "traps.h"
 
 /* Macros */
 
@@ -62,7 +62,7 @@
 
 /* Enumerators */
 
-typedef enum
+ಪ್ರಕಾರನಿರ್ದೇಶ ಗಣನಾ
 {
 	INACTIVE = 0,
 	ACTIVE   = 1,
@@ -72,32 +72,32 @@ typedef enum
 
 /* Structures and Unions */
 
-typedef struct
+ಪ್ರಕಾರನಿರ್ದೇಶ ಸಂರಚನಾ
 {
 	uint32_t id; /*id of the interrupt target source*/
 	uint32_t priority; /*priority assigned to it*/
 	interrupt_status_e state; /*state of the interrupt*/
-	uint32_t count; /*number of times this interrupt occured*/
+	uint32_t ಎಣಿಕೆ; /*number of times this interrupt occured*/
 } interrupt_data_t;
 
 /* Platform Level Interrupt Controller (PLIC) table
    Each entry in the table corresponds to an interrupt service routine */
 
-typedef void (*plic_fptr_t) (uint32_t);
-extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+ಪ್ರಕಾರನಿರ್ದೇಶ ಶೂನ್ಯ (*plic_fptr_t) (uint32_t);
+ಬಾಹ್ಯ plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /* Function prototypes */
 
-void interrupt_complete(uint32_t interrupt_id);
-uint32_t interrupt_claim_request(void);
-void isr_default(uint32_t interrupt_id);
-void interrupt_enable(uint32_t interrupt_id);
-void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
-void configure_interrupt_pin(uint32_t pin);
-void plic_init(void);
-void configure_interrupt(uint32_t int_id);
+ಶೂನ್ಯ interrupt_complete(uint32_t interrupt_id);
+uint32_t interrupt_claim_request(ಶೂನ್ಯ);
+ಶೂನ್ಯ isr_default(uint32_t interrupt_id);
+ಶೂನ್ಯ interrupt_enable(uint32_t interrupt_id);
+ಶೂನ್ಯ mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+ಶೂನ್ಯ interrupt_disable(uint32_t interrupt_id);
+ಶೂನ್ಯ set_interrupt_threshold(uint32_t priority_ಮೌಲ್ಯ);
+ಶೂನ್ಯ set_interrupt_priority(uint32_t priority_ಮೌಲ್ಯ, uint32_t int_id);
+ಶೂನ್ಯ configure_interrupt_pin(uint32_t pin);
+ಶೂನ್ಯ plic_init(ಶೂನ್ಯ);
+ಶೂನ್ಯ configure_interrupt(uint32_t int_id);
 
 #endif

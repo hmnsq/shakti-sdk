@@ -27,34 +27,34 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ಅನ್ತರ್ಭಾವ "gpio_i2c.h"
 
 #define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#define DELAY_ಎಣಿಕೆ 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+unsigned ಪೂರ್ಣಾಙ್ಕ Lm75ReadTemperature(unsigned long delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
+	unsigned ವರ್ಣ readBuf = 0;
+	unsigned short read_ಮೌಲ್ಯ_2 = 0;
 	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
 	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
+	read_ಮೌಲ್ಯ_2 = (readBuf << 1);
 	readBuf = I2cReadDataNack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_ಮೌಲ್ಯ_2 = (readBuf >> 7) | read_ಮೌಲ್ಯ_2;
+	ಪ್ರತ್ಯಾಗಮ read_ಮೌಲ್ಯ_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+ಶೂನ್ಯ main() 
 {
 	unsigned short tempRead = 0;
 	unsigned short temp = 0;
@@ -63,12 +63,12 @@ void main()
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
+	tempRead = Lm75ReadTemperature(DELAY_ಎಣಿಕೆ);
+	ಯದಿ(tempRead & 0x100) {
 		tempRead = ( (~tempRead) + 1 ) >> 1;
 		printf("\n\t Current Temperature:=-%u°C",tempRead);
 	}		
-	else {
+	ಅನ್ಯಥಾ {
 		tempRead = tempRead >> 1;
 		printf("\n\t Current Temperature:=+%u°C",tempRead);
 	 }

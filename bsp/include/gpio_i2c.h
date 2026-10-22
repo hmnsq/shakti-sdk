@@ -29,8 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
@@ -42,20 +42,20 @@ add a method to set the GPIO pins that are to be used  */
 #define I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+ಶೂನ್ಯ I2cInit();
+ಶೂನ್ಯ I2cSendSlaveAddress(unsigned ವರ್ಣ , unsigned ವರ್ಣ , unsigned ವರ್ಣ );
+ಶೂನ್ಯ I2cWriteByte(unsigned ವರ್ಣ , unsigned ವರ್ಣ );
+unsigned ವರ್ಣ I2cReadByte(unsigned ವರ್ಣ );
+ಶೂನ್ಯ I2cWriteData(unsigned ವರ್ಣ , unsigned ವರ್ಣ );
+unsigned ವರ್ಣ I2cReadDataAck(unsigned ವರ್ಣ );
+unsigned ವರ್ಣ I2cReadDataNack(unsigned ವರ್ಣ );
+ಶೂನ್ಯ I2cStart(unsigned ವರ್ಣ );
+ಶೂನ್ಯ I2cStop(unsigned ವರ್ಣ );
+ಶೂನ್ಯ I2c_Write_byte(unsigned ವರ್ಣ, unsigned ವರ್ಣ, unsigned ವರ್ಣ, unsigned ವರ್ಣ);
+ಪೂರ್ಣಾಙ್ಕ I2c_Read_byte(unsigned ವರ್ಣ ,unsigned ವರ್ಣ , unsigned ವರ್ಣ );
+ಪೂರ್ಣಾಙ್ಕ I2c_shakti_readbytes(ವರ್ಣ *, ಪೂರ್ಣಾಙ್ಕ , ಪೂರ್ಣಾಙ್ಕ , unsigned ವರ್ಣ );
+ಶೂನ್ಯ ReadAckForWrite(unsigned ವರ್ಣ delay);
+ಶೂನ್ಯ SendNackForRead(unsigned ವರ್ಣ delay);
+ಶೂನ್ಯ SendAckForRead(unsigned ವರ್ಣ delay);
 
 #endif

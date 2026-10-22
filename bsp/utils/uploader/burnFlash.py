@@ -25,20 +25,20 @@
 #***************************************************************************
 
 #To open gdb. 
-from pygdbmi.gdbcontroller import GdbController
+ತಃ pygdbmi.gdbcontroller ಆನಯನ GdbController
 #To use gdb commands and get gdb console outputs.
-from pygdbmi import gdbmiparser
+ತಃ pygdbmi ಆನಯನ gdbmiparser
 #To name log files.
-from datetime import datetime
+ತಃ datetime ಆನಯನ datetime
 #To verify gdb console outputs.
-import re
+ಆನಯನ re
 # To handle arguments to the script
-import sys
+ಆನಯನ sys
 #To start openocd session
-import os
-import time
+ಆನಯನ os
+ಆನಯನ time
 
-class GDB:
+ವರ್ಗ GDB:
 	def __init__(self):
 		self.gdbmi = None
 		self.timeout = 10
@@ -50,51 +50,51 @@ class GDB:
 		logFile = 'copy_to_flash_'+str(datetime.now().strftime("%Y-%m-%d_%H:%M:%S"))+ '.log'
 		self.opLog=open( logFile,'w+')
 		#open gdb
-		self.gdbmi=GdbController(gdb_path=gdbPath, gdb_args=None, time_to_check_for_additional_output_sec=4.5, rr=False, verbose=False)
+		self.gdbmi=GdbController(gdb_path=gdbPath, gdb_args=None, time_to_check_for_additional_output_sec=4.5, rr=ಅಸತ್ಯ, verbose=ಅಸತ್ಯ)
 		#print('started gdb')
 
 	def gdbSendCommand(self,command):
 		self.command=command
-		if self.gdbmi is None:
-			return False
+		ಯದಿ self.gdbmi is None:
+			ಪ್ರತ್ಯಾಗಮ ಅಸತ್ಯ
 		#send command and get output.
-		response = self.gdbmi.write(command,timeout_sec=self.timeout)
-		if len(response) == 0:
-			return False
-		return response
+		response = self.gdbmi.ಲಿಖ(command,timeout_sec=self.timeout)
+		ಯದಿ len(response) == 0:
+			ಪ್ರತ್ಯಾಗಮ ಅಸತ್ಯ
+		ಪ್ರತ್ಯಾಗಮ response
 
 	def gdbClose(self):
 		#close gdb
-		if self.gdbmi is None:
-			return False
+		ಯದಿ self.gdbmi is None:
+			ಪ್ರತ್ಯಾಗಮ ಅಸತ್ಯ
 		self.gdbmi.send_signal_to_gdb("SIGINT")
 		self.gdbmi.send_signal_to_gdb(2)
 		self.gdbmi.interrupt_gdb()
-		assert self.gdbmi.exit() is None
-		assert self.gdbmi.gdb_process is None
+		ಪ್ರತಿಜ್ಞಾ self.gdbmi.exit() is None
+		ಪ್ರತಿಜ್ಞಾ self.gdbmi.gdb_process is None
 		self.opLog.close()
-		return True
+		ಪ್ರತ್ಯಾಗಮ ಸತ್ಯ
 
-	def getResponseTypeMsg(self,response):
-		TypeMsg=""
-		typeMsgNum = str(response).count("payload")
+	def get_Response_Type_ಸಂದೇಶ(self,response):
+		Type_ಸಂದೇಶ=""
+		type_ಸಂದೇಶ_ಅಂಕೆ = str(response).ಎಣಿಕೆ("payload")
 		#get exact gdb console response.
-		for line in range( typeMsgNum ):
-			if (str(response[line]['type'])) == "console":
-				TypeMsg += (str(response[line]['payload']))
-		self.opLog.write("The output of "+self.command+" :\n"+TypeMsg+"\n")
-		return TypeMsg	
+		ಪ್ರತಿ ಸಾಲು ಅನ್ತಃ range( type_ಸಂದೇಶ_ಅಂಕೆ ):
+			ಯದಿ (str(response[ಸಾಲು]['type'])) == "console":
+				Type_ಸಂದೇಶ += (str(response[ಸಾಲು]['payload']))
+		self.opLog.ಲಿಖ("The output of "+self.command+" :\n"+Type_ಸಂದೇಶ+"\n")
+		ಪ್ರತ್ಯಾಗಮ Type_ಸಂದೇಶ	
 	
 	def gdbSendSignal(self,sig):
-		if self.gdbmi is None:
-			return False
+		ಯದಿ self.gdbmi is None:
+			ಪ್ರತ್ಯಾಗಮ ಅಸತ್ಯ
 		self.gdbmi.send_signal_to_gdb(sig)
 
-if __name__ == "__main__":
+ಯದಿ __name__ == "__main__":
 	print("Starting copy to Flash\n")
 	elf = "file "+ sys.argv[1]
 	path_to_sdk = os.getenv("SHAKTISDK")
-	if path_to_sdk == None:
+	ಯದಿ path_to_sdk == None:
 		print("Set environmental variable SHAKTISDK")
 		exit()
 	print(path_to_sdk)
@@ -119,14 +119,14 @@ if __name__ == "__main__":
 	gdbObject = GDB()
 	gdbObject.gdbStart(gdb)
 #execute commands 
-	for cmd in command:
+	ಪ್ರತಿ cmd ಅನ್ತಃ command:
 		response = gdbObject.gdbSendCommand(cmd)
-		if (response == False):
+		ಯದಿ (response == ಅಸತ್ಯ):
 			print("\n cmd %s failed\n",cmd)
-			break
-		gdbObject.getResponseTypeMsg(response)
+			ಭಙ್ಗ
+		gdbObject.get_Response_Type_ಸಂದೇಶ(response)
 #close gdb
-	time.sleep(60)
+	time.ಸುಷುಪ್ತಿ(60)
 	gdbObject.gdbClose()
 #close openocd
 	os.system("pkill openocd")

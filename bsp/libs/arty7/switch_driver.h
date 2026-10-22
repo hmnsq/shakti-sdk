@@ -29,10 +29,10 @@
 #ifndef SWITCH_DRIVER_H
 #define SWITCH_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ಯದಿ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "gpio.h"
 
 //Switches
 #define SW0 GPIO24
@@ -43,7 +43,7 @@
 #define ALL_SWITCHES (SW0 | SW1 | SW2 | SW3)
 
 // function prototype
-void configure_switch(unsigned long pinCntrl);
-void configure_all_switchs();
+ಶೂನ್ಯ configure_switch(unsigned long pinCntrl);
+ಶೂನ್ಯ configure_all_switchs();
 #endif
 #endif

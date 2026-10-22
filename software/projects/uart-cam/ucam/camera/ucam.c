@@ -30,20 +30,20 @@
 
 
 
-#include "ucam.h"
+#ಅನ್ತರ್ಭಾವ "ucam.h"
 
 /** @fn assert_check(int bool,int track)
  * @brief assert function, exits if assert failed.
  * @param int bool-false or true
  * @param int track - 0 if host, 1 if camera
  */
-void assert_check(int bool,int track) {
-    if(bool) return;
-    if(track) 
+ಶೂನ್ಯ assert_check(ಪೂರ್ಣಾಙ್ಕ bool,ಪೂರ್ಣಾಙ್ಕ track) {
+    ಯದಿ(bool) ಪ್ರತ್ಯಾಗಮ;
+    ಯದಿ(track) 
       printf("Camera response error!!\n");
-    else {
+    ಅನ್ಯಥಾ {
       printf("Host response error!!\nIs host connected?");
-      return;
+      ಪ್ರತ್ಯಾಗಮ;
     }
     exit(-1);
 }
@@ -52,14 +52,14 @@ void assert_check(int bool,int track) {
  * @brief delay function 
  * @param unsigned long milli_seconds - delay for given milliseconds
  */
-void delay_milli(unsigned long milli_seconds)
+ಶೂನ್ಯ delay_milli(unsigned long milli_seconds)
 {
 	unsigned long cntr1 = milli_seconds;
 	unsigned long tmpCntr;
 
-	while (cntr1--) {
+	ಯಾವತ್ (cntr1--) {
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		ಯಾವತ್ (tmpCntr--);
 	}
 }
 
@@ -68,10 +68,10 @@ void delay_milli(unsigned long milli_seconds)
  * @param const uint8_t* str-pointer to command string  
  * @param int len- length of command string
  */
-void send(const uint8_t* str,int len){
-  int i;
+ಶೂನ್ಯ send(ಧ್ರುವ uint8_t* str,ಪೂರ್ಣಾಙ್ಕ len){
+  ಪೂರ್ಣಾಙ್ಕ i;
   flush_uart(CAM);
-  for(i =0;i<len;i++){
+  ಪ್ರತಿ(i =0;i<len;i++){
     write_uart_character(CAM,*str);
     str++;
   }
@@ -82,11 +82,11 @@ void send(const uint8_t* str,int len){
  * @param int cmdno-command number of ACK 
  * @param int pid- packet ID
  */
-void recieve_ack(int cmdno,int pid)
+ಶೂನ್ಯ recieve_ack(ಪೂರ್ಣಾಙ್ಕ cmdno,ಪೂರ್ಣಾಙ್ಕ pid)
 {
   uint8_t str[6]; 
-  int i = 0;
-  for(i=0;i<6;i++){
+  ಪೂರ್ಣಾಙ್ಕ i = 0;
+  ಪ್ರತಿ(i=0;i<6;i++){
     read_uart_character(CAM,(str+i));
   }
   uint8_t cc = (uint8_t)cmdno; 
@@ -101,7 +101,7 @@ void recieve_ack(int cmdno,int pid)
  * @param int pid- packet ID 
  * @param uint8_t str[]- pointer to command string
  */
-void get_ack(int cmdno,int pid, uint8_t str[])
+ಶೂನ್ಯ get_ack(ಪೂರ್ಣಾಙ್ಕ cmdno,ಪೂರ್ಣಾಙ್ಕ pid, uint8_t str[])
 {
   str[0] = (uint8_t)(0xAA);
   str[1] = (uint8_t)(0x0E);
@@ -116,10 +116,10 @@ void get_ack(int cmdno,int pid, uint8_t str[])
  * @param uint8_t str[]- pointer to string 
  * @param int len - number of bytes to recieve from camera
  */
-void recieve_gen(uint8_t str[],int len)
+ಶೂನ್ಯ recieve_gen(uint8_t str[],ಪೂರ್ಣಾಙ್ಕ len)
 {
-  int i;
-  for(i = 0;i < len; i++)
+  ಪೂರ್ಣಾಙ್ಕ i;
+  ಪ್ರತಿ(i = 0;i < len; i++)
   {
     read_uart_character(CAM,str+i);
   }
@@ -130,20 +130,20 @@ void recieve_gen(uint8_t str[],int len)
  * @param int count- Packet ID of current packet 
  * @param int limit- number of bytes in current packet
  */ 
-void recieve_img(int count,int limit){
+ಶೂನ್ಯ recieve_img(ಪೂರ್ಣಾಙ್ಕ ಎಣಿಕೆ,ಪೂರ್ಣಾಙ್ಕ limit){
   uint8_t ptr[256];
-  int i=0;
+  ಪೂರ್ಣಾಙ್ಕ i=0;
   uint8_t ack_temp[6];
-  get_ack(0,count,ack_temp);
+  get_ack(0,ಎಣಿಕೆ,ack_temp);
   send(ack_temp, 6);
   // if limit=6 it means we don't expect any data bytes
-  if(limit==6) return;
-  while(1){
+  ಯದಿ(limit==6) ಪ್ರತ್ಯಾಗಮ;
+  ಯಾವತ್(1){
     read_uart_character(CAM,(ptr+i));
     i++;
-    if(i==limit) break;
+    ಯದಿ(i==limit) ಭಙ್ಗ;
   }
-  for(int j=4;j<i-2;j++){
+  ಪ್ರತಿ(ಪೂರ್ಣಾಙ್ಕ j=4;j<i-2;j++){
     write_uart_character(HOST,ptr[j]);
   }
 }
@@ -152,58 +152,58 @@ void recieve_img(int count,int limit){
  * @brief Function to wake up camera
  * @return int - 0 if success, -1 if error
  */ 
-int init_cam()
+ಪೂರ್ಣಾಙ್ಕ init_cam()
 {
-  int delay_time = 4;
-  int no=0;
-  const uint8_t  sync_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0D), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  const uint8_t  ack_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0D),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  const uint8_t  ack_command_reply[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  ಪೂರ್ಣಾಙ್ಕ delay_time = 4;
+  ಪೂರ್ಣಾಙ್ಕ no=0;
+  ಧ್ರುವ uint8_t  sync_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0D), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  ಧ್ರುವ uint8_t  ack_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0D),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  ಧ್ರುವ uint8_t  ack_command_reply[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
   start:
   {
     no++;
     printf("Round : %d\n",no);
     send(sync_command,6);
     delay_milli(delay_time++); 
-    if(CAM->status & STS_RX_NOT_EMPTY)
+    ಯದಿ(CAM->status & STS_RX_NOT_EMPTY)
     {
         // code to read 12 characters from the buffer and if it matches with the ACK and sync commands go to succes
-        int i;
-        for(i = 0;i<6;i++) 
+        ಪೂರ್ಣಾಙ್ಕ i;
+        ಪ್ರತಿ(i = 0;i<6;i++) 
         {
            uint8_t ch;
            read_uart_character(CAM,&ch);
-           if(i == 3)continue; // don't care xx thing
-           if(ch != ack_command[i]) goto fail;
+           ಯದಿ(i == 3)ಅನುವರ್ತ; // don't care xx thing
+           ಯದಿ(ch != ack_command[i]) ಗಚ್ಛ fail;
         }
-        for(i = 0;i<6;i++)
+        ಪ್ರತಿ(i = 0;i<6;i++)
         {
             uint8_t ch;
             read_uart_character(CAM,&ch);
-            if(ch != sync_command[i]) goto fail;
+            ಯದಿ(ch != sync_command[i]) ಗಚ್ಛ fail;
         }
-        goto success;
+        ಗಚ್ಛ success;
     }
   }
   fail:
-  if(delay_time>15000) {
+  ಯದಿ(delay_time>15000) {
     printf("Can't wake up camera! Is camera connected?\n");
-    return -1;
+    ಪ್ರತ್ಯಾಗಮ -1;
   }
-  goto start;
+  ಗಚ್ಛ start;
   success:
   flush_uart(CAM);
   send(ack_command_reply,6);
   printf("\n synchronisation process done waiting for 2 seconds for stabilisation \n");
   delay(2);
   printf("\n you are all set \n");
-  return 0;
+  ಪ್ರತ್ಯಾಗಮ 0;
 }
 
 /** @fn send_full_reset()
  * @brief Send Full reset to camera
  */ 
-void send_full_reset() {
+ಶೂನ್ಯ send_full_reset() {
   uint8_t reset_command[] = {(uint8_t)(0xAA),(uint8_t)(0x08),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
   send(reset_command,6);
   recieve_ack(8,0);
@@ -213,7 +213,7 @@ void send_full_reset() {
  * @brief Function to get picture
  * @param int mode - 0 for one image, 1 for continuous
  */ 
-void get_pic(int mode)
+ಶೂನ್ಯ get_pic(ಪೂರ್ಣಾಙ್ಕ mode)
 {
   //INITIAL_command : AA 01 00 07 xx 07 ( specific for JPEG,640x480 xx=don't care )
   uint8_t initial_command[] = {(uint8_t)(0xAA),(uint8_t)(0x1),(uint8_t)(0x0),(uint8_t)(0x7),(uint8_t)(0x3),(uint8_t)(0x7)};
@@ -239,26 +239,26 @@ void get_pic(int mode)
   assert_check(data[1]==0xA,1);
   assert_check(data[2]==0x5,1);
 
-  long no_of_pg = (int)data[3] + (((long)data[4])<<8) + (((long)data[5])<<16) ;
+  long no_of_pg = (ಪೂರ್ಣಾಙ್ಕ)data[3] + (((long)data[4])<<8) + (((long)data[5])<<16) ;
   printf("New size : %ld\n",no_of_pg);
 
   // Send data to host
   flush_uart(HOST);
-  for(int i=0;i<6;i++)
+  ಪ್ರತಿ(ಪೂರ್ಣಾಙ್ಕ i=0;i<6;i++)
     write_uart_character(HOST,data[i]);
 
-  int counter = no_of_pg/250 ;
-  int i = 0;
-  char recv;
+  ಪೂರ್ಣಾಙ್ಕ counter = no_of_pg/250 ;
+  ಪೂರ್ಣಾಙ್ಕ i = 0;
+  ವರ್ಣ recv;
   //Wait for HOST to confirm that DATA_command is recieved.
   //Host should reply with 'K'
   read_uart_character(HOST,&recv);
   assert_check(recv=='K',0);
-  for(i=0;i<counter;i++){
+  ಪ್ರತಿ(i=0;i<counter;i++){
     recieve_img(i,256);
   }
   recieve_img(counter,6+(no_of_pg%250));
-  if(no_of_pg%250 != 0) {     
+  ಯದಿ(no_of_pg%250 != 0) {     
     uint8_t ack_temp[6];
     get_ack(0,counter+1,ack_temp);
     send(ack_temp, 6);
@@ -269,5 +269,5 @@ void get_pic(int mode)
   assert_check(recv=='O',0);
   printf("Imgdone\n");
 
-  if(mode) goto start;
+  ಯದಿ(mode) ಗಚ್ಛ start;
 }

@@ -29,39 +29,39 @@
 
 #ifndef ETH_DRIVER_H
 #define ETH_DRIVER_H
-#include "platform.h"
-#include "traps.h"
-#include "eth_driver.h"
-#include "eth_macros.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "traps.h"
+#ಅನ್ತರ್ಭಾವ "eth_driver.h"
+#ಅನ್ತರ್ಭಾವ "eth_macros.h"
 
-#define INLINE inline
+#define INLINE ಅನ್ತಃಸ್ಥ
 #define __LITTLE_ENDIAN__ 1
 
 
 /*
  * guarded against xbasic_types.h.
  */
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
+ಪ್ರಕಾರನಿರ್ದೇಶ uint8_t u8;
+ಪ್ರಕಾರನಿರ್ದೇಶ uint16_t u16;
+ಪ್ರಕಾರನಿರ್ದೇಶ uint32_t u32;
 /** @}*/
 #define __XUINT64__
-typedef struct
+ಪ್ರಕಾರನಿರ್ದೇಶ ಸಂರಚನಾ
 {
 	u32 Upper;
 	u32 Lower;
 } Xuint64;
 
-typedef char char8;
-typedef int8_t s8;
-typedef int16_t s16;
-typedef int32_t s32;
-typedef int64_t s64;
-typedef uint64_t u64;
-typedef int sint32;
+ಪ್ರಕಾರನಿರ್ದೇಶ ವರ್ಣ char8;
+ಪ್ರಕಾರನಿರ್ದೇಶ int8_t s8;
+ಪ್ರಕಾರನಿರ್ದೇಶ int16_t s16;
+ಪ್ರಕಾರನಿರ್ದೇಶ int32_t s32;
+ಪ್ರಕಾರನಿರ್ದೇಶ int64_t s64;
+ಪ್ರಕಾರನಿರ್ದೇಶ uint64_t u64;
+ಪ್ರಕಾರನಿರ್ದೇಶ ಪೂರ್ಣಾಙ್ಕ sint32;
 
-typedef intptr_t INTPTR;
-typedef uintptr_t UINTPTR;
+ಪ್ರಕಾರನಿರ್ದೇಶ intptr_t INTPTR;
+ಪ್ರಕಾರನಿರ್ದೇಶ uintptr_t UINTPTR;
 //typedef ptrdiff_t PTRDIFF;
 
 /*****************************************************************************
@@ -69,7 +69,7 @@ typedef uintptr_t UINTPTR;
  * EmacLite defines .
  * DeviceID starts at 240
  */
-#define XPAR_XEMACLITE_NUM_INSTANCES    1
+#define XPAR_XEMACLITE_ಅಂಕೆ_INSTANCES    1
 #define XPAR_EMACLITE_0_DEVICE_ID       240
 /* EK Change */
 #define XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
@@ -82,7 +82,7 @@ typedef uintptr_t UINTPTR;
 #define TRUE		1U
 #define FALSE		0U
 
-#define NULL		0U
+#define ರಿಕ್ತ		0U
 #define SUCCESS 0
 #define FAILURE -1
 #define DEVICE_BUSY                 21L	/*!< Device is busy */
@@ -128,7 +128,7 @@ typedef uintptr_t UINTPTR;
 /**
  * This typedef contains configuration information for a device.
  */
-typedef struct {
+ಪ್ರಕಾರನಿರ್ದೇಶ ಸಂರಚನಾ {
 	u16 DeviceId;	 /**< Unique ID  of device */
 	UINTPTR BaseAddress; /**< Device base address */
 	u8 TxPingPong;	 /**< 1 if TX Pong buffer configured, 0 otherwise */
@@ -143,14 +143,14 @@ typedef struct {
  *		when setting the callback functions, and passed back to the
  *		upper layer when the callback is invoked.
  */
-typedef void (*XEmacLite_Handler) (void *CallBackRef);
+ಪ್ರಕಾರನಿರ್ದೇಶ ಶೂನ್ಯ (*XEmacLite_Handler) (ಶೂನ್ಯ *CallBackRef);
 
 /**
  * The XEmacLite driver instance data. The user is required to allocate a
  * variable of this type for every EmacLite device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+ಪ್ರಕಾರನಿರ್ದೇಶ ಸಂರಚನಾ {
 	XEmacLite_Config EmacLiteConfig; /* Device configuration */
 	u32 IsReady;			 /* Device is initialized and ready */
 
@@ -161,21 +161,21 @@ typedef struct {
 	 * Callbacks
 	 */
 	XEmacLite_Handler RecvHandler;
-	void *RecvRef;
+	ಶೂನ್ಯ *RecvRef;
 	XEmacLite_Handler SendHandler;
-	void *SendRef;
+	ಶೂನ್ಯ *SendRef;
 
 } XEmacLite;
 
 #ifndef ETH_VARI
-extern volatile u32 RecvFrameLength;
-extern UINTPTR TxBuffPtr;
-extern UINTPTR RxBuffPtr;
-extern volatile int FramesTx;
-extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
-extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+ಬಾಹ್ಯ ಚಞ್ಚಲ u32 RecvFrameLength;
+ಬಾಹ್ಯ UINTPTR TxBuffPtr;
+ಬಾಹ್ಯ UINTPTR RxBuffPtr;
+ಬಾಹ್ಯ ಚಞ್ಚಲ ಪೂರ್ಣಾಙ್ಕ FramesTx;
+ಬಾಹ್ಯ ಚಞ್ಚಲ ಪೂರ್ಣಾಙ್ಕ FramesRx;
+ಬಾಹ್ಯ ಚಞ್ಚಲ ಪೂರ್ಣಾಙ್ಕ Tx_ಎಣಿಕೆ;
+ಬಾಹ್ಯ ಚಞ್ಚಲ ಪೂರ್ಣಾಙ್ಕ Rx_ಎಣಿಕೆ;
+ಬಾಹ್ಯ ಚಞ್ಚಲ ಪೂರ್ಣಾಙ್ಕ Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 #endif
 
 
@@ -260,11 +260,11 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 /************************** Variable Definitions *****************************/
 
 
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
+ಶೂನ್ಯ XEmacLite_AlignedWrite(ಶೂನ್ಯ *SrcPtr, UINTPTR *DestPtr, unsigned Byte_ಎಣಿಕೆ);
+ಶೂನ್ಯ XEmacLite_AlignedRead(UINTPTR *SrcPtr, ಶೂನ್ಯ *DestPtr, unsigned Byte_ಎಣಿಕೆ);
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
-extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+ಬಾಹ್ಯ XEmacLite_Config XEmacLite_ConfigTable;
+ಬಾಹ್ಯ ಪೂರ್ಣಾಙ್ಕ XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr);
 

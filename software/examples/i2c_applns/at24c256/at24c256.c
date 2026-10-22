@@ -27,15 +27,15 @@
   @detail I2C based routines to write and read all locations of AT24C256.
  */
 
-#include <stdint.h>
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ಅನ್ತರ್ಭಾವ <stdint.h>
+#ಅನ್ತರ್ಭಾವ "i2c.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
+#ಅನ್ತರ್ಭಾವ "uart.h"
 
 #define AT24C256_SLAVE_ADDRESS 0xA0 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define DELAY_ಮೌಲ್ಯ 900
+#define PRESCALER_ಎಣಿಕೆ 0x1F
+#define SCLK_ಎಣಿಕೆ 0x91
 #define I2C i2c_instance[0]
 
 /** @fn int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, unsigned long delay)
@@ -46,11 +46,11 @@
  * @param delay
  * @return read status (zero on success)
  */
-int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, uint8_t *read_data, unsigned long delay)
+ಪೂರ್ಣಾಙ್ಕ read_eeprom_address(i2c_struct * i2c_instance, unsigned ಪೂರ್ಣಾಙ್ಕ address, uint8_t *read_data, unsigned long delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned char temp = 0;
+	unsigned ವರ್ಣ read_buf[4] = {'\0'};
+	ಪೂರ್ಣಾಙ್ಕ i = 0, j = 0, k = 0, status=0;
+	unsigned ವರ್ಣ temp = 0;
 
 	//Writes the slave address for write
 	i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -74,7 +74,7 @@ int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, uint8_t
 	*read_data = temp;
 
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	ಪ್ರತ್ಯಾಗಮ 0;
 }
 
 /** @fn int read_eeprom_locations(i2c_struct * i2c_instance, unsigned int address, unsigned char *read_data, unsigned long delay)
@@ -85,15 +85,15 @@ int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, uint8_t
  * @param delay
  * @return read status (zero on success)
  */
-int read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_data, uint16_t length, uint32_t delay)
+ಪೂರ್ಣಾಙ್ಕ read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_data, uint16_t length, uint32_t delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned char temp = 0;
+	ಪೂರ್ಣಾಙ್ಕ i = 0, j = 0, k = 0, status=0;
+	unsigned ವರ್ಣ temp = 0;
 
 	//Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	ಪ್ರತಿ(i = 0; i < length; i++)
 	{
-		if (0 == (address % 64 ) )
+		ಯದಿ (0 == (address % 64 ) )
 		{
 			//Writes the slave address for write
 			i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, delay);
@@ -115,19 +115,19 @@ int read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *
 		i2c_read_data(i2c_instance, write_data, delay);
 		printf("\nread Value: %x", *write_data);
 
-		if( i == (length - 2) )
+		ಯದಿ( i == (length - 2) )
 			i2c_instance->control = I2C_NACK;
 
 		*write_data++;
 		address ++;
 
-		if(0 == (address % 64) )
+		ಯದಿ(0 == (address % 64) )
 		{
 			i2c_instance->control = I2C_STOP;
 		}
 	}
 
-	return 0;
+	ಪ್ರತ್ಯಾಗಮ 0;
 }
 
 /** @fn int write_eeprom_address(i2c_struct * i2c_instance, unsigned int address, unsigned int *write_value, unsigned long delay)
@@ -139,10 +139,10 @@ int read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t write_value, unsigned long delay)
+ಪೂರ್ಣಾಙ್ಕ write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t write_ಮೌಲ್ಯ, unsigned long delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned int temp = 0;
+	ಪೂರ್ಣಾಙ್ಕ i = 0, j = 0, k = 0, status=0;
+	unsigned ಪೂರ್ಣಾಙ್ಕ temp = 0;
 	i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, delay);
 
 	//Writes the pointer to msb address that needs to be read
@@ -150,11 +150,11 @@ int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t wr
 	//Writes the pointer to lsb address that needs to be read
 	i2c_write_data(i2c_instance, ( ( address >> 0 ) & 0xFF), delay);
 
-	i2c_write_data(i2c_instance, ( write_value & 0xff), delay);
+	i2c_write_data(i2c_instance, ( write_ಮೌಲ್ಯ & 0xff), delay);
 
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	ಪ್ರತ್ಯಾಗಮ 0;
 }
 
 /** @fn int write_eeprom_locations(i2c_struct * i2c_instance, unsigned int address, unsigned int *write_value, unsigned long delay)
@@ -166,14 +166,14 @@ int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t wr
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_value, uint16_t length, uint32_t delay)
+ಪೂರ್ಣಾಙ್ಕ write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_ಮೌಲ್ಯ, uint16_t length, uint32_t delay)
 {
-	int i = 0, j = 0, k = 0, status=0;
-	unsigned int temp = 0;
+	ಪೂರ್ಣಾಙ್ಕ i = 0, j = 0, k = 0, status=0;
+	unsigned ಪೂರ್ಣಾಙ್ಕ temp = 0;
 
-	for(i = 0; i < length; i++)
+	ಪ್ರತಿ(i = 0; i < length; i++)
 	{
-		if(0 == (address % 64) )
+		ಯದಿ(0 == (address % 64) )
 		{
 			i2c_send_slave_address(i2c_instance, AT24C256_SLAVE_ADDRESS, I2C_WRITE, delay);
 
@@ -183,17 +183,17 @@ int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t 
 			//Writes the pointer to lsb address that needs to be read
 			i2c_write_data(i2c_instance, (( address >> 0 ) & 0xFF), delay);
 		}
-		i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
+		i2c_write_data(i2c_instance, (*write_ಮೌಲ್ಯ++ & 0xff), delay);
 		address ++;
 
-		if(0 == (address % 64) )
+		ಯದಿ(0 == (address % 64) )
 		{
 			i2c_instance->control = I2C_STOP;
 		}
 
 	}
 
-	return 0;
+	ಪ್ರತ್ಯಾಗಮ 0;
 }
 
 /** @fn int main()
@@ -202,7 +202,7 @@ int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t 
  * prints the read values
  * @return Zero
  */
-int main()
+ಪೂರ್ಣಾಙ್ಕ main()
 {
 	uint16_t i = 0;
 	uint16_t timeout;
@@ -211,32 +211,32 @@ int main()
 	uint16_t address = 0;
 	uint8_t read_data = 0;
 	uint8_t write_data = 0;
-	uint8_t count = 0;
-	uint8_t write_value[256] = {'\0'};
-	uint8_t read_value[256] = {'\0'};
+	uint8_t ಎಣಿಕೆ = 0;
+	uint8_t write_ಮೌಲ್ಯ[256] = {'\0'};
+	uint8_t read_ಮೌಲ್ಯ[256] = {'\0'};
 	uint32_t data_read = 0, data_write = 0;
 
 	log_debug("\tI2C: AT24C256 - EEPROM test\n");
 	read_data = 0x55;
 
-	if(read_data != write_data)
+	ಯದಿ(read_data != write_data)
 		printf("\n Values are not equal. RV: %x; WV: %x", read_data, write_data);
-	else
+	ಅನ್ಯಥಾ
 		printf("\n Values are equal. RV: %x; WV: %x", read_data, write_data);
 
-	if(write_data != read_data)
+	ಯದಿ(write_data != read_data)
 		printf("\n Values are not equal. RV: %x; WV: %x", read_data, write_data);
-	else
+	ಅನ್ಯಥಾ
 		printf("\n Values are equal. RV: %x; WV: %x", read_data, write_data);
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ಯದಿ(config_i2c(I2C, PRESCALER_ಎಣಿಕೆ, SCLK_ಎಣಿಕೆ))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		ಪ್ರತ್ಯಾಗಮ -1;
 	}
-	else
+	ಅನ್ಯಥಾ
 		log_info("\tI2C Intilization Success\n");
 
 	length = 256;
@@ -251,39 +251,39 @@ int main()
 	log_debug("\n Read Complete");
 	read_data = 0x0;
 
-	if(write_data == read_data)
+	ಯದಿ(write_data == read_data)
 		log_info("\n AT24C256 EEPROM RW Passed");
-	else
+	ಅನ್ಯಥಾ
 	{
 		log_error("\n AT24C256 EEPROM RW Failed; RV: %x; WV: %x", read_data, write_data);
 	}
 
-	for(i = 0; i < length; i++)
+	ಪ್ರತಿ(i = 0; i < length; i++)
 	{
-		write_value[i] = i;
-		data_write = write_value[i];
+		write_ಮೌಲ್ಯ[i] = i;
+		data_write = write_ಮೌಲ್ಯ[i];
 		log_error("\n Write Value: %x", data_write);
 	}
 
-	write_eeprom_locations(I2C, address, &write_value, length, delay);
+	write_eeprom_locations(I2C, address, &write_ಮೌಲ್ಯ, length, delay);
 	address = 0;
-	read_eeprom_locations(I2C, address, &read_value, length, delay);
+	read_eeprom_locations(I2C, address, &read_ಮೌಲ್ಯ, length, delay);
 
-	for (i = 0; i < length; i++)
+	ಪ್ರತಿ (i = 0; i < length; i++)
 	{
-		data_write = write_value[i];
-		data_read = read_value[i];
+		data_write = write_ಮೌಲ್ಯ[i];
+		data_read = read_ಮೌಲ್ಯ[i];
 
 		log_info("\n wv: %x; rv: %x", data_write, data_read );
 
-		if(write_value[i] != read_value[i])
-			count++;
+		ಯದಿ(write_ಮೌಲ್ಯ[i] != read_ಮೌಲ್ಯ[i])
+			ಎಣಿಕೆ++;
 	}
 
-	if(0 != count )
+	ಯದಿ(0 != ಎಣಿಕೆ )
 		printf("\n Write failed");
-	else
+	ಅನ್ಯಥಾ
 		printf("\n I2C test passed");
 
-	return 0;
+	ಪ್ರತ್ಯಾಗಮ 0;
 }

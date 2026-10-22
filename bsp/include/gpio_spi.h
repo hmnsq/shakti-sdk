@@ -43,7 +43,7 @@
 
 // function prototype
  unsigned char readbyte(unsigned char delay);
- int config();
+ целое config();
 
 #endif/* GPIO_SPI_H*/
 

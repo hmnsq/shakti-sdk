@@ -35,9 +35,9 @@
  */
 void convert_hex_array()
 {
-	unsigned int  i= 0;
-	int write_data;
-	int count=0;
+	unsigned целое  i= 0;
+	целое write_data;
+	целое count=0;
 
 	FILE *myFile;
 	FILE *Cypress;
@@ -45,17 +45,17 @@ void convert_hex_array()
 	myFile = fopen(FILEPATH "/output/code.mem", "r");
 	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
 
-	if(!myFile) {
+	если(!myFile) {
 		printf(" unable to read code.mem\n");
-		return;
+		вернуть;
 	}
 
-	if(!Cypress) {
+	если(!Cypress) {
 		printf(" unable to open flashdata.h\n");
-		return;
+		вернуть;
 	}
 	
-	while (fscanf(myFile, "%x", &write_data) != EOF) {
+	пока (fscanf(myFile, "%x", &write_data) != EOF) {
 		count++;
 	}
 
@@ -63,7 +63,7 @@ void convert_hex_array()
 
 	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
 
-	while (fscanf(myFile, "%x", &write_data) != EOF)
+	пока (fscanf(myFile, "%x", &write_data) != EOF)
 	{
 		fprintf(Cypress,"\n ,0x%x", write_data);
 	}
@@ -79,7 +79,7 @@ void convert_hex_array()
 /** @fn void main()
  * @brief Initiates conversion by calling convert_hex_array
  */
-void main()
+void основной()
 {
 	printf(" Converting codemem to array\n");
 	convert_hex_array();

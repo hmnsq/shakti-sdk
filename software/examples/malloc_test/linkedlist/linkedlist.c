@@ -27,22 +27,22 @@
 #include <stdlib.h>
 
 struct node {
-	int num;
+	целое num;
 	struct node *nptr;
 }*head;
 
-void create_list(int n);
+void create_list(целое n);
 void display_list();
-void delete_node(int position);
+void delete_node(целое position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+void основной()
 {
-	int n,position,m;
+	целое n,position,m;
 	char t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
@@ -68,7 +68,7 @@ void main()
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	пока(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+void create_list(целое n)
 {
 	struct node *node, *tmp;
-	int data,m;
+	целое data,m;
 	char t[12];
 
 	head = (struct node*)malloc(sizeof(struct node));
 
-	if(head == NULL)
+	если(head == NULL)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	иначе
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -100,15 +100,15 @@ void create_list(int n)
 		head->nptr = NULL;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		для(целое i = 2;i <= n; i++)
 		{
 			node = (struct node*)malloc(sizeof(struct node));
 
-			if(node == NULL)
+			если(node == NULL)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			иначе 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
@@ -131,17 +131,17 @@ void create_list(int n)
  */
 void display_list()
 {
-	int i = 0;
+	целое i = 0;
 	struct node *tmp;
 
-	if(head == NULL)
+	если(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else
+	иначе
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		пока(tmp != NULL) 
 		{
 			printf(" Node%d = %d",i,tmp->num);
 			printf("->");
@@ -157,32 +157,32 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+void delete_node(целое position)
 {
 	struct node *temp;
 
-	if(head == NULL)
+	если(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	иначе 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		если (position == 0)//Delete head node
 		{
 			head = temp->nptr;
 			free(temp);
-			return;
+			вернуть;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		для (целое i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		если (temp == NULL || temp->nptr == NULL)
+			вернуть;
 
 		//delete node at pos (next of position-1)
 		struct node *nptr = temp->nptr->nptr;

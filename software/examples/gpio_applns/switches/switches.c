@@ -44,13 +44,13 @@ unsigned long read_data = 0;
  * @details 
  * @warning 
  */
-void main()
+void основной()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#если defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 
-	while(1){	
+	пока(1){	
 #ifdef READ_INDIVIDUAL_SWITCHES		
 		/*! Define any one button from below at a time */
 #define SW_0 /*! Read SW0 value */
@@ -89,9 +89,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x01000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x01000000)
+		если(read_data == 0x01000000)
 			printf("\n SW0: HIGH"); 		
-		else
+		иначе
 			printf("\n SW0: LOW");
 #endif
 
@@ -100,9 +100,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x02000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x02000000)
+		если(read_data == 0x02000000)
 			printf("\n SW1: HIGH"); 		
-		else
+		иначе
 			printf("\n SW1: LOW");
 #endif
 
@@ -111,9 +111,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x04000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x04000000)
+		если(read_data == 0x04000000)
 			printf("\n SW2: HIGH"); 		
-		else
+		иначе
 			printf("\n SW2: LOW");
 #endif
 
@@ -121,9 +121,9 @@ void main()
 		read_data = read_word(GPIO_DATA_REG);
 		printf("\n Read Data is :0x%x", read_data);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x08000000)
+		если(read_data == 0x08000000)
 			printf("\n SW3: HIGH"); 		
-		else
+		иначе
 			printf("\n SW3: LOW");
 #endif
 

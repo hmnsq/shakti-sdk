@@ -53,10 +53,10 @@
  * @param delay
  * @return read status (Zero of success)
  */
-int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+целое read_ds3231_registers(i2c_struct * i2c_instance, unsigned целое reg_offset, unsigned целое *readTemp, unsigned char length, unsigned long delay)
 {
 	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
+	целое i = 0, j = 0,  k = 0, status=0;
 	unsigned char temp = 0;
 
 //Writes the slave address for write
@@ -75,17 +75,17 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 		i2c_read_data(i2c_instance, &temp, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-		for(i = 0; i < length; i++)
+		для(i = 0; i < length; i++)
 		{
 			i2c_read_data(i2c_instance, &temp, delay);
 			*readTemp = temp;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
-			if( i == (length - 2) )
+			если( i == (length - 2) )
 				i2c_instance->control = I2C_NACK;
 			*readTemp++;
 		}
 		i2c_instance->control = I2C_STOP;
-		return 0;
+		вернуть 0;
 }
 
 /** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -99,13 +99,13 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+целое write_ds3231_registers(i2c_struct * i2c_instance, unsigned целое reg_offset, unsigned целое *write_value, unsigned char length, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	целое i = 0, j = 0,  k = 0, status=0;
+	unsigned целое temp = 0;
 		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, delay);
 		i2c_write_data(i2c_instance, reg_offset, delay);
-		for(i = 0; i < length; i++)
+		для(i = 0; i < length; i++)
 	{
 		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
@@ -114,7 +114,7 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 //		delay_loop(800, 800);
 
 
-			return 0;
+			вернуть 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)
@@ -125,12 +125,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param y
  * @return Day of the week (0 - 6)
  */
-int dayofweek(int d, int m, int y)
+целое dayofweek(целое d, целое m, целое y)
 {
-    static int t[] = { 0, 3, 2, 5, 0, 3,
+    static целое t[] = { 0, 3, 2, 5, 0, 3,
                        5, 1, 4, 6, 2, 4 };
     y -= m < 3;
-    return ( y + y / 4 - y / 100 +
+    вернуть ( y + y / 4 - y / 100 +
              y / 400 + t[m - 1] + d) % 7;
 }
 
@@ -140,9 +140,9 @@ int dayofweek(int d, int m, int y)
  * @param decimal
  * @return Calculated hex value. 
  */
-unsigned int ds3231_decimal_to_hex(unsigned int decimal)
+unsigned целое ds3231_decimal_to_hex(unsigned целое decimal)
 {
-	return( ((decimal / 10 ) << 4) | (decimal % 10) );
+	вернуть( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
 /** @fn void main()
@@ -150,14 +150,14 @@ unsigned int ds3231_decimal_to_hex(unsigned int decimal)
  * @details Configures the DS3231 and reads Date and time information and prints the 
  * in decimal
  */
-void main()
+void основной()
 {
-		int timeout;
-		unsigned int tempReadValue = 0;
+		целое timeout;
+		unsigned целое tempReadValue = 0;
 		unsigned long delay = 1000;
-		unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
+		unsigned целое write_buf[7] = {0x00}, read_buf[7] = {0x00};
 		unsigned char length;
-		unsigned int hour, minute, second, date, month, year;
+		unsigned целое hour, minute, second, date, month, year;
 	
 		hour = 11;
 		minute = 46;
@@ -183,18 +183,18 @@ void main()
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	если(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		вернуть -1;
 	}
-	else
+	иначе
 		log_info("\tIntilization Happened Fine\n");
 #ifdef UPDATE_TIME
 	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
 			printf("\n Write complete");
 #endif
-	while(1)
+	пока(1)
 	{
 			read_ds3231_registers(I2C, DS3231_REG_OFFSET, &read_buf[0], 7, 800);
 			

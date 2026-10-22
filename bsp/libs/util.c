@@ -35,10 +35,10 @@ used to achieve higher level objectives.
  * @brief stall the process for given time
  * @param unsigned int secs
  */
-void waitfor(unsigned int secs)
+void waitfor(unsigned целое secs)
 {
-	unsigned int time = 0;
-	while (time++ < secs);
+	unsigned целое time = 0;
+	пока (time++ < secs);
 }
 
 /** @fn void delay(unsigned long count)
@@ -50,9 +50,9 @@ void delay(unsigned long count)
 	unsigned long cntr1 = count *1000;
 	unsigned long tmpCntr;
 
-	while (cntr1--){
+	пока (cntr1--){
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		пока (tmpCntr--);
 	}
 }
 
@@ -61,29 +61,29 @@ void delay(unsigned long count)
  * @param unsigned int y
  * @return return result in float 
  */
-float pow_10(unsigned int y)
+float pow_10(unsigned целое y)
 {
-	unsigned int x=1;
+	unsigned целое x=1;
 
-	for (unsigned int i=0; i <y; i++)
+	для (unsigned целое i=0; i <y; i++)
 	{
 		x *= 10;
 	}
 
-	return ((float) x);
+	вернуть ((float) x);
 }
 /** @fn void reverse(char *str, int length)
  * @brief reverse a string and store in the same string
  * @param char *str
  * @param int length
  */
-void reverse(char *str, int length)
+void reverse(char *str, целое length)
 {
-	int i = 0;
-	int j = length - 1;
+	целое i = 0;
+	целое j = length - 1;
 	char tmp;
 
-	while (i<j)
+	пока (i<j)
 	{
 		tmp = str[i];
 		str[i] = str[j];
@@ -105,13 +105,13 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+целое int_to_string(целое number, char str[], unsigned целое afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	пока (number != 0)
 	{
 		str[i] = ((number%10) + '0');
 		i++;
@@ -120,7 +120,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint)
+	пока (i < afterpoint)
 	{
 		str[i] = '0';
 		i++;
@@ -133,7 +133,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 	reverse(str, i);
 	str[i] = '\0';
 
-	return i;
+	вернуть i;
 }
 /** @fn void ftoa(float n, char *res, int afterpoint)
  * @brief converts float to string
@@ -144,32 +144,32 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
  * @param char* (float in string - res)
  * @param int (precision - afterpoint)
  */
-void ftoa(float n, char *res, unsigned int afterpoint)
+void ftoa(float n, char *res, unsigned целое afterpoint)
 {
-	int i=0;
+	целое i=0;
 	char temp[30]={'\0'};
 	n += 0.0000001;
 
 	// Extract integer part
-	int ipart = (int)n;
+	целое ipart = (целое)n;
 
 	// Extract floating part
 	float fpart = (float) (n - (float)ipart);
-	int j=0;
+	целое j=0;
 
-	if(n < (0/1))
+	если(n < (0/1))
 	{
 		res[j]='-';
 		j=1;
 	}
 
-	if (ipart == 0)
+	если (ipart == 0)
 	{
 		res[j]='0';
 		j=j+1;
 	}
-	else{
-		if (ipart <0)
+	иначе{
+		если (ipart <0)
 		{
 			ipart =(-1)*ipart;
 		}
@@ -182,24 +182,24 @@ void ftoa(float n, char *res, unsigned int afterpoint)
 	i = i+j;
 
 	// check for display option after point
-	if (afterpoint != 0)
+	если (afterpoint != 0)
 	{
 		res[i] = '.';// add dot
 
-		if (fpart < 0/1)
+		если (fpart < 0/1)
 		{
 
 			fpart = (-1)*fpart;
 
 		}
-		else if (fpart == 0/1)
+		иначе если (fpart == 0/1)
 		{
 			fpart = fpart;
 		}
 
 		fpart = fpart * pow_10( afterpoint);
 
-		int_to_string((int)fpart, res + i + 1, afterpoint);
+		int_to_string((целое)fpart, res + i + 1, afterpoint);
 	}
 }
 
@@ -212,11 +212,11 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
 	unsigned long tmpCntr = cntr2;
 
-	while (cntr1--)
+	пока (cntr1--)
 	{
 		tmpCntr = cntr2;
 
-		while (tmpCntr--);
+		пока (tmpCntr--);
 	}
 }
 
@@ -229,7 +229,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 unsigned long read_word(uint32_t *addr)
 {
 	log_debug("addr = %x data = %x\n", addr, *addr);
-	return *addr;
+	вернуть *addr;
 }
 
 /** @fn void write_word(int *addr, unsigned long val)

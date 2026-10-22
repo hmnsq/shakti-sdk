@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+static inline void itoa (unsigned long long целое number, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	целое i = 0;
+	unsigned целое intermediate = 0;
+	unsigned целое digits[sizeof(number)*8];
 
-	while (1) {
+	пока (1) {
 		digits[i] = number % base;
 
-		if (number < base)
+		если (number < base)
 			break;
 
 		number /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	пока (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		если (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		иначе
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -76,17 +76,17 @@ void _printf_(const char *fmt, va_list ap)
 {
 	register const char* p;
 	const char* last_fmt;
-	register int ch;
+	register целое ch;
 	unsigned long long num;
-	int base, lflag, i;
+	целое base, lflag, i;
 	float float_num = 0;
 	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	целое backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	для (;;) {
+		для (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
+			если (ch == '\0')
+				вернуть;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,7 +96,7 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		для (;;) {
 
 			switch (ch = *(unsigned char *) fmt++) {
 
@@ -108,14 +108,14 @@ void _printf_(const char *fmt, va_list ap)
 
 					// character
 				case 'c':
-					putchar(va_arg(ap, int));
+					putchar(va_arg(ap, целое));
 					break;
 
 					// string
 				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+					если ((p = va_arg(ap, char *)) == NULL)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					для (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
@@ -125,14 +125,14 @@ void _printf_(const char *fmt, va_list ap)
 				case 'd':
 					base = 10;
 
-					if (lflag >= 2)
+					если (lflag >= 2)
 						num = va_arg(ap, long long);
-					else if (lflag ==1)
+					иначе если (lflag ==1)
 						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					иначе
+						num = va_arg(ap, целое);
 
-					if ((long long) num < 0) {
+					если ((long long) num < 0) {
 						putchar('-');
 						num = -(long long) num;
 					}
@@ -146,10 +146,10 @@ void _printf_(const char *fmt, va_list ap)
 
 					ftoa(float_num, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					для( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						если(i > 29) break;
 					}
 					break;
 
@@ -157,12 +157,12 @@ void _printf_(const char *fmt, va_list ap)
 				case 'u':
 					base = 10;
 
-					if (lflag >= 2)
+					если (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					иначе если (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					иначе
+						num = va_arg(ap, unsigned целое);
 
 					itoa( num, base);
 
@@ -173,12 +173,12 @@ void _printf_(const char *fmt, va_list ap)
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
+					если (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					иначе если (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					иначе
+						num = va_arg(ap, unsigned целое);
 
 					itoa( num, base);
 
@@ -187,12 +187,12 @@ void _printf_(const char *fmt, va_list ap)
 				case 'x':
 					base = 16;
 
-					if (lflag >= 2)
+					если (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					иначе если (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					иначе
+						num = va_arg(ap, unsigned целое);
 
 					itoa( num, base);
 
@@ -210,12 +210,12 @@ void _printf_(const char *fmt, va_list ap)
 					break;
 			}
 
-			if (backtothebeginning)
+			если (backtothebeginning)
 			{
 				backtothebeginning = 0;
 				continue;
 			}
-			else
+			иначе
 				break;
 		}
 	}
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+целое printf(const char* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	вернуть 0;// incorrect return value, but who cares, anyway?
 }

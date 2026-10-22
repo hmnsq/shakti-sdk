@@ -37,7 +37,7 @@
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+unsigned целое Lm75ReadTemperature(unsigned long delay)
 {
 	unsigned char readBuf = 0;
 	unsigned short readValue = 0;
@@ -47,14 +47,14 @@ unsigned int Lm75ReadTemperature(unsigned long delay)
 	readBuf = I2cReadDataNack(delay);
 	I2cStop(delay);  
 	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	вернуть readValue;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+void основной() 
 {
 	unsigned short tempRead = 0;
 	unsigned short temp = 0;
@@ -64,11 +64,11 @@ void main()
 	I2cInit();
 
 	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
+	если(tempRead & 0x100) {
 		tempRead = ( (~tempRead) + 1 ) >> 1;
 		printf("\n\t Current Temperature:=-%u°C",tempRead);
 	}		
-	else {
+	иначе {
 		tempRead = tempRead >> 1;
 		printf("\n\t Current Temperature:=+%u°C",tempRead);
 	 }

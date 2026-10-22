@@ -48,22 +48,22 @@
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+целое read_from_lora(char *data)
 {
-	int ch;
+	целое ch;
 	char *str = data;
 	char *test = data;
-	for (int i = 0; i < 98; i++)
+	для (целое i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		если (ch == '\n')
 		{
 			break;
 		}
 	}
-	return;	
+	вернуть;	
 }
 
 
@@ -72,11 +72,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+целое write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	вернуть 0;
 }
 
 
@@ -86,7 +86,7 @@ int write_enter_to_lora()
  */
 void write_to_lora(char *data)
 {
-	while (*data != '\0')
+	пока (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -188,7 +188,7 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Send data 
  */
-void main()
+void основной()
 {
 	printf("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;

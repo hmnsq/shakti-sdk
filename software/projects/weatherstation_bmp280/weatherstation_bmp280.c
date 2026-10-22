@@ -64,9 +64,9 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+целое write_to_esp8266(char *data)
 {
-	while (*data != '\0')
+	пока (*data != '\0')
 	{
 		write_uart_character(ESP_UART, *data);
 		data++;
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+целое write_enter_to_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+целое read_from_esp8266(char *data)
 {
-	int ch;
+	целое ch;
 	char *str = data;
 	char *test = data;
-	for (int i = 0; i < 198; i++)
+	для (целое i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		если (strstr(test, "OK") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			вернуть;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		если (strstr(test, "ERROR") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			вернуть;
 		}
-		if (strstr(test, ">") != NULL)
+		если (strstr(test, ">") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			вернуть;
 		}
-		if (strstr(test, "RECV") != NULL)
+		если (strstr(test, "RECV") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			вернуть;
 		}
-		if (strstr(test, "IP") != NULL)
+		если (strstr(test, "IP") != NULL)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			вернуть;
 		}
 	}
 	*str = '\0';
-	return 1;
+	вернуть 1;
 }
 
 /**
@@ -171,12 +171,12 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+void transmit_data(целое temperature, целое pressure)
 {
 	char data[200];
 	char sendData[93];
 	char CIPSEND[14];
-	int length;
+	целое length;
 	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
 	length = strlen(sendData);
@@ -219,13 +219,13 @@ void transmit_data(int temperature, int pressure)
   * @fn void main()
   * @brief Entry point for the program
 */
-void main()
+void основной()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
+	целое i = 0;
+	целое baudrate = 115200;
+	целое transmit_count = 0;
 	char data[200];
-	unsigned int tempReadValue = 0;
+	unsigned целое tempReadValue = 0;
 	unsigned long delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
@@ -240,15 +240,15 @@ void main()
 	setup_esp8266();
 	setup_bmp280();
 
-	while (1)
+	пока (1)
 	{
 		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		если (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			если (!(tempReadValue & 0x9))
 			{
 				//Read pressure and temperature values.
 				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
@@ -257,7 +257,7 @@ void main()
 				transmit_data(temperature, pressure);
 			}
 		}
-		else
+		иначе
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

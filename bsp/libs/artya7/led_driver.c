@@ -26,7 +26,7 @@
   @detail  Configures leds and maps to the gpio pins.
  */
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#если defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #include "platform.h"
 #include "gpio.h"
@@ -44,7 +44,7 @@ void configure_ledx(unsigned long pin_cntrl)
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | pin_cntrl ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void configure_rgb_ledx(unsigned char led_no)
@@ -57,13 +57,13 @@ void configure_rgb_ledx(unsigned char led_no)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  if (0 == led_no)
+  если (0 == led_no)
     write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB0 ) );
-  else if (1 == led_no)
+  иначе если (1 == led_no)
     write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB1  ) );
-  else
+  иначе
     printf("\nInvalid LED No. Permissable values [0,1]");
-	return ;
+	вернуть ;
 }
 
 /*
@@ -77,7 +77,7 @@ void configure_normal_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
   	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | NORMAL_LEDS ) ) ;
-	return ;
+	вернуть ;
 }
 
 /*
@@ -91,7 +91,7 @@ void configure_rgb_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
   	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ( RGB_LEDS ) ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void configure_all_leds()
@@ -104,7 +104,7 @@ void configure_all_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
   	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ALL_LEDS ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn static void turn_on_ledx()
@@ -118,7 +118,7 @@ void turn_on_ledx(unsigned long pin_cntrl)
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | pin_cntrl ) );
-	return ;
+	вернуть ;
 }
 
  /** @fn void turn_off_ledx(unsigned long pin_cntrl)
@@ -132,7 +132,7 @@ void turn_off_ledx(unsigned long pin_cntrl)
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data & (~pin_cntrl) )   );
-	return ;
+	вернуть ;
 }
 
 /** @fn  void turn_on_normal_leds()
@@ -144,7 +144,7 @@ void turn_on_normal_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
  	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_off_normal_leds()
@@ -156,7 +156,7 @@ void turn_off_normal_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data & (~NORMAL_LEDS) ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_on_rgb_ledx(unsigned char led_no)
@@ -169,13 +169,13 @@ void turn_on_rgb_ledx(unsigned char led_no)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
-  if (0 == led_no)
+  если (0 == led_no)
     write_word(GPIO_DATA_REG, ( read_data | RGB0 ) );
-  else if (1 == led_no)
+  иначе если (1 == led_no)
     write_word(GPIO_DATA_REG, ( read_data | RGB1 ) );
-  else
+  иначе
     printf("\n RGB Led number is not valid [0,1]");
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_off_rgb_ledx(unsigned char led_no)
@@ -188,13 +188,13 @@ void turn_off_rgb_ledx(unsigned char led_no)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
-  if (0 == led_no)
+  если (0 == led_no)
 	 write_word(GPIO_DATA_REG, ( read_data & (~RGB0) ) );
-  else if (1 == led_no)
+  иначе если (1 == led_no)
  	  write_word(GPIO_DATA_REG, ( read_data & (~RGB1) ) );
-  else
+  иначе
     printf("\n RGB Led number is not valid [0,1]");
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_on_rgb_leds()
@@ -207,7 +207,7 @@ void turn_on_rgb_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
     write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_off_rgb_leds()
@@ -219,7 +219,7 @@ void turn_off_rgb_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
  	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_on_all_leds()
@@ -231,7 +231,7 @@ void turn_on_all_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
-	return ;
+	вернуть ;
 }
 
 /** @fn void turn_off_all_leds()
@@ -243,7 +243,7 @@ void turn_off_all_leds()
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
   write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
-	return ;
+	вернуть ;
 }
 
  /** @fn void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
@@ -261,7 +261,7 @@ void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long de
 	delay_loop(delay1, delay2);
 	write_word(GPIO_DATA_REG, ( read_data & (~pin_cntrl) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	вернуть ;
 }
 
  /** @fn void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
@@ -279,7 +279,7 @@ void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 	delay_loop(delay1, delay2);
  	write_word(GPIO_DATA_REG, ( read_data & (~NORMAL_LEDS) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	вернуть ;
 }
 
 /** @fn void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
@@ -296,7 +296,7 @@ void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 	delay_loop(delay1, delay2);
  	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	вернуть ;
 }
 
 /** @fn void toggle_all_leds( unsigned long delay1, unsigned long delay2)
@@ -313,6 +313,6 @@ void toggle_all_leds( unsigned long delay1, unsigned long delay2)
 	delay_loop(delay1, delay2);
 	write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
 	delay_loop(delay1, delay2);
-	return ;
+	вернуть ;
 }
 #endif

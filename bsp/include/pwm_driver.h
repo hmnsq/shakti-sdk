@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(целое module_number, целое clock_divisor, целое period, целое duty, bool external_clock);
+void pwm_start(целое module_number, целое mode);
+целое pwm_check_continuous_mode(целое module_number);
+void pwm_clear_registers(целое module_number);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_set_external_clock(целое module_number, bool value);
+void pwm_set_clock(целое module_number, целое clock_divisor);
+void pwm_set_duty_cycle(целое module_number, целое duty);
+void pwm_set_periodic_cycle(целое module_number, целое period);
+void pwm_stop(целое module_number);
+void show_register_values(целое module_number);
+целое set_pwm_period_register(целое module_number, целое value);
+целое set_pwm_duty_register(целое module_number, целое value);
+целое set_pwm_control_register(целое module_number, целое value);
+целое set_pwm_clock_register(целое module_number, целое value);
+целое configure_control_register_mode(целое mode);
+void pwm_use_external_clock(целое module_number, bool value);
 

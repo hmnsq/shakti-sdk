@@ -45,7 +45,7 @@ static void writebyte(unsigned char writeData, unsigned char delay)
 
     // Before initiating communication SS -> low
        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SS)) );
-	while (j < 8) {
+	док (j < 8) {
 		k = writeData;
 		k = ( k << j ) & 0x80;
 
@@ -54,11 +54,11 @@ static void writebyte(unsigned char writeData, unsigned char delay)
         // increasing sck --> Rising EDGE
         write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
 
-        if (k == 0) {
+        ако (k == 0) {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_MOSI)) );
 			delay_loop(delay, delay);
 		}
-		else {
+		инако {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_MOSI) );
 			delay_loop(delay, delay);
 		}
@@ -89,15 +89,15 @@ unsigned char readbyte(unsigned char delay)
 	unsigned char readData = 0;
         unsigned long readGpioData = 0;
 	readData = read_word(GPIO_DATA_REG);
-	while (j < 8) {
+	док (j < 8) {
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
 		delay_loop(delay, delay);
 
 		readGpioData = read_word(GPIO_DATA_REG)  & SPI_MISO;
 
-        if (readGpioData != 0)
+        ако (readGpioData != 0)
 			bitValue = 1;
-		else
+		инако
 			bitValue = 0;
 	    
         readData = readData << 1;
@@ -109,7 +109,7 @@ unsigned char readbyte(unsigned char delay)
 		delay_loop(delay, delay);
 		++j;
 	}
-	return readData;
+	врати readData;
 }
 /*
   1.) MISO_pin  --> 1st GPIO //0 
@@ -122,15 +122,15 @@ unsigned char readbyte(unsigned char delay)
  * @brief Configures the GPIO pins for SPI functionality
  * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
  */
-int config()
+цео config()
 {
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
-    unsigned char writeData = (int) 'a';
+    unsigned char writeData = (цео) 'a';
     unsigned char delay = 10;
-    for (;;)
+    за (;;)
     {
     writebyte(writeData,delay);
     printf("%d\n",writeData);

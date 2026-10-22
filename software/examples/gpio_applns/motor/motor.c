@@ -42,7 +42,7 @@ void main()
 	log_info("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-	while(1) {
+	док(1) {
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
 		log_info("Forward\n");
 		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);

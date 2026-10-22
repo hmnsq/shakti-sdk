@@ -48,7 +48,7 @@
  */
 void handle_pwm_interrupt( uint32_t num)
 {
-	if(pwm_check_continuous_mode((6-num)) == 0)
+	ако(pwm_check_continuous_mode((6-num)) == 0)
 	{
 		set_pwm_control_register((6-num),0x80);
 	}
@@ -60,8 +60,8 @@ void handle_pwm_interrupt( uint32_t num)
   */
 void main(void){
 
-	register unsigned int retval;
-	int i;
+	register unsigned цео retval;
+	цео i;
 
 	plic_init();
 
@@ -136,7 +136,7 @@ void main(void){
 	pwm_start(PWM_5,1);
 */
 	
-	while(1){
+	док(1){
 		asm volatile(
 			     "csrr %[retval], mip\n"
 			     :
@@ -146,7 +146,7 @@ void main(void){
 			    );
 
 		i++;
-		if((i%10000000) == 0){
+		ако((i%10000000) == 0){
 			printf(" mip = %x\n", retval);
 		}
 	}

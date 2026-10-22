@@ -39,9 +39,9 @@ extern "C" {
 #include "log_debug.h"
 #include "xstatus.h"
 
-#if defined (__MICROBLAZE__)
+#ако defined (__MICROBLAZE__)
 #include "mb_interface.h"
-#else
+#инако
 #include "xpseudo_asm.h"
 #endif
 
@@ -53,16 +53,16 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 #endif
 
 /***************** Macros (Inline Functions) Definitions *********************/
-#if defined __GNUC__
-#if defined (__MICROBLAZE__)
+#ако defined __GNUC__
+#ако defined (__MICROBLAZE__)
 #  define INST_SYNC		mbar(0)
 #  define DATA_SYNC		mbar(1)
-# else
+# инако
 #  define SYNCHRONIZE_IO	dmb()
 #  define INST_SYNC		isb()
 #  define DATA_SYNC		dsb()
 # endif
-#else
+#инако
 # define SYNCHRONIZE_IO
 # define INST_SYNC
 # define DATA_SYNC
@@ -70,9 +70,9 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 # define DATA_SYNC
 #endif
 
-#if defined (__GNUC__) || defined (__ICCARM__) || defined (__MICROBLAZE__)
+#ако defined (__GNUC__) || defined (__ICCARM__) || defined (__MICROBLAZE__)
 #define INLINE inline
-#else
+#инако
 #define INLINE __inline
 #endif
 
@@ -91,7 +91,7 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 ******************************************************************************/
 static INLINE uint8_t get_io8(UINTPTR Addr)
 {
-	return *(volatile uint8_t *) Addr;
+	врати *(volatile uint8_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -108,7 +108,7 @@ static INLINE uint8_t get_io8(UINTPTR Addr)
 ******************************************************************************/
 static INLINE uin16_t get_io16(UINTPTR Addr)
 {
-	return *(volatile uin16_t *) Addr;
+	врати *(volatile uin16_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -125,7 +125,7 @@ static INLINE uin16_t get_io16(UINTPTR Addr)
 ******************************************************************************/
 static INLINE uint32_t get_io32(UINTPTR Addr)
 {
-	return *(volatile uint32_t *) Addr;
+	врати *(volatile uint32_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -142,7 +142,7 @@ static INLINE uint32_t get_io32(UINTPTR Addr)
 ******************************************************************************/
 static INLINE uint64_t get_io64(UINTPTR Addr)
 {
-	return *(volatile uint64_t *) Addr;
+	врати *(volatile uint64_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -245,14 +245,14 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 	ReadReg = Xil_In32(Addr);
 	ReadRegTemp = Xil_In32(Addr);
 
-	if( (ReadReg == Value) && (ReadRegTemp == Value) ) {
+	ако( (ReadReg == Value) && (ReadRegTemp == Value) ) {
 		Status = (u32)SUCCESS;
 	}
 
-	return Status;
+	врати Status;
 }
 
-#if defined (__MICROBLAZE__)
+#ако defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 # define Xil_In16LE	get_io16
 # define Xil_In32LE	get_io32
@@ -262,7 +262,7 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Htonl	Xil_EndianSwap32
 # define Xil_Ntohs	Xil_EndianSwap16
 # define Xil_Ntohl	Xil_EndianSwap32
-# else
+# инако
 # define Xil_In16BE	get_io16
 # define Xil_In32BE	get_io32
 # define Xil_Out16BE	set_io16
@@ -272,7 +272,7 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Ntohs(Data) (Data)
 # define Xil_Ntohl(Data) (Data)
 #endif
-#else
+#инако
 # define Xil_In16LE	get_io16
 # define Xil_In32LE	get_io32
 # define Xil_Out16LE	set_io16
@@ -283,41 +283,41 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Ntohl	Xil_EndianSwap32
 #endif
 
-#if defined (__MICROBLAZE__)
+#ако defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 static INLINE u16 Xil_In16BE(UINTPTR Addr)
-#else
+#инако
 static INLINE u16 Xil_In16LE(UINTPTR Addr)
 #endif
-#else
+#инако
 static INLINE u16 Xil_In16BE(UINTPTR Addr)
 #endif
 {
 	u16 value = Xil_In16(Addr);
-	return Xil_EndianSwap16(value);
+	врати Xil_EndianSwap16(value);
 }
 
-#if defined (__MICROBLAZE__)
+#ако defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 static INLINE u32 Xil_In32BE(UINTPTR Addr)
-#else
+#инако
 static INLINE u32 Xil_In32LE(UINTPTR Addr)
 #endif
-#else
+#инако
 static INLINE u32 Xil_In32BE(UINTPTR Addr)
 #endif
 {
 	u32 value = Xil_In32(Addr);
-	return Xil_EndianSwap32(value);
+	врати Xil_EndianSwap32(value);
 }
 
-#if defined (__MICROBLAZE__)
+#ако defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
-#else
+#инако
 static INLINE void Xil_Out16LE(UINTPTR Addr, u16 Value)
 #endif
-#else
+#инако
 static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
 #endif
 {
@@ -325,13 +325,13 @@ static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
 	Xil_Out16(Addr, Value);
 }
 
-#if defined (__MICROBLAZE__)
+#ако defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
-#else
+#инако
 static INLINE void Xil_Out32LE(UINTPTR Addr, u32 Value)
 #endif
-#else
+#инако
 static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
 #endif
 {

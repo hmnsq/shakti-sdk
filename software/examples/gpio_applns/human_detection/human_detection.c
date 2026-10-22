@@ -41,15 +41,15 @@ void main()
     unsigned long readData = 0;
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
     
-    while (1){
+    ໃນຂະນະທີ່ (1){
         	readData = read_word(GPIO_DATA_REG);
 
-	        if (readData == 0x00000001){
+	        ຖ້າ (readData == 0x00000001){
 
  		printf("\nHuman Detected");
                 }
 
-                else{
+                ບໍ່ດັ່ງນັ້ນ{
 		printf("\nNo one detected");
              	}
           

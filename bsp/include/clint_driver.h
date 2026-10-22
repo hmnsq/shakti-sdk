@@ -31,8 +31,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "traps.h"
 #include "platform.h"
 
-extern volatile uint64_t* mtime;
-extern volatile uint64_t* mtimecmp;
+extern ca_ncala uint64_t* mtime;
+extern ca_ncala uint64_t* mtimecmp;
 
 /* function prototype */
 uint64_t get_timer_value(void);

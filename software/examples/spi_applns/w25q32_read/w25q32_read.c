@@ -44,9 +44,9 @@ cs  -spi cs
  */
 void w25q32()
 {
-	int total_data = 100; //total data you want to read/write
-	int read_address = 0x00000100;  //read from this address
-	int* bram_address = (int*) 0x80000100; //write to this address
+	ຈຳນວນເຕັມ total_data = 100; //total data you want to read/write
+	ຈຳນວນເຕັມ read_address = 0x00000100;  //read from this address
+	ຈຳນວນເຕັມ* bram_address = (ຈຳນວນເຕັມ*) 0x80000100; //write to this address
 
 	*pinmux_config_reg = 0x154000;	
 
@@ -58,9 +58,9 @@ void w25q32()
 	flash_device_id();
 	waitfor(200);
 		
-	for(int i = 0; i < total_data; ++i)
+	ສຳລັບ(ຈຳນວນເຕັມ i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
+		ຈຳນວນເຕັມ read_value= flash_read(read_address);
 		printf("Reading from adddress %x and data \ %x\n",read_address,read_value);
 		*(bram_address+i) = read_value;
 		read_address=read_address+4;
@@ -78,5 +78,5 @@ void main()
 {
 	w25q32();
 
-	while(1);
+	ໃນຂະນະທີ່(1);
 }

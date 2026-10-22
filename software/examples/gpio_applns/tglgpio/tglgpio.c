@@ -38,7 +38,7 @@ void tglgpio()
 //Assumption 1 ---> output, 0 ---> input
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
 
-	while (1) {
+	ໃນຂະນະທີ່ (1) {
 		write_word(GPIO_DATA_REG, 0x00FFFFFF);
 		delay_loop(1000, 5000);
 		write_word(GPIO_DATA_REG, 0x00);
@@ -52,6 +52,6 @@ void tglgpio()
 void main()
 {
 	tglgpio();
-	return 0;
+	ສົ່ງຄືນ 0;
 }
 

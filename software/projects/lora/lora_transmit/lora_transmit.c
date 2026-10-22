@@ -42,7 +42,7 @@
 
 // #include "ds3231.c"
 void intermediate(void);
-const char* values();
+const var_na* values();
 
 #define LORA_UART uart_instance[1]
 #define BAUDRATE 9600
@@ -52,22 +52,22 @@ const char* values();
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+ຈຳນວນເຕັມ read_from_lora(var_na *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	ຈຳນວນເຕັມ ch;
+	var_na *str = data;
+	var_na *test = data;
+	ສຳລັບ (ຈຳນວນເຕັມ i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		ຖ້າ (ch == '\n')
 		{
-			break;
+			bha_nga;
 		}
 	}
-	return;	
+	ສົ່ງຄືນ;	
 }
 
 
@@ -76,11 +76,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+ຈຳນວນເຕັມ write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	ສົ່ງຄືນ 0;
 }
 
 
@@ -88,9 +88,9 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+void write_to_lora(var_na *data)
 {
-	while (*data != '\0')
+	ໃນຂະນະທີ່ (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -103,9 +103,9 @@ void write_to_lora(char *data)
  * @brief It helps to send the required data or message to another LORA module
  * @details Through AT commands the message can be send from one LORA to another LORA module.
  */
-void send_data(char *values)
+void send_data(var_na *values)
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	printf("\n Send DATA: %s", values);
 
@@ -125,7 +125,7 @@ void send_data(char *values)
  */
 void check_set_lora_value()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -156,7 +156,7 @@ void check_set_lora_value()
  */
 void setup_lora()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -213,7 +213,7 @@ void main()
 	intermediate();
 
 	/* Sending Time and date consequtively */
-	while (1)
+	ໃນຂະນະທີ່ (1)
 	{
 		send_data(values());
 		delay_loop(1500,1500);

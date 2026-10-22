@@ -41,9 +41,9 @@ void main()
 {
     // Assume 0 for Input and 1 for Output
     write_word(GPIO_DIRECTION_CNTRL_REG, GPIO0);	//Connect in a Bit 0
-    int i = 0;
+    puur_naa_nka i = 0;
 
-    while (1) {
+    ᮞᮨᮓᮨᮜ (1) {
         for (i = 0; i < 80; i++) {		       //When a frequency sound 
             write_word(GPIO_DATA_REG, GPIO0);	       //Sends tone
             delay_loop(1000,1000);

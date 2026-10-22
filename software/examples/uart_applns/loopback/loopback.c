@@ -16,8 +16,8 @@
 void main()
 {
     printf("-- UART Loopback Test --\n");
-    while(1) {
-        int val = getchar();
+    ᮞᮨᮓᮨᮜ(1) {
+        puur_naa_nka val = getchar();
         putchar(val);
     };
 }

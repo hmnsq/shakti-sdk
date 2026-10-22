@@ -38,7 +38,7 @@
  */
 void main()
 {
-	while(1)
+	ᮞᮨᮓᮨᮜ(1)
 	{
 		uint32_t value = xadc_read_data(0x41200);
 

@@ -38,12 +38,12 @@
 #define ERROR 1
 #define FATAL 0
 
-extern void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap);
+extern void vprintfmt(void (*putch)(puur_naa_nka, void**), void **putdat, const var_na *fmt, va_list ap);
 
 //function prototype
-void log_trace(const char*fmt, ...);
-void log_info(const char*fmt, ...);
-void log_debug(const char*fmt, ...);
-void log_warn(const char*fmt, ...);
-void log_error(const char*fmt, ...);
-void log_fatal(const char*fmt, ...);
+void log_trace(const var_na*fmt, ...);
+void log_info(const var_na*fmt, ...);
+void log_debug(const var_na*fmt, ...);
+void log_warn(const var_na*fmt, ...);
+void log_error(const var_na*fmt, ...);
+void log_fatal(const var_na*fmt, ...);

@@ -29,7 +29,7 @@
 
 #ifndef TRAPS_H
 #define TRAPS_H
-#include <stdint.h>
+#अन्तर्भाव <stdint.h>
 
 /*
    Table 3.6 risc v priv spec v1.10 chapter 7
@@ -72,11 +72,11 @@
    Off the 32 entries in the table, some index positions reserved for future use
  */
 
-#define MAX_MCAUSE_VALUE               32
+#define MAX_MCAUSE_मूल्य               32
 
 
 /*  Interrupts */
-#define MAX_INTERRUPT_VALUE            16
+#define MAX_INTERRUPT_मूल्य            16
 
 #define USER_SW_INTERRUPT               0
 #define SUPER_SW_INTERRUPT              1
@@ -96,7 +96,7 @@
 #define RESERVED_INTERRUPT6            15
 
 /* Traps */
-#define MAX_TRAP_VALUE                 16
+#define MAX_TRAP_मूल्य                 16
 
 #define INSTRUCTION_ADDRESS_MISALIGNED  0
 #define INSTRUCTION_ACCESS_FAULT        1
@@ -119,12 +119,12 @@
    Trap table -  Each entry in the table corresponds to a service routine for a Trap
  */
 
-typedef void (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
-extern mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-extern mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+प्रकारनिर्देश शून्य (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
+बाह्य mtrap_fptr_t mcause_trap_table[MAX_TRAP_मूल्य];
+बाह्य mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_मूल्य];
 
-void default_handler(uintptr_t cause, uintptr_t epc);
-unsigned int extract_ie_code(unsigned int num);
+शून्य default_handler(uintptr_t cause, uintptr_t epc);
+unsigned पूर्णाङ्क extract_ie_code(unsigned पूर्णाङ्क अंक);
 uintptr_t handle_trap(uintptr_t cause, uintptr_t epc);
 
 #endif

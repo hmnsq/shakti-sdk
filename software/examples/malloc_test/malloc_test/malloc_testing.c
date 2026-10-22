@@ -26,120 +26,120 @@
  * @detail This file contains the tests to verify the working of malloc
  */
 
-extern char _free_space[];
-extern char _STACK_SIZE[];
-extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
-extern char __bss_end[];
-extern char __bss_start[];
-extern char __sbss_end[];
-extern char __sbss_start[];
+बाह्य वर्ण _free_space[];
+बाह्य वर्ण ढेर_SIZE[];
+बाह्य वर्ण _HEAP_SIZE[];
+बाह्य वर्ण ढेर_end[];
+बाह्य वर्ण ढेर[];
+बाह्य वर्ण _heap[];
+बाह्य वर्ण _heap_end[];
+बाह्य वर्ण __bss_end[];
+बाह्य वर्ण __bss_start[];
+बाह्य वर्ण __sbss_end[];
+बाह्य वर्ण __sbss_start[];
 
 
-char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
-char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
-char *test7=(char *)&_heap;
-char *test8=(char *)&_heap_end;
-char *test9=(char *)&__bss_end;
-char *test10=(char *)&__bss_start;
-char *test11=(char *)&__sbss_end;
-char *test12=(char *)&__sbss_start;
+वर्ण *test1=(वर्ण *)&_free_space;
+वर्ण *test3=(वर्ण *)&ढेर_SIZE;
+वर्ण *test4=(वर्ण *)&_HEAP_SIZE;
+वर्ण *test5=(वर्ण *)&ढेर_end;
+वर्ण *test6=(वर्ण *)&ढेर;
+वर्ण *test7=(वर्ण *)&_heap;
+वर्ण *test8=(वर्ण *)&_heap_end;
+वर्ण *test9=(वर्ण *)&__bss_end;
+वर्ण *test10=(वर्ण *)&__bss_start;
+वर्ण *test11=(वर्ण *)&__sbss_end;
+वर्ण *test12=(वर्ण *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+पूर्णाङ्क c1,c2,c3,c4,c5;
+पूर्णाङ्क *pointer;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+पूर्णाङ्क main()
 {
 
   printf("\n\n\n\n\n\nTest Running");
   printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
   printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
+  स्थिर पूर्णाङ्क b1,b2,b3,b4,b5;
   printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
+  पूर्णाङ्क a1,a2,a3,a4,a5;
   printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+पूर्णाङ्क **a;
+पूर्णाङ्क *b,*c,*d;
+पूर्णाङ्क i=0;पूर्णाङ्क n;
 
 //Enter Size of Array;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*परिमाण(पूर्णाङ्क))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+प्रति(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+प्रति(i=0;i<n;i++)
 {
     printf("\n b[%d]'s address is : %x",i,&b[i]);
     printf("\n b[%d]'s value is : %d",i,b[i]);
 }
 
-free(b);
+मुक्त(b);
 
 printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
+c=malloc(n*परिमाण(पूर्णाङ्क))	;
 printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
 printf("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+प्रति(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+प्रति(i=0;i<n;i++)
 {
     printf("\n c[%d]'s address is : %x",i,&c[i]);
     printf("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+मुक्त(c);
 
 printf("\nc=%x",c);
 
-int x;
+पूर्णाङ्क x;
 x=30;
 
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*परिमाण(पूर्णाङ्क));
 
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+प्रति(i=0;i<x;i++)
 {
     printf("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+प्रति(i=0;i<x;i++)
 {
     printf("\n d[%d]'s address is : %x",i,&d[i]);
     printf("\n d[%d]'s value is : %d",i,d[i]);
 }
 
-free(d);
+मुक्त(d);
 
 printf("\nd=%x",d);
 

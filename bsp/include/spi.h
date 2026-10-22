@@ -28,7 +28,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include<stdlib.h>
+#अन्तर्भाव<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI0_OFFSET 0x00000000
@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+शून्य configure_spi(पूर्णाङ्क offset);
+शून्य spi_init(शून्य);
+शून्य set_spi(पूर्णाङ्क* addr, पूर्णाङ्क val);
+शून्य bin(unsigned n);
+शून्य spi_tx_rx_start(शून्य);
+शून्य spi_enable(शून्य);
+शून्य spi_rx_enable(शून्य);
+शून्य flash_cmd_addr_data(पूर्णाङ्क command, पूर्णाङ्क addr, पूर्णाङ्क data);
+शून्य flash_write(पूर्णाङ्क address, पूर्णाङ्क data);
+शून्य flash_erase(पूर्णाङ्क address);
+पूर्णाङ्क get_spi(पूर्णाङ्क* addr);
+पूर्णाङ्क bitExtracted(पूर्णाङ्क संख्या, पूर्णाङ्क k, पूर्णाङ्क p) ;
+पूर्णाङ्क concat(पूर्णाङ्क x, पूर्णाङ्क y) ;
+पूर्णाङ्क spi_rxne_enable(शून्य);
+पूर्णाङ्क spi_notbusy(शून्य);
+पूर्णाङ्क flash_write_enable(शून्य);
+पूर्णाङ्क flash_clear_sr(शून्य);
+पूर्णाङ्क flash_cmd_addr(पूर्णाङ्क command, पूर्णाङ्क addr);
+पूर्णाङ्क flash_cmd_to_read(पूर्णाङ्क command, पूर्णाङ्क addr);
+पूर्णाङ्क flash_read(पूर्णाङ्क address);
+पूर्णाङ्क flash_cmd_read(पूर्णाङ्क command);
+पूर्णाङ्क flash_status_register_read(शून्य);
+पूर्णाङ्क flash_device_id(शून्य);
 
 #endif

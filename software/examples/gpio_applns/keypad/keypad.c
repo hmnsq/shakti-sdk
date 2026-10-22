@@ -27,24 +27,24 @@
 @detail Detects the pressed key/button and prints decoded keypad value (0 - 15).
 */
 
-#include "gpio.h"
-#include "platform.h"
-#include "keypad.h"//Includes the definitions of keypad function//
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "keypad.h"//Includes the definitions of keypad function//
 
 /* global variable definition*/
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
-int col_row = -1;
+ਪੂਰਨ ਕੁੰਜੀ = -1;
+ਪੂਰਨ ਖਾਨਾ_ਪੰਕਤੀ = -1;
 
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-unsigned int col[4]={0, 1, 2, 3};
-unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਪੰਕਤੀ_pins[ROWNUM];
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਖਾਨਾ_pins[COLNUM];
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਖਾਨਾ[4]={0, 1, 2, 3};
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਪੰਕਤੀ[4]={4, 5, 6, 7};
+ਪੂਰਨ ਕੁੰਜੀ_map[COLNUM][ROWNUM];
 
 
-int  key_table[4][4] =
+ਪੂਰਨ  ਕੁੰਜੀ_ਸਾਰਣੀ[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -58,15 +58,15 @@ int  key_table[4][4] =
  * @param unsigned int* row
  * @param unsigned int* col
  */
-void set_pins(unsigned int*  row, unsigned int* col)
+ਖਾਲੀ ਸੈੱਟ_pins(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ*  ਪੰਕਤੀ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ* ਖਾਨਾ)
 {
-	for(int i = 0 ; i < COLNUM ; i++)
+	ਲਈ(ਪੂਰਨ i = 0 ; i < COLNUM ; i++)
 	{
-		col_pins[i] = col[i];// set col
+		ਖਾਨਾ_pins[i] = ਖਾਨਾ[i];// set col
 	}
-	for(int j = 0 ; j < ROWNUM ; j++) // set row
+	ਲਈ(ਪੂਰਨ j = 0 ; j < ROWNUM ; j++) // set row
 	{
-		row_pins[j] = row[j];
+		ਪੰਕਤੀ_pins[j] = ਪੰਕਤੀ[j];
 	}
 }
 
@@ -75,13 +75,13 @@ void set_pins(unsigned int*  row, unsigned int* col)
  * @details Fills the passed array values into key_map array.
  * @param int table
  */
-void set_key_map(int table[COLNUM][ROWNUM])
+ਖਾਲੀ ਸੈੱਟ_ਕੁੰਜੀ_map(ਪੂਰਨ ਸਾਰਣੀ[COLNUM][ROWNUM])
 {
-	for(int i = 0 ; i < COLNUM ; i++)
+	ਲਈ(ਪੂਰਨ i = 0 ; i < COLNUM ; i++)
 	{
-		for(int j = 0 ; j < ROWNUM ; j++)
+		ਲਈ(ਪੂਰਨ j = 0 ; j < ROWNUM ; j++)
 		{
-			key_map[i][j] = table[i][j];
+			ਕੁੰਜੀ_map[i][j] = ਸਾਰਣੀ[i][j];
 		}
 	}
 }
@@ -92,26 +92,26 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * and returns the decoded key value.
  * @return Key value pressed
  */
-int get_key_another_way()
+ਪੂਰਨ get_ਕੁੰਜੀ_another_way()
 {
 
-	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+	write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, (0xF << OUTPINS_ਵਿੱਥ) );
 
-	for (int i = 0 ; i < COLNUM ; i++)
+	ਲਈ (ਪੂਰਨ i = 0 ; i < COLNUM ; i++)
 	{
-		write_word(GPIO_DATA_REG, ~(0x1 << (OUTPINS_OFFSET + i) )   );
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, ~(0x1 << (OUTPINS_ਵਿੱਥ + i) )   );
 
-		for (int j = 0 ; j < ROWNUM ; j++)
+		ਲਈ (ਪੂਰਨ j = 0 ; j < ROWNUM ; j++)
 		{
-			if ( ( read_word(row_pins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
+			ਜੇ ( ( read_ਸ਼ਬਦ(ਪੰਕਤੀ_pins[j]) & (INPINS << INPINS_ਵਿੱਥ )  ) == 0)
 			{
-				return key_map[i][j];
+				ਵਾਪਸ ਕੁੰਜੀ_map[i][j];
 			}
 		}
-		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, (0xF << OUTPINS_ਵਿੱਥ) );
 	}
 
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /** @fn int get_key(int col_row)
@@ -121,9 +121,9 @@ int get_key_another_way()
  * @param int col row
  * @return Key value pressed
  */
-int get_key(int col_row)
+ਪੂਰਨ get_ਕੁੰਜੀ(ਪੂਰਨ ਖਾਨਾ_ਪੰਕਤੀ)
 {
-    return key_map[col_row>>16][0xFFFF & col_row];
+    ਵਾਪਸ ਕੁੰਜੀ_map[ਖਾਨਾ_ਪੰਕਤੀ>>16][0xFFFF & ਖਾਨਾ_ਪੰਕਤੀ];
 }
 
 /** @fn int get_col_row(void)
@@ -132,45 +132,45 @@ int get_key(int col_row)
    low and reading the row values     
  * @return Column and row combination.
  */
-int get_col_row(void)
+ਪੂਰਨ get_ਖਾਨਾ_ਪੰਕਤੀ(ਖਾਲੀ)
 {
-	int col_row = 0;
-	unsigned long read_value = 0;
+	ਪੂਰਨ ਖਾਨਾ_ਪੰਕਤੀ = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ read_ਮੁੱਲ = 0;
 
-	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+	write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, (0xF << OUTPINS_ਵਿੱਥ) );
 
-	for(int i = 0 ; i < COLNUM ; i++)
+	ਲਈ(ਪੂਰਨ i = 0 ; i < COLNUM ; i++)
 	{
-		write_word(GPIO_DATA_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
 
-		for(int j = 0 ; j < ROWNUM ; j++)
+		ਲਈ(ਪੂਰਨ j = 0 ; j < ROWNUM ; j++)
 		{
-			read_value =  read_word(GPIO_DATA_REG);
+			read_ਮੁੱਲ =  read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
 
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 )
+			ਜੇ( ( read_ਮੁੱਲ & (1 << ਪੰਕਤੀ_pins[j] ) ) == 0 )
 			{
-					return key_map[i][j];
+					ਵਾਪਸ ਕੁੰਜੀ_map[i][j];
 			}
 		}
 
-		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, (0xF << OUTPINS_ਵਿੱਥ) );
 	}
 
-	return -1;
+	ਵਾਪਸ -1;
 }
 
 /** @fn void gpio_init()
  * @brief This maps the keypad from pins
  * @details  Initialises Rows pins and coloumn pins of the mapped GPIO lines to keypad.  
  */
-void gpio_init()
+ਖਾਲੀ gpio_init()
 {
-	set_pins(row, col);
+	ਸੈੱਟ_pins(ਪੰਕਤੀ, ਖਾਨਾ);
 
-	set_key_map(key_table);
+	ਸੈੱਟ_ਕੁੰਜੀ_map(ਕੁੰਜੀ_ਸਾਰਣੀ);
 
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
-	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
+	write_ਸ਼ਬਦ(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
 }
 
 /** @fn int main()
@@ -178,22 +178,22 @@ void gpio_init()
  * @details  Detects the pressed key and prints its decoded value.  
  * @return Zero 
  */
-int main()
+ਪੂਰਨ ਮੁੱਖ()
 {
-	int prev_col_row = 0;
+	ਪੂਰਨ prev_ਖਾਨਾ_ਪੰਕਤੀ = 0;
 	gpio_init(); //Intialization of gpio //
 
-	printf("\nGPIO Init Done");
-	while(1)
+	ਲਿਖੋ("\nGPIO Init Done");
+	ਜਦੋਂ(1)
 	{
-		col_row = get_col_row();
+		ਖਾਨਾ_ਪੰਕਤੀ = get_ਖਾਨਾ_ਪੰਕਤੀ();
 
-		if( col_row != -1 )
+		ਜੇ( ਖਾਨਾ_ਪੰਕਤੀ != -1 )
 		{
-			log_info("\nThe %x Key Pressed", col_row);
+			log_info("\nThe %x Key Pressed", ਖਾਨਾ_ਪੰਕਤੀ);
 				delay_loop(600, 2000);
 		}
 	}
 
-	return 0;
+	ਵਾਪਸ 0;
 }

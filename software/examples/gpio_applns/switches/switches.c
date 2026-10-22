@@ -27,238 +27,238 @@
 @detail 
 */
 
-#include <stdio.h> //includes the definitions of standard input/output functions
-#include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
-#include "switch_driver.h"
-#include "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdio.h> //includes the definitions of standard input/output functions
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h" // includes definitions of gpio pins and read, write functions//
+#ਅਨ੍ਤਰ੍ਭਾਵ "switch_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
-#define READ_INDIVIDUAL_SWITCHES /*! Read each switch value */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ READ_INDIVIDUAL_SWITCHES /*! Read each switch value */
 //#define READ_ALL_SWITCHES /*! Read All switch values */
 
-unsigned long read_data = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ read_ਅੰਕੜੇ_2 = 0;
 
 /** @fn  void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details 
  * @warning 
  */
-void main()
+ਖਾਲੀ ਮੁੱਖ()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ਜੇ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 
-	while(1){	
-#ifdef READ_INDIVIDUAL_SWITCHES		
+	ਜਦੋਂ(1){	
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_INDIVIDUAL_SWITCHES		
 		/*! Define any one button from below at a time */
-#define SW_0 /*! Read SW0 value */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SW_0 /*! Read SW0 value */
 		//#define SW_1 /*! Read SW1 value */
 		//#define SW_2 /*! Read SW2 value */
 		//#define SW_3 /*! Read SW3 value */
 
-#ifdef SW_0
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_0
 		configure_switch(SW0);	
-#endif	
+#ਜੇ_ਅੰਤ	
 
-#ifdef SW_1
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_1
 		configure_switch(SW1);	
-#endif	
+#ਜੇ_ਅੰਤ	
 
-#ifdef SW_2
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_2
 		configure_switch(SW2);	
-#endif	
+#ਜੇ_ਅੰਤ	
 
-#ifdef SW_3
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_3
 		configure_switch(SW3);	
-#endif				
+#ਜੇ_ਅੰਤ				
 
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef READ_ALL_SWITCHES	
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_ALL_SWITCHES	
 
 		configure_all_switch();	
 
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef READ_INDIVIDUAL_SWITCHES	
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_INDIVIDUAL_SWITCHES	
 
-#ifdef SW_0
-		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x01000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x01000000)
-			printf("\n SW0: HIGH"); 		
-		else
-			printf("\n SW0: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_0
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG); /* Copies the GPIO_DATA_REG Register contents */
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x01000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x01000000)
+			ਲਿਖੋ("\n SW0: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n SW0: LOW");
+#ਜੇ_ਅੰਤ
 
-#ifdef SW_1
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x02000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x02000000)
-			printf("\n SW1: HIGH"); 		
-		else
-			printf("\n SW1: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_1
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x02000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x02000000)
+			ਲਿਖੋ("\n SW1: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n SW1: LOW");
+#ਜੇ_ਅੰਤ
 
-#ifdef SW_2
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x04000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x04000000)
-			printf("\n SW2: HIGH"); 		
-		else
-			printf("\n SW2: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_2
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x04000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x04000000)
+			ਲਿਖੋ("\n SW2: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n SW2: LOW");
+#ਜੇ_ਅੰਤ
 
-#ifdef SW_3
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x08000000)
-			printf("\n SW3: HIGH"); 		
-		else
-			printf("\n SW3: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ SW_3
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x08000000)
+			ਲਿਖੋ("\n SW3: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n SW3: LOW");
+#ਜੇ_ਅੰਤ
 
 		delay_loop(500, 500);
 
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef READ_ALL_SWITCHES	
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_ALL_SWITCHES	
 
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
 
-		switch(read_data)
+		ਚੋਣ(read_ਅੰਕੜੇ_2)
 		{
 
-		case 0x00000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: LOW");
-			printf("\n SW2: LOW");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x00000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x01000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: LOW");
-			printf("\n SW2: LOW");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x01000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x02000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: LOW");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x02000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x03000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: LOW");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x03000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x04000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: LOW");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x04000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x05000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: LOW");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x05000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x06000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x06000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x07000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: LOW");
-			break;
+		ਹਾਲਤ 0x07000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: LOW");
+			ਰੋਕੋ;
 
-		case 0x08000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: LOW");
-			printf("\n SW2: LOW");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x08000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x09000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: LOW");
-			printf("\n SW2: LOW");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x09000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x0A000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: LOW");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x0A000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x0B000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: LOW");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x0B000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: LOW");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x0C000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: LOW");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x0C000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x0D000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: LOW");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x0D000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: LOW");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x0E000000:
-			printf("\n SW0: LOW");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x0E000000:
+			ਲਿਖੋ("\n SW0: LOW");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x0F000000:
-			printf("\n SW0: HIGH");
-			printf("\n SW1: HIGH");
-			printf("\n SW2: HIGH");
-			printf("\n SW3: HIGH");
-			break;
+		ਹਾਲਤ 0x0F000000:
+			ਲਿਖੋ("\n SW0: HIGH");
+			ਲਿਖੋ("\n SW1: HIGH");
+			ਲਿਖੋ("\n SW2: HIGH");
+			ਲਿਖੋ("\n SW3: HIGH");
+			ਰੋਕੋ;
 
 		}
 
 		delay_loop(500, 500);
 
-#endif
+#ਜੇ_ਅੰਤ
 	}	
 	delay_loop(500, 500);
 
-#endif
+#ਜੇ_ਅੰਤ
 }

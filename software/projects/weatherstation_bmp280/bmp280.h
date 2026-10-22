@@ -24,29 +24,29 @@
 
 ***************************************************************************/
 
-#define I2C i2c_instance[1]
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C i2c_instance[1]
 
-#define BMP280_SLAVE_ADDRESS 0xEC       //Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define BMP280_CTRL_MEANS 0xF4
-#define BMP280_NORMAL_MODE 0x26
-#define BMP280_STATUS_REGISTER 0xF3
-#define BMP280_CONFIG_REGISTER 0xF5
-#define BMP280_RESET_REGISTER 0xE0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_SLAVE_ਪਤਾ 0xEC       //Defines the Starting address of slave//
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DELAY_ਮੁੱਲ 900
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PRESCALER_ਗਿਣਤੀ 0x1F
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SCLK_ਗਿਣਤੀ 0x91
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_CTRL_MEANS 0xF4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_ਸਾਧਾਰਨ_ਬਹੁਲਕ 0x26
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_ਸਥਿਤੀ_ਰਜਿਸਟਰ 0xF3
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_CONFIG_ਰਜਿਸਟਰ 0xF5
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_RESET_ਰਜਿਸਟਰ 0xE0
 
-#define BMP280_REG_DIG_T1 0x88
-#define BMP280_REG_DIG_T2 0x8A
-#define BMP280_REG_DIG_T3 0x8C
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_T1 0x88
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_T2 0x8A
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_T3 0x8C
 
-#define BMP280_REG_DIG_P1 0x8E
-#define BMP280_REG_DIG_P2 0x90
-#define BMP280_REG_DIG_P3 0x92
-#define BMP280_REG_DIG_P4 0x94
-#define BMP280_REG_DIG_P5 0x96
-#define BMP280_REG_DIG_P6 0x98
-#define BMP280_REG_DIG_P7 0x9A
-#define BMP280_REG_DIG_P8 0x9C
-#define BMP280_REG_DIG_P9 0x9E
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P1 0x8E
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P2 0x90
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P3 0x92
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P4 0x94
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P5 0x96
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P6 0x98
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P7 0x9A
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P8 0x9C
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BMP280_REG_DIG_P9 0x9E
 

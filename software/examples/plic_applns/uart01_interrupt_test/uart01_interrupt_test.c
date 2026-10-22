@@ -23,77 +23,77 @@
 
  ***************************************************************************/
 //#include "gpiov2.h"
-#include "pinmux.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "pinmux.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "traps.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "plic_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart0_prev_rcv_isr_ਗਿਣਤੀ_flag = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart1_prev_rcv_isr_ਗਿਣਤੀ_flag = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart2_prev_rcv_isr_ਗਿਣਤੀ_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart0_prev_tx_isr_ਗਿਣਤੀ_flag = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart1_prev_tx_isr_ਗਿਣਤੀ_flag = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart2_prev_tx_isr_ਗਿਣਤੀ_flag = 0;
 
 
-void init_variables()
+ਖਾਲੀ init_variables()
 {
 	uart0_complete = 0;
 	uart1_complete = 0;
 	uart2_complete = 0;
-	uart0_tx_isr_count = 0;
-	uart0_rcv_isr_count = 0;
-	uart1_tx_isr_count = 0;
-	uart1_rcv_isr_count = 0;
-	uart2_tx_isr_count = 0;
-	uart2_rcv_isr_count = 0;
-	memset(u0_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	memset(u2_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	uart0_prev_rcv_isr_count_flag = 0;
-	uart1_prev_rcv_isr_count_flag = 0;
-	uart2_prev_rcv_isr_count_flag = 0;
+	uart0_tx_isr_ਗਿਣਤੀ = 0;
+	uart0_rcv_isr_ਗਿਣਤੀ = 0;
+	uart1_tx_isr_ਗਿਣਤੀ = 0;
+	uart1_rcv_isr_ਗਿਣਤੀ = 0;
+	uart2_tx_isr_ਗਿਣਤੀ = 0;
+	uart2_rcv_isr_ਗਿਣਤੀ = 0;
+	memset(u0_rcv_char,'\0', UARTX_ਬਫਰ_ਮਾਪ);
+	memset(u1_rcv_char,'\0', UARTX_ਬਫਰ_ਮਾਪ);
+	memset(u2_rcv_char,'\0', UARTX_ਬਫਰ_ਮਾਪ);
+	uart0_prev_rcv_isr_ਗਿਣਤੀ_flag = 0;
+	uart1_prev_rcv_isr_ਗਿਣਤੀ_flag = 0;
+	uart2_prev_rcv_isr_ਗਿਣਤੀ_flag = 0;
 
-	uart0_prev_tx_isr_count_flag = 0;
-	uart1_prev_tx_isr_count_flag = 0;
-	uart2_prev_tx_isr_count_flag = 0;
+	uart0_prev_tx_isr_ਗਿਣਤੀ_flag = 0;
+	uart1_prev_tx_isr_ਗਿਣਤੀ_flag = 0;
+	uart2_prev_tx_isr_ਗਿਣਤੀ_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+ਬਾਹਰੀ ਅਸਥਿਰ ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ* pinmux_config_reg;
 
 
 
-int main(void){
+ਪੂਰਨ ਮੁੱਖ(ਖਾਲੀ){
 
 
-	register uint32_t retval;
-	int i;
+	ਰਜਿਸਟਰ uint32_t retval;
+	ਪੂਰਨ i;
 	init_variables();
 
-	printf("\n---------------Uart 1 Interrupt Test---------------\n");
+	ਲਿਖੋ("\n---------------Uart 1 Interrupt Test---------------\n");
 
 	*(pinmux_config_reg) = 0x55;
-	set_baud_rate(uart_instance[0], 19200);
-	set_baud_rate(uart_instance[1], 19200);
+	ਸੈੱਟ_baud_ਦਰ(uart_instance[0], 19200);
+	ਸੈੱਟ_baud_ਦਰ(uart_instance[1], 19200);
 	plic_init();
 
-	configure_interrupt(PLIC_INTERRUPT_26);
-	isr_table[PLIC_INTERRUPT_26] = uart1_isr;
+	configure_ਰੁਕਾਵਟ(PLIC_ਰੁਕਾਵਟ_26);
+	isr_ਸਾਰਣੀ[PLIC_ਰੁਕਾਵਟ_26] = uart1_isr;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm ਅਸਥਿਰ("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm ਅਸਥਿਰ("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm ਅਸਥਿਰ(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -101,8 +101,8 @@ int main(void){
 		     (retval)
 		    );
 
-	printf("\n retval = %x", retval);
-	asm volatile(
+	ਲਿਖੋ("\n retval = %x", retval);
+	asm ਅਸਥਿਰ(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -110,56 +110,56 @@ int main(void){
 		     (retval)
 		    );
 
-	printf("\t retval = %x", retval);
+	ਲਿਖੋ("\t retval = %x", retval);
 
-	asm volatile(
+	asm ਅਸਥਿਰ(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
 		     "=r"
 		     (retval)
 		    );
-	printf("\t retval = %x", retval);
+	ਲਿਖੋ("\t retval = %x", retval);
 
 
-	uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
-	uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+	uart1_prev_tx_isr_ਗਿਣਤੀ_flag = uart1_tx_isr_ਗਿਣਤੀ;
+	uart1_prev_rcv_isr_ਗਿਣਤੀ_flag = uart1_rcv_isr_ਗਿਣਤੀ;
 
 
-	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_EMPTY | ENABLE_RX_FULL);
-	printf("\n Before Tx: Status Register= %x \n", uart_instance[1]->status);
+	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ | ENABLE_RX_ਭਰਿਆ);
+	ਲਿਖੋ("\n Before Tx: Status Register= %x \n", uart_instance[1]->ਸਥਿਤੀ_2);
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	ਜਦੋਂ(1)
 	{
-#if 0
-		if(i % 2)
+#ਜੇ 0
+		ਜੇ(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		ਨਹੀਂਤਾਂ
 			write_uart_string(uart_instance[1], "tEsT");
-#endif
+#ਜੇ_ਅੰਤ
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		ਜੇ(uart1_prev_tx_isr_ਗਿਣਤੀ_flag != uart1_tx_isr_ਗਿਣਤੀ)
 		{
-			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
+			uart1_prev_tx_isr_ਗਿਣਤੀ_flag = uart1_tx_isr_ਗਿਣਤੀ;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		ਜੇ(uart1_prev_rcv_isr_ਗਿਣਤੀ_flag != uart1_rcv_isr_ਗਿਣਤੀ)
 		{
-			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+			uart1_prev_rcv_isr_ਗਿਣਤੀ_flag = uart1_rcv_isr_ਗਿਣਤੀ;
 		}
-		if(i++ >= 10)
+		ਜੇ(i++ >= 10)
 		{
-			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
+			u1_rcv_char[++uart1_rcv_isr_ਗਿਣਤੀ] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
-			printf("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_count-1);
+			ਲਿਖੋ("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_ਗਿਣਤੀ-1);
 			i = 0;
-			uart1_rcv_isr_count = 0;
-			memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
+			uart1_rcv_isr_ਗਿਣਤੀ = 0;
+			memset(u1_rcv_char,'\0', UARTX_ਬਫਰ_ਮਾਪ);
 			//break;
 		}
 	};
 
 
-	return 0;
+	ਵਾਪਸ 0;
 }

@@ -26,24 +26,24 @@
  * @brief Declaration for keypad library.
  * @detail Include File Definitions	
  */
-#if !defined(KYPD_H)
-#define KYPD_H
+#ਜੇ !defined(KYPD_H)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ KYPD_H
 
-#define ROWNUM 4
-#define COLNUM 4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ROWNUM 4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ COLNUM 4
 
-#define OUTPINS_OFFSET 0
-#define INPINS_OFFSET 4
-#define OUTPINS (0xF << OUTPINS_OFFSET)
-#define INPINS  (0xF << INPINS_OFFSET)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ OUTPINS_ਵਿੱਥ 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INPINS_ਵਿੱਥ 4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ OUTPINS (0xF << OUTPINS_ਵਿੱਥ)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INPINS  (0xF << INPINS_ਵਿੱਥ)
 
 //function prototype
-void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+ਖਾਲੀ ਸੈੱਟ_pins(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ* ਪੰਕਤੀ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ* ਖਾਨਾ);
+ਖਾਲੀ ਸੈੱਟ_ਕੁੰਜੀ_map(ਪੂਰਨ ਸਾਰਣੀ[COLNUM][ROWNUM]);
+ਪੂਰਨ get_ਕੁੰਜੀ();
+ਪੂਰਨ get_ਖਾਨਾ_ਪੰਕਤੀ(ਖਾਲੀ);
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਪੰਕਤੀ_pins[ROWNUM];
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਖਾਨਾ_pins[COLNUM];
+ਪੂਰਨ ਕੁੰਜੀ_map[COLNUM][ROWNUM];
 
-#endif
+#ਜੇ_ਅੰਤ

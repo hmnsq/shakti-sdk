@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ GPIO_I2C_H
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C_SCL GPIO0 
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C_SDA GPIO1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ GPIOD_IS_ਵਿੱਚ 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ GPIOD_IS_ਬਾਹਰਲਾ 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C_WRITE 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+ਖਾਲੀ I2cInit();
+ਖਾਲੀ I2c_Send_Slave_ਪਤਾ(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ , ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ , ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਖਾਲੀ I2cWriteByte(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ , ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ I2cReadByte(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਖਾਲੀ I2c_Write_ਅੰਕੜੇ(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ , ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ I2c_Read_ਅੰਕੜੇ_Ack(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ I2c_Read_ਅੰਕੜੇ_Nack(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਖਾਲੀ I2c_ਸ਼ੁਰੂ(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਖਾਲੀ I2cStop(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਖਾਲੀ I2c_Write_byte(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ);
+ਪੂਰਨ I2c_Read_byte(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ,ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ , ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਪੂਰਨ I2c_shakti_readbytes(ਅੱਖਰ *, ਪੂਰਨ , ਪੂਰਨ , ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ );
+ਖਾਲੀ ReadAckForWrite(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ delay);
+ਖਾਲੀ SendNackForRead(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ delay);
+ਖਾਲੀ SendAckForRead(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ delay);
 
-#endif
+#ਜੇ_ਅੰਤ

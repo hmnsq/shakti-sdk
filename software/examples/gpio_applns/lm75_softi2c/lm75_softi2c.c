@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LM75_SLAVE_ਪਤਾ 0x90
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DELAY_ਗਿਣਤੀ 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ Lm75ReadTemperature(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
-	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ readBuf = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਛੋਟਾ read_ਮੁੱਲ_2 = 0;
+	I2c_Send_Slave_ਪਤਾ(LM75_SLAVE_ਪਤਾ, I2C_READ, delay);
+	readBuf = I2c_Read_ਅੰਕੜੇ_Ack(delay);
+	read_ਮੁੱਲ_2 = (readBuf << 1);
+	readBuf = I2c_Read_ਅੰਕੜੇ_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_ਮੁੱਲ_2 = (readBuf >> 7) | read_ਮੁੱਲ_2;
+	ਵਾਪਸ read_ਮੁੱਲ_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+ਖਾਲੀ ਮੁੱਖ() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਛੋਟਾ ਆਰਜ਼ੀ_Read = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਛੋਟਾ ਆਰਜ਼ੀ = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	ਲਿਖੋ("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	ਆਰਜ਼ੀ_Read = Lm75ReadTemperature(DELAY_ਗਿਣਤੀ);
+	ਜੇ(ਆਰਜ਼ੀ_Read & 0x100) {
+		ਆਰਜ਼ੀ_Read = ( (~ਆਰਜ਼ੀ_Read) + 1 ) >> 1;
+		ਲਿਖੋ("\n\t Current Temperature:=-%u°C",ਆਰਜ਼ੀ_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	ਨਹੀਂਤਾਂ {
+		ਆਰਜ਼ੀ_Read = ਆਰਜ਼ੀ_Read >> 1;
+		ਲਿਖੋ("\n\t Current Temperature:=+%u°C",ਆਰਜ਼ੀ_Read);
 	 }
 	delay_loop(10000,20000);
 }

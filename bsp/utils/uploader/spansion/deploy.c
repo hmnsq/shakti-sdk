@@ -29,56 +29,56 @@ flash device. SPI protocol is used for this purporse. The array is usually a
 project's hex file 
 */
 
-#include <stdint.h>
-#include <uart.h>
-#include <stdio.h>
-#include "spi.h"
-#include "flashdata.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdint.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ <uart.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdio.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ "spi.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "flashdata.h"
 
 /** @fn void deploy()
  * @brief Erases flash and writes the hex array entry by entry into the flash
  *       memory. Here SPI protocol is used.
  */
-void deploy()
+ਖਾਲੀ deploy()
 {
-	int read_address = 0x00b00000;
-	double count=0.0;
+	ਪੂਰਨ read_ਪਤਾ = 0x00b00000;
+	ਦੁੱਗਣਾ ਗਿਣਤੀ_2=0.0;
 
-	configure_spi(SPI0_OFFSET);
+	configure_spi(SPI0_ਵਿੱਥ);
 	spi_init();
 	flash_device_id();
 
 	waitfor(200);
-	printf("\nErasing...\n");
+	ਲਿਖੋ("\nErasing...\n");
 
 	flash_write_enable();
-	flash_erase(read_address);
-	flash_status_register_read();
-	printf("\nErase complete.\n");
+	flash_erase(read_ਪਤਾ);
+	flash_ਸਥਿਤੀ_ਰਜਿਸਟਰ_read();
+	ਲਿਖੋ("\nErase complete.\n");
 
-	flash_write(read_address,write_data[0]);
-	read_address+=4;
+	flash_write(read_ਪਤਾ,write_ਅੰਕੜੇ_2[0]);
+	read_ਪਤਾ+=4;
 
-	printf("\nWriting...");
+	ਲਿਖੋ("\nWriting...");
 
-	for(int i =0; i< write_data[0]; i++)
+	ਲਈ(ਪੂਰਨ i =0; i< write_ਅੰਕੜੇ_2[0]; i++)
 	{
 		waitfor(200);
-		flash_write(read_address,write_data[i+1]);
-		read_address+=4;
+		flash_write(read_ਪਤਾ,write_ਅੰਕੜੇ_2[i+1]);
+		read_ਪਤਾ+=4;
 
-		if(i%512 == 0)
-			printf(".");;
+		ਜੇ(i%512 == 0)
+			ਲਿਖੋ(".");;
 	}
 
-	printf("\n\nWrite complete.\n");
-	printf("\nPlease reset.\n");
-	asm volatile ("ebreak");
+	ਲਿਖੋ("\n\nWrite complete.\n");
+	ਲਿਖੋ("\nPlease reset.\n");
+	asm ਅਸਥਿਰ ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function
  */
-void main(){
+ਖਾਲੀ ਮੁੱਖ(){
 	deploy();
 }

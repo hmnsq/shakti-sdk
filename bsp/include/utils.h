@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ UTIL_H
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ UTIL_H
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdio.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+ਖਾਲੀ waitfor(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ secs);
+ਖਾਲੀ delay(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ seconds);
+ਦਸ਼ਮਲਵ pow_10(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ y);
+ਖਾਲੀ ਉਲਟ(ਅੱਖਰ *str, ਪੂਰਨ len);
+ਖਾਲੀ ftoa( ਦਸ਼ਮਲਵ, ਅੱਖਰ *, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ);
+ਖਾਲੀ delay_loop(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ cntr1, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ cntr2);
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ read_ਸ਼ਬਦ(uint32_t *addr);
+ਖਾਲੀ write_ਸ਼ਬਦ(uint32_t *addr, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ val);
+ਪੂਰਨ int_ਮੰਜ਼ਿਲ_string(ਪੂਰਨ ਸੰਖਿਆ, ਅੱਖਰ str[], ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ afterpoint);
+ਖਾਲੀ _printf_(ਅਚਲ ਅੱਖਰ *fmt, va_list ap);
+ਪੂਰਨ ਲਿਖੋ(ਅਚਲ ਅੱਖਰ* fmt, ...);
 
-#endif
+#ਜੇ_ਅੰਤ

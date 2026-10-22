@@ -27,239 +27,239 @@
 @detail Detects the pressed key/button and prints pressed button.
 */
 
-#include <stdio.h>        
-#include "platform.h"
-#include "gpio.h"         
-#include "button_driver.h"
-#include "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdio.h>        
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h"         
+#ਅਨ੍ਤਰ੍ਭਾਵ "button_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
-#define READ_INDIVIDUAL_BTNS /*! Read each button value */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ READ_INDIVIDUAL_BTNS /*! Read each button value */
 //#define READ_ALL_BTNS /*! Read All button values */
 
-unsigned long read_data = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ read_ਅੰਕੜੇ_2 = 0;
 
 /** @fn void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
  */
-void main()
+ਖਾਲੀ ਮੁੱਖ()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ਜੇ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	ਜਦੋਂ (1) {
 
-#ifdef READ_INDIVIDUAL_BTNS
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_INDIVIDUAL_BTNS
 
 		/*! Define any one button from below at a time */
-#define BTN_0  /*! Read BTN0 value */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BTN_0  /*! Read BTN0 value */
 		//#define BTN_1 /*! Read BTN1 value */
 		//#define BTN_2 /*! Read BTN2 value */
 		//#define BTN_3 /*! Read BTN3 value */
 
-#ifdef BTN_0
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_0
 		configure_btn(BTN0);
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef BTN_1
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_1
 		configure_btn(BTN1);
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef BTN_2
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_2
 		configure_btn(BTN2);
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef BTN_3
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_3
 		configure_btn(BTN3);
-#endif
+#ਜੇ_ਅੰਤ
 
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef READ_ALL_BTNS
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_ALL_BTNS
 
 		configure_all_btn();
 
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef READ_INDIVIDUAL_BTNS
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_INDIVIDUAL_BTNS
 
-#ifdef BTN_0
-		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x10000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
-			printf("\n BTN0: HIGH"); 		
-		else
-			printf("\n BTN0: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_0
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG); /* Copies the GPIO_DATA_REG Register contents */
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x10000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x10000000)
+			ਲਿਖੋ("\n BTN0: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n BTN0: LOW");
+#ਜੇ_ਅੰਤ
 
-#ifdef BTN_1
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x20000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
-			printf("\n BTN1: HIGH"); 		
-		else
-			printf("\n BTN1: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_1
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x20000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x20000000)
+			ਲਿਖੋ("\n BTN1: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n BTN1: LOW");
+#ਜੇ_ਅੰਤ
 
-#ifdef BTN_2
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x40000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
-			printf("\n BTN2: HIGH"); 		
-		else
-			printf("\n BTN2: LOW");
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_2
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x40000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x40000000)
+			ਲਿਖੋ("\n BTN2: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n BTN2: LOW");
+#ਜੇ_ਅੰਤ
 
-#ifdef BTN_3
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x80000000);
-		printf("\n Read Data is :0x%x", read_data);
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ BTN_3
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = (read_ਅੰਕੜੇ_2 & 0x80000000);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
 
-		if(read_data == 0x80000000)
-			printf("\n BTN3: HIGH"); 		
-		else
-			printf("\n BTN3: LOW");
-#endif
+		ਜੇ(read_ਅੰਕੜੇ_2 == 0x80000000)
+			ਲਿਖੋ("\n BTN3: HIGH"); 		
+		ਨਹੀਂਤਾਂ
+			ਲਿਖੋ("\n BTN3: LOW");
+#ਜੇ_ਅੰਤ
 
 		delay_loop(500, 500);
 
-#endif
+#ਜੇ_ਅੰਤ
 
-#ifdef READ_ALL_BTNS	
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ READ_ALL_BTNS	
 
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
+		read_ਅੰਕੜੇ_2 = read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG);
+		ਲਿਖੋ("\n Read Data is :0x%x", read_ਅੰਕੜੇ_2);
 
-		switch(read_data)
+		ਚੋਣ(read_ਅੰਕੜੇ_2)
 		{
 
-		case 0x00000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x00000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x10000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x10000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x20000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x20000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x30000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x30000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x40000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x40000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x50000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x50000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x60000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x60000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x70000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ਹਾਲਤ 0x70000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: LOW");
+			ਰੋਕੋ;
 
-		case 0x80000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0x80000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0x90000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0x90000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0xA0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0xA0000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0xB0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0xB0000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: LOW");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0xC0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0xC0000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0xD0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0xD0000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: LOW");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0xE0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0xE0000000:
+			ਲਿਖੋ("\n BTN0: LOW");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 
-		case 0xF0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ਹਾਲਤ 0xF0000000:
+			ਲਿਖੋ("\n BTN0: HIGH");
+			ਲਿਖੋ("\n BTN1: HIGH");
+			ਲਿਖੋ("\n BTN2: HIGH");
+			ਲਿਖੋ("\n BTN3: HIGH");
+			ਰੋਕੋ;
 		}
 
 		delay_loop(500, 500);
-#endif
+#ਜੇ_ਅੰਤ
 	}
 	delay_loop(500, 500);
-#endif
+#ਜੇ_ਅੰਤ
 }
 

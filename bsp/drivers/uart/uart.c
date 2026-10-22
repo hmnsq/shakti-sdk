@@ -27,30 +27,30 @@
   and receive over UART interface.
  */
 
-#include "uart.h"
-#include "gpio.h"
-#include "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
 
-uart_struct *uart_instance[MAX_UART_COUNT];
+uart_struct *uart_instance[MAX_UART_ਗਿਣਤੀ];
 
-#define RTS GPIO4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ RTS GPIO4
 //#define USE_INTERRUPT 
 
-unsigned char uart0_complete = 0;
-unsigned char uart1_complete = 0;
-unsigned char uart2_complete = 0;
-unsigned int uart0_tx_isr_count = 0;
-unsigned int uart0_rcv_isr_count = 0;
-unsigned int uart1_tx_isr_count = 0;
-unsigned int uart1_rcv_isr_count = 0;
-unsigned int uart2_tx_isr_count = 0;
-unsigned int uart2_rcv_isr_count = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ uart0_complete = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ uart1_complete = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ uart2_complete = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart0_tx_isr_ਗਿਣਤੀ = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart0_rcv_isr_ਗਿਣਤੀ = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart1_tx_isr_ਗਿਣਤੀ = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart1_rcv_isr_ਗਿਣਤੀ = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart2_tx_isr_ਗਿਣਤੀ = 0;
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ uart2_rcv_isr_ਗਿਣਤੀ = 0;
 
-#ifdef USE_INTERRUPT
-unsigned char u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ USE_ਰੁਕਾਵਟ
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ u0_rcv_char[UARTX_ਬਫਰ_ਮਾਪ] = {'\0'};
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ u1_rcv_char[UARTX_ਬਫਰ_ਮਾਪ] = {'\0'};
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ u2_rcv_char[UARTX_ਬਫਰ_ਮਾਪ] = {'\0'};
+#ਜੇ_ਅੰਤ
 
 /**
  * @fn void uart_init()
@@ -58,11 +58,11 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
  * @details Initialises given number of UART Arrays which has 
  *          complete set of UART registers.
  */
-void uart_init()
+ਖਾਲੀ uart_init()
 {
-	for(int i=0; i< MAX_UART_COUNT; i++)
+	ਲਈ(ਪੂਰਨ i=0; i< MAX_UART_ਗਿਣਤੀ; i++)
 	{
-		uart_instance[i] = (uart_struct*) (UART0_START+i*UART_OFFSET);
+		uart_instance[i] = (uart_struct*) (UART0_ਸ਼ੁਰੂ+i*UART_ਵਿੱਥ);
 	}
 }
 
@@ -72,11 +72,11 @@ void uart_init()
  * @details This function will be called to write a single character from the stdin.
  * @return integer equivalent of the received character.
  */
-#undef getchar
-int getchar()
+#ਪਰਿਭਾਸ਼ਾ_ਰੱਦ getchar
+ਪੂਰਨ getchar()
 {
-	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
-	return (uart_instance[0]->rcv_reg);
+	ਜਦੋਂ((uart_instance[0]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ) == 0); 
+	ਵਾਪਸ (uart_instance[0]->rcv_reg);
 }
 
 /**
@@ -87,14 +87,14 @@ int getchar()
  * @param character as int.
  * @return Zero
  */
-#undef putchar
-int putchar(int ch)
+#ਪਰਿਭਾਸ਼ਾ_ਰੱਦ ਅੱਖਰ_ਲਿਖੋ
+ਪੂਰਨ ਅੱਖਰ_ਲਿਖੋ(ਪੂਰਨ ch)
 {
-	while(uart_instance[0]->status & STS_TX_FULL);
+	ਜਦੋਂ(uart_instance[0]->ਸਥਿਤੀ_2 & STS_TX_ਭਰਿਆ);
 
 	uart_instance[0]->tx_reg = ch;
 
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /**
@@ -105,11 +105,11 @@ int putchar(int ch)
  * @param UART instance
  * @param unsigned int baudrate
  */
-void set_baud_rate(uart_struct *instance, unsigned int baudrate)
+ਖਾਲੀ ਸੈੱਟ_baud_ਦਰ(uart_struct *instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ baudrate)
 {
-	unsigned int baud_count = 0;
-	baud_count = CLOCK_FREQUENCY / (16 * baudrate);
-	instance->baud = baud_count;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ baud_ਗਿਣਤੀ = 0;
+	baud_ਗਿਣਤੀ = CLOCK_FREQUENCY / (16 * baudrate);
+	instance->baud = baud_ਗਿਣਤੀ;
 }
 
 /**
@@ -120,12 +120,12 @@ void set_baud_rate(uart_struct *instance, unsigned int baudrate)
  * @param uart instance 
  * @param unsigned char interrupt
  */
-void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
+ਖਾਲੀ enable_uart_interrupts(uart_struct * instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਰੁਕਾਵਟ)
 {
-	instance->ien = interrupt; 
+	instance->ien = ਰੁਕਾਵਟ; 
 }
 
-#ifdef USE_RX_THRESHOLD
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ USE_RX_ਹੱਦ
 /**
  * @fn void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  * @brief Funtion to set the threshold value of the Rx FIFO.
@@ -134,11 +134,11 @@ void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
  * @param uart instance 
  * @param unsigned char rxthreshold
  */
-void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
+ਖਾਲੀ ਸੈੱਟ_uart_rx_ਹੱਦ(uart_struct * instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ rxthreshold)
 {
-	instance->rx_threshold = rxthreshold;
+	instance->rx_ਹੱਦ = rxthreshold;
 }
-#endif
+#ਜੇ_ਅੰਤ
 
 /**
  * @fn uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
@@ -150,11 +150,11 @@ void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  */
 uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 {
-	while(instance->status & STS_TX_FULL);
+	ਜਦੋਂ(instance->ਸਥਿਤੀ_2 & STS_TX_ਭਰਿਆ);
 
 	instance->tx_reg = prn_character;
 
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /**
@@ -169,15 +169,15 @@ uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
 {
 	uint32_t i = 0;
-	uint8_t temp;
+	uint8_t ਆਰਜ਼ੀ;
 
-	do
+	ਕਰੋ
 	{
-		temp = ptr_string[i++];
-		write_uart_character(instance, temp);
-	} while(temp != 0);
+		ਆਰਜ਼ੀ = ptr_string[i++];
+		write_uart_character(instance, ਆਰਜ਼ੀ);
+	} ਜਦੋਂ(ਆਰਜ਼ੀ != 0);
 
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /**
@@ -189,16 +189,16 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
  * @param pointer to a character.
  * @return number of characters read
  */
-uint8_t read_uart_character(uart_struct * instance, char * prn_character)
+uint8_t read_uart_character(uart_struct * instance, ਅੱਖਰ * prn_character)
 {
-	uint8_t temp = 0;
+	uint8_t ਆਰਜ਼ੀ = 0;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+	ਜਦੋਂ ((instance->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ) == 0);
 
-	temp = instance->rcv_reg;
-	*prn_character = temp;
+	ਆਰਜ਼ੀ = instance->rcv_reg;
+	*prn_character = ਆਰਜ਼ੀ;
 
-	return 1;
+	ਵਾਪਸ 1;
 }
 
 /**
@@ -210,24 +210,24 @@ uint8_t read_uart_character(uart_struct * instance, char * prn_character)
  * @param pointer to an array of character.
  * @return length of the received string
  */
-uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
+uint8_t read_uart_string(uart_struct * instance, ਅੱਖਰ * ptr_string)
 {
 	uint32_t i = 0;
-	uint8_t temp = 0;
+	uint8_t ਆਰਜ਼ੀ = 0;
 
-	while(1)
+	ਜਦੋਂ(1)
 	{
-		while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+		ਜਦੋਂ ((instance->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ) == 0);
 
-		temp = instance->rcv_reg;
-		ptr_string[i++] = temp;
-		putchar(temp);
+		ਆਰਜ਼ੀ = instance->rcv_reg;
+		ptr_string[i++] = ਆਰਜ਼ੀ;
+		ਅੱਖਰ_ਲਿਖੋ(ਆਰਜ਼ੀ);
 
-		if (temp == 0x0D)
+		ਜੇ (ਆਰਜ਼ੀ == 0x0D)
 		{
 			ptr_string[i++] = 0x0A;
 			ptr_string[i++] = 0x00;
-			return(i);
+			ਵਾਪਸ(i);
 		}
 	}
 }
@@ -239,19 +239,19 @@ uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
  * passing UART number for different offset addresses.
  * @param UART instance.
  */
-void flush_uart(uart_struct * instance)
+ਖਾਲੀ flush_uart(uart_struct * instance)
 {
-	__attribute__((unused)) char temp;
+	__attribute__((ਅਣਵਰਤਿਆ)) ਅੱਖਰ ਆਰਜ਼ੀ;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) != 0)
+	ਜਦੋਂ ((instance->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ) != 0)
 	{
-		temp = instance->rcv_reg ;
+		ਆਰਜ਼ੀ = instance->rcv_reg ;
 	}
 }
 
 /*Enable USE_INTERRUPT in command line*/
 
-#ifdef USE_INTERRUPT
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ USE_ਰੁਕਾਵਟ
 /**
  * @fn unsigned char uart0_isr()
  * @brief Function to offer interrupt service routine for uart_instance[0].
@@ -260,39 +260,39 @@ void flush_uart(uart_struct * instance)
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart0_isr()
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ uart0_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_ਮੁੱਲ = '\0';
 
-	if(uart_instance[0]->status & STS_RX_THRESHOLD)
+	ਜੇ(uart_instance[0]->ਸਥਿਤੀ_2 & STS_RX_ਹੱਦ)
 	{
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		ਜਦੋਂ(uart_instance[0]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_ਮੁੱਲ = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+			write_uart_character(uart_instance[0], read_ਮੁੱਲ);
 		}
 	}
-	else if(uart_instance[0]->status & STS_RX_FULL)
+	ਨਹੀਂਤਾਂ ਜੇ(uart_instance[0]->ਸਥਿਤੀ_2 & STS_RX_ਭਰਿਆ)
 	{
-		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_ਸ਼ਬਦ(GPIO_DIRECTION_CNTRL_REG, RTS);
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG) | RTS);
 
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		ਜਦੋਂ(uart_instance[0]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_ਮੁੱਲ = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+			write_uart_character(uart_instance[0], read_ਮੁੱਲ);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG) & ~(RTS));
 	}
-	else if(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+	ਨਹੀਂਤਾਂ ਜੇ(uart_instance[0]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 	{
-		read_value = uart_instance[0]->rcv_reg;
-		u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[0], read_value);
+		read_ਮੁੱਲ = uart_instance[0]->rcv_reg;
+		u0_rcv_char[uart0_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+		write_uart_character(uart_instance[0], read_ਮੁੱਲ);
 	}
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /**
@@ -303,39 +303,39 @@ unsigned char uart0_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart1_isr()
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ uart1_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_ਮੁੱਲ = '\0';
 
-	if(uart_instance[1]->status & STS_RX_THRESHOLD)
+	ਜੇ(uart_instance[1]->ਸਥਿਤੀ_2 & STS_RX_ਹੱਦ)
 	{
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		ਜਦੋਂ(uart_instance[1]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_ਮੁੱਲ = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+			write_uart_character(uart_instance[1], read_ਮੁੱਲ);
 		}
 	}
-	else if(uart_instance[1]->status & STS_RX_FULL)
+	ਨਹੀਂਤਾਂ ਜੇ(uart_instance[1]->ਸਥਿਤੀ_2 & STS_RX_ਭਰਿਆ)
 	{
-		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_ਸ਼ਬਦ(GPIO_DIRECTION_CNTRL_REG, RTS);
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG) | RTS);
 
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		ਜਦੋਂ(uart_instance[1]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_ਮੁੱਲ = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+			write_uart_character(uart_instance[1], read_ਮੁੱਲ);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG) & ~(RTS));
 	}
-	else if(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+	ਨਹੀਂਤਾਂ ਜੇ(uart_instance[1]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 	{
-		read_value = uart_instance[1]->rcv_reg;
-		u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[1], read_value);
+		read_ਮੁੱਲ = uart_instance[1]->rcv_reg;
+		u1_rcv_char[uart1_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+		write_uart_character(uart_instance[1], read_ਮੁੱਲ);
 	}
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /**
@@ -346,38 +346,38 @@ unsigned char uart1_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart2_isr()
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ uart2_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_ਮੁੱਲ = '\0';
 
-	if(uart_instance[2]->status & STS_RX_THRESHOLD)
+	ਜੇ(uart_instance[2]->ਸਥਿਤੀ_2 & STS_RX_ਹੱਦ)
 	{
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		ਜਦੋਂ(uart_instance[2]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_ਮੁੱਲ = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+			write_uart_character(uart_instance[2], read_ਮੁੱਲ);
 		}
 	}
-	else if(uart_instance[2]->status & STS_RX_FULL)
+	ਨਹੀਂਤਾਂ ਜੇ(uart_instance[2]->ਸਥਿਤੀ_2 & STS_RX_ਭਰਿਆ)
 	{
-		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
+		write_ਸ਼ਬਦ(GPIO_DIRECTION_CNTRL_REG, RTS);
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG) | RTS);
 
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		ਜਦੋਂ(uart_instance[2]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_ਮੁੱਲ = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+			write_uart_character(uart_instance[2], read_ਮੁੱਲ);
 		}
-		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
+		write_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG, read_ਸ਼ਬਦ(GPIO_ਅੰਕੜੇ_REG) & ~(RTS));
 	}
-	else if(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+	ਨਹੀਂਤਾਂ ਜੇ(uart_instance[2]->ਸਥਿਤੀ_2 & STS_RX_NOT_ਖਾਲੀ_ਥਾਵਾਂ)
 	{
-		read_value = uart_instance[2]->rcv_reg;
-		u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[2], read_value);
+		read_ਮੁੱਲ = uart_instance[2]->rcv_reg;
+		u2_rcv_char[uart2_rcv_isr_ਗਿਣਤੀ++] = read_ਮੁੱਲ;
+		write_uart_character(uart_instance[2], read_ਮੁੱਲ);
 	}
-	return 0;
+	ਵਾਪਸ 0;
 }
-#endif
+#ਜੇ_ਅੰਤ

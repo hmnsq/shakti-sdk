@@ -27,32 +27,32 @@
 used to achieve higher level objectives.
 */
 
-#include "log.h"
-#include "utils.h"
-#include "string.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "string.h"
 
 /** @fn  void waitfor(unsigned int secs)
  * @brief stall the process for given time
  * @param unsigned int secs
  */
-void waitfor(unsigned int secs)
+ਖਾਲੀ waitfor(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ secs)
 {
-	unsigned int time = 0;
-	while (time++ < secs);
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਸਮਾਂ = 0;
+	ਜਦੋਂ (ਸਮਾਂ++ < secs);
 }
 
 /** @fn void delay(unsigned long count)
  * @brief  sleeps for number of "count"
  * @param unsigned long (number of count)
  */
-void delay(unsigned long count)
+ਖਾਲੀ delay(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ ਗਿਣਤੀ_2)
 {
-	unsigned long cntr1 = count *1000;
-	unsigned long tmpCntr;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ cntr1 = ਗਿਣਤੀ_2 *1000;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ tmpCntr;
 
-	while (cntr1--){
+	ਜਦੋਂ (cntr1--){
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		ਜਦੋਂ (tmpCntr--);
 	}
 }
 
@@ -61,29 +61,29 @@ void delay(unsigned long count)
  * @param unsigned int y
  * @return return result in float 
  */
-float pow_10(unsigned int y)
+ਦਸ਼ਮਲਵ pow_10(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ y)
 {
-	unsigned int x=1;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ x=1;
 
-	for (unsigned int i=0; i <y; i++)
+	ਲਈ (ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ i=0; i <y; i++)
 	{
 		x *= 10;
 	}
 
-	return ((float) x);
+	ਵਾਪਸ ((ਦਸ਼ਮਲਵ) x);
 }
 /** @fn void reverse(char *str, int length)
  * @brief reverse a string and store in the same string
  * @param char *str
  * @param int length
  */
-void reverse(char *str, int length)
+ਖਾਲੀ ਉਲਟ(ਅੱਖਰ *str, ਪੂਰਨ ਲੰਮਾਈ_2)
 {
-	int i = 0;
-	int j = length - 1;
-	char tmp;
+	ਪੂਰਨ i = 0;
+	ਪੂਰਨ j = ਲੰਮਾਈ_2 - 1;
+	ਅੱਖਰ tmp;
 
-	while (i<j)
+	ਜਦੋਂ (i<j)
 	{
 		tmp = str[i];
 		str[i] = str[j];
@@ -105,22 +105,22 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+ਪੂਰਨ int_ਮੰਜ਼ਿਲ_string(ਪੂਰਨ ਸੰਖਿਆ, ਅੱਖਰ str[], ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	ਜਦੋਂ (ਸੰਖਿਆ != 0)
 	{
-		str[i] = ((number%10) + '0');
+		str[i] = ((ਸੰਖਿਆ%10) + '0');
 		i++;
-		number = number/10;
+		ਸੰਖਿਆ = ਸੰਖਿਆ/10;
 	}
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint)
+	ਜਦੋਂ (i < afterpoint)
 	{
 		str[i] = '0';
 		i++;
@@ -130,10 +130,10 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 	   zeroth digit is in oth position in array,
 	   To read digits properly, reverse array
 	 */
-	reverse(str, i);
+	ਉਲਟ(str, i);
 	str[i] = '\0';
 
-	return i;
+	ਵਾਪਸ i;
 }
 /** @fn void ftoa(float n, char *res, int afterpoint)
  * @brief converts float to string
@@ -144,62 +144,62 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
  * @param char* (float in string - res)
  * @param int (precision - afterpoint)
  */
-void ftoa(float n, char *res, unsigned int afterpoint)
+ਖਾਲੀ ftoa(ਦਸ਼ਮਲਵ n, ਅੱਖਰ *res, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ afterpoint)
 {
-	int i=0;
-	char temp[30]={'\0'};
+	ਪੂਰਨ i=0;
+	ਅੱਖਰ ਆਰਜ਼ੀ[30]={'\0'};
 	n += 0.0000001;
 
 	// Extract integer part
-	int ipart = (int)n;
+	ਪੂਰਨ ipart = (ਪੂਰਨ)n;
 
 	// Extract floating part
-	float fpart = (float) (n - (float)ipart);
-	int j=0;
+	ਦਸ਼ਮਲਵ fpart = (ਦਸ਼ਮਲਵ) (n - (ਦਸ਼ਮਲਵ)ipart);
+	ਪੂਰਨ j=0;
 
-	if(n < (0/1))
+	ਜੇ(n < (0/1))
 	{
 		res[j]='-';
 		j=1;
 	}
 
-	if (ipart == 0)
+	ਜੇ (ipart == 0)
 	{
 		res[j]='0';
 		j=j+1;
 	}
-	else{
-		if (ipart <0)
+	ਨਹੀਂਤਾਂ{
+		ਜੇ (ipart <0)
 		{
 			ipart =(-1)*ipart;
 		}
 
-		i = int_to_string(ipart, temp, 0);
+		i = int_ਮੰਜ਼ਿਲ_string(ipart, ਆਰਜ਼ੀ, 0);
 
-		strcpy(res+j,temp);
+		strcpy(res+j,ਆਰਜ਼ੀ);
 	}
 
 	i = i+j;
 
 	// check for display option after point
-	if (afterpoint != 0)
+	ਜੇ (afterpoint != 0)
 	{
 		res[i] = '.';// add dot
 
-		if (fpart < 0/1)
+		ਜੇ (fpart < 0/1)
 		{
 
 			fpart = (-1)*fpart;
 
 		}
-		else if (fpart == 0/1)
+		ਨਹੀਂਤਾਂ ਜੇ (fpart == 0/1)
 		{
 			fpart = fpart;
 		}
 
 		fpart = fpart * pow_10( afterpoint);
 
-		int_to_string((int)fpart, res + i + 1, afterpoint);
+		int_ਮੰਜ਼ਿਲ_string((ਪੂਰਨ)fpart, res + i + 1, afterpoint);
 	}
 }
 
@@ -208,15 +208,15 @@ void ftoa(float n, char *res, unsigned int afterpoint)
  * @param unsigned long cntr1 - one counter value
  * @param unsigned long cntr2 - another counter value
  */
-void delay_loop(unsigned long cntr1, unsigned long cntr2)
+ਖਾਲੀ delay_loop(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ cntr1, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ cntr2)
 {
-	unsigned long tmpCntr = cntr2;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ tmpCntr = cntr2;
 
-	while (cntr1--)
+	ਜਦੋਂ (cntr1--)
 	{
 		tmpCntr = cntr2;
 
-		while (tmpCntr--);
+		ਜਦੋਂ (tmpCntr--);
 	}
 }
 
@@ -226,10 +226,10 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  * @param int* addr
  * @return long int
  */
-unsigned long read_word(uint32_t *addr)
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ read_ਸ਼ਬਦ(uint32_t *addr)
 {
 	log_debug("addr = %x data = %x\n", addr, *addr);
-	return *addr;
+	ਵਾਪਸ *addr;
 }
 
 /** @fn void write_word(int *addr, unsigned long val)
@@ -237,7 +237,7 @@ unsigned long read_word(uint32_t *addr)
  * @param int*
  * @param unsigned long
  */
-void write_word(uint32_t *addr, unsigned long val)
+ਖਾਲੀ write_ਸ਼ਬਦ(uint32_t *addr, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ val)
 {
 	*addr = val;
 	log_debug("addr = %x data = %x\n", addr, *addr);

@@ -26,22 +26,22 @@
 @detail This file contains implementation of different log levels.
 */ 
 
-#include "log.h"
-#include "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
 
 /*Use -D compiler flag to set the LOG_LEVEL; default value is 1*/
-#ifndef LOG_LEVEL
-#define LOG_LEVEL 3 
-#endif
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ LOG_LEVEL
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LOG_LEVEL 3 
+#ਜੇ_ਅੰਤ
 
 /** @fn void log_trace(const char*fmt, ...)
  * @brief Function to print trace logs
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_trace(const char* fmt, ...)
+ਖਾਲੀ log_trace(ਅਚਲ ਅੱਖਰ* fmt, ...)
 {
-	if (TRACE <= LOG_LEVEL) {
+	ਜੇ (TRACE <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -56,9 +56,9 @@ void log_trace(const char* fmt, ...)
  * @details This function print info logs if the LOG_LEVEL allows info logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_info(const char* fmt, ...)
+ਖਾਲੀ log_info(ਅਚਲ ਅੱਖਰ* fmt, ...)
 {
-	if (INFO <= LOG_LEVEL) {
+	ਜੇ (INFO <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -73,9 +73,9 @@ void log_info(const char* fmt, ...)
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_debug(const char* fmt, ...)
+ਖਾਲੀ log_debug(ਅਚਲ ਅੱਖਰ* fmt, ...)
 {
-	if (DEBUG <= LOG_LEVEL) {
+	ਜੇ (DEBUG <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -90,9 +90,9 @@ void log_debug(const char* fmt, ...)
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_warn(const char* fmt, ...)
+ਖਾਲੀ log_warn(ਅਚਲ ਅੱਖਰ* fmt, ...)
 {
-	if (WARN <= LOG_LEVEL) {
+	ਜੇ (WARN <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -107,9 +107,9 @@ void log_warn(const char* fmt, ...)
  * @details This function print error logs if the LOG_LEVEL allows error logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_error(const char* fmt, ...)
+ਖਾਲੀ log_error(ਅਚਲ ਅੱਖਰ* fmt, ...)
 {
-	if (ERROR <= LOG_LEVEL) {
+	ਜੇ (ERROR <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -124,9 +124,9 @@ void log_error(const char* fmt, ...)
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
  * @param const char* (printf formatted arguments with format specifiers)
  */
-void log_fatal(const char* fmt, ...)
+ਖਾਲੀ log_fatal(ਅਚਲ ਅੱਖਰ* fmt, ...)
 {
-	if (FATAL <= LOG_LEVEL) {
+	ਜੇ (FATAL <= LOG_LEVEL) {
 		va_list ap;
 		va_start(ap, fmt);
 
@@ -136,5 +136,5 @@ void log_fatal(const char* fmt, ...)
 	}
 
 	log_info("\n panic \n");
-	while (1);
+	ਜਦੋਂ (1);
 }

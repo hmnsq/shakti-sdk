@@ -26,80 +26,80 @@
 @detail I2C based routines to write and read all locations of mpu6050.
 */
 
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdint.h>//Includes the definitions of standard input/output functions//
+#ਅਨ੍ਤਰ੍ਭਾਵ "i2c.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
 
-#define DELAY1 100
-#define DELAY2 50
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DELAY1 100
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DELAY2 50
 
 
-#define DELAY_VALUE 900
-#if 1
-#define PRESCALER_COUNT 24
-#define SCLK_COUNT 9
-#else
-#define PRESCALER_COUNT 8
-#define SCLK_COUNT 6
-#endif
-#define I2C i2c_instance[1]
-#define RD_DATA_CNT 14
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DELAY_ਮੁੱਲ 900
+#ਜੇ 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PRESCALER_ਗਿਣਤੀ 24
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SCLK_ਗਿਣਤੀ 9
+#ਨਹੀਂਤਾਂ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PRESCALER_ਗਿਣਤੀ 8
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SCLK_ਗਿਣਤੀ 6
+#ਜੇ_ਅੰਤ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C i2c_instance[1]
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ RD_ਅੰਕੜੇ_CNT 14
 
-#define MPU6050_SLAVE_ADDRESS 0xD0
-#define MPU_6050_OUTPUT_BEGIN 0x3B
-#define MPU6050_DLPF_CFG 0x20
-#define MPU6050_SMPL_DIV 0x19
-#define MPU6050_ADDRESS   0x68
-#define DEV_IDENTITY  0X68
-#define DEV_IDENTITY_DATA_REG 0X75
-#define MPU6050_REG_PWR_MGMT 0X6B
-#define MPU6050_RESET         0x80
-#define MPU6050_ACC_SENS_2G         0x00
-#define MPU6050_ACC_SENS_4G         0x08
-#define MPU6050_ACC_SENS_8G         0x10
-#define MPU6050_REG_GYRO_CONFIG      0x1B // Gyroscope Configuration
-#define MPU6050_REG_ACCEL_CONFIG     0x1C // Accelerometer Configuration
-#define MPU6050_GYRO_SENS_500D       0x08
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_SLAVE_ਪਤਾ 0xD0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU_6050_OUTPUT_BEGIN 0x3B
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_DLPF_CFG 0x20
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_SMPL_DIV 0x19
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_ਪਤਾ   0x68
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DEV_ਪਛਾਣ_ਤੱਤ  0X68
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DEV_ਪਛਾਣ_ਤੱਤ_ਅੰਕੜੇ_REG 0X75
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_REG_PWR_MGMT 0X6B
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_RESET         0x80
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_ACC_SENS_2G         0x00
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_ACC_SENS_4G         0x08
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_ACC_SENS_8G         0x10
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_REG_GYRO_CONFIG      0x1B // Gyroscope Configuration
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_REG_ACCEL_CONFIG     0x1C // Accelerometer Configuration
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ MPU6050_GYRO_SENS_500D       0x08
 
-#define PI 3.141592654
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PI 3.141592654
 
-char readbuf[RD_DATA_CNT];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
+ਅੱਖਰ readbuf[RD_ਅੰਕੜੇ_CNT];
+ਪੂਰਨ AccX,AccY,AccZ;
+ਪੂਰਨ accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+ਪੂਰਨ roll, pitch, yaw;
+ਪੂਰਨ AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+ਪੂਰਨ AccErrorX,AccErrory;
+ਪੂਰਨ GyroX, GyroY, GyroZ;
+ਪੂਰਨ c = 0;
+ਪੂਰਨ i=0;
 
-int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *read_data, unsigned char length, unsigned long delay)
+ਪੂਰਨ read_mpu6050_ਰਜਿਸਟਰ(i2c_struct * i2c_instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ reg_ਵਿੱਥ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ *read_ਅੰਕੜੇ_2, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਲੰਮਾਈ_2, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ read_buf[4] = {'\0'};
+	ਪੂਰਨ i = 0, j = 0,  k = 0, ਸਥਿਤੀ_2=0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਆਰਜ਼ੀ = 0;
 
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_ਪਤਾ(i2c_instance, MPU6050_SLAVE_ਪਤਾ, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance, reg_ਵਿੱਥ, delay);
 //Restarts the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_REPSTART;
 	delay_loop(DELAY1, DELAY2);
 //Writes the slave address for read
-	i2c_write_data(i2c_instance, MPU6050_SLAVE_ADDRESS | I2C_READ, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance, MPU6050_SLAVE_ਪਤਾ | I2C_READ, delay);
 /* Make a dummy read as per spec of the I2C controller */
 	i2c_instance->control = I2C_NACK;
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_ਅੰਕੜੇ(i2c_instance, &ਆਰਜ਼ੀ, delay);
 //	printf("\n Reading the data");
 
-	i2c_read_data_nack(i2c_instance, &temp, delay);
-	*read_data = temp;
+	i2c_read_ਅੰਕੜੇ_nack(i2c_instance, &ਆਰਜ਼ੀ, delay);
+	*read_ਅੰਕੜੇ_2 = ਆਰਜ਼ੀ;
 //	delay_loop(DELAY1, DELAY2);
 	i2c_instance->control = I2C_STOP;
 	delay_loop(DELAY1, DELAY2);
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /** @fn int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -112,51 +112,51 @@ int read_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return read status (zero on success)
  */
-int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char *readTemp, unsigned char length, unsigned long delay)
+ਪੂਰਨ read_mpu6050_registers(i2c_struct * i2c_instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ reg_ਵਿੱਥ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ *read_ਆਰਜ਼ੀ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਲੰਮਾਈ_2, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
 //	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	ਪੂਰਨ i = 0, j = 0,  k = 0, ਸਥਿਤੀ_2=0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਆਰਜ਼ੀ = 0;
 
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
+	i2c_send_slave_ਪਤਾ(i2c_instance, MPU6050_SLAVE_ਪਤਾ, I2C_WRITE, delay);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance, reg_ਵਿੱਥ, delay);
 //	delay_loop(DELAY1, DELAY2);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_REPSTART;
 	delay_loop(DELAY1, DELAY2);
 
 //Writes the slave address for read
-	i2c_write_data(i2c_instance, MPU6050_SLAVE_ADDRESS + I2C_READ, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance, MPU6050_SLAVE_ਪਤਾ + I2C_READ, delay);
 //	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_READ, delay);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_ਅੰਕੜੇ(i2c_instance, &ਆਰਜ਼ੀ, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	ਲਈ(i = 0; i < ਲੰਮਾਈ_2; i++)
 	{
-		if(i == (length - 1) )
+		ਜੇ(i == (ਲੰਮਾਈ_2 - 1) )
 		{
 			log_debug("\nSending nack");
 			i2c_instance->control = I2C_NACK;
 //			i2c_read_data_nack(i2c_instance, &temp, delay);
-			i2c_read_data(i2c_instance, &temp, delay);
-			break;
+			i2c_read_ਅੰਕੜੇ(i2c_instance, &ਆਰਜ਼ੀ, delay);
+			ਰੋਕੋ;
 			}
-		else
+		ਨਹੀਂਤਾਂ
 		{
-			i2c_read_data(i2c_instance, &temp, delay);
+			i2c_read_ਅੰਕੜੇ(i2c_instance, &ਆਰਜ਼ੀ, delay);
 		}
-		log_debug("\n read data[%x]: %x", i, temp);
-		*readTemp = temp;
-		*readTemp++;
+		log_debug("\n read data[%x]: %x", i, ਆਰਜ਼ੀ);
+		*read_ਆਰਜ਼ੀ = ਆਰਜ਼ੀ;
+		*read_ਆਰਜ਼ੀ++;
 	}
 	
 	log_debug("\n Sending Stop condition");
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 
@@ -172,16 +172,16 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned long delay)
+ਪੂਰਨ write_mpu6050_ਰਜਿਸਟਰ(i2c_struct * i2c_instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ reg_ਵਿੱਥ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ *write_ਮੁੱਲ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
 	i2c_instance->control = I2C_IDLE;
 	delay_loop(DELAY1, DELAY2);
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
+	i2c_send_slave_ਪਤਾ(i2c_instance, MPU6050_SLAVE_ਪਤਾ, I2C_WRITE, delay);
 //	delay_loop(DELAY1, DELAY2);
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance, reg_ਵਿੱਥ, delay);
 //	delay_loop(DELAY1, DELAY2);
-	log_debug("\n write value: %x", *write_value);
-	i2c_write_data(i2c_instance,  ( *write_value & 0xff), delay);
+	log_debug("\n write value: %x", *write_ਮੁੱਲ);
+	i2c_write_ਅੰਕੜੇ(i2c_instance,  ( *write_ਮੁੱਲ & 0xff), delay);
 	//Stops the I2C transaction to start reading the temperature value.
 //	delay_loop(DELAY1, DELAY2);
 	i2c_instance->control = I2C_STOP;
@@ -201,24 +201,24 @@ int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+ਪੂਰਨ write_mpu6050_registers(i2c_struct * i2c_instance, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ reg_ਵਿੱਥ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ *write_ਮੁੱਲ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਲੰਮਾਈ_2, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	ਪੂਰਨ i = 0, j = 0,  k = 0, ਸਥਿਤੀ_2=0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਆਰਜ਼ੀ = 0;
 	
-	i2c_send_slave_address(i2c_instance, MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_send_slave_ਪਤਾ(i2c_instance, MPU6050_SLAVE_ਪਤਾ, I2C_WRITE, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance, reg_ਵਿੱਥ, delay);
 	delay_loop(DELAY1, DELAY2);
 	
-	if(1 == length)
+	ਜੇ(1 == ਲੰਮਾਈ_2)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value	& 0xff), delay);
+		i2c_write_ਅੰਕੜੇ(i2c_instance,  ( *write_ਮੁੱਲ	& 0xff), delay);
 	}
-	else
+	ਨਹੀਂਤਾਂ
 	{
-		for(i = 0; i < length; i++)
+		ਲਈ(i = 0; i < ਲੰਮਾਈ_2; i++)
 		{
-			i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
+			i2c_write_ਅੰਕੜੇ(i2c_instance, (*write_ਮੁੱਲ++ & 0xff), delay);
 
 		}
 	}
@@ -226,18 +226,18 @@ int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 	delay_loop(DELAY1, DELAY2);
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /*
    soft float library need to be added, if hardfloat not there
  */
-void measuring_value(unsigned long delay)
+ਖਾਲੀ measuring_ਮੁੱਲ(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
 	// read accelerometer data
-	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_DATA_CNT, delay);
-	printf("\n Read Buf: { ");
-	for(i = 0; i < RD_DATA_CNT; i++)
+	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_ਅੰਕੜੇ_CNT, delay);
+	ਲਿਖੋ("\n Read Buf: { ");
+	ਲਈ(i = 0; i < RD_ਅੰਕੜੇ_CNT; i++)
 	{
 		log_info(" %x, ", readbuf[i] );
 		}
@@ -258,18 +258,18 @@ void measuring_value(unsigned long delay)
 }
 
 
-void calculate_imu_error(unsigned long delay)
+ਖਾਲੀ calculate_imu_error(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
-	int c=0;
-	int yaw;
-	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+	ਪੂਰਨ c=0;
+	ਪੂਰਨ yaw;
+	ਦਸ਼ਮਲਵ accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while(c<200)
+	ਜਦੋਂ(c<200)
 	{
-		measuring_value(delay);
+		measuring_ਮੁੱਲ(delay);
 
-		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2)))* 180 / PI;
-		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2)))* 180 / PI;
+		AccErrorX = AccErrorX + (atan(AccY / ਵਰਗਮੂਲ(ਘਾਤ(AccX, 2)) + ਘਾਤ(AccZ, 2)))* 180 / PI;
+		AccErrorY = AccErrorY + (atan(AccY / ਵਰਗਮੂਲ(ਘਾਤ(AccX, 2)) + ਘਾਤ(AccZ, 2)))* 180 / PI;
 
 		GyroErrorX = GyroErrorX + (GyroX / 65.5);
 		GyroErrorY = GyroErrorY + (GyroY / 65.5);
@@ -280,8 +280,8 @@ void calculate_imu_error(unsigned long delay)
 	AccErrorX = AccErrorX / 200;
 	AccErrorY = AccErrorY / 200;
 
-	accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorX; // AccErrorX
-	accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorY; // AccErrory
+	accAngleX = (atan(AccY / ਵਰਗਮੂਲ(ਘਾਤ(AccX, 2) + ਘਾਤ(AccZ, 2))) * 180 / PI) - AccErrorX; // AccErrorX
+	accAngleY = (atan(-1 * AccX / ਵਰਗਮੂਲ(ਘਾਤ(AccY, 2) + ਘਾਤ(AccZ, 2))) * 180 / PI) - AccErrorY; // AccErrory
 	// sum all reading
 	GyroErrorX = GyroErrorX / 200;
 	GyroErrorY = GyroErrorY / 200;
@@ -292,62 +292,62 @@ void calculate_imu_error(unsigned long delay)
 	GyroZ = GyroZ - GyroErrorZ; // GyroErrorZ
 }
 
-unsigned char CheckForDeviceId(unsigned long delay)
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ CheckForDeviceId(ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
-	unsigned char readBuf = 0xFF;
-	read_mpu6050_register(I2C, DEV_IDENTITY_DATA_REG, &readBuf, 1, delay);
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ readBuf = 0xFF;
+	read_mpu6050_ਰਜਿਸਟਰ(I2C, DEV_ਪਛਾਣ_ਤੱਤ_ਅੰਕੜੇ_REG, &readBuf, 1, delay);
 	log_debug("\n Read Buf Value: %x", readBuf);
-	return readBuf;
+	ਵਾਪਸ readBuf;
 }
 
-int main()
+ਪੂਰਨ ਮੁੱਖ()
 {
-	unsigned char i = 0;
-	int timeout;
-	unsigned long delay = 500;
-	unsigned int write_buf[7] = {0x00};
-	unsigned char length = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ i = 0;
+	ਪੂਰਨ timeout;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay = 500;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ write_buf[7] = {0x00};
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ ਲੰਮਾਈ_2 = 0;
 
 	log_debug("\tI2C: MPU6050 - ACC test\n");
 
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ਜੇ(config_i2c(I2C, PRESCALER_ਗਿਣਤੀ, SCLK_ਗਿਣਤੀ))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+			ਵਾਪਸ -1;
 	}
-	else
+	ਨਹੀਂਤਾਂ
 		log_info("\tIntilization Happened Fine\n");
 
-		if(DEV_IDENTITY == CheckForDeviceId(delay))
+		ਜੇ(DEV_ਪਛਾਣ_ਤੱਤ == CheckForDeviceId(delay))
 		{
 			log_info("Device ID Check Success");
 		}
-		else
+		ਨਹੀਂਤਾਂ
 		{
 			log_error("Could not verify Device identity");
 		}
 		write_buf[0] = 1;
-		write_mpu6050_register(I2C, MPU6050_REG_PWR_MGMT, &write_buf[0],  delay);
+		write_mpu6050_ਰਜਿਸਟਰ(I2C, MPU6050_REG_PWR_MGMT, &write_buf[0],  delay);
 		write_buf[0] = MPU6050_GYRO_SENS_500D;
-		write_mpu6050_register(I2C, MPU6050_REG_GYRO_CONFIG, &write_buf[0], delay);
+		write_mpu6050_ਰਜਿਸਟਰ(I2C, MPU6050_REG_GYRO_CONFIG, &write_buf[0], delay);
 		write_buf[0] = 0x01;
-		write_mpu6050_register(I2C, 0x1B, &write_buf[0], delay);
+		write_mpu6050_ਰਜਿਸਟਰ(I2C, 0x1B, &write_buf[0], delay);
 		write_buf[0] = 0x01;
-		write_mpu6050_register(I2C, 0x1C, &write_buf[0], delay);
+		write_mpu6050_ਰਜਿਸਟਰ(I2C, 0x1C, &write_buf[0], delay);
 		write_buf[0] = 0x01;
-		write_mpu6050_register(I2C, 0x6B, &write_buf[0], delay);
+		write_mpu6050_ਰਜਿਸਟਰ(I2C, 0x6B, &write_buf[0], delay);
 
 
 	log_debug("\n Entering While loop");
-	while(1)
+	ਜਦੋਂ(1)
 	{
-		measuring_value(delay);
+		measuring_ਮੁੱਲ(delay);
 		delay_loop(2000, 1000);
 	}
 
-	return 0;
+	ਵਾਪਸ 0;
 }
 

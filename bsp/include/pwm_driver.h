@@ -26,48 +26,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ<stdbool.h>
 
 // PWM Registers 
-#define PERIOD_REGISTER     0x00000000	//16 bits (short)
-#define DUTY_REGISTER       0x00000004	//16 bits (short)
-#define CONTROL_REGISTER    0x00000008	//8 bits (char)
-#define CLOCK_REGISTER      0x0000000c	//16 bits (short)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PERIOD_ਰਜਿਸਟਰ     0x00000000	//16 bits (short)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DUTY_ਰਜਿਸਟਰ       0x00000004	//16 bits (short)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CONTROL_ਰਜਿਸਟਰ    0x00000008	//8 bits (char)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CLOCK_ਰਜਿਸਟਰ      0x0000000c	//16 bits (short)
 
 // Control Register Individual Bits 
-#define CLOCK_SELECTOR      0x00000001
-#define PWM_ENABLE          0x00000002
-#define PWM_START           0x00000004
-#define CONTINUOUS_ONCE     0x00000008
-#define PWM_OUTPUT_ENABLE   0x00000010
-#define INTERRUPT           0x00000020
-#define READ_ONLY           0x00000040
-#define RESET_COUNTER       0x00000080
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CLOCK_SELECTOR      0x00000001
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_ENABLE          0x00000002
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_ਸ਼ੁਰੂ           0x00000004
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CONTINUOUS_ONCE     0x00000008
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_OUTPUT_ENABLE   0x00000010
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ਰੁਕਾਵਟ_2           0x00000020
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ READ_ONLY           0x00000040
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ RESET_COUNTER       0x00000080
 
 // PWM Modules 
-#define PWM_0 0
-#define PWM_1 1
-#define PWM_2 2
-#define PWM_3 3
-#define PWM_4 4
-#define PWM_5 5
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_0 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_1 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_2 2
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_3 3
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_4 4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+ਖਾਲੀ pwm_configure(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ clock_ਭਾਜਕ, ਪੂਰਨ period, ਪੂਰਨ duty, bool external_clock);
+ਖਾਲੀ pwm_ਸ਼ੁਰੂ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ ਬਹੁਲਕ);
+ਪੂਰਨ pwm_check_continuous_ਬਹੁਲਕ(ਪੂਰਨ module_ਸੰਖਿਆ);
+ਖਾਲੀ pwm_clear_registers(ਪੂਰਨ module_ਸੰਖਿਆ);
+ਖਾਲੀ pwm_init(ਖਾਲੀ);
+ਖਾਲੀ pwm_ਸੈੱਟ_external_clock(ਪੂਰਨ module_ਸੰਖਿਆ, bool ਮੁੱਲ);
+ਖਾਲੀ pwm_ਸੈੱਟ_clock(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ clock_ਭਾਜਕ);
+ਖਾਲੀ pwm_ਸੈੱਟ_duty_ਚੱਕਰ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ duty);
+ਖਾਲੀ pwm_ਸੈੱਟ_periodic_ਚੱਕਰ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ period);
+ਖਾਲੀ pwm_stop(ਪੂਰਨ module_ਸੰਖਿਆ);
+ਖਾਲੀ show_ਰਜਿਸਟਰ_ਮੁੱਲਾਂ(ਪੂਰਨ module_ਸੰਖਿਆ);
+ਪੂਰਨ ਸੈੱਟ_pwm_period_ਰਜਿਸਟਰ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ ਮੁੱਲ);
+ਪੂਰਨ ਸੈੱਟ_pwm_duty_ਰਜਿਸਟਰ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ ਮੁੱਲ);
+ਪੂਰਨ ਸੈੱਟ_pwm_control_ਰਜਿਸਟਰ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ ਮੁੱਲ);
+ਪੂਰਨ ਸੈੱਟ_pwm_clock_ਰਜਿਸਟਰ(ਪੂਰਨ module_ਸੰਖਿਆ, ਪੂਰਨ ਮੁੱਲ);
+ਪੂਰਨ configure_control_ਰਜਿਸਟਰ_ਬਹੁਲਕ(ਪੂਰਨ ਬਹੁਲਕ);
+ਖਾਲੀ pwm_use_external_clock(ਪੂਰਨ module_ਸੰਖਿਆ, bool ਮੁੱਲ);
 

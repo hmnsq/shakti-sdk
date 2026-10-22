@@ -30,52 +30,52 @@ uart is initialized. Trap handler is initialized.
 Disable Xip for Aardonyx
 */
 
-#include "traps.h"
-#include "plic_driver.h"
-#include "clint_driver.h"
-#include "log.h"
-#include "utils.h"
-#include "qspi.h"
-#include "platform.h"
-#include "defines.h"
-#include "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "traps.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "plic_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "clint_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "qspi.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "defines.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
 
-extern void init(void);
-extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+ਬਾਹਰੀ ਖਾਲੀ init(ਖਾਲੀ);
+ਬਾਹਰੀ ਖਾਲੀ trap_ਇੰਦਰਾਜ(ਖਾਲੀ);
+ਬਾਹਰੀ uart_struct *uart_instance[MAX_UART_ਗਿਣਤੀ];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+ਬਾਹਰੀ ਅੱਖਰ ਢੇਰ_ਸਿਰਾ[];
+ਬਾਹਰੀ ਅੱਖਰ ਢੇਰ[];
+ਬਾਹਰੀ ਅੱਖਰ ਢੇਰ_2[];
+ਬਾਹਰੀ ਅੱਖਰ ਢੇਰ_ਸਿਰਾ_2[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+ਅੱਖਰ *ਢੇਰ_ਸਿਰਾ_3=(ਅੱਖਰ *)&ਢੇਰ_ਸਿਰਾ;
+ਅੱਖਰ *ਢੇਰ_ਸ਼ੁਰੂ=(ਅੱਖਰ *)&ਢੇਰ;
+ਅੱਖਰ *ਢੇਰ_ਸ਼ੁਰੂ_2=(ਅੱਖਰ *)&ਢੇਰ_2;
+ਅੱਖਰ *ਢੇਰ_ਸਿਰਾ_4=(ਅੱਖਰ *)&ਢੇਰ_ਸਿਰਾ_2;
 
 /** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
  */
-static void section_init(void)
+ਸਥਿਰ ਖਾਲੀ section_init(ਖਾਲੀ)
 {
-#if 0
+#ਜੇ 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	ਜਦੋਂ(ਢੇਰ_ਸ਼ੁਰੂ_2<=ਢੇਰ_ਸਿਰਾ_4)
 	{
-		*heap_start=0xff;
-		heap_start++;
+		*ਢੇਰ_ਸ਼ੁਰੂ_2=0xff;
+		ਢੇਰ_ਸ਼ੁਰੂ_2++;
 	}
 
-	while(stack_end>=stack_start)
+	ਜਦੋਂ(ਢੇਰ_ਸਿਰਾ_3>=ਢੇਰ_ਸ਼ੁਰੂ)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*ਢੇਰ_ਸਿਰਾ_3=0x0;
+		ਢੇਰ_ਸਿਰਾ_3--;
 	}
-#endif
+#ਜੇ_ਅੰਤ
 
 }
 
@@ -84,58 +84,58 @@ static void section_init(void)
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
  */
-static void trap_init(void)
+ਸਥਿਰ ਖਾਲੀ trap_init(ਖਾਲੀ)
 {
 	log_trace("trap_init entered \n ");
 
-	mcause_interrupt_table[USER_SW_INTERRUPT]        = default_handler;
-	mcause_interrupt_table[SUPER_SW_INTERRUPT]       = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT0]      = default_handler;
-	mcause_interrupt_table[MACH_SW_INTERRUPT]        = default_handler;
-	mcause_interrupt_table[USER_TIMER_INTERRUPT]     = default_handler;
-	mcause_interrupt_table[SUPER_TIMER_INTERRUPT]    = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT1]      = default_handler;
-	mcause_interrupt_table[MACH_TIMER_INTERRUPT]     = mach_clint_handler;
-	mcause_interrupt_table[USER_EXT_INTERRUPT]       = default_handler;
-	mcause_interrupt_table[SUPERVISOR_EXT_INTERRUPT] = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT2]      = default_handler;
-	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT]  = mach_plic_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT3]      = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT4]      = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT5]      = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT6]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[USER_SW_ਰੁਕਾਵਟ]        = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[SUPER_SW_ਰੁਕਾਵਟ]       = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT0]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[MACH_SW_ਰੁਕਾਵਟ]        = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[USER_TIMER_ਰੁਕਾਵਟ]     = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[SUPER_TIMER_ਰੁਕਾਵਟ]    = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT1]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[MACH_TIMER_ਰੁਕਾਵਟ]     = mach_clint_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[USER_EXT_ਰੁਕਾਵਟ]       = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[SUPERVISOR_EXT_ਰੁਕਾਵਟ] = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT2]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[MACH_EXTERNAL_ਰੁਕਾਵਟ]  = mach_plic_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT3]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT4]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT5]      = default_handler;
+	mcause_ਰੁਕਾਵਟ_ਸਾਰਣੀ[RESERVED_INTERRUPT6]      = default_handler;
 
-	mcause_trap_table[INSTRUCTION_ADDRESS_MISALIGNED] =
+	mcause_trap_ਸਾਰਣੀ[INSTRUCTION_ਪਤਾ_MISALIGNED] =
 		default_handler;
-	mcause_trap_table[INSTRUCTION_ACCESS_FAULT] =
+	mcause_trap_ਸਾਰਣੀ[INSTRUCTION_ACCESS_FAULT] =
 		default_handler;
-	mcause_trap_table[ILLEGAL_INSTRUCTION] =
+	mcause_trap_ਸਾਰਣੀ[ILLEGAL_INSTRUCTION] =
 		default_handler;
-	mcause_trap_table[BREAKPOINT] =
+	mcause_trap_ਸਾਰਣੀ[BREAKPOINT] =
 		default_handler;
-	mcause_trap_table[LOAD_ADDRESS_MISALIGNED] =
+	mcause_trap_ਸਾਰਣੀ[ਲੱਦੋ_ਪਤਾ_MISALIGNED] =
 		default_handler;
-	mcause_trap_table[LOAD_ACCESS_FAULT] =
+	mcause_trap_ਸਾਰਣੀ[ਲੱਦੋ_ACCESS_FAULT] =
 		default_handler;
-	mcause_trap_table[STORE_AMO_ADDRESS_MISALIGNED] =
+	mcause_trap_ਸਾਰਣੀ[STORE_AMO_ਪਤਾ_MISALIGNED] =
 		default_handler;
-	mcause_trap_table[STORE_AMO_ACCESS_FAULT] =
+	mcause_trap_ਸਾਰਣੀ[STORE_AMO_ACCESS_FAULT] =
 		default_handler;
-	mcause_trap_table[ENVIRONMENT_CALL_FROM_U_MODE] =
+	mcause_trap_ਸਾਰਣੀ[ENVIRONMENT_CALL_FROM_U_ਬਹੁਲਕ] =
 		default_handler;
-	mcause_trap_table[ENVIRONMENT_CALL_FROM_S_MODE] =
+	mcause_trap_ਸਾਰਣੀ[ENVIRONMENT_CALL_FROM_S_ਬਹੁਲਕ] =
 		default_handler;
-	mcause_trap_table[RESERVED_TRAP1] =
+	mcause_trap_ਸਾਰਣੀ[RESERVED_TRAP1] =
 		default_handler;
-	mcause_trap_table[ENVIRONMENT_CALL_FROM_M_MODE] =
+	mcause_trap_ਸਾਰਣੀ[ENVIRONMENT_CALL_FROM_M_ਬਹੁਲਕ] =
 		default_handler;
-	mcause_trap_table[INSTRUCTION_PAGE_FAULT] =
+	mcause_trap_ਸਾਰਣੀ[INSTRUCTION_ਪੰਨਾ_FAULT] =
 		default_handler;
-	mcause_trap_table[LOAD_PAGE_FAULT] =
+	mcause_trap_ਸਾਰਣੀ[ਲੱਦੋ_ਪੰਨਾ_FAULT] =
 		default_handler;
-	mcause_trap_table[RESERVED_TRAP2] =
+	mcause_trap_ਸਾਰਣੀ[RESERVED_TRAP2] =
 		default_handler;
-	mcause_trap_table[STORE_AMO_PAGE_FAULT] =
+	mcause_trap_ਸਾਰਣੀ[STORE_AMO_ਪੰਨਾ_FAULT] =
 		default_handler;
 
 	log_trace("trap_init exited \n ");
@@ -144,21 +144,21 @@ static void trap_init(void)
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+ਖਾਲੀ init(ਖਾਲੀ)
 {
 //	section_init(); // uncomment on need basis
 	uart_init();
 
 	log_trace("init entered \n ");
 
-#ifdef AARDONYX
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ AARDONYX
 	micron_disable_xip_volatile(0,0);
 	flashMemInit();
-#endif
+#ਜੇ_ਅੰਤ
 
 	trap_init();
 
-	main();
+	ਮੁੱਖ();
 
 	log_trace("init exited\n");
 }

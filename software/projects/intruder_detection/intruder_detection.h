@@ -28,42 +28,42 @@
 */
 
 
-#ifndef INTRUDER_DETECTION_H
-#define INTRUDER_DETECTION_H
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ INTRUDER_DETECTION_H
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INTRUDER_DETECTION_H
 
-#define ROWNUM              4
-#define COLNUM              4
-#define OUTPINS_OFFSET      0
-#define INPINS_OFFSET       4
-#define OUTPINS             (0xF << OUTPINS_OFFSET)
-#define INPINS              (0xF << INPINS_OFFSET)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ROWNUM              4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ COLNUM              4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ OUTPINS_ਵਿੱਥ      0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INPINS_ਵਿੱਥ       4
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ OUTPINS             (0xF << OUTPINS_ਵਿੱਥ)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INPINS              (0xF << INPINS_ਵਿੱਥ)
 
 //Peripheral Pins
-#define BUZZER              GPIO11
-#define LED_P1              GPIO16
-#define LED_P2              GPIO18
-#define LED_P3              GPIO19
-#define LED_P4              GPIO21
-#define POWER_SWITCH        GPIO24
-#define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
-#define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
-#define PIR_IN	            GPIO8
-#define PANIC_BUTTON_OFFSET 28
-#define PIR_OFFSET          8
-#define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ BUZZER              GPIO11
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LED_P1              GPIO16
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LED_P2              GPIO18
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LED_P3              GPIO19
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LED_P4              GPIO21
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ POWER_SWITCH        GPIO24
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DEACTIVATE_SWITCH   GPIO25
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PANIC_BUTTON        GPIO28          //ਨਿਵੇਸ਼
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PIR_ਵਿੱਚ	            GPIO8
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PANIC_BUTTON_ਵਿੱਥ 28
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PIR_ਵਿੱਥ          8
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ALARM_TIMER         5
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ਉੱਚਾ                1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ਨੀਵਾਂ                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PASS_ਅੰਕ            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+ਖਾਲੀ ਸੈੱਟ_ਕੁੰਜੀ_pins_map(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ* ਪੰਕਤੀ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ* ਖਾਨਾ, ਪੂਰਨ ਸਾਰਣੀ[COLNUM][ROWNUM]);
+ਪੂਰਨ get_ਕੁੰਜੀ();
+ਪੂਰਨ get_ਖਾਨਾ_ਪੰਕਤੀ(ਖਾਲੀ);
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਪੰਕਤੀ_pins[ROWNUM];
+ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਖਾਨਾ_pins[COLNUM];
+ਪੂਰਨ ਕੁੰਜੀ_map[COLNUM][ROWNUM];
 
-#endif
+#ਜੇ_ਅੰਤ

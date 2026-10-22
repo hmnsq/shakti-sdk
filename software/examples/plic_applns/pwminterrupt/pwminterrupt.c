@@ -31,14 +31,14 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "memory.h"
-#include "pwm_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "traps.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "plic_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "memory.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "pwm_driver.h"
 
 /** @fn unsigned handle_pwm_interrupt (uint32_t num)
  * @brief  Default handler to handle pwm interrupt,
@@ -46,11 +46,11 @@
  * @param unsigned num
  * @return unsigned
  */
-void handle_pwm_interrupt( uint32_t num)
+ਖਾਲੀ handle_pwm_ਰੁਕਾਵਟ( uint32_t ਅੰਕ)
 {
-	if(pwm_check_continuous_mode((6-num)) == 0)
+	ਜੇ(pwm_check_continuous_ਬਹੁਲਕ((6-ਅੰਕ)) == 0)
 	{
-		set_pwm_control_register((6-num),0x80);
+		ਸੈੱਟ_pwm_control_ਰਜਿਸਟਰ((6-ਅੰਕ),0x80);
 	}
 	log_info("pwm interrupt handled\n");
 }
@@ -58,29 +58,29 @@ void handle_pwm_interrupt( uint32_t num)
 /** @fn void main(void)
  * @brief sets up the environment for pwn interrupt feature
   */
-void main(void){
+ਖਾਲੀ ਮੁੱਖ(ਖਾਲੀ){
 
-	register unsigned int retval;
-	int i;
+	ਰਜਿਸਟਰ ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ retval;
+	ਪੂਰਨ i;
 
 	plic_init();
 
 	/*
 	   Configure pwm module interrupt
 	 */
-	configure_interrupt(PLIC_INTERRUPT_2);
-	isr_table[PLIC_INTERRUPT_2] = handle_pwm_interrupt;
+	configure_ਰੁਕਾਵਟ(PLIC_ਰੁਕਾਵਟ_2);
+	isr_ਸਾਰਣੀ[PLIC_ਰੁਕਾਵਟ_2] = handle_pwm_ਰੁਕਾਵਟ;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm ਅਸਥਿਰ("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm ਅਸਥਿਰ("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm ਅਸਥਿਰ(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -90,7 +90,7 @@ void main(void){
 
 	log_debug(" mstatus = %x\n", retval);
 
-	asm volatile(
+	asm ਅਸਥਿਰ(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -100,7 +100,7 @@ void main(void){
 
 	log_debug("mie = %x\n", retval);
 
-	asm volatile(
+	asm ਅਸਥਿਰ(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -128,7 +128,7 @@ void main(void){
 */
 //uncomment to test PWM 4 interrupts (interrupt ID - 1)
 	pwm_configure(PWM_4,0xffff,0xff,0x01,false);
-	pwm_start(PWM_4,1);	
+	pwm_ਸ਼ੁਰੂ(PWM_4,1);	
 
 	/*
  test PWM 5 interrupts (Not working)
@@ -136,8 +136,8 @@ void main(void){
 	pwm_start(PWM_5,1);
 */
 	
-	while(1){
-		asm volatile(
+	ਜਦੋਂ(1){
+		asm ਅਸਥਿਰ(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -146,8 +146,8 @@ void main(void){
 			    );
 
 		i++;
-		if((i%10000000) == 0){
-			printf(" mip = %x\n", retval);
+		ਜੇ((i%10000000) == 0){
+			ਲਿਖੋ(" mip = %x\n", retval);
 		}
 	}
 }

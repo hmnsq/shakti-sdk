@@ -219,89 +219,89 @@ q
 
 */
 
-#include <stdio.h>
-#define NOSIGNAL
-#define NOPAUSE
-#ifndef NOSIGNAL
-#include <signal.h>
-#endif
-#include <setjmp.h>
-#ifdef Single
-#define FLOAT float
-#define FABS(x) (float)fabs((double)(x))
-#define FLOOR(x) (float)floor((double)(x))
-#define LOG(x) (float)log((double)(x))
-#define POW(x,y) (float)pow((double)(x),(double)(y))
-#define SQRT(x) (float)sqrt((double)(x))
-#else
-#define FLOAT double
-#define FABS(x) fabs(x)
-#define FLOOR(x) floor(x)
-#define LOG(x) log(x)
-#define POW(x,y) pow(x,y)
-#define SQRT(x) sqrt(x)
-#endif
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdio.h>
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ NOSIGNAL
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ NOPAUSE
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOSIGNAL
+#ਅਨ੍ਤਰ੍ਭਾਵ <signal.h>
+#ਜੇ_ਅੰਤ
+#ਅਨ੍ਤਰ੍ਭਾਵ <setjmp.h>
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ Single
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FLOAT ਦਸ਼ਮਲਵ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FABS(x) (ਦਸ਼ਮਲਵ)fabs((ਦੁੱਗਣਾ)(x))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FLOOR(x) (ਦਸ਼ਮਲਵ)floor((ਦੁੱਗਣਾ)(x))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LOG(x) (ਦਸ਼ਮਲਵ)ਲਘੂਗਣਕ((ਦੁੱਗਣਾ)(x))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ POW(x,y) (ਦਸ਼ਮਲਵ)ਘਾਤ((ਦੁੱਗਣਾ)(x),(ਦੁੱਗਣਾ)(y))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SQRT(x) (ਦਸ਼ਮਲਵ)ਵਰਗਮੂਲ((ਦੁੱਗਣਾ)(x))
+#ਨਹੀਂਤਾਂ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FLOAT ਦੁੱਗਣਾ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FABS(x) fabs(x)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FLOOR(x) floor(x)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ LOG(x) ਲਘੂਗਣਕ(x)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ POW(x,y) ਘਾਤ(x,y)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SQRT(x) ਵਰਗਮੂਲ(x)
+#ਜੇ_ਅੰਤ
 
 jmp_buf ovfl_buf;
-#ifdef KR_headers
-#define VOID /* void */
-#define INT /* int */
-#define FP /* FLOAT */
-#define CHARP /* char * */
-#define CHARPP /* char ** */
-extern double fabs(), floor(), log(), pow(), sqrt();
-extern void exit();
-typedef void (*Sig_type)();
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ VOID /* void */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INT /* int */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FP /* FLOAT */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CHARP /* char * */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CHARPP /* char ** */
+ਬਾਹਰੀ ਦੁੱਗਣਾ fabs(), floor(), ਲਘੂਗਣਕ(), ਘਾਤ(), ਵਰਗਮੂਲ();
+ਬਾਹਰੀ ਖਾਲੀ ਬਾਹਰ_ਨਿਕਲੋ();
+ਕਿਸਮਪਰਿਭਾਸ਼ਾ ਖਾਲੀ (*Sig_type)();
 FLOAT Sign(), Random();
-extern void BadCond();
-extern void SqXMinX();
-extern void TstCond();
-extern void notify();
-extern int read();
-#else
-#define VOID void
-#define INT int
-#define FP FLOAT
-#define CHARP char *
-#define CHARPP char **
-#ifdef __STDC__
-#include <stdlib.h>
-#include <math.h>
-#else
-#ifdef __cplusplus
-extern "C" {
-#endif
-extern double fabs(double), floor(double), log(double);
-extern double pow(double,double), sqrt(double);
-extern void exit(INT);
-#ifdef __cplusplus
+ਬਾਹਰੀ ਖਾਲੀ BadCond();
+ਬਾਹਰੀ ਖਾਲੀ SqXMinX();
+ਬਾਹਰੀ ਖਾਲੀ TstCond();
+ਬਾਹਰੀ ਖਾਲੀ notify();
+ਬਾਹਰੀ ਪੂਰਨ ਪਠ();
+#ਨਹੀਂਤਾਂ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ VOID ਖਾਲੀ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ INT ਪੂਰਨ
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ FP FLOAT
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CHARP ਅੱਖਰ *
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ CHARPP ਅੱਖਰ **
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ __STDC__
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdlib.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ <math.h>
+#ਨਹੀਂਤਾਂ
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ __cplusplus
+ਬਾਹਰੀ "C" {
+#ਜੇ_ਅੰਤ
+ਬਾਹਰੀ ਦੁੱਗਣਾ fabs(ਦੁੱਗਣਾ), floor(ਦੁੱਗਣਾ), ਲਘੂਗਣਕ(ਦੁੱਗਣਾ);
+ਬਾਹਰੀ ਦੁੱਗਣਾ ਘਾਤ(ਦੁੱਗਣਾ,ਦੁੱਗਣਾ), ਵਰਗਮੂਲ(ਦੁੱਗਣਾ);
+ਬਾਹਰੀ ਖਾਲੀ ਬਾਹਰ_ਨਿਕਲੋ(INT);
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ __cplusplus
 	}
-#endif
-#endif
-typedef void (*Sig_type)(int);
-FLOAT Sign(FLOAT), Random(void);
-extern void BadCond(int, char*);
-extern void SqXMinX(int);
-extern void TstCond(int, int, char*);
-extern void notify(char*);
-extern int read(int, char*, int);
-#endif
-#undef V9
-extern void Characteristics(VOID);
-extern void Heading(VOID);
-extern void History(VOID);
-extern void Instructions(VOID);
-extern void IsYeqX(VOID);
-extern void NewD(VOID);
-extern void Pause(VOID);
-extern void PrintIfNPositive(VOID);
-extern void SR3750(VOID);
-extern void SR3980(VOID);
-extern void TstPtUf(VOID);
+#ਜੇ_ਅੰਤ
+#ਜੇ_ਅੰਤ
+ਕਿਸਮਪਰਿਭਾਸ਼ਾ ਖਾਲੀ (*Sig_type)(ਪੂਰਨ);
+FLOAT Sign(FLOAT), Random(ਖਾਲੀ);
+ਬਾਹਰੀ ਖਾਲੀ BadCond(ਪੂਰਨ, ਅੱਖਰ*);
+ਬਾਹਰੀ ਖਾਲੀ SqXMinX(ਪੂਰਨ);
+ਬਾਹਰੀ ਖਾਲੀ TstCond(ਪੂਰਨ, ਪੂਰਨ, ਅੱਖਰ*);
+ਬਾਹਰੀ ਖਾਲੀ notify(ਅੱਖਰ*);
+ਬਾਹਰੀ ਪੂਰਨ ਪਠ(ਪੂਰਨ, ਅੱਖਰ*, ਪੂਰਨ);
+#ਜੇ_ਅੰਤ
+#ਪਰਿਭਾਸ਼ਾ_ਰੱਦ V9
+ਬਾਹਰੀ ਖਾਲੀ Characteristics(VOID);
+ਬਾਹਰੀ ਖਾਲੀ Heading(VOID);
+ਬਾਹਰੀ ਖਾਲੀ History(VOID);
+ਬਾਹਰੀ ਖਾਲੀ Instructions(VOID);
+ਬਾਹਰੀ ਖਾਲੀ IsYeqX(VOID);
+ਬਾਹਰੀ ਖਾਲੀ NewD(VOID);
+ਬਾਹਰੀ ਖਾਲੀ Pause(VOID);
+ਬਾਹਰੀ ਖਾਲੀ PrintIfNPositive(VOID);
+ਬਾਹਰੀ ਖਾਲੀ SR3750(VOID);
+ਬਾਹਰੀ ਖਾਲੀ SR3980(VOID);
+ਬਾਹਰੀ ਖਾਲੀ TstPtUf(VOID);
 
 Sig_type sigsave;
 
-#define KEYBOARD 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ KEYBOARD 0
 
 FLOAT Radix, BInvrse, RadixD2, BMinusU2;
 
@@ -321,9 +321,9 @@ FLOAT TwoForty = 240.0;
 FLOAT MinusOne = -1.0;
 FLOAT OneAndHalf = 1.5;
 /*Integer constants*/
-int NoTrials = 20; /*Number of tests for commutativity. */
-#define False 0
-#define True 1
+ਪੂਰਨ NoTrials = 20; /*Number of tests for commutativity. */
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ False 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ True 1
 
 /* Definitions for declared types 
 	Guard == (Yes, No);
@@ -331,31 +331,31 @@ int NoTrials = 20; /*Number of tests for commutativity. */
 	Message == packed array [1..40] of char;
 	Class == (Flaw, Defect, Serious, Failure);
 	  */
-#define Yes 1
-#define No  0
-#define Chopped 2
-#define Rounded 1
-#define Other   0
-#define Flaw    3
-#define Defect  2
-#define Serious 1
-#define Failure 0
-typedef int Guard, Rounding, Class;
-typedef char Message;
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Yes 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ No  0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Chopped 2
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Rounded 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Other   0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Flaw    3
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Defect  2
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Serious 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Failure 0
+ਕਿਸਮਪਰਿਭਾਸ਼ਾ ਪੂਰਨ Guard, Rounding, Class;
+ਕਿਸਮਪਰਿਭਾਸ਼ਾ ਅੱਖਰ ਸੁਨੇਹਾ;
 
 /* Declarations of Variables */
-int Indx;
-char ch[8];
+ਪੂਰਨ Indx;
+ਅੱਖਰ ch[8];
 FLOAT AInvrse, A1;
 FLOAT C, CInvrse;
 FLOAT D, FourD;
 FLOAT E0, E1, Exp2, E3, MinSqEr;
 FLOAT SqEr, MaxSqEr, E9;
-FLOAT Third;
+FLOAT ਤੀਜਾ;
 FLOAT F6, F9;
 FLOAT H, HInvrse;
-int I;
-FLOAT StickyBit, J;
+ਪੂਰਨ I;
+FLOAT Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ, J;
 FLOAT MyZero;
 FLOAT Precision;
 FLOAT Q, Q9;
@@ -367,37 +367,37 @@ FLOAT W;
 FLOAT X, X1, X2, X8, Random1;
 FLOAT Y, Y1, Y2, Random2;
 FLOAT Z, PseudoZero, Z1, Z2, Z9;
-int ErrCnt[4];
-int fpecount;
-int Milestone;
-int PageNo;
-int M, N, N1;
+ਪੂਰਨ ErrCnt[4];
+ਪੂਰਨ fpecount;
+ਪੂਰਨ Milestone;
+ਪੂਰਨ ਪੰਨਾ_No;
+ਪੂਰਨ M, N, N1;
 Guard GMult, GDiv, GAddSub;
 Rounding RMult, RDiv, RAddSub, RSqrt;
-int Break, Done, NotMonot, Monot, Anomaly, IEEE,
+ਪੂਰਨ Break, ਪੂਰਾ, NotMonot, Monot, Anomaly, IEEE,
 		SqRWrng, UfNGrad;
 /* Computed constants. */
 /*U1  gap below 1.0, i.e, 1.0-U1 is next number below 1.0 */
 /*U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0 */
 
 /* floating point exception receiver */
- void
+ ਖਾਲੀ
 sigfpe(INT x)
 {
 	fpecount++;
-	printf("\n* * * FLOATING-POINT ERROR %d * * *\n", x);
+	ਲਿਖੋ("\n* * * FLOATING-POINT ERROR %d * * *\n", x);
 	fflush(stdout);
-	if (sigsave) {
-#ifndef NOSIGNAL
-		signal(SIGFPE, sigsave);
-#endif
+	ਜੇ (sigsave) {
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOSIGNAL
+		ਸੰਕੇਤ(SIGFPE, sigsave);
+#ਜੇ_ਅੰਤ
 		sigsave = 0;
 		longjmp(ovfl_buf, 1);
 		}
-	exit(1);
+	ਬਾਹਰ_ਨਿਕਲੋ(1);
 }
 
-main(VOID)
+ਮੁੱਖ(VOID)
 {
 	/* First two assignments use integer right-hand sides. */
   uart_init();
@@ -419,13 +419,13 @@ main(VOID)
 	ErrCnt[Serious] = 0;
 	ErrCnt[Defect] = 0;
 	ErrCnt[Flaw] = 0;
-	PageNo = 1;
+	ਪੰਨਾ_No = 1;
 	/*=============================================*/
 	Milestone = 0;
 	/*=============================================*/
-#ifndef NOSIGNAL
-	signal(SIGFPE, sigfpe);
-#endif
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOSIGNAL
+	ਸੰਕੇਤ(SIGFPE, sigfpe);
+#ਜੇ_ਅੰਤ
 	Instructions();
 	Pause();
 	Heading();
@@ -437,15 +437,15 @@ main(VOID)
 	/*=============================================*/
 	Milestone = 7;
 	/*=============================================*/
-	printf("Program is now RUNNING tests on small integers:\n");
+	ਲਿਖੋ("Program is now RUNNING tests on small integers:\n");
 	
 	TstCond (Failure, (Zero + Zero == Zero) && (One - One == Zero)
 		   && (One > Zero) && (One + One == Two),
 			"0+0 != 0, 1-1 != 0, 1 <= 0, or 1+1 != 2");
 	Z = - Zero;
-	if (Z != 0.0) {
+	ਜੇ (Z != 0.0) {
 		ErrCnt[Failure] = ErrCnt[Failure] + 1;
-		printf("Comparison alleges that -0.0 is Non-zero!\n");
+		ਲਿਖੋ("Comparison alleges that -0.0 is Non-zero!\n");
 		U2 = 0.001;
 		Radix = 1;
 		TstPtUf();
@@ -462,7 +462,7 @@ main(VOID)
 	TstCond (Failure, Half + MinusOne + Half == Zero,
 		  "1/2 + (-1) + 1/2 != 0");
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	{
 		extern void part2(VOID), part3(VOID), part4(VOID),
 			part5(VOID), part6(VOID), part7(VOID);
@@ -493,42 +493,42 @@ void part2(VOID){
 		   && ( TwoForty / Four - Five * Three * Four == Zero)
 		   && ( TwoForty / Five - Four * Three * Four == Zero),
 		  "5 != 4+1, 240/3 != 80, 240/4 != 60, or 240/5 != 48");
-	if (ErrCnt[Failure] == 0) {
-		printf("-1, 0, 1/2, 1, 2, 3, 4, 5, 9, 27, 32 & 240 are O.K.\n");
-		printf("\n");
+	ਜੇ (ErrCnt[Failure] == 0) {
+		ਲਿਖੋ("-1, 0, 1/2, 1, 2, 3, 4, 5, 9, 27, 32 & 240 are O.K.\n");
+		ਲਿਖੋ("\n");
 		}
-	printf("Searching for Radix and Precision.\n");
+	ਲਿਖੋ("Searching for Radix and Precision.\n");
 	W = One;
-	do  {
+	ਕਰੋ  {
 		W = W + W;
 		Y = W + One;
 		Z = Y - W;
 		Y = Z - One;
-		} while (MinusOne + FABS(Y) < Zero);
+		} ਜਦੋਂ (MinusOne + FABS(Y) < Zero);
 	/*.. now W is just big enough that |((W+1)-W)-1| >= 1 ...*/
 	Precision = Zero;
 	Y = One;
-	do  {
+	ਕਰੋ  {
 		Radix = W + Y;
 		Y = Y + Y;
 		Radix = Radix - W;
-		} while ( Radix == Zero);
-	if (Radix < Two) Radix = One;
-	printf("Radix = %d .\n", Radix);
-	if (Radix != 1) {
+		} ਜਦੋਂ ( Radix == Zero);
+	ਜੇ (Radix < Two) Radix = One;
+	ਲਿਖੋ("Radix = %d .\n", Radix);
+	ਜੇ (Radix != 1) {
 		W = One;
-		do  {
+		ਕਰੋ  {
 			Precision = Precision + One;
 			W = W * Radix;
 			Y = W + One;
-			} while ((Y - W) == One);
+			} ਜਦੋਂ ((Y - W) == One);
 		}
 	/*... now W == Radix^Precision is barely too big to satisfy (W+1)-W == 1
 			                              ...*/
 	U1 = One / W;
 	U2 = Radix * U1;
-	printf("Closest relative separation found is U1 = %d .\n\n", U1);
-	printf("Recalculating radix and precision\n ");
+	ਲਿਖੋ("Closest relative separation found is U1 = %d .\n\n", U1);
+	ਲਿਖੋ("Recalculating radix and precision\n ");
 	
 	/*save old values*/
 	E0 = Radix;
@@ -537,45 +537,45 @@ void part2(VOID){
 	E3 = Precision;
 	
 	X = Four / Three;
-	Third = X - One;
-	F6 = Half - Third;
+	ਤੀਜਾ = X - One;
+	F6 = Half - ਤੀਜਾ;
 	X = F6 + F6;
-	X = FABS(X - Third);
-	if (X < U2) X = U2;
+	X = FABS(X - ਤੀਜਾ);
+	ਜੇ (X < U2) X = U2;
 	
 	/*... now X = (unknown no.) ulps of 1+...*/
-	do  {
+	ਕਰੋ  {
 		U2 = X;
 		Y = Half * U2 + ThirtyTwo * U2 * U2;
 		Y = One + Y;
 		X = Y - One;
-		} while ( ! ((U2 <= X) || (X <= Zero)));
+		} ਜਦੋਂ ( ! ((U2 <= X) || (X <= Zero)));
 	
 	/*... now U2 == 1 ulp of 1 + ... */
 	X = Two / Three;
 	F6 = X - Half;
-	Third = F6 + F6;
-	X = Third - Half;
+	ਤੀਜਾ = F6 + F6;
+	X = ਤੀਜਾ - Half;
 	X = FABS(X + F6);
-	if (X < U1) X = U1;
+	ਜੇ (X < U1) X = U1;
 	
 	/*... now  X == (unknown no.) ulps of 1 -... */
-	do  {
+	ਕਰੋ  {
 		U1 = X;
 		Y = Half * U1 + ThirtyTwo * U1 * U1;
 		Y = Half - Y;
 		X = Half + Y;
 		Y = Half - X;
 		X = Half + Y;
-		} while ( ! ((U1 <= X) || (X <= Zero)));
+		} ਜਦੋਂ ( ! ((U1 <= X) || (X <= Zero)));
 	/*... now U1 == 1 ulp of 1 - ... */
-	if (U1 == E1) printf("confirms closest relative separation U1 .\n");
-	else printf("gets better closest relative separation U1 = %d .\n", U1);
+	ਜੇ (U1 == E1) ਲਿਖੋ("confirms closest relative separation U1 .\n");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("gets better closest relative separation U1 = %d .\n", U1);
 	W = One / U1;
 	F9 = (Half - U1) + Half;
 	Radix = FLOOR(0.01 + U2 / U1);
-	if (Radix == E0) printf("Radix confirmed.\n");
-	else printf("MYSTERY: recalculated Radix = %d .\n", Radix);
+	ਜੇ (Radix == E0) ਲਿਖੋ("Radix confirmed.\n");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("MYSTERY: recalculated Radix = %d .\n", Radix);
 	TstCond (Defect, Radix <= Eight + Eight,
 		   "Radix is too big: roundoff problems");
 	TstCond (Flaw, (Radix == Two) || (Radix == 10)
@@ -600,21 +600,21 @@ void part2(VOID){
 	BMinusU2 = Radix - One;
 	BMinusU2 = (BMinusU2 - U2) + One;
 	/* Purify Integers */
-	if (Radix != One)  {
+	ਜੇ (Radix != One)  {
 		X = - TwoForty * LOG(U1) / LOG(Radix);
 		Y = FLOOR(Half + X);
-		if (FABS(X - Y) * Four < One) X = Y;
+		ਜੇ (FABS(X - Y) * Four < One) X = Y;
 		Precision = X / TwoForty;
 		Y = FLOOR(Half + Precision);
-		if (FABS(Precision - Y) * TwoForty < Half) Precision = Y;
+		ਜੇ (FABS(Precision - Y) * TwoForty < Half) Precision = Y;
 		}
-	if ((Precision != FLOOR(Precision)) || (Radix == One)) {
-		printf("Precision cannot be characterized by an Integer number\n");
-		printf("of significant digits but, by itself, this is a minor flaw.\n");
+	ਜੇ ((Precision != FLOOR(Precision)) || (Radix == One)) {
+		ਲਿਖੋ("Precision cannot be characterized by an Integer number\n");
+		ਲਿਖੋ("of significant digits but, by itself, this is a minor flaw.\n");
 		}
-	if (Radix == One) 
-		printf("logarithmic encoding has precision characterized solely by U1.\n");
-	else printf("The number of significant digits of the Radix is %d .\n",
+	ਜੇ (Radix == One) 
+		ਲਿਖੋ("logarithmic encoding has precision characterized solely by U1.\n");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("The number of significant digits of the Radix is %d .\n",
 			Precision);
 	TstCond (Serious, U2 * Nine * Nine * TwoForty < One,
 		   "Precision worse than 5 decimal figures  ");
@@ -623,74 +623,74 @@ void part2(VOID){
 	/*=============================================*/
 	/* Test for extra-precise subepressions */
 	X = FABS(((Four / Three - One) - One / Four) * Three - One / Four);
-	do  {
+	ਕਰੋ  {
 		Z2 = X;
 		X = (One + (Half * Z2 + ThirtyTwo * Z2 * Z2)) - One;
-		} while ( ! ((Z2 <= X) || (X <= Zero)));
+		} ਜਦੋਂ ( ! ((Z2 <= X) || (X <= Zero)));
 	X = Y = Z = FABS((Three / Four - Two / Three) * Three - One / Four);
-	do  {
+	ਕਰੋ  {
 		Z1 = Z;
 		Z = (One / Two - ((One / Two - (Half * Z1 + ThirtyTwo * Z1 * Z1))
 			+ One / Two)) + One / Two;
-		} while ( ! ((Z1 <= Z) || (Z <= Zero)));
-	do  {
-		do  {
+		} ਜਦੋਂ ( ! ((Z1 <= Z) || (Z <= Zero)));
+	ਕਰੋ  {
+		ਕਰੋ  {
 			Y1 = Y;
 			Y = (Half - ((Half - (Half * Y1 + ThirtyTwo * Y1 * Y1)) + Half
 				)) + Half;
-			} while ( ! ((Y1 <= Y) || (Y <= Zero)));
+			} ਜਦੋਂ ( ! ((Y1 <= Y) || (Y <= Zero)));
 		X1 = X;
 		X = ((Half * X1 + ThirtyTwo * X1 * X1) - F9) + F9;
-		} while ( ! ((X1 <= X) || (X <= Zero)));
-	if ((X1 != Y1) || (X1 != Z1)) {
+		} ਜਦੋਂ ( ! ((X1 <= X) || (X <= Zero)));
+	ਜੇ ((X1 != Y1) || (X1 != Z1)) {
 		BadCond(Serious, "Disagreements among the values X1, Y1, Z1,\n");
-		printf("respectively  %d,  %016x,  %016x,\n", X1, Y1, Z1);
-		printf("are symptoms of inconsistencies introduced\n");
-		printf("by extra-precise evaluation of arithmetic subexpressions.\n");
+		ਲਿਖੋ("respectively  %d,  %016x,  %016x,\n", X1, Y1, Z1);
+		ਲਿਖੋ("are symptoms of inconsistencies introduced\n");
+		ਲਿਖੋ("by extra-precise evaluation of arithmetic subexpressions.\n");
 		notify("Possibly some part of this");
-		if ((X1 == U1) || (Y1 == U1) || (Z1 == U1))  printf(
+		ਜੇ ((X1 == U1) || (Y1 == U1) || (Z1 == U1))  ਲਿਖੋ(
 			"That feature is not tested further by this program.\n") ;
 		}
-	else  {
-		if ((Z1 != U1) || (Z2 != U2)) {
-			if ((Z1 >= U1) || (Z2 >= U2)) {
+	ਨਹੀਂਤਾਂ  {
+		ਜੇ ((Z1 != U1) || (Z2 != U2)) {
+			ਜੇ ((Z1 >= U1) || (Z2 >= U2)) {
 				BadCond(Failure, "");
 				notify("Precision");
-				printf("\tU1 = %d, Z1 - U1 = %016x\n",U1,Z1-U1);
-				printf("\tU2 = %d, Z2 - U2 = %016x\n",U2,Z2-U2);
+				ਲਿਖੋ("\tU1 = %d, Z1 - U1 = %016x\n",U1,Z1-U1);
+				ਲਿਖੋ("\tU2 = %d, Z2 - U2 = %016x\n",U2,Z2-U2);
 				}
-			else {
-				if ((Z1 <= Zero) || (Z2 <= Zero)) {
-					printf("Because of unusual Radix = %d", Radix);
-					printf(", or exact rational arithmetic a result\n");
-					printf("Z1 = %d, or Z2 = %016x ", Z1, Z2);
+			ਨਹੀਂਤਾਂ {
+				ਜੇ ((Z1 <= Zero) || (Z2 <= Zero)) {
+					ਲਿਖੋ("Because of unusual Radix = %d", Radix);
+					ਲਿਖੋ(", or exact rational arithmetic a result\n");
+					ਲਿਖੋ("Z1 = %d, or Z2 = %016x ", Z1, Z2);
 					notify("of an\nextra-precision");
 					}
-				if (Z1 != Z2 || Z1 > Zero) {
+				ਜੇ (Z1 != Z2 || Z1 > Zero) {
 					X = Z1 / U1;
 					Y = Z2 / U2;
-					if (Y > X) X = Y;
+					ਜੇ (Y > X) X = Y;
 					Q = - LOG(X);
-					printf("Some subexpressions appear to be calculated extra\n");
-					printf("precisely with about %d extra B-digits, i.e.\n",
+					ਲਿਖੋ("Some subexpressions appear to be calculated extra\n");
+					ਲਿਖੋ("precisely with about %d extra B-digits, i.e.\n",
 						(Q / LOG(Radix)));
-					printf("roughly %d extra significant decimals.\n",
+					ਲਿਖੋ("roughly %d extra significant decimals.\n",
 						Q / LOG(10.));
 					}
-				printf("That feature is not tested further by this program.\n");
+				ਲਿਖੋ("That feature is not tested further by this program.\n");
 				}
 			}
 		}
 	Pause();
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	}
 #include "paranoia.h"
 void part3(VOID){
 */
 	Milestone = 35;
 	/*=============================================*/
-	if (Radix >= Two) {
+	ਜੇ (Radix >= Two) {
 		X = W / (Radix * Radix);
 		Y = X + One;
 		Z = Y - X;
@@ -698,10 +698,10 @@ void part3(VOID){
 		X = T - Z;
 		TstCond (Failure, X == U2,
 			"Subtraction is not normalized X=Y,X+Z != Y+Z!");
-		if (X == U2) printf(
+		ਜੇ (X == U2) ਲਿਖੋ(
 			"Subtraction appears to be normalized, as it should be.");
 		}
-	printf("\nChecking for guard digit in *, /, and -.\n");
+	ਲਿਖੋ("\nChecking for guard digit in *, /, and -.\n");
 	Y = F9 * One;
 	Z = One * F9;
 	X = F9 - Half;
@@ -716,8 +716,8 @@ void part3(VOID){
 	T = T - Radix * U2;
 	X = X * (Radix - One);
 	T = T * (Radix - One);
-	if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)) GMult = Yes;
-	else {
+	ਜੇ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)) GMult = Yes;
+	ਨਹੀਂਤਾਂ {
 		GMult = No;
 		TstCond (Serious, False,
 			"* lacks a Guard Digit, so 1*X != X");
@@ -747,8 +747,8 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	X = One + U2;
 	T = X / One;
 	X = T - X;
-	if ((X == Zero) && (Y == Zero) && (Z == Zero)) GDiv = Yes;
-	else {
+	ਜੇ ((X == Zero) && (Y == Zero) && (Z == Zero)) GDiv = Yes;
+	ਨਹੀਂਤਾਂ {
 		GDiv = No;
 		TstCond (Serious, False,
 			"Division lacks a Guard Digit, so X/1 != X");
@@ -762,9 +762,9 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	Z = X * Radix;
 	T = Y * Radix;
 	R = Z / Radix;
-	StickyBit = T / Radix;
+	Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = T / Radix;
 	X = R - X;
-	Y = StickyBit - Y;
+	Y = Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ - Y;
 	TstCond (Failure, X == Zero && Y == Zero,
 			"* and/or / gets too many last digits wrong");
 	Y = One - U1;
@@ -773,53 +773,53 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	T = Radix - U2;
 	Z = Radix - BMinusU2;
 	T = Radix - T;
-	if ((X == U1) && (Y == U1) && (Z == U2) && (T == U2)) GAddSub = Yes;
-	else {
+	ਜੇ ((X == U1) && (Y == U1) && (Z == U2) && (T == U2)) GAddSub = Yes;
+	ਨਹੀਂਤਾਂ {
 		GAddSub = No;
 		TstCond (Serious, False,
 			"- lacks Guard Digit, so cancellation is obscured");
 		}
-	if (F9 != One && F9 - One >= Zero) {
+	ਜੇ (F9 != One && F9 - One >= Zero) {
 		BadCond(Serious, "comparison alleges  (1-U1) < 1  although\n");
-		printf("  subtraction yields  (1-U1) - 1 = 0 , thereby vitiating\n");
-		printf("  such precautions against division by zero as\n");
-		printf("  ...  if (X == 1.0) {.....} else {.../(X-1.0)...}\n");
+		ਲਿਖੋ("  subtraction yields  (1-U1) - 1 = 0 , thereby vitiating\n");
+		ਲਿਖੋ("  such precautions against division by zero as\n");
+		ਲਿਖੋ("  ...  if (X == 1.0) {.....} else {.../(X-1.0)...}\n");
 		}
-	if (GMult == Yes && GDiv == Yes && GAddSub == Yes) printf(
+	ਜੇ (GMult == Yes && GDiv == Yes && GAddSub == Yes) ਲਿਖੋ(
 		"     *, /, and - appear to have guard digits, as they should.\n");
 	/*=============================================*/
 	Milestone = 40;
 	/*=============================================*/
 	Pause();
-	printf("Checking rounding on multiply, divide and add/subtract.\n");
+	ਲਿਖੋ("Checking rounding on multiply, divide and add/subtract.\n");
 	RMult = Other;
 	RDiv = Other;
 	RAddSub = Other;
 	RadixD2 = Radix / Two;
 	A1 = Two;
-	Done = False;
-	do  {
+	ਪੂਰਾ = False;
+	ਕਰੋ  {
 		AInvrse = Radix;
-		do  {
+		ਕਰੋ  {
 			X = AInvrse;
 			AInvrse = AInvrse / A1;
-			} while ( ! (FLOOR(AInvrse) != AInvrse));
-		Done = (X == One) || (A1 > Three);
-		if (! Done) A1 = Nine + One;
-		} while ( ! (Done));
-	if (X == One) A1 = Radix;
+			} ਜਦੋਂ ( ! (FLOOR(AInvrse) != AInvrse));
+		ਪੂਰਾ = (X == One) || (A1 > Three);
+		ਜੇ (! ਪੂਰਾ) A1 = Nine + One;
+		} ਜਦੋਂ ( ! (ਪੂਰਾ));
+	ਜੇ (X == One) A1 = Radix;
 	AInvrse = One / A1;
 	X = A1;
 	Y = AInvrse;
-	Done = False;
-	do  {
+	ਪੂਰਾ = False;
+	ਕਰੋ  {
 		Z = X * Y - Half;
 		TstCond (Failure, Z == Half,
 			"X * (1/X) differs from 1");
-		Done = X == Radix;
+		ਪੂਰਾ = X == Radix;
 		X = Radix;
 		Y = One / X;
-		} while ( ! (Done));
+		} ਜਦੋਂ ( ! (ਪੂਰਾ));
 	Y2 = One + U2;
 	Y1 = One - U2;
 	X = OneAndHalf - U2;
@@ -832,36 +832,36 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	Y = (Y + U2) * Y1;
 	X = X - OneAndHalf;
 	Y = Y - OneAndHalf;
-	if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T <= Zero)) {
+	ਜੇ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T <= Zero)) {
 		X = (OneAndHalf + U2) * Y2;
 		Y = OneAndHalf - U2 - U2;
 		Z = OneAndHalf + U2 + U2;
 		T = (OneAndHalf - U2) * Y1;
 		X = X - (Z + U2);
-		StickyBit = Y * Y1;
+		Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = Y * Y1;
 		S = Z * Y2;
 		T = T - Y;
-		Y = (U2 - Y) + StickyBit;
+		Y = (U2 - Y) + Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ;
 		Z = S - (Z + U2 + U2);
-		StickyBit = (Y2 + U2) * Y1;
+		Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = (Y2 + U2) * Y1;
 		Y1 = Y2 * Y1;
-		StickyBit = StickyBit - Y2;
+		Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ - Y2;
 		Y1 = Y1 - Half;
-		if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
-			&& ( StickyBit == Zero) && (Y1 == Half)) {
+		ਜੇ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
+			&& ( Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ == Zero) && (Y1 == Half)) {
 			RMult = Rounded;
-			printf("Multiplication appears to round correctly.\n");
+			ਲਿਖੋ("Multiplication appears to round correctly.\n");
 			}
-		else	if ((X + U2 == Zero) && (Y < Zero) && (Z + U2 == Zero)
-				&& (T < Zero) && (StickyBit + U2 == Zero)
+		ਨਹੀਂਤਾਂ	ਜੇ ((X + U2 == Zero) && (Y < Zero) && (Z + U2 == Zero)
+				&& (T < Zero) && (Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ + U2 == Zero)
 				&& (Y1 < Half)) {
 				RMult = Chopped;
-				printf("Multiplication appears to chop.\n");
+				ਲਿਖੋ("Multiplication appears to chop.\n");
 				}
-			else printf("* is neither chopped nor correctly rounded.\n");
-		if ((RMult == Rounded) && (GMult == No)) notify("Multiplication");
+			ਨਹੀਂਤਾਂ ਲਿਖੋ("* is neither chopped nor correctly rounded.\n");
+		ਜੇ ((RMult == Rounded) && (GMult == No)) notify("Multiplication");
 		}
-	else printf("* is neither chopped nor correctly rounded.\n");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("* is neither chopped nor correctly rounded.\n");
 	/*=============================================*/
 	Milestone = 45;
 	/*=============================================*/
@@ -877,7 +877,7 @@ or  1/3  and  3/9  and  9/27 may disagree");
 	T = T / Y1;
 	Z = Z - (OneAndHalf + U2);
 	T = (U2 - OneAndHalf) + T;
-	if (! ((X > Zero) || (Y > Zero) || (Z > Zero) || (T > Zero))) {
+	ਜੇ (! ((X > Zero) || (Y > Zero) || (Z > Zero) || (T > Zero))) {
 		X = OneAndHalf / Y2;
 		Y = OneAndHalf - U2;
 		Z = OneAndHalf + U2;
@@ -891,25 +891,25 @@ or  1/3  and  3/9  and  9/27 may disagree");
 		Z = Z - OneAndHalf;
 		Y2 = Y1 - Y2;
 		Y1 = (F9 - U1) / F9;
-		if ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
+		ਜੇ ((X == Zero) && (Y == Zero) && (Z == Zero) && (T == Zero)
 			&& (Y2 == Zero) && (Y2 == Zero)
 			&& (Y1 - Half == F9 - Half )) {
 			RDiv = Rounded;
-			printf("Division appears to round correctly.\n");
-			if (GDiv == No) notify("Division");
+			ਲਿਖੋ("Division appears to round correctly.\n");
+			ਜੇ (GDiv == No) notify("Division");
 			}
-		else if ((X < Zero) && (Y < Zero) && (Z < Zero) && (T < Zero)
+		ਨਹੀਂਤਾਂ ਜੇ ((X < Zero) && (Y < Zero) && (Z < Zero) && (T < Zero)
 			&& (Y2 < Zero) && (Y1 - Half < F9 - Half)) {
 			RDiv = Chopped;
-			printf("Division appears to chop.\n");
+			ਲਿਖੋ("Division appears to chop.\n");
 			}
 		}
-	if (RDiv == Other) printf("/ is neither chopped nor correctly rounded.\n");
+	ਜੇ (RDiv == Other) ਲਿਖੋ("/ is neither chopped nor correctly rounded.\n");
 	BInvrse = One / Radix;
 	TstCond (Failure, (BInvrse * Radix - Half == Half),
 		   "Radix * ( 1 / Radix ) differs from 1");
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	}
 #include "paranoia.h"
 void part4(VOID){
@@ -924,108 +924,108 @@ void part4(VOID){
 	Z = F9 - Half;
 	X = (X - Half) - Z;
 	Y = Y - One;
-	if ((X == Zero) && (Y == Zero)) {
+	ਜੇ ((X == Zero) && (Y == Zero)) {
 		RAddSub = Chopped;
-		printf("Add/Subtract appears to be chopped.\n");
+		ਲਿਖੋ("Add/Subtract appears to be chopped.\n");
 		}
-	if (GAddSub == Yes) {
+	ਜੇ (GAddSub == Yes) {
 		X = (Half + U2) * U2;
 		Y = (Half - U2) * U2;
 		X = One + X;
 		Y = One + Y;
 		X = (One + U2) - X;
 		Y = One - Y;
-		if ((X == Zero) && (Y == Zero)) {
+		ਜੇ ((X == Zero) && (Y == Zero)) {
 			X = (Half + U2) * U1;
 			Y = (Half - U2) * U1;
 			X = One - X;
 			Y = One - Y;
 			X = F9 - X;
 			Y = One - Y;
-			if ((X == Zero) && (Y == Zero)) {
+			ਜੇ ((X == Zero) && (Y == Zero)) {
 				RAddSub = Rounded;
-				printf("Addition/Subtraction appears to round correctly.\n");
-				if (GAddSub == No) notify("Add/Subtract");
+				ਲਿਖੋ("Addition/Subtraction appears to round correctly.\n");
+				ਜੇ (GAddSub == No) notify("Add/Subtract");
 				}
-			else printf("Addition/Subtraction neither rounds nor chops.\n");
+			ਨਹੀਂਤਾਂ ਲਿਖੋ("Addition/Subtraction neither rounds nor chops.\n");
 			}
-		else printf("Addition/Subtraction neither rounds nor chops.\n");
+		ਨਹੀਂਤਾਂ ਲਿਖੋ("Addition/Subtraction neither rounds nor chops.\n");
 		}
-	else printf("Addition/Subtraction neither rounds nor chops.\n");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("Addition/Subtraction neither rounds nor chops.\n");
 	S = One;
 	X = One + Half * (One + Half);
 	Y = (One + U2) * Half;
 	Z = X - Y;
 	T = Y - X;
-	StickyBit = Z + T;
-	if (StickyBit != Zero) {
+	Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = Z + T;
+	ਜੇ (Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ != Zero) {
 		S = Zero;
 		BadCond(Flaw, "(X - Y) + (Y - X) is non zero!\n");
 		}
-	StickyBit = Zero;
-	if ((GMult == Yes) && (GDiv == Yes) && (GAddSub == Yes)
+	Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = Zero;
+	ਜੇ ((GMult == Yes) && (GDiv == Yes) && (GAddSub == Yes)
 		&& (RMult == Rounded) && (RDiv == Rounded)
 		&& (RAddSub == Rounded) && (FLOOR(RadixD2) == RadixD2)) {
-		printf("Checking for sticky bit.\n");
+		ਲਿਖੋ("Checking for sticky bit.\n");
 		X = (Half + U1) * U2;
 		Y = Half * U2;
 		Z = One + Y;
 		T = One + X;
-		if ((Z - One <= Zero) && (T - One >= U2)) {
+		ਜੇ ((Z - One <= Zero) && (T - One >= U2)) {
 			Z = T + Y;
 			Y = Z - X;
-			if ((Z - T >= U2) && (Y - T == Zero)) {
+			ਜੇ ((Z - T >= U2) && (Y - T == Zero)) {
 				X = (Half + U1) * U1;
 				Y = Half * U1;
 				Z = One - Y;
 				T = One - X;
-				if ((Z - One == Zero) && (T - F9 == Zero)) {
+				ਜੇ ((Z - One == Zero) && (T - F9 == Zero)) {
 					Z = (Half - U1) * U1;
 					T = F9 - Z;
 					Q = F9 - Y;
-					if ((T - F9 == Zero) && (F9 - U1 - Q == Zero)) {
+					ਜੇ ((T - F9 == Zero) && (F9 - U1 - Q == Zero)) {
 						Z = (One + U2) * OneAndHalf;
 						T = (OneAndHalf + U2) - Z + U2;
 						X = One + Half / Radix;
 						Y = One + Radix * U2;
 						Z = X * Y;
-						if (T == Zero && X + Radix * U2 - Z == Zero) {
-							if (Radix != Two) {
+						ਜੇ (T == Zero && X + Radix * U2 - Z == Zero) {
+							ਜੇ (Radix != Two) {
 								X = Two + U2;
 								Y = X / Two;
-								if ((Y - One == Zero)) StickyBit = S;
+								ਜੇ ((Y - One == Zero)) Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = S;
 								}
-							else StickyBit = S;
+							ਨਹੀਂਤਾਂ Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ = S;
 							}
 						}
 					}
 				}
 			}
 		}
-	if (StickyBit == One) printf("Sticky bit apparently used correctly.\n");
-	else printf("Sticky bit used incorrectly or not at all.\n");
+	ਜੇ (Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ == One) ਲਿਖੋ("Sticky bit apparently used correctly.\n");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("Sticky bit used incorrectly or not at all.\n");
 	TstCond (Flaw, !(GMult == No || GDiv == No || GAddSub == No ||
 			RMult == Other || RDiv == Other || RAddSub == Other),
-		"lack(s) of guard digits or failure(s) to correctly round or chop\n\
-(noted above) count as one flaw in the final tally below");
+		"lack(s) ਦਾ guard digits or failure(s) ਮੰਜ਼ਿਲ correctly round or chop\n\
+(noted above) ਗਿਣਤੀ_2 as one flaw ਵਿੱਚ_2 the final tally ਹੇਠਾਂ");
 	/*=============================================*/
 	Milestone = 60;
 	/*=============================================*/
-	printf("\n");
-	printf("Does Multiplication commute?  ");
-	printf("Testing on %d random pairs.\n", NoTrials);
+	ਲਿਖੋ("\n");
+	ਲਿਖੋ("Does Multiplication commute?  ");
+	ਲਿਖੋ("Testing on %d random pairs.\n", NoTrials);
 	Random9 = SQRT(3.0);
-	Random1 = Third;
+	Random1 = ਤੀਜਾ;
 	I = 1;
-	do  {
+	ਕਰੋ  {
 		X = Random();
 		Y = Random();
 		Z9 = Y * X;
 		Z = X * Y;
 		Z9 = Z - Z9;
 		I = I + 1;
-		} while ( ! ((I > NoTrials) || (Z9 != Zero)));
-	if (I == NoTrials) {
+		} ਜਦੋਂ ( ! ((I > NoTrials) || (Z9 != Zero)));
+	ਜੇ (I == NoTrials) {
 		Random1 = One + Half / Three;
 		Random2 = (U2 + U1) + One;
 		Z = Random1 * Random2;
@@ -1033,13 +1033,13 @@ void part4(VOID){
 		Z9 = (One + Half / Three) * ((U2 + U1) + One) - (One + Half /
 			Three) * ((U2 + U1) + One);
 		}
-	if (! ((I == NoTrials) || (Z9 == Zero)))
+	ਜੇ (! ((I == NoTrials) || (Z9 == Zero)))
 		BadCond(Defect, "X * Y == Y * X trial fails.\n");
-	else printf("     No failures found in %d integer pairs.\n", NoTrials);
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("     No failures found in %d integer pairs.\n", NoTrials);
 	/*=============================================*/
 	Milestone = 70;
 	/*=============================================*/
-	printf("\nRunning test of square root(x).\n");
+	ਲਿਖੋ("\nRunning test of square root(x).\n");
 	TstCond (Failure, (Zero == SQRT(Zero))
 		   && (- Zero == SQRT(- Zero))
 		   && (One == SQRT(One)), "Square root of 0.0, -0.0 or 1.0 wrong");
@@ -1055,61 +1055,61 @@ void part4(VOID){
 	X = U1;
 	OneUlp = U1 * U1;
 	SqXMinX (Serious);
-	if (J != Zero) Pause();
-	printf("Testing if sqrt(X * X) == X for %d Integers X.\n", NoTrials);
+	ਜੇ (J != Zero) Pause();
+	ਲਿਖੋ("Testing if sqrt(X * X) == X for %d Integers X.\n", NoTrials);
 	J = Zero;
 	X = Two;
 	Y = Radix;
-	if ((Radix != One)) do  {
+	ਜੇ ((Radix != One)) ਕਰੋ  {
 		X = Y;
 		Y = Radix * Y;
-		} while ( ! ((Y - X >= NoTrials)));
+		} ਜਦੋਂ ( ! ((Y - X >= NoTrials)));
 	OneUlp = X * U2;
 	I = 1;
-	while (I <= NoTrials) {
+	ਜਦੋਂ (I <= NoTrials) {
 		X = X + One;
 		SqXMinX (Defect);
-		if (J > Zero) break;
+		ਜੇ (J > Zero) ਰੋਕੋ;
 		I = I + 1;
 		}
-	printf("Test for sqrt monotonicity.\n");
+	ਲਿਖੋ("Test for sqrt monotonicity.\n");
 	I = - 1;
 	X = BMinusU2;
 	Y = Radix;
 	Z = Radix + Radix * U2;
 	NotMonot = False;
 	Monot = False;
-	while ( ! (NotMonot || Monot)) {
+	ਜਦੋਂ ( ! (NotMonot || Monot)) {
 		I = I + 1;
 		X = SQRT(X);
 		Q = SQRT(Y);
 		Z = SQRT(Z);
-		if ((X > Q) || (Q > Z)) NotMonot = True;
-		else {
+		ਜੇ ((X > Q) || (Q > Z)) NotMonot = True;
+		ਨਹੀਂਤਾਂ {
 			Q = FLOOR(Q + Half);
-			if (!(I > 0 || Radix == Q * Q)) Monot = True;
-			else if (I > 0) {
-			if (I > 1) Monot = True;
-			else {
+			ਜੇ (!(I > 0 || Radix == Q * Q)) Monot = True;
+			ਨਹੀਂਤਾਂ ਜੇ (I > 0) {
+			ਜੇ (I > 1) Monot = True;
+			ਨਹੀਂਤਾਂ {
 				Y = Y * BInvrse;
 				X = Y - U1;
 				Z = Y + U1;
 				}
 			}
-			else {
+			ਨਹੀਂਤਾਂ {
 				Y = Q;
 				X = Y - U2;
 				Z = Y + U2;
 				}
 			}
 		}
-	if (Monot) printf("sqrt has passed a test for Monotonicity.\n");
-	else {
+	ਜੇ (Monot) ਲਿਖੋ("sqrt has passed a test for Monotonicity.\n");
+	ਨਹੀਂਤਾਂ {
 		BadCond(Defect, "");
-		printf("sqrt(X) is non-monotonic for X near %d .\n", Y);
+		ਲਿਖੋ("sqrt(X) is non-monotonic for X near %d .\n", Y);
 		}
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	}
 #include "paranoia.h"
 void part5(VOID){
@@ -1120,27 +1120,27 @@ void part5(VOID){
 	MaxSqEr = MaxSqEr - Half;
 	Y = (SQRT(One + U2) - One) / U2;
 	SqEr = (Y - One) + U2 / Eight;
-	if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+	ਜੇ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 	SqEr = Y + U2 / Eight;
-	if (SqEr < MinSqEr) MinSqEr = SqEr;
+	ਜੇ (SqEr < MinSqEr) MinSqEr = SqEr;
 	Y = ((SQRT(F9) - U2) - (One - U2)) / U1;
 	SqEr = Y + U1 / Eight;
-	if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+	ਜੇ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 	SqEr = (Y + One) + U1 / Eight;
-	if (SqEr < MinSqEr) MinSqEr = SqEr;
+	ਜੇ (SqEr < MinSqEr) MinSqEr = SqEr;
 	OneUlp = U2;
 	X = OneUlp;
-	for( Indx = 1; Indx <= 3; ++Indx) {
+	ਲਈ( Indx = 1; Indx <= 3; ++Indx) {
 		Y = SQRT((X + U1 + X) + F9);
 		Y = ((Y - U2) - ((One - U2) + X)) / OneUlp;
 		Z = ((U1 - X) + F9) * Half * X * X / OneUlp;
 		SqEr = (Y + Half) + Z;
-		if (SqEr < MinSqEr) MinSqEr = SqEr;
+		ਜੇ (SqEr < MinSqEr) MinSqEr = SqEr;
 		SqEr = (Y - Half) + Z;
-		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
-		if (((Indx == 1) || (Indx == 3))) 
+		ਜੇ (SqEr > MaxSqEr) MaxSqEr = SqEr;
+		ਜੇ (((Indx == 1) || (Indx == 3))) 
 			X = OneUlp * Sign (X) * FLOOR(Eight / (Nine * SQRT(OneUlp)));
-		else {
+		ਨਹੀਂਤਾਂ {
 			OneUlp = U1;
 			X = - OneUlp;
 			}
@@ -1151,32 +1151,32 @@ void part5(VOID){
 	SqRWrng = False;
 	Anomaly = False;
 	RSqrt = Other; /* ~dgh */
-	if (Radix != One) {
-		printf("Testing whether sqrt is rounded or chopped.\n");
+	ਜੇ (Radix != One) {
+		ਲਿਖੋ("Testing whether sqrt is rounded or chopped.\n");
 		D = FLOOR(Half + POW(Radix, One + Precision - FLOOR(Precision)));
 	/* ... == Radix^(1 + fract) if (Precision == Integer + fract. */
 		X = D / Radix;
 		Y = D / A1;
-		if ((X != FLOOR(X)) || (Y != FLOOR(Y))) {
+		ਜੇ ((X != FLOOR(X)) || (Y != FLOOR(Y))) {
 			Anomaly = True;
 			}
-		else {
+		ਨਹੀਂਤਾਂ {
 			X = Zero;
 			Z2 = X;
 			Y = One;
 			Y2 = Y;
 			Z1 = Radix - One;
 			FourD = Four * D;
-			do  {
-				if (Y2 > Z2) {
+			ਕਰੋ  {
+				ਜੇ (Y2 > Z2) {
 					Q = Radix;
 					Y1 = Y;
-					do  {
+					ਕਰੋ  {
 						X1 = FABS(Q + FLOOR(Half - Q / Y1) * Y1);
 						Q = Y1;
 						Y1 = X1;
-						} while ( ! (X1 <= Zero));
-					if (Q <= One) {
+						} ਜਦੋਂ ( ! (X1 <= Zero));
+					ਜੇ (Q <= One) {
 						Z2 = Y2;
 						Z = Y;
 						}
@@ -1184,30 +1184,30 @@ void part5(VOID){
 				Y = Y + Two;
 				X = X + Eight;
 				Y2 = Y2 + X;
-				if (Y2 >= FourD) Y2 = Y2 - FourD;
-				} while ( ! (Y >= D));
+				ਜੇ (Y2 >= FourD) Y2 = Y2 - FourD;
+				} ਜਦੋਂ ( ! (Y >= D));
 			X8 = FourD - Z2;
 			Q = (X8 + Z * Z) / FourD;
 			X8 = X8 / Eight;
-			if (Q != FLOOR(Q)) Anomaly = True;
-			else {
+			ਜੇ (Q != FLOOR(Q)) Anomaly = True;
+			ਨਹੀਂਤਾਂ {
 				Break = False;
-				do  {
+				ਕਰੋ  {
 					X = Z1 * Z;
 					X = X - FLOOR(X / Radix) * Radix;
-					if (X == One) 
+					ਜੇ (X == One) 
 						Break = True;
-					else
+					ਨਹੀਂਤਾਂ
 						Z1 = Z1 - One;
-					} while ( ! (Break || (Z1 <= Zero)));
-				if ((Z1 <= Zero) && (! Break)) Anomaly = True;
-				else {
-					if (Z1 > RadixD2) Z1 = Z1 - Radix;
-					do  {
+					} ਜਦੋਂ ( ! (Break || (Z1 <= Zero)));
+				ਜੇ ((Z1 <= Zero) && (! Break)) Anomaly = True;
+				ਨਹੀਂਤਾਂ {
+					ਜੇ (Z1 > RadixD2) Z1 = Z1 - Radix;
+					ਕਰੋ  {
 						NewD();
-						} while ( ! (U2 * D >= F9));
-					if (D * Radix - D != W - D) Anomaly = True;
-					else {
+						} ਜਦੋਂ ( ! (U2 * D >= F9));
+					ਜੇ (D * Radix - D != W - D) Anomaly = True;
+					ਨਹੀਂਤਾਂ {
 						Z2 = D;
 						I = 0;
 						Y = D + (One + Z) * Half;
@@ -1218,45 +1218,45 @@ void part5(VOID){
 						X = X + Q + X;
 						SR3750();
 						NewD();
-						if (D - Z2 != W - Z2) Anomaly = True;
-						else {
+						ਜੇ (D - Z2 != W - Z2) Anomaly = True;
+						ਨਹੀਂਤਾਂ {
 							Y = (D - Z2) + (Z2 + (One - Z) * Half);
 							X = (D - Z2) + (Z2 - Z + Q);
 							SR3750();
 							Y = (One + Z) * Half;
 							X = Q;
 							SR3750();
-							if (I == 0) Anomaly = True;
+							ਜੇ (I == 0) Anomaly = True;
 							}
 						}
 					}
 				}
 			}
-		if ((I == 0) || Anomaly) {
+		ਜੇ ((I == 0) || Anomaly) {
 			BadCond(Failure, "Anomalous arithmetic with Integer < ");
-			printf("Radix^Precision = %d\n", W);
-			printf(" fails test whether sqrt rounds or chops.\n");
+			ਲਿਖੋ("Radix^Precision = %d\n", W);
+			ਲਿਖੋ(" fails test whether sqrt rounds or chops.\n");
 			SqRWrng = True;
 			}
 		}
-	if (! Anomaly) {
-		if (! ((MinSqEr < Zero) || (MaxSqEr > Zero))) {
+	ਜੇ (! Anomaly) {
+		ਜੇ (! ((MinSqEr < Zero) || (MaxSqEr > Zero))) {
 			RSqrt = Rounded;
-			printf("Square root appears to be correctly rounded.\n");
+			ਲਿਖੋ("Square root appears to be correctly rounded.\n");
 			}
-		else  {
-			if ((MaxSqEr + U2 > U2 - Half) || (MinSqEr > Half)
+		ਨਹੀਂਤਾਂ  {
+			ਜੇ ((MaxSqEr + U2 > U2 - Half) || (MinSqEr > Half)
 				|| (MinSqEr + Radix < Half)) SqRWrng = True;
-			else {
+			ਨਹੀਂਤਾਂ {
 				RSqrt = Chopped;
-				printf("Square root appears to be chopped.\n");
+				ਲਿਖੋ("Square root appears to be chopped.\n");
 				}
 			}
 		}
-	if (SqRWrng) {
-		printf("Square root is neither chopped nor correctly rounded.\n");
-		printf("Observed errors run from %d ", MinSqEr - Half);
-		printf("to %d ulps.\n", Half + MaxSqEr);
+	ਜੇ (SqRWrng) {
+		ਲਿਖੋ("Square root is neither chopped nor correctly rounded.\n");
+		ਲਿਖੋ("Observed errors run from %d ", MinSqEr - Half);
+		ਲਿਖੋ("to %d ulps.\n", Half + MaxSqEr);
 		TstCond (Serious, MaxSqEr - MinSqEr < Radix * Radix,
 			"sqrt gets too many last digits wrong");
 		}
@@ -1264,40 +1264,40 @@ void part5(VOID){
 	Milestone = 90;
 	/*=============================================*/
 	Pause();
-	printf("Testing powers Z^i for small Integers Z and i.\n");
+	ਲਿਖੋ("Testing powers Z^i for small Integers Z and i.\n");
 	N = 0;
 	/* ... test powers of zero. */
 	I = 0;
 	Z = -Zero;
 	M = 3;
 	Break = False;
-	do  {
+	ਕਰੋ  {
 		X = One;
 		SR3980();
-		if (I <= 10) {
+		ਜੇ (I <= 10) {
 			I = 1023;
 			SR3980();
 			}
-		if (Z == MinusOne) Break = True;
-		else {
+		ਜੇ (Z == MinusOne) Break = True;
+		ਨਹੀਂਤਾਂ {
 			Z = MinusOne;
 			/* .. if(-1)^N is invalid, replace MinusOne by One. */
 			I = - 4;
 			}
-		} while ( ! Break);
+		} ਜਦੋਂ ( ! Break);
 	PrintIfNPositive();
 	N1 = N;
 	N = 0;
 	Z = A1;
-	M = (int)FLOOR(Two * LOG(W) / LOG(A1));
+	M = (ਪੂਰਨ)FLOOR(Two * LOG(W) / LOG(A1));
 	Break = False;
-	do  {
+	ਕਰੋ  {
 		X = Z;
 		I = 1;
 		SR3980();
-		if (Z == AInvrse) Break = True;
-		else Z = AInvrse;
-		} while ( ! (Break));
+		ਜੇ (Z == AInvrse) Break = True;
+		ਨਹੀਂਤਾਂ Z = AInvrse;
+		} ਜਦੋਂ ( ! (Break));
 	/*=============================================*/
 		Milestone = 100;
 	/*=============================================*/
@@ -1305,80 +1305,80 @@ void part5(VOID){
 	/*         next try a few primes     */
 	M = NoTrials;
 	Z = Three;
-	do  {
+	ਕਰੋ  {
 		X = Z;
 		I = 1;
 		SR3980();
-		do  {
+		ਕਰੋ  {
 			Z = Z + Two;
-			} while ( Three * FLOOR(Z / Three) == Z );
-		} while ( Z < Eight * Three );
-	if (N > 0) {
-		printf("Errors like this may invalidate financial calculations\n");
-		printf("\tinvolving interest rates.\n");
+			} ਜਦੋਂ ( Three * FLOOR(Z / Three) == Z );
+		} ਜਦੋਂ ( Z < Eight * Three );
+	ਜੇ (N > 0) {
+		ਲਿਖੋ("Errors like this may invalidate financial calculations\n");
+		ਲਿਖੋ("\tinvolving interest rates.\n");
 		}
 	PrintIfNPositive();
 	N += N1;
-	if (N == 0) printf("... no discrepancies found.\n");
-	if (N > 0) Pause();
-	else printf("\n");
+	ਜੇ (N == 0) ਲਿਖੋ("... no discrepancies found.\n");
+	ਜੇ (N > 0) Pause();
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("\n");
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	}
 #include "paranoia.h"
 void part6(VOID){
 */
 	Milestone = 110;
 	/*=============================================*/
-	printf("Seeking Underflow thresholds UfThold and E0.\n");
+	ਲਿਖੋ("Seeking Underflow thresholds UfThold and E0.\n");
 	D = U1;
-	if (Precision != FLOOR(Precision)) {
+	ਜੇ (Precision != FLOOR(Precision)) {
 		D = BInvrse;
 		X = Precision;
-		do  {
+		ਕਰੋ  {
 			D = D * BInvrse;
 			X = X - One;
-			} while ( X > Zero);
+			} ਜਦੋਂ ( X > Zero);
 		}
 	Y = One;
 	Z = D;
 	/* ... D is power of 1/Radix < 1. */
-	do  {
+	ਕਰੋ  {
 		C = Y;
 		Y = Z;
 		Z = Y * Y;
-		} while ((Y > Z) && (Z + Z > Z));
+		} ਜਦੋਂ ((Y > Z) && (Z + Z > Z));
 	Y = C;
 	Z = Y * D;
-	do  {
+	ਕਰੋ  {
 		C = Y;
 		Y = Z;
 		Z = Y * D;
-		} while ((Y > Z) && (Z + Z > Z));
-	if (Radix < Two) HInvrse = Two;
-	else HInvrse = Radix;
+		} ਜਦੋਂ ((Y > Z) && (Z + Z > Z));
+	ਜੇ (Radix < Two) HInvrse = Two;
+	ਨਹੀਂਤਾਂ HInvrse = Radix;
 	H = One / HInvrse;
 	/* ... 1/HInvrse == H == Min(1/Radix, 1/2) */
 	CInvrse = One / C;
 	E0 = C;
 	Z = E0 * H;
 	/* ...1/Radix^(BIG Integer) << 1 << CInvrse == 1/C */
-	do  {
+	ਕਰੋ  {
 		Y = E0;
 		E0 = Z;
 		Z = E0 * H;
-		} while ((E0 > Z) && (Z + Z > Z));
+		} ਜਦੋਂ ((E0 > Z) && (Z + Z > Z));
 	UfThold = E0;
 	E1 = Zero;
 	Q = Zero;
 	E9 = U2;
 	S = One + E9;
 	D = C * S;
-	if (D <= C) {
+	ਜੇ (D <= C) {
 		E9 = Radix * U2;
 		S = One + E9;
 		D = C * S;
-		if (D <= C) {
+		ਜੇ (D <= C) {
 			BadCond(Failure, "multiplication gets too many last digits wrong.\n");
 			Underflow = E0;
 			Y1 = Zero;
@@ -1386,106 +1386,106 @@ void part6(VOID){
 			Pause();
 			}
 		}
-	else {
+	ਨਹੀਂਤਾਂ {
 		Underflow = D;
 		PseudoZero = Underflow * H;
 		UfThold = Zero;
-		do  {
+		ਕਰੋ  {
 			Y1 = Underflow;
 			Underflow = PseudoZero;
-			if (E1 + E1 <= E1) {
+			ਜੇ (E1 + E1 <= E1) {
 				Y2 = Underflow * HInvrse;
 				E1 = FABS(Y1 - Y2);
 				Q = Y1;
-				if ((UfThold == Zero) && (Y1 != Y2)) UfThold = Y1;
+				ਜੇ ((UfThold == Zero) && (Y1 != Y2)) UfThold = Y1;
 				}
 			PseudoZero = PseudoZero * H;
-			} while ((Underflow > PseudoZero)
+			} ਜਦੋਂ ((Underflow > PseudoZero)
 				&& (PseudoZero + PseudoZero > PseudoZero));
 		}
 	/* Comment line 4530 .. 4560 */
-	if (PseudoZero != Zero) {
-		printf("\n");
+	ਜੇ (PseudoZero != Zero) {
+		ਲਿਖੋ("\n");
 		Z = PseudoZero;
 	/* ... Test PseudoZero for "phoney- zero" violates */
 	/* ... PseudoZero < Underflow or PseudoZero < PseudoZero + PseudoZero
 		   ... */
-		if (PseudoZero <= Zero) {
+		ਜੇ (PseudoZero <= Zero) {
 			BadCond(Failure, "Positive expressions can underflow to an\n");
-			printf("allegedly negative value\n");
-			printf("PseudoZero that prints out as: %d .\n", PseudoZero);
+			ਲਿਖੋ("allegedly negative value\n");
+			ਲਿਖੋ("PseudoZero that prints out as: %d .\n", PseudoZero);
 			X = - PseudoZero;
-			if (X <= Zero) {
-				printf("But -PseudoZero, which should be\n");
-				printf("positive, isn't; it prints out as  %d .\n", X);
+			ਜੇ (X <= Zero) {
+				ਲਿਖੋ("But -PseudoZero, which should be\n");
+				ਲਿਖੋ("positive, isn't; it prints out as  %d .\n", X);
 				}
 			}
-		else {
+		ਨਹੀਂਤਾਂ {
 			BadCond(Flaw, "Underflow can stick at an allegedly positive\n");
-			printf("value PseudoZero that prints out as %d .\n", PseudoZero);
+			ਲਿਖੋ("value PseudoZero that prints out as %d .\n", PseudoZero);
 			}
 		TstPtUf();
 		}
 	/*=============================================*/
 	Milestone = 120;
 	/*=============================================*/
-	if (CInvrse * Y > CInvrse * Y1) {
+	ਜੇ (CInvrse * Y > CInvrse * Y1) {
 		S = H * S;
 		E0 = Underflow;
 		}
-	if (! ((E1 == Zero) || (E1 == E0))) {
+	ਜੇ (! ((E1 == Zero) || (E1 == E0))) {
 		BadCond(Defect, "");
-		if (E1 < E0) {
-			printf("Products underflow at a higher");
-			printf(" threshold than differences.\n");
-			if (PseudoZero == Zero) 
+		ਜੇ (E1 < E0) {
+			ਲਿਖੋ("Products underflow at a higher");
+			ਲਿਖੋ(" threshold than differences.\n");
+			ਜੇ (PseudoZero == Zero) 
 			E0 = E1;
 			}
-		else {
-			printf("Difference underflows at a higher");
-			printf(" threshold than products.\n");
+		ਨਹੀਂਤਾਂ {
+			ਲਿਖੋ("Difference underflows at a higher");
+			ਲਿਖੋ(" threshold than products.\n");
 			}
 		}
-	printf("Smallest strictly positive number found is E0 = %d .\n", E0);
+	ਲਿਖੋ("Smallest strictly positive number found is E0 = %d .\n", E0);
 	Z = E0;
 	TstPtUf();
 	Underflow = E0;
-	if (N == 1) Underflow = Y;
+	ਜੇ (N == 1) Underflow = Y;
 	I = 4;
-	if (E1 == Zero) I = 3;
-	if (UfThold == Zero) I = I - 2;
+	ਜੇ (E1 == Zero) I = 3;
+	ਜੇ (UfThold == Zero) I = I - 2;
 	UfNGrad = True;
-	switch (I)  {
-		case	1:
+	ਚੋਣ (I)  {
+		ਹਾਲਤ	1:
 		UfThold = Underflow;
-		if ((CInvrse * Q) != ((CInvrse * Y) * S)) {
+		ਜੇ ((CInvrse * Q) != ((CInvrse * Y) * S)) {
 			UfThold = Y;
 			BadCond(Failure, "Either accuracy deteriorates as numbers\n");
-			printf("approach a threshold = %d\n", UfThold);;
-			printf(" coming down from %d\n", C);
-			printf(" or else multiplication gets too many last digits wrong.\n");
+			ਲਿਖੋ("approach a threshold = %d\n", UfThold);;
+			ਲਿਖੋ(" coming down from %d\n", C);
+			ਲਿਖੋ(" or else multiplication gets too many last digits wrong.\n");
 			}
 		Pause();
-		break;
+		ਰੋਕੋ;
 	
-		case	2:
+		ਹਾਲਤ	2:
 		BadCond(Failure, "Underflow confuses Comparison, which alleges that\n");
-		printf("Q == Y while denying that |Q - Y| == 0; these values\n");
-		printf("print out as Q = %d, Y = %016x .\n", Q, Y2);
-		printf ("|Q - Y| = %d .\n" , FABS(Q - Y2));
+		ਲਿਖੋ("Q == Y while denying that |Q - Y| == 0; these values\n");
+		ਲਿਖੋ("print out as Q = %d, Y = %016x .\n", Q, Y2);
+		ਲਿਖੋ ("|Q - Y| = %d .\n" , FABS(Q - Y2));
 		UfThold = Q;
-		break;
+		ਰੋਕੋ;
 	
-		case	3:
+		ਹਾਲਤ	3:
 		X = X;
-		break;
+		ਰੋਕੋ;
 	
-		case	4:
-		if ((Q == UfThold) && (E1 == E0)
+		ਹਾਲਤ	4:
+		ਜੇ ((Q == UfThold) && (E1 == E0)
 			&& (FABS( UfThold - E1 / E9) <= E1)) {
 			UfNGrad = False;
-			printf("Underflow is gradual; it incurs Absolute Error =\n");
-			printf("(roundoff in UfThold) < E0.\n");
+			ਲਿਖੋ("Underflow is gradual; it incurs Absolute Error =\n");
+			ਲਿਖੋ("(roundoff in UfThold) < E0.\n");
 			Y = E0 * CInvrse;
 			Y = Y * (OneAndHalf + U2);
 			X = CInvrse * (One + U2);
@@ -1493,60 +1493,60 @@ void part6(VOID){
 			IEEE = (Y == E0);
 			}
 		}
-	if (UfNGrad) {
-		printf("\n");
+	ਜੇ (UfNGrad) {
+		ਲਿਖੋ("\n");
 		sigsave = sigfpe;
-		if (setjmp(ovfl_buf)) {
-			printf("Underflow / UfThold failed!\n");
+		ਜੇ (setjmp(ovfl_buf)) {
+			ਲਿਖੋ("Underflow / UfThold failed!\n");
 			R = H + H;
 			}
-		else R = SQRT(Underflow / UfThold);
+		ਨਹੀਂਤਾਂ R = SQRT(Underflow / UfThold);
 		sigsave = 0;
-		if (R <= H) {
+		ਜੇ (R <= H) {
 			Z = R * UfThold;
 			X = Z * (One + R * H * (One + H));
 			}
-		else {
+		ਨਹੀਂਤਾਂ {
 			Z = UfThold;
 			X = Z * (One + H * H * (One + H));
 			}
-		if (! ((X == Z) || (X - Z != Zero))) {
+		ਜੇ (! ((X == Z) || (X - Z != Zero))) {
 			BadCond(Flaw, "");
-			printf("X = %d\n\tis not equal to Z = %016x .\n", X, Z);
+			ਲਿਖੋ("X = %d\n\tis not equal to Z = %016x .\n", X, Z);
 			Z9 = X - Z;
-			printf("yet X - Z yields %d .\n", Z9);
-			printf("    Should this NOT signal Underflow, ");
-			printf("this is a SERIOUS DEFECT\nthat causes ");
-			printf("confusion when innocent statements like\n");;
-			printf("    if (X == Z)  ...  else");
-			printf("  ... (f(X) - f(Z)) / (X - Z) ...\n");
-			printf("encounter Division by Zero although actually\n");
+			ਲਿਖੋ("yet X - Z yields %d .\n", Z9);
+			ਲਿਖੋ("    Should this NOT signal Underflow, ");
+			ਲਿਖੋ("this is a SERIOUS DEFECT\nthat causes ");
+			ਲਿਖੋ("confusion when innocent statements like\n");;
+			ਲਿਖੋ("    if (X == Z)  ...  else");
+			ਲਿਖੋ("  ... (f(X) - f(Z)) / (X - Z) ...\n");
+			ਲਿਖੋ("encounter Division by Zero although actually\n");
 			sigsave = sigfpe;
-			if (setjmp(ovfl_buf)) printf("X / Z fails!\n");
-			else printf("X / Z = 1 + %d .\n", (X / Z - Half) - Half);
+			ਜੇ (setjmp(ovfl_buf)) ਲਿਖੋ("X / Z fails!\n");
+			ਨਹੀਂਤਾਂ ਲਿਖੋ("X / Z = 1 + %d .\n", (X / Z - Half) - Half);
 			sigsave = 0;
 			}
 		}
-	printf("The Underflow threshold is %d, %s\n", UfThold,
+	ਲਿਖੋ("The Underflow threshold is %d, %s\n", UfThold,
 		   " below which");
-	printf("calculation may suffer larger Relative error than ");
-	printf("merely roundoff.\n");
+	ਲਿਖੋ("calculation may suffer larger Relative error than ");
+	ਲਿਖੋ("merely roundoff.\n");
 	Y2 = U1 * U1;
 	Y = Y2 * Y2;
 	Y2 = Y * U1;
-	if (Y2 <= UfThold) {
-		if (Y > E0) {
+	ਜੇ (Y2 <= UfThold) {
+		ਜੇ (Y > E0) {
 			BadCond(Defect, "");
 			I = 5;
 			}
-		else {
+		ਨਹੀਂਤਾਂ {
 			BadCond(Serious, "");
 			I = 4;
 			}
-		printf("Range is too narrow; U1^%d Underflows.\n", I);
+		ਲਿਖੋ("Range is too narrow; U1^%d Underflows.\n", I);
 		}
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	}
 #include "paranoia.h"
 void part7(VOID){
@@ -1555,84 +1555,84 @@ void part7(VOID){
 	/*=============================================*/
 	Y = - FLOOR(Half - TwoForty * LOG(UfThold) / LOG(HInvrse)) / TwoForty;
 	Y2 = Y + Y;
-	printf("Since underflow occurs below the threshold\n");
-	printf("UfThold = (%d) ^ (%016x)\nonly underflow ", HInvrse, Y);
-	printf("should afflict the expression\n\t(%d) ^ (%016x);\n",
+	ਲਿਖੋ("Since underflow occurs below the threshold\n");
+	ਲਿਖੋ("UfThold = (%d) ^ (%016x)\nonly underflow ", HInvrse, Y);
+	ਲਿਖੋ("should afflict the expression\n\t(%d) ^ (%016x);\n",
 		HInvrse, Y2);
-	printf("actually calculating yields:");
-	if (setjmp(ovfl_buf)) {
+	ਲਿਖੋ("actually calculating yields:");
+	ਜੇ (setjmp(ovfl_buf)) {
 		sigsave = 0;
 		BadCond(Serious, "trap on underflow.\n");
 		}
-	else {
+	ਨਹੀਂਤਾਂ {
 		sigsave = sigfpe;
 		V9 = POW(HInvrse, Y2);
 		sigsave = 0;
-		printf(" %d .\n", V9);
-		if (! ((V9 >= Zero) && (V9 <= (Radix + Radix + E9) * UfThold))) {
+		ਲਿਖੋ(" %d .\n", V9);
+		ਜੇ (! ((V9 >= Zero) && (V9 <= (Radix + Radix + E9) * UfThold))) {
 			BadCond(Serious, "this is not between 0 and underflow\n");
-		printf("   threshold = %d .\n", UfThold);
+		ਲਿਖੋ("   threshold = %d .\n", UfThold);
 		}
-		else if (! (V9 > UfThold * (One + E9)))
-			printf("This computed value is O.K.\n");
-		else {
+		ਨਹੀਂਤਾਂ ਜੇ (! (V9 > UfThold * (One + E9)))
+			ਲਿਖੋ("This computed value is O.K.\n");
+		ਨਹੀਂਤਾਂ {
 			BadCond(Defect, "this is not between 0 and underflow\n");
-			printf("   threshold = %d .\n", UfThold);
+			ਲਿਖੋ("   threshold = %d .\n", UfThold);
 			}
 		}
 	/*=============================================*/
 	Milestone = 140;
 	/*=============================================*/
-	printf("\n");
+	ਲਿਖੋ("\n");
 	/* ...calculate Exp2 == exp(2) == 7.389056099... */
 	X = Zero;
 	I = 2;
 	Y = Two * Three;
 	Q = Zero;
 	N = 0;
-	do  {
+	ਕਰੋ  {
 		Z = X;
 		I = I + 1;
 		Y = Y / (I + I);
 		R = Y + Q;
 		X = Z + R;
 		Q = (Z - X) + R;
-		} while(X > Z);
+		} ਜਦੋਂ(X > Z);
 	Z = (OneAndHalf + One / Eight) + X / (OneAndHalf * ThirtyTwo);
 	X = Z * Z;
 	Exp2 = X * X;
 	X = F9;
 	Y = X - U1;
-	printf("Testing X^((X + 1) / (X - 1)) vs. exp(2) = %d as X -> 1.\n",
+	ਲਿਖੋ("Testing X^((X + 1) / (X - 1)) vs. exp(2) = %d as X -> 1.\n",
 		Exp2);
-	for(I = 1;;) {
+	ਲਈ(I = 1;;) {
 		Z = X - BInvrse;
 		Z = (X + One) / (Z - (One - BInvrse));
 		Q = POW(X, Z) - Exp2;
-		if (FABS(Q) > TwoForty * U2) {
+		ਜੇ (FABS(Q) > TwoForty * U2) {
 			N = 1;
 	 		V9 = (X - BInvrse) - (One - BInvrse);
 			BadCond(Defect, "Calculated");
-			printf(" %d for\n", POW(X,Z));
-			printf("\t(1 + (%d) ^ (%016x);\n", V9, Z);
-			printf("\tdiffers from correct value by %d .\n", Q);
-			printf("\tThis much error may spoil financial\n");
-			printf("\tcalculations involving tiny interest rates.\n");
-			break;
+			ਲਿਖੋ(" %d for\n", POW(X,Z));
+			ਲਿਖੋ("\t(1 + (%d) ^ (%016x);\n", V9, Z);
+			ਲਿਖੋ("\tdiffers from correct value by %d .\n", Q);
+			ਲਿਖੋ("\tThis much error may spoil financial\n");
+			ਲਿਖੋ("\tcalculations involving tiny interest rates.\n");
+			ਰੋਕੋ;
 			}
-		else {
+		ਨਹੀਂਤਾਂ {
 			Z = (Y - X) * Two + Y;
 			X = Y;
 			Y = Z;
 			Z = One + (X - F9)*(X - F9);
-			if (Z > One && I < NoTrials) I++;
-			else  {
-				if (X > One) {
-					if (N == 0)
-					   printf("Accuracy seems adequate.\n");
-					break;
+			ਜੇ (Z > One && I < NoTrials) I++;
+			ਨਹੀਂਤਾਂ  {
+				ਜੇ (X > One) {
+					ਜੇ (N == 0)
+					   ਲਿਖੋ("Accuracy seems adequate.\n");
+					ਰੋਕੋ;
 					}
-				else {
+				ਨਹੀਂਤਾਂ {
 					X = One + U2;
 					Y = U2 + U2;
 					Y += X;
@@ -1644,12 +1644,12 @@ void part7(VOID){
 	/*=============================================*/
 	Milestone = 150;
 	/*=============================================*/
-	printf("Testing powers Z^Q at four nearly extreme values.\n");
+	ਲਿਖੋ("Testing powers Z^Q at four nearly extreme values.\n");
 	N = 0;
 	Z = A1;
 	Q = FLOOR(Half - LOG(C) / LOG(A1));
 	Break = False;
-	do  {
+	ਕਰੋ  {
 		X = CInvrse;
 		Y = POW(Z, Q);
 		IsYeqX();
@@ -1657,115 +1657,115 @@ void part7(VOID){
 		X = C;
 		Y = POW(Z, Q);
 		IsYeqX();
-		if (Z < One) Break = True;
-		else Z = AInvrse;
-		} while ( ! (Break));
+		ਜੇ (Z < One) Break = True;
+		ਨਹੀਂਤਾਂ Z = AInvrse;
+		} ਜਦੋਂ ( ! (Break));
 	PrintIfNPositive();
-	if (N == 0) printf(" ... no discrepancies found.\n");
-	printf("\n");
+	ਜੇ (N == 0) ਲਿਖੋ(" ... no discrepancies found.\n");
+	ਲਿਖੋ("\n");
 	
 	/*=============================================*/
 	Milestone = 160;
 	/*=============================================*/
 	Pause();
-	printf("Searching for Overflow threshold:\n");
-	printf("This may generate an error.\n");
+	ਲਿਖੋ("Searching for Overflow threshold:\n");
+	ਲਿਖੋ("This may generate an error.\n");
 	Y = - CInvrse;
 	V9 = HInvrse * Y;
 	sigsave = sigfpe;
-	if (setjmp(ovfl_buf)) { I = 0; V9 = Y; goto overflow; }
-	do {
+	ਜੇ (setjmp(ovfl_buf)) { I = 0; V9 = Y; ਜਾਓ ਉਛਾਲ; }
+	ਕਰੋ {
 		V = Y;
 		Y = V9;
 		V9 = HInvrse * Y;
-		} while(V9 < Y);
+		} ਜਦੋਂ(V9 < Y);
 	I = 1;
-overflow:
+ਉਛਾਲ:
 	sigsave = 0;
 	Z = V9;
-	printf("Can `Z = -Y' overflow?\n");
-	printf("Trying it on Y = %d .\n", Y);
+	ਲਿਖੋ("Can `Z = -Y' overflow?\n");
+	ਲਿਖੋ("Trying it on Y = %d .\n", Y);
 	V9 = - Y;
 	V0 = V9;
-	if (V - Y == V + V0) printf("Seems O.K.\n");
-	else {
-		printf("finds a ");
+	ਜੇ (V - Y == V + V0) ਲਿਖੋ("Seems O.K.\n");
+	ਨਹੀਂਤਾਂ {
+		ਲਿਖੋ("finds a ");
 		BadCond(Flaw, "-(-Y) differs from Y.\n");
 		}
-	if (Z != Y) {
+	ਜੇ (Z != Y) {
 		BadCond(Serious, "");
-		printf("overflow past %d\n\tshrinks to %016x .\n", Y, Z);
+		ਲਿਖੋ("overflow past %d\n\tshrinks to %016x .\n", Y, Z);
 		}
-	if (I) {
+	ਜੇ (I) {
 		Y = V * (HInvrse * U2 - HInvrse);
 		Z = Y + ((One - HInvrse) * U2) * V;
-		if (Z < V0) Y = Z;
-		if (Y < V0) V = Y;
-		if (V0 - V < V0) V = V0;
+		ਜੇ (Z < V0) Y = Z;
+		ਜੇ (Y < V0) V = Y;
+		ਜੇ (V0 - V < V0) V = V0;
 		}
-	else {
+	ਨਹੀਂਤਾਂ {
 		V = Y * (HInvrse * U2 - HInvrse);
 		V = V + ((One - HInvrse) * U2) * Y;
 		}
-	printf("Overflow threshold is V  = %d .\n", V);
-	if (I) printf("Overflow saturates at V0 = %d .\n", V0);
-	else printf("There is no saturation value because \
-the system traps on overflow.\n");
+	ਲਿਖੋ("Overflow threshold is V  = %d .\n", V);
+	ਜੇ (I) ਲਿਖੋ("Overflow saturates at V0 = %d .\n", V0);
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("There is no saturation ਮੁੱਲ because \
+the system traps on ਉਛਾਲ.\n");
 	V9 = V * One;
-	printf("No Overflow should be signaled for V * 1 = %d\n", V9);
+	ਲਿਖੋ("No Overflow should be signaled for V * 1 = %d\n", V9);
 	V9 = V / One;
-	printf("                           nor for V / 1 = %d .\n", V9);
-	printf("Any overflow signal separating this * from the one\n");
-	printf("above is a DEFECT.\n");
+	ਲਿਖੋ("                           nor for V / 1 = %d .\n", V9);
+	ਲਿਖੋ("Any overflow signal separating this * from the one\n");
+	ਲਿਖੋ("above is a DEFECT.\n");
 	/*=============================================*/
 	Milestone = 170;
 	/*=============================================*/
-	if (!(-V < V && -V0 < V0 && -UfThold < V && UfThold < V)) {
+	ਜੇ (!(-V < V && -V0 < V0 && -UfThold < V && UfThold < V)) {
 		BadCond(Failure, "Comparisons involving ");
-		printf("+-%d, +-%016x\nand +-%016x are confused by Overflow.",
+		ਲਿਖੋ("+-%d, +-%016x\nand +-%016x are confused by Overflow.",
 			V, V0, UfThold);
 		}
 	/*=============================================*/
 	Milestone = 175;
 	/*=============================================*/
-	printf("\n");
-	for(Indx = 1; Indx <= 3; ++Indx) {
-		switch (Indx)  {
-			case 1: Z = UfThold; break;
-			case 2: Z = E0; break;
-			case 3: Z = PseudoZero; break;
+	ਲਿਖੋ("\n");
+	ਲਈ(Indx = 1; Indx <= 3; ++Indx) {
+		ਚੋਣ (Indx)  {
+			ਹਾਲਤ 1: Z = UfThold; ਰੋਕੋ;
+			ਹਾਲਤ 2: Z = E0; ਰੋਕੋ;
+			ਹਾਲਤ 3: Z = PseudoZero; ਰੋਕੋ;
 			}
-		if (Z != Zero) {
+		ਜੇ (Z != Zero) {
 			V9 = SQRT(Z);
 			Y = V9 * V9;
-			if (Y / (One - Radix * E9) < Z
+			ਜੇ (Y / (One - Radix * E9) < Z
 			   || Y > (One + Radix * E9) * Z) { /* dgh: + E9 --> * E9 */
-				if (V9 > U1) BadCond(Serious, "");
-				else BadCond(Defect, "");
-				printf("Comparison alleges that what prints as Z = %d\n", Z);
-				printf(" is too far from sqrt(Z) ^ 2 = %d .\n", Y);
+				ਜੇ (V9 > U1) BadCond(Serious, "");
+				ਨਹੀਂਤਾਂ BadCond(Defect, "");
+				ਲਿਖੋ("Comparison alleges that what prints as Z = %d\n", Z);
+				ਲਿਖੋ(" is too far from sqrt(Z) ^ 2 = %d .\n", Y);
 				}
 			}
 		}
 	/*=============================================*/
 	Milestone = 180;
 	/*=============================================*/
-	for(Indx = 1; Indx <= 2; ++Indx) {
-		if (Indx == 1) Z = V;
-		else Z = V0;
+	ਲਈ(Indx = 1; Indx <= 2; ++Indx) {
+		ਜੇ (Indx == 1) Z = V;
+		ਨਹੀਂਤਾਂ Z = V0;
 		V9 = SQRT(Z);
 		X = (One - Radix * E9) * V9;
 		V9 = V9 * X;
-		if (((V9 < (One - Two * Radix * E9) * Z) || (V9 > Z))) {
+		ਜੇ (((V9 < (One - Two * Radix * E9) * Z) || (V9 > Z))) {
 			Y = V9;
-			if (X < W) BadCond(Serious, "");
-			else BadCond(Defect, "");
-			printf("Comparison alleges that Z = %d\n", Z);
-			printf(" is too far from sqrt(Z) ^ 2 (%d) .\n", Y);
+			ਜੇ (X < W) BadCond(Serious, "");
+			ਨਹੀਂਤਾਂ BadCond(Defect, "");
+			ਲਿਖੋ("Comparison alleges that Z = %d\n", Z);
+			ਲਿਖੋ(" is too far from sqrt(Z) ^ 2 (%d) .\n", Y);
 			}
 		}
 	/*=============================================*/
-	/*SPLIT
+	/*ਵੰਡੋ
 	}
 #include "paranoia.h"
 int part8(VOID){
@@ -1775,35 +1775,35 @@ int part8(VOID){
 	Pause();
 	X = UfThold * V;
 	Y = Radix * Radix;
-	if (X*Y < One || X > Y) {
-		if (X * Y < U1 || X > Y/U1) BadCond(Defect, "Badly");
-		else BadCond(Flaw, "");
+	ਜੇ (X*Y < One || X > Y) {
+		ਜੇ (X * Y < U1 || X > Y/U1) BadCond(Defect, "Badly");
+		ਨਹੀਂਤਾਂ BadCond(Flaw, "");
 			
-		printf(" unbalanced range; UfThold * V = %d\n\t%s\n",
+		ਲਿਖੋ(" unbalanced range; UfThold * V = %d\n\t%s\n",
 			X, "is too far from 1.\n");
 		}
 	/*=============================================*/
 	Milestone = 200;
 	/*=============================================*/
-	for (Indx = 1; Indx <= 5; ++Indx)  {
+	ਲਈ (Indx = 1; Indx <= 5; ++Indx)  {
 		X = F9;
-		switch (Indx)  {
-			case 2: X = One + U2; break;
-			case 3: X = V; break;
-			case 4: X = UfThold; break;
-			case 5: X = Radix;
+		ਚੋਣ (Indx)  {
+			ਹਾਲਤ 2: X = One + U2; ਰੋਕੋ;
+			ਹਾਲਤ 3: X = V; ਰੋਕੋ;
+			ਹਾਲਤ 4: X = UfThold; ਰੋਕੋ;
+			ਹਾਲਤ 5: X = Radix;
 			}
 		Y = X;
 		sigsave = sigfpe;
-		if (setjmp(ovfl_buf))
-			printf("  X / X  traps when X = %d\n", X);
-		else {
+		ਜੇ (setjmp(ovfl_buf))
+			ਲਿਖੋ("  X / X  traps when X = %d\n", X);
+		ਨਹੀਂਤਾਂ {
 			V9 = (Y / X - Half) - Half;
-			if (V9 == Zero) continue;
-			if (V9 == - U1 && Indx < 5) BadCond(Flaw, "");
-			else BadCond(Serious, "");
-			printf("  X / X differs from 1 when X = %d\n", X);
-			printf("  instead, X / X - 1/2 - 1/2 = %d .\n", V9);
+			ਜੇ (V9 == Zero) ਜਾਰੀ;
+			ਜੇ (V9 == - U1 && Indx < 5) BadCond(Flaw, "");
+			ਨਹੀਂਤਾਂ BadCond(Serious, "");
+			ਲਿਖੋ("  X / X differs from 1 when X = %d\n", X);
+			ਲਿਖੋ("  instead, X / X - 1/2 - 1/2 = %d .\n", V9);
 			}
 		sigsave = 0;
 		}
@@ -1811,103 +1811,103 @@ int part8(VOID){
 	Milestone = 210;
 	/*=============================================*/
 	MyZero = Zero;
-	printf("\n");
-	printf("What message and/or values does Division by Zero produce?\n") ;
-#ifndef NOPAUSE
-	printf("This can interupt your program.  You can ");
-	printf("skip this part if you wish.\n");
-	printf("Do you wish to compute 1 / 0? ");
+	ਲਿਖੋ("\n");
+	ਲਿਖੋ("What message and/or values does Division by Zero produce?\n") ;
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOPAUSE
+	ਲਿਖੋ("This can interupt your program.  You can ");
+	ਲਿਖੋ("skip this part if you wish.\n");
+	ਲਿਖੋ("Do you wish to compute 1 / 0? ");
 	fflush(stdout);
-	read (KEYBOARD, ch, 8);
-	if ((ch[0] == 'Y') || (ch[0] == 'y')) {
-#endif
+	ਪਠ (KEYBOARD, ch, 8);
+	ਜੇ ((ch[0] == 'Y') || (ch[0] == 'y')) {
+#ਜੇ_ਅੰਤ
 		sigsave = sigfpe;
-		printf("    Trying to compute 1 / 0 produces ...");
-		if (!setjmp(ovfl_buf)) printf("  %d .\n", One / MyZero);
+		ਲਿਖੋ("    Trying to compute 1 / 0 produces ...");
+		ਜੇ (!setjmp(ovfl_buf)) ਲਿਖੋ("  %d .\n", One / MyZero);
 		sigsave = 0;
-#ifndef NOPAUSE
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOPAUSE
 		}
-	else printf("O.K.\n");
-	printf("\nDo you wish to compute 0 / 0? ");
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("O.K.\n");
+	ਲਿਖੋ("\nDo you wish to compute 0 / 0? ");
 	fflush(stdout);
-	read (KEYBOARD, ch, 80);
-	if ((ch[0] == 'Y') || (ch[0] == 'y')) {
-#endif
+	ਪਠ (KEYBOARD, ch, 80);
+	ਜੇ ((ch[0] == 'Y') || (ch[0] == 'y')) {
+#ਜੇ_ਅੰਤ
 		sigsave = sigfpe;
-		printf("\n    Trying to compute 0 / 0 produces ...");
-		if (!setjmp(ovfl_buf)) printf("  %d .\n", Zero / MyZero);
+		ਲਿਖੋ("\n    Trying to compute 0 / 0 produces ...");
+		ਜੇ (!setjmp(ovfl_buf)) ਲਿਖੋ("  %d .\n", Zero / MyZero);
 		sigsave = 0;
-#ifndef NOPAUSE
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOPAUSE
 		}
-	else printf("O.K.\n");
-#endif
+	ਨਹੀਂਤਾਂ ਲਿਖੋ("O.K.\n");
+#ਜੇ_ਅੰਤ
 	/*=============================================*/
 	Milestone = 220;
 	/*=============================================*/
 	Pause();
-	printf("\n");
+	ਲਿਖੋ("\n");
 	{
-		static char *msg[] = {
+		ਸਥਿਰ ਅੱਖਰ *ਸੁਨੇਹਾ_2[] = {
 			"FAILUREs  encountered =",
 			"SERIOUS DEFECTs  discovered =",
 			"DEFECTs  discovered =",
 			"FLAWs  discovered =" };
-		int i;
-		for(i = 0; i < 4; i++) if (ErrCnt[i])
-			printf("The number of  %-29s %d.\n",
-				msg[i], ErrCnt[i]);
+		ਪੂਰਨ i;
+		ਲਈ(i = 0; i < 4; i++) ਜੇ (ErrCnt[i])
+			ਲਿਖੋ("The number of  %-29s %d.\n",
+				ਸੁਨੇਹਾ_2[i], ErrCnt[i]);
 		}
-	printf("\n");
-	if ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[Defect]
+	ਲਿਖੋ("\n");
+	ਜੇ ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[Defect]
 			+ ErrCnt[Flaw]) > 0) {
-		if ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[
+		ਜੇ ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[
 			Defect] == 0) && (ErrCnt[Flaw] > 0)) {
-			printf("The arithmetic diagnosed seems ");
-			printf("Satisfactory though flawed.\n");
+			ਲਿਖੋ("The arithmetic diagnosed seems ");
+			ਲਿਖੋ("Satisfactory though flawed.\n");
 			}
-		if ((ErrCnt[Failure] + ErrCnt[Serious] == 0)
+		ਜੇ ((ErrCnt[Failure] + ErrCnt[Serious] == 0)
 			&& ( ErrCnt[Defect] > 0)) {
-			printf("The arithmetic diagnosed may be Acceptable\n");
-			printf("despite inconvenient Defects.\n");
+			ਲਿਖੋ("The arithmetic diagnosed may be Acceptable\n");
+			ਲਿਖੋ("despite inconvenient Defects.\n");
 			}
-		if ((ErrCnt[Failure] + ErrCnt[Serious]) > 0) {
-			printf("The arithmetic diagnosed has ");
-			printf("unacceptable Serious Defects.\n");
+		ਜੇ ((ErrCnt[Failure] + ErrCnt[Serious]) > 0) {
+			ਲਿਖੋ("The arithmetic diagnosed has ");
+			ਲਿਖੋ("unacceptable Serious Defects.\n");
 			}
-		if (ErrCnt[Failure] > 0) {
-			printf("Potentially fatal FAILURE may have spoiled this");
-			printf(" program's subsequent diagnoses.\n");
+		ਜੇ (ErrCnt[Failure] > 0) {
+			ਲਿਖੋ("Potentially fatal FAILURE may have spoiled this");
+			ਲਿਖੋ(" program's subsequent diagnoses.\n");
 			}
 		}
-	else {
-		printf("No failures, defects nor flaws have been discovered.\n");
-		if (! ((RMult == Rounded) && (RDiv == Rounded)
+	ਨਹੀਂਤਾਂ {
+		ਲਿਖੋ("No failures, defects nor flaws have been discovered.\n");
+		ਜੇ (! ((RMult == Rounded) && (RDiv == Rounded)
 			&& (RAddSub == Rounded) && (RSqrt == Rounded))) 
-			printf("The arithmetic diagnosed seems Satisfactory.\n");
-		else {
-			if (StickyBit >= One &&
+			ਲਿਖੋ("The arithmetic diagnosed seems Satisfactory.\n");
+		ਨਹੀਂਤਾਂ {
+			ਜੇ (Sticky_ਦੋਆਧਾਰੀ_ਅੰਕ >= One &&
 				(Radix - Two) * (Radix - Nine - One) == Zero) {
-				printf("Rounding appears to conform to ");
-				printf("the proposed IEEE standard P");
-				if ((Radix == Two) &&
+				ਲਿਖੋ("Rounding appears to conform to ");
+				ਲਿਖੋ("the proposed IEEE standard P");
+				ਜੇ ((Radix == Two) &&
 					 ((Precision - Four * Three * Two) *
 					  ( Precision - TwentySeven -
 					   TwentySeven + One) == Zero)) 
-					printf("754");
-				else printf("854");
-				if (IEEE) printf(".\n");
-				else {
-					printf(",\nexcept for possibly Double Rounding");
-					printf(" during Gradual Underflow.\n");
+					ਲਿਖੋ("754");
+				ਨਹੀਂਤਾਂ ਲਿਖੋ("854");
+				ਜੇ (IEEE) ਲਿਖੋ(".\n");
+				ਨਹੀਂਤਾਂ {
+					ਲਿਖੋ(",\nexcept for possibly Double Rounding");
+					ਲਿਖੋ(" during Gradual Underflow.\n");
 					}
 				}
-			printf("The arithmetic diagnosed appears to be Excellent!\n");
+			ਲਿਖੋ("The arithmetic diagnosed appears to be Excellent!\n");
 			}
 		}
-	if (fpecount)
-		printf("\nA total of %d floating point exceptions were registered.\n",
+	ਜੇ (fpecount)
+		ਲਿਖੋ("\nA total of %d floating point exceptions were registered.\n",
 			fpecount);
-	printf("END OF TEST $\n");
+	ਲਿਖੋ("END OF TEST $\n");
   __asm__("ebreak");
 	//return 0;
 	}
@@ -1918,46 +1918,46 @@ int part8(VOID){
 
  FLOAT
 Sign (FP X)
-#ifdef KR_headers
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
 FLOAT X;
-#endif
-{ return X >= 0. ? 1.0 : -1.0; }
+#ਜੇ_ਅੰਤ
+{ ਵਾਪਸ X >= 0. ? 1.0 : -1.0; }
 
- void
+ ਖਾਲੀ
 Pause(VOID)
 {
-#ifndef NOPAUSE
-	char ch[8];
+#ਜੇ_ਅਪਰਿਭਾਸ਼ਿਤ NOPAUSE
+	ਅੱਖਰ ch[8];
 
-	printf("\nTo continue, press RETURN");
+	ਲਿਖੋ("\nTo continue, press RETURN");
 	fflush(stdout);
-	read(KEYBOARD, ch, 8);
-#endif
-	printf("\nDiagnosis resumes after milestone Number %d", Milestone);
-	printf("          Page: %d\n\n", PageNo);
+	ਪਠ(KEYBOARD, ch, 8);
+#ਜੇ_ਅੰਤ
+	ਲਿਖੋ("\nDiagnosis resumes after milestone Number %d", Milestone);
+	ਲਿਖੋ("          Page: %d\n\n", ਪੰਨਾ_No);
 	++Milestone;
-	++PageNo;
+	++ਪੰਨਾ_No;
 	}
 
- void
+ ਖਾਲੀ
 TstCond (INT K, INT Valid, CHARP T)
-#ifdef KR_headers
-int K, Valid;
-char *T;
-#endif
-{ if (! Valid) { BadCond(K,T); printf(".\n"); } }
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
+ਪੂਰਨ K, Valid;
+ਅੱਖਰ *T;
+#ਜੇ_ਅੰਤ
+{ ਜੇ (! Valid) { BadCond(K,T); ਲਿਖੋ(".\n"); } }
 
- void
+ ਖਾਲੀ
 BadCond(INT K, CHARP T)
-#ifdef KR_headers
-int K;
-char *T;
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
+ਪੂਰਨ K;
+ਅੱਖਰ *T;
+#ਜੇ_ਅੰਤ
 {
-	static char *msg[] = { "FAILURE", "SERIOUS DEFECT", "DEFECT", "FLAW" };
+	ਸਥਿਰ ਅੱਖਰ *ਸੁਨੇਹਾ_2[] = { "FAILURE", "SERIOUS DEFECT", "DEFECT", "FLAW" };
 
 	ErrCnt [K] = ErrCnt [K] + 1;
-	printf("%s:  %s", msg[K], T);
+	ਲਿਖੋ("%s:  %s", ਸੁਨੇਹਾ_2[K], T);
 	}
 
 
@@ -1977,123 +1977,123 @@ Random(VOID)
 	X = X * Y;
 	Y = X - FLOOR(X);
 	Random1 = Y + X * 0.000005;
-	return(Random1);
+	ਵਾਪਸ(Random1);
 	}
 
- void
-SqXMinX (INT ErrKind)
-#ifdef KR_headers
-int ErrKind;
-#endif
+ ਖਾਲੀ
+SqXMinX (INT Err_ਕਿਸਮ)
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
+ਪੂਰਨ Err_ਕਿਸਮ;
+#ਜੇ_ਅੰਤ
 {
 	FLOAT XA, XB;
 	
 	XB = X * BInvrse;
 	XA = X - XB;
 	SqEr = ((SQRT(X * X) - XB) - XA) / OneUlp;
-	if (SqEr != Zero) {
-		if (SqEr < MinSqEr) MinSqEr = SqEr;
-		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+	ਜੇ (SqEr != Zero) {
+		ਜੇ (SqEr < MinSqEr) MinSqEr = SqEr;
+		ਜੇ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 		J = J + 1.0;
-		BadCond(ErrKind, "\n");
-		printf("sqrt( %d) - %016x  = %016x\n", X * X, X, OneUlp * SqEr);
-		printf("\tinstead of correct value 0 .\n");
+		BadCond(Err_ਕਿਸਮ, "\n");
+		ਲਿਖੋ("sqrt( %d) - %016x  = %016x\n", X * X, X, OneUlp * SqEr);
+		ਲਿਖੋ("\tinstead of correct value 0 .\n");
 		}
 	}
 
- void
+ ਖਾਲੀ
 NewD(VOID)
 {
 	X = Z1 * Q;
 	X = FLOOR(Half - X / Radix) * Radix + X;
 	Q = (Q - X * Z) / Radix + X * X * (D / Radix);
 	Z = Z - Two * X * D;
-	if (Z <= Zero) {
+	ਜੇ (Z <= Zero) {
 		Z = - Z;
 		Z1 = - Z1;
 		}
 	D = Radix * D;
 	}
 
- void
+ ਖਾਲੀ
 SR3750(VOID)
 {
-	if (! ((X - Radix < Z2 - Radix) || (X - Z2 > W - Z2))) {
+	ਜੇ (! ((X - Radix < Z2 - Radix) || (X - Z2 > W - Z2))) {
 		I = I + 1;
 		X2 = SQRT(X * D);
 		Y2 = (X2 - Z2) - (Y - Z2);
 		X2 = X8 / (Y - Half);
 		X2 = X2 - Half * X2 * X2;
 		SqEr = (Y2 + Half) + (Half - X2);
-		if (SqEr < MinSqEr) MinSqEr = SqEr;
+		ਜੇ (SqEr < MinSqEr) MinSqEr = SqEr;
 		SqEr = Y2 - X2;
-		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
+		ਜੇ (SqEr > MaxSqEr) MaxSqEr = SqEr;
 		}
 	}
 
- void
+ ਖਾਲੀ
 IsYeqX(VOID)
 {
-	if (Y != X) {
-		if (N <= 0) {
-			if (Z == Zero && Q <= Zero)
-				printf("WARNING:  computing\n");
-			else BadCond(Defect, "computing\n");
-			printf("\t(%d) ^ (%016x)\n", Z, Q);
-			printf("\tyielded %d;\n", Y);
-			printf("\twhich compared unequal to correct %d ;\n",
+	ਜੇ (Y != X) {
+		ਜੇ (N <= 0) {
+			ਜੇ (Z == Zero && Q <= Zero)
+				ਲਿਖੋ("WARNING:  computing\n");
+			ਨਹੀਂਤਾਂ BadCond(Defect, "computing\n");
+			ਲਿਖੋ("\t(%d) ^ (%016x)\n", Z, Q);
+			ਲਿਖੋ("\tyielded %d;\n", Y);
+			ਲਿਖੋ("\twhich compared unequal to correct %d ;\n",
 				X);
-			printf("\t\tthey differ by %d .\n", Y - X);
+			ਲਿਖੋ("\t\tthey differ by %d .\n", Y - X);
 			}
 		N = N + 1; /* ... count discrepancies. */
 		}
 	}
 
- void
+ ਖਾਲੀ
 SR3980(VOID)
 {
-	do {
+	ਕਰੋ {
 		Q = (FLOAT) I;
 		Y = POW(Z, Q);
 		IsYeqX();
-		if (++I > M) break;
+		ਜੇ (++I > M) ਰੋਕੋ;
 		X = Z * X;
-		} while ( X < W );
+		} ਜਦੋਂ ( X < W );
 	}
 
- void
+ ਖਾਲੀ
 PrintIfNPositive(VOID)
 {
-	if (N > 0) printf("Similar discrepancies have occurred %d times.\n", N);
+	ਜੇ (N > 0) ਲਿਖੋ("Similar discrepancies have occurred %d times.\n", N);
 	}
 
- void
+ ਖਾਲੀ
 TstPtUf(VOID)
 {
 	N = 0;
-	if (Z != Zero) {
-		printf("Since comparison denies Z = 0, evaluating ");
-		printf("(Z + Z) / Z should be safe.\n");
+	ਜੇ (Z != Zero) {
+		ਲਿਖੋ("Since comparison denies Z = 0, evaluating ");
+		ਲਿਖੋ("(Z + Z) / Z should be safe.\n");
 		sigsave = sigfpe;
-		if (setjmp(ovfl_buf)) goto very_serious;
+		ਜੇ (setjmp(ovfl_buf)) ਜਾਓ very_serious;
 		Q9 = (Z + Z) / Z;
-		printf("What the machine gets for (Z + Z) / Z is  %d .\n",
+		ਲਿਖੋ("What the machine gets for (Z + Z) / Z is  %d .\n",
 			Q9);
-		if (FABS(Q9 - Two) < Radix * U2) {
-			printf("This is O.K., provided Over/Underflow");
-			printf(" has NOT just been signaled.\n");
+		ਜੇ (FABS(Q9 - Two) < Radix * U2) {
+			ਲਿਖੋ("This is O.K., provided Over/Underflow");
+			ਲਿਖੋ(" has NOT just been signaled.\n");
 			}
-		else {
-			if ((Q9 < One) || (Q9 > Two)) {
+		ਨਹੀਂਤਾਂ {
+			ਜੇ ((Q9 < One) || (Q9 > Two)) {
 very_serious:
 				N = 1;
 				ErrCnt [Serious] = ErrCnt [Serious] + 1;
-				printf("This is a VERY SERIOUS DEFECT!\n");
+				ਲਿਖੋ("This is a VERY SERIOUS DEFECT!\n");
 				}
-			else {
+			ਨਹੀਂਤਾਂ {
 				N = 1;
 				ErrCnt [Defect] = ErrCnt [Defect] + 1;
-				printf("This is a DEFECT!\n");
+				ਲਿਖੋ("This is a DEFECT!\n");
 				}
 			}
 		sigsave = 0;
@@ -2102,55 +2102,55 @@ very_serious:
 		V9 = One * Z;
 		Random2 = V9;
 		V9 = Z / One;
-		if ((Z == Random1) && (Z == Random2) && (Z == V9)) {
-			if (N > 0) Pause();
+		ਜੇ ((Z == Random1) && (Z == Random2) && (Z == V9)) {
+			ਜੇ (N > 0) Pause();
 			}
-		else {
+		ਨਹੀਂਤਾਂ {
 			N = 1;
 			BadCond(Defect, "What prints as Z = ");
-			printf("%d\n\tcompares different from  ", Z);
-			if (Z != Random1) printf("Z * 1 = %d ", Random1);
-			if (! ((Z == Random2)
+			ਲਿਖੋ("%d\n\tcompares different from  ", Z);
+			ਜੇ (Z != Random1) ਲਿਖੋ("Z * 1 = %d ", Random1);
+			ਜੇ (! ((Z == Random2)
 				|| (Random2 == Random1)))
-				printf("1 * Z == %d\n", Random2);
-			if (! (Z == V9)) printf("Z / 1 = %d\n", V9);
-			if (Random2 != Random1) {
+				ਲਿਖੋ("1 * Z == %d\n", Random2);
+			ਜੇ (! (Z == V9)) ਲਿਖੋ("Z / 1 = %d\n", V9);
+			ਜੇ (Random2 != Random1) {
 				ErrCnt [Defect] = ErrCnt [Defect] + 1;
 				BadCond(Defect, "Multiplication does not commute!\n");
-				printf("\tComparison alleges that 1 * Z = %d\n",
+				ਲਿਖੋ("\tComparison alleges that 1 * Z = %d\n",
 					Random2);
-				printf("\tdiffers from Z * 1 = %d\n", Random1);
+				ਲਿਖੋ("\tdiffers from Z * 1 = %d\n", Random1);
 				}
 			Pause();
 			}
 		}
 	}
 
- void
+ ਖਾਲੀ
 notify(CHARP s)
-#ifdef KR_headers
- char *s;
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
+ ਅੱਖਰ *s;
+#ਜੇ_ਅੰਤ
 {
-	printf("%s test appears to be inconsistent...\n", s);
-	printf("   PLEASE NOTIFY KARPINKSI!\n");
+	ਲਿਖੋ("%s test appears to be inconsistent...\n", s);
+	ਲਿਖੋ("   PLEASE NOTIFY KARPINKSI!\n");
 	}
 
 /*SPLIT msgs.c
 #include "paranoia.h"
 */
 
- void
+ ਖਾਲੀ
 msglist(CHARPP s)
-#ifdef KR_headers
-char **s;
-#endif
-{ while(*s) printf("%s\n", *s++); }
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ KR_ਸਿਰਲੇਖਾਂ
+ਅੱਖਰ **s;
+#ਜੇ_ਅੰਤ
+{ ਜਦੋਂ(*s) ਲਿਖੋ("%s\n", *s++); }
 
- void
+ ਖਾਲੀ
 Instructions(VOID)
 {
-  static char *instr[] = {
+  ਸਥਿਰ ਅੱਖਰ *instr[] = {
 	"Lest this program stop prematurely, i.e. before displaying\n",
 	"    `END OF TEST',\n",
 	"try to persuade the computer NOT to terminate execution when an",
@@ -2165,10 +2165,10 @@ Instructions(VOID)
 	msglist(instr);
 	}
 
- void
+ ਖਾਲੀ
 Heading(VOID)
 {
-  static char *head[] = {
+  ਸਥਿਰ ਅੱਖਰ *ਸਿਰ[] = {
 	"Users are invited to help debug and augment this program so it will",
 	"cope with unanticipated and newly uncovered arithmetic pathologies.\n",
 	"Please send suggestions and interesting results to",
@@ -2177,11 +2177,11 @@ Heading(VOID)
 	"\tUniversity of California",
 	"\tSan Francisco, CA 94143-0704, USA\n",
 	"In doing so, please include the following information:",
-#ifdef Single
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ Single
 	"\tPrecision:\tsingle;",
-#else
+#ਨਹੀਂਤਾਂ
 	"\tPrecision:\tdouble;",
-#endif
+#ਜੇ_ਅੰਤ
 	"\tVersion:\t10 February 1989;",
 	"\tComputer:\n",
 	"\tCompiler:\n",
@@ -2189,13 +2189,13 @@ Heading(VOID)
 	"\tOther relevant compiler options:",
 	0};
 
-	msglist(head);
+	msglist(ਸਿਰ);
 	}
 
- void
+ ਖਾਲੀ
 Characteristics(VOID)
 {
-	static char *chars[] = {
+	ਸਥਿਰ ਅੱਖਰ *chars[] = {
 	 "Running this program should reveal these characteristics:",
 	"     Radix = 1, 2, 4, 8, 10, 16, 100, 256 ...",
 	"     Precision = number of significant digits carried.",
@@ -2220,13 +2220,13 @@ Characteristics(VOID)
 	msglist(chars);
 	}
 
- void
+ ਖਾਲੀ
 History(VOID)
 { /* History */
  /* Converted from Brian Wichmann's Pascal version to C by Thos Sumner,
 	with further massaging by David M. Gay. */
 
-  static char *hist[] = {
+  ਸਥਿਰ ਅੱਖਰ *hist[] = {
 	"The program attempts to discriminate among",
 	"   FLAWs, like lack of a sticky bit,",
 	"   Serious DEFECTs, like lack of a guard digit, and",

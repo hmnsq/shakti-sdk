@@ -26,27 +26,27 @@
   @detail This file contains the driver code for plic device. The functions to
   setup each plic registers, isr routine and plic interrupt handler are here.
  */
-#define ETH_VARI 1
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ETH_VARI 1
 
-#include "eth_driver.h"
-#include "plic_driver.h"
-#include "platform.h"
-#include "log.h"
-#include "stddef.h"
-#include "gpio.h"
-#include "utils.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "eth_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "plic_driver.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "platform.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "stddef.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "gpio.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "utils.h"
 
 /*
  * Variable used to indicate the length of the received frame.
  */
-volatile u32 RecvFrameLength;
+ਅਸਥਿਰ u32 Recv_ਚੌਖਟਾ_ਲੰਮਾਈ;
 UINTPTR TxBuffPtr;
 UINTPTR RxBuffPtr;
-volatile int FramesTx;
-volatile int FramesRx;
-volatile int TxCount;
-volatile int RxCount;
-volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+ਅਸਥਿਰ ਪੂਰਨ ਚੌਖਟੇ_Tx;
+ਅਸਥਿਰ ਪੂਰਨ ਚੌਖਟੇ_Rx;
+ਅਸਥਿਰ ਪੂਰਨ Tx_ਗਿਣਤੀ;
+ਅਸਥਿਰ ਪੂਰਨ Rx_ਗਿਣਤੀ;
+ਅਸਥਿਰ ਪੂਰਨ Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 
 /*
  * Set up valid local MAC addresses. This loop back test uses the LocalAddress
@@ -59,31 +59,31 @@ XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
  * Buffers used for Transmission and Reception of Packets. These are declared
  * as global so that they are not a part of the stack.
  */
-u8 TxFrame[XEL_MAX_FRAME_SIZE];
-u8 RxFrame[XEL_MAX_FRAME_SIZE];
+u8 Tx_ਚੌਖਟਾ[XEL_MAX_ਚੌਖਟਾ_ਮਾਪ];
+u8 Rx_ਚੌਖਟਾ[XEL_MAX_ਚੌਖਟਾ_ਮਾਪ];
 
-volatile u32 RecvFrameLength;	/* Indicates the length of the Received packet
+ਅਸਥਿਰ u32 Recv_ਚੌਖਟਾ_ਲੰਮਾਈ;	/* Indicates the length of the Received packet
 				 */
-volatile int TransmitComplete;	/* Flag to indicate that the Transmission
+ਅਸਥਿਰ ਪੂਰਨ TransmitComplete;	/* Flag to indicate that the Transmission
 				 * is complete
 				 */
 
 
-void StubHandler(void *CallBackRef);
+ਖਾਲੀ StubHandler(ਖਾਲੀ *Call_ਪਿੱਠ_Ref);
 
 
 /**
  * This table contains configuration information for each EmacLite device
  * in the system.
  */
-XEmacLite_Config XEmacLite_ConfigTable = {
+XEmacLite_Config XEmac_Lite_Config_ਸਾਰਣੀ = {
 	{
 	 XPAR_EMACLITE_0_DEVICE_ID,	/* Unique ID of device */
 	 XPAR_EMACLITE_0_BASEADDR,	/* Device base address */
 	 XPAR_EMACLITE_0_TX_PING_PONG,	/* Include TX Ping Pong buffers */
 	 XPAR_EMACLITE_0_RX_PING_PONG,	/* Include RX Ping Pong buffers */
 	 XPAR_EMACLITE_0_INCLUDE_MDIO,	/* Include MDIO support */
-	 XPAR_EMACLITE_0_INCLUDE_INTERNAL_LOOPBACK
+	 XPAR_EMACLITE_0_INCLUDE_ਅੰਦਰੂਨੀ_LOOPBACK
 /* Include Internal  loop back support */
 	 }
 };
@@ -92,7 +92,7 @@ XEmacLite_Config XEmacLite_ConfigTable = {
 
 /************************** Function Prototypes ******************************/
 
-static u16 XEmacLite_GetReceiveDataLength(UINTPTR BaseAddress);
+ਸਥਿਰ u16 XEmac_Lite_Get_Receive_ਅੰਕੜੇ_ਲੰਮਾਈ(UINTPTR ਅਧਾਰ_ਪਤਾ);
 
 /*****************************************************************************/
 /**
@@ -107,9 +107,9 @@ static u16 XEmacLite_GetReceiveDataLength(UINTPTR BaseAddress);
 
 *
 ******************************************************************************/
-static INLINE u8 Xil_In8(UINTPTR Addr)
+ਸਥਿਰ INLINE u8 Xil_In8(UINTPTR Addr)
 {
-	return *(volatile u8 *) Addr;
+	ਵਾਪਸ *(ਅਸਥਿਰ u8 *) Addr;
 }
 
 /*****************************************************************************/
@@ -124,9 +124,9 @@ static INLINE u8 Xil_In8(UINTPTR Addr)
 * @return	The 16 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE u16 Xil_In16(UINTPTR Addr)
+ਸਥਿਰ INLINE u16 Xil_In16(UINTPTR Addr)
 {
-	return *(volatile u16 *) Addr;
+	ਵਾਪਸ *(ਅਸਥਿਰ u16 *) Addr;
 }
 
 /*****************************************************************************/
@@ -141,9 +141,9 @@ static INLINE u16 Xil_In16(UINTPTR Addr)
 * @return	The 32 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE u32 Xil_In32(UINTPTR Addr)
+ਸਥਿਰ INLINE u32 Xil_In32(UINTPTR Addr)
 {
-	return *(volatile u32 *) Addr;
+	ਵਾਪਸ *(ਅਸਥਿਰ u32 *) Addr;
 }
 
 /*****************************************************************************/
@@ -158,9 +158,9 @@ static INLINE u32 Xil_In32(UINTPTR Addr)
 * @return	The 64 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE u64 Xil_In64(UINTPTR Addr)
+ਸਥਿਰ INLINE u64 Xil_In64(UINTPTR Addr)
 {
-	return *(volatile u64 *) Addr;
+	ਵਾਪਸ *(ਅਸਥਿਰ u64 *) Addr;
 }
 
 /*****************************************************************************/
@@ -176,10 +176,10 @@ static INLINE u64 Xil_In64(UINTPTR Addr)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out8(UINTPTR Addr, u8 Value)
+ਸਥਿਰ INLINE ਖਾਲੀ Xil_Out8(UINTPTR Addr, u8 ਮੁੱਲ_2)
 {
-	volatile u8 *LocalAddr = (volatile u8 *)Addr;
-	*LocalAddr = Value;
+	ਅਸਥਿਰ u8 *LocalAddr = (ਅਸਥਿਰ u8 *)Addr;
+	*LocalAddr = ਮੁੱਲ_2;
 }
 
 /*****************************************************************************/
@@ -194,10 +194,10 @@ static INLINE void Xil_Out8(UINTPTR Addr, u8 Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out16(UINTPTR Addr, u16 Value)
+ਸਥਿਰ INLINE ਖਾਲੀ Xil_Out16(UINTPTR Addr, u16 ਮੁੱਲ_2)
 {
-	volatile u16 *LocalAddr = (volatile u16 *)Addr;
-	*LocalAddr = Value;
+	ਅਸਥਿਰ u16 *LocalAddr = (ਅਸਥਿਰ u16 *)Addr;
+	*LocalAddr = ਮੁੱਲ_2;
 }
 
 /*****************************************************************************/
@@ -213,10 +213,10 @@ static INLINE void Xil_Out16(UINTPTR Addr, u16 Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out32(UINTPTR Addr, u32 Value)
+ਸਥਿਰ INLINE ਖਾਲੀ Xil_Out32(UINTPTR Addr, u32 ਮੁੱਲ_2)
 {
-	volatile u32 *LocalAddr = (volatile u32 *)Addr;
-	*LocalAddr = Value;
+	ਅਸਥਿਰ u32 *LocalAddr = (ਅਸਥਿਰ u32 *)Addr;
+	*LocalAddr = ਮੁੱਲ_2;
 }
 
 /*****************************************************************************/
@@ -231,10 +231,10 @@ static INLINE void Xil_Out32(UINTPTR Addr, u32 Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out64(UINTPTR Addr, u64 Value)
+ਸਥਿਰ INLINE ਖਾਲੀ Xil_Out64(UINTPTR Addr, u64 ਮੁੱਲ_2)
 {
-	volatile u64 *LocalAddr = (volatile u64 *)Addr;
-	*LocalAddr = Value;
+	ਅਸਥਿਰ u64 *LocalAddr = (ਅਸਥਿਰ u64 *)Addr;
+	*LocalAddr = ਮੁੱਲ_2;
 }
 
 /*****************************************************************************/
@@ -247,9 +247,9 @@ static INLINE void Xil_Out64(UINTPTR Addr, u64 Value)
 * @return	16 bit Data with converted endianness
 *
 ******************************************************************************/
-u16 Xil_EndianSwap16(u16 Data)
+u16 Xil_EndianSwap16(u16 ਅੰਕੜੇ)
 {
-	return (u16) (((Data & 0xFF00U) >> 8U) | ((Data & 0x00FFU) << 8U));
+	ਵਾਪਸ (u16) (((ਅੰਕੜੇ & 0xFF00U) >> 8U) | ((ਅੰਕੜੇ & 0x00FFU) << 8U));
 }
 
 /*****************************************************************************/
@@ -262,24 +262,24 @@ u16 Xil_EndianSwap16(u16 Data)
 * @return	32 bit data with converted endianness
 *
 ******************************************************************************/
-u32 Xil_EndianSwap32(u32 Data)
+u32 Xil_EndianSwap32(u32 ਅੰਕੜੇ)
 {
-	u16 LoWord;
-	u16 HiWord;
+	u16 Lo_ਸ਼ਬਦ;
+	u16 Hi_ਸ਼ਬਦ;
 
 	/* get each of the half words from the 32 bit word */
 
-	LoWord = (u16) (Data & 0x0000FFFFU);
-	HiWord = (u16) ((Data & 0xFFFF0000U) >> 16U);
+	Lo_ਸ਼ਬਦ = (u16) (ਅੰਕੜੇ & 0x0000FFFFU);
+	Hi_ਸ਼ਬਦ = (u16) ((ਅੰਕੜੇ & 0xFFFF0000U) >> 16U);
 
 	/* byte swap each of the 16 bit half words */
 
-	LoWord = (((LoWord & 0xFF00U) >> 8U) | ((LoWord & 0x00FFU) << 8U));
-	HiWord = (((HiWord & 0xFF00U) >> 8U) | ((HiWord & 0x00FFU) << 8U));
+	Lo_ਸ਼ਬਦ = (((Lo_ਸ਼ਬਦ & 0xFF00U) >> 8U) | ((Lo_ਸ਼ਬਦ & 0x00FFU) << 8U));
+	Hi_ਸ਼ਬਦ = (((Hi_ਸ਼ਬਦ & 0xFF00U) >> 8U) | ((Hi_ਸ਼ਬਦ & 0x00FFU) << 8U));
 
 	/* swap the half words before returning the value */
 
-	return ((((u32)LoWord) << (u32)16U) | (u32)HiWord);
+	ਵਾਪਸ ((((u32)Lo_ਸ਼ਬਦ) << (u32)16U) | (u32)Hi_ਸ਼ਬਦ);
 }
 
 
@@ -287,27 +287,27 @@ u32 Xil_EndianSwap32(u32 Data)
 
 
 
-u16 Xil_Htons(u16 Data)
+u16 Xil_Htons(u16 ਅੰਕੜੇ)
 {
-	return (u16) (((Data & 0xFF00U) >> 8U) | ((Data & 0x00FFU) << 8U));
+	ਵਾਪਸ (u16) (((ਅੰਕੜੇ & 0xFF00U) >> 8U) | ((ਅੰਕੜੇ & 0x00FFU) << 8U));
 }
 
-u16 Xil_Ntohs(u16 Data)
+u16 Xil_Ntohs(u16 ਅੰਕੜੇ)
 {
-	return (u16) (((Data & 0xFF00U) >> 8U) | ((Data & 0x00FFU) << 8U));
+	ਵਾਪਸ (u16) (((ਅੰਕੜੇ & 0xFF00U) >> 8U) | ((ਅੰਕੜੇ & 0x00FFU) << 8U));
 }
 
 
-#if 0
-#define Xil_In16LE	Xil_In16
-#define Xil_In32LE	Xil_In32
-#define Xil_Out16LE	Xil_Out16
-#define Xil_Out32LE	Xil_Out32
-#define Xil_Htons	Xil_EndianSwap16
-#define Xil_Htonl	Xil_EndianSwap32
-#define Xil_Ntohs	Xil_EndianSwap16
-#define Xil_Ntohl	Xil_EndianSwap32
-#endif
+#ਜੇ 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_In16LE	Xil_In16
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_In32LE	Xil_In32
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_Out16LE	Xil_Out16
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_Out32LE	Xil_Out32
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_Htons	Xil_EndianSwap16
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_Htonl	Xil_EndianSwap32
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_Ntohs	Xil_EndianSwap16
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ Xil_Ntohl	Xil_EndianSwap32
+#ਜੇ_ਅੰਤ
 
 
 /****************************************************************************/
@@ -325,8 +325,8 @@ u16 Xil_Ntohs(u16 Data)
 *		u32 XEmacLite_ReadReg(u32 BaseAddress, u32 RegOffset);
 *
 ******************************************************************************/
-#define XEmacLite_ReadReg(BaseAddress, RegOffset) \
-	XEmacLite_In32((BaseAddress) + (RegOffset))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmacLite_ReadReg(ਅਧਾਰ_ਪਤਾ, Reg_ਵਿੱਥ) \
+	XEmacLite_In32((ਅਧਾਰ_ਪਤਾ) + (Reg_ਵਿੱਥ))
 
 /***************************************************************************/
 /**
@@ -344,8 +344,8 @@ u16 Xil_Ntohs(u16 Data)
 *		void XEmacLite_WriteReg(u32 BaseAddress, u32 RegOffset,
 *					u32 RegisterValue);
 ******************************************************************************/
-#define XEmacLite_WriteReg(BaseAddress, RegOffset, RegisterValue) \
-	XEmacLite_Out32((BaseAddress) + (RegOffset), (RegisterValue))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ, Reg_ਵਿੱਥ, ਰਜਿਸਟਰ_ਮੁੱਲ) \
+	XEmacLite_Out32((ਅਧਾਰ_ਪਤਾ) + (Reg_ਵਿੱਥ), (ਰਜਿਸਟਰ_ਮੁੱਲ))
 
 
 /****************************************************************************/
@@ -361,8 +361,8 @@ u16 Xil_Ntohs(u16 Data)
 * 		u32 XEmacLite_GetTxStatus(u32 BaseAddress)
 *
 *****************************************************************************/
-#define XEmacLite_GetTxStatus(BaseAddress)			\
-	(XEmacLite_ReadReg((BaseAddress), XEL_TSR_OFFSET))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ)			\
+	(XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ), XEL_TSR_ਵਿੱਥ))
 
 
 /****************************************************************************/
@@ -379,8 +379,8 @@ u16 Xil_Ntohs(u16 Data)
 * 		u32 XEmacLite_SetTxStatus(u32 BaseAddress, u32 Data)
 *
 *****************************************************************************/
-#define XEmacLite_SetTxStatus(BaseAddress, Data)			\
-	(XEmacLite_WriteReg((BaseAddress), XEL_TSR_OFFSET, (Data)))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਅੰਕੜੇ)			\
+	(XEmacLite_WriteReg((ਅਧਾਰ_ਪਤਾ), XEL_TSR_ਵਿੱਥ, (ਅੰਕੜੇ)))
 
 
 /****************************************************************************/
@@ -396,8 +396,8 @@ u16 Xil_Ntohs(u16 Data)
 * 		u32 XEmacLite_GetRxStatus(u32 BaseAddress)
 *
 *****************************************************************************/
-#define XEmacLite_GetRxStatus(BaseAddress)			\
-	(XEmacLite_ReadReg((BaseAddress), XEL_RSR_OFFSET))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ)			\
+	(XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ), XEL_RSR_ਵਿੱਥ))
 
 
 /****************************************************************************/
@@ -414,8 +414,8 @@ u16 Xil_Ntohs(u16 Data)
 * 		u32 XEmacLite_SetRxStatus(u32 BaseAddress, u32 Data)
 *
 *****************************************************************************/
-#define XEmacLite_SetRxStatus(BaseAddress, Data)			\
-	(XEmacLite_WriteReg((BaseAddress), XEL_RSR_OFFSET, (Data)))
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਅੰਕੜੇ)			\
+	(XEmacLite_WriteReg((ਅਧਾਰ_ਪਤਾ), XEL_RSR_ਵਿੱਥ, (ਅੰਕੜੇ)))
 
 
 /****************************************************************************/
@@ -431,9 +431,9 @@ u16 Xil_Ntohs(u16 Data)
 * 		int XEmacLite_IsTxDone(u32 BaseAddress)
 *
 *****************************************************************************/
-#define XEmacLite_IsTxDone(BaseAddress)			\
-		 ((XEmacLite_ReadReg((BaseAddress), XEL_TSR_OFFSET) & 	 \
-			 XEL_TSR_XMIT_BUSY_MASK) != XEL_TSR_XMIT_BUSY_MASK)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmac_Lite_Is_Tx_ਪੂਰਾ(ਅਧਾਰ_ਪਤਾ)			\
+		 ((XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ), XEL_TSR_ਵਿੱਥ) & 	 \
+			 XEL_TSR_XMIT_BUSY_ਨਕਾਬ) != XEL_TSR_XMIT_BUSY_ਨਕਾਬ)
 
 
 /****************************************************************************/
@@ -449,14 +449,14 @@ u16 Xil_Ntohs(u16 Data)
 *		int XEmacLite_IsRxEmpty(u32 BaseAddress)
 *
 *****************************************************************************/
-#define XEmacLite_IsRxEmpty(BaseAddress) \
-		  ((XEmacLite_ReadReg((BaseAddress), XEL_RSR_OFFSET) & \
-			XEL_RSR_RECV_DONE_MASK) != XEL_RSR_RECV_DONE_MASK)
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ XEmac_Lite_Is_Rx_ਖਾਲੀ_ਥਾਵਾਂ(ਅਧਾਰ_ਪਤਾ) \
+		  ((XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ), XEL_RSR_ਵਿੱਥ) & \
+			XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ) != XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ)
 
 /************************** Function Prototypes ******************************/
 
-void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned ByteCount);
-u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr);
+ਖਾਲੀ XEmac_Lite_Send_ਚੌਖਟਾ(UINTPTR ਅਧਾਰ_ਪਤਾ, u8 *ਚੌਖਟਾ_Ptr, ਬਿਨਾਨਿਸ਼ਾਨੀ Byte_ਗਿਣਤੀ);
+u16 XEmac_Lite_Recv_ਚੌਖਟਾ(UINTPTR ਅਧਾਰ_ਪਤਾ, u8 *ਚੌਖਟਾ_Ptr);
 
 /*****************************************************************************/
 /**
@@ -483,30 +483,30 @@ u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr);
 * The function does not take the different buffers into consideration.
 *
 ******************************************************************************/
-void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned ByteCount)
+ਖਾਲੀ XEmac_Lite_Send_ਚੌਖਟਾ(UINTPTR ਅਧਾਰ_ਪਤਾ, u8 *ਚੌਖਟਾ_Ptr, ਬਿਨਾਨਿਸ਼ਾਨੀ Byte_ਗਿਣਤੀ)
 {
-	u32 Register;
+	u32 ਰਜਿਸਟਰ_2;
 
 	/*
 	 * Write data to the EmacLite
 	 */
-	XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) (BaseAddress), ByteCount);
+	XEmacLite_AlignedWrite(ਚੌਖਟਾ_Ptr, (UINTPTR *) (ਅਧਾਰ_ਪਤਾ), Byte_ਗਿਣਤੀ);
 
 	/*
 	 * The frame is in the buffer, now send it
 	 */
-	XEmacLite_WriteReg(BaseAddress,  XEL_TPLR_OFFSET,
-				(ByteCount & (XEL_TPLR_LENGTH_MASK_HI |
-				XEL_TPLR_LENGTH_MASK_LO)));
+	XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ,  XEL_TPLR_ਵਿੱਥ,
+				(Byte_ਗਿਣਤੀ & (XEL_TPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI |
+				XEL_TPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO)));
 
 
-	Register = XEmacLite_GetTxStatus(BaseAddress);
-	XEmacLite_SetTxStatus(BaseAddress, Register | XEL_TSR_XMIT_BUSY_MASK);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2 | XEL_TSR_XMIT_BUSY_ਨਕਾਬ);
 
 	/*
 	 * Loop on the status waiting for the transmit to be complete.
 	 */
-	while (!XEmacLite_IsTxDone(BaseAddress));
+	ਜਦੋਂ (!XEmac_Lite_Is_Tx_ਪੂਰਾ(ਅਧਾਰ_ਪਤਾ));
 
 }
 
@@ -538,57 +538,57 @@ void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned ByteCount)
 * The function does not take the different buffers into consideration.
 *
 ******************************************************************************/
-u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr)
+u16 XEmac_Lite_Recv_ਚੌਖਟਾ(UINTPTR ਅਧਾਰ_ਪਤਾ, u8 *ਚੌਖਟਾ_Ptr)
 {
-	u16 LengthType;
-	u16 Length;
-	u32 Register;
+	u16 ਲੰਮਾਈ_Type;
+	u16 ਲੰਮਾਈ;
+	u32 ਰਜਿਸਟਰ_2;
 
 	/*
 	 * Wait for a frame to arrive - this is a blocking call
 	 */
-	while (XEmacLite_IsRxEmpty(BaseAddress));
+	ਜਦੋਂ (XEmac_Lite_Is_Rx_ਖਾਲੀ_ਥਾਵਾਂ(ਅਧਾਰ_ਪਤਾ));
 
 	/*
 	 * Get the length of the frame that arrived, only 32-bit reads are
 	 * allowed LengthType is in the upper half of the 32-bit word.
 	 */
-	Register = XEmacLite_ReadReg(BaseAddress, XEL_RPLR_OFFSET);
-	LengthType = (u16) ((Register >> 16) &
-			    (XEL_RPLR_LENGTH_MASK_HI |
-			     XEL_RPLR_LENGTH_MASK_LO));
+	ਰਜਿਸਟਰ_2 = XEmacLite_ReadReg(ਅਧਾਰ_ਪਤਾ, XEL_RPLR_ਵਿੱਥ);
+	ਲੰਮਾਈ_Type = (u16) ((ਰਜਿਸਟਰ_2 >> 16) &
+			    (XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI |
+			     XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO));
 
 	/*
 	 * Check if length is valid
 	 */
-	if (LengthType > XEL_MAX_FRAME_SIZE) {
+	ਜੇ (ਲੰਮਾਈ_Type > XEL_MAX_ਚੌਖਟਾ_ਮਾਪ) {
 		/*
 		 * Field contain type, use max frame size and
 		 * let user parse it
 		 */
-		Length = XEL_MAX_FRAME_SIZE;
+		ਲੰਮਾਈ = XEL_MAX_ਚੌਖਟਾ_ਮਾਪ;
 	}
-	else {
+	ਨਹੀਂਤਾਂ {
 		/*
 		 * Use the length in the frame, plus the header and trailer
 		 */
-		Length = LengthType + XEL_HEADER_SIZE + XEL_FCS_SIZE;
+		ਲੰਮਾਈ = ਲੰਮਾਈ_Type + XEL_ਸਿਰਲੇਖ_ਮਾਪ + XEL_FCS_ਮਾਪ;
 	}
 
 	/*
 	 * Read each byte from the EmacLite
 	 */
-	XEmacLite_AlignedRead((UINTPTR *) (BaseAddress + XEL_RXBUFF_OFFSET),
-			      FramePtr, Length);
+	XEmacLite_AlignedRead((UINTPTR *) (ਅਧਾਰ_ਪਤਾ + XEL_RXBUFF_ਵਿੱਥ),
+			      ਚੌਖਟਾ_Ptr, ਲੰਮਾਈ);
 
 	/*
 	 * Acknowledge the frame
 	 */
-	Register = XEmacLite_GetRxStatus(BaseAddress);
-	Register &= ~XEL_RSR_RECV_DONE_MASK;
-	XEmacLite_SetRxStatus(BaseAddress, Register);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਰਜਿਸਟਰ_2 &= ~XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ;
+	XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
-	return LengthType;
+	ਵਾਪਸ ਲੰਮਾਈ_Type;
 }
 
 /******************************************************************************/
@@ -606,40 +606,40 @@ u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr)
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
+ਖਾਲੀ XEmacLite_AlignedWrite(ਖਾਲੀ *SrcPtr, UINTPTR *DestPtr, ਬਿਨਾਨਿਸ਼ਾਨੀ Byte_ਗਿਣਤੀ)
 {
-	unsigned Index;
-	unsigned Length = ByteCount;
-	volatile u32 AlignBuffer;
-	volatile u32 *To32Ptr;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਸੂਚਕਾਂਕ;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾਈ = Byte_ਗਿਣਤੀ;
+	ਅਸਥਿਰ u32 Align_ਬਫਰ;
+	ਅਸਥਿਰ u32 *To32Ptr;
 	u32 *From32Ptr;
-	volatile u16 *To16Ptr;
+	ਅਸਥਿਰ u16 *To16Ptr;
 	u16 *From16Ptr;
-	volatile u8 *To8Ptr;
+	ਅਸਥਿਰ u8 *To8Ptr;
 	u8 *From8Ptr;
 
 //	To32Ptr = (volatile UINTPTR *)DestPtr;
 
-	if ((((u32) SrcPtr) & 0x00000003) == 0) {
+	ਜੇ ((((u32) SrcPtr) & 0x00000003) == 0) {
 
 		/*
 		 * Word aligned buffer, no correction needed.
 		 */
 		From32Ptr = (u32 *) SrcPtr;
 		To32Ptr = (u32 *)DestPtr;
-#if 0
-		log_info("length is %x", Length);
-		log_info("\n Size of To32Ptr: %x", sizeof(*To32Ptr));
-		log_info("\n Size of From32Ptr: %x", sizeof(*From32Ptr));
-#endif		
-		while (Length > 3) {
+#ਜੇ 0
+		log_info("length is %x", ਲੰਮਾਈ);
+		log_info("\n Size of To32Ptr: %x", ਆਕਾਰ(*To32Ptr));
+		log_info("\n Size of From32Ptr: %x", ਆਕਾਰ(*From32Ptr));
+#ਜੇ_ਅੰਤ		
+		ਜਦੋਂ (ਲੰਮਾਈ > 3) {
 			/*
 			 * Output each word destination.
 			 */
 			*To32Ptr++ = *From32Ptr++;
-#if 0
+#ਜੇ 0
 			*To32Ptr = *From32Ptr++;
-			printf("\n Write value @ %x: %x", To32Ptr, *To32Ptr);
+			ਲਿਖੋ("\n Write value @ %x: %x", To32Ptr, *To32Ptr);
 			*To32Ptr++;
 
 //#else
@@ -650,63 +650,63 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
 			*From32Ptr++;
 			log_info("\n 1_2:[%x]; 2: [%x]", *To32Ptr, *From32Ptr);
 			log_info("\n 1_2:[%x]; 2: [%x]", To32Ptr, From32Ptr);
-#endif
+#ਜੇ_ਅੰਤ
 			/*
 			 * Adjust length accordingly
 			 */
-			Length -= 4;
+			ਲੰਮਾਈ -= 4;
 		}
 
 		/*
 		 * Set up to output the remaining data, zero the temp buffer
 		 first.
 		 */
-		AlignBuffer = 0;
-		To8Ptr = (u8 *) &AlignBuffer;
+		Align_ਬਫਰ = 0;
+		To8Ptr = (u8 *) &Align_ਬਫਰ;
 		From8Ptr = (u8 *) From32Ptr;
 
 	}
-	else if ((((u32) SrcPtr) & 0x00000001) != 0) {
+	ਨਹੀਂਤਾਂ ਜੇ ((((u32) SrcPtr) & 0x00000001) != 0) {
 		/*
 		 * Byte aligned buffer, correct.
 		 */
-		AlignBuffer = 0;
-		To8Ptr = (u8 *) &AlignBuffer;
+		Align_ਬਫਰ = 0;
+		To8Ptr = (u8 *) &Align_ਬਫਰ;
 		From8Ptr = (u8 *) SrcPtr;
 
-		while (Length > 3) {
+		ਜਦੋਂ (ਲੰਮਾਈ > 3) {
 			/*
 			 * Copy each byte into the temporary buffer.
 			 */
-			for (Index = 0; Index < 4; Index++) {
+			ਲਈ (ਸੂਚਕਾਂਕ = 0; ਸੂਚਕਾਂਕ < 4; ਸੂਚਕਾਂਕ++) {
 				*To8Ptr++ = *From8Ptr++;
 			}
 
 			/*
 			 * Output the buffer
 			 */
-			*To32Ptr++ = AlignBuffer;
+			*To32Ptr++ = Align_ਬਫਰ;
 
 			/*.
 			 * Reset the temporary buffer pointer and adjust length.
 			 */
-			To8Ptr = (u8 *) &AlignBuffer;
-			Length -= 4;
+			To8Ptr = (u8 *) &Align_ਬਫਰ;
+			ਲੰਮਾਈ -= 4;
 		}
 
 		/*
 		 * Set up to output the remaining data, zero the temp buffer
 		 * first.
 		 */
-		AlignBuffer = 0;
-		To8Ptr = (u8 *) &AlignBuffer;
+		Align_ਬਫਰ = 0;
+		To8Ptr = (u8 *) &Align_ਬਫਰ;
 
 	}
-	else {
+	ਨਹੀਂਤਾਂ {
 		/*
 		 * Half-Word aligned buffer, correct.
 		 */
-		AlignBuffer = 0;
+		Align_ਬਫਰ = 0;
 
 		/*
 		 * This is a funny looking cast. The new gcc, version 3.3.x has
@@ -717,21 +717,21 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
 		 * rules'
 		 */
 
-		To16Ptr = (u16 *) ((void *) &AlignBuffer);
+		To16Ptr = (u16 *) ((ਖਾਲੀ *) &Align_ਬਫਰ);
 		From16Ptr = (u16 *) SrcPtr;
 
-		while (Length > 3) {
+		ਜਦੋਂ (ਲੰਮਾਈ > 3) {
 			/*
 			 * Copy each half word into the temporary buffer.
 			 */
-			for (Index = 0; Index < 2; Index++) {
+			ਲਈ (ਸੂਚਕਾਂਕ = 0; ਸੂਚਕਾਂਕ < 2; ਸੂਚਕਾਂਕ++) {
 				*To16Ptr++ = *From16Ptr++;
 			}
 
 			/*
 			 * Output the buffer.
 			 */
-			*To32Ptr++ = AlignBuffer;
+			*To32Ptr++ = Align_ਬਫਰ;
 
 			/*
 			 * Reset the temporary buffer pointer and adjust length.
@@ -745,29 +745,29 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
 			 * 'dereferencing type-punned pointer will break
 			 * strict-aliasing  rules'
 			 */
-			To16Ptr = (u16 *) ((void *) &AlignBuffer);
-			Length -= 4;
+			To16Ptr = (u16 *) ((ਖਾਲੀ *) &Align_ਬਫਰ);
+			ਲੰਮਾਈ -= 4;
 		}
 
 		/*
 		 * Set up to output the remaining data, zero the temp buffer
 		 * first.
 		 */
-		AlignBuffer = 0;
-		To8Ptr = (u8 *) &AlignBuffer;
+		Align_ਬਫਰ = 0;
+		To8Ptr = (u8 *) &Align_ਬਫਰ;
 		From8Ptr = (u8 *) From16Ptr;
 	}
 
 	/*
 	 * Output the remaining data, zero the temp buffer first.
 	 */
-	for (Index = 0; Index < Length; Index++) {
+	ਲਈ (ਸੂਚਕਾਂਕ = 0; ਸੂਚਕਾਂਕ < ਲੰਮਾਈ; ਸੂਚਕਾਂਕ++) {
 		*To8Ptr++ = *From8Ptr++;
 	}
-	if (Length) {
-		*To32Ptr++ = AlignBuffer;
+	ਜੇ (ਲੰਮਾਈ) {
+		*To32Ptr++ = Align_ਬਫਰ;
 	}
-	To32Ptr = (volatile UINTPTR *)DestPtr;
+	To32Ptr = (ਅਸਥਿਰ UINTPTR *)DestPtr;
 //	log_info("\n 1_3:[%x]; ", *To32Ptr);
 
 }
@@ -787,21 +787,21 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
+ਖਾਲੀ XEmacLite_AlignedRead(UINTPTR *SrcPtr, ਖਾਲੀ *DestPtr, ਬਿਨਾਨਿਸ਼ਾਨੀ Byte_ਗਿਣਤੀ)
 {
-	unsigned Index;
-	unsigned Length = ByteCount;
-	volatile u32 AlignBuffer;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਸੂਚਕਾਂਕ;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾਈ = Byte_ਗਿਣਤੀ;
+	ਅਸਥਿਰ u32 Align_ਬਫਰ;
 	u32 *To32Ptr;
-	volatile u32 *From32Ptr;
+	ਅਸਥਿਰ u32 *From32Ptr;
 	u16 *To16Ptr;
-	volatile u16 *From16Ptr;
+	ਅਸਥਿਰ u16 *From16Ptr;
 	u8 *To8Ptr;
-	volatile u8 *From8Ptr;
+	ਅਸਥਿਰ u8 *From8Ptr;
 
 	From32Ptr = (u32 *) SrcPtr;
 
-	if ((((u32) DestPtr) & 0x00000003) == 0) {
+	ਜੇ ((((u32) DestPtr) & 0x00000003) == 0) {
 
 		/*
 		 * Word aligned buffer, no correction needed.
@@ -810,7 +810,7 @@ void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
 //		log_info("\n Read: 1:[%x]; 2: [%x]", *To32Ptr, *From32Ptr);
 //		log_info("\n 1:[%x]; 2: [%x]", To32Ptr, From32Ptr);
 
-		while (Length > 3) {
+		ਜਦੋਂ (ਲੰਮਾਈ > 3) {
 			/*
 			 * Output each word.
 			 */
@@ -819,7 +819,7 @@ void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
 			/*
 			 * Adjust length accordingly.
 			 */
-			Length -= 4;
+			ਲੰਮਾਈ -= 4;
 		}
 
 		/*
@@ -828,44 +828,44 @@ void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
 		To8Ptr = (u8 *) To32Ptr;
 
 	}
-	else if ((((u32) DestPtr) & 0x00000001) != 0) {
+	ਨਹੀਂਤਾਂ ਜੇ ((((u32) DestPtr) & 0x00000001) != 0) {
 		/*
 		 * Byte aligned buffer, correct.
 		 */
 		To8Ptr = (u8 *) DestPtr;
 
-		while (Length > 3) {
+		ਜਦੋਂ (ਲੰਮਾਈ > 3) {
 			/*
 			 * Copy each word into the temporary buffer.
 			 */
-			AlignBuffer = *From32Ptr++;
-			From8Ptr = (u8 *) &AlignBuffer;
+			Align_ਬਫਰ = *From32Ptr++;
+			From8Ptr = (u8 *) &Align_ਬਫਰ;
 
 			/*
 			 * Write data to destination.
 			 */
-			for (Index = 0; Index < 4; Index++) {
+			ਲਈ (ਸੂਚਕਾਂਕ = 0; ਸੂਚਕਾਂਕ < 4; ਸੂਚਕਾਂਕ++) {
 				*To8Ptr++ = *From8Ptr++;
 			}
 
 			/*
 			 * Adjust length
 			 */
-			Length -= 4;
+			ਲੰਮਾਈ -= 4;
 		}
 
 	}
-	else {
+	ਨਹੀਂਤਾਂ {
 		/*
 		 * Half-Word aligned buffer, correct.
 		 */
 		To16Ptr = (u16 *) DestPtr;
 
-		while (Length > 3) {
+		ਜਦੋਂ (ਲੰਮਾਈ > 3) {
 			/*
 			 * Copy each word into the temporary buffer.
 			 */
-			AlignBuffer = *From32Ptr++;
+			Align_ਬਫਰ = *From32Ptr++;
 
 			/*
 			 * This is a funny looking cast. The new gcc, version
@@ -875,19 +875,19 @@ void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
 			 * 'dereferencing type-punned pointer will break
 			 *  strict-aliasing rules'
 			 */
-			From16Ptr = (u16 *) ((void *) &AlignBuffer);
+			From16Ptr = (u16 *) ((ਖਾਲੀ *) &Align_ਬਫਰ);
 
 			/*
 			 * Write data to destination.
 			 */
-			for (Index = 0; Index < 2; Index++) {
+			ਲਈ (ਸੂਚਕਾਂਕ = 0; ਸੂਚਕਾਂਕ < 2; ਸੂਚਕਾਂਕ++) {
 				*To16Ptr++ = *From16Ptr++;
 			}
 
 			/*
 			 * Adjust length.
 			 */
-			Length -= 4;
+			ਲੰਮਾਈ -= 4;
 		}
 
 		/*
@@ -899,10 +899,10 @@ void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
 	/*
 	 * Read the remaining data.
 	 */
-	AlignBuffer = *From32Ptr++;
-	From8Ptr = (u8 *) &AlignBuffer;
+	Align_ਬਫਰ = *From32Ptr++;
+	From8Ptr = (u8 *) &Align_ਬਫਰ;
 
-	for (Index = 0; Index < Length; Index++) {
+	ਲਈ (ਸੂਚਕਾਂਕ = 0; ਸੂਚਕਾਂਕ < ਲੰਮਾਈ; ਸੂਚਕਾਂਕ++) {
 		*To8Ptr++ = *From8Ptr++;
 	}
 }
@@ -934,7 +934,7 @@ void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
 *		XEmacLite_PhyWrite functions to access the PHY device.
 *
 ******************************************************************************/
-int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+ਪੂਰਨ XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr)
 {
@@ -943,52 +943,52 @@ int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 	 * Verify that each of the inputs are valid.
 	 */
 //	Xil_AssertNonvoid(InstancePtr != NULL);
-	if(NULL == InstancePtr)
+	ਜੇ(ਨਿਰਾ == InstancePtr)
 	{
 		log_error("\nEthernet Parameter - InstancePtr is Null");
-		return -1;
+		ਵਾਪਸ -1;
 	}
 //	Xil_AssertNonvoid(EmacLiteConfigPtr != NULL);
-	if(NULL == EmacLiteConfigPtr)
+	ਜੇ(ਨਿਰਾ == EmacLiteConfigPtr)
 	{
 		log_error("Ethernet Parameter - EmacLiteConfigPtr is Null");
-		return -1;
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Zero the provided instance memory.
 	 */
-	memset(InstancePtr, 0, sizeof(XEmacLite));
+	memset(InstancePtr, 0, ਆਕਾਰ(XEmacLite));
 
 	/*
 	 * Set some default values for instance data, don't indicate the device
 	 * is ready to use until everything has been initialized successfully.
 	 */
-	InstancePtr->EmacLiteConfig.BaseAddress = EffectiveAddr;
+	InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ = EffectiveAddr;
 	InstancePtr->EmacLiteConfig.DeviceId = EmacLiteConfigPtr->DeviceId;
 	InstancePtr->EmacLiteConfig.TxPingPong = EmacLiteConfigPtr->TxPingPong;
 	InstancePtr->EmacLiteConfig.RxPingPong = EmacLiteConfigPtr->RxPingPong;
 	InstancePtr->EmacLiteConfig.MdioInclude = EmacLiteConfigPtr->MdioInclude;
 	InstancePtr->EmacLiteConfig.Loopback = EmacLiteConfigPtr->Loopback;
 
-	InstancePtr->NextTxBufferToUse = 0x0;
-	InstancePtr->NextRxBufferToUse = 0x0;
+	InstancePtr->ਅਗਲਾ_Tx_ਬਫਰ_ਮੰਜ਼ਿਲ_Use = 0x0;
+	InstancePtr->ਅਗਲਾ_Rx_ਬਫਰ_ਮੰਜ਼ਿਲ_Use = 0x0;
 	InstancePtr->RecvHandler = (XEmacLite_Handler) StubHandler;
 	InstancePtr->SendHandler = (XEmacLite_Handler) StubHandler;
 	/*
 	 * Clear the TX CSR's in case this is a restart.
 	 */
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_TSR_OFFSET, 0);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_BUFFER_OFFSET + XEL_TSR_OFFSET, 0);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_TSR_ਵਿੱਥ, 0);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_ਬਫਰ_ਵਿੱਥ + XEL_TSR_ਵਿੱਥ, 0);
 
 	/*
 	 * Since there were no failures, indicate the device is ready to use.
 	 */
 	InstancePtr->IsReady = XIL_COMPONENT_IS_READY;
 
-	return SUCCESS;
+	ਵਾਪਸ SUCCESS;
 }
 
 /*****************************************************************************/
@@ -1014,69 +1014,69 @@ int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 * frame is transmitted.
 *
 ******************************************************************************/
-int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
+ਪੂਰਨ XEmacLite_Send(XEmacLite *InstancePtr, u8 *ਚੌਖਟਾ_Ptr, ਬਿਨਾਨਿਸ਼ਾਨੀ Byte_ਗਿਣਤੀ)
 {
-	u32 Register;
-	UINTPTR BaseAddress;
-	UINTPTR EmacBaseAddress;
-	u32 IntrEnableStatus;
+	u32 ਰਜਿਸਟਰ_2;
+	UINTPTR ਅਧਾਰ_ਪਤਾ;
+	UINTPTR Emac_ਅਧਾਰ_ਪਤਾ;
+	u32 Intr_Enable_ਸਥਿਤੀ;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
 //	Xil_AssertNonvoid(InstancePtr != NULL);
-	if (InstancePtr == NULL) {
-		return -1;
+	ਜੇ (InstancePtr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Determine the expected TX buffer address.
 	 */
-	BaseAddress = XEmacLite_NextTransmitAddr(InstancePtr);
-	EmacBaseAddress = InstancePtr->EmacLiteConfig.BaseAddress;
+	ਅਧਾਰ_ਪਤਾ = XEmac_Lite_ਅਗਲਾ_Transmit_Addr(InstancePtr);
+	Emac_ਅਧਾਰ_ਪਤਾ = InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ;
 
 	/*
 	 * Check the Length if it is too large, truncate it.
 	 * The maximum Tx packet size is
 	 * Ethernet header (14 Bytes) + Maximum MTU (1500 bytes).
 	 */
-	if (ByteCount > XEL_MAX_TX_FRAME_SIZE) {
+	ਜੇ (Byte_ਗਿਣਤੀ > XEL_MAX_TX_ਚੌਖਟਾ_ਮਾਪ) {
 
-		ByteCount = XEL_MAX_TX_FRAME_SIZE;
+		Byte_ਗਿਣਤੀ = XEL_MAX_TX_ਚੌਖਟਾ_ਮਾਪ;
 	}
 
 	/*
 	 * Determine if the expected buffer address is empty.
 	 */
-	Register = XEmacLite_GetTxStatus(BaseAddress);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
 
 	/*
 	 * If the expected buffer is available, fill it with the provided data
 	 * Align if necessary.
 	 */
-	if ((Register & (XEL_TSR_XMIT_BUSY_MASK |
-			XEL_TSR_XMIT_ACTIVE_MASK)) == 0) {
+	ਜੇ ((ਰਜਿਸਟਰ_2 & (XEL_TSR_XMIT_BUSY_ਨਕਾਬ |
+			XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ)) == 0) {
 
 		/*
 		 * Switch to next buffer if configured.
 		 */
-		if (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
-			InstancePtr->NextTxBufferToUse ^= XEL_BUFFER_OFFSET;
+		ਜੇ (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
+			InstancePtr->ਅਗਲਾ_Tx_ਬਫਰ_ਮੰਜ਼ਿਲ_Use ^= XEL_ਬਫਰ_ਵਿੱਥ;
 		}
 
 		/*
 		 * Write the frame to the buffer.
 		 */
-		XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) BaseAddress,
-				       ByteCount);
+		XEmacLite_AlignedWrite(ਚੌਖਟਾ_Ptr, (UINTPTR *) ਅਧਾਰ_ਪਤਾ,
+				       Byte_ਗਿਣਤੀ);
 
 
 		/*
 		 * The frame is in the buffer, now send it.
 		 */
-		XEmacLite_WriteReg(BaseAddress, XEL_TPLR_OFFSET,
-					(ByteCount & (XEL_TPLR_LENGTH_MASK_HI |
-					XEL_TPLR_LENGTH_MASK_LO)));
+		XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ, XEL_TPLR_ਵਿੱਥ,
+					(Byte_ਗਿਣਤੀ & (XEL_TPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI |
+					XEL_TPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO)));
 
 		/*
 		 * Update the Tx Status Register to indicate that there is a
@@ -1087,48 +1087,48 @@ int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
 		 * handler to call the callback function provided by the user
 		 * to indicate that the frame has been transmitted.
 		 */
-		Register = XEmacLite_GetTxStatus(BaseAddress);
-		Register |= XEL_TSR_XMIT_BUSY_MASK;
-		IntrEnableStatus = XEmacLite_GetTxStatus(EmacBaseAddress);
-		if ((IntrEnableStatus & XEL_TSR_XMIT_IE_MASK) != 0) {
-			Register |= XEL_TSR_XMIT_ACTIVE_MASK;
+		ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+		ਰਜਿਸਟਰ_2 |= XEL_TSR_XMIT_BUSY_ਨਕਾਬ;
+		Intr_Enable_ਸਥਿਤੀ = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(Emac_ਅਧਾਰ_ਪਤਾ);
+		ਜੇ ((Intr_Enable_ਸਥਿਤੀ & XEL_TSR_XMIT_IE_ਨਕਾਬ) != 0) {
+			ਰਜਿਸਟਰ_2 |= XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ;
 		}
-		XEmacLite_SetTxStatus(BaseAddress, Register);
+		XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
-		return SUCCESS;
+		ਵਾਪਸ SUCCESS;
 	}
 
 	/*
 	 * If the expected buffer was full, try the other buffer if configured.
 	 */
-	if (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
+	ਜੇ (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
 
-		BaseAddress ^= XEL_BUFFER_OFFSET;
+		ਅਧਾਰ_ਪਤਾ ^= XEL_ਬਫਰ_ਵਿੱਥ;
 
 		/*
 		 * Determine if the expected buffer address is empty.
 		 */
-		Register = XEmacLite_GetTxStatus(BaseAddress);
+		ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
 
 		/*
 		 * If the next buffer is available, fill it with the provided
 		 * data.
 		 */
-		if ((Register & (XEL_TSR_XMIT_BUSY_MASK |
-				XEL_TSR_XMIT_ACTIVE_MASK)) == 0) {
+		ਜੇ ((ਰਜਿਸਟਰ_2 & (XEL_TSR_XMIT_BUSY_ਨਕਾਬ |
+				XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ)) == 0) {
 
 			/*
 			 * Write the frame to the buffer.
 			 */
-			XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) BaseAddress,
-					       ByteCount);
+			XEmacLite_AlignedWrite(ਚੌਖਟਾ_Ptr, (UINTPTR *) ਅਧਾਰ_ਪਤਾ,
+					       Byte_ਗਿਣਤੀ);
 
 			/*
 			 * The frame is in the buffer, now send it.
 			 */
-			XEmacLite_WriteReg(BaseAddress, XEL_TPLR_OFFSET,
-					(ByteCount & (XEL_TPLR_LENGTH_MASK_HI |
-					   XEL_TPLR_LENGTH_MASK_LO)));
+			XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ, XEL_TPLR_ਵਿੱਥ,
+					(Byte_ਗਿਣਤੀ & (XEL_TPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI |
+					   XEL_TPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO)));
 
 			/*
 			 * Update the Tx Status Register to indicate that there
@@ -1140,28 +1140,28 @@ int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
 			 * provided by the user to indicate that the frame has
 			 * been transmitted.
 			 */
-			Register = XEmacLite_GetTxStatus(BaseAddress);
-			Register |= XEL_TSR_XMIT_BUSY_MASK;
-			IntrEnableStatus =
-					XEmacLite_GetTxStatus(EmacBaseAddress);
-			if ((IntrEnableStatus & XEL_TSR_XMIT_IE_MASK) != 0) {
-				Register |= XEL_TSR_XMIT_ACTIVE_MASK;
+			ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+			ਰਜਿਸਟਰ_2 |= XEL_TSR_XMIT_BUSY_ਨਕਾਬ;
+			Intr_Enable_ਸਥਿਤੀ =
+					XEmac_Lite_Get_Tx_ਸਥਿਤੀ(Emac_ਅਧਾਰ_ਪਤਾ);
+			ਜੇ ((Intr_Enable_ਸਥਿਤੀ & XEL_TSR_XMIT_IE_ਨਕਾਬ) != 0) {
+				ਰਜਿਸਟਰ_2 |= XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ;
 			}
-			XEmacLite_SetTxStatus(BaseAddress, Register);
+			XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
 			/*
 			 * Do not switch to next buffer, there is a sync problem
 			 * and the expected buffer should not change.
 			 */
-			return SUCCESS;
+			ਵਾਪਸ SUCCESS;
 		}
 	}
 
-	printf("\n Error in sending the packet");
+	ਲਿਖੋ("\n Error in sending the packet");
 	/*
 	 * Buffer(s) was(were) full, return failure to allow for polling usage.
 	 */
-	return FAILURE;
+	ਵਾਪਸ FAILURE;
 }
 
 /*****************************************************************************/
@@ -1191,140 +1191,140 @@ int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
 * a frame arrives.
 *
 ******************************************************************************/
-u16 XEmacLite_Recv(XEmacLite *InstancePtr, u8 *FramePtr)
+u16 XEmacLite_Recv(XEmacLite *InstancePtr, u8 *ਚੌਖਟਾ_Ptr)
 {
-	u16 LengthType;
-	u16 Length;
-	u32 Register;
-	UINTPTR BaseAddress;
+	u16 ਲੰਮਾਈ_Type;
+	u16 ਲੰਮਾਈ;
+	u32 ਰਜਿਸਟਰ_2;
+	UINTPTR ਅਧਾਰ_ਪਤਾ;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
 
-	if (InstancePtr == NULL) {
-		return -1;
+	ਜੇ (InstancePtr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Determine the expected buffer address.
 	 */
-	BaseAddress = XEmacLite_NextReceiveAddr(InstancePtr);
+	ਅਧਾਰ_ਪਤਾ = XEmac_Lite_ਅਗਲਾ_Receive_Addr(InstancePtr);
 
 	/*
 	 * Verify which buffer has valid data.
 	 */
-	Register = XEmacLite_GetRxStatus(BaseAddress);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
 
-	if ((Register & XEL_RSR_RECV_DONE_MASK) == XEL_RSR_RECV_DONE_MASK) {
+	ਜੇ ((ਰਜਿਸਟਰ_2 & XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ) == XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ) {
 
 		/*
 		 * The driver is in sync, update the next expected buffer if
 		 * configured.
 		 */
 
-		if (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
-			InstancePtr->NextRxBufferToUse ^= XEL_BUFFER_OFFSET;
+		ਜੇ (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
+			InstancePtr->ਅਗਲਾ_Rx_ਬਫਰ_ਮੰਜ਼ਿਲ_Use ^= XEL_ਬਫਰ_ਵਿੱਥ;
 		}
 	}
-	else {
+	ਨਹੀਂਤਾਂ {
 		/*
 		 * The instance is out of sync, try other buffer if other
 		 * buffer is configured, return 0 otherwise. If the instance is
 		 * out of sync, do not update the 'NextRxBufferToUse' since it
 		 * will correct on subsequent calls.
 		 */
-		if (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
-			BaseAddress ^= XEL_BUFFER_OFFSET;
+		ਜੇ (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
+			ਅਧਾਰ_ਪਤਾ ^= XEL_ਬਫਰ_ਵਿੱਥ;
 		}
-		else {
-			return 0;	/* No data was available */
+		ਨਹੀਂਤਾਂ {
+			ਵਾਪਸ 0;	/* No data was available */
 		}
 
 		/*
 		 * Verify that buffer has valid data.
 		 */
-		Register = XEmacLite_GetRxStatus(BaseAddress);
-		if ((Register & XEL_RSR_RECV_DONE_MASK) !=
-				XEL_RSR_RECV_DONE_MASK) {
-			return 0;	/* No data was available */
+		ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+		ਜੇ ((ਰਜਿਸਟਰ_2 & XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ) !=
+				XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ) {
+			ਵਾਪਸ 0;	/* No data was available */
 		}
 	}
 
 	/*
 	 * Get the length of the frame that arrived.
 	 */
-	LengthType = XEmacLite_GetReceiveDataLength(BaseAddress);
+	ਲੰਮਾਈ_Type = XEmac_Lite_Get_Receive_ਅੰਕੜੇ_ਲੰਮਾਈ(ਅਧਾਰ_ਪਤਾ);
 
 	/*
 	 * Check if length is valid.
 	 */
-	if (LengthType > XEL_MAX_FRAME_SIZE) {
+	ਜੇ (ਲੰਮਾਈ_Type > XEL_MAX_ਚੌਖਟਾ_ਮਾਪ) {
 
 
-		if (LengthType == XEL_ETHER_PROTO_TYPE_IP) {
+		ਜੇ (ਲੰਮਾਈ_Type == XEL_ETHER_PROTO_TYPE_IP) {
 
 			/*
 			 * The packet is a an IP Packet.
 			 */
-#ifdef __LITTLE_ENDIAN__
-			Length = (XEmacLite_ReadReg((BaseAddress),
-					XEL_HEADER_IP_LENGTH_OFFSET +
-					XEL_RXBUFF_OFFSET) &
-					(XEL_RPLR_LENGTH_MASK_HI |
-					XEL_RPLR_LENGTH_MASK_LO));
-			Length = (u16) (((Length & 0xFF00) >> 8) | ((Length & 0x00FF) << 8));
-#else
-			Length = ((XEmacLite_ReadReg((BaseAddress),
-					XEL_HEADER_IP_LENGTH_OFFSET +
-					XEL_RXBUFF_OFFSET) >>
-					XEL_HEADER_SHIFT) &
-					(XEL_RPLR_LENGTH_MASK_HI |
-					XEL_RPLR_LENGTH_MASK_LO));
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ __LITTLE_ENDIAN__
+			ਲੰਮਾਈ = (XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ),
+					XEL_ਸਿਰਲੇਖ_IP_ਲੰਮਾਈ_ਵਿੱਥ +
+					XEL_RXBUFF_ਵਿੱਥ) &
+					(XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI |
+					XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO));
+			ਲੰਮਾਈ = (u16) (((ਲੰਮਾਈ & 0xFF00) >> 8) | ((ਲੰਮਾਈ & 0x00FF) << 8));
+#ਨਹੀਂਤਾਂ
+			ਲੰਮਾਈ = ((XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ),
+					XEL_ਸਿਰਲੇਖ_IP_ਲੰਮਾਈ_ਵਿੱਥ +
+					XEL_RXBUFF_ਵਿੱਥ) >>
+					XEL_ਸਿਰਲੇਖ_ਖਿਸਕਾਓ) &
+					(XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI |
+					XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO));
+#ਜੇ_ਅੰਤ
 
 //			Length += XEL_HEADER_SIZE + XEL_FCS_SIZE;
-			Length += XEL_HEADER_SIZE;
+			ਲੰਮਾਈ += XEL_ਸਿਰਲੇਖ_ਮਾਪ;
 //			printf("\n Length1 is %x", Length);
 
-		} else if (LengthType == XEL_ETHER_PROTO_TYPE_ARP) {
+		} ਨਹੀਂਤਾਂ ਜੇ (ਲੰਮਾਈ_Type == XEL_ETHER_PROTO_TYPE_ARP) {
 
 			/*
 			 * The packet is an ARP Packet.
 			 */
-			Length = XEL_ARP_PACKET_SIZE + XEL_HEADER_SIZE +
-					XEL_FCS_SIZE;
+			ਲੰਮਾਈ = XEL_ARP_PACKET_ਮਾਪ + XEL_ਸਿਰਲੇਖ_ਮਾਪ +
+					XEL_FCS_ਮਾਪ;
 
-		} else {
+		} ਨਹੀਂਤਾਂ {
 			/*
 			 * Field contains type other than IP or ARP, use max
 			 * frame size and let user parse it.
 			 */
-			Length = XEL_MAX_FRAME_SIZE;
+			ਲੰਮਾਈ = XEL_MAX_ਚੌਖਟਾ_ਮਾਪ;
 
 		}
-	} else {
+	} ਨਹੀਂਤਾਂ {
 
 		/*
 		 * Use the length in the frame, plus the header and trailer.
 		 */
-		Length = LengthType + XEL_HEADER_SIZE + XEL_FCS_SIZE;
+		ਲੰਮਾਈ = ਲੰਮਾਈ_Type + XEL_ਸਿਰਲੇਖ_ਮਾਪ + XEL_FCS_ਮਾਪ;
 	}
 
 	/*
 	 * Read from the EmacLite.
 	 */
-	XEmacLite_AlignedRead(((UINTPTR *) (BaseAddress + XEL_RXBUFF_OFFSET)),
-			      FramePtr, Length);
+	XEmacLite_AlignedRead(((UINTPTR *) (ਅਧਾਰ_ਪਤਾ + XEL_RXBUFF_ਵਿੱਥ)),
+			      ਚੌਖਟਾ_Ptr, ਲੰਮਾਈ);
 
 	/*
 	 * Acknowledge the frame.
 	 */
-	Register = XEmacLite_GetRxStatus(BaseAddress);
-	Register &= ~XEL_RSR_RECV_DONE_MASK;
-	XEmacLite_SetRxStatus(BaseAddress, Register);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਰਜਿਸਟਰ_2 &= ~XEL_RSR_RECV_ਪੂਰਾ_ਨਕਾਬ;
+	XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
-	return Length;
+	ਵਾਪਸ ਲੰਮਾਈ;
 }
 
 /*****************************************************************************/
@@ -1349,46 +1349,46 @@ u16 XEmacLite_Recv(XEmacLite *InstancePtr, u8 *FramePtr)
 *	buffers (if configured).
 *
 ******************************************************************************/
-void XEmacLite_SetMacAddress(XEmacLite *InstancePtr, u8 *AddressPtr)
+ਖਾਲੀ XEmac_Lite_ਸੈੱਟ_Mac_ਪਤਾ(XEmacLite *InstancePtr, u8 *ਪਤਾ_Ptr)
 {
-	UINTPTR BaseAddress;
+	UINTPTR ਅਧਾਰ_ਪਤਾ;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	ਜੇ (InstancePtr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Determine the expected TX buffer address.
 	 */
-	BaseAddress = XEmacLite_NextTransmitAddr(InstancePtr);
+	ਅਧਾਰ_ਪਤਾ = XEmac_Lite_ਅਗਲਾ_Transmit_Addr(InstancePtr);
 
 	/*
 	 * Copy the MAC address to the Transmit buffer.
 	 */
-	XEmacLite_AlignedWrite(AddressPtr,
-				(UINTPTR *) BaseAddress,
-				XEL_MAC_ADDR_SIZE);
+	XEmacLite_AlignedWrite(ਪਤਾ_Ptr,
+				(UINTPTR *) ਅਧਾਰ_ਪਤਾ,
+				XEL_MAC_ADDR_ਮਾਪ);
 
 	/*
 	 * Set the length.
 	 */
-	XEmacLite_WriteReg(BaseAddress,
-				XEL_TPLR_OFFSET,
-				XEL_MAC_ADDR_SIZE);
+	XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ,
+				XEL_TPLR_ਵਿੱਥ,
+				XEL_MAC_ADDR_ਮਾਪ);
 
 	/*
 	 * Update the MAC address in the EmacLite.
 	 */
-	XEmacLite_SetTxStatus(BaseAddress, XEL_TSR_PROG_MAC_ADDR);
+	XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, XEL_TSR_PROG_MAC_ADDR);
 
 
 	/*
 	 * Wait for EmacLite to finish with the MAC address update.
 	 */
-	while ((XEmacLite_GetTxStatus(BaseAddress) &
+	ਜਦੋਂ ((XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ) &
 			XEL_TSR_PROG_MAC_ADDR) != 0);
 
 }
@@ -1406,10 +1406,10 @@ void XEmacLite_SetMacAddress(XEmacLite *InstancePtr, u8 *AddressPtr)
 * @note		None.
 *
 ******************************************************************************/
-void StubHandler(void *CallBackRef)
+ਖਾਲੀ StubHandler(ਖਾਲੀ *Call_ਪਿੱਠ_Ref)
 {
-	(void)(CallBackRef);
-	return 1;
+	(ਖਾਲੀ)(Call_ਪਿੱਠ_Ref);
+	ਵਾਪਸ 1;
 //	Xil_AssertVoidAlways();
 }
 
@@ -1429,46 +1429,46 @@ void StubHandler(void *CallBackRef)
 * @note		None.
 *
 *****************************************************************************/
-int XEmacLite_TxBufferAvailable(XEmacLite *InstancePtr)
+ਪੂਰਨ XEmac_Lite_Tx_ਬਫਰ_ਉਪਲਬਧ(XEmacLite *InstancePtr)
 {
 
-	u32 Register;
-	int TxPingBusy;
-	int TxPongBusy;
+	u32 ਰਜਿਸਟਰ_2;
+	ਪੂਰਨ TxPingBusy;
+	ਪੂਰਨ TxPongBusy;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	ਜੇ (InstancePtr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Read the Tx Status and determine if the buffer is available.
 	 */
-	Register = XEmacLite_GetTxStatus(InstancePtr->EmacLiteConfig.
-						BaseAddress);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(InstancePtr->EmacLiteConfig.
+						ਅਧਾਰ_ਪਤਾ);
 
-	TxPingBusy = (Register & (XEL_TSR_XMIT_BUSY_MASK |
-				 XEL_TSR_XMIT_ACTIVE_MASK));
+	TxPingBusy = (ਰਜਿਸਟਰ_2 & (XEL_TSR_XMIT_BUSY_ਨਕਾਬ |
+				 XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ));
 
 
 	/*
 	 * Read the Tx Status of the second buffer register and determine if the
 	 * buffer is available.
 	 */
-	if (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
-		Register = XEmacLite_GetTxStatus(InstancePtr->EmacLiteConfig.
-						BaseAddress +
-						XEL_BUFFER_OFFSET);
+	ਜੇ (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
+		ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(InstancePtr->EmacLiteConfig.
+						ਅਧਾਰ_ਪਤਾ +
+						XEL_ਬਫਰ_ਵਿੱਥ);
 
-		TxPongBusy = (Register & (XEL_TSR_XMIT_BUSY_MASK |
-					XEL_TSR_XMIT_ACTIVE_MASK));
+		TxPongBusy = (ਰਜਿਸਟਰ_2 & (XEL_TSR_XMIT_BUSY_ਨਕਾਬ |
+					XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ));
 
-		return (!(TxPingBusy && TxPongBusy));
+		ਵਾਪਸ (!(TxPingBusy && TxPongBusy));
 	}
 
-	return (!TxPingBusy);
+	ਵਾਪਸ (!TxPingBusy);
 
 
 }
@@ -1486,58 +1486,58 @@ int XEmacLite_TxBufferAvailable(XEmacLite *InstancePtr)
 * @note		None.
 *
 *****************************************************************************/
-void XEmacLite_FlushReceive(XEmacLite *InstancePtr)
+ਖਾਲੀ XEmacLite_FlushReceive(XEmacLite *InstancePtr)
 {
 
-	u32 Register;
+	u32 ਰਜਿਸਟਰ_2;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-		if (InstancePtr == NULL) {
-			return -1;
+		ਜੇ (InstancePtr == ਨਿਰਾ) {
+			ਵਾਪਸ -1;
 		}
 
 	/*
 	 * Read the current buffer register and determine if the buffer is
 	 * available.
 	 */
-	Register = XEmacLite_GetRxStatus(InstancePtr->EmacLiteConfig.
-						BaseAddress);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(InstancePtr->EmacLiteConfig.
+						ਅਧਾਰ_ਪਤਾ);
 
 	/*
 	 * Preserve the IE bit.
 	 */
-	Register &= XEL_RSR_RECV_IE_MASK;
+	ਰਜਿਸਟਰ_2 &= XEL_RSR_RECV_IE_ਨਕਾਬ;
 
 	/*
 	 * Write out the value to flush the RX buffer.
 	 */
-	XEmacLite_SetRxStatus(InstancePtr->EmacLiteConfig.BaseAddress,
-				Register);
+	XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				ਰਜਿਸਟਰ_2);
 
 	/*
 	 * If the pong buffer is available, flush it also.
 	 */
-	if (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
+	ਜੇ (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
 		/*
 		 * Read the current buffer register and determine if the buffer
 		 * is available.
 		 */
-		Register = XEmacLite_GetRxStatus(InstancePtr->EmacLiteConfig.
-							BaseAddress +
-							XEL_BUFFER_OFFSET);
+		ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(InstancePtr->EmacLiteConfig.
+							ਅਧਾਰ_ਪਤਾ +
+							XEL_ਬਫਰ_ਵਿੱਥ);
 
 		/*
 		 * Preserve the IE bit.
 		 */
-		Register &= XEL_RSR_RECV_IE_MASK;
+		ਰਜਿਸਟਰ_2 &= XEL_RSR_RECV_IE_ਨਕਾਬ;
 
 		/*
 		 * Write out the value to flush the RX buffer.
 		 */
-		XEmacLite_SetRxStatus(InstancePtr->EmacLiteConfig.BaseAddress +
-					XEL_BUFFER_OFFSET, Register);
+		XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ +
+					XEL_ਬਫਰ_ਵਿੱਥ, ਰਜਿਸਟਰ_2);
 
 	}
 
@@ -1563,8 +1563,8 @@ void XEmacLite_FlushReceive(XEmacLite *InstancePtr)
 * @note		This function waits for the completion of MDIO data transfer.
 *
 *****************************************************************************/
-int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
-			u16 *PhyDataPtr)
+ਪੂਰਨ XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 Phy_ਪਤਾ, u32 Reg_ਅੰਕ,
+			u16 *Phy_ਅੰਕੜੇ_Ptr)
 {
 	u32 PhyAddrReg;
 	u32 MdioCtrlReg;
@@ -1572,75 +1572,75 @@ int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-		if (InstancePtr == NULL) {
-			return -1;
+		ਜੇ (InstancePtr == ਨਿਰਾ) {
+			ਵਾਪਸ -1;
 		}
-		if (InstancePtr->EmacLiteConfig.MdioInclude == TRUE) {
-			return -1;
+		ਜੇ (InstancePtr->EmacLiteConfig.MdioInclude == TRUE) {
+			ਵਾਪਸ -1;
 		}
-		if (PhyAddress <= 31) {
-			return -1;
+		ਜੇ (Phy_ਪਤਾ <= 31) {
+			ਵਾਪਸ -1;
 		}
-		if (RegNum <= 31) {
-			return -1;
+		ਜੇ (Reg_ਅੰਕ <= 31) {
+			ਵਾਪਸ -1;
 		}
 
-	if (PhyDataPtr == NULL) {
-		return -1;
+	ਜੇ (Phy_ਅੰਕੜੇ_Ptr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Verify MDIO master status.
 	 */
-	if (XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET) &
-				XEL_MDIOCNTR_STATUS_MASK) {
-		return DEVICE_BUSY;
+	ਜੇ (XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ) &
+				XEL_MDIOCNTR_ਸਥਿਤੀ_ਨਕਾਬ) {
+		ਵਾਪਸ DEVICE_BUSY;
 	}
 
-	PhyAddrReg = ((((PhyAddress << XEL_MDIO_ADDRESS_SHIFT) &
-			XEL_MDIO_ADDRESS_MASK) | RegNum) | XEL_MDIO_OP_MASK);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				 XEL_MDIOADDR_OFFSET, PhyAddrReg);
+	PhyAddrReg = ((((Phy_ਪਤਾ << XEL_MDIO_ਪਤਾ_ਖਿਸਕਾਓ) &
+			XEL_MDIO_ਪਤਾ_ਨਕਾਬ) | Reg_ਅੰਕ) | XEL_MDIO_OP_ਨਕਾਬ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				 XEL_MDIOADDR_ਵਿੱਥ, PhyAddrReg);
 
 	/*
 	 * Enable MDIO and start the transfer.
 	 */
 	MdioCtrlReg =
-		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_MDIOCNTR_OFFSET);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET,
+		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_MDIOCNTR_ਵਿੱਥ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ,
 				MdioCtrlReg |
-				XEL_MDIOCNTR_STATUS_MASK |
-				XEL_MDIOCNTR_ENABLE_MASK);
+				XEL_MDIOCNTR_ਸਥਿਤੀ_ਨਕਾਬ |
+				XEL_MDIOCNTR_ENABLE_ਨਕਾਬ);
 
 	/*
 	 * Wait till the completion of transfer.
 	 */
-	while ((XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET) &
-				XEL_MDIOCNTR_STATUS_MASK));
+	ਜਦੋਂ ((XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ) &
+				XEL_MDIOCNTR_ਸਥਿਤੀ_ਨਕਾਬ));
 
 	/*
 	 * Read data from MDIO read data register.
 	 */
-	*PhyDataPtr = (u16)XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_MDIORD_OFFSET);
+	*Phy_ਅੰਕੜੇ_Ptr = (u16)XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_MDIORD_ਵਿੱਥ);
 
 	/*
 	 * Disable the MDIO.
 	 */
 	MdioCtrlReg =
-		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_MDIOCNTR_OFFSET);
+		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_MDIOCNTR_ਵਿੱਥ);
 
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET,
-				MdioCtrlReg & ~XEL_MDIOCNTR_ENABLE_MASK);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ,
+				MdioCtrlReg & ~XEL_MDIOCNTR_ENABLE_ਨਕਾਬ);
 
 
-	return SUCCESS;
+	ਵਾਪਸ SUCCESS;
 }
 
 /******************************************************************************/
@@ -1663,8 +1663,8 @@ int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 * @note		This function waits for the completion of MDIO data transfer.
 *
 *******************************************************************************/
-int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
-			u16 PhyData)
+ਪੂਰਨ XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 Phy_ਪਤਾ, u32 Reg_ਅੰਕ,
+			u16 Phy_ਅੰਕੜੇ)
 {
 	u32 PhyAddrReg;
 	u32 MdioCtrlReg;
@@ -1672,72 +1672,72 @@ int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	ਜੇ (InstancePtr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
-	if (InstancePtr->EmacLiteConfig.MdioInclude == TRUE) {
-		return -1;
+	ਜੇ (InstancePtr->EmacLiteConfig.MdioInclude == TRUE) {
+		ਵਾਪਸ -1;
 	}
-	if (PhyAddress <= 31) {
-		return -1;
+	ਜੇ (Phy_ਪਤਾ <= 31) {
+		ਵਾਪਸ -1;
 	}
-	if (RegNum <= 31) {
-		return -1;
+	ਜੇ (Reg_ਅੰਕ <= 31) {
+		ਵਾਪਸ -1;
 	}
 
 	/*
 	 * Verify MDIO master status.
 	 */
-	if (XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET) &
-				XEL_MDIOCNTR_STATUS_MASK) {
-		return DEVICE_BUSY;
+	ਜੇ (XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ) &
+				XEL_MDIOCNTR_ਸਥਿਤੀ_ਨਕਾਬ) {
+		ਵਾਪਸ DEVICE_BUSY;
 	}
 
 
 
-	PhyAddrReg = ((((PhyAddress << XEL_MDIO_ADDRESS_SHIFT) &
-			XEL_MDIO_ADDRESS_MASK) | RegNum) & ~XEL_MDIO_OP_MASK);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOADDR_OFFSET, PhyAddrReg);
+	PhyAddrReg = ((((Phy_ਪਤਾ << XEL_MDIO_ਪਤਾ_ਖਿਸਕਾਓ) &
+			XEL_MDIO_ਪਤਾ_ਨਕਾਬ) | Reg_ਅੰਕ) & ~XEL_MDIO_OP_ਨਕਾਬ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOADDR_ਵਿੱਥ, PhyAddrReg);
 
 	/*
 	 * Write data to MDIO write data register.
 	 */
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOWR_OFFSET, (u32)PhyData);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOWR_ਵਿੱਥ, (u32)Phy_ਅੰਕੜੇ);
 
 	/*
 	 * Enable MDIO and start the transfer.
 	 */
 	MdioCtrlReg =
-		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_MDIOCNTR_OFFSET);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET,
-				MdioCtrlReg | XEL_MDIOCNTR_STATUS_MASK |
-				XEL_MDIOCNTR_ENABLE_MASK);
+		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_MDIOCNTR_ਵਿੱਥ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ,
+				MdioCtrlReg | XEL_MDIOCNTR_ਸਥਿਤੀ_ਨਕਾਬ |
+				XEL_MDIOCNTR_ENABLE_ਨਕਾਬ);
 
 	/*
 	 * Wait till the completion of transfer.
 	 */
-	while ((XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET) & XEL_MDIOCNTR_STATUS_MASK));
+	ਜਦੋਂ ((XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ) & XEL_MDIOCNTR_ਸਥਿਤੀ_ਨਕਾਬ));
 
 
 	/*
 	 * Disable the MDIO.
 	 */
 	MdioCtrlReg =
-		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_MDIOCNTR_OFFSET);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-				XEL_MDIOCNTR_OFFSET,
-				MdioCtrlReg & ~XEL_MDIOCNTR_ENABLE_MASK);
+		XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_MDIOCNTR_ਵਿੱਥ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+				XEL_MDIOCNTR_ਵਿੱਥ,
+				MdioCtrlReg & ~XEL_MDIOCNTR_ENABLE_ਨਕਾਬ);
 
 
 
-	return SUCCESS;
+	ਵਾਪਸ SUCCESS;
 }
 
 
@@ -1754,24 +1754,24 @@ int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 * @note		None.
 *
 *****************************************************************************/
-void XEmacLite_EnableLoopBack(XEmacLite *InstancePtr)
+ਖਾਲੀ XEmac_Lite_Enable_Loop_ਪਿੱਠ(XEmacLite *InstancePtr)
 {
 	u32 TsrReg;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	ਜੇ (InstancePtr == ਨਿਰਾ) {
+		ਵਾਪਸ -1;
 	}
-	if (InstancePtr->EmacLiteConfig.Loopback == TRUE) {
-		return -1;
+	ਜੇ (InstancePtr->EmacLiteConfig.Loopback == TRUE) {
+		ਵਾਪਸ -1;
 	}
 
-	TsrReg = XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_TSR_OFFSET);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-			XEL_TSR_OFFSET,	TsrReg | XEL_TSR_LOOPBACK_MASK);
+	TsrReg = XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_TSR_ਵਿੱਥ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+			XEL_TSR_ਵਿੱਥ,	TsrReg | XEL_TSR_LOOPBACK_ਨਕਾਬ);
 }
 
 /****************************************************************************/
@@ -1786,24 +1786,24 @@ void XEmacLite_EnableLoopBack(XEmacLite *InstancePtr)
 * @note		None.
 *
 *****************************************************************************/
-void XEmacLite_DisableLoopBack(XEmacLite *InstancePtr)
+ਖਾਲੀ XEmac_Lite_Disable_Loop_ਪਿੱਠ(XEmacLite *InstancePtr)
 {
 	u32 TsrReg;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-		if (InstancePtr == NULL) {
-			return -1;
+		ਜੇ (InstancePtr == ਨਿਰਾ) {
+			ਵਾਪਸ -1;
 		}
-		if (InstancePtr->EmacLiteConfig.Loopback == TRUE) {
-			return -1;
+		ਜੇ (InstancePtr->EmacLiteConfig.Loopback == TRUE) {
+			ਵਾਪਸ -1;
 		}
 
-	TsrReg = XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.BaseAddress,
-					XEL_TSR_OFFSET);
-	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
-			XEL_TSR_OFFSET,	TsrReg & (~XEL_TSR_LOOPBACK_MASK));
+	TsrReg = XEmacLite_ReadReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+					XEL_TSR_ਵਿੱਥ);
+	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ,
+			XEL_TSR_ਵਿੱਥ,	TsrReg & (~XEL_TSR_LOOPBACK_ਨਕਾਬ));
 }
 
 
@@ -1819,44 +1819,44 @@ void XEmacLite_DisableLoopBack(XEmacLite *InstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-static u16 XEmacLite_GetReceiveDataLength(UINTPTR BaseAddress)
+ਸਥਿਰ u16 XEmac_Lite_Get_Receive_ਅੰਕੜੇ_ਲੰਮਾਈ(UINTPTR ਅਧਾਰ_ਪਤਾ)
 {
-	u16 Length;
+	u16 ਲੰਮਾਈ;
 
-#ifdef __LITTLE_ENDIAN__
-	Length = (XEmacLite_ReadReg((BaseAddress),
-			XEL_HEADER_OFFSET + XEL_RXBUFF_OFFSET) &
-			(XEL_RPLR_LENGTH_MASK_HI | XEL_RPLR_LENGTH_MASK_LO));
-	Length = (u16) (((Length & 0xFF00) >> 8) | ((Length & 0x00FF) << 8));
-#else
-	Length = ((XEmacLite_ReadReg((BaseAddress),
-			XEL_HEADER_OFFSET + XEL_RXBUFF_OFFSET) >>
-			XEL_HEADER_SHIFT) &
-			(XEL_RPLR_LENGTH_MASK_HI | XEL_RPLR_LENGTH_MASK_LO));
-#endif
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ __LITTLE_ENDIAN__
+	ਲੰਮਾਈ = (XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ),
+			XEL_ਸਿਰਲੇਖ_ਵਿੱਥ + XEL_RXBUFF_ਵਿੱਥ) &
+			(XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI | XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO));
+	ਲੰਮਾਈ = (u16) (((ਲੰਮਾਈ & 0xFF00) >> 8) | ((ਲੰਮਾਈ & 0x00FF) << 8));
+#ਨਹੀਂਤਾਂ
+	ਲੰਮਾਈ = ((XEmacLite_ReadReg((ਅਧਾਰ_ਪਤਾ),
+			XEL_ਸਿਰਲੇਖ_ਵਿੱਥ + XEL_RXBUFF_ਵਿੱਥ) >>
+			XEL_ਸਿਰਲੇਖ_ਖਿਸਕਾਓ) &
+			(XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_HI | XEL_RPLR_ਲੰਮਾਈ_ਨਕਾਬ_LO));
+#ਜੇ_ਅੰਤ
 
-	return Length;
+	ਵਾਪਸ ਲੰਮਾਈ;
 }
 
-int XEmacLite_EnableInterrupts(XEmacLite *InstancePtr)
+ਪੂਰਨ XEmacLite_EnableInterrupts(XEmacLite *InstancePtr)
 {
-	u32 Register;
-	UINTPTR BaseAddress;
+	u32 ਰਜਿਸਟਰ_2;
+	UINTPTR ਅਧਾਰ_ਪਤਾ;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if(NULL == InstancePtr)
-		return -1;
-	if(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
-		return -1;
+	ਜੇ(ਨਿਰਾ == InstancePtr)
+		ਵਾਪਸ -1;
+	ਜੇ(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
+		ਵਾਪਸ -1;
 
 	/*
 	 * Verify that the handlers are in place.
 	 */
-	if ((InstancePtr->RecvHandler == (XEmacLite_Handler) StubHandler) ||
+	ਜੇ ((InstancePtr->RecvHandler == (XEmacLite_Handler) StubHandler) ||
 	    (InstancePtr->SendHandler == (XEmacLite_Handler) StubHandler)) {
-		return XST_NO_CALLBACK;
+		ਵਾਪਸ XST_NO_CALLBACK;
 	}
 
 	/*
@@ -1864,25 +1864,25 @@ int XEmacLite_EnableInterrupts(XEmacLite *InstancePtr)
 	 * is common for the both the buffers and is defined in the
 	 * Ping buffer.
 	 */
-	Register = XEmacLite_GetTxStatus(BaseAddress);
-	Register |= XEL_TSR_XMIT_IE_MASK;
-	XEmacLite_SetTxStatus(BaseAddress, Register);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਰਜਿਸਟਰ_2 |= XEL_TSR_XMIT_IE_ਨਕਾਬ;
+	XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
 	/*
 	 * Enable the RX interrupts for both the buffers, the Interrupt Enable
 	 * is common for the both the buffers and is defined in the
 	 * Ping buffer.
 	 */
-	Register = XEmacLite_GetRxStatus(BaseAddress);
-	Register |= XEL_RSR_RECV_IE_MASK;
-	XEmacLite_SetRxStatus(BaseAddress, Register);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਰਜਿਸਟਰ_2 |= XEL_RSR_RECV_IE_ਨਕਾਬ;
+	XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
 	/*
 	 * Enable the global interrupt output.
 	 */
-	XEmacLite_WriteReg(BaseAddress, XEL_GIER_OFFSET, XEL_GIER_GIE_MASK);
+	XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ, XEL_GIER_ਵਿੱਥ, XEL_GIER_GIE_ਨਕਾਬ);
 
-	return SUCCESS;
+	ਵਾਪਸ SUCCESS;
 }
 
 /*****************************************************************************/
@@ -1900,44 +1900,44 @@ int XEmacLite_EnableInterrupts(XEmacLite *InstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_DisableInterrupts(XEmacLite *InstancePtr)
+ਖਾਲੀ XEmacLite_DisableInterrupts(XEmacLite *InstancePtr)
 {
-	u32 Register;
-	UINTPTR BaseAddress;
+	u32 ਰਜਿਸਟਰ_2;
+	UINTPTR ਅਧਾਰ_ਪਤਾ;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-		if(NULL == InstancePtr)
-			return -1;
-		if(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
-			return -1;
+		ਜੇ(ਨਿਰਾ == InstancePtr)
+			ਵਾਪਸ -1;
+		ਜੇ(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
+			ਵਾਪਸ -1;
 
 
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress;
+	ਅਧਾਰ_ਪਤਾ = InstancePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ;
 
 	/*
 	 * Disable the global interrupt output.
 	 */
-	XEmacLite_WriteReg(BaseAddress, XEL_GIER_OFFSET, 0);
+	XEmacLite_WriteReg(ਅਧਾਰ_ਪਤਾ, XEL_GIER_ਵਿੱਥ, 0);
 
 	/*
 	 * Disable the TX interrupts for both the buffers, the Interrupt Enable
 	 * is common for the both the buffers and is defined in the
 	 * Ping buffer.
 	 */
-	Register = XEmacLite_GetTxStatus(BaseAddress);
-	Register &= ~XEL_TSR_XMIT_IE_MASK;
-	XEmacLite_SetTxStatus(BaseAddress, Register);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਰਜਿਸਟਰ_2 &= ~XEL_TSR_XMIT_IE_ਨਕਾਬ;
+	XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
 	/*
 	 * Disable the RX interrupts for both the buffers, the Interrupt Enable
 	 * is common for the both the buffers and is defined in the
 	 * Ping buffer.
 	 */
-	Register = XEmacLite_GetRxStatus(BaseAddress);
-	Register &= ~XEL_RSR_RECV_IE_MASK;
-	XEmacLite_SetRxStatus(BaseAddress, Register);
+	ਰਜਿਸਟਰ_2 = XEmac_Lite_Get_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਰਜਿਸਟਰ_2 &= ~XEL_RSR_RECV_IE_ਨਕਾਬ;
+	XEmac_Lite_ਸੈੱਟ_Rx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, ਰਜਿਸਟਰ_2);
 
 }
 
@@ -1960,30 +1960,30 @@ void XEmacLite_DisableInterrupts(XEmacLite *InstancePtr)
 *
 *
 ******************************************************************************/
-void XEmacLite_InterruptHandler(void *InstancePtr)
+ਖਾਲੀ XEmac_Lite_ਰੁਕਾਵਟ_Handler(ਖਾਲੀ *InstancePtr)
 {
 
 	XEmacLite *EmacLitePtr;
-	int TxCompleteIntr = FALSE;
-	UINTPTR BaseAddress;
-	u32 TxStatus;
+	ਪੂਰਨ TxCompleteIntr = FALSE;
+	UINTPTR ਅਧਾਰ_ਪਤਾ;
+	u32 Tx_ਸਥਿਤੀ;
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-		if(NULL == InstancePtr)
-			return -1;
+		ਜੇ(ਨਿਰਾ == InstancePtr)
+			ਵਾਪਸ -1;
 
 	/*
 	 * Convert the non-typed pointer to an EmacLite instance pointer
 	 * such that there is access to the device.
 	 */
 	EmacLitePtr = (XEmacLite *) InstancePtr;
-	BaseAddress = EmacLitePtr->EmacLiteConfig.BaseAddress;
+	ਅਧਾਰ_ਪਤਾ = EmacLitePtr->EmacLiteConfig.ਅਧਾਰ_ਪਤਾ;
 
-	if ((XEmacLite_IsRxEmpty(BaseAddress) != TRUE) ||
-		(XEmacLite_IsRxEmpty(BaseAddress +
-			XEL_BUFFER_OFFSET) != TRUE)) {
+	ਜੇ ((XEmac_Lite_Is_Rx_ਖਾਲੀ_ਥਾਵਾਂ(ਅਧਾਰ_ਪਤਾ) != TRUE) ||
+		(XEmac_Lite_Is_Rx_ਖਾਲੀ_ਥਾਵਾਂ(ਅਧਾਰ_ਪਤਾ +
+			XEL_ਬਫਰ_ਵਿੱਥ) != TRUE)) {
 		/*
 		 * Call the RX callback.
 		 */
@@ -1991,15 +1991,15 @@ void XEmacLite_InterruptHandler(void *InstancePtr)
 
 	}
 
-	TxStatus = XEmacLite_GetTxStatus(BaseAddress);
-	if (((TxStatus & XEL_TSR_XMIT_BUSY_MASK) == 0) &&
-		(TxStatus & XEL_TSR_XMIT_ACTIVE_MASK) != 0) {
+	Tx_ਸਥਿਤੀ = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ);
+	ਜੇ (((Tx_ਸਥਿਤੀ & XEL_TSR_XMIT_BUSY_ਨਕਾਬ) == 0) &&
+		(Tx_ਸਥਿਤੀ & XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ) != 0) {
 
 		/*
 		 * Clear the Tx Active bit in the Tx Status Register.
 		 */
-		TxStatus &= ~XEL_TSR_XMIT_ACTIVE_MASK;
-		XEmacLite_SetTxStatus(BaseAddress, TxStatus);
+		Tx_ਸਥਿਤੀ &= ~XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ;
+		XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ, Tx_ਸਥਿਤੀ);
 
 		/*
 		 * Update the flag indicating that there was a Tx Interrupt.
@@ -2008,16 +2008,16 @@ void XEmacLite_InterruptHandler(void *InstancePtr)
 
 	}
 
-	TxStatus = XEmacLite_GetTxStatus(BaseAddress + XEL_BUFFER_OFFSET);
-	if (((TxStatus & XEL_TSR_XMIT_BUSY_MASK) == 0) &&
-		(TxStatus & XEL_TSR_XMIT_ACTIVE_MASK) != 0) {
+	Tx_ਸਥਿਤੀ = XEmac_Lite_Get_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ + XEL_ਬਫਰ_ਵਿੱਥ);
+	ਜੇ (((Tx_ਸਥਿਤੀ & XEL_TSR_XMIT_BUSY_ਨਕਾਬ) == 0) &&
+		(Tx_ਸਥਿਤੀ & XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ) != 0) {
 
 		/*
 		 * Clear the Tx Active bit in the Tx Status Register.
 		 */
-		TxStatus &= ~XEL_TSR_XMIT_ACTIVE_MASK;
-		XEmacLite_SetTxStatus(BaseAddress + XEL_BUFFER_OFFSET,
-					TxStatus);
+		Tx_ਸਥਿਤੀ &= ~XEL_TSR_XMIT_ਸਰਗਰਮ_ਨਕਾਬ;
+		XEmac_Lite_ਸੈੱਟ_Tx_ਸਥਿਤੀ(ਅਧਾਰ_ਪਤਾ + XEL_ਬਫਰ_ਵਿੱਥ,
+					Tx_ਸਥਿਤੀ);
 		/*
 		 * Update the flag indicating that there was a Tx Interrupt.
 		 */
@@ -2027,7 +2027,7 @@ void XEmacLite_InterruptHandler(void *InstancePtr)
 	/*
 	 * If there was a TX interrupt, call the callback.
 	 */
-	if (TxCompleteIntr == TRUE) {
+	ਜੇ (TxCompleteIntr == TRUE) {
 
 		/*
 		 * Call the TX callback.
@@ -2061,18 +2061,18 @@ void XEmacLite_InterruptHandler(void *InstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_SetRecvHandler(XEmacLite *InstancePtr, void *CallBackRef,
+ਖਾਲੀ XEmac_Lite_ਸੈੱਟ_Recv_Handler(XEmacLite *InstancePtr, ਖਾਲੀ *Call_ਪਿੱਠ_Ref,
 			      XEmacLite_Handler FuncPtr)
 {
-	if(NULL == InstancePtr)
-		return -1;
-	if(NULL == FuncPtr)
-		return -1;
-	if(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
-		return -1;
+	ਜੇ(ਨਿਰਾ == InstancePtr)
+		ਵਾਪਸ -1;
+	ਜੇ(ਨਿਰਾ == FuncPtr)
+		ਵਾਪਸ -1;
+	ਜੇ(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
+		ਵਾਪਸ -1;
 
 	InstancePtr->RecvHandler = FuncPtr;
-	InstancePtr->RecvRef = CallBackRef;
+	InstancePtr->RecvRef = Call_ਪਿੱਠ_Ref;
 }
 
 
@@ -2100,18 +2100,18 @@ void XEmacLite_SetRecvHandler(XEmacLite *InstancePtr, void *CallBackRef,
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_SetSendHandler(XEmacLite *InstancePtr, void *CallBackRef,
+ਖਾਲੀ XEmac_Lite_ਸੈੱਟ_Send_Handler(XEmacLite *InstancePtr, ਖਾਲੀ *Call_ਪਿੱਠ_Ref,
 			      XEmacLite_Handler FuncPtr)
 {
-	if(NULL == InstancePtr)
-		return -1;
-	if(NULL == FuncPtr)
-		return -1;
-	if(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
-		return -1;
+	ਜੇ(ਨਿਰਾ == InstancePtr)
+		ਵਾਪਸ -1;
+	ਜੇ(ਨਿਰਾ == FuncPtr)
+		ਵਾਪਸ -1;
+	ਜੇ(InstancePtr->IsReady != XIL_COMPONENT_IS_READY)
+		ਵਾਪਸ -1;
 
 	InstancePtr->SendHandler = FuncPtr;
-	InstancePtr->SendRef = CallBackRef;
+	InstancePtr->SendRef = Call_ਪਿੱਠ_Ref;
 }
 
 
@@ -2143,28 +2143,28 @@ void XEmacLite_SetSendHandler(XEmacLite *InstancePtr, void *CallBackRef,
 ******************************************************************************/
 u32 EmacLitePhyDetect(XEmacLite *InstancePtr)
 {
-	u16 PhyData;
-	int PhyAddr;
+	u16 Phy_ਅੰਕੜੇ;
+	ਪੂਰਨ PhyAddr;
 
 	/*
 	 * Verify all 32 MDIO ports.
 	 */
-	for (PhyAddr = 31; PhyAddr >= 0; PhyAddr--) {
-		XEmacLite_PhyRead(InstancePtr, PhyAddr, PHY_REG1_OFFSET,
-				 &PhyData);
+	ਲਈ (PhyAddr = 31; PhyAddr >= 0; PhyAddr--) {
+		XEmacLite_PhyRead(InstancePtr, PhyAddr, PHY_REG1_ਵਿੱਥ,
+				 &Phy_ਅੰਕੜੇ);
 
-		if (PhyData != 0xFFFF) {
-			if ((PhyData & PHY_REG1_DETECT_MASK) ==
-			PHY_REG1_DETECT_MASK) {
-				return PhyAddr;	/* Found a valid PHY device */
+		ਜੇ (Phy_ਅੰਕੜੇ != 0xFFFF) {
+			ਜੇ ((Phy_ਅੰਕੜੇ & PHY_REG1_DETECT_ਨਕਾਬ) ==
+			PHY_REG1_DETECT_ਨਕਾਬ) {
+				ਵਾਪਸ PhyAddr;	/* Found a valid PHY device */
 			}
 		}
 	}
-	printf("\n Could not detect phy device");
+	ਲਿਖੋ("\n Could not detect phy device");
 	/*
 	 * Unable to detect PHY device returning the default address of 0.
 	 */
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /******************************************************************************/
@@ -2182,19 +2182,19 @@ u32 EmacLitePhyDetect(XEmacLite *InstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress)
+ਪੂਰਨ Emac_Lite_Enable_Phy_Loop_ਪਿੱਠ(XEmacLite *InstancePtr, u32 Phy_ਪਤਾ)
 {
-	int Status;
-	u16 PhyData = 0;
+	ਪੂਰਨ ਸਥਿਤੀ;
+	u16 Phy_ਅੰਕੜੇ = 0;
 
 	/*
 	 * Set the speed and put the PHY in reset.
 	 */
-	PhyData |= PHY_REG0_SPD_100_MASK;
-	Status = XEmacLite_PhyWrite(InstancePtr, PhyAddress, PHY_REG0_OFFSET,
-			PhyData | PHY_REG0_RESET_MASK);
-	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
+	Phy_ਅੰਕੜੇ |= PHY_REG0_SPD_100_ਨਕਾਬ;
+	ਸਥਿਤੀ = XEmacLite_PhyWrite(InstancePtr, Phy_ਪਤਾ, PHY_REG0_ਵਿੱਥ,
+			Phy_ਅੰਕੜੇ | PHY_REG0_RESET_ਨਕਾਬ);
+	ਜੇ (ਸਥਿਤੀ != XST_SUCCESS) {
+		ਵਾਪਸ XST_FAILURE;
 	}
 
 	/*
@@ -2205,10 +2205,10 @@ int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress)
 	/*
 	 * Set the PHY in loop back.
 	 */
-	XEmacLite_PhyWrite(InstancePtr, PhyAddress, PHY_REG0_OFFSET,
-			PhyData | PHY_REG0_LOOPBACK_MASK);
-	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
+	XEmacLite_PhyWrite(InstancePtr, Phy_ਪਤਾ, PHY_REG0_ਵਿੱਥ,
+			Phy_ਅੰਕੜੇ | PHY_REG0_LOOPBACK_ਨਕਾਬ);
+	ਜੇ (ਸਥਿਤੀ != XST_SUCCESS) {
+		ਵਾਪਸ XST_FAILURE;
 	}
 
 	/*
@@ -2216,7 +2216,7 @@ int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress)
 	 */
 	EmacLitePhyDelay(1);
 
-	return XST_SUCCESS;
+	ਵਾਪਸ XST_SUCCESS;
 }
 
 /******************************************************************************/
@@ -2234,27 +2234,27 @@ int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress)
 * @note		None.
 *
 ******************************************************************************/
-int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress)
+ਪੂਰਨ Emac_Lite_Disable_Phy_Loop_ਪਿੱਠ(XEmacLite *InstancePtr, u32 Phy_ਪਤਾ)
 {
-	int Status;
-	u16 PhyData;
+	ਪੂਰਨ ਸਥਿਤੀ;
+	u16 Phy_ਅੰਕੜੇ;
 
 	/*
 	 * Disable loop back through PHY register using MDIO support.
 	 */
-	Status = XEmacLite_PhyRead(InstancePtr, PhyAddress, PHY_REG0_OFFSET,
-					&PhyData);
-	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
+	ਸਥਿਤੀ = XEmacLite_PhyRead(InstancePtr, Phy_ਪਤਾ, PHY_REG0_ਵਿੱਥ,
+					&Phy_ਅੰਕੜੇ);
+	ਜੇ (ਸਥਿਤੀ != XST_SUCCESS) {
+		ਵਾਪਸ XST_FAILURE;
 	}
 
-	Status = XEmacLite_PhyWrite(InstancePtr,PhyAddress, PHY_REG0_OFFSET,
-					PhyData & ~(PHY_REG0_LOOPBACK_MASK));
-	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
+	ਸਥਿਤੀ = XEmacLite_PhyWrite(InstancePtr,Phy_ਪਤਾ, PHY_REG0_ਵਿੱਥ,
+					Phy_ਅੰਕੜੇ & ~(PHY_REG0_LOOPBACK_ਨਕਾਬ));
+	ਜੇ (ਸਥਿਤੀ != XST_SUCCESS) {
+		ਵਾਪਸ XST_FAILURE;
 	}
 
-	return XST_SUCCESS;
+	ਵਾਪਸ XST_SUCCESS;
 
 }
 
@@ -2271,25 +2271,25 @@ int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress)
 * @note     None
 *
 ******************************************************************************/
-void EmacLitePhyDelay(unsigned int Seconds)
+ਖਾਲੀ EmacLitePhyDelay(ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ Seconds)
 {
-#ifdef __MICROBLAZE__
-	static int WarningFlag = 0;
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ __MICROBLAZE__
+	ਸਥਿਰ ਪੂਰਨ WarningFlag = 0;
 
 	/* If MB caches are disabled or do not exist, this delay loop could
 	 * take minutes instead of seconds (e.g., 30x longer).  Print a warning
 	 * message for the user (once).  If only MB had a built-in timer!
 	 */
-	if (((mfmsr() & 0x20) == 0) && (!WarningFlag)) {
-#ifdef STDOUT_BASEADDRESS
+	ਜੇ (((mfmsr() & 0x20) == 0) && (!WarningFlag)) {
+#ਜੇ_ਪਰਿਭਾਸ਼ਿਤ STDOUT_BASEADDRESS
 		xil_printf("Warning: This example will take ");
 		xil_printf("minutes to complete without I-cache enabled \r\n");
-#endif
+#ਜੇ_ਅੰਤ
 		WarningFlag = 1;
 	}
 
-#define ITERS_PER_SEC   (XPAR_CPU_CORE_CLOCK_FREQ_HZ / 6)
-    asm volatile ("\n"
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ ITERS_ਪ੍ਰਤੀ_SEC   (XPAR_CPU_CORE_CLOCK_FREQ_HZ / 6)
+    asm ਅਸਥਿਰ ("\n"
                   "1:               \n\t"
                   "addik r7, r0, %0 \n\t"
                   "2:               \n\t"
@@ -2298,13 +2298,13 @@ void EmacLitePhyDelay(unsigned int Seconds)
                   "or  r0, r0, r0   \n\t"
                   "bneid %1, 1b     \n\t"
                   "addik %1, %1, -1 \n\t"
-                  :: "i"(ITERS_PER_SEC), "d" (Seconds));
+                  :: "i"(ITERS_ਪ੍ਰਤੀ_SEC), "d" (Seconds));
 
-#else
+#ਨਹੀਂਤਾਂ
 
 //	usleep(Seconds * 1000000);
 //	waitfor(Seconds * 1000);
-#endif
+#ਜੇ_ਅੰਤ
 }
 
 

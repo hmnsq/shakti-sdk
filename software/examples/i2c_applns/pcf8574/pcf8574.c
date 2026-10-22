@@ -26,21 +26,21 @@
 @detail I2C based routines to configure pcf8574.
 */
 
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdint.h>//Includes the definitions of standard input/output functions//
+#ਅਨ੍ਤਰ੍ਭਾਵ "i2c.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "i2c.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "uart.h"
 
-#define PCF8574_SLAVE_ADDRESS 0x4E
-#define I2C i2c_instance[0]
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define PCF8574_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
-#define PCF8574_REG_OFFSET 0
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PCF8574_SLAVE_ਪਤਾ 0x4E
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ I2C i2c_instance[0]
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PRESCALER_ਗਿਣਤੀ 0x1F
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ SCLK_ਗਿਣਤੀ 0x91
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PCF8574_DEC_ਮੰਜ਼ਿਲ_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ DELAY_ਮੁੱਲ 900
+#ਪਰਿਭਾਸ਼ਿਤ_ਕਰੋ PCF8574_REG_ਵਿੱਥ 0
 
 /** @fn int write_pcf8574_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
  * @brief  configures and write the pcf8574 
@@ -50,46 +50,46 @@
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_pcf8574_registers(i2c_struct * i2c_instance,unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+ਪੂਰਨ write_pcf8574_registers(i2c_struct * i2c_instance,ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ reg_ਵਿੱਥ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ write_ਮੁੱਲ, ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, PCF8574_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance,  ( write_value & 0xff), delay);
+	ਪੂਰਨ i = 0, j = 0,  k = 0, ਸਥਿਤੀ_2=0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਆਰਜ਼ੀ = 0;
+	i2c_send_slave_ਪਤਾ(i2c_instance, PCF8574_SLAVE_ਪਤਾ, I2C_WRITE, delay);
+	i2c_write_ਅੰਕੜੇ(i2c_instance,  ( write_ਮੁੱਲ & 0xff), delay);
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 	// delay_loop(800, 800);
-	return 0;
+	ਵਾਪਸ 0;
 }
 
 /** @fn void main()
  * @brief configures and write the pcf8574 IO expander.
  * @details 
  */
-void main()
+ਖਾਲੀ ਮੁੱਖ()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
+	ਪੂਰਨ timeout;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਪੂਰਨ ਆਰਜ਼ੀ_Read_ਮੁੱਲ = 0;
+	ਬਿਨਾਨਿਸ਼ਾਨੀ ਲੰਮਾ delay = 1000;
 
-	printf("\nPCF8574 IO Expander Test");
+	ਲਿਖੋ("\nPCF8574 IO Expander Test");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ਜੇ(config_i2c(I2C, PRESCALER_ਗਿਣਤੀ, SCLK_ਗਿਣਤੀ))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		ਵਾਪਸ -1;
 	}
-		else
+		ਨਹੀਂਤਾਂ
 		log_info("\tIntilization Happened Fine\n");
-		printf("\n Write he scomplete");
-	while(1)
+		ਲਿਖੋ("\n Write he scomplete");
+	ਜਦੋਂ(1)
 	{
-		printf("\n Writing 0");
+		ਲਿਖੋ("\n Writing 0");
 		write_pcf8574_registers(I2C, 0x00, 0x00, delay);
 		delay_loop(2000, 5000);
-		printf("\n Writing 1");
+		ਲਿਖੋ("\n Writing 1");
 		write_pcf8574_registers(I2C, 0x00, 0xFF, delay);
 		delay_loop(2000, 5000);
 	}

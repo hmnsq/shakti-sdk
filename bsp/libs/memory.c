@@ -26,9 +26,9 @@
 @brief A library to display the memory contents at byte and word level.
 */
 
-#include "log.h"
-#include "memory.h"
-#include <stdint.h>
+#ਅਨ੍ਤਰ੍ਭਾਵ "log.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ "memory.h"
+#ਅਨ੍ਤਰ੍ਭਾਵ <stdint.h>
 
 /** @fn void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @brief dump contents of word addressabe location in the memory,
@@ -37,17 +37,17 @@
  * @param uint32_t word_length
  */
 
-void dump_word_memory(uint32_t* start, uint32_t word_length)
+ਖਾਲੀ dump_ਸ਼ਬਦ_ਸਮ੍ਰਿਤੀ(uint32_t* ਸ਼ੁਰੂ, uint32_t ਸ਼ਬਦ_ਲੰਮਾਈ)
 {
 	uint32_t i=0;
-	void *address;
+	ਖਾਲੀ *ਪਤਾ;
 
-	address = (uint32_t *) start;
+	ਪਤਾ = (uint32_t *) ਸ਼ੁਰੂ;
 
-	while(i++< word_length)
+	ਜਦੋਂ(i++< ਸ਼ਬਦ_ਲੰਮਾਈ)
 	{
-		log_info("address = %x data = %x\n", address, *(uint32_t *) address);
-		address += 4;
+		log_info("address = %x data = %x\n", ਪਤਾ, *(uint32_t *) ਪਤਾ);
+		ਪਤਾ += 4;
 	}
 }
 
@@ -58,17 +58,17 @@ void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @param uint32_t word_length
  */
 
-void dump_byte_memory(uint32_t* start, uint32_t word_length)
+ਖਾਲੀ dump_byte_ਸਮ੍ਰਿਤੀ(uint32_t* ਸ਼ੁਰੂ, uint32_t ਸ਼ਬਦ_ਲੰਮਾਈ)
 {
 	uint32_t i=0;
-	void *address;
+	ਖਾਲੀ *ਪਤਾ;
 
-	address = (unsigned char *) start;
+	ਪਤਾ = (ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ *) ਸ਼ੁਰੂ;
 
-	while(i++< word_length)
+	ਜਦੋਂ(i++< ਸ਼ਬਦ_ਲੰਮਾਈ)
 	{
-		log_info("address = %x data = %x\n", address, *(unsigned char
-							       *) address);
-		address += 1;
+		log_info("address = %x data = %x\n", ਪਤਾ, *(ਬਿਨਾਨਿਸ਼ਾਨੀ ਅੱਖਰ
+							       *) ਪਤਾ);
+		ਪਤਾ += 1;
 	}
 }

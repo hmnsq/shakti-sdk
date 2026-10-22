@@ -29,8 +29,8 @@
 
 #ifndef PLIC_DRIVER_H
 #define PLIC_DRIVER_H
-#include "platform.h"
-#include "traps.h"
+#ضمن "platform.h"
+#ضمن "traps.h"
 
 /* Macros */
 
@@ -62,7 +62,7 @@
 
 /* Enumerators */
 
-typedef enum
+تعريفنوع تعداد
 {
 	INACTIVE = 0,
 	ACTIVE   = 1,
@@ -72,7 +72,7 @@ typedef enum
 
 /* Structures and Unions */
 
-typedef struct
+تعريفنوع بنية
 {
 	uint32_t id; /*id of the interrupt target source*/
 	uint32_t priority; /*priority assigned to it*/
@@ -83,21 +83,21 @@ typedef struct
 /* Platform Level Interrupt Controller (PLIC) table
    Each entry in the table corresponds to an interrupt service routine */
 
-typedef void (*plic_fptr_t) (uint32_t);
-extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+تعريفنوع فراغ (*plic_fptr_t) (uint32_t);
+خارجي plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /* Function prototypes */
 
-void interrupt_complete(uint32_t interrupt_id);
-uint32_t interrupt_claim_request(void);
-void isr_default(uint32_t interrupt_id);
-void interrupt_enable(uint32_t interrupt_id);
-void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
-void configure_interrupt_pin(uint32_t pin);
-void plic_init(void);
-void configure_interrupt(uint32_t int_id);
+فراغ interrupt_complete(uint32_t interrupt_id);
+uint32_t interrupt_claim_request(فراغ);
+فراغ isr_default(uint32_t interrupt_id);
+فراغ interrupt_enable(uint32_t interrupt_id);
+فراغ mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+فراغ interrupt_disable(uint32_t interrupt_id);
+فراغ set_interrupt_threshold(uint32_t priority_value);
+فراغ set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
+فراغ configure_interrupt_pin(uint32_t pin);
+فراغ plic_init(فراغ);
+فراغ configure_interrupt(uint32_t int_id);
 
 #endif

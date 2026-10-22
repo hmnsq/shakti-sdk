@@ -27,7 +27,7 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ضمن "gpio_i2c.h"
 
 #define LM75_SLAVE_ADDRESS 0x90
 #define DELAY_COUNT 200
@@ -37,9 +37,9 @@
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+unsigned صحيح Lm75ReadTemperature(unsigned long delay)
 {
-	unsigned char readBuf = 0;
+	unsigned حرف readBuf = 0;
 	unsigned short readValue = 0;
 	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
 	readBuf = I2cReadDataAck(delay);
@@ -47,14 +47,14 @@ unsigned int Lm75ReadTemperature(unsigned long delay)
 	readBuf = I2cReadDataNack(delay);
 	I2cStop(delay);  
 	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	החזר readValue;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+فراغ main() 
 {
 	unsigned short tempRead = 0;
 	unsigned short temp = 0;
@@ -64,11 +64,11 @@ void main()
 	I2cInit();
 
 	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
+	אם(tempRead & 0x100) {
 		tempRead = ( (~tempRead) + 1 ) >> 1;
 		printf("\n\t Current Temperature:=-%u°C",tempRead);
 	}		
-	else {
+	אחרת {
 		tempRead = tempRead >> 1;
 		printf("\n\t Current Temperature:=+%u°C",tempRead);
 	 }

@@ -26,13 +26,13 @@
 @brief Prints "Hello world !" in the uart terminal.
 */
 
-#include<uart.h>
+#ضمن<uart.h>
 
 /** @fn void main()
  * @brief prints hello world
  */
-void main()
+فراغ main()
 {
 	printf ("Hello World !\n");
-	while(1);
+	כלעוד(1);
 }

@@ -26,35 +26,35 @@
 @detail By giving signal it will glow Red Green Blue light within a certain interval.
 */
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 /** @fn void main()
  * @brief Getting RGB light glow one by one
  * @details By giving HIGH signal RED GREEN and BLUE light glow automatically.
  */
-void main()
+فراغ مکھ()
 {
     //Assume  0 for INPUT and  1 for OUTPUT
-    write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000FFF);
+    write_لفظ(GPIO_DIRECTION_CNTRL_REG, 0x00000FFF);
 
-    while (1) {
-        write_word(GPIO_DATA_REG, GPIO0);
+    طالما (1) {
+        write_لفظ(GPIO_انکڑے_REG, GPIO0);
 	    delay_loop(1000, 1000);
-	printf("\nRED LIGHT");			//RED LIGHT.
-        write_word(GPIO_DATA_REG, 0x00);
+	لکھو("\nRED LIGHT");			//RED LIGHT.
+        write_لفظ(GPIO_انکڑے_REG, 0x00);
         delay_loop(1000,1000);
 
-        write_word(GPIO_DATA_REG, GPIO1);
+        write_لفظ(GPIO_انکڑے_REG, GPIO1);
 	    delay_loop(1000, 1000);
-	printf("\nGREEN LIGHT");			//GREEN LIGHT.
-        write_word(GPIO_DATA_REG, 0x00);
+	لکھو("\nGREEN LIGHT");			//GREEN LIGHT.
+        write_لفظ(GPIO_انکڑے_REG, 0x00);
         delay_loop(1000,1000);
         
-        write_word(GPIO_DATA_REG, GPIO2);
+        write_لفظ(GPIO_انکڑے_REG, GPIO2);
 	    delay_loop(1000, 1000);
-	printf("\nBLUE LIGHT");			//BLUE LIGHT.
-        write_word(GPIO_DATA_REG, 0x00);
+	لکھو("\nBLUE LIGHT");			//BLUE LIGHT.
+        write_لفظ(GPIO_انکڑے_REG, 0x00);
         delay_loop(1000,1000);
     }
 }

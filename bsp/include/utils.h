@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#جے_بنا_تعریف UTIL_H
+#تعریف_کرو UTIL_H
+#ضمن <stdio.h>
+#ضمن <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+فراغ waitfor(بنانشانی صحيح secs);
+فراغ delay(بنانشانی لما seconds);
+عائم pow_10(بنانشانی صحيح y);
+فراغ الٹ(حرف *str, صحيح len);
+فراغ ftoa( عائم, حرف *, بنانشانی صحيح);
+فراغ delay_loop(بنانشانی لما cntr1, بنانشانی لما cntr2);
+بنانشانی لما read_لفظ(uint32_t *addr);
+فراغ write_لفظ(uint32_t *addr, بنانشانی لما val);
+صحيح int_منزل_string(صحيح نمبر, حرف str[], بنانشانی صحيح afterpoint);
+فراغ _printf_(ثابت حرف *fmt, va_list ap);
+صحيح لکھو(ثابت حرف* fmt, ...);
 
-#endif
+#جے_انت

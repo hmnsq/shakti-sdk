@@ -25,14 +25,14 @@
  * @brief store pinmux configuration
  */
 
-#ifndef PINMUX_H
-#define PINMUX_H
-#include "platform.h"
+#جے_بنا_تعریف PINMUX_H
+#تعریف_کرو PINMUX_H
+#ضمن "platform.h"
 
-volatile unsigned int* pinmux_config_reg = PINMUX_CONFIGURE_REG;
+متطاير بنانشانی صحيح* pinmux_config_reg = PINMUX_CONFIGURE_REG;
 
-#define PINMUX_CONFIG_1 
-#define PINMUX_CONFIG_2 
-#define PINMUX_CONFIG_3
+#تعریف_کرو PINMUX_CONFIG_1 
+#تعریف_کرو PINMUX_CONFIG_2 
+#تعریف_کرو PINMUX_CONFIG_3
 
-#endif
+#جے_انت

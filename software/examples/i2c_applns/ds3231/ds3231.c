@@ -28,18 +28,18 @@
 */
 
 //#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ضمن "i2c.h"
+#ضمن "log.h"
+#ضمن "uart.h"
 
-#define UPDATE_TIME 1
-#define I2C i2c_instance[1]
-#define DS3231_SLAVE_ADDRESS 0XD0
-#define DS3231_REG_OFFSET 0
-#define DS3231_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#تعریف_کرو UPDATE_ویلا 1
+#تعریف_کرو I2C i2c_instance[1]
+#تعریف_کرو DS3231_SLAVE_پتہ 0XD0
+#تعریف_کرو DS3231_REG_وتھ 0
+#تعریف_کرو DS3231_DEC_منزل_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
+#تعریف_کرو DELAY_قدر 900
+#تعریف_کرو PRESCALER_گنتی 0x1F
+#تعریف_کرو SCLK_گنتی 0x91
 
 
 /** @fn int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -53,39 +53,39 @@
  * @param delay
  * @return read status (Zero of success)
  */
-int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+صحيح read_ds3231_registers(i2c_struct * i2c_instance, بنانشانی صحيح reg_وتھ, بنانشانی صحيح *read_عارضی, بنانشانی حرف لمائی_2, بنانشانی لما delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	بنانشانی حرف read_buf[4] = {'\0'};
+	صحيح i = 0, j = 0,  k = 0, حالت_2=0;
+	بنانشانی حرف عارضی = 0;
 
 //Writes the slave address for write
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, 800);
+		i2c_send_slave_پتہ(i2c_instance, DS3231_SLAVE_پتہ, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-		i2c_write_data(i2c_instance, reg_offset, delay);
+		i2c_write_انکڑے(i2c_instance, reg_وتھ, delay);
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_READ, 800);
+		i2c_send_slave_پتہ(i2c_instance, DS3231_SLAVE_پتہ, I2C_READ, 800);
 
 
 /* Make a dummy read as per spec of the I2C controller */
-		i2c_read_data(i2c_instance, &temp, delay);
+		i2c_read_انکڑے(i2c_instance, &عارضی, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-		for(i = 0; i < length; i++)
+		لكل(i = 0; i < لمائی_2; i++)
 		{
-			i2c_read_data(i2c_instance, &temp, delay);
-			*readTemp = temp;
+			i2c_read_انکڑے(i2c_instance, &عارضی, delay);
+			*read_عارضی = عارضی;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
-			if( i == (length - 2) )
+			إذا( i == (لمائی_2 - 2) )
 				i2c_instance->control = I2C_NACK;
-			*readTemp++;
+			*read_عارضی++;
 		}
 		i2c_instance->control = I2C_STOP;
-		return 0;
+		أرجع 0;
 }
 
 /** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -99,22 +99,22 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+صحيح write_ds3231_registers(i2c_struct * i2c_instance, بنانشانی صحيح reg_وتھ, بنانشانی صحيح *write_قدر, بنانشانی حرف لمائی_2, بنانشانی لما delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, delay);
-		i2c_write_data(i2c_instance, reg_offset, delay);
-		for(i = 0; i < length; i++)
+	صحيح i = 0, j = 0,  k = 0, حالت_2=0;
+	بنانشانی صحيح عارضی = 0;
+		i2c_send_slave_پتہ(i2c_instance, DS3231_SLAVE_پتہ, I2C_WRITE, delay);
+		i2c_write_انکڑے(i2c_instance, reg_وتھ, delay);
+		لكل(i = 0; i < لمائی_2; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_انکڑے(i2c_instance,  ( *write_قدر++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 //		delay_loop(800, 800);
 
 
-			return 0;
+			أرجع 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)
@@ -125,12 +125,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param y
  * @return Day of the week (0 - 6)
  */
-int dayofweek(int d, int m, int y)
+صحيح dayofweek(صحيح d, صحيح m, صحيح y)
 {
-    static int t[] = { 0, 3, 2, 5, 0, 3,
+    ساكن صحيح t[] = { 0, 3, 2, 5, 0, 3,
                        5, 1, 4, 6, 2, 4 };
     y -= m < 3;
-    return ( y + y / 4 - y / 100 +
+    أرجع ( y + y / 4 - y / 100 +
              y / 400 + t[m - 1] + d) % 7;
 }
 
@@ -140,9 +140,9 @@ int dayofweek(int d, int m, int y)
  * @param decimal
  * @return Calculated hex value. 
  */
-unsigned int ds3231_decimal_to_hex(unsigned int decimal)
+بنانشانی صحيح ds3231_decimal_منزل_hex(بنانشانی صحيح decimal)
 {
-	return( ((decimal / 10 ) << 4) | (decimal % 10) );
+	أرجع( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
 /** @fn void main()
@@ -150,85 +150,85 @@ unsigned int ds3231_decimal_to_hex(unsigned int decimal)
  * @details Configures the DS3231 and reads Date and time information and prints the 
  * in decimal
  */
-void main()
+فراغ مکھ()
 {
-		int timeout;
-		unsigned int tempReadValue = 0;
-		unsigned long delay = 1000;
-		unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-		unsigned char length;
-		unsigned int hour, minute, second, date, month, year;
+		صحيح timeout;
+		بنانشانی صحيح عارضی_Read_قدر = 0;
+		بنانشانی لما delay = 1000;
+		بنانشانی صحيح write_buf[7] = {0x00}, read_buf[7] = {0x00};
+		بنانشانی حرف لمائی_2;
+		بنانشانی صحيح hour, minute, دوجا, date, month, year;
 	
 		hour = 11;
 		minute = 46;
-		second = 30;
+		دوجا = 30;
 	
 		date = 25;
 		month = 01;
 		year = 2020;
 	
-		write_buf[0] = DS3231_DEC_TO_HEX(second); //Seconds
-		write_buf[1] = DS3231_DEC_TO_HEX(minute); //Minutes
-		write_buf[2] = DS3231_DEC_TO_HEX(hour); //Hours
+		write_buf[0] = DS3231_DEC_منزل_HEX(دوجا); //Seconds
+		write_buf[1] = DS3231_DEC_منزل_HEX(minute); //Minutes
+		write_buf[2] = DS3231_DEC_منزل_HEX(hour); //Hours
 	
-		write_buf[4] = DS3231_DEC_TO_HEX(date); //Seconds
-		write_buf[5] = DS3231_DEC_TO_HEX(month); //Minutes
-		write_buf[6] = DS3231_DEC_TO_HEX( (year % 100) ); //Hours
+		write_buf[4] = DS3231_DEC_منزل_HEX(date); //Seconds
+		write_buf[5] = DS3231_DEC_منزل_HEX(month); //Minutes
+		write_buf[6] = DS3231_DEC_منزل_HEX( (year % 100) ); //Hours
 	
 		write_buf[3] = dayofweek(date, month, year) + 1;
-		length = 7;
+		لمائی_2 = 7;
 	
 //	set_baud_rate(uart_instance[0], 115200);
-	printf("\nHello Welcome to Shakti");
+	لکھو("\nHello Welcome to Shakti");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	إذا(config_i2c(I2C, PRESCALER_گنتی, SCLK_گنتی))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		أرجع -1;
 	}
-	else
+	وإلا
 		log_info("\tIntilization Happened Fine\n");
-#ifdef UPDATE_TIME
-	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
-			printf("\n Write complete");
-#endif
-	while(1)
+#جے_تعریف_شدہ UPDATE_ویلا
+	write_ds3231_registers(I2C, 0x00, &write_buf[0], لمائی_2, delay);
+			لکھو("\n Write complete");
+#جے_انت
+	طالما(1)
 	{
-			read_ds3231_registers(I2C, DS3231_REG_OFFSET, &read_buf[0], 7, 800);
+			read_ds3231_registers(I2C, DS3231_REG_وتھ, &read_buf[0], 7, 800);
 			
 			log_info("\n Date: %x-%x-20%x Day: ", read_buf[4], read_buf[5], read_buf[6]);
 			
-			switch(read_buf[3])
+			بدل(read_buf[3])
 			{
-				case 1:
+				حالة 1:
 						log_info( "   Sunday; ");
-						break;
+						اكسر;
 
-				case 2:
+				حالة 2:
 						log_info( "   Monday; ");
-						break;
+						اكسر;
 
-				case 3:
+				حالة 3:
 						log_info( "  Tuesday; ");
-						break;
+						اكسر;
 
-				case 4:
+				حالة 4:
 						log_info( "Wednesday; ");
-						break;
+						اكسر;
 
-				case 5:
+				حالة 5:
 						log_info( " Thursday; ");
-						break;
+						اكسر;
 
-				case 6:
+				حالة 6:
 						log_info( "   Friday; ");
-						break;
+						اكسر;
 
-				case 7:
+				حالة 7:
 						log_info( " Saturday; ");
-						break;
+						اكسر;
 			}
 			log_info("Time: %x:%x:%x", read_buf[2], read_buf[1], read_buf[0]);
 			delay_loop(1000, 1000);

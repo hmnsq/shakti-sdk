@@ -27,9 +27,9 @@
  * handling traps are declared.
  */
 
-#ifndef TRAPS_H
-#define TRAPS_H
-#include <stdint.h>
+#جے_بنا_تعریف TRAPS_H
+#تعریف_کرو TRAPS_H
+#ضمن <stdint.h>
 
 /*
    Table 3.6 risc v priv spec v1.10 chapter 7
@@ -72,59 +72,59 @@
    Off the 32 entries in the table, some index positions reserved for future use
  */
 
-#define MAX_MCAUSE_VALUE               32
+#تعریف_کرو MAX_MCAUSE_قدر               32
 
 
 /*  Interrupts */
-#define MAX_INTERRUPT_VALUE            16
+#تعریف_کرو MAX_رکاوٹ_قدر            16
 
-#define USER_SW_INTERRUPT               0
-#define SUPER_SW_INTERRUPT              1
-#define RESERVED_INTERRUPT0             2
-#define MACH_SW_INTERRUPT               3
-#define USER_TIMER_INTERRUPT            4
-#define SUPER_TIMER_INTERRUPT           5
-#define RESERVED_INTERRUPT1             6
-#define MACH_TIMER_INTERRUPT            7
-#define USER_EXT_INTERRUPT              8
-#define SUPERVISOR_EXT_INTERRUPT        9
-#define RESERVED_INTERRUPT2            10
-#define MACH_EXTERNAL_INTERRUPT        11
-#define RESERVED_INTERRUPT3            12
-#define RESERVED_INTERRUPT4            13
-#define RESERVED_INTERRUPT5            14
-#define RESERVED_INTERRUPT6            15
+#تعریف_کرو USER_SW_رکاوٹ               0
+#تعریف_کرو SUPER_SW_رکاوٹ              1
+#تعریف_کرو RESERVED_INTERRUPT0             2
+#تعریف_کرو MACH_SW_رکاوٹ               3
+#تعریف_کرو USER_TIMER_رکاوٹ            4
+#تعریف_کرو SUPER_TIMER_رکاوٹ           5
+#تعریف_کرو RESERVED_INTERRUPT1             6
+#تعریف_کرو MACH_TIMER_رکاوٹ            7
+#تعریف_کرو USER_EXT_رکاوٹ              8
+#تعریف_کرو SUPERVISOR_EXT_رکاوٹ        9
+#تعریف_کرو RESERVED_INTERRUPT2            10
+#تعریف_کرو MACH_EXTERNAL_رکاوٹ        11
+#تعریف_کرو RESERVED_INTERRUPT3            12
+#تعریف_کرو RESERVED_INTERRUPT4            13
+#تعریف_کرو RESERVED_INTERRUPT5            14
+#تعریف_کرو RESERVED_INTERRUPT6            15
 
 /* Traps */
-#define MAX_TRAP_VALUE                 16
+#تعریف_کرو MAX_TRAP_قدر                 16
 
-#define INSTRUCTION_ADDRESS_MISALIGNED  0
-#define INSTRUCTION_ACCESS_FAULT        1
-#define ILLEGAL_INSTRUCTION             2
-#define BREAKPOINT                      3
-#define LOAD_ADDRESS_MISALIGNED         4
-#define LOAD_ACCESS_FAULT               5
-#define STORE_AMO_ADDRESS_MISALIGNED    6
-#define STORE_AMO_ACCESS_FAULT          7
-#define ENVIRONMENT_CALL_FROM_U_MODE    8
-#define ENVIRONMENT_CALL_FROM_S_MODE    9
-#define RESERVED_TRAP1                 10
-#define ENVIRONMENT_CALL_FROM_M_MODE   11
-#define INSTRUCTION_PAGE_FAULT         12
-#define LOAD_PAGE_FAULT                13
-#define RESERVED_TRAP2                 14
-#define STORE_AMO_PAGE_FAULT           15
+#تعریف_کرو INSTRUCTION_پتہ_MISALIGNED  0
+#تعریف_کرو INSTRUCTION_ACCESS_FAULT        1
+#تعریف_کرو ILLEGAL_INSTRUCTION             2
+#تعریف_کرو BREAKPOINT                      3
+#تعریف_کرو لدو_پتہ_MISALIGNED         4
+#تعریف_کرو لدو_ACCESS_FAULT               5
+#تعریف_کرو STORE_AMO_پتہ_MISALIGNED    6
+#تعریف_کرو STORE_AMO_ACCESS_FAULT          7
+#تعریف_کرو ENVIRONMENT_CALL_FROM_U_منوال    8
+#تعریف_کرو ENVIRONMENT_CALL_FROM_S_منوال    9
+#تعریف_کرو RESERVED_TRAP1                 10
+#تعریف_کرو ENVIRONMENT_CALL_FROM_M_منوال   11
+#تعریف_کرو INSTRUCTION_ورقہ_FAULT         12
+#تعریف_کرو لدو_ورقہ_FAULT                13
+#تعریف_کرو RESERVED_TRAP2                 14
+#تعریف_کرو STORE_AMO_ورقہ_FAULT           15
 
 /*
    Trap table -  Each entry in the table corresponds to a service routine for a Trap
  */
 
-typedef void (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
-extern mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-extern mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+تعريفنوع فراغ (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
+خارجي mtrap_fptr_t mcause_trap_جدول[MAX_TRAP_قدر];
+خارجي mtrap_fptr_t mcause_رکاوٹ_جدول[MAX_رکاوٹ_قدر];
 
-void default_handler(uintptr_t cause, uintptr_t epc);
-unsigned int extract_ie_code(unsigned int num);
+فراغ default_handler(uintptr_t cause, uintptr_t epc);
+بنانشانی صحيح کڈھو_ie_کوڈ(بنانشانی صحيح عدد);
 uintptr_t handle_trap(uintptr_t cause, uintptr_t epc);
 
-#endif
+#جے_انت

@@ -32,28 +32,28 @@
 * </pre>
 *
 ******************************************************************************/
-#ifndef POLL_EG_H
-#define POLL_EG_H
+#جے_بنا_تعریف POLL_EG_H
+#تعریف_کرو POLL_EG_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#جے_تعریف_شدہ __cplusplus
+خارجي "C" {
+#جے_انت
 
 /***************************** Include Files *********************************/
 
 
 /************************** Constant Definitions ****************************/
 
-#define PHY_REG0_OFFSET		0 /* Register 0 of PHY device */
-#define PHY_REG1_OFFSET 	1 /* Register 1 of PHY device */
+#تعریف_کرو PHY_REG0_وتھ		0 /* Register 0 of PHY device */
+#تعریف_کرو PHY_REG1_وتھ 	1 /* Register 1 of PHY device */
 
-#define PHY_REG0_RESET_MASK	0x8000  /* Reset Phy device */
-#define PHY_REG0_LOOPBACK_MASK	0x4000  /* Loopback Enable in Phy */
-#define PHY_REG0_SPD_100_MASK	0x2000  /* Speed of 100Mbps for Phy */
+#تعریف_کرو PHY_REG0_RESET_نقاب	0x8000  /* Reset Phy device */
+#تعریف_کرو PHY_REG0_LOOPBACK_نقاب	0x4000  /* Loopback Enable in Phy */
+#تعریف_کرو PHY_REG0_SPD_100_نقاب	0x2000  /* Speed of 100Mbps for Phy */
 
-#define PHY_REG1_DETECT_MASK	0x1808	/* Mask to detect PHY device */
+#تعریف_کرو PHY_REG1_DETECT_نقاب	0x1808	/* Mask to detect PHY device */
 
-#define EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
+#تعریف_کرو EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
 					 * PHY to reset.
 					 */
 
@@ -62,7 +62,7 @@ extern "C" {
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID		XPAR_EMACLITE_0_DEVICE_ID
+#تعریف_کرو EMAC_DEVICE_ID		XPAR_EMACLITE_0_DEVICE_ID
 
 /***************** Macros (Inline Functions) Definitions *********************/
 
@@ -73,10 +73,10 @@ extern "C" {
 /*
  * Utility functions implemented in xemaclite_example_util.c
  */
-void EmacLitePhyDelay(unsigned int Seconds);
+فراغ EmacLitePhyDelay(بنانشانی صحيح Seconds);
 u32 EmacLitePhyDetect(XEmacLite *InstancePtr);
-int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
-int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+صحيح Emac_Lite_Enable_Phy_Loop_پٹھ(XEmacLite *InstancePtr, u32 Phy_پتہ);
+صحيح Emac_Lite_Disable_Phy_Loop_پٹھ(XEmacLite *InstancePtr, u32 Phy_پتہ);
 
 /************************** Variable Definitions ****************************/
 /*
@@ -84,23 +84,23 @@ int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
  * both as a source and destination MAC address.
  */
 
-extern XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
+خارجي XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
 
 /*
  * Buffers used for Transmission and Reception of Packets. These are declared
  * as global so that they are not a part of the stack.
  */
-extern u8 TxFrame[XEL_MAX_FRAME_SIZE];
-extern u8 RxFrame[XEL_MAX_FRAME_SIZE];
+خارجي u8 Tx_چوکھٹا[XEL_MAX_چوکھٹا_ناپ];
+خارجي u8 Rx_چوکھٹا[XEL_MAX_چوکھٹا_ناپ];
 
-extern volatile u32 RecvFrameLength;	/* Indicates the length of the
+خارجي متطاير u32 Recv_چوکھٹا_لمائی;	/* Indicates the length of the
 					 * Received packet
 					 */
-extern volatile int TransmitComplete;	/* Flag to indicate that the
+خارجي متطاير صحيح TransmitComplete;	/* Flag to indicate that the
 					 * Transmission is complete
 					 */
-#ifdef __cplusplus
+#جے_تعریف_شدہ __cplusplus
 }
-#endif
+#جے_انت
 
-#endif /* POLL_EG_H */
+#جے_انت /* POLL_EG_H */

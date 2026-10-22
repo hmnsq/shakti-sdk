@@ -27,16 +27,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 using gpio pins.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "gpio_i2c.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
+#ضمن "gpio_i2c.h"
 
 /** @fn extern void delay_loop(unsigned long , unsigned long)
  * @brief Maintains the required delay to perform an operation
  * @param unsigned long 
  * @param unsigned long
  */
-extern void delay_loop(unsigned long , unsigned long);
+خارجي فراغ delay_loop(بنانشانی لما , بنانشانی لما);
 
 /** @fn static void SetSCLAsOutput()
  * @brief Function for configure GPIO 0 as SCL output.
@@ -44,12 +44,12 @@ extern void delay_loop(unsigned long , unsigned long);
  *             macro as output.
  * @warning This bit value can be changed as per I2C_SCL macro.
  */
-static void SetSCLAsOutput()
+ساكن فراغ سیٹ_SCLAs_Output()
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, (readData | I2C_SCL) );
-	printf("SCL set as output\n");
+	بنانشانی لما read_انکڑے = 0;
+	read_انکڑے = read_لفظ(GPIO_DIRECTION_CNTRL_REG);
+	write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_انکڑے | I2C_SCL) );
+	لکھو("SCL set as output\n");
 }
 
 /** @fn static void SetSdaDirection(int inOutCntrl)
@@ -59,18 +59,18 @@ static void SetSCLAsOutput()
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param int inOutCntrl
  */
-static void SetSdaDirection(int inOutCntrl)
+ساكن فراغ سیٹ_Sda_Direction(صحيح وچ_باہرلا_Cntrl)
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DIRECTION_CNTRL_REG);
+	بنانشانی لما read_انکڑے = 0;
+	read_انکڑے = read_لفظ(GPIO_DIRECTION_CNTRL_REG);
 
-	if (inOutCntrl) { // output
-		write_word(GPIO_DIRECTION_CNTRL_REG, (readData | I2C_SDA) );
-		printf("\n\tSDA set as output\n");
+	إذا (وچ_باہرلا_Cntrl) { // output
+		write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_انکڑے | I2C_SDA) );
+		لکھو("\n\tSDA set as output\n");
 	}
-    else {
-		write_word(GPIO_DIRECTION_CNTRL_REG, (readData & ~(I2C_SDA) ) );
-		printf("\n\tSDA set as input\n");
+    وإلا {
+		write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_انکڑے & ~(I2C_SDA) ) );
+		لکھو("\n\tSDA set as input\n");
 	}
 }
 
@@ -80,28 +80,28 @@ static void SetSdaDirection(int inOutCntrl)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char delay
  */
-static void start(unsigned char delay)
+ساكن فراغ شروع(بنانشانی حرف delay)
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DATA_REG);
+	بنانشانی لما read_انکڑے = 0;
+	read_انکڑے = read_لفظ(GPIO_انکڑے_REG);
 
 //	sda=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA | I2C_SCL) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SDA | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //		scl=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //		sda=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SDA)) );
 	delay_loop(delay, delay);
 
 //		scl=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SCL) ) );
 	delay_loop(delay, delay);
 
-	printf("\n\tI2C: I2C Start condition sent\n");
+	لکھو("\n\tI2C: I2C Start condition sent\n");
 }
 
 /** @fn static void stop(unsigned char delay)
@@ -110,22 +110,22 @@ static void start(unsigned char delay)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char
  */
-static void stop(unsigned char delay)
+ساكن فراغ stop(بنانشانی حرف delay)
 {
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DATA_REG);
+	بنانشانی لما read_انکڑے = 0;
+	read_انکڑے = read_لفظ(GPIO_انکڑے_REG);
 //	sda=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SDA)) );
 	delay_loop(delay, delay);
 
 //	scl=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //	sda=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SDA) );
 	delay_loop(delay, delay);
-	printf("\n\tI2C: I2C Start condition sent\n");
+	لکھو("\n\tI2C: I2C Start condition sent\n");
 
 }
 
@@ -137,32 +137,32 @@ static void stop(unsigned char delay)
  * @param writeData --> Value that needs to be written.
  * @param unsigned char delay
  */
-void I2cWriteByte(unsigned char writeData, unsigned char delay)
+فراغ I2cWriteByte(بنانشانی حرف write_انکڑے, بنانشانی حرف delay)
 {
-	unsigned char j = 0,k;
-	unsigned long readData = 0;
-	readData = read_word(GPIO_DATA_REG);
-	while (j < 8)
+	بنانشانی حرف j = 0,k;
+	بنانشانی لما read_انکڑے = 0;
+	read_انکڑے = read_لفظ(GPIO_انکڑے_REG);
+	طالما (j < 8)
 	{
-		k = writeData;
+		k = write_انکڑے;
 		k = ( k << j ) & 0x80;
 //		printf("\n\r i: %d; j: %d; k: %d", i, j, k);
 //		sda=CY;
-		if (k == 0) {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+		إذا (k == 0) {
+			write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SDA)) );
 			delay_loop(delay, delay);
 		}
-		else {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+		وإلا {
+			write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SDA) );
 			delay_loop(delay, delay);
 		}
 
 	//	scl=1;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+		write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SCL) );
 		delay_loop(delay, delay);
 
 	//	scl=0;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+		write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SCL) ) );
 		delay_loop(delay, delay);
 		++j;
 	}
@@ -176,39 +176,39 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
  * @param unsigned char delay
  * @return unsigned char (returns the value of readData).
  */
-unsigned char I2cReadByte(unsigned char delay)
+بنانشانی حرف I2cReadByte(بنانشانی حرف delay)
 {
-	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
-	unsigned char readData = 0;
-  unsigned long readGpioData = 0;
-	readData = read_word(GPIO_DATA_REG);
+	بنانشانی حرف j = 0, i = 0;
+	بنانشانی حرف ثنائی_ہندسہ_قدر;
+	بنانشانی حرف read_انکڑے = 0;
+  بنانشانی لما read_Gpio_انکڑے = 0;
+	read_انکڑے = read_لفظ(GPIO_انکڑے_REG);
 
 //	sda=1;
 //Make SDA high
-	while (j < 8) {
+	طالما (j < 8) {
 	//	scl=1;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+		write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SCL) );
 		delay_loop(delay, delay);
 
 //		d1 = sda;
-		readGpioData = read_word(GPIO_DATA_REG)  & I2C_SDA;
-		if (readGpioData != 0)
-			bitValue = 1;
-		else
-			bitValue = 0;
-	    readData = readData << 1;
-		readData = readData | bitValue;
+		read_Gpio_انکڑے = read_لفظ(GPIO_انکڑے_REG)  & I2C_SDA;
+		إذا (read_Gpio_انکڑے != 0)
+			ثنائی_ہندسہ_قدر = 1;
+		وإلا
+			ثنائی_ہندسہ_قدر = 0;
+	    read_انکڑے = read_انکڑے << 1;
+		read_انکڑے = read_انکڑے | ثنائی_ہندسہ_قدر;
 		delay_loop(delay, delay);
 
 	//	scl=0;
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+		write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SCL) ) );
 		delay_loop(delay, delay);
 
 		++j;
 	}
 
-	return readData;
+	أرجع read_انکڑے;
 }
 
 /** @fn void ReadAckForWrite(unsigned char delay)
@@ -220,25 +220,25 @@ unsigned char I2cReadByte(unsigned char delay)
  *        responding.
  * @param unsigned char delay
  */
-void ReadAckForWrite(unsigned char delay)
+فراغ ReadAckForWrite(بنانشانی حرف delay)
 {
-	unsigned long readData = 0;
-	printf("\n\tI2C: I2C Read\n");
-	readData = read_word(GPIO_DATA_REG);
+	بنانشانی لما read_انکڑے = 0;
+	لکھو("\n\tI2C: I2C Read\n");
+	read_انکڑے = read_لفظ(GPIO_انکڑے_REG);
 	delay_loop(delay, delay);
 //	scl=1;delay
-	printf("\n\tI2C: I2C Write\n");
-	write_word(GPIO_DATA_REG, (readData | I2C_SCL) );
+	لکھو("\n\tI2C: I2C Write\n");
+	write_لفظ(GPIO_انکڑے_REG, (read_انکڑے | I2C_SCL) );
 	delay_loop(delay, delay);
 
-		printf("\n\tI2C: I2C Write\n");
-		readData = read_word(GPIO_DATA_REG)  & I2C_SDA;
+		لکھو("\n\tI2C: I2C Write\n");
+		read_انکڑے = read_لفظ(GPIO_انکڑے_REG)  & I2C_SDA;
 
 //	scl=0;
-	printf("\n\tI2C: I2C Write\n");
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+	لکھو("\n\tI2C: I2C Write\n");
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SCL) ) );
 	delay_loop(delay, delay);
-	printf("\n\tI2C: I2C ReadNackForWrite sent\n");
+	لکھو("\n\tI2C: I2C ReadNackForWrite sent\n");
 
 }
 
@@ -251,26 +251,26 @@ void ReadAckForWrite(unsigned char delay)
  *        responding.
  * @param unsigned char delay
  */
-void SendAckForRead(unsigned char delay)
+فراغ SendAckForRead(بنانشانی حرف delay)
 {
-	unsigned long readData = 0;
-  SetSdaDirection(GPIOD_IS_OUT);
+	بنانشانی لما read_انکڑے = 0;
+  سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
 
 //	readData = read_word(GPIO_DATA_REG);
 
 //	sda=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SDA)) );
 	delay_loop(delay, delay);
 
 //	scl=1;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SCL) );
 	delay_loop(delay, delay);
 
 //	scl=0;
-	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+	write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SCL) ) );
 	delay_loop(delay, delay);
 
-  SetSdaDirection(GPIOD_IS_IN);
+  سیٹ_Sda_Direction(GPIOD_IS_وچ);
 }
 
 /** @fn void SendNackForRead(unsigned char delay)
@@ -282,26 +282,26 @@ void SendAckForRead(unsigned char delay)
  *         responding.
  * @param unsigned char delay
  */
-void SendNackForRead(unsigned char delay)
+فراغ SendNackForRead(بنانشانی حرف delay)
  {
-  unsigned long readData = 0;
-  SetSdaDirection(GPIOD_IS_OUT);
+  بنانشانی لما read_انکڑے = 0;
+  سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
 
  //	readData = read_word(GPIO_DATA_REG);
 
  //	sda=0;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG)  | (I2C_SDA)) );
+  write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG)  | (I2C_SDA)) );
   delay_loop(delay, delay);
 
  //	scl=1;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
+  write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SCL) );
   delay_loop(delay, delay);
 
  //	scl=0;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
+  write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) & ~(I2C_SCL) ) );
   delay_loop(delay, delay);
 
-  SetSdaDirection(GPIOD_IS_IN);
+  سیٹ_Sda_Direction(GPIOD_IS_وچ);
  }
 
 /** @fn void I2cInit()
@@ -311,11 +311,11 @@ void SendNackForRead(unsigned char delay)
  *      operation.
  * @warning This bit value can be changed as per I2C_SCL macro.
  */
-void I2cInit()
+فراغ I2cInit()
 {
-  SetSCLAsOutput();
-  SetSdaDirection(GPIOD_IS_OUT);
-  printf("Initialization successfully done");
+  سیٹ_SCLAs_Output();
+  سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
+  لکھو("Initialization successfully done");
 }
 
 /** @fn void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned char delay)
@@ -329,27 +329,27 @@ void I2cInit()
  * @param unsigned char (Read / Write Control (0 --> Write, 1 --> Read)).
  * @param unsigned char delay
  */
-void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned char delay)
+فراغ I2c_Send_Slave_پتہ(بنانشانی حرف slave_پتہ, بنانشانی حرف rdWrCntrl, بنانشانی حرف delay)
 {
-  SetSdaDirection(GPIOD_IS_OUT);
+  سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
 
-  printf("\n\tI2C: I2C Start\n");
-  start(delay);
-  printf("\n\tI2C: I2C Send Bytes\n");
-  if(rdWrCntrl) {
-     printf("\n\tI2C: I2C Write\n");
-    I2cWriteByte( (slaveAddress | I2C_READ), delay);
+  لکھو("\n\tI2C: I2C Start\n");
+  شروع(delay);
+  لکھو("\n\tI2C: I2C Send Bytes\n");
+  إذا(rdWrCntrl) {
+     لکھو("\n\tI2C: I2C Write\n");
+    I2cWriteByte( (slave_پتہ | I2C_READ), delay);
 	}
-  else {
-     printf("\n\tI2C: I2C Write\n");
-    I2cWriteByte( (slaveAddress | I2C_WRITE), delay);
+  وإلا {
+     لکھو("\n\tI2C: I2C Write\n");
+    I2cWriteByte( (slave_پتہ | I2C_WRITE), delay);
 	}
   //	sda=1;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+  write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SDA) );
   delay_loop(delay, delay);
 
-  printf("\n\tI2C: I2C Write Ack\n");
-  SetSdaDirection(GPIOD_IS_IN);
+  لکھو("\n\tI2C: I2C Write Ack\n");
+  سیٹ_Sda_Direction(GPIOD_IS_وچ);
     ReadAckForWrite(delay);
 }
 
@@ -362,17 +362,17 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
  *    or register value.)
  * @param unsigned char delay
  */
-void I2cWriteData(unsigned char writeData, unsigned char delay)
+فراغ I2c_Write_انکڑے(بنانشانی حرف write_انکڑے, بنانشانی حرف delay)
 {
-  SetSdaDirection(GPIOD_IS_OUT);
-  printf("\n\tI2C: I2C Write\n");
-  I2cWriteByte( writeData, delay);
+  سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
+  لکھو("\n\tI2C: I2C Write\n");
+  I2cWriteByte( write_انکڑے, delay);
   //	sda=1;
-  write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
+  write_لفظ(GPIO_انکڑے_REG, (read_لفظ(GPIO_انکڑے_REG) | I2C_SDA) );
   delay_loop(delay, delay);
 
-  printf("\n\tI2C: I2C Write Ack\n");
-  SetSdaDirection(GPIOD_IS_IN);
+  لکھو("\n\tI2C: I2C Write Ack\n");
+  سیٹ_Sda_Direction(GPIOD_IS_وچ);
   ReadAckForWrite(delay);
 }
 
@@ -384,16 +384,16 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
  * @param unsigned char delay
  * @return unsigned char (returns the value of readData)
  */
-unsigned char I2cReadDataAck(unsigned char delay)
+بنانشانی حرف I2c_Read_انکڑے_Ack(بنانشانی حرف delay)
 {
-  unsigned char readData = 0;
-  SetSdaDirection(GPIOD_IS_IN);
-	printf("\n\tI2C: I2C Read\n");
-	readData = I2cReadByte(delay);
-	SetSdaDirection(GPIOD_IS_OUT);
-	printf("\n\tI2C: I2C Read Ack\n");
+  بنانشانی حرف read_انکڑے = 0;
+  سیٹ_Sda_Direction(GPIOD_IS_وچ);
+	لکھو("\n\tI2C: I2C Read\n");
+	read_انکڑے = I2cReadByte(delay);
+	سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
+	لکھو("\n\tI2C: I2C Read Ack\n");
 	SendAckForRead(delay);
-  return readData;
+  أرجع read_انکڑے;
 }
 
 /** @fn unsigned char I2cReadDataNack(unsigned char delay)
@@ -405,16 +405,16 @@ unsigned char I2cReadDataAck(unsigned char delay)
  * @param unsigned char delay
  * @return unsigned char (returns the value of readData)
  */
-unsigned char I2cReadDataNack(unsigned char delay)
+بنانشانی حرف I2c_Read_انکڑے_Nack(بنانشانی حرف delay)
 {
-  unsigned char readData = 0;
-  SetSdaDirection(GPIOD_IS_IN);
- 	printf("\n\tI2C: I2C Read\n");
-  readData = I2cReadByte(delay);
-	SetSdaDirection(GPIOD_IS_OUT);
-  	printf("\n\tI2C: I2C Read NAck\n");
+  بنانشانی حرف read_انکڑے = 0;
+  سیٹ_Sda_Direction(GPIOD_IS_وچ);
+ 	لکھو("\n\tI2C: I2C Read\n");
+  read_انکڑے = I2cReadByte(delay);
+	سیٹ_Sda_Direction(GPIOD_IS_باہرلا);
+  	لکھو("\n\tI2C: I2C Read NAck\n");
   	SendNackForRead(delay);
-    return readData;
+    أرجع read_انکڑے;
 }
 
 /** @fn void I2cStart(unsigned char delay)
@@ -423,10 +423,10 @@ unsigned char I2cReadDataNack(unsigned char delay)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char delay
  */
-void I2cStart(unsigned char delay)
+فراغ I2c_شروع(بنانشانی حرف delay)
 {
-  printf("\n\tI2C: I2C start\n");
-  start(delay);
+  لکھو("\n\tI2C: I2C start\n");
+  شروع(delay);
 }
 
 /** @fn void I2cStop(unsigned char delay)
@@ -435,9 +435,9 @@ void I2cStart(unsigned char delay)
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param unsigned char delay
  */
-void I2cStop(unsigned char delay)
+فراغ I2cStop(بنانشانی حرف delay)
 {
-  printf("\n\tI2C: I2C stop\n");
+  لکھو("\n\tI2C: I2C stop\n");
   stop(delay);
 }
 
@@ -449,11 +449,11 @@ void I2cStop(unsigned char delay)
  * @param unsigned char data to be written
  * @param unsigned char delay
  */
-void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
+فراغ I2c_Write_byte(بنانشانی حرف slave_پتہ_2,بنانشانی حرف reg_پتہ, بنانشانی حرف انکڑے_2, بنانشانی حرف delay )
 {
-	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);
-	I2cWriteData(reg_address, delay);
-	I2cWriteData(data,delay);
+	I2c_Send_Slave_پتہ(slave_پتہ_2, I2C_WRITE, delay);
+	I2c_Write_انکڑے(reg_پتہ, delay);
+	I2c_Write_انکڑے(انکڑے_2,delay);
 	I2cStop(delay);
 }
 
@@ -465,15 +465,15 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
  * @param unsigned char delay 
  * @return int (readdata)
  */
-int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
+صحيح I2c_Read_byte(بنانشانی حرف slave_پتہ_2,بنانشانی حرف reg_پتہ, بنانشانی حرف delay)
 {
-	unsigned char readData;
-	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);//selecting slave to be read
-	I2cWriteData(reg_address, delay);//selecting register to be read
-	I2cSendSlaveAddress(slave_address, I2C_READ, delay);
-	readData = I2cReadDataAck(delay);
+	بنانشانی حرف read_انکڑے;
+	I2c_Send_Slave_پتہ(slave_پتہ_2, I2C_WRITE, delay);//selecting slave to be read
+	I2c_Write_انکڑے(reg_پتہ, delay);//selecting register to be read
+	I2c_Send_Slave_پتہ(slave_پتہ_2, I2C_READ, delay);
+	read_انکڑے = I2c_Read_انکڑے_Ack(delay);
 	I2cStop(delay);
-	return (int) readData;
+	أرجع (صحيح) read_انکڑے;
 }
 
  /** @fn int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
@@ -484,34 +484,34 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  * @param last decides whether to stop operation or not
  * @return int (No. of values(bytes) read)
  */
-int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
+صحيح I2c_shakti_readbytes(حرف *buf, صحيح گنتی, صحيح آخری, بنانشانی حرف delay)
 {
-	printf("start reading the slave device\n");
-	int i = 0;
-#ifdef PCF8584
-	for (i = 0; i <= count; i++) {
-		if (i != 0 && i < count) {
-			readbuf[i]=I2cReadDataAck(delay);
+	لکھو("start reading the slave device\n");
+	صحيح i = 0;
+#جے_تعریف_شدہ PCF8584
+	لكل (i = 0; i <= گنتی; i++) {
+		إذا (i != 0 && i < گنتی) {
+			readbuf[i]=I2c_Read_انکڑے_Ack(delay);
 		}
-		else if(i==0) I2cReadDataAck(delay);//dummy read
-		else {
-			readbuf[i] = I2cReadDataNack(delay);
+		وإلا إذا(i==0) I2c_Read_انکڑے_Ack(delay);//dummy read
+		وإلا {
+			readbuf[i] = I2c_Read_انکڑے_Nack(delay);
 		}
 		/*The following loop is useful only  for eeprom*/
-		if (last)  I2cStop(delay);
-		else  I2cStart(delay);//sending repeated start
+		إذا (آخری)  I2cStop(delay);
+		وإلا  I2c_شروع(delay);//sending repeated start
 	}
-	return i-1; //excluding the dummy read
-#else
-	for (i = 0; i < count-1; i++)
-		*(buf + i) = I2cReadDataAck(delay);
-	*(buf + i) = I2cReadDataNack(delay);
+	أرجع i-1; //excluding the dummy read
+#وإلا
+	لكل (i = 0; i < گنتی-1; i++)
+		*(buf + i) = I2c_Read_انکڑے_Ack(delay);
+	*(buf + i) = I2c_Read_انکڑے_Nack(delay);
 
 	/*The following loop is useful only  for eeprom*/
-	if (last)
+	إذا (آخری)
 		I2cStop(delay);
-	else
-		I2cStart(delay);//sending repeated start
-#endif
-	return i+1;
+	وإلا
+		I2c_شروع(delay);//sending repeated start
+#جے_انت
+	أرجع i+1;
 }

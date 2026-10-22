@@ -26,28 +26,28 @@
   @detail The QSPI module driver supports QSPI driver routines for micron flash device.
  */
 
-#include "qspi.h"
-#include "utils.h"
-#include "log.h"
-#define MEM_TYPE_N25Q256_ID 0x9d189d18
+#ضمن "qspi.h"
+#ضمن "utils.h"
+#ضمن "log.h"
+#تعریف_کرو MEM_TYPE_N25Q256_ID 0x9d189d18
 
-char fail_bit = 0;
-int status = 0;
+حرف fail_ثنائی_ہندسہ = 0;
+صحيح حالت_2 = 0;
 /*! Pointer to QSPI registers */
-int* cr       =  (int*) CR; /*! Control Register */
-int* dcr      =  (int*) DCR; /*! Data Configuration Register */
-int* sr       =  (int*) SR; /*! Status Register */
-int* fcr      =  (int*) FCR; /* Flag Clear Register */
-int* ccr      =  (int*) CCR; /* Commn. Configuration Register */
-int* ar       =  (int*) AR; /*! Address Register */
-int* abr      =  (int*) ABR; /*! Alternate Bytes Register */
-int* dr       =  (int*) DR; /*! Data Register */
-int* dlr      =  (int*) DLR; /*! Data Length Register */
-int* psmkr    =  (int*) PSMKR; /*! Polling Status Mask Register */
-int* pir      =  (int*) PIR; /*! Polling Interval Register */
-int* lprt     =  (int*) LPRT; /*! Low power Time Register */
-int* startmm  =  (int*) STARTMM; /*! Start Memory Map Register */
-int* endmm    =  (int*) ENDMM; /*! End Memory Map Register */
+صحيح* cr       =  (صحيح*) CR; /*! Control Register */
+صحيح* dcr      =  (صحيح*) DCR; /*! Data Configuration Register */
+صحيح* sr       =  (صحيح*) SR; /*! Status Register */
+صحيح* fcr      =  (صحيح*) FCR; /* Flag Clear Register */
+صحيح* ccr      =  (صحيح*) CCR; /* Commn. Configuration Register */
+صحيح* ar       =  (صحيح*) AR; /*! Address Register */
+صحيح* abr      =  (صحيح*) ABR; /*! Alternate Bytes Register */
+صحيح* dr       =  (صحيح*) DR; /*! Data Register */
+صحيح* dlr      =  (صحيح*) DLR; /*! Data Length Register */
+صحيح* psmkr    =  (صحيح*) PSMKR; /*! Polling Status Mask Register */
+صحيح* pir      =  (صحيح*) PIR; /*! Polling Interval Register */
+صحيح* lprt     =  (صحيح*) LPRT; /*! Low power Time Register */
+صحيح* startmm  =  (صحيح*) STARTMM; /*! Start Memory Map Register */
+صحيح* endmm    =  (صحيح*) ENDMM; /*! End Memory Map Register */
 
 /** @fn void set_qspi_shakti32(int* addr, int val)
  * @brief Writes 32 bit value into QSPI register.
@@ -55,7 +55,7 @@ int* endmm    =  (int*) ENDMM; /*! End Memory Map Register */
  * @param int* addr --- Addresss where the data (val) needs to be written
  * @param int val ---  Data which needs to be written.
  */
-void set_qspi_shakti32(int* addr, int val)
+فراغ سیٹ_qspi_shakti32(صحيح* addr, صحيح val)
 {
 	*addr = val;
 }
@@ -66,7 +66,7 @@ void set_qspi_shakti32(int* addr, int val)
  * @param 16bit int* addr --- Addresss where the data (val) needs to be written
  * @param 16bit int val ---  Data which needs to be written.
  */
-void set_qspi_shakti16(int16_t* addr, int16_t val)
+فراغ سیٹ_qspi_shakti16(int16_t* addr, int16_t val)
 {
 	*addr = val;
 }
@@ -77,7 +77,7 @@ void set_qspi_shakti16(int16_t* addr, int16_t val)
  * @param char* addr --- Addresss where the data (val) needs to be written
  * @param char val ---  Data which needs to be written.
  */
-void set_qspi_shakti8(char* addr, char val)
+فراغ سیٹ_qspi_shakti8(حرف* addr, حرف val)
 {
 	*addr= val;
 }
@@ -88,9 +88,9 @@ void set_qspi_shakti8(char* addr, char val)
  * @param int* addr --- 32 bit Read Addresss  
  * @return Read value -- Read value from the passed value.
  */
-int get_qspi_shakti(int* addr)
+صحيح get_qspi_shakti(صحيح* addr)
 {
-	return *addr;
+	أرجع *addr;
 }
 
 /** @fn void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode)
@@ -103,18 +103,18 @@ int get_qspi_shakti(int* addr)
  * @param int --- FIFO threshold Level
  * @param int ck_mode --- Clock mode selection (Mode 0 and Mode 3)
  */
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode){
-	int int_vector = enable_interrupts? (CR_TOIE|CR_SMIE|CR_FTIE|CR_TCIE|CR_TEIE) : 0; 
-	set_qspi_shakti32(dcr,(DCR_FSIZE(fsize)|DCR_CSHT(csht)|DCR_CKMODE(ck_mode))); 
-	set_qspi_shakti32(cr,(CR_PRESCALER(prescaler)|int_vector|CR_FTHRES(fthreshold)|CR_EN));
+فراغ qspi_init(صحيح fsize, صحيح csht, صحيح prescaler, صحيح enable_interrupts, صحيح fthreshold, صحيح ck_منوال){
+	صحيح int_سمتیہ = enable_interrupts? (CR_TOIE|CR_SMIE|CR_FTIE|CR_TCIE|CR_TEIE) : 0; 
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(fsize)|DCR_CSHT(csht)|DCR_CKMODE(ck_منوال))); 
+	سیٹ_qspi_shakti32(cr,(CR_PRESCALER(prescaler)|int_سمتیہ|CR_FTHRES(fthreshold)|CR_EN));
 }
 
 /** @fn void reset_interrupt_flags()
  * @brief Resets interrupt flags.
  * @details Before carrying out any flash access operations, the interrupt flags are cleared.
  */
-void reset_interrupt_flags(){
-	set_qspi_shakti32(fcr,(FCR_CTOF|FCR_CSMF|FCR_CTCF|FCR_CTEF)); //Resetting all the flags
+فراغ reset_رکاوٹ_flags(){
+	سیٹ_qspi_shakti32(fcr,(FCR_CTOF|FCR_CSMF|FCR_CTCF|FCR_CTEF)); //Resetting all the flags
 }
 
 /** @fn int wait_for_tcf(int status)
@@ -124,37 +124,37 @@ void reset_interrupt_flags(){
  * @param int status register read value.
  * @return Zero on success else -1
  */
-int wait_for_tcf(int status){
-	int timeout = DEF_TIMEOUT; 
+صحيح wait_for_tcf(صحيح حالت_2){
+	صحيح timeout = DEF_TIMEOUT; 
 
-	status = get_qspi_shakti(sr);
+	حالت_2 = get_qspi_shakti(sr);
 
 	//    printf("status : %d looping?\n",status);
 
-	while(!( status & 0x02 ) && --timeout){
+	طالما(!( حالت_2 & 0x02 ) && --timeout){
 		waitfor(1000);
-		status=get_qspi_shakti(sr);
-		printf("status: %08x in loop %d \n",status, !(status & 0x02));
+		حالت_2=get_qspi_shakti(sr);
+		لکھو("status: %08x in loop %d \n",حالت_2, !(حالت_2 & 0x02));
 	}
-	if(timeout==0){
-		printf("Request Timed out\n");
-		return -1;
+	إذا(timeout==0){
+		لکھو("Request Timed out\n");
+		أرجع -1;
 	}
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int check_fail_bit()
  * @brief Checks the value of fail_bit.
  * @details Checks the fail bit whether the value is zero or not.
  */
-int check_fail_bit(void){
-	if(fail_bit){
-		fail_bit = 0;
-		return -1;
+صحيح check_fail_ثنائی_ہندسہ(فراغ){
+	إذا(fail_ثنائی_ہندسہ){
+		fail_ثنائی_ہندسہ = 0;
+		أرجع -1;
 	}
-	else{
-		fail_bit = 0;
-		return 0;
+	وإلا{
+		fail_ثنائی_ہندسہ = 0;
+		أرجع 0;
 	}
 }
 
@@ -163,25 +163,25 @@ int check_fail_bit(void){
  * @details Reads flash status register contents
  * @return Status register value on success; else -1
  */
-int flashReadStatusRegister(){
+صحيح flash_Read_حالت_رجسٹر(){
 	//    printf("\tReading the Status bits of the Flash\n");
-	set_qspi_shakti32(dlr,4);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x05)|CCR_DMODE(SINGLE)));
+	سیٹ_qspi_shakti32(dlr,4);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x05)|CCR_DMODE(SINGLE)));
 
-	status = 0;
+	حالت_2 = 0;
 	waitfor(1000);
-	int ret = wait_for_tcf(status);
+	صحيح ret = wait_for_tcf(حالت_2);
 	waitfor(100);
-	int value = get_qspi_shakti(dr);
+	صحيح قدر = get_qspi_shakti(dr);
 	//	printf("Read status register value %08x \n", value);
-	reset_interrupt_flags();
-	if(ret){
-		printf("\tRead Status Register Failed\n");
-		fail_bit = 1;
-		return -1;
+	reset_رکاوٹ_flags();
+	إذا(ret){
+		لکھو("\tRead Status Register Failed\n");
+		fail_ثنائی_ہندسہ = 1;
+		أرجع -1;
 	}
-	else
-		return value;
+	وإلا
+		أرجع قدر;
 }
 
 /** @fn int wait_for_wip()
@@ -190,21 +190,21 @@ int flashReadStatusRegister(){
  * Useful during flash write operations.
  * @return Zero on Success
  */
-int wait_for_wip(void){
-	int status1;
-	do{
+صحيح wait_for_wip(فراغ){
+	صحيح status1;
+	افعل{
 		//  printf("\t Waiting for Wip \n");
-		status1 = flashReadStatusRegister(0x05);
-		if(check_fail_bit())
-			return -1;
-		if(status1 & 0x0){
-			printf("\tQSPI: Programming Error - Diagnose\n");
-			return -1;
+		status1 = flash_Read_حالت_رجسٹر(0x05);
+		إذا(check_fail_ثنائی_ہندسہ())
+			أرجع -1;
+		إذا(status1 & 0x0){
+			لکھو("\tQSPI: Programming Error - Diagnose\n");
+			أرجع -1;
 		}
 		waitfor(20000);
-	}while(status1 & 0x01);
+	}طالما(status1 & 0x01);
 	//    printf("\t QSPI: Page Program/Erase Command Successfully Completed\n");
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int micron_write_enable(int status)
@@ -213,12 +213,12 @@ int wait_for_wip(void){
  * @param int status --- Write enable status.
  * @return Zero on Success
  */
-int micron_write_enable(int status){
+صحيح micron_write_enable(صحيح حالت_2){
 	//  printf("\tWrite Enable\n");
-	set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x06)));
-	int ret = wait_for_tcf(status); //Indicating the completion of command -- Currently polling
+	سیٹ_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x06)));
+	صحيح ret = wait_for_tcf(حالت_2); //Indicating the completion of command -- Currently polling
 	//  printf("Status : %d dcr : %d cr: %d ccr: %d \n",status,*dcr,*cr,*ccr);
-	return ret;
+	أرجع ret;
 }
 
 /** @fn int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address)
@@ -231,30 +231,30 @@ int micron_write_enable(int status){
  * @param int address --- Address where data needs to be written.
  * @return Zero on Success else -1
  */
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address){
-	if(micron_write_enable(status)){
-		printf("Panic: Write Enable Command Failed to execute");
-		return -1;
+صحيح ورقہ_پروگرام_Single_SPI(صحيح value1, صحيح value2, صحيح value3, صحيح value4, صحيح پتہ){
+	إذا(micron_write_enable(حالت_2)){
+		لکھو("Panic: Write Enable Command Failed to execute");
+		أرجع -1;
 	}
-	reset_interrupt_flags(); 
+	reset_رکاوٹ_flags(); 
 
-	set_qspi_shakti32(dlr,DL(16));
+	سیٹ_qspi_shakti32(dlr,DL(16));
 	// set_qspi_shakti32(ccr,(CCR_DDRM | CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x12))); 
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x12)));
-	set_qspi_shakti32(ar, address);        
-	printf(" Address written %d \n",address); 
-	set_qspi_shakti32(dr,value1);
-	printf(" Value 1 written %d \n",value1);
-	set_qspi_shakti32(dr,value2);
-	printf(" Value 2 written %d \n",value2);
-	set_qspi_shakti32(dr,value3);
-	printf(" Value 3 written %d \n",value3);
-	set_qspi_shakti32(dr,value4);
-	printf(" Value 4 written %d \n",value4);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x12)));
+	سیٹ_qspi_shakti32(ar, پتہ);        
+	لکھو(" Address written %d \n",پتہ); 
+	سیٹ_qspi_shakti32(dr,value1);
+	لکھو(" Value 1 written %d \n",value1);
+	سیٹ_qspi_shakti32(dr,value2);
+	لکھو(" Value 2 written %d \n",value2);
+	سیٹ_qspi_shakti32(dr,value3);
+	لکھو(" Value 3 written %d \n",value3);
+	سیٹ_qspi_shakti32(dr,value4);
+	لکھو(" Value 4 written %d \n",value4);
 	waitfor(150); 
-	wait_for_tcf(status);
-	reset_interrupt_flags();
-	return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
+	wait_for_tcf(حالت_2);
+	reset_رکاوٹ_flags();
+	أرجع wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
 
 /** @fn int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address)
@@ -267,25 +267,25 @@ int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int add
  * @param int address --- Address where data needs to be written.
  * @return Zero on success else -1
  */
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address){
-	if(micron_write_enable(status)){
-		printf("Panic: Write Enable Command Failed to execute");
-		return -1;
+صحيح ورقہ_پروگرام_Quad_SPI(صحيح value1, صحيح value2, صحيح value3, صحيح value4, صحيح پتہ){
+	إذا(micron_write_enable(حالت_2)){
+		لکھو("Panic: Write Enable Command Failed to execute");
+		أرجع -1;
 	}
-	reset_interrupt_flags(); 
+	reset_رکاوٹ_flags(); 
 
-	set_qspi_shakti32(dlr,DL(16));
+	سیٹ_qspi_shakti32(dlr,DL(16));
 	// set_qspi_shakti32(ccr,(CCR_DDRM | CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x12))); 
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(QUAD)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x34))); 
-	set_qspi_shakti32(ar, address);
-	set_qspi_shakti32(dr,value1);
-	set_qspi_shakti32(dr,value2);
-	set_qspi_shakti32(dr,value3);
-	set_qspi_shakti32(dr,value4);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(QUAD)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x34))); 
+	سیٹ_qspi_shakti32(ar, پتہ);
+	سیٹ_qspi_shakti32(dr,value1);
+	سیٹ_qspi_shakti32(dr,value2);
+	سیٹ_qspi_shakti32(dr,value3);
+	سیٹ_qspi_shakti32(dr,value4);
 	waitfor(150); 
-	wait_for_tcf(status);
-	reset_interrupt_flags();
-	return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
+	wait_for_tcf(حالت_2);
+	reset_رکاوٹ_flags();
+	أرجع wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
 
 /** @fn int flashIdentificationDevice()
@@ -293,23 +293,23 @@ int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int addre
  * @details Reads flash identification code from the flash device and checks whether it valid.
  * @return Zero on success else -1
  */
-int flashIdentificationDevice(void){
+صحيح flashIdentificationDevice(فراغ){
 	log_debug("\tReading the ID register and discovering the Flash Device\n");
-	set_qspi_shakti32(dlr,4);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x90)|CCR_ADSIZE(THREEBYTE)|CCR_ADMODE(SINGLE)|CCR_DMODE(SINGLE)));
-	set_qspi_shakti32(ar, 0);
-	status = 0; // Useless Variable but still!!!!
-	int ret = wait_for_tcf(status);
-	int value = get_qspi_shakti(dr);
-	log_info("\t device id %x\n",value);
-	reset_interrupt_flags();
-	if(value == MEM_TYPE_N25Q256_ID){
-		printf("\tN25Q256 Device Detected \n");
-		return 0;
+	سیٹ_qspi_shakti32(dlr,4);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x90)|CCR_ADSIZE(THREEBYTE)|CCR_ADMODE(SINGLE)|CCR_DMODE(SINGLE)));
+	سیٹ_qspi_shakti32(ar, 0);
+	حالت_2 = 0; // Useless Variable but still!!!!
+	صحيح ret = wait_for_tcf(حالت_2);
+	صحيح قدر = get_qspi_shakti(dr);
+	log_info("\t device id %x\n",قدر);
+	reset_رکاوٹ_flags();
+	إذا(قدر == MEM_TYPE_N25Q256_ID){
+		لکھو("\tN25Q256 Device Detected \n");
+		أرجع 0;
 	}
-	else{
-		log_fatal("\t Device Not Detected - Diagnose %08x\n",value);
-		return -1;
+	وإلا{
+		log_fatal("\t Device Not Detected - Diagnose %08x\n",قدر);
+		أرجع -1;
 	}
 }
 
@@ -318,14 +318,14 @@ int flashIdentificationDevice(void){
  * @details Initialises flash device and check for id code.
  * @return Zero on success else -1
  */
-int flashMemInit(){  //Supposedly a set of routines to check if the memory/interface or whatever is proper
-	int ret = flashIdentificationDevice();
-	if(ret==-1){
+صحيح flashMemInit(){  //Supposedly a set of routines to check if the memory/interface or whatever is proper
+	صحيح ret = flashIdentificationDevice();
+	إذا(ret==-1){
 		log_fatal("Flash Mem Init Failed -- Quitting Program, Diagnose");
-		return ret;
+		أرجع ret;
 	}
-	else log_debug("Flash Mem Init Success\n");
-	return 0;
+	وإلا log_debug("Flash Mem Init Success\n");
+	أرجع 0;
 	//to fill in code
 }
 
@@ -335,8 +335,8 @@ int flashMemInit(){  //Supposedly a set of routines to check if the memory/inter
  * @details Reads the flash flag register.
  * @warning Not implemented now. Reserve for future.
  */
-int flashReadFlagRegister(void){
-	return 0;
+صحيح flash_Read_Flag_رجسٹر(فراغ){
+	أرجع 0;
 }
 
 /** @fn int flashWriteEnable()
@@ -345,12 +345,12 @@ int flashReadFlagRegister(void){
  *        this enable bit needs to be enabled.
  * @return TCF status
  */
-int flashWriteEnable(void){
-	printf("\tWrite Enable\n");
-	set_qspi_shakti32(ccr,(CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x06)));
-	int ret = wait_for_tcf(0); //Indicating the completion of command -- Currently polling
-	reset_interrupt_flags();
-	return ret; 
+صحيح flashWriteEnable(فراغ){
+	لکھو("\tWrite Enable\n");
+	سیٹ_qspi_shakti32(ccr,(CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x06)));
+	صحيح ret = wait_for_tcf(0); //Indicating the completion of command -- Currently polling
+	reset_رکاوٹ_flags();
+	أرجع ret; 
 }
 
 /** @fn int flashEnable4ByteAddressingMode()
@@ -358,26 +358,26 @@ int flashWriteEnable(void){
  * @details Before accessing flash device, the number of bits used for (Q)SPI needs to be programmed.
  * @return Status of the performed operation; else -1
  */
-int flashEnable4ByteAddressingMode(void){  //Enable 4-byte addressing Mode and read the status to verify that it has happened correctly
+صحيح flash_Enable4_Byte_Addressing_منوال(فراغ){  //Enable 4-byte addressing Mode and read the status to verify that it has happened correctly
 
-	if(flashWriteEnable()){
-		printf("\t Write Enable Failed \n");
-		return -1;
+	إذا(flashWriteEnable()){
+		لکھو("\t Write Enable Failed \n");
+		أرجع -1;
 	}
 	waitfor(100);
-	set_qspi_shakti32(ccr,(CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xB7)));
+	سیٹ_qspi_shakti32(ccr,(CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xB7)));
 	//  int status =0; 
-	status = 0;
-	int ret = wait_for_tcf(status);
-	reset_interrupt_flags();
+	حالت_2 = 0;
+	صحيح ret = wait_for_tcf(حالت_2);
+	reset_رکاوٹ_flags();
 	waitfor(100);
 	//Checking Phase
-	status = flashReadStatusRegister();
-	printf("\t Status Value: %08x\n",status);
-	if(status & 1)
-		printf("\t 4-Byte Addressing Mode is Enabled\n");
-	else
-		printf("\t 4-byte Addressing mode not Enabled\n");
+	حالت_2 = flash_Read_حالت_رجسٹر();
+	لکھو("\t Status Value: %08x\n",حالت_2);
+	إذا(حالت_2 & 1)
+		لکھو("\t 4-Byte Addressing Mode is Enabled\n");
+	وإلا
+		لکھو("\t 4-byte Addressing mode not Enabled\n");
 }
 
 /** @fn int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize)
@@ -390,21 +390,21 @@ int flashEnable4ByteAddressingMode(void){  //Enable 4-byte addressing Mode and r
  * @param int adsize --- Address Size (8, 16, 24 & 32 bit address) 
  * @return Status of the performed operation; else -1
  */
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
-	set_qspi_shakti32(dlr,data_words);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DCYC(dummy_cycles)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_ADSIZE(adsize)|CCR_INSTRUCTION(instruction)));
-	set_qspi_shakti32(ar,read_address);
-	status = 0;
-	int ret = wait_for_tcf(status);
-	int value = get_qspi_shakti(dr);
-	printf("\tThe Read Value: %08x\n",value);
+صحيح flashReadSingleSPI(صحيح dummy_چکراں, صحيح read_پتہ, صحيح instruction, صحيح انکڑے_الفاظ, صحيح adsize){
+	سیٹ_qspi_shakti32(dlr,انکڑے_الفاظ);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DCYC(dummy_چکراں)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_ADSIZE(adsize)|CCR_INSTRUCTION(instruction)));
+	سیٹ_qspi_shakti32(ar,read_پتہ);
+	حالت_2 = 0;
+	صحيح ret = wait_for_tcf(حالت_2);
+	صحيح قدر = get_qspi_shakti(dr);
+	لکھو("\tThe Read Value: %08x\n",قدر);
 	//    printf("\tThe Read Value: %08x\n",value);
-	if(ret){
-		printf("\t Read Value Failed \n");
-		return -1;
+	إذا(ret){
+		لکھو("\t Read Value Failed \n");
+		أرجع -1;
 	}
-	reset_interrupt_flags();
-	return value;
+	reset_رکاوٹ_flags();
+	أرجع قدر;
 }
 
 /** @fn int flashReadDualSPI(int address, int data_length)
@@ -414,22 +414,22 @@ int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int 
  * @param int data_length --- Number of Data bytes (data_words + 1) needs to be read 
  * @return Status of the performed operation; else -1
  */
-int flashReadDualSPI(int address, int data_length){
-	set_qspi_shakti32(dlr,data_length); //DLR
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
-	set_qspi_shakti32(ar,address); 
+صحيح flashReadDualSPI(صحيح پتہ, صحيح انکڑے_لمائی){
+	سیٹ_qspi_shakti32(dlr,انکڑے_لمائی); //DLR
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
+	سیٹ_qspi_shakti32(ar,پتہ); 
 	//    printf("Status : %08x dcr : %08x cr : %08x ccr : %08x dlr: %08x ar: %08x\n",status,*dcr,*cr,*ccr,*dlr,*ar);
-	int ret = wait_for_tcf(status);
-	int value = get_qspi_shakti(dr);
-	printf("\tThe Read Value: %08x\n",value);	
-	if(ret){
-		printf("\t QSPI: Read Value failed\n");
-		return -1;
+	صحيح ret = wait_for_tcf(حالت_2);
+	صحيح قدر = get_qspi_shakti(dr);
+	لکھو("\tThe Read Value: %08x\n",قدر);	
+	إذا(ret){
+		لکھو("\t QSPI: Read Value failed\n");
+		أرجع -1;
 	}
 	//*config_string = get_qspi_shakti(dr);
 	//printf("\t Read Data is %08x\n",read_data);
-	reset_interrupt_flags();
-	return value;
+	reset_رکاوٹ_flags();
+	أرجع قدر;
 }
 
 /** @fn int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize)
@@ -442,23 +442,23 @@ int flashReadDualSPI(int address, int data_length){
  * @param int adsize --- Address Size (8, 16, 24 & 32 bit address) 
  * @return Status of the performed operation; else -1
  */
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
-	set_qspi_shakti32(dlr,data_words);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DCYC(dummy_cycles)|CCR_ADSIZE(adsize)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(instruction)));
-	set_qspi_shakti32(ar,read_address);
-	status = 0;
-	int ret = wait_for_tcf(status);
-	int value_1 = get_qspi_shakti(dr);
-	int value_2 = get_qspi_shakti(dr);
-	int value_3 = get_qspi_shakti(dr);
-	int value_4 = get_qspi_shakti(dr);
-	printf("\tThe Read Value: %08x, %08x, %08x and %08x \n",value_1,value_2,value_3,value_4);
-	if(ret){
-		printf("\t Read Value Failed \n");
-		return -1; 
+صحيح flashReadQuadSPI(صحيح dummy_چکراں, صحيح read_پتہ, صحيح instruction, صحيح انکڑے_الفاظ, صحيح adsize){
+	سیٹ_qspi_shakti32(dlr,انکڑے_الفاظ);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DCYC(dummy_چکراں)|CCR_ADSIZE(adsize)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(instruction)));
+	سیٹ_qspi_shakti32(ar,read_پتہ);
+	حالت_2 = 0;
+	صحيح ret = wait_for_tcf(حالت_2);
+	صحيح قدر_1 = get_qspi_shakti(dr);
+	صحيح قدر_2_2 = get_qspi_shakti(dr);
+	صحيح قدر_3 = get_qspi_shakti(dr);
+	صحيح قدر_4 = get_qspi_shakti(dr);
+	لکھو("\tThe Read Value: %08x, %08x, %08x and %08x \n",قدر_1,قدر_2_2,قدر_3,قدر_4);
+	إذا(ret){
+		لکھو("\t Read Value Failed \n");
+		أرجع -1; 
 	}   
-	reset_interrupt_flags();
-	return value_1;
+	reset_رکاوٹ_flags();
+	أرجع قدر_1;
 }
 
 /** @fn int flashSingleSPIXip(int addr, int* dest_addr) 
@@ -468,22 +468,22 @@ int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int da
  * @param int* dest_addr --- RAM location to where the data needs to be copied.
  * @return Zero on success.
  */
-int flashSingleSPIXip(int addr, int* dest_addr){
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(7)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0C)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0x00)|DCR_CKMODE(1)));
-	set_qspi_shakti32(dlr,0x4);
-	set_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
-	status=0;
-	wait_for_tcf(status);
+صحيح flashSingleSPIXip(صحيح addr, صحيح* dest_addr){
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(7)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0C)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0x00)|DCR_CKMODE(1)));
+	سیٹ_qspi_shakti32(dlr,0x4);
+	سیٹ_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
+	حالت_2=0;
+	wait_for_tcf(حالت_2);
 	waitfor(100); 
 	*dest_addr = get_qspi_shakti(dr);
-	printf("\n Fisrt value obtained through single read : %d \n ",*dest_addr);
-	reset_interrupt_flags(); 
-	printf("\t Trying XIP now\n");
-	set_qspi_shakti32(ccr, (CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(7)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0C)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0x00)|DCR_CKMODE(1))); 
+	لکھو("\n Fisrt value obtained through single read : %d \n ",*dest_addr);
+	reset_رکاوٹ_flags(); 
+	لکھو("\t Trying XIP now\n");
+	سیٹ_qspi_shakti32(ccr, (CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(7)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0C)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0x00)|DCR_CKMODE(1))); 
 	waitfor(25);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int flashSingleSPIDDRXip(int addr, int* dest_addr)  
@@ -493,21 +493,21 @@ int flashSingleSPIXip(int addr, int* dest_addr){
  * @param int* dest_addr --- RAM location to where the data needs to be copied.
  * @return Zero on Success
  */
-int flashSingleSPIDDRXip(int addr, int* dest_addr){
-	set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(15)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0E)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0x00)|DCR_CKMODE(1)));
-	set_qspi_shakti32(dlr,0x4);
-	set_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
-	status=0;
-	wait_for_tcf(status);
+صحيح flashSingleSPIDDRXip(صحيح addr, صحيح* dest_addr){
+	سیٹ_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(15)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0E)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0x00)|DCR_CKMODE(1)));
+	سیٹ_qspi_shakti32(dlr,0x4);
+	سیٹ_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
+	حالت_2=0;
+	wait_for_tcf(حالت_2);
 	waitfor(100); 
 	*dest_addr = get_qspi_shakti(dr);
-	reset_interrupt_flags(); 
-	printf("\t Trying XIP now\n");
-	set_qspi_shakti32(ccr, (CCR_DDRM|CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(14)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0E)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0x00)|DCR_CKMODE(1))); 
+	reset_رکاوٹ_flags(); 
+	لکھو("\t Trying XIP now\n");
+	سیٹ_qspi_shakti32(ccr, (CCR_DDRM|CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(14)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0E)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0x00)|DCR_CKMODE(1))); 
 	waitfor(25);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int flashDualSPIXip(int addr, int* dest_addr)
@@ -517,22 +517,22 @@ int flashSingleSPIDDRXip(int addr, int* dest_addr){
  * @param int* dest_addr --- RAM location to where the data needs to be copied.
  * @return Zero on Success
  */
-int flashDualSPIXip(int addr, int* dest_addr){
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1)));
-	set_qspi_shakti32(dlr,0x4);
-	set_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
-	status=0;
-	wait_for_tcf(status);
+صحيح flashDualSPIXip(صحيح addr, صحيح* dest_addr){
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1)));
+	سیٹ_qspi_shakti32(dlr,0x4);
+	سیٹ_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
+	حالت_2=0;
+	wait_for_tcf(حالت_2);
 	waitfor(100); 
 	*dest_addr = get_qspi_shakti(dr);
-	printf("\n Fisrt value obtained through single read : %d \n ",*dest_addr);
-	reset_interrupt_flags(); 
-	printf("\t Trying XIP now\n");
-	set_qspi_shakti32(ccr, (CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(NDATA)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1))); 
+	لکھو("\n Fisrt value obtained through single read : %d \n ",*dest_addr);
+	reset_رکاوٹ_flags(); 
+	لکھو("\t Trying XIP now\n");
+	سیٹ_qspi_shakti32(ccr, (CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(NDATA)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1))); 
 	waitfor(25);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int flashDualSPIDDRXip(int addr, int* dest_addr) 
@@ -542,21 +542,21 @@ int flashDualSPIXip(int addr, int* dest_addr){
  * @param int* dest_addr --- RAM location to where the data needs to be copied.
  * @return Zero on Success
  */
-int flashDualSPIDDRXip(int addr, int* dest_addr){
-	set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(6)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1)));
-	set_qspi_shakti32(dlr,0x4);
-	set_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
-	status=0;
-	wait_for_tcf(status);
+صحيح flashDualSPIDDRXip(صحيح addr, صحيح* dest_addr){
+	سیٹ_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(6)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1)));
+	سیٹ_qspi_shakti32(dlr,0x4);
+	سیٹ_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
+	حالت_2=0;
+	wait_for_tcf(حالت_2);
 	waitfor(100); 
 	*dest_addr = get_qspi_shakti(dr);
-	reset_interrupt_flags(); 
-	printf("\t Trying XIP now\n");
-	set_qspi_shakti32(ccr, (CCR_DDRM|CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(6)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(NDATA)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1))); 
+	reset_رکاوٹ_flags(); 
+	لکھو("\t Trying XIP now\n");
+	سیٹ_qspi_shakti32(ccr, (CCR_DDRM|CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(6)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(NDATA)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1))); 
 	waitfor(25);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int flashWriteVolatileConfigReg(int value) 
@@ -565,24 +565,24 @@ int flashDualSPIDDRXip(int addr, int* dest_addr){
  * @param int value needs to written into Write Volatile Config Register.
  * @return Zero on Success
  */
-int flashWriteVolatileConfigReg(int value){
-	printf("\t Setting Volatile Configuration Register with the Value: %08x\n",value);
-	if(micron_write_enable(status)){
-		printf("Panic: Write Enable Command Failed to execute\n");
-		return -1;
+صحيح flashWriteVolatileConfigReg(صحيح قدر){
+	لکھو("\t Setting Volatile Configuration Register with the Value: %08x\n",قدر);
+	إذا(micron_write_enable(حالت_2)){
+		لکھو("Panic: Write Enable Command Failed to execute\n");
+		أرجع -1;
 	}
-	reset_interrupt_flags();
+	reset_رکاوٹ_flags();
 	//	flashReadStatusRegister();
-	set_qspi_shakti32(dlr,DL(1));
-	set_qspi_shakti8(dr,value);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x01)));
+	سیٹ_qspi_shakti32(dlr,DL(1));
+	سیٹ_qspi_shakti8(dr,قدر);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x01)));
 	waitfor(50);
-	status=0;
-	int ret = wait_for_tcf(status);
+	حالت_2=0;
+	صحيح ret = wait_for_tcf(حالت_2);
 	//    printf("Status : %d dcr : %d cr : %d ccr : %d dlr: %d dr: %d\n",status,*dcr,*cr,*ccr,*dlr,*dr);
-	reset_interrupt_flags();
+	reset_رکاوٹ_flags();
 	waitfor(50);  //Giving Micron time to store the data
-	return ret;
+	أرجع ret;
 }
 
 /** @fn int flashQuadSPIXip(int addr, int* dest_addr)
@@ -592,28 +592,28 @@ int flashWriteVolatileConfigReg(int value){
  * @param int* dest_addr --- RAM location to where the data needs to be copied.
  * @return Zero on Success
  */
-int flashQuadSPIXip(int addr, int* dest_addr){
-	if(flashWriteVolatileConfigReg(0x40404040)){
-		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+صحيح flashQuadSPIXip(صحيح addr, صحيح* dest_addr){
+	إذا(flashWriteVolatileConfigReg(0x40404040)){
+		لکھو("\t Volatile Configuration Register not Set -- Diagnose\n");
+		أرجع -1;
 	}
-	status = wait_for_wip();
-	printf("\t qspi status register %08x\n",status);
-	reset_interrupt_flags();
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(5)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xEC)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1)));
-	set_qspi_shakti32(dlr,0x4);
-	set_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
-	status=0;
-	wait_for_tcf(status);
+	حالت_2 = wait_for_wip();
+	لکھو("\t qspi status register %08x\n",حالت_2);
+	reset_رکاوٹ_flags();
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(5)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xEC)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1)));
+	سیٹ_qspi_shakti32(dlr,0x4);
+	سیٹ_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
+	حالت_2=0;
+	wait_for_tcf(حالت_2);
 	waitfor(100); 
 	*dest_addr = get_qspi_shakti(dr);
-	reset_interrupt_flags(); 
-	printf("\t Trying XIP now\n");
-	set_qspi_shakti32(ccr, (CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(5)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(NDATA)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1))); 
+	reset_رکاوٹ_flags(); 
+	لکھو("\t Trying XIP now\n");
+	سیٹ_qspi_shakti32(ccr, (CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(5)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(NDATA)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1))); 
 	waitfor(25);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int flashQuadSPIDDRXip(int addr, int* dest_addr)
@@ -623,28 +623,28 @@ int flashQuadSPIXip(int addr, int* dest_addr){
  * @param int* dest_addr --- RAM location to where the data needs to be copied.
  * @return Zero on Success
  */
-int flashQuadSPIDDRXip(int addr, int* dest_addr){
-	if(flashWriteVolatileConfigReg(0x40404040)){
-		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+صحيح flashQuadSPIDDRXip(صحيح addr, صحيح* dest_addr){
+	إذا(flashWriteVolatileConfigReg(0x40404040)){
+		لکھو("\t Volatile Configuration Register not Set -- Diagnose\n");
+		أرجع -1;
 	}
-	status = wait_for_wip();
-	printf("\t qspi status register %08x\n",status);
-	reset_interrupt_flags();
-	set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(10)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xEE)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1)));
-	set_qspi_shakti32(dlr,0x4);
-	set_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
-	status=0;
-	wait_for_tcf(status);
+	حالت_2 = wait_for_wip();
+	لکھو("\t qspi status register %08x\n",حالت_2);
+	reset_رکاوٹ_flags();
+	سیٹ_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(10)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xEE)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1)));
+	سیٹ_qspi_shakti32(dlr,0x4);
+	سیٹ_qspi_shakti32(ar, addr); //Address where the Config_string is situated in the micron nand flash memory
+	حالت_2=0;
+	wait_for_tcf(حالت_2);
 	waitfor(100); 
 	*dest_addr = get_qspi_shakti(dr);
-	reset_interrupt_flags(); 
-	printf("\t Trying XIP now\n");
-	set_qspi_shakti32(ccr, (CCR_DDRM|CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(10)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(NDATA)));
-	set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1))); 
+	reset_رکاوٹ_flags(); 
+	لکھو("\t Trying XIP now\n");
+	سیٹ_qspi_shakti32(ccr, (CCR_DDRM|CCR_FMODE(CCR_FMODE_MMAPD)|CCR_DMODE(QUAD)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(10)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(NDATA)));
+	سیٹ_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_منوال_BYTE(0xA0)|DCR_CKMODE(1))); 
 	waitfor(25);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int flash_Write_disable()
@@ -653,13 +653,13 @@ int flashQuadSPIDDRXip(int addr, int* dest_addr){
  *       Here this is disabled using this function.
  * @return Zero on Success
  */
-int flash_Write_disable(void){
-	printf("\tWrite disable\n");
-	set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x04)));
-	int ret = wait_for_tcf(status); //Indicating the completion of command -- Currently polling
-	printf("Status : %d dcr : %d cr: %d ccr: %d \n",status,*dcr,*cr,*ccr);
-	reset_interrupt_flags();
-	return wait_for_wip();
+صحيح flash_Write_disable(فراغ){
+	لکھو("\tWrite disable\n");
+	سیٹ_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x04)));
+	صحيح ret = wait_for_tcf(حالت_2); //Indicating the completion of command -- Currently polling
+	لکھو("Status : %d dcr : %d cr: %d ccr: %d \n",حالت_2,*dcr,*cr,*ccr);
+	reset_رکاوٹ_flags();
+	أرجع wait_for_wip();
 }
 
 /** @fn int eraseSector(int command, int address)
@@ -669,18 +669,18 @@ int flash_Write_disable(void){
  * @param int address --- Starting address of erase.
  * @return Zero on Success
  */
-int eraseSector(int command, int address){
-	if(micron_write_enable(status)){
-		printf("Panic: Write Enable Command Failed to execute");
-		return -1;
+صحيح eraseSector(صحيح command, صحيح پتہ){
+	إذا(micron_write_enable(حالت_2)){
+		لکھو("Panic: Write Enable Command Failed to execute");
+		أرجع -1;
 	}
-	reset_interrupt_flags();
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(command)));
-	set_qspi_shakti32(ar,address);
+	reset_رکاوٹ_flags();
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(command)));
+	سیٹ_qspi_shakti32(ar,پتہ);
 	waitfor(150);
-	int ret = wait_for_tcf(status);
-	reset_interrupt_flags();
-	return wait_for_wip(); //For sector erase maybe estat should be checked
+	صحيح ret = wait_for_tcf(حالت_2);
+	reset_رکاوٹ_flags();
+	أرجع wait_for_wip(); //For sector erase maybe estat should be checked
 }
 
 /** @fn int micron_volatile_write_enable(int status) 
@@ -689,12 +689,12 @@ int eraseSector(int command, int address){
  * @param int --- status register value.
  * @return Zero on Success
  */
-int micron_volatile_write_enable(int status){
-	printf("\tVolatile Write Enable\n");
-	set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x50)));
-	int ret = wait_for_tcf(status); //Indicating the completion of command -- Currently polling
-	printf("Status : %d dcr : %d cr: %d ccr: %d \n",status,*dcr,*cr,*ccr);
-	return ret;
+صحيح micron_volatile_write_enable(صحيح حالت_2){
+	لکھو("\tVolatile Write Enable\n");
+	سیٹ_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x50)));
+	صحيح ret = wait_for_tcf(حالت_2); //Indicating the completion of command -- Currently polling
+	لکھو("Status : %d dcr : %d cr: %d ccr: %d \n",حالت_2,*dcr,*cr,*ccr);
+	أرجع ret;
 }
 
 /** @fn int micron_enable_4byte_addressing(int status) 
@@ -704,12 +704,12 @@ int micron_volatile_write_enable(int status){
  * @param int --- status register value
  * @return Zero on Success
  */
-int micron_enable_4byte_addressing(int status){
-	printf("\t Enable 4 byte address \n");
-	set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xB7)));
-	int ret = wait_for_tcf(status); //Indicating the completion of command -- Currently polling
-	printf("Status : %d dcr : %d cr: %d ccr: %d \n",status,*dcr,*cr,*ccr);
-	return ret;
+صحيح micron_enable_4byte_addressing(صحيح حالت_2){
+	لکھو("\t Enable 4 byte address \n");
+	سیٹ_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xB7)));
+	صحيح ret = wait_for_tcf(حالت_2); //Indicating the completion of command -- Currently polling
+	لکھو("Status : %d dcr : %d cr: %d ccr: %d \n",حالت_2,*dcr,*cr,*ccr);
+	أرجع ret;
 }
 
 /** @fn int micron_configure_xip_volatile(int status, int value)
@@ -719,16 +719,16 @@ int micron_enable_4byte_addressing(int status){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_configure_xip_volatile(int status, int value){
+صحيح micron_configure_xip_volatile(صحيح حالت_2, صحيح قدر){
 	log_debug("\tWrite Volatile Configuration Register\n");
-	set_qspi_shakti32(dlr,DL(1));
-	set_qspi_shakti8(dr,value);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x81)));
+	سیٹ_qspi_shakti32(dlr,DL(1));
+	سیٹ_qspi_shakti8(dr,قدر);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x81)));
 	waitfor(50);
-	int ret = wait_for_tcf(status);
-	printf("Status : %d dcr : %d cr : %d ccr : %d dlr: %d dr: %d\n",status,*dcr,*cr,*ccr,*dlr,*dr);
+	صحيح ret = wait_for_tcf(حالت_2);
+	لکھو("Status : %d dcr : %d cr : %d ccr : %d dlr: %d dr: %d\n",حالت_2,*dcr,*cr,*ccr,*dlr,*dr);
 	waitfor(50);  //Giving Micron time to store the data
-	return ret;
+	أرجع ret;
 }
 
 /** @fn int micron_disable_xip_volatile(int status, int value)
@@ -738,21 +738,21 @@ int micron_configure_xip_volatile(int status, int value){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_disable_xip_volatile(int status, __attribute__ ((unused)) int value){
+صحيح micron_disable_xip_volatile(صحيح حالت_2, __attribute__ ((بن_ورتیا)) صحيح قدر){
 	log_debug("\tWrite Volatile Configuration Register to exit XIP\n");
-	set_qspi_shakti32(cr,(CR_PRESCALER(0x3)|CR_TOIE|CR_TCIE|CR_TEIE|CR_SMIE|CR_FTIE|CR_ABORT|CR_EN));
+	سیٹ_qspi_shakti32(cr,(CR_PRESCALER(0x3)|CR_TOIE|CR_TCIE|CR_TEIE|CR_SMIE|CR_FTIE|CR_ABORT|CR_EN));
 	waitfor(30);
 	qspi_init(27,0,3,1,15,1);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DUMMY_BIT|CCR_DUMMY_CONFIRMATION|CCR_DCYC(8)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(NDATA)));
-	set_qspi_shakti32(ar,0x00000); //Dummy address 
-	set_qspi_shakti32(dlr,1);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DUMMY_ثنائی_ہندسہ|CCR_DUMMY_CONFIRMATION|CCR_DCYC(8)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(QUAD)|CCR_IMODE(NDATA)));
+	سیٹ_qspi_shakti32(ar,0x00000); //Dummy address 
+	سیٹ_qspi_shakti32(dlr,1);
 
-	int ret = wait_for_tcf(status);
-	int temp_data = get_qspi_shakti(dr);
+	صحيح ret = wait_for_tcf(حالت_2);
+	صحيح عارضی_انکڑے = get_qspi_shakti(dr);
 
 	waitfor(50);
-	reset_interrupt_flags();
-	return ret;
+	reset_رکاوٹ_flags();
+	أرجع ret;
 }
 
 /** @fn int micron_read_id_cmd(int status, int value)
@@ -763,14 +763,14 @@ int micron_disable_xip_volatile(int status, __attribute__ ((unused)) int value){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_read_id_cmd(int status, int value){
+صحيح micron_read_id_cmd(صحيح حالت_2, صحيح قدر){
 	log_debug("\tRead ID Command to see if the Protocol is Proper\n");
-	set_qspi_shakti32(dlr,4);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x9E)|CCR_DMODE(SINGLE)));
-	int ret = wait_for_tcf(status);
-	value = get_qspi_shakti(dr);
-	printf("Read ID: %08x",value);
-	return ret;
+	سیٹ_qspi_shakti32(dlr,4);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x9E)|CCR_DMODE(SINGLE)));
+	صحيح ret = wait_for_tcf(حالت_2);
+	قدر = get_qspi_shakti(dr);
+	لکھو("Read ID: %08x",قدر);
+	أرجع ret;
 }
 
 /** @fn int micron_read_configuration_register(int status, int value)
@@ -780,12 +780,12 @@ int micron_read_id_cmd(int status, int value){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_read_configuration_register(int status, int value){
-	printf("\tRead ID Command to see if the Protocol is Proper\n");
-	set_qspi_shakti32(dlr,4);
-	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)|CCR_DMODE(SINGLE)));
-	int ret = wait_for_tcf(status);
-	value = get_qspi_shakti(dr);
-	log_debug("Configuration Register Value: %08x",value);
-	return ret;
+صحيح micron_read_configuration_رجسٹر(صحيح حالت_2, صحيح قدر){
+	لکھو("\tRead ID Command to see if the Protocol is Proper\n");
+	سیٹ_qspi_shakti32(dlr,4);
+	سیٹ_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)|CCR_DMODE(SINGLE)));
+	صحيح ret = wait_for_tcf(حالت_2);
+	قدر = get_qspi_shakti(dr);
+	log_debug("Configuration Register Value: %08x",قدر);
+	أرجع ret;
 }

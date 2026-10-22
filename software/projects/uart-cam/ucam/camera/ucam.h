@@ -29,10 +29,10 @@
 
 
 
-#include <stdio.h>
-#include "uart.h"
-#define CAM uart_instance[1]
-#define HOST uart_instance[2]
-int init_cam();
-void get_pic(int);  // two modes 0---one pic, 1---continuous pictures
-void send_full_reset();
+#ضمن <stdio.h>
+#ضمن "uart.h"
+#تعریف_کرو CAM uart_instance[1]
+#تعریف_کرو HOST uart_instance[2]
+صحيح init_cam();
+فراغ get_pic(صحيح);  // two modes 0---one pic, 1---continuous pictures
+فراغ send_بھریا_reset();

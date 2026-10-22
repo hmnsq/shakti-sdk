@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#جے_بنا_تعریف GPIO_I2C_H
+#تعریف_کرو GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#تعریف_کرو I2C_SCL GPIO0 
+#تعریف_کرو I2C_SDA GPIO1
+#تعریف_کرو GPIOD_IS_وچ 0
+#تعریف_کرو GPIOD_IS_باہرلا 1
+#تعریف_کرو I2C_WRITE 0
+#تعریف_کرو I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+فراغ I2cInit();
+فراغ I2c_Send_Slave_پتہ(بنانشانی حرف , بنانشانی حرف , بنانشانی حرف );
+فراغ I2cWriteByte(بنانشانی حرف , بنانشانی حرف );
+بنانشانی حرف I2cReadByte(بنانشانی حرف );
+فراغ I2c_Write_انکڑے(بنانشانی حرف , بنانشانی حرف );
+بنانشانی حرف I2c_Read_انکڑے_Ack(بنانشانی حرف );
+بنانشانی حرف I2c_Read_انکڑے_Nack(بنانشانی حرف );
+فراغ I2c_شروع(بنانشانی حرف );
+فراغ I2cStop(بنانشانی حرف );
+فراغ I2c_Write_byte(بنانشانی حرف, بنانشانی حرف, بنانشانی حرف, بنانشانی حرف);
+صحيح I2c_Read_byte(بنانشانی حرف ,بنانشانی حرف , بنانشانی حرف );
+صحيح I2c_shakti_readbytes(حرف *, صحيح , صحيح , بنانشانی حرف );
+فراغ ReadAckForWrite(بنانشانی حرف delay);
+فراغ SendNackForRead(بنانشانی حرف delay);
+فراغ SendAckForRead(بنانشانی حرف delay);
 
-#endif
+#جے_انت

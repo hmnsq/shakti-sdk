@@ -24,11 +24,11 @@
  * @file memory.h
  * @brief dumps values at memory mapped locations, useful for debugging
  */
-#ifndef _MEMORY_H
-#define _MEMORY_H
+#جے_بنا_تعریف حافظہ_H
+#تعریف_کرو حافظہ_H
 
-#include<stdint.h>
+#ضمن<stdint.h>
 
-void dump_word_memory(uint32_t* start, uint32_t word_length);
-void dump_byte_memory(uint32_t* start, uint32_t word_length);
-#endif
+فراغ dump_لفظ_حافظہ(uint32_t* شروع, uint32_t لفظ_لمائی);
+فراغ dump_byte_حافظہ(uint32_t* شروع, uint32_t لفظ_لمائی);
+#جے_انت

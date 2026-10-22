@@ -49,22 +49,22 @@
  * @brief Reads data sent by lora module.
  * @param data responses read from lora module, mainly used for logging
  */
-int read_from_lora(char *data)
+ціле read_from_lora(char *data)
 {
-	int ch;
+	ціле ch;
 	char *str = data;
 	char *test = data;
-	for (int i = 0; i < 98; i++)
+	для (ціле i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		якщо (ch == '\n')
 		{
 			break;
 		}
 	}
-	return;	
+	повернути;	
 }
 
 
@@ -73,11 +73,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+ціле write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	повернути 0;
 }
 
 
@@ -87,7 +87,7 @@ int write_enter_to_lora()
  */
 void write_to_lora(char *data)
 {
-	while (*data != '\0')
+	поки (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -209,7 +209,7 @@ void main()
 	// check_set_lora_value();
 
 	/* Receiving Data */
-	while (1) 
+	поки (1) 
 	{
 		receive_data();
 		delay_loop(1000, 1000);

@@ -39,12 +39,12 @@ uart_struct *uart_instance[MAX_UART_COUNT];
 unsigned char uart0_complete = 0;
 unsigned char uart1_complete = 0;
 unsigned char uart2_complete = 0;
-unsigned int uart0_tx_isr_count = 0;
-unsigned int uart0_rcv_isr_count = 0;
-unsigned int uart1_tx_isr_count = 0;
-unsigned int uart1_rcv_isr_count = 0;
-unsigned int uart2_tx_isr_count = 0;
-unsigned int uart2_rcv_isr_count = 0;
+unsigned ціле uart0_tx_isr_count = 0;
+unsigned ціле uart0_rcv_isr_count = 0;
+unsigned ціле uart1_tx_isr_count = 0;
+unsigned ціле uart1_rcv_isr_count = 0;
+unsigned ціле uart2_tx_isr_count = 0;
+unsigned ціле uart2_rcv_isr_count = 0;
 
 #ifdef USE_INTERRUPT
 unsigned char u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
@@ -60,7 +60,7 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
  */
 void uart_init()
 {
-	for(int i=0; i< MAX_UART_COUNT; i++)
+	для(ціле i=0; i< MAX_UART_COUNT; i++)
 	{
 		uart_instance[i] = (uart_struct*) (UART0_START+i*UART_OFFSET);
 	}
@@ -73,10 +73,10 @@ void uart_init()
  * @return integer equivalent of the received character.
  */
 #undef getchar
-int getchar()
+ціле getchar()
 {
-	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
-	return (uart_instance[0]->rcv_reg);
+	поки((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
+	повернути (uart_instance[0]->rcv_reg);
 }
 
 /**
@@ -88,13 +88,13 @@ int getchar()
  * @return Zero
  */
 #undef putchar
-int putchar(int ch)
+ціле putchar(ціле ch)
 {
-	while(uart_instance[0]->status & STS_TX_FULL);
+	поки(uart_instance[0]->status & STS_TX_FULL);
 
 	uart_instance[0]->tx_reg = ch;
 
-	return 0;
+	повернути 0;
 }
 
 /**
@@ -105,9 +105,9 @@ int putchar(int ch)
  * @param UART instance
  * @param unsigned int baudrate
  */
-void set_baud_rate(uart_struct *instance, unsigned int baudrate)
+void set_baud_rate(uart_struct *instance, unsigned ціле baudrate)
 {
-	unsigned int baud_count = 0;
+	unsigned ціле baud_count = 0;
 	baud_count = CLOCK_FREQUENCY / (16 * baudrate);
 	instance->baud = baud_count;
 }
@@ -150,11 +150,11 @@ void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  */
 uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 {
-	while(instance->status & STS_TX_FULL);
+	поки(instance->status & STS_TX_FULL);
 
 	instance->tx_reg = prn_character;
 
-	return 0;
+	повернути 0;
 }
 
 /**
@@ -175,9 +175,9 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
 	{
 		temp = ptr_string[i++];
 		write_uart_character(instance, temp);
-	} while(temp != 0);
+	} поки(temp != 0);
 
-	return 0;
+	повернути 0;
 }
 
 /**
@@ -193,12 +193,12 @@ uint8_t read_uart_character(uart_struct * instance, char * prn_character)
 {
 	uint8_t temp = 0;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+	поки ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
 	temp = instance->rcv_reg;
 	*prn_character = temp;
 
-	return 1;
+	повернути 1;
 }
 
 /**
@@ -215,19 +215,19 @@ uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
 	uint32_t i = 0;
 	uint8_t temp = 0;
 
-	while(1)
+	поки(1)
 	{
-		while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+		поки ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
 		temp = instance->rcv_reg;
 		ptr_string[i++] = temp;
 		putchar(temp);
 
-		if (temp == 0x0D)
+		якщо (temp == 0x0D)
 		{
 			ptr_string[i++] = 0x0A;
 			ptr_string[i++] = 0x00;
-			return(i);
+			повернути(i);
 		}
 	}
 }
@@ -243,7 +243,7 @@ void flush_uart(uart_struct * instance)
 {
 	__attribute__((unused)) char temp;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) != 0)
+	поки ((instance->status & STS_RX_NOT_EMPTY) != 0)
 	{
 		temp = instance->rcv_reg ;
 	}
@@ -264,21 +264,21 @@ unsigned char uart0_isr()
 {
 	uint32_t read_value = '\0';
 
-	if(uart_instance[0]->status & STS_RX_THRESHOLD)
+	якщо(uart_instance[0]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		поки(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[0]->rcv_reg;
 			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
 			write_uart_character(uart_instance[0], read_value);
 		}
 	}
-	else if(uart_instance[0]->status & STS_RX_FULL)
+	інакше якщо(uart_instance[0]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		поки(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[0]->rcv_reg;
 			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
@@ -286,13 +286,13 @@ unsigned char uart0_isr()
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+	інакше якщо(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 	{
 		read_value = uart_instance[0]->rcv_reg;
 		u0_rcv_char[uart0_rcv_isr_count++] = read_value;
 		write_uart_character(uart_instance[0], read_value);
 	}
-	return 0;
+	повернути 0;
 }
 
 /**
@@ -307,21 +307,21 @@ unsigned char uart1_isr()
 {
 	uint32_t read_value = '\0';
 
-	if(uart_instance[1]->status & STS_RX_THRESHOLD)
+	якщо(uart_instance[1]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		поки(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[1]->rcv_reg;
 			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
 			write_uart_character(uart_instance[1], read_value);
 		}
 	}
-	else if(uart_instance[1]->status & STS_RX_FULL)
+	інакше якщо(uart_instance[1]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		поки(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[1]->rcv_reg;
 			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
@@ -329,13 +329,13 @@ unsigned char uart1_isr()
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+	інакше якщо(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 	{
 		read_value = uart_instance[1]->rcv_reg;
 		u1_rcv_char[uart1_rcv_isr_count++] = read_value;
 		write_uart_character(uart_instance[1], read_value);
 	}
-	return 0;
+	повернути 0;
 }
 
 /**
@@ -350,21 +350,21 @@ unsigned char uart2_isr()
 {
 	uint32_t read_value = '\0';
 
-	if(uart_instance[2]->status & STS_RX_THRESHOLD)
+	якщо(uart_instance[2]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		поки(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[2]->rcv_reg;
 			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
 			write_uart_character(uart_instance[2], read_value);
 		}
 	}
-	else if(uart_instance[2]->status & STS_RX_FULL)
+	інакше якщо(uart_instance[2]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		поки(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
 			read_value = uart_instance[2]->rcv_reg;
 			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
@@ -372,12 +372,12 @@ unsigned char uart2_isr()
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+	інакше якщо(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 	{
 		read_value = uart_instance[2]->rcv_reg;
 		u2_rcv_char[uart2_rcv_isr_count++] = read_value;
 		write_uart_character(uart_instance[2], read_value);
 	}
-	return 0;
+	повернути 0;
 }
 #endif

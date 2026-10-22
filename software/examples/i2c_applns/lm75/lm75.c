@@ -52,10 +52,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * @param delay
  * @return  Read Status (Zero on Success).
  */
-int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
+ціле read_lm75_register(i2c_struct * i2c_instance, unsigned ціле reg_offset, unsigned ціле *readTemp, unsigned long delay)
 {
 	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
+	ціле i = 0, j = 0,  k = 0, status=0;
 	unsigned char temp = 0;
 //Writes the slave address for write
 	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -81,7 +81,7 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 	i2c_instance->control = I2C_STOP;
 	*readTemp = (read_buf[1] << 1) | (read_buf[0] >> 7);
 
-	return 0;
+	повернути 0;
 }
 
 /** @fn int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
@@ -93,10 +93,10 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
  * @param delay
  * @return Write Status (Zero on Success)
  */
-int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+ціле write_lm75_register(i2c_struct * i2c_instance, unsigned ціле reg_offset, unsigned ціле write_value, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	ціле i = 0, j = 0,  k = 0, status=0;
+	unsigned ціле temp = 0;
 	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, delay);
 	i2c_write_data(i2c_instance, reg_offset /*LM75_TEMP_REG_OFFSET */, delay);
 	i2c_write_data(i2c_instance,  ( (write_value >> 1) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
@@ -105,7 +105,7 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
 	printf("\n Write Value[1]: %02x", ( ( (write_value & 0x01) << 7) & 0xff));
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	повернути 0;
 }
 
 /** @fn int main()
@@ -114,33 +114,33 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
  * calculates the actual temperature value and prints the same.
  * @return Zero
  */
-int main()
+ціле main()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
+	ціле timeout;
+	unsigned ціле tempReadValue = 0;
 	unsigned long delay = 1000;
 //	set_baud_rate(uart_instance[0], 115200);
     
 	log_debug("\n\tI2C: LM75 Temperature Sensor I2C read\n");
     i2c_init();
 	//Initialises I2C Controller
-		if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+		якщо(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
 		{
 				log_error("\tSomething Wrong In Initialization\n");
-				return -1;
+				повернути -1;
 		}
-	else
+	інакше
 				log_info("\tIntilization Happened Fine\n");
 #ifdef LM75_HYST_CHECK
 	write_lm75_register(I2C, LM75_HYST_REG_OFFSET, 0x30, delay);
-		if(0 == read_lm75_register(I2C, LM75_HYST_REG_OFFSET, &tempReadValue, delay))
+		якщо(0 == read_lm75_register(I2C, LM75_HYST_REG_OFFSET, &tempReadValue, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
 //				tempReadValue = ( (~tempReadValue) + 1 );
 				log_info("\n\t Hyst Reg Value:=%u",tempReadValue);
 		}
-		else
+		інакше
 		{
 	//Display the error
 			log_error("\nHyst Reg Value failed.");
@@ -148,34 +148,34 @@ int main()
 #endif
 #ifdef LM75_OFFSET_CHECK
 	write_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, 0x35, delay);
-	if(0 == read_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, &tempReadValue, delay))
+	якщо(0 == read_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, &tempReadValue, delay))
 	{
 		//Display Temperature value
 			log_info("\n\t Offset Reg Value:=%u",tempReadValue);
 	}
-	else
+	інакше
 	{
 //Display the error
 		log_error("\nOffset Reg Value failed.");
 	}
 #endif
-	while(1)
+	поки(1)
 	{
 
-		if(0 == read_lm75_register(I2C, LM75_TEMP_REG_OFFSET, &tempReadValue, delay))
+		якщо(0 == read_lm75_register(I2C, LM75_TEMP_REG_OFFSET, &tempReadValue, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
-			if(tempReadValue & 0x100) {
+			якщо(tempReadValue & 0x100) {
 				tempReadValue = ( (~tempReadValue) + 1 ) >> 1;
 				log_info("\n\t Current Temperature:=-%u°C",tempReadValue);
 			}
-			else {
+			інакше {
 				tempReadValue = tempReadValue >> 1;
 				log_info("\n\t Current Temperature:=+%u°C",tempReadValue);
 			 }
 		}
-		else
+		інакше
 		{
 	//Display the error
 			log_error("\nTemperature read failed.");
@@ -184,5 +184,5 @@ int main()
 	}
 
 
-	return 0;
+	повернути 0;
 }

@@ -49,14 +49,14 @@
 #define PI 3.141592654
 
 char readbuf[20];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
+ціле AccX,AccY,AccZ;
+ціле accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+ціле roll, pitch, yaw;
+ціле AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+ціле AccErrorX,AccErrory;
+ціле GyroX, GyroY, GyroZ;
+ціле c = 0;
+ціле i=0;
 static unsigned char delay = 100;
 
 //   soft float library need to be added, if hardfloat not there
@@ -93,16 +93,16 @@ void measuring_value()
  * @details determines whether the initalisation as well as verfication is done properly or not 
  * @return int
  */
-int main()
+ціле main()
 {
 	I2cInit();//configuring data and clocks as output lines
 
 	printf("MPU6050 i2c Init completed\n");
 
-	if (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_DATA_REG, delay)){
+	якщо (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_DATA_REG, delay)){
 		printf("DEVICE SUCCESFULLY VERIFIED");
 	}
-	else{
+	інакше{
 		printf("something went wrong , device identity not verified");
 	}
 	//configuring power management register
@@ -125,7 +125,7 @@ int main()
 	// configuring sample divider to 99(i.e sample rate= gyroscope output rate /(1+sample divider))
 	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_SMPL_DIV, 0x63, delay);//set sample rate to 10
 
-	while (1){
+	поки (1){
 		measuring_value();
 		printf("AccErrorX: %d,AccErrMPU6050_SLAVE_ADDRESSorX");
 		printf("AccErrorY: %d,AccErrorY");
@@ -134,7 +134,7 @@ int main()
 		printf("GyroErrorZ %d,GyroErrorZ");
 	}
 
-	return 0;
+	повернути 0;
 }
 
 /** @fn void calculate_imu_error()
@@ -144,11 +144,11 @@ int main()
  */
 void calculate_imu_error()
 {
-	int c = 0;
-	int yaw;
+	ціле c = 0;
+	ціле yaw;
 	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while (c < 200){
+	поки (c < 200){
 		measuring_value();
 
 		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;

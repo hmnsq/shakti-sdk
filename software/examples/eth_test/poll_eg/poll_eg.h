@@ -73,10 +73,10 @@ extern "C" {
 /*
  * Utility functions implemented in xemaclite_example_util.c
  */
-void EmacLitePhyDelay(unsigned int Seconds);
+void EmacLitePhyDelay(unsigned ціле Seconds);
 u32 EmacLitePhyDetect(XEmacLite *InstancePtr);
-int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
-int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+ціле EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+ціле EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
 
 /************************** Variable Definitions ****************************/
 /*
@@ -96,7 +96,7 @@ extern u8 RxFrame[XEL_MAX_FRAME_SIZE];
 extern volatile u32 RecvFrameLength;	/* Indicates the length of the
 					 * Received packet
 					 */
-extern volatile int TransmitComplete;	/* Flag to indicate that the
+extern volatile ціле TransmitComplete;	/* Flag to indicate that the
 					 * Transmission is complete
 					 */
 #ifdef __cplusplus

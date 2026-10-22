@@ -48,7 +48,7 @@
  */
 #define EMAC_DEVICE_ID			240
 #define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+volatile unsigned ціле* eth_base_reg = ETH_BASE_REG;
 /*
  * Instance of the driver
  */
@@ -122,11 +122,11 @@ static XEmacLite EmacLite;
 
 /************************** Function Prototypes ******************************/
 
-static int EmacLitePingReplyExample(u16 DeviceId);
+static ціле EmacLitePingReplyExample(u16 DeviceId);
 
 static void ProcessRecvFrame(XEmacLite *InstancePtr);
 
-static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length);
+static u16 CheckSumCalculation(u16 *RxFramePtr, ціле StartLoc, ціле Length);
 
 /************************** Variable Definitions *****************************/
 
@@ -181,21 +181,21 @@ u32 arpcount = 0;
 * @note		None.
 *
 *****************************************************************************/
-int main()
+ціле main()
 {
-	int Status;
+	ціле Status;
 	arpcount = 0;
 	/*
 	 * Run the EmacLite Ping reply example.
 	 */
 	Status = EmacLitePingReplyExample(EMAC_DEVICE_ID);
-	if (Status != XST_SUCCESS) {
+	якщо (Status != XST_SUCCESS) {
 		xil_printf("Emaclite ping reply Example Failed\r\n");
-		return XST_FAILURE;
+		повернути XST_FAILURE;
 	}
 
 	xil_printf("Successfully ran Emaclite ping reply Example\r\n");
-	return XST_SUCCESS;
+	повернути XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -212,9 +212,9 @@ int main()
 *		ping replies as defined by MAX_PING_REPLIES.
 *
 ******************************************************************************/
-int EmacLitePingReplyExample(u16 DeviceId)
+ціле EmacLitePingReplyExample(u16 DeviceId)
 {
-	int Status, count = 0;
+	ціле Status, count = 0;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
 	XEmacLite_Config *ConfigPtr;
 	NumOfPingReplies = 0;
@@ -223,8 +223,8 @@ int EmacLitePingReplyExample(u16 DeviceId)
 	 * Initialize the EmacLite device.
 	 */
 	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	якщо (ConfigPtr == NULL) {
+		повернути -1;
 	}
 	printf("\n ");
 
@@ -235,8 +235,8 @@ int EmacLitePingReplyExample(u16 DeviceId)
 	Status = XEmacLite_CfgInitialize(EmacLiteInstPtr,
 					ConfigPtr,
 					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+	якщо (Status != 0) {
+		повернути -1;
 	}
 	
 	/*
@@ -248,18 +248,18 @@ int EmacLitePingReplyExample(u16 DeviceId)
 	 */
 	XEmacLite_FlushReceive(EmacLiteInstPtr);
 
-	while (1) {
+	поки (1) {
 
 		/*
 		 * Wait for a Receive packet.
 		 */
-		while (RecvFrameLength == 0) {
+		поки (RecvFrameLength == 0) {
 			RecvFrameLength = XEmacLite_Recv(EmacLiteInstPtr,
 								(u8 *)RxFrame);
 		}
-#if 1
+#якщо 1
 		printf("\n Rcv. Frame %x: %x\n", NumOfPingReplies, RecvFrameLength);
-		for(int i = 0; i < RecvFrameLength; i++)
+		для(ціле i = 0; i < RecvFrameLength; i++)
 			printf("%x ", RxFrame[i]);
 		printf("\n");
 #endif			
@@ -278,9 +278,9 @@ int EmacLitePingReplyExample(u16 DeviceId)
 		 * If the number of ping replies sent is equal to that
 		 * specified by the user then exit out of this loop.
 		 */
-		if (NumOfPingReplies == MAX_PING_REPLIES) {
+		якщо (NumOfPingReplies == MAX_PING_REPLIES) {
 
-			return XST_SUCCESS;
+			повернути XST_SUCCESS;
 		}
 
 	}
@@ -306,8 +306,8 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 	u16 *TempPtr;
 	u16 CheckSum;
 	u32 NextTxBuffBaseAddr;
-	int Index;
-	int PacketType = 0;
+	ціле Index;
+	ціле PacketType = 0;
 
 	TxFramePtr = (u16 *)TxFrame;
 	RxFramePtr = (u16 *)RxFrame;
@@ -322,30 +322,30 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 	 */
 	Index = MAC_ADDR_LEN;
 	TempPtr = (u16 *)LocalMacAddr;
-	while (Index--) {
-		if (Xil_Ntohs((*(RxFramePtr + Index)) == BROADCAST_ADDR) &&
+	поки (Index--) {
+		якщо (Xil_Ntohs((*(RxFramePtr + Index)) == BROADCAST_ADDR) &&
 					(PacketType != MAC_MATCHED_PACKET)) {
 			PacketType = BROADCAST_PACKET;
-		} else if (Xil_Ntohs((*(RxFramePtr + Index)) == *(TempPtr + Index)) &&
+		} інакше якщо (Xil_Ntohs((*(RxFramePtr + Index)) == *(TempPtr + Index)) &&
 					(PacketType != BROADCAST_PACKET)) {
 			PacketType = MAC_MATCHED_PACKET;
-		} else {
+		} інакше {
 			PacketType = 0;
 			break;
 		}
 	}
-#if 0
+#якщо 0
 	printf("\n Packet type is %x", PacketType);
 #endif
 	/*
 	 * Process broadcast packet.
 	 */
-	if (PacketType == BROADCAST_PACKET) {
+	якщо (PacketType == BROADCAST_PACKET) {
 
 		/*
 		 * Check for an ARP Packet if so generate a reply.
 		 */
-		if (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
+		якщо (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
 				XEL_ETHER_PROTO_TYPE_ARP) {
 
 			/*
@@ -357,14 +357,14 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 			 * Check destination IP address of the packet with
 			 * local IP address.
 			 */
-			if (
+			якщо (
 			((*(RxFramePtr + ARP_REQ_DEST_IP_LOC_1)) == *TempPtr++) &&
 			((*(RxFramePtr + ARP_REQ_DEST_IP_LOC_2)) == *TempPtr++)) {
 
 				/*
 				 * Check ARP packet type(request/reply).
 				 */
-				if (Xil_Ntohs(*(RxFramePtr + ARP_REQ_STATUS_LOC)) ==
+				якщо (Xil_Ntohs(*(RxFramePtr + ARP_REQ_STATUS_LOC)) ==
 								ARP_REQUEST) {
 
 					/*
@@ -373,7 +373,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * address of the received packet.
 					 */
 					Index = SRC_MAC_ADDR_LOC;
-					while (Index < (SRC_MAC_ADDR_LOC +
+					поки (Index < (SRC_MAC_ADDR_LOC +
 							MAC_ADDR_LEN)) {
 						*TxFramePtr++ =
 							*(RxFramePtr + Index);
@@ -386,7 +386,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 */
 					Index = 0;
 					TempPtr = (u16 *)LocalMacAddr;
-					while (Index < MAC_ADDR_LEN) {
+					поки (Index < MAC_ADDR_LEN) {
 						*TxFramePtr++ = *TempPtr++;
 						Index++;
 					}
@@ -398,7 +398,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * the received packet
 					 */
 					Index = ETHER_PROTO_TYPE_LOC;
-					while (Index < (ETHER_PROTO_TYPE_LOC +
+					поки (Index < (ETHER_PROTO_TYPE_LOC +
 							ETHER_PROTO_TYPE_LEN +
 							ARP_HW_TYPE_LEN +
 							ARP_HW_ADD_LEN
@@ -420,7 +420,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 */
 					TempPtr = (u16 *)LocalMacAddr;
 					Index = 0;
-					while (Index < MAC_ADDR_LEN) {
+					поки (Index < MAC_ADDR_LEN) {
 						*TxFramePtr++ = *TempPtr++;
 						Index++;
 					}
@@ -431,7 +431,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 */
 					TempPtr = (u16 *)LocalIpAddr;
 					Index = 0;
-					while (Index < IP_ADDR_LEN) {
+					поки (Index < IP_ADDR_LEN) {
 						*TxFramePtr++ = *TempPtr++ ;
 						Index++;
 					}
@@ -442,7 +442,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * packet.
 					 */
 					Index = SRC_MAC_ADDR_LOC;
-					while (Index < (SRC_MAC_ADDR_LOC +
+					поки (Index < (SRC_MAC_ADDR_LOC +
 							MAC_ADDR_LEN)) {
 						*TxFramePtr++ =
 							*(RxFramePtr + Index);
@@ -454,7 +454,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * to the reply packet.
 					 */
 					Index = ARP_REQ_SRC_IP_LOC;
-					while (Index < (ARP_REQ_SRC_IP_LOC +
+					поки (Index < (ARP_REQ_SRC_IP_LOC +
 							IP_ADDR_LEN)) {
 						*TxFramePtr++ =
 								*(RxFramePtr + Index);
@@ -465,7 +465,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * Fill zeros as per protocol.
 					 */
 					Index = 0;
-					while (Index < ARP_ZEROS_LEN) {
+					поки (Index < ARP_ZEROS_LEN) {
 						*TxFramePtr++ = 0x0000;
 						Index++;
 					}
@@ -484,12 +484,12 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 	/*
 	 * Process packets whose MAC address is matched.
 	 */
-	if (PacketType == MAC_MATCHED_PACKET) {
+	якщо (PacketType == MAC_MATCHED_PACKET) {
 //		printf("\n MAC matched packet");
 		/*
 		 * Check ICMP packet.
 		 */
-		if (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
+		якщо (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
 						XEL_ETHER_PROTO_TYPE_IP) {
 //			printf("\n calculate ip header checksum");
 			/*
@@ -503,19 +503,19 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 			 * Check the Data field checksum.
 			 */
 //			printf("\n ip checksum:%x", CheckSum);
-			if (CheckSum == CORRECT_CKSUM_VALUE) {
+			якщо (CheckSum == CORRECT_CKSUM_VALUE) {
 				CheckSum = CheckSumCalculation(RxFramePtr,
 						ICMP_DATA_START_LOC,
 						ICMP_DATA_FIELD_LEN);
-#if 0
+#якщо 0
 			printf("\nICMP Rcv Packet: \n");
-			for(int i = ICMP_DATA_START_LOC; i <= ICMP_DATA_FIELD_LEN; i++)
+			для(ціле i = ICMP_DATA_START_LOC; i <= ICMP_DATA_FIELD_LEN; i++)
 			   printf("%x ", RxFramePtr[i]);
 			printf("\n End of ICMP Rcv Packet");
 				
 				printf("\n data checksum:%x", CheckSum);
 #endif
-				if (CheckSum == CORRECT_CKSUM_VALUE) {
+				якщо (CheckSum == CORRECT_CKSUM_VALUE) {
 
 					/*
 					 * Add destination address
@@ -523,7 +523,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * address of the received packet.
 					 */
 					Index = SRC_MAC_ADDR_LOC;
-					while (Index < (SRC_MAC_ADDR_LOC +
+					поки (Index < (SRC_MAC_ADDR_LOC +
 							MAC_ADDR_LEN)) {
 						*TxFramePtr++ =
 							*(RxFramePtr + Index);
@@ -536,7 +536,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 */
 					Index = 0;
 					TempPtr = (u16 *)LocalMacAddr;
-					while (Index < MAC_ADDR_LEN) {
+					поки (Index < MAC_ADDR_LEN) {
 						*TxFramePtr++ = *TempPtr++;
 						Index++;
 					}
@@ -547,7 +547,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * length(60 Bytes) to the reply packet.
 					 */
 					Index = ETHER_PROTO_TYPE_LOC;
-					while (Index < (ETHER_PROTO_TYPE_LOC +
+					поки (Index < (ETHER_PROTO_TYPE_LOC +
 							ETHER_PROTO_TYPE_LEN +
 							IP_VERSION_LEN +
 							IP_PACKET_LEN)) {
@@ -568,7 +568,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * received packet.
 					 */
 					Index = IP_FRAG_FIELD_LOC;
-					while (Index < (IP_FRAG_FIELD_LOC +
+					поки (Index < (IP_FRAG_FIELD_LOC +
 							IP_TTL_ICM_LEN +
 							IP_FRAG_FIELD_LEN)) {
 						*TxFramePtr++ =
@@ -587,7 +587,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 */
 					Index = 0;
 					TempPtr = (u16 *)LocalIpAddr;
-					while (Index < IP_ADDR_LEN) {
+					поки (Index < IP_ADDR_LEN) {
 						*TxFramePtr++ = *TempPtr++;
 						Index++;
 					}
@@ -596,7 +596,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * Add Destination IP address.
 					 */
 					Index = ICMP_REQ_SRC_IP_LOC;
-					while (Index < (ICMP_REQ_SRC_IP_LOC +
+					поки (Index < (ICMP_REQ_SRC_IP_LOC +
 							IP_ADDR_LEN)) {
 						*TxFramePtr++ =
 							*(RxFramePtr + Index);
@@ -619,7 +619,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * Echo reply status & checksum.
 					 */
 					Index = ICMP_ECHO_FIELD_LOC;
-					while (Index < (ICMP_ECHO_FIELD_LOC +
+					поки (Index < (ICMP_ECHO_FIELD_LOC +
 							ICMP_ECHO_FIELD_LEN)) {
 						*TxFramePtr++ = 0x0000;
 						Index++;
@@ -630,7 +630,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * received from the packet.
 					 */
 					Index = ICMP_DATA_LOC;
-					while (Index < (ICMP_DATA_LOC +
+					поки (Index < (ICMP_DATA_LOC +
 							ICMP_DATA_LEN)) {
 						*TxFramePtr++ =
 								(*(RxFramePtr + Index));
@@ -652,9 +652,9 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					/*
 					 * Transmit the frame.
 					 */
-#if 1
+#якщо 1
 					 printf("\n%x. ICMP Tx Packet \n", NumOfPingReplies);
-					 for(int i = 0; i < ICMP_PACKET_SIZE; i++)
+					 для(ціле i = 0; i < ICMP_PACKET_SIZE; i++)
 					 	printf("%x ", TxFrame[i]);
 					 printf("\n End of ICMP Tx Packet");
 #endif					 
@@ -670,10 +670,10 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 //					printf("NumOfPingReplies: %x", NumOfPingReplies);
 
 				}
-				else
+				інакше
 					printf("\n Data check sum error");
 			}
-			else
+			інакше
 				printf("\n IP Check sum error");
 		}
 	}
@@ -697,17 +697,17 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 * 		complement of this return value will give the final checksum.
 *
 ******************************************************************************/
-static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length)
+static u16 CheckSumCalculation(u16 *RxFramePtr, ціле StartLoc, ціле Length)
 {
 	u32 Sum = 0;
 	u16 CheckSum = 0;
-	int Index;
+	ціле Index;
 
 	/*
 	 * Add all the 16 bit data.
 	 */
 	Index = StartLoc;
-	while (Index < (StartLoc + Length)) {
+	поки (Index < (StartLoc + Length)) {
 		Sum = Sum + Xil_Ntohs(*(RxFramePtr + Index));
 		Index++;
 	}
@@ -718,5 +718,5 @@ static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length)
 	CheckSum = Sum;
 	Sum = Sum >> 16;
 	CheckSum = Sum + CheckSum;
-	return CheckSum;
+	повернути CheckSum;
 }

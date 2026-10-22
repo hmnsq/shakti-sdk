@@ -34,7 +34,7 @@ platform.h - header file for moushik E class SoC
 #define CLINT_BASE 0x020000000
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   16
+#define CLINT_مي_ربو   16
 
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
@@ -51,7 +51,7 @@ platform.h - header file for moushik E class SoC
 #define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#define تر_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
 #define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
@@ -71,7 +71,7 @@ platform.h - header file for moushik E class SoC
 #define UART2_START 0x00011500 /*! UART 2 */
 #define UART_OFFSET 0x100
 #define UART_BASE 0x11300
-#define MAX_UART_COUNT 3
+#define MAX_UART_كدي 3
 
 #define PINMUX_CONFIGURE_REG 0x40310
 
@@ -79,7 +79,7 @@ platform.h - header file for moushik E class SoC
 /*! Inter Integrated Circuit (I2C) Interface */
 #define I2C0_BASE 0x00040000
 #define I2C_OFFSET 0x400
-#define MAX_I2C_COUNT 2
+#define MAX_I2_C_كدي 2
 
 /*! Programmable Logic Interrupt Interface */
 #define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
@@ -139,6 +139,6 @@ platform.h - header file for moushik E class SoC
 #define GPIO14 (1 << 14)
 #define GPIO15 (1 << 15)
 
-#define GPIO_COUNT  0x10
+#define GPIO_كدي  0x10
 
 #endif

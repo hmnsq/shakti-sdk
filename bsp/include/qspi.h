@@ -32,9 +32,9 @@
 //#define BOOT
 #ifndef BOOT
 
-#include<stdlib.h>
+#ضمن<stdlib.h>
 #endif
-#include<stdint.h>
+#ضمن<stdint.h>
 
 #define DEF_TIMEOUT 60
 #define BASE_ADDR 0x00000100 
@@ -129,56 +129,56 @@
 #define THREEBYTE 0x2
 #define FOURBYTE  0x3
 
-extern int* cr      ;
- extern int* dcr    ;
- extern int* sr     ; 
- extern int* fcr    ;
- extern int* ccr    ;
- extern int* ar     ; 
- extern int* abr    ;
- extern int* dr     ; 
- extern int* dlr    ;
- extern int* psmkr  ;
- extern int* pir    ;
- extern int* lprt   ;
- extern int* startmm;
- extern int* endmm ;
+خارجي صحيح* cr      ;
+ خارجي صحيح* dcr    ;
+ خارجي صحيح* sr     ; 
+ خارجي صحيح* fcr    ;
+ خارجي صحيح* ccr    ;
+ خارجي صحيح* ar     ; 
+ خارجي صحيح* abr    ;
+ خارجي صحيح* dr     ; 
+ خارجي صحيح* dlr    ;
+ خارجي صحيح* psmkr  ;
+ خارجي صحيح* pir    ;
+ خارجي صحيح* lprt   ;
+ خارجي صحيح* startmm;
+ خارجي صحيح* endmm ;
 
-void set_qspi_shakti32(int* addr, const int val);
-void set_qspi_shakti16(int16_t* addr, int16_t val);
-void set_qspi_shakti8(char* addr, char val);
-int get_qspi_shakti( int* addr);
-int check_fail_bit(void);
-void reset_interrupt_flags(void);
-int micron_write_enable(int status);
-int flashSingleSPIDDRXip(int addr, int* dest_addr);
-int wait_for_tcf(int status);
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode);
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address);
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address);
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int flashReadDualSPI(int address, int data_length);
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int micron_disable_xip_volatile(int,int);
-int flashSingleSPIXip(int addr, int* dest_addr);
-int flashMemInit(void);
-int flashDualSPIXip(int addr, int* dest_addr);
-int flashDualSPIDDRXip(int addr, int* dest_addr);
-int flashWriteVolatileConfigReg(int value);
-int flashQuadSPIXip(int addr, int* dest_addr);
-int flashQuadSPIDDRXip(int addr, int* dest_addr);
-int eraseSector(int command, int address);
-int micron_volatile_write_enable(int status);
-int micron_enable_4byte_addressing(int status);
-int micron_configure_xip_volatile(int status, int value);
-int micron_read_configuration_register(int status, int value);
-int micron_read_id_cmd(int status, int value);
-int wait_for_wip(void);
-int flashIdentificationDevice(void);
-int flashReadFlagRegister(void);
-int flashWriteEnable(void);
-int flashEnable4ByteAddressingMode(void);
-int flash_Write_disable(void);
+فراغ set_qspi_shakti32(صحيح* addr, ثابت صحيح val);
+فراغ set_qspi_shakti16(int16_t* addr, int16_t val);
+فراغ set_qspi_shakti8(حرف* addr, حرف val);
+صحيح get_qspi_shakti( صحيح* addr);
+صحيح check_fail_bit(فراغ);
+فراغ reset_interrupt_flags(فراغ);
+صحيح micron_write_enable(صحيح status);
+صحيح flashSingleSPIDDRXip(صحيح addr, صحيح* dest_addr);
+صحيح wait_for_tcf(صحيح status);
+فراغ qspi_init(صحيح fsize, صحيح csht, صحيح prescaler, صحيح enable_interrupts, صحيح fthreshold, صحيح ck_mode);
+صحيح pageProgramSingleSPI(صحيح value1, صحيح value2, صحيح value3, صحيح value4, صحيح address);
+صحيح pageProgramQuadSPI(صحيح value1, صحيح value2, صحيح value3, صحيح value4, صحيح address);
+صحيح flashReadSingleSPI(صحيح dummy_cycles, صحيح read_address, صحيح instruction, صحيح data_كلموم, صحيح adsize);
+صحيح flashReadDualSPI(صحيح address, صحيح data_length);
+صحيح flashReadQuadSPI(صحيح dummy_cycles, صحيح read_address, صحيح instruction, صحيح data_كلموم, صحيح adsize);
+صحيح micron_disable_xip_volatile(صحيح,صحيح);
+صحيح flashSingleSPIXip(صحيح addr, صحيح* dest_addr);
+صحيح flashMemInit(فراغ);
+صحيح flashDualSPIXip(صحيح addr, صحيح* dest_addr);
+صحيح flashDualSPIDDRXip(صحيح addr, صحيح* dest_addr);
+صحيح flashWriteVolatileConfigReg(صحيح درج);
+صحيح flashQuadSPIXip(صحيح addr, صحيح* dest_addr);
+صحيح flashQuadSPIDDRXip(صحيح addr, صحيح* dest_addr);
+صحيح eraseSector(صحيح command, صحيح address);
+صحيح micron_volatile_write_enable(صحيح status);
+صحيح micron_enable_4byte_addressing(صحيح status);
+صحيح micron_configure_xip_volatile(صحيح status, صحيح درج);
+صحيح micron_read_configuration_register(صحيح status, صحيح درج);
+صحيح micron_read_id_cmd(صحيح status, صحيح درج);
+صحيح wait_for_wip(فراغ);
+صحيح flashIdentificationDevice(فراغ);
+صحيح flashReadFlagRegister(فراغ);
+صحيح flashWriteEnable(فراغ);
+صحيح flashEnable4ByteAddressingMode(فراغ);
+صحيح flash_Write_disable(فراغ);
 
 
 #endif

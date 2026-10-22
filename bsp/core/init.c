@@ -30,50 +30,50 @@ uart is initialized. Trap handler is initialized.
 Disable Xip for Aardonyx
 */
 
-#include "traps.h"
-#include "plic_driver.h"
-#include "clint_driver.h"
-#include "log.h"
-#include "utils.h"
-#include "qspi.h"
-#include "platform.h"
-#include "defines.h"
-#include "uart.h"
+#ضمن "traps.h"
+#ضمن "plic_driver.h"
+#ضمن "clint_driver.h"
+#ضمن "log.h"
+#ضمن "utils.h"
+#ضمن "qspi.h"
+#ضمن "platform.h"
+#ضمن "defines.h"
+#ضمن "uart.h"
 
-extern void init(void);
-extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+خارجي فراغ init(فراغ);
+خارجي فراغ trap_entry(فراغ);
+خارجي uart_struct *uart_instance[MAX_UART_كدي];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+خارجي حرف تر_end[];
+خارجي حرف تر[];
+خارجي حرف _heap[];
+خارجي حرف _heap_end[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+حرف *تر_end_2=(حرف *)&تر_end;
+حرف *تر_start=(حرف *)&تر;
+حرف *heap_start=(حرف *)&_heap;
+حرف *heap_end=(حرف *)&_heap_end;
 
 /** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
  */
-static void section_init(void)
+ساكن فراغ section_init(فراغ)
 {
-#if 0
+#إذا 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	طالما(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	طالما(تر_end_2>=تر_start)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*تر_end_2=0x0;
+		تر_end_2--;
 	}
 #endif
 
@@ -84,7 +84,7 @@ static void section_init(void)
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
  */
-static void trap_init(void)
+ساكن فراغ trap_init(فراغ)
 {
 	log_trace("trap_init entered \n ");
 
@@ -144,7 +144,7 @@ static void trap_init(void)
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+فراغ init(فراغ)
 {
 //	section_init(); // uncomment on need basis
 	uart_init();

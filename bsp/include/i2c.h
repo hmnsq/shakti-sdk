@@ -29,7 +29,7 @@
 #ifndef I2C_H
 #define I2C_H
 
-#include "platform.h"
+#ଅନ୍ତର୍ଭାଵ "platform.h"
 
 #define ETIMEOUT -60
 #define DEF_TIMEOUT 60
@@ -84,65 +84,65 @@
 `define     SCL            8'h38
 */
 
-unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+unsigned ଅକ୍ଷର i2c_complete_flag;
+unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_read_ମୂଲ୍ୟ;
 
 /* Struct to access I2C registers as 32 bit registers */
-typedef struct
+ପ୍ରକାରବ୍ୟାଖ୍ୟା ସଂରଚନା
 {
 /* 0x00 */
-	unsigned int  prescale;     /*! Prescale Register */
-	unsigned int   prescale_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  prescale;     /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   prescale_rsvd;
 
 /* 0x08 */
-	unsigned int   control;
-	unsigned int   control_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   control;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   control_rsvd;
 
 /* 0x10 */
-	unsigned int  data;	 /*! Prescale Register */
-	unsigned int   data_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  data;	 /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   data_rsvd;
 
 /* 0x18 */
-	unsigned int  status;	 /*! Prescale Register */
-	unsigned int   status_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  status;	 /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   status_rsvd;
 
 /* 0x20 */
-	unsigned int  s01;	 /*! Prescale Register */
-	unsigned int   s01_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  s01;	 /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   s01_rsvd;
 
 /* 0x28 */
-	unsigned int  s3;	 /*! Prescale Register */
-	unsigned int   s3_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  s3;	 /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   s3_rsvd;
 
 /* 0x30 */
-	unsigned int  time;	 /*! Prescale Register */
-	unsigned int   time_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  time;	 /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   time_rsvd;
 
 /* 0x38 */
-	unsigned int  scl;	 /*! Prescale Register */
-	unsigned int   scl_rsvd;
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା  scl;	 /*! Prescale Register */
+	unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା   scl_rsvd;
 } i2c_struct;
 
-void i2c_init(void);
-int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
-int wait_till_I2c_bus_free(i2c_struct *);
-int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
-int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
-			   char rdWrCntrl, unsigned long delay);
-int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
-int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
-				     slaveAddress, unsigned char rdWrCntrl,
+ଶୂନ୍ୟ i2c_init(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା config_i2c(i2c_struct *,unsigned ଅକ୍ଷର prescale_div, unsigned ଅକ୍ଷର scl_div);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା wait_till_I2c_bus_free(i2c_struct *);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା wait_till_txrx_operation_Completes(i2c_struct *,ପୂର୍ଣ୍ଣସଂଖ୍ୟା *status);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା sendbytes(i2c_struct *, ଅଚଳ ଅକ୍ଷର *buf, ପୂର୍ଣ୍ଣସଂଖ୍ୟା ଗଣନା_2, ପୂର୍ଣ୍ଣସଂଖ୍ୟା last, ପୂର୍ଣ୍ଣସଂଖ୍ୟା eni);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା readbytes(i2c_struct *,ଅକ୍ଷର *buf, ପୂର୍ଣ୍ଣସଂଖ୍ୟା ଗଣନା_2, ପୂର୍ଣ୍ଣସଂଖ୍ୟା last);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_send_slave_address(i2c_struct *,unsigned ଅକ୍ଷର slaveAddress, unsigned
+			   ଅକ୍ଷର rdWrCntrl, unsigned long delay);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_write_data(i2c_struct *,unsigned ଅକ୍ଷର writeData, unsigned ଅକ୍ଷର delay);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_read_data(i2c_struct *,unsigned ଅକ୍ଷର *read_data, unsigned ଅକ୍ଷର delay);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned ଅକ୍ଷର
+				     slaveAddress, unsigned ଅକ୍ଷର rdWrCntrl,
 				     unsigned long delay);
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
-			    unsigned char delay, unsigned char last);
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
-			     unsigned char delay, unsigned char last);
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
-		       char delay);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_read_interrupt_data(i2c_struct * instance, unsigned ଅକ୍ଷର *read_data,
+			    unsigned ଅକ୍ଷର delay, unsigned ଅକ୍ଷର last);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_write_interrupt_data(i2c_struct * instance, unsigned ଅକ୍ଷର writeData,
+			     unsigned ଅକ୍ଷର delay, unsigned ଅକ୍ଷର last);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା i2c_read_data_nack(i2c_struct * instance, unsigned ଅକ୍ଷର *read_data, unsigned
+		       ଅକ୍ଷର delay);
 
-extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
+ବାହ୍ୟ i2c_struct *i2c_instance[MAX_I2_C_ଗଣନା];
 
 #endif

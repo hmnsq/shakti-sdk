@@ -34,15 +34,15 @@
   * 5. Lora module send the data by specifing the length
 */
 
-#include <string.h>
-#include "uart.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
+#ଅନ୍ତର୍ଭାଵ <string.h>
+#ଅନ୍ତର୍ଭାଵ "uart.h"
+#ଅନ୍ତର୍ଭାଵ "pinmux.h"
+#ଅନ୍ତର୍ଭାଵ "i2c.h"
+#ଅନ୍ତର୍ଭାଵ "log.h"
 
 // #include "ds3231.c"
-void intermediate(void);
-const char* values();
+ଶୂନ୍ୟ intermediate(ଶୂନ୍ୟ);
+ଅଚଳ ଅକ୍ଷର* ମୂଲ୍ୟଗୁଡ଼ିକ();
 
 #define LORA_UART uart_instance[1]
 #define BAUDRATE 9600
@@ -52,22 +52,22 @@ const char* values();
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା read_from_lora(ଅକ୍ଷର *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	ପୂର୍ଣ୍ଣସଂଖ୍ୟା ch;
+	ଅକ୍ଷର *str = data;
+	ଅକ୍ଷର *test = data;
+	ପାଇଁ (ପୂର୍ଣ୍ଣସଂଖ୍ୟା i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		ଯଦି (ch == '\n')
 		{
-			break;
+			ଭାଙ୍ଗ;
 		}
 	}
-	return;	
+	ଫେରନ୍ତୁ;	
 }
 
 
@@ -76,11 +76,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	ଫେରନ୍ତୁ 0;
 }
 
 
@@ -88,9 +88,9 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+ଶୂନ୍ୟ write_to_lora(ଅକ୍ଷର *data)
 {
-	while (*data != '\0')
+	ଯେତେବେଳେ (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -103,16 +103,16 @@ void write_to_lora(char *data)
  * @brief It helps to send the required data or message to another LORA module
  * @details Through AT commands the message can be send from one LORA to another LORA module.
  */
-void send_data(char *values)
+ଶୂନ୍ୟ send_data(ଅକ୍ଷର *ମୂଲ୍ୟଗୁଡ଼ିକ)
 {
-	char data[LENGTH];
+	ଅକ୍ଷର data[LENGTH];
 
-	printf("\n Send DATA: %s", values);
+	printf("\n Send DATA: %s", ମୂଲ୍ୟଗୁଡ଼ିକ);
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
 	printf("\n Sending DATA from");
-	write_to_lora(values);
+	write_to_lora(ମୂଲ୍ୟଗୁଡ଼ିକ);
 	read_from_lora(data);
 	printf("\n Data from LORA module: %s", data);
 }
@@ -123,9 +123,9 @@ void send_data(char *values)
  * @brief It helps to check the value set by the user, to the LORA module.
  * @details Through AT commands, the set values can be checked by these functions.
  */
-void check_set_lora_value()
+ଶୂନ୍ୟ check_set_lora_ମୂଲ୍ୟ()
 {
-	char data[LENGTH];
+	ଅକ୍ଷର data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -154,9 +154,9 @@ void check_set_lora_value()
  * @brief all the necessary features can be set by thsese.
  * @details through AT commands the LORA module can be set and make it usable.
  */
-void setup_lora()
+ଶୂନ୍ୟ setup_lora()
 {
-	char data[LENGTH];
+	ଅକ୍ଷର data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -194,7 +194,7 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Send data 
  */
-void main()
+ଶୂନ୍ୟ ମୁଖ୍ୟ()
 {
 	printf("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;
@@ -213,9 +213,9 @@ void main()
 	intermediate();
 
 	/* Sending Time and date consequtively */
-	while (1)
+	ଯେତେବେଳେ (1)
 	{
-		send_data(values());
+		send_data(ମୂଲ୍ୟଗୁଡ଼ିକ());
 		delay_loop(1500,1500);
 	}
 	

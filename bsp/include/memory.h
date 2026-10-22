@@ -27,8 +27,8 @@
 #ifndef _MEMORY_H
 #define _MEMORY_H
 
-#include<stdint.h>
+#ଅନ୍ତର୍ଭାଵ<stdint.h>
 
-void dump_word_memory(uint32_t* start, uint32_t word_length);
-void dump_byte_memory(uint32_t* start, uint32_t word_length);
+ଶୂନ୍ୟ dump_word_memory(uint32_t* start, uint32_t word_length);
+ଶୂନ୍ୟ dump_byte_memory(uint32_t* start, uint32_t word_length);
 #endif

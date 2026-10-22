@@ -32,9 +32,9 @@
 //#define BOOT
 #ifndef BOOT
 
-#include<stdlib.h>
+#ଅନ୍ତର୍ଭାଵ<stdlib.h>
 #endif
-#include<stdint.h>
+#ଅନ୍ତର୍ଭାଵ<stdint.h>
 
 #define DEF_TIMEOUT 60
 #define BASE_ADDR 0x00000100 
@@ -129,56 +129,56 @@
 #define THREEBYTE 0x2
 #define FOURBYTE  0x3
 
-extern int* cr      ;
- extern int* dcr    ;
- extern int* sr     ; 
- extern int* fcr    ;
- extern int* ccr    ;
- extern int* ar     ; 
- extern int* abr    ;
- extern int* dr     ; 
- extern int* dlr    ;
- extern int* psmkr  ;
- extern int* pir    ;
- extern int* lprt   ;
- extern int* startmm;
- extern int* endmm ;
+ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* cr      ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dcr    ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* sr     ; 
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* fcr    ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* ccr    ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* ar     ; 
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* abr    ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dr     ; 
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dlr    ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* psmkr  ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* pir    ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* lprt   ;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* startmm;
+ ବାହ୍ୟ ପୂର୍ଣ୍ଣସଂଖ୍ୟା* endmm ;
 
-void set_qspi_shakti32(int* addr, const int val);
-void set_qspi_shakti16(int16_t* addr, int16_t val);
-void set_qspi_shakti8(char* addr, char val);
-int get_qspi_shakti( int* addr);
-int check_fail_bit(void);
-void reset_interrupt_flags(void);
-int micron_write_enable(int status);
-int flashSingleSPIDDRXip(int addr, int* dest_addr);
-int wait_for_tcf(int status);
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode);
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address);
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address);
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int flashReadDualSPI(int address, int data_length);
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int micron_disable_xip_volatile(int,int);
-int flashSingleSPIXip(int addr, int* dest_addr);
-int flashMemInit(void);
-int flashDualSPIXip(int addr, int* dest_addr);
-int flashDualSPIDDRXip(int addr, int* dest_addr);
-int flashWriteVolatileConfigReg(int value);
-int flashQuadSPIXip(int addr, int* dest_addr);
-int flashQuadSPIDDRXip(int addr, int* dest_addr);
-int eraseSector(int command, int address);
-int micron_volatile_write_enable(int status);
-int micron_enable_4byte_addressing(int status);
-int micron_configure_xip_volatile(int status, int value);
-int micron_read_configuration_register(int status, int value);
-int micron_read_id_cmd(int status, int value);
-int wait_for_wip(void);
-int flashIdentificationDevice(void);
-int flashReadFlagRegister(void);
-int flashWriteEnable(void);
-int flashEnable4ByteAddressingMode(void);
-int flash_Write_disable(void);
+ଶୂନ୍ୟ set_qspi_shakti32(ପୂର୍ଣ୍ଣସଂଖ୍ୟା* addr, ଅଚଳ ପୂର୍ଣ୍ଣସଂଖ୍ୟା val);
+ଶୂନ୍ୟ set_qspi_shakti16(int16_t* addr, int16_t val);
+ଶୂନ୍ୟ set_qspi_shakti8(ଅକ୍ଷର* addr, ଅକ୍ଷର val);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା get_qspi_shakti( ପୂର୍ଣ୍ଣସଂଖ୍ୟା* addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା check_fail_bit(ଶୂନ୍ୟ);
+ଶୂନ୍ୟ reset_interrupt_flags(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_write_enable(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashSingleSPIDDRXip(ପୂର୍ଣ୍ଣସଂଖ୍ୟା addr, ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dest_addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା wait_for_tcf(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status);
+ଶୂନ୍ୟ qspi_init(ପୂର୍ଣ୍ଣସଂଖ୍ୟା fsize, ପୂର୍ଣ୍ଣସଂଖ୍ୟା csht, ପୂର୍ଣ୍ଣସଂଖ୍ୟା prescaler, ପୂର୍ଣ୍ଣସଂଖ୍ୟା enable_interrupts, ପୂର୍ଣ୍ଣସଂଖ୍ୟା fthreshold, ପୂର୍ଣ୍ଣସଂଖ୍ୟା ck_mode);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା pageProgramSingleSPI(ପୂର୍ଣ୍ଣସଂଖ୍ୟା value1, ପୂର୍ଣ୍ଣସଂଖ୍ୟା value2, ପୂର୍ଣ୍ଣସଂଖ୍ୟା value3, ପୂର୍ଣ୍ଣସଂଖ୍ୟା value4, ପୂର୍ଣ୍ଣସଂଖ୍ୟା address);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା pageProgramQuadSPI(ପୂର୍ଣ୍ଣସଂଖ୍ୟା value1, ପୂର୍ଣ୍ଣସଂଖ୍ୟା value2, ପୂର୍ଣ୍ଣସଂଖ୍ୟା value3, ପୂର୍ଣ୍ଣସଂଖ୍ୟା value4, ପୂର୍ଣ୍ଣସଂଖ୍ୟା address);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashReadSingleSPI(ପୂର୍ଣ୍ଣସଂଖ୍ୟା dummy_cycles, ପୂର୍ଣ୍ଣସଂଖ୍ୟା read_address, ପୂର୍ଣ୍ଣସଂଖ୍ୟା instruction, ପୂର୍ଣ୍ଣସଂଖ୍ୟା data_ଶବ୍ଦଗୁଡ଼ିକ, ପୂର୍ଣ୍ଣସଂଖ୍ୟା adsize);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashReadDualSPI(ପୂର୍ଣ୍ଣସଂଖ୍ୟା address, ପୂର୍ଣ୍ଣସଂଖ୍ୟା data_length);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashReadQuadSPI(ପୂର୍ଣ୍ଣସଂଖ୍ୟା dummy_cycles, ପୂର୍ଣ୍ଣସଂଖ୍ୟା read_address, ପୂର୍ଣ୍ଣସଂଖ୍ୟା instruction, ପୂର୍ଣ୍ଣସଂଖ୍ୟା data_ଶବ୍ଦଗୁଡ଼ିକ, ପୂର୍ଣ୍ଣସଂଖ୍ୟା adsize);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_disable_xip_volatile(ପୂର୍ଣ୍ଣସଂଖ୍ୟା,ପୂର୍ଣ୍ଣସଂଖ୍ୟା);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashSingleSPIXip(ପୂର୍ଣ୍ଣସଂଖ୍ୟା addr, ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dest_addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashMemInit(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashDualSPIXip(ପୂର୍ଣ୍ଣସଂଖ୍ୟା addr, ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dest_addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashDualSPIDDRXip(ପୂର୍ଣ୍ଣସଂଖ୍ୟା addr, ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dest_addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashWriteVolatileConfigReg(ପୂର୍ଣ୍ଣସଂଖ୍ୟା ମୂଲ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashQuadSPIXip(ପୂର୍ଣ୍ଣସଂଖ୍ୟା addr, ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dest_addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashQuadSPIDDRXip(ପୂର୍ଣ୍ଣସଂଖ୍ୟା addr, ପୂର୍ଣ୍ଣସଂଖ୍ୟା* dest_addr);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା eraseSector(ପୂର୍ଣ୍ଣସଂଖ୍ୟା command, ପୂର୍ଣ୍ଣସଂଖ୍ୟା address);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_volatile_write_enable(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_enable_4byte_addressing(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_configure_xip_volatile(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status, ପୂର୍ଣ୍ଣସଂଖ୍ୟା ମୂଲ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_read_configuration_register(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status, ପୂର୍ଣ୍ଣସଂଖ୍ୟା ମୂଲ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା micron_read_id_cmd(ପୂର୍ଣ୍ଣସଂଖ୍ୟା status, ପୂର୍ଣ୍ଣସଂଖ୍ୟା ମୂଲ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା wait_for_wip(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashIdentificationDevice(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashReadFlagRegister(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashWriteEnable(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flashEnable4ByteAddressingMode(ଶୂନ୍ୟ);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା flash_Write_disable(ଶୂନ୍ୟ);
 
 
 #endif

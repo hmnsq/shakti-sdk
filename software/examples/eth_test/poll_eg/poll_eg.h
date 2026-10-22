@@ -36,7 +36,7 @@
 #define POLL_EG_H
 
 #ifdef __cplusplus
-extern "C" {
+ବାହ୍ୟ "C" {
 #endif
 
 /***************************** Include Files *********************************/
@@ -73,10 +73,10 @@ extern "C" {
 /*
  * Utility functions implemented in xemaclite_example_util.c
  */
-void EmacLitePhyDelay(unsigned int Seconds);
+ଶୂନ୍ୟ EmacLitePhyDelay(unsigned ପୂର୍ଣ୍ଣସଂଖ୍ୟା Seconds);
 u32 EmacLitePhyDetect(XEmacLite *InstancePtr);
-int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
-int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
 
 /************************** Variable Definitions ****************************/
 /*
@@ -84,19 +84,19 @@ int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
  * both as a source and destination MAC address.
  */
 
-extern XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
+ବାହ୍ୟ XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
 
 /*
  * Buffers used for Transmission and Reception of Packets. These are declared
  * as global so that they are not a part of the stack.
  */
-extern u8 TxFrame[XEL_MAX_FRAME_SIZE];
-extern u8 RxFrame[XEL_MAX_FRAME_SIZE];
+ବାହ୍ୟ u8 TxFrame[XEL_MAX_FRAME_SIZE];
+ବାହ୍ୟ u8 RxFrame[XEL_MAX_FRAME_SIZE];
 
-extern volatile u32 RecvFrameLength;	/* Indicates the length of the
+ବାହ୍ୟ ଅସ୍ଥିର u32 RecvFrameLength;	/* Indicates the length of the
 					 * Received packet
 					 */
-extern volatile int TransmitComplete;	/* Flag to indicate that the
+ବାହ୍ୟ ଅସ୍ଥିର ପୂର୍ଣ୍ଣସଂଖ୍ୟା TransmitComplete;	/* Flag to indicate that the
 					 * Transmission is complete
 					 */
 #ifdef __cplusplus

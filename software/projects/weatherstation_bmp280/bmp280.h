@@ -27,9 +27,9 @@
 #define I2C i2c_instance[1]
 
 #define BMP280_SLAVE_ADDRESS 0xEC       //Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define DELAY_ମୂଲ୍ୟ 900
+#define PRESCALER_ଗଣନା 0x1F
+#define SCLK_ଗଣନା 0x91
 #define BMP280_CTRL_MEANS 0xF4
 #define BMP280_NORMAL_MODE 0x26
 #define BMP280_STATUS_REGISTER 0xF3

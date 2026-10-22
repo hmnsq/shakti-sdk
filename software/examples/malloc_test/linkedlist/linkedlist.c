@@ -22,28 +22,28 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#ଅନ୍ତର୍ଭାଵ "uart.h"
+#ଅନ୍ତର୍ଭାଵ <stdio.h>
+#ଅନ୍ତର୍ଭାଵ <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+ସଂରଚନା ଗଣ୍ଠି {
+	ପୂର୍ଣ୍ଣସଂଖ୍ୟା ଅଙ୍କ;
+	ସଂରଚନା ଗଣ୍ଠି *nptr;
 }*head;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+ଶୂନ୍ୟ create_list(ପୂର୍ଣ୍ଣସଂଖ୍ୟା n);
+ଶୂନ୍ୟ display_list();
+ଶୂନ୍ୟ delete_ଗଣ୍ଠି(ପୂର୍ଣ୍ଣସଂଖ୍ୟା position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+ଶୂନ୍ୟ ମୁଖ୍ୟ()
 {
-	int n,position,m;
-	char t[15];
+	ପୂର୍ଣ୍ଣସଂଖ୍ୟା n,position,m;
+	ଅକ୍ଷର t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -63,12 +63,12 @@ void main()
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_ଗଣ୍ଠି(position);
 
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	ଯେତେବେଳେ(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+ଶୂନ୍ୟ create_list(ପୂର୍ଣ୍ଣସଂଖ୍ୟା n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	ସଂରଚନା ଗଣ୍ଠି *ଗଣ୍ଠି, *tmp;
+	ପୂର୍ଣ୍ଣସଂଖ୍ୟା data,m;
+	ଅକ୍ଷର t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (ସଂରଚନା ଗଣ୍ଠି*)malloc(ଆକାର(ସଂରଚନା ଗଣ୍ଠି));
 
-	if(head == NULL)
+	ଯଦି(head == ଖାଲି)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	ଅନ୍ୟଥା
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -96,28 +96,28 @@ void create_list(int n)
 
 		data = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
+		head->ଅଙ୍କ = data;
+		head->nptr = ଖାଲି;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		ପାଇଁ(ପୂର୍ଣ୍ଣସଂଖ୍ୟା i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			ଗଣ୍ଠି = (ସଂରଚନା ଗଣ୍ଠି*)malloc(ଆକାର(ସଂରଚନା ଗଣ୍ଠି));
 
-			if(node == NULL)
+			ଯଦି(ଗଣ୍ଠି == ଖାଲି)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			ଅନ୍ୟଥା 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
 				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				ଗଣ୍ଠି->ଅଙ୍କ = data;
+				ଗଣ୍ଠି->nptr = ଖାଲି;
 
-				tmp->nptr = node;
+				tmp->nptr = ଗଣ୍ଠି;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,21 +129,21 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+ଶୂନ୍ୟ display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	ପୂର୍ଣ୍ଣସଂଖ୍ୟା i = 0;
+	ସଂରଚନା ଗଣ୍ଠି *tmp;
 
-	if(head == NULL)
+	ଯଦି(head == ଖାଲି)
 	{
 		printf(" List is empty.");
 	}
-	else
+	ଅନ୍ୟଥା
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		ଯେତେବେଳେ(tmp != ଖାଲି) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
+			printf(" Node%d = %d",i,tmp->ଅଙ୍କ);
 			printf("->");
 			tmp = tmp->nptr;
 			i++;
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+ଶୂନ୍ୟ delete_ଗଣ୍ଠି(ପୂର୍ଣ୍ଣସଂଖ୍ୟା position)
 {
-	struct node *temp;
+	ସଂରଚନା ଗଣ୍ଠି *temp;
 
-	if(head == NULL)
+	ଯଦି(head == ଖାଲି)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	ଅନ୍ୟଥା 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		ଯଦି (position == 0)//Delete head node
 		{
 			head = temp->nptr;
-			free(temp);
-			return;
+			ମୁକ୍ତ(temp);
+			ଫେରନ୍ତୁ;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		ପାଇଁ (ପୂର୍ଣ୍ଣସଂଖ୍ୟା i = 0; temp != ଖାଲି && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		ଯଦି (temp == ଖାଲି || temp->nptr == ଖାଲି)
+			ଫେରନ୍ତୁ;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		ସଂରଚନା ଗଣ୍ଠି *nptr = temp->nptr->nptr;
 
-		free(temp->nptr);
+		ମୁକ୍ତ(temp->nptr);
 		temp->nptr = nptr; 
 	}
 }

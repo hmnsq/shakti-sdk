@@ -29,20 +29,20 @@
 
 
 
-#include <stdio.h>
-#include "camera/ucam.h"
-#include "pinmux.h"
+#ଅନ୍ତର୍ଭାଵ <stdio.h>
+#ଅନ୍ତର୍ଭାଵ "camera/ucam.h"
+#ଅନ୍ତର୍ଭାଵ "pinmux.h"
 
 
-int main(void) {
+ପୂର୍ଣ୍ଣସଂଖ୍ୟା ମୁଖ୍ୟ(ଶୂନ୍ୟ) {
   *pinmux_config_reg = 85;
-  int brate = 115200;
+  ପୂର୍ଣ୍ଣସଂଖ୍ୟା brate = 115200;
   set_baud_rate(uart_instance[1],brate);
   set_baud_rate(uart_instance[2],brate);
-  if( init_cam() < 0) 
-      return -1;
+  ଯଦି( init_cam() < 0) 
+      ଫେରନ୍ତୁ -1;
   get_pic(1);
-  return 0;
+  ଫେରନ୍ତୁ 0;
 }
 
 

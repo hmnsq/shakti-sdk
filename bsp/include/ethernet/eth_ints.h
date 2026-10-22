@@ -290,7 +290,7 @@ typedef struct {
 #if XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
 	XIntc_VectorTableEntry HandlerTable[XIN_CONTROLLER_MAX_INTRS];
 #else
-	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_NUM_INTR_INPUTS];
+	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_नुमेरो_INTR_INPUTS];
 #endif
 
 } XIntc_Config;

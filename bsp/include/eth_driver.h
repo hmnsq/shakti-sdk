@@ -69,7 +69,7 @@ typedef uintptr_t UINTPTR;
  * EmacLite defines .
  * DeviceID starts at 240
  */
-#define XPAR_XEMACLITE_NUM_INSTANCES    1
+#define XPAR_XEMACLITE_नुमेरो_INSTANCES    1
 #define XPAR_EMACLITE_0_DEVICE_ID       240
 /* EK Change */
 #define XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
@@ -173,8 +173,8 @@ extern UINTPTR TxBuffPtr;
 extern UINTPTR RxBuffPtr;
 extern volatile int FramesTx;
 extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
+extern volatile int Tx_बिलांग;
+extern volatile int Rx_बिलांग;
 extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 #endif
 
@@ -260,8 +260,8 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 /************************** Variable Definitions *****************************/
 
 
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
+void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned Byte_बिलांग);
+void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned Byte_बिलांग);
 
 extern XEmacLite_Config XEmacLite_ConfigTable;
 extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,

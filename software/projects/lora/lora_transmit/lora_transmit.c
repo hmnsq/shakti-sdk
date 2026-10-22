@@ -42,7 +42,7 @@
 
 // #include "ds3231.c"
 void intermediate(void);
-const char* values();
+const char* मगा_हालागा();
 
 #define LORA_UART uart_instance[1]
 #define BAUDRATE 9600
@@ -103,16 +103,16 @@ void write_to_lora(char *data)
  * @brief It helps to send the required data or message to another LORA module
  * @details Through AT commands the message can be send from one LORA to another LORA module.
  */
-void send_data(char *values)
+void send_data(char *मगा_हालागा)
 {
 	char data[LENGTH];
 
-	printf("\n Send DATA: %s", values);
+	printf("\n Send DATA: %s", मगा_हालागा);
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
 	printf("\n Sending DATA from");
-	write_to_lora(values);
+	write_to_lora(मगा_हालागा);
 	read_from_lora(data);
 	printf("\n Data from LORA module: %s", data);
 }
@@ -123,7 +123,7 @@ void send_data(char *values)
  * @brief It helps to check the value set by the user, to the LORA module.
  * @details Through AT commands, the set values can be checked by these functions.
  */
-void check_set_lora_value()
+void check_set_lora_हालागा()
 {
 	char data[LENGTH];
 
@@ -215,7 +215,7 @@ void main()
 	/* Sending Time and date consequtively */
 	while (1)
 	{
-		send_data(values());
+		send_data(मगा_हालागा());
 		delay_loop(1500,1500);
 	}
 	

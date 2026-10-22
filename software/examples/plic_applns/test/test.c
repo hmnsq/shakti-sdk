@@ -39,14 +39,14 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
 #include "defines.h"
 #include "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+void handle_button_press(__attribute__((unused)) uint32_t नुमेरो);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+void handle_button_press(__attribute__((unused)) uint32_t नुमेरो)
 {
 	log_info("button pressed\n");
 }

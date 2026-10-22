@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(int module_नुमेरो, int clock_पांगहाति, int period, int duty, bool external_clock);
+void pwm_start(int module_नुमेरो, int mode);
+int pwm_check_continuous_mode(int module_नुमेरो);
+void pwm_clear_registers(int module_नुमेरो);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
+void pwm_set_external_clock(int module_नुमेरो, bool हालागा);
+void pwm_set_clock(int module_नुमेरो, int clock_पांगहाति);
+void pwm_set_duty_cycle(int module_नुमेरो, int duty);
+void pwm_set_periodic_cycle(int module_नुमेरो, int period);
+void pwm_stop(int module_नुमेरो);
+void show_register_मगा_हालागा(int module_नुमेरो);
+int set_pwm_period_register(int module_नुमेरो, int हालागा);
+int set_pwm_duty_register(int module_नुमेरो, int हालागा);
+int set_pwm_control_register(int module_नुमेरो, int हालागा);
+int set_pwm_clock_register(int module_नुमेरो, int हालागा);
 int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_use_external_clock(int module_नुमेरो, bool हालागा);
 

@@ -29,8 +29,8 @@
 #include "traps.h"
 #include "log.h"
 
-mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+mtrap_fptr_t mcause_trap_table[MAX_TRAP_हालागा];
+mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_हालागा];
 
 /** @fn unsigned int extract_ie_code(unsigned int num)
  * @brief Extract the exception code from the mcause value
@@ -40,13 +40,13 @@ mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
  * @param unsigned int num - mcause value
  * @return unsigned int
  */
-unsigned int extract_ie_code(unsigned int num)
+unsigned int extract_ie_code(unsigned int नुमेरो)
 {
 	unsigned int exception_code;
 
 	log_trace("\nextract_ie_code entered\n");
 
-	exception_code = (num & 0X7FFFFFFF);
+	exception_code = (नुमेरो & 0X7FFFFFFF);
 
 	log_debug("exception code = %x\n",exception_code);
 

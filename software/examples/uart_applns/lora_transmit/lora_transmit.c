@@ -117,7 +117,7 @@ void send_data()
  * @brief It helps to check the value set by the user, to the LORA module.
  * @details Through AT commands, the set values can be checked by these functions.
  */
-void check_set_lora_value()
+void check_set_lora_हालागा()
 {
 	char data[LENGTH];
 
@@ -200,7 +200,7 @@ void main()
 	setup_lora();
 
 	/* If you want to check that value is set correctly or not.*/
-	check_set_lora_value();
+	check_set_lora_हालागा();
 	
 	send_data();
 }

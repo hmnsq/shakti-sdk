@@ -36,10 +36,10 @@
 
 #define PCF8574_SLAVE_ADDRESS 0x4E
 #define I2C i2c_instance[0]
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define PRESCALER_बिलांग 0x1F
+#define SCLK_बिलांग 0x91
 #define PCF8574_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
+#define DELAY_हालागा 900
 #define PCF8574_REG_OFFSET 0
 
 /** @fn int write_pcf8574_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
@@ -50,12 +50,12 @@
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_pcf8574_registers(i2c_struct * i2c_instance,unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+int write_pcf8574_registers(i2c_struct * i2c_instance,unsigned int reg_offset, unsigned int write_हालागा, unsigned long delay)
 {
 	int i = 0, j = 0,  k = 0, status=0;
 	unsigned int temp = 0;
 	i2c_send_slave_address(i2c_instance, PCF8574_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance,  ( write_value & 0xff), delay);
+	i2c_write_data(i2c_instance,  ( write_हालागा & 0xff), delay);
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 	// delay_loop(800, 800);
@@ -69,14 +69,14 @@ int write_pcf8574_registers(i2c_struct * i2c_instance,unsigned int reg_offset, u
 void main()
 {
 	int timeout;
-	unsigned int tempReadValue = 0;
+	unsigned int temp_Read_हालागा = 0;
 	unsigned long delay = 1000;
 
 	printf("\nPCF8574 IO Expander Test");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	if(config_i2c(I2C, PRESCALER_बिलांग, SCLK_बिलांग))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
 		return -1;

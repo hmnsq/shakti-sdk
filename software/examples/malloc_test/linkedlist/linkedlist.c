@@ -26,14 +26,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+struct बुहोल {
+	int नुमेरो;
+	struct बुहोल *nptr;
 }*head;
 
 void create_list(int n);
 void display_list();
-void delete_node(int position);
+void delete_बुहोल(int position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
@@ -63,7 +63,7 @@ void main()
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_बुहोल(position);
 
 	printf("\nLinked list after deletion\n");
 	display_list();
@@ -78,11 +78,11 @@ void main()
  */
 void create_list(int n)
 {
-	struct node *node, *tmp;
+	struct बुहोल *बुहोल, *tmp;
 	int data,m;
 	char t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (struct बुहोल*)malloc(sizeof(struct बुहोल));
 
 	if(head == NULL)
 	{
@@ -96,15 +96,15 @@ void create_list(int n)
 
 		data = atoi(t);
 
-		head->num = data;
+		head->नुमेरो = data;
 		head->nptr = NULL;
 		tmp = head;
 
 		for(int i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			बुहोल = (struct बुहोल*)malloc(sizeof(struct बुहोल));
 
-			if(node == NULL)
+			if(बुहोल == NULL)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
@@ -114,10 +114,10 @@ void create_list(int n)
 				read_uart_string(uart_instance[0],t);
 
 				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				बुहोल->नुमेरो = data;
+				बुहोल->nptr = NULL;
 
-				tmp->nptr = node;
+				tmp->nptr = बुहोल;
 				tmp = tmp->nptr;
 			}
 		}
@@ -132,7 +132,7 @@ void create_list(int n)
 void display_list()
 {
 	int i = 0;
-	struct node *tmp;
+	struct बुहोल *tmp;
 
 	if(head == NULL)
 	{
@@ -143,7 +143,7 @@ void display_list()
 		tmp = head;
 		while(tmp != NULL) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
+			printf(" Node%d = %d",i,tmp->नुमेरो);
 			printf("->");
 			tmp = tmp->nptr;
 			i++;
@@ -157,9 +157,9 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+void delete_बुहोल(int position)
 {
-	struct node *temp;
+	struct बुहोल *temp;
 
 	if(head == NULL)
 	{
@@ -185,7 +185,7 @@ void delete_node(int position)
 			return;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		struct बुहोल *nptr = temp->nptr->nptr;
 
 		free(temp->nptr);
 		temp->nptr = nptr; 

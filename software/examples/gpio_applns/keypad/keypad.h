@@ -39,11 +39,11 @@
 
 //function prototype
 void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
+void set_सुसि_map(int table[COLNUM][ROWNUM]);
+int get_सुसि();
 int get_col_row(void);
 unsigned int row_pins[ROWNUM];
 unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+int सुसि_map[COLNUM][ROWNUM];
 
 #endif

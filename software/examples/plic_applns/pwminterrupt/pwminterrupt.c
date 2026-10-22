@@ -46,11 +46,11 @@
  * @param unsigned num
  * @return unsigned
  */
-void handle_pwm_interrupt( uint32_t num)
+void handle_pwm_interrupt( uint32_t नुमेरो)
 {
-	if(pwm_check_continuous_mode((6-num)) == 0)
+	if(pwm_check_continuous_mode((6-नुमेरो)) == 0)
 	{
-		set_pwm_control_register((6-num),0x80);
+		set_pwm_control_register((6-नुमेरो),0x80);
 	}
 	log_info("pwm interrupt handled\n");
 }

@@ -42,15 +42,15 @@ Disable Xip for Aardonyx
 
 extern void init(void);
 extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+extern uart_struct *uart_instance[MAX_UART_बिलांग];
 
-extern char _stack_end[];
-extern char _stack[];
+extern char सालानसान_end[];
+extern char सालानसान[];
 extern char _heap[];
 extern char _heap_end[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
+char *सालानसान_end_2=(char *)&सालानसान_end;
+char *सालानसान_start=(char *)&सालानसान;
 char *heap_start=(char *)&_heap;
 char *heap_end=(char *)&_heap_end;
 
@@ -70,10 +70,10 @@ static void section_init(void)
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	while(सालानसान_end_2>=सालानसान_start)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*सालानसान_end_2=0x0;
+		सालानसान_end_2--;
 	}
 #endif
 

@@ -130,11 +130,11 @@ void recieve_gen(uint8_t str[],int len)
  * @param int count- Packet ID of current packet 
  * @param int limit- number of bytes in current packet
  */ 
-void recieve_img(int count,int limit){
+void recieve_img(int बिलांग,int limit){
   uint8_t ptr[256];
   int i=0;
   uint8_t ack_temp[6];
-  get_ack(0,count,ack_temp);
+  get_ack(0,बिलांग,ack_temp);
   send(ack_temp, 6);
   // if limit=6 it means we don't expect any data bytes
   if(limit==6) return;

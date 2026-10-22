@@ -85,7 +85,7 @@
 */
 
 unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+unsigned int i2c_read_हालागा;
 
 /* Struct to access I2C registers as 32 bit registers */
 typedef struct
@@ -127,8 +127,8 @@ void i2c_init(void);
 int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
 int wait_till_I2c_bus_free(i2c_struct *);
 int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
+int sendbytes(i2c_struct *, const char *buf, int बिलांग, int last, int eni);
+int readbytes(i2c_struct *,char *buf, int बिलांग, int last);
 int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
 			   char rdWrCntrl, unsigned long delay);
 int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
@@ -143,6 +143,6 @@ int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
 int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
 		       char delay);
 
-extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
+extern i2c_struct *i2c_instance[MAX_I2_C_बिलांग];
 
 #endif

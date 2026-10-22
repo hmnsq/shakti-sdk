@@ -47,9 +47,9 @@ int main(void){
 
 	for(int i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
+		int read_हालागा= flash_read(read_address);
 		printf("Reading from adddress %x and data \
-		       %x\n",read_address,read_value);
+		       %x\n",read_address,read_हालागा);
 		read_address=read_address+4;
 	}
 	asm volatile ("ebreak");

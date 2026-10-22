@@ -37,7 +37,7 @@ void convert_hex_array()
 {
 	unsigned int  i= 0;
 	int write_data;
-	int count=0;
+	int बिलांग=0;
 
 	FILE *myFile;
 	FILE *Cypress;
@@ -56,12 +56,12 @@ void convert_hex_array()
 	}
 	
 	while (fscanf(myFile, "%x", &write_data) != EOF) {
-		count++;
+		बिलांग++;
 	}
 
 	rewind(myFile);
 
-	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
+	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", बिलांग + 1, बिलांग); 
 
 	while (fscanf(myFile, "%x", &write_data) != EOF)
 	{
@@ -70,7 +70,7 @@ void convert_hex_array()
 
 	fprintf(Cypress,"};\n\n");
 
-	fprintf(Cypress,"#define SIZE %d", count);
+	fprintf(Cypress,"#define SIZE %d", बिलांग);
 
 	fclose(Cypress);
 	fclose(myFile);

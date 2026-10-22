@@ -37,9 +37,9 @@
 #define DS3231_SLAVE_ADDRESS 0XD0
 #define DS3231_REG_OFFSET 0
 #define DS3231_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define DELAY_हालागा 900
+#define PRESCALER_बिलांग 0x1F
+#define SCLK_बिलांग 0x91
 
 char sending_data[50];
 
@@ -100,7 +100,7 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_हालागा, unsigned char length, unsigned long delay)
 {
 	int i = 0, j = 0,  k = 0, status=0;
 	unsigned int temp = 0;
@@ -108,7 +108,7 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 		i2c_write_data(i2c_instance, reg_offset, delay);
 		for(i = 0; i < length; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_data(i2c_instance,  ( *write_हालागा++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
@@ -153,7 +153,7 @@ unsigned int ds3231_decimal_to_hex(unsigned int decimal)
 void intermediate(void)
 {
 	int timeout;
-	unsigned int tempReadValue = 0;
+	unsigned int temp_Read_हालागा = 0;
 	unsigned long delay = 1000;
 	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
 	unsigned char length;
@@ -181,7 +181,7 @@ void intermediate(void)
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	if(config_i2c(I2C, PRESCALER_बिलांग, SCLK_बिलांग))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
 		return -1;
@@ -198,7 +198,7 @@ void intermediate(void)
  * @brief Configures the DS3231
  * @details Reads Date and time information and returns the in string
  */
-const char* values()
+const char* मगा_हालागा()
 {
 	unsigned int read_buf[7] = {0x00};
 

@@ -85,7 +85,7 @@ static void writebyte(unsigned char writeData, unsigned char delay)
 unsigned char readbyte(unsigned char delay)
 {
 	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
+	unsigned char bit_हालागा;
 	unsigned char readData = 0;
         unsigned long readGpioData = 0;
 	readData = read_word(GPIO_DATA_REG);
@@ -96,12 +96,12 @@ unsigned char readbyte(unsigned char delay)
 		readGpioData = read_word(GPIO_DATA_REG)  & SPI_MISO;
 
         if (readGpioData != 0)
-			bitValue = 1;
+			bit_हालागा = 1;
 		else
-			bitValue = 0;
+			bit_हालागा = 0;
 	    
         readData = readData << 1;
-		readData = readData | bitValue;
+		readData = readData | bit_हालागा;
 		
         delay_loop(delay, delay);
 

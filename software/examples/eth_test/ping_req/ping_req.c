@@ -70,23 +70,23 @@ static XEmacLite EmacLite;
  * Change this parameter to limit the number of ping requests sent by this
  * program.
  */
-#define NUM_OF_PING_REQ_PKTS	100	/* Number of ping req it generates */
+#define नुमेरो_OF_PING_REQ_PKTS	100	/* Number of ping req it generates */
 
 #define ECHO_REPLY		0x00	/* Echo reply */
 #define HW_TYPE			0x01	/* Hardware type (10/100 Mbps) */
 #define ARP_REQUEST 		0x01	/* ARP Request bits in Rx packet */
 #define ARP_REPLY 		0x02 	/* ARP status bits indicating reply */
-#define IDEN_NUM		0x02	/* ICMP identifier number */
+#define IDEN_नुमेरो		0x02	/* ICMP identifier number */
 #define IP_VERSION		0x0604	/* IP version ipv4/ipv6 */
 #define BROADCAST_ADDR 		0xFFFF 	/* Broadcast Address */
-#define CORRECT_CHECKSUM_VALUE	0xFFFF	/* Correct checksum value */
+#define CORRECT_CHECKSUM_हालागा	0xFFFF	/* Correct checksum value */
 #define ARP_REQ_PKT_SIZE	0x2A	/* ARP request packet size */
 #define ICMP_PKT_SIZE 		0x4A	/* ICMP packet length 74 Bytes
 					including Src and dest MAC Add */
 #define IP_ADDR_SIZE		4	/* IP Address size in Bytes */
-#define NUM_RX_PACK_CHECK_REQ	10	/* Max num of Rx pack to be checked
+#define नुमेरो_RX_PACK_CHECK_REQ	10	/* Max num of Rx pack to be checked
 					before sending another request */
-#define NUM_PACK_CHECK_RX_PACK	100	/* Max number of pack to be checked
+#define नुमेरो_PACK_CHECK_RX_PACK	100	/* Max number of pack to be checked
 					before to identify a Rx packet */
 #define DELAY			5000000 /* Used to introduce delay */
 
@@ -141,7 +141,7 @@ static int ProcessRecvFrame(XEmacLite *InstancePtr);
 static u16 CheckSumCalculation(u16 *RxFramePtr16, int StartLoc, int Length);
 
 static int CompareData(u16 *LhsPtr, u16 *RhsPtr, int LhsLoc, int RhsLoc,
-			int Count);
+			int बिलांग_2);
 
 /************************** Variable Definitions *****************************/
 
@@ -214,12 +214,12 @@ extern volatile u32 RecvFrameLength;
 /*
  * Variable used to indicate the sequence number of the ICMP(echo) packet.
  */
-int SeqNum;
+int Seq_नुमेरो;
 
 /*
  * Variable used to indicate the number of ping request packets to be send.
  */
-int NumOfPingReqPkts;
+int नुमेरो_Of_Ping_Req_Pkts;
 
 /****************************************************************************/
 /**
@@ -271,14 +271,14 @@ static int EmacLitePingReqExample(u16 DeviceId)
 {
 	int Status;
 	int Index;
-	int Count;
+	int बिलांग_2;
 	int EchoReplyStatus;
 	XEmacLite_Config *ConfigPtr;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
-	SeqNum = 0;
+	Seq_नुमेरो = 0;
 	RecvFrameLength = 0;
 	EchoReplyStatus = XST_FAILURE;
-	NumOfPingReqPkts = NUM_OF_PING_REQ_PKTS;
+	नुमेरो_Of_Ping_Req_Pkts = नुमेरो_OF_PING_REQ_PKTS;
 
 	/*
 	 * Initialize the EmacLite device.
@@ -316,19 +316,19 @@ static int EmacLitePingReqExample(u16 DeviceId)
 	 * Empty any existing receive frames.
 	 */
 	XEmacLite_FlushReceive(EmacLiteInstPtr);
-	while (NumOfPingReqPkts--) {
+	while (नुमेरो_Of_Ping_Req_Pkts--) {
 
 		/*
 		 * Introduce delay.
 		 */
-		Count = DELAY;
-		while (Count--) {
+		बिलांग_2 = DELAY;
+		while (बिलांग_2--) {
 		}
 
 		/*
 		 * Send an ARP or an ICMP packet based on receive packet.
 		 */
-		if (SeqNum == 0) {
+		if (Seq_नुमेरो == 0) {
 			SendArpReqFrame(EmacLiteInstPtr);
 		} else {
 			SendEchoReqFrame(EmacLiteInstPtr);
@@ -337,13 +337,13 @@ static int EmacLitePingReqExample(u16 DeviceId)
 		/*
 		 * Check next 10 packets for the correct reply.
 		 */
-		Index = NUM_RX_PACK_CHECK_REQ;
+		Index = नुमेरो_RX_PACK_CHECK_REQ;
 		while (Index--) {
 
 			/*
 			 * Wait for a Receive packet.
 			 */
-			Count = NUM_PACK_CHECK_RX_PACK;
+			बिलांग_2 = नुमेरो_PACK_CHECK_RX_PACK;
 			while (RecvFrameLength == 0) {
 				RecvFrameLength = XEmacLite_Recv(
 							EmacLiteInstPtr,
@@ -353,7 +353,7 @@ static int EmacLitePingReqExample(u16 DeviceId)
 				 * To avoid infinite loop when no packet is
 				 * received.
 				 */
-				if (Count-- == 0) {
+				if (बिलांग_2-- == 0) {
 					break;
 				}
 			}
@@ -382,9 +382,9 @@ static int EmacLitePingReqExample(u16 DeviceId)
 		 */
 		if (EchoReplyStatus == XST_FAILURE) {
 			xil_printf("Packet No: %d",
-				NUM_OF_PING_REQ_PKTS - NumOfPingReqPkts);
+				नुमेरो_OF_PING_REQ_PKTS - नुमेरो_Of_Ping_Req_Pkts);
 			xil_printf(" Seq NO %d Request timed out\r\n",
-							SeqNum);
+							Seq_नुमेरो);
 		}
 	}
 	return XST_SUCCESS;
@@ -590,8 +590,8 @@ static void SendEchoReqFrame(XEmacLite *InstancePtr)
 	/*
 	 * Add identifier and sequence number to the frame.
 	 */
-	*(TxFramePtr + ICMP_IDEN_FIELD_LOC) = (IDEN_NUM);
-	*(TxFramePtr + (ICMP_IDEN_FIELD_LOC + 1)) = Xil_Htons((u16)(++SeqNum));
+	*(TxFramePtr + ICMP_IDEN_FIELD_LOC) = (IDEN_नुमेरो);
+	*(TxFramePtr + (ICMP_IDEN_FIELD_LOC + 1)) = Xil_Htons((u16)(++Seq_नुमेरो));
 
 	/*
 	 * Add known data to the frame.
@@ -707,10 +707,10 @@ static int ProcessRecvFrame(XEmacLite *InstancePtr)
 			 * Verify checksum, echo reply, identifier number and
 			 * sequence number of the received packet.
 			 */
-			if ((CheckSum == CORRECT_CHECKSUM_VALUE) &&
+			if ((CheckSum == CORRECT_CHECKSUM_हालागा) &&
 			(Xil_Ntohs(*(RxFramePtr + ICMP_ECHO_FIELD_LOC)) == ECHO_REPLY) &&
-			(Xil_Ntohs(*(RxFramePtr + ICMP_IDEN_FIELD_LOC)) == IDEN_NUM) &&
-			(Xil_Ntohs(*(RxFramePtr + (ICMP_SEQ_NO_LOC))) == SeqNum)) {
+			(Xil_Ntohs(*(RxFramePtr + ICMP_IDEN_FIELD_LOC)) == IDEN_नुमेरो) &&
+			(Xil_Ntohs(*(RxFramePtr + (ICMP_SEQ_NO_LOC))) == Seq_नुमेरो)) {
 
 				/*
 				 * Verify data in the received packet with known
@@ -726,9 +726,9 @@ static int ProcessRecvFrame(XEmacLite *InstancePtr)
 			}
 			if (DataWrong != 1) {
 				xil_printf("Packet No: %d ",
-				NUM_OF_PING_REQ_PKTS - NumOfPingReqPkts);
+				नुमेरो_OF_PING_REQ_PKTS - नुमेरो_Of_Ping_Req_Pkts);
 				xil_printf("Seq NO %d Echo Packet received\r\n",
-								SeqNum);
+								Seq_नुमेरो);
 				return XST_SUCCESS;
 			}
 		}
@@ -794,11 +794,11 @@ static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length)
 *
 ******************************************************************************/
 static int CompareData(u16 *LhsPtr, u16 *RhsPtr, int LhsLoc, int RhsLoc,
-								int Count)
+								int बिलांग_2)
 {
 	int Result;
-	while (Count--) {
-		if (*(LhsPtr + LhsLoc + Count) == *(RhsPtr + RhsLoc + Count)) {
+	while (बिलांग_2--) {
+		if (*(LhsPtr + LhsLoc + बिलांग_2) == *(RhsPtr + RhsLoc + बिलांग_2)) {
 			Result = XST_SUCCESS;
 		} else {
 			Result = XST_FAILURE;

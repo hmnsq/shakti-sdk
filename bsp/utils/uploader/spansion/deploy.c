@@ -42,7 +42,7 @@ project's hex file
 void deploy()
 {
 	int read_address = 0x00b00000;
-	double count=0.0;
+	double बिलांग=0.0;
 
 	configure_spi(SPI0_OFFSET);
 	spi_init();

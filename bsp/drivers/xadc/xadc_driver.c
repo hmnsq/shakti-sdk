@@ -61,9 +61,9 @@ void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_voltage(uint32_t value)
+float xadc_onchip_voltage(uint32_t हालागा)
 {
-	return (((value >> 4)*3.0f)/4096.0f );
+	return (((हालागा >> 4)*3.0f)/4096.0f );
 }
 
 /**
@@ -74,9 +74,9 @@ float xadc_onchip_voltage(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_temp(uint32_t value)
+float xadc_onchip_temp(uint32_t हालागा)
 {
-	return (((value/65536.0f)/0.00198421639f ) - 273.15f);
+	return (((हालागा/65536.0f)/0.00198421639f ) - 273.15f);
 }
 
 /**
@@ -85,7 +85,7 @@ float xadc_onchip_temp(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_dedicated_channel(uint32_t value)
+float xadc_dedicated_channel(uint32_t हालागा)
 {
-	return ((value >> 4)/4096.0f );
+	return ((हालागा >> 4)/4096.0f );
 }

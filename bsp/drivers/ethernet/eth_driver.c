@@ -44,8 +44,8 @@ UINTPTR TxBuffPtr;
 UINTPTR RxBuffPtr;
 volatile int FramesTx;
 volatile int FramesRx;
-volatile int TxCount;
-volatile int RxCount;
+volatile int Tx_बिलांग;
+volatile int Rx_बिलांग;
 volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 
 /*
@@ -176,10 +176,10 @@ static INLINE u64 Xil_In64(UINTPTR Addr)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out8(UINTPTR Addr, u8 Value)
+static INLINE void Xil_Out8(UINTPTR Addr, u8 हालागा_2)
 {
 	volatile u8 *LocalAddr = (volatile u8 *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -194,10 +194,10 @@ static INLINE void Xil_Out8(UINTPTR Addr, u8 Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out16(UINTPTR Addr, u16 Value)
+static INLINE void Xil_Out16(UINTPTR Addr, u16 हालागा_2)
 {
 	volatile u16 *LocalAddr = (volatile u16 *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -213,10 +213,10 @@ static INLINE void Xil_Out16(UINTPTR Addr, u16 Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out32(UINTPTR Addr, u32 Value)
+static INLINE void Xil_Out32(UINTPTR Addr, u32 हालागा_2)
 {
 	volatile u32 *LocalAddr = (volatile u32 *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -231,10 +231,10 @@ static INLINE void Xil_Out32(UINTPTR Addr, u32 Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void Xil_Out64(UINTPTR Addr, u64 Value)
+static INLINE void Xil_Out64(UINTPTR Addr, u64 हालागा_2)
 {
 	volatile u64 *LocalAddr = (volatile u64 *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -344,8 +344,8 @@ u16 Xil_Ntohs(u16 Data)
 *		void XEmacLite_WriteReg(u32 BaseAddress, u32 RegOffset,
 *					u32 RegisterValue);
 ******************************************************************************/
-#define XEmacLite_WriteReg(BaseAddress, RegOffset, RegisterValue) \
-	XEmacLite_Out32((BaseAddress) + (RegOffset), (RegisterValue))
+#define XEmacLite_WriteReg(BaseAddress, RegOffset, Register_हालागा) \
+	XEmacLite_Out32((BaseAddress) + (RegOffset), (Register_हालागा))
 
 
 /****************************************************************************/
@@ -455,7 +455,7 @@ u16 Xil_Ntohs(u16 Data)
 
 /************************** Function Prototypes ******************************/
 
-void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned ByteCount);
+void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned Byte_बिलांग);
 u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr);
 
 /*****************************************************************************/
@@ -483,20 +483,20 @@ u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr);
 * The function does not take the different buffers into consideration.
 *
 ******************************************************************************/
-void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned ByteCount)
+void XEmacLite_SendFrame(UINTPTR BaseAddress, u8 *FramePtr, unsigned Byte_बिलांग)
 {
 	u32 Register;
 
 	/*
 	 * Write data to the EmacLite
 	 */
-	XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) (BaseAddress), ByteCount);
+	XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) (BaseAddress), Byte_बिलांग);
 
 	/*
 	 * The frame is in the buffer, now send it
 	 */
 	XEmacLite_WriteReg(BaseAddress,  XEL_TPLR_OFFSET,
-				(ByteCount & (XEL_TPLR_LENGTH_MASK_HI |
+				(Byte_बिलांग & (XEL_TPLR_LENGTH_MASK_HI |
 				XEL_TPLR_LENGTH_MASK_LO)));
 
 
@@ -606,10 +606,10 @@ u16 XEmacLite_RecvFrame(UINTPTR BaseAddress, u8 *FramePtr)
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
+void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned Byte_बिलांग)
 {
 	unsigned Index;
-	unsigned Length = ByteCount;
+	unsigned Length = Byte_बिलांग;
 	volatile u32 AlignBuffer;
 	volatile u32 *To32Ptr;
 	u32 *From32Ptr;
@@ -787,10 +787,10 @@ void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount)
 * @note		None.
 *
 ******************************************************************************/
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount)
+void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned Byte_बिलांग)
 {
 	unsigned Index;
-	unsigned Length = ByteCount;
+	unsigned Length = Byte_बिलांग;
 	volatile u32 AlignBuffer;
 	u32 *To32Ptr;
 	volatile u32 *From32Ptr;
@@ -1014,7 +1014,7 @@ int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 * frame is transmitted.
 *
 ******************************************************************************/
-int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
+int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned Byte_बिलांग)
 {
 	u32 Register;
 	UINTPTR BaseAddress;
@@ -1040,9 +1040,9 @@ int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
 	 * The maximum Tx packet size is
 	 * Ethernet header (14 Bytes) + Maximum MTU (1500 bytes).
 	 */
-	if (ByteCount > XEL_MAX_TX_FRAME_SIZE) {
+	if (Byte_बिलांग > XEL_MAX_TX_FRAME_SIZE) {
 
-		ByteCount = XEL_MAX_TX_FRAME_SIZE;
+		Byte_बिलांग = XEL_MAX_TX_FRAME_SIZE;
 	}
 
 	/*
@@ -1068,14 +1068,14 @@ int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
 		 * Write the frame to the buffer.
 		 */
 		XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) BaseAddress,
-				       ByteCount);
+				       Byte_बिलांग);
 
 
 		/*
 		 * The frame is in the buffer, now send it.
 		 */
 		XEmacLite_WriteReg(BaseAddress, XEL_TPLR_OFFSET,
-					(ByteCount & (XEL_TPLR_LENGTH_MASK_HI |
+					(Byte_बिलांग & (XEL_TPLR_LENGTH_MASK_HI |
 					XEL_TPLR_LENGTH_MASK_LO)));
 
 		/*
@@ -1121,13 +1121,13 @@ int XEmacLite_Send(XEmacLite *InstancePtr, u8 *FramePtr, unsigned ByteCount)
 			 * Write the frame to the buffer.
 			 */
 			XEmacLite_AlignedWrite(FramePtr, (UINTPTR *) BaseAddress,
-					       ByteCount);
+					       Byte_बिलांग);
 
 			/*
 			 * The frame is in the buffer, now send it.
 			 */
 			XEmacLite_WriteReg(BaseAddress, XEL_TPLR_OFFSET,
-					(ByteCount & (XEL_TPLR_LENGTH_MASK_HI |
+					(Byte_बिलांग & (XEL_TPLR_LENGTH_MASK_HI |
 					   XEL_TPLR_LENGTH_MASK_LO)));
 
 			/*
@@ -1563,7 +1563,7 @@ void XEmacLite_FlushReceive(XEmacLite *InstancePtr)
 * @note		This function waits for the completion of MDIO data transfer.
 *
 *****************************************************************************/
-int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
+int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 Reg_नुमेरो,
 			u16 *PhyDataPtr)
 {
 	u32 PhyAddrReg;
@@ -1581,7 +1581,7 @@ int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 		if (PhyAddress <= 31) {
 			return -1;
 		}
-		if (RegNum <= 31) {
+		if (Reg_नुमेरो <= 31) {
 			return -1;
 		}
 
@@ -1599,7 +1599,7 @@ int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 	}
 
 	PhyAddrReg = ((((PhyAddress << XEL_MDIO_ADDRESS_SHIFT) &
-			XEL_MDIO_ADDRESS_MASK) | RegNum) | XEL_MDIO_OP_MASK);
+			XEL_MDIO_ADDRESS_MASK) | Reg_नुमेरो) | XEL_MDIO_OP_MASK);
 	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
 				 XEL_MDIOADDR_OFFSET, PhyAddrReg);
 
@@ -1663,7 +1663,7 @@ int XEmacLite_PhyRead(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 * @note		This function waits for the completion of MDIO data transfer.
 *
 *******************************************************************************/
-int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
+int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 Reg_नुमेरो,
 			u16 PhyData)
 {
 	u32 PhyAddrReg;
@@ -1681,7 +1681,7 @@ int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 	if (PhyAddress <= 31) {
 		return -1;
 	}
-	if (RegNum <= 31) {
+	if (Reg_नुमेरो <= 31) {
 		return -1;
 	}
 
@@ -1697,7 +1697,7 @@ int XEmacLite_PhyWrite(XEmacLite *InstancePtr, u32 PhyAddress, u32 RegNum,
 
 
 	PhyAddrReg = ((((PhyAddress << XEL_MDIO_ADDRESS_SHIFT) &
-			XEL_MDIO_ADDRESS_MASK) | RegNum) & ~XEL_MDIO_OP_MASK);
+			XEL_MDIO_ADDRESS_MASK) | Reg_नुमेरो) & ~XEL_MDIO_OP_MASK);
 	XEmacLite_WriteReg(InstancePtr->EmacLiteConfig.BaseAddress,
 				XEL_MDIOADDR_OFFSET, PhyAddrReg);
 

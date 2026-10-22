@@ -60,9 +60,9 @@ void w25q32()
 		
 	for(int i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("Reading from adddress %x and data \ %x\n",read_address,read_value);
-		*(bram_address+i) = read_value;
+		int read_हालागा= flash_read(read_address);
+		printf("Reading from adddress %x and data \ %x\n",read_address,read_हालागा);
+		*(bram_address+i) = read_हालागा;
 		read_address=read_address+4;
 	}
 	printf("SPI Read Successr\n");

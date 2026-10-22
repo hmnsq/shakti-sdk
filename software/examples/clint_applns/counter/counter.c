@@ -41,7 +41,7 @@
  */
 void main(void){
 
-	uint64_t value = 50000000;
+	uint64_t हालागा = 50000000;
 
 	asm volatile("li      t0, 0x80\t\n"
 		     "csrrs   zero, mie, t0\t\n"
@@ -51,7 +51,7 @@ void main(void){
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	configure_counter(value);
+	configure_counter(हालागा);
 
 	while(1);
 }

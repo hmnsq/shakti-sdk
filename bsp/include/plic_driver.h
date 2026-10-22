@@ -77,7 +77,7 @@ typedef struct
 	uint32_t id; /*id of the interrupt target source*/
 	uint32_t priority; /*priority assigned to it*/
 	interrupt_status_e state; /*state of the interrupt*/
-	uint32_t count; /*number of times this interrupt occured*/
+	uint32_t बिलांग; /*number of times this interrupt occured*/
 } interrupt_data_t;
 
 /* Platform Level Interrupt Controller (PLIC) table
@@ -94,8 +94,8 @@ void isr_default(uint32_t interrupt_id);
 void interrupt_enable(uint32_t interrupt_id);
 void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
 void interrupt_disable(uint32_t interrupt_id);
-void set_interrupt_threshold(uint32_t priority_value);
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id);
+void set_interrupt_threshold(uint32_t priority_हालागा);
+void set_interrupt_priority(uint32_t priority_हालागा, uint32_t int_id);
 void configure_interrupt_pin(uint32_t pin);
 void plic_init(void);
 void configure_interrupt(uint32_t int_id);

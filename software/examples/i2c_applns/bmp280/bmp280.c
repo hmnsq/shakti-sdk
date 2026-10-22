@@ -35,9 +35,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define I2C i2c_instance[1]
 
 #define BMP280_SLAVE_ADDRESS 0xEC	//Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define DELAY_हालागा 900
+#define PRESCALER_बिलांग 0x1F
+#define SCLK_बिलांग 0x91
 #define BMP280_CTRL_MEANS 0xF4
 #define BMP280_NORMAL_MODE 0x26
 #define BMP280_STATUS_REGISTER 0xF3
@@ -121,7 +121,7 @@ int read_bmp280_register(i2c_struct *i2c_instance, unsigned int reg_offset, unsi
  * @param unsigned long *temperature  Reading the temperature value.
  * @param unsigned long delay  Used delay for I2C functionality.
  */
-int read_bmp280_values(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned long *pressure, unsigned long *temperature, unsigned long delay)
+int read_bmp280_मगा_हालागा(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned long *pressure, unsigned long *temperature, unsigned long delay)
 {
 	unsigned char read_buf[6] = {'\0'};
 	int i = 0, j = 0,  k = 0, status=0;
@@ -243,13 +243,13 @@ short read_bmp280_values16(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param unsigned long delay  Used delay for I2C functionality.
  * @return Returns 0 to the main after stopping I2C.
  */
-int write_bmp280_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char write_value, unsigned long delay)
+int write_bmp280_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned char write_हालागा, unsigned long delay)
 {
 	int i = 0, j = 0, k = 0, status=0;
 	unsigned int temp = 0;
 	i2c_send_slave_address(i2c_instance, BMP280_SLAVE_ADDRESS, I2C_WRITE, delay);
 	i2c_write_data(i2c_instance, reg_offset , delay);
-	i2c_write_data(i2c_instance, write_value , delay);
+	i2c_write_data(i2c_instance, write_हालागा , delay);
 
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
@@ -265,7 +265,7 @@ int write_bmp280_register(i2c_struct * i2c_instance, unsigned int reg_offset, un
 int main()
 {
 	int timeout;
-	unsigned int tempReadValue = 0;
+	unsigned int temp_Read_हालागा = 0;
 	unsigned long delay = 1000;
 	unsigned long pressure = 0, temperature = 0;
 	int len;
@@ -273,7 +273,7 @@ int main()
 	i2c_init();
 
 	//Initialises I2C Controller
-	if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+	if(config_i2c(I2C, PRESCALER_बिलांग,SCLK_बिलांग))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
 		return -1;
@@ -284,9 +284,9 @@ int main()
 	write_bmp280_register(I2C, BMP280_CONFIG_REGISTER, 0xC0, delay);
 	write_bmp280_register(I2C, BMP280_CTRL_MEANS, 0x27, delay);
 
-	if(0 == read_bmp280_register(I2C, 0xD0, &tempReadValue, delay))
+	if(0 == read_bmp280_register(I2C, 0xD0, &temp_Read_हालागा, delay))
 	{
-		if (0x58 != tempReadValue)
+		if (0x58 != temp_Read_हालागा)
 		{
 			printf("\n Device Not detected");
 			return -1;
@@ -294,7 +294,7 @@ int main()
 	}
 		
 	write_bmp280_register(I2C, BMP280_RESET_REGISTER, 0xB6, delay);
-	read_bmp280_register(I2C, BMP280_RESET_REGISTER, &tempReadValue, delay);
+	read_bmp280_register(I2C, BMP280_RESET_REGISTER, &temp_Read_हालागा, delay);
 	
 	bmp280_calib_dig_T1 = read_bmp280_values16(I2C, BMP280_REG_DIG_T1, delay);
 	bmp280_calib_dig_T2 = read_bmp280_values16(I2C, BMP280_REG_DIG_T2, delay);
@@ -313,12 +313,12 @@ int main()
 while(1)
 	{
 		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay );     // Set it to NORMAL MODE
-		if(0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		if(0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &temp_Read_हालागा, delay))
 		{
-			if(!(tempReadValue & 0x9))
+			if(!(temp_Read_हालागा & 0x9))
 			{
 			//Read pressure and temperature values.
-			read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
+			read_bmp280_मगा_हालागा(I2C, 0xF7, &pressure, &temperature, delay);
 			}
 		}
 			else

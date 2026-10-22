@@ -40,7 +40,7 @@ volatile uint64_t* mtimecmp =  (MTIMECMP);
  * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines.
  * @return unsigned long
  */
-static uint32_t mtime_low(void)
+static uint32_t mtime_माबाबा(void)
 {
   return *(uint32_t *)(MTIME);
 }
@@ -55,7 +55,7 @@ Get each 32 bit and append for full timer value
  *          Incase of 64 bit core this has to be appended with lower 32 bits adn sent.
  * @return unsigned 32bit int
  */
-static uint32_t mtime_high(void)
+static uint32_t mtime_माताअस(void)
 {
   return *(volatile uint32_t *)(MTIME + 4);
 }
@@ -66,13 +66,13 @@ static uint32_t mtime_high(void)
  *          and lower 32 bits of mtime and return
  * @return unsigned 64bit int
  */
-uint64_t get_timer_value()
+uint64_t get_timer_हालागा()
 {
 
 #if __riscv_xlen == 64
-   return ( ((uint64_t)mtime_high() << 32) | mtime_low());
+   return ( ((uint64_t)mtime_माताअस() << 32) | mtime_माबाबा());
 #else
-  return mtime_low();
+  return mtime_माबाबा();
 #endif
 }
 
@@ -81,11 +81,11 @@ uint64_t get_timer_value()
  * @details sets the mtimecmp to current mtime + delta
  * @param unsigned 64bit int (delta value after which interrupt happens)
  */
-void configure_counter( uint64_t value)
+void configure_counter( uint64_t हालागा)
 {
 	log_trace("\nconfigure_counter entered\n");
 
-	*mtimecmp = *mtime + value;
+	*mtimecmp = *mtime + हालागा;
 
 	log_debug("mtimecmp value = %d\n", *mtimecmp);
 	log_debug("mtime value = %d\n", *mtime);

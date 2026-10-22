@@ -35,13 +35,13 @@
 #define DELAY2 50
 
 
-#define DELAY_VALUE 900
+#define DELAY_हालागा 900
 #if 1
-#define PRESCALER_COUNT 24
-#define SCLK_COUNT 9
+#define PRESCALER_बिलांग 24
+#define SCLK_बिलांग 9
 #else
-#define PRESCALER_COUNT 8
-#define SCLK_COUNT 6
+#define PRESCALER_बिलांग 8
+#define SCLK_बिलांग 6
 #endif
 #define I2C i2c_instance[1]
 #define RD_DATA_CNT 14
@@ -172,7 +172,7 @@ int read_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned long delay)
+int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_हालागा, unsigned long delay)
 {
 	i2c_instance->control = I2C_IDLE;
 	delay_loop(DELAY1, DELAY2);
@@ -180,8 +180,8 @@ int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, u
 //	delay_loop(DELAY1, DELAY2);
 	i2c_write_data(i2c_instance, reg_offset, delay);
 //	delay_loop(DELAY1, DELAY2);
-	log_debug("\n write value: %x", *write_value);
-	i2c_write_data(i2c_instance,  ( *write_value & 0xff), delay);
+	log_debug("\n write value: %x", *write_हालागा);
+	i2c_write_data(i2c_instance,  ( *write_हालागा & 0xff), delay);
 	//Stops the I2C transaction to start reading the temperature value.
 //	delay_loop(DELAY1, DELAY2);
 	i2c_instance->control = I2C_STOP;
@@ -201,7 +201,7 @@ int write_mpu6050_register(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_हालागा, unsigned char length, unsigned long delay)
 {
 	int i = 0, j = 0,  k = 0, status=0;
 	unsigned int temp = 0;
@@ -212,13 +212,13 @@ int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 	
 	if(1 == length)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value	& 0xff), delay);
+		i2c_write_data(i2c_instance,  ( *write_हालागा	& 0xff), delay);
 	}
 	else
 	{
 		for(i = 0; i < length; i++)
 		{
-			i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
+			i2c_write_data(i2c_instance, (*write_हालागा++ & 0xff), delay);
 
 		}
 	}
@@ -232,7 +232,7 @@ int write_mpu6050_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 /*
    soft float library need to be added, if hardfloat not there
  */
-void measuring_value(unsigned long delay)
+void measuring_हालागा(unsigned long delay)
 {
 	// read accelerometer data
 	read_mpu6050_registers(I2C, MPU_6050_OUTPUT_BEGIN, readbuf, RD_DATA_CNT, delay);
@@ -266,7 +266,7 @@ void calculate_imu_error(unsigned long delay)
 
 	while(c<200)
 	{
-		measuring_value(delay);
+		measuring_हालागा(delay);
 
 		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2)))* 180 / PI;
 		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2)))* 180 / PI;
@@ -313,7 +313,7 @@ int main()
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	if(config_i2c(I2C, PRESCALER_बिलांग, SCLK_बिलांग))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
 			return -1;
@@ -344,7 +344,7 @@ int main()
 	log_debug("\n Entering While loop");
 	while(1)
 	{
-		measuring_value(delay);
+		measuring_हालागा(delay);
 		delay_loop(2000, 1000);
 	}
 

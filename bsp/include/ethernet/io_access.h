@@ -158,10 +158,10 @@ static INLINE uint64_t get_io64(UINTPTR Addr)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io8(UINTPTR Addr, uint8_t Value)
+static INLINE void set_io8(UINTPTR Addr, uint8_t हालागा_2)
 {
 	volatile uint8_t *LocalAddr = (volatile uint8_t *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -176,10 +176,10 @@ static INLINE void set_io8(UINTPTR Addr, uint8_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io16(UINTPTR Addr, uint16_t Value)
+static INLINE void set_io16(UINTPTR Addr, uint16_t हालागा_2)
 {
 	volatile uint16_t *LocalAddr = (volatile uint16_t *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -195,10 +195,10 @@ static INLINE void set_io16(UINTPTR Addr, uint16_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io32(UINTPTR Addr, uint32_t Value)
+static INLINE void set_io32(UINTPTR Addr, uint32_t हालागा_2)
 {
 	volatile uint32_t *LocalAddr = (volatile uint32_t *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -213,10 +213,10 @@ static INLINE void set_io32(UINTPTR Addr, uint32_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io64(UINTPTR Addr, uint64_t Value)
+static INLINE void set_io64(UINTPTR Addr, uint64_t हालागा_2)
 {
 	volatile uint64_t *LocalAddr = (volatile uint64_t *)Addr;
-	*LocalAddr = Value;
+	*LocalAddr = हालागा_2;
 }
 
 /*****************************************************************************/
@@ -234,18 +234,18 @@ static INLINE void set_io64(UINTPTR Addr, uint64_t Value)
  *        	- FAILURE on failure
  *
  *****************************************************************************/
-static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
+static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 हालागा_2)
 {
 	u32 ReadReg;
 	u32 ReadRegTemp;
 	u32 Status = (u32)FAILURE;
 
-	Xil_Out32(Addr, Value);
+	Xil_Out32(Addr, हालागा_2);
 
 	ReadReg = Xil_In32(Addr);
 	ReadRegTemp = Xil_In32(Addr);
 
-	if( (ReadReg == Value) && (ReadRegTemp == Value) ) {
+	if( (ReadReg == हालागा_2) && (ReadRegTemp == हालागा_2) ) {
 		Status = (u32)SUCCESS;
 	}
 
@@ -293,8 +293,8 @@ static INLINE u16 Xil_In16LE(UINTPTR Addr)
 static INLINE u16 Xil_In16BE(UINTPTR Addr)
 #endif
 {
-	u16 value = Xil_In16(Addr);
-	return Xil_EndianSwap16(value);
+	u16 हालागा = Xil_In16(Addr);
+	return Xil_EndianSwap16(हालागा);
 }
 
 #if defined (__MICROBLAZE__)
@@ -307,36 +307,36 @@ static INLINE u32 Xil_In32LE(UINTPTR Addr)
 static INLINE u32 Xil_In32BE(UINTPTR Addr)
 #endif
 {
-	u32 value = Xil_In32(Addr);
-	return Xil_EndianSwap32(value);
+	u32 हालागा = Xil_In32(Addr);
+	return Xil_EndianSwap32(हालागा);
 }
 
 #if defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
+static INLINE void Xil_Out16BE(UINTPTR Addr, u16 हालागा_2)
 #else
-static INLINE void Xil_Out16LE(UINTPTR Addr, u16 Value)
+static INLINE void Xil_Out16LE(UINTPTR Addr, u16 हालागा_2)
 #endif
 #else
-static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
+static INLINE void Xil_Out16BE(UINTPTR Addr, u16 हालागा_2)
 #endif
 {
-	Value = Xil_EndianSwap16(Value);
-	Xil_Out16(Addr, Value);
+	हालागा_2 = Xil_EndianSwap16(हालागा_2);
+	Xil_Out16(Addr, हालागा_2);
 }
 
 #if defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
+static INLINE void Xil_Out32BE(UINTPTR Addr, u32 हालागा_2)
 #else
-static INLINE void Xil_Out32LE(UINTPTR Addr, u32 Value)
+static INLINE void Xil_Out32LE(UINTPTR Addr, u32 हालागा_2)
 #endif
 #else
-static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
+static INLINE void Xil_Out32BE(UINTPTR Addr, u32 हालागा_2)
 #endif
 {
-	Value = Xil_EndianSwap32(Value);
-	Xil_Out32(Addr, Value);
+	हालागा_2 = Xil_EndianSwap32(हालागा_2);
+	Xil_Out32(Addr, हालागा_2);
 }
 
 #ifdef __cplusplus

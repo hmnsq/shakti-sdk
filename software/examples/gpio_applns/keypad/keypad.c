@@ -34,17 +34,17 @@
 /* global variable definition*/
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
+int सुसि = -1;
 int col_row = -1;
 
 unsigned int row_pins[ROWNUM];
 unsigned int col_pins[COLNUM];
 unsigned int col[4]={0, 1, 2, 3};
 unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+int सुसि_map[COLNUM][ROWNUM];
 
 
-int  key_table[4][4] =
+int  सुसि_table[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -75,13 +75,13 @@ void set_pins(unsigned int*  row, unsigned int* col)
  * @details Fills the passed array values into key_map array.
  * @param int table
  */
-void set_key_map(int table[COLNUM][ROWNUM])
+void set_सुसि_map(int table[COLNUM][ROWNUM])
 {
 	for(int i = 0 ; i < COLNUM ; i++)
 	{
 		for(int j = 0 ; j < ROWNUM ; j++)
 		{
-			key_map[i][j] = table[i][j];
+			सुसि_map[i][j] = table[i][j];
 		}
 	}
 }
@@ -92,7 +92,7 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * and returns the decoded key value.
  * @return Key value pressed
  */
-int get_key_another_way()
+int get_सुसि_another_way()
 {
 
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
@@ -105,7 +105,7 @@ int get_key_another_way()
 		{
 			if ( ( read_word(row_pins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
 			{
-				return key_map[i][j];
+				return सुसि_map[i][j];
 			}
 		}
 		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
@@ -121,9 +121,9 @@ int get_key_another_way()
  * @param int col row
  * @return Key value pressed
  */
-int get_key(int col_row)
+int get_सुसि(int col_row)
 {
-    return key_map[col_row>>16][0xFFFF & col_row];
+    return सुसि_map[col_row>>16][0xFFFF & col_row];
 }
 
 /** @fn int get_col_row(void)
@@ -135,7 +135,7 @@ int get_key(int col_row)
 int get_col_row(void)
 {
 	int col_row = 0;
-	unsigned long read_value = 0;
+	unsigned long read_हालागा = 0;
 
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
 
@@ -145,11 +145,11 @@ int get_col_row(void)
 
 		for(int j = 0 ; j < ROWNUM ; j++)
 		{
-			read_value =  read_word(GPIO_DATA_REG);
+			read_हालागा =  read_word(GPIO_DATA_REG);
 
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 )
+			if( ( read_हालागा & (1 << row_pins[j] ) ) == 0 )
 			{
-					return key_map[i][j];
+					return सुसि_map[i][j];
 			}
 		}
 
@@ -167,7 +167,7 @@ void gpio_init()
 {
 	set_pins(row, col);
 
-	set_key_map(key_table);
+	set_सुसि_map(सुसि_table);
 
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
 	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);

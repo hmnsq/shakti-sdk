@@ -294,7 +294,7 @@ extern void Instructions(VOID);
 extern void IsYeqX(VOID);
 extern void NewD(VOID);
 extern void Pause(VOID);
-extern void PrintIfNPositive(VOID);
+extern void इलिम्बाग_If_NPositive(VOID);
 extern void SR3750(VOID);
 extern void SR3980(VOID);
 extern void TstPtUf(VOID);
@@ -1007,7 +1007,7 @@ void part4(VOID){
 	TstCond (Flaw, !(GMult == No || GDiv == No || GAddSub == No ||
 			RMult == Other || RDiv == Other || RAddSub == Other),
 		"lack(s) of guard digits or failure(s) to correctly round or chop\n\
-(noted above) count as one flaw in the final tally below");
+(noted above) बिलांग as one flaw in the final tally below");
 	/*=============================================*/
 	Milestone = 60;
 	/*=============================================*/
@@ -1285,7 +1285,7 @@ void part5(VOID){
 			I = - 4;
 			}
 		} while ( ! Break);
-	PrintIfNPositive();
+	इलिम्बाग_If_NPositive();
 	N1 = N;
 	N = 0;
 	Z = A1;
@@ -1317,7 +1317,7 @@ void part5(VOID){
 		printf("Errors like this may invalidate financial calculations\n");
 		printf("\tinvolving interest rates.\n");
 		}
-	PrintIfNPositive();
+	इलिम्बाग_If_NPositive();
 	N += N1;
 	if (N == 0) printf("... no discrepancies found.\n");
 	if (N > 0) Pause();
@@ -1660,7 +1660,7 @@ void part7(VOID){
 		if (Z < One) Break = True;
 		else Z = AInvrse;
 		} while ( ! (Break));
-	PrintIfNPositive();
+	इलिम्बाग_If_NPositive();
 	if (N == 0) printf(" ... no discrepancies found.\n");
 	printf("\n");
 	
@@ -1709,7 +1709,7 @@ overflow:
 		}
 	printf("Overflow threshold is V  = %d .\n", V);
 	if (I) printf("Overflow saturates at V0 = %d .\n", V0);
-	else printf("There is no saturation value because \
+	else printf("There is no saturation हालागा because \
 the system traps on overflow.\n");
 	V9 = V * One;
 	printf("No Overflow should be signaled for V * 1 = %d\n", V9);
@@ -1847,7 +1847,7 @@ int part8(VOID){
 	Pause();
 	printf("\n");
 	{
-		static char *msg[] = {
+		static char *मेनसाहे[] = {
 			"FAILUREs  encountered =",
 			"SERIOUS DEFECTs  discovered =",
 			"DEFECTs  discovered =",
@@ -1855,7 +1855,7 @@ int part8(VOID){
 		int i;
 		for(i = 0; i < 4; i++) if (ErrCnt[i])
 			printf("The number of  %-29s %d.\n",
-				msg[i], ErrCnt[i]);
+				मेनसाहे[i], ErrCnt[i]);
 		}
 	printf("\n");
 	if ((ErrCnt[Failure] + ErrCnt[Serious] + ErrCnt[Defect]
@@ -1954,10 +1954,10 @@ int K;
 char *T;
 #endif
 {
-	static char *msg[] = { "FAILURE", "SERIOUS DEFECT", "DEFECT", "FLAW" };
+	static char *मेनसाहे[] = { "FAILURE", "SERIOUS DEFECT", "DEFECT", "FLAW" };
 
 	ErrCnt [K] = ErrCnt [K] + 1;
-	printf("%s:  %s", msg[K], T);
+	printf("%s:  %s", मेनसाहे[K], T);
 	}
 
 
@@ -2062,7 +2062,7 @@ SR3980(VOID)
 	}
 
  void
-PrintIfNPositive(VOID)
+इलिम्बाग_If_NPositive(VOID)
 {
 	if (N > 0) printf("Similar discrepancies have occurred %d times.\n", N);
 	}

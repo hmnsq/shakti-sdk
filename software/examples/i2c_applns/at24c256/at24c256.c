@@ -33,9 +33,9 @@
 #include "uart.h"
 
 #define AT24C256_SLAVE_ADDRESS 0xA0 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#define DELAY_हालागा 900
+#define PRESCALER_बिलांग 0x1F
+#define SCLK_बिलांग 0x91
 #define I2C i2c_instance[0]
 
 /** @fn int read_eeprom_address(i2c_struct * i2c_instance, unsigned int address, unsigned long delay)
@@ -139,7 +139,7 @@ int read_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t write_value, unsigned long delay)
+int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t write_हालागा, unsigned long delay)
 {
 	int i = 0, j = 0, k = 0, status=0;
 	unsigned int temp = 0;
@@ -150,7 +150,7 @@ int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t wr
 	//Writes the pointer to lsb address that needs to be read
 	i2c_write_data(i2c_instance, ( ( address >> 0 ) & 0xFF), delay);
 
-	i2c_write_data(i2c_instance, ( write_value & 0xff), delay);
+	i2c_write_data(i2c_instance, ( write_हालागा & 0xff), delay);
 
 	//Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
@@ -166,7 +166,7 @@ int write_eeprom_address(i2c_struct * i2c_instance, uint16_t address, uint8_t wr
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_value, uint16_t length, uint32_t delay)
+int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t *write_हालागा, uint16_t length, uint32_t delay)
 {
 	int i = 0, j = 0, k = 0, status=0;
 	unsigned int temp = 0;
@@ -183,7 +183,7 @@ int write_eeprom_locations(i2c_struct * i2c_instance, uint16_t address, uint8_t 
 			//Writes the pointer to lsb address that needs to be read
 			i2c_write_data(i2c_instance, (( address >> 0 ) & 0xFF), delay);
 		}
-		i2c_write_data(i2c_instance, (*write_value++ & 0xff), delay);
+		i2c_write_data(i2c_instance, (*write_हालागा++ & 0xff), delay);
 		address ++;
 
 		if(0 == (address % 64) )
@@ -211,9 +211,9 @@ int main()
 	uint16_t address = 0;
 	uint8_t read_data = 0;
 	uint8_t write_data = 0;
-	uint8_t count = 0;
-	uint8_t write_value[256] = {'\0'};
-	uint8_t read_value[256] = {'\0'};
+	uint8_t बिलांग = 0;
+	uint8_t write_हालागा[256] = {'\0'};
+	uint8_t read_हालागा[256] = {'\0'};
 	uint32_t data_read = 0, data_write = 0;
 
 	log_debug("\tI2C: AT24C256 - EEPROM test\n");
@@ -231,7 +231,7 @@ int main()
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	if(config_i2c(I2C, PRESCALER_बिलांग, SCLK_बिलांग))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
 		return -1;
@@ -260,27 +260,27 @@ int main()
 
 	for(i = 0; i < length; i++)
 	{
-		write_value[i] = i;
-		data_write = write_value[i];
+		write_हालागा[i] = i;
+		data_write = write_हालागा[i];
 		log_error("\n Write Value: %x", data_write);
 	}
 
-	write_eeprom_locations(I2C, address, &write_value, length, delay);
+	write_eeprom_locations(I2C, address, &write_हालागा, length, delay);
 	address = 0;
-	read_eeprom_locations(I2C, address, &read_value, length, delay);
+	read_eeprom_locations(I2C, address, &read_हालागा, length, delay);
 
 	for (i = 0; i < length; i++)
 	{
-		data_write = write_value[i];
-		data_read = read_value[i];
+		data_write = write_हालागा[i];
+		data_read = read_हालागा[i];
 
 		log_info("\n wv: %x; rv: %x", data_write, data_read );
 
-		if(write_value[i] != read_value[i])
-			count++;
+		if(write_हालागा[i] != read_हालागा[i])
+			बिलांग++;
 	}
 
-	if(0 != count )
+	if(0 != बिलांग )
 		printf("\n Write failed");
 	else
 		printf("\n I2C test passed");

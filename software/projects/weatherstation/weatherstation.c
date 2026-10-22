@@ -45,7 +45,7 @@
 #include "pinmux.h"
 
 #define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave
-#define API_KEY   "PPI6OVOI1A2LGXMZ"
+#define API_सुसि   "PPI6OVOI1A2LGXMZ"
 #define ESP_UART uart_instance[1]
 /**
   * @fn int write_to_esp8266(char *data)
@@ -166,7 +166,7 @@ void transmit_data(int temperature) {
 
 	char data[200];
 	char sendData[76];
-	sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_KEY,temperature);
+	sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_सुसि,temperature);
 	//printf("\n send data %s\n",sendData);
 	// Connect to Wifi using esp8266
 
@@ -216,7 +216,7 @@ void main()
 	//int baudrate = 9600;
 	int baudrate = 115200;
 	int temperature = 24;
-	int transmit_count = 0;
+	int transmit_बिलांग = 0;
 	char data[200];
    	printf("\n setting PIN MUX config to 2 .... \n");
     	*pinmux_config_reg = 0x5;
@@ -228,7 +228,7 @@ void main()
 	delay(3);
 	setup_esp8266();
 	while (1) {
- 		temperature = temperature_value();
+ 		temperature = temperature_हालागा();
 		if (temperature != 999)
 			transmit_data(temperature); 
 		delay(60);

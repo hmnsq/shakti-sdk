@@ -32,7 +32,7 @@
 #include "gpio_i2c.h"
 
 #define CDCE913_SLAVE_ADDRESS 0xCA
-#define DELAY_COUNT 50
+#define DELAY_बिलांग 50
 #define _50MHZ
 //#define _75MHZ
 //#define _100MHZ
@@ -47,19 +47,19 @@
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int reg_count, unsigned int *write_data, unsigned long delay)
+unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int reg_बिलांग, unsigned int *write_data, unsigned long delay)
 {
 	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_WRITE, delay);
-	if(reg_count > 1)
+	if(reg_बिलांग > 1)
 		I2cWriteData(reg_offset, delay);
 	else
 		I2cWriteData(reg_offset | 0x80, delay);
-	I2cWriteData(reg_count, delay);
+	I2cWriteData(reg_बिलांग, delay);
 
-	for(int i = 0; i < reg_count; i++)
+	for(int i = 0; i < reg_बिलांग; i++)
 	{
 		I2cWriteData(*write_data, delay);
-		if(reg_count > 1)
+		if(reg_बिलांग > 1)
 			*write_data++;
 	}
 	I2cStop(delay);
@@ -71,14 +71,14 @@ unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int r
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int cdce913_read_all_registers(unsigned int reg_offset, unsigned int reg_count, unsigned long delay)
+unsigned int cdce913_read_all_registers(unsigned int reg_offset, unsigned int reg_बिलांग, unsigned long delay)
 {
 	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
+	unsigned short read_हालागा_2 = 0;
 
 	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_WRITE, delay);
 
-	if(reg_count > 1)
+	if(reg_बिलांग > 1)
 		I2cWriteData(reg_offset, delay);
 	else
 		I2cWriteData(reg_offset | 0x80, delay);
@@ -86,9 +86,9 @@ unsigned int cdce913_read_all_registers(unsigned int reg_offset, unsigned int re
 	I2cStart(delay);
 	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_READ, delay);
 
-	if(reg_count > 1)
+	if(reg_बिलांग > 1)
 	{
-		for(int i = 0; i < reg_count; i++)
+		for(int i = 0; i < reg_बिलांग; i++)
 		{
 			readBuf = I2cReadDataAck(delay);
 			printf("\n Read Value: %x", readBuf);
@@ -147,26 +147,26 @@ void main()
 #endif
 
 	unsigned int eeprom_write = 0;
-	unsigned int read_value = 0xff;
+	unsigned int read_हालागा = 0xff;
 
 	printf("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	cdce913_write_all_registers(write_buf1[0], write_buf1[1], &write_buf1[2], DELAY_COUNT);
-	cdce913_write_all_registers(write_buf2[0], write_buf2[1], &write_buf2[2], DELAY_COUNT);
+	cdce913_write_all_registers(write_buf1[0], write_buf1[1], &write_buf1[2], DELAY_बिलांग);
+	cdce913_write_all_registers(write_buf2[0], write_buf2[1], &write_buf2[2], DELAY_बिलांग);
 
 	eeprom_write = 0x21;
-	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_COUNT);
+	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_बिलांग);
 
 	while(1)
 	{
-		read_value = cdce913_read_all_registers(0x02, 1, DELAY_COUNT);
-		if(0 == (read_value & 0x40) )
+		read_हालागा = cdce913_read_all_registers(0x02, 1, DELAY_बिलांग);
+		if(0 == (read_हालागा & 0x40) )
 			break;
 	}
 	eeprom_write = 0x20;
-	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_COUNT);
+	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_बिलांग);
 
 	printf("\n After Write");
 
@@ -174,7 +174,7 @@ void main()
 	{
 		if  ( (i >= 7) && (i <= 15) )
 			continue;
-		cdce913_read_all_registers(i, 1, DELAY_COUNT);
+		cdce913_read_all_registers(i, 1, DELAY_बिलांग);
 		delay_loop(1000,2000);
 	}
 

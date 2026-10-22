@@ -179,7 +179,7 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
 unsigned char I2cReadByte(unsigned char delay)
 {
 	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
+	unsigned char bit_हालागा;
 	unsigned char readData = 0;
   unsigned long readGpioData = 0;
 	readData = read_word(GPIO_DATA_REG);
@@ -194,11 +194,11 @@ unsigned char I2cReadByte(unsigned char delay)
 //		d1 = sda;
 		readGpioData = read_word(GPIO_DATA_REG)  & I2C_SDA;
 		if (readGpioData != 0)
-			bitValue = 1;
+			bit_हालागा = 1;
 		else
-			bitValue = 0;
+			bit_हालागा = 0;
 	    readData = readData << 1;
-		readData = readData | bitValue;
+		readData = readData | bit_हालागा;
 		delay_loop(delay, delay);
 
 	//	scl=0;
@@ -484,13 +484,13 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  * @param last decides whether to stop operation or not
  * @return int (No. of values(bytes) read)
  */
-int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
+int I2c_shakti_readbytes(char *buf, int बिलांग, int last, unsigned char delay)
 {
 	printf("start reading the slave device\n");
 	int i = 0;
 #ifdef PCF8584
-	for (i = 0; i <= count; i++) {
-		if (i != 0 && i < count) {
+	for (i = 0; i <= बिलांग; i++) {
+		if (i != 0 && i < बिलांग) {
 			readbuf[i]=I2cReadDataAck(delay);
 		}
 		else if(i==0) I2cReadDataAck(delay);//dummy read
@@ -503,7 +503,7 @@ int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
 	}
 	return i-1; //excluding the dummy read
 #else
-	for (i = 0; i < count-1; i++)
+	for (i = 0; i < बिलांग-1; i++)
 		*(buf + i) = I2cReadDataAck(delay);
 	*(buf + i) = I2cReadDataNack(delay);
 

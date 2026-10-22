@@ -51,17 +51,17 @@ void spi_dac()
 	log_debug("SPI init done\n");
 
 	waitfor(200);
-	write_dac_value(0xfff);
+	write_dac_हालागा(0xfff);
 
 	log_debug("\nDac Value Written\n");
 
 	while(1)
 	{
-		write_dac_value(0xFFF);
+		write_dac_हालागा(0xFFF);
 		log_debug("Dac Value Written - 4096\n");
 
 		delay_loop(0x1750, 0x1750);
-		write_dac_value(0x0);
+		write_dac_हालागा(0x0);
 		log_debug("Dac Value Written - 0\n");
 
 		delay_loop(0x1750, 0x1750);
@@ -74,9 +74,9 @@ void spi_dac()
  * @param dac_value
  * @return One.
  */
-int write_dac_value(unsigned dac_value)
+int write_dac_हालागा(unsigned dac_हालागा)
 {
-	int data1 = ((0x3 << 28) | (dac_value << 16));
+	int data1 = ((0x3 << 28) | (dac_हालागा << 16));
 
 	log_info("\n Data value written: %x", data1);
 

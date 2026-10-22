@@ -56,17 +56,17 @@ void interrupt_complete(uint32_t interrupt_id)
 
 	*claim_addr = interrupt_id;
 	hart0_interrupt_matrix[interrupt_id].state = SERVICED;
-	hart0_interrupt_matrix[interrupt_id].count++;
+	hart0_interrupt_matrix[interrupt_id].बिलांग++;
 
 	log_debug("interrupt id %d, state changed to %d\n", interrupt_id,
 		  hart0_interrupt_matrix[interrupt_id].state);
 
-	log_debug("interrupt id = %x \n reset to default values state = %x \
-		  \n priority = %x\n count = %x\n", \
+	log_debug("interrupt id = %x \n reset to default मगा_हालागा state = %x \
+		  \n priority = %x\n बिलांग = %x\n", \
 		  hart0_interrupt_matrix[interrupt_id].id, \
 		  hart0_interrupt_matrix[interrupt_id].state, \
 		  hart0_interrupt_matrix[interrupt_id].priority, \
-		  hart0_interrupt_matrix[interrupt_id].count);
+		  hart0_interrupt_matrix[interrupt_id].बिलांग);
 
 	log_trace("interrupt_complete exited\n");
 }
@@ -187,7 +187,7 @@ void isr_default(uint32_t interrupt_id)
 void interrupt_enable(uint32_t interrupt_id)
 {
 	uint8_t *interrupt_enable_addr;
-	uint8_t current_value = 0x00, new_value;
+	uint8_t current_हालागा = 0x00, new_हालागा;
 
 	log_trace("\ninterrupt_enable entered \n");
 
@@ -199,17 +199,17 @@ void interrupt_enable(uint32_t interrupt_id)
 			PLIC_ENABLE_OFFSET +
 			((interrupt_id) >> 3));
 
-	current_value = *interrupt_enable_addr;
+	current_हालागा = *interrupt_enable_addr;
 
 	log_debug("interrupt_enable_addr = %x current_value = %x \n", \
-			interrupt_enable_addr, current_value);
+			interrupt_enable_addr, current_हालागा);
 
 	/*set the bit corresponding to the interrupt src*/
-	new_value = current_value | (0x1 << (interrupt_id % 8));
+	new_हालागा = current_हालागा | (0x1 << (interrupt_id % 8));
 
-	*((uint8_t*)interrupt_enable_addr) = new_value;
+	*((uint8_t*)interrupt_enable_addr) = new_हालागा;
 
-	log_debug("value read: new_value = %x\n", new_value);
+	log_debug("value read: new_value = %x\n", new_हालागा);
 
 	log_trace("\ninterrupt_enable exited \n");
 }
@@ -223,7 +223,7 @@ void interrupt_enable(uint32_t interrupt_id)
 void interrupt_disable(uint32_t interrupt_id)
 {
 	uint8_t *interrupt_disable_addr = 0;
-	uint8_t current_value = 0x00, new_value;
+	uint8_t current_हालागा = 0x00, new_हालागा;
 
 	log_trace("\ninterrupt_disable entered \n");
 
@@ -236,15 +236,15 @@ void interrupt_disable(uint32_t interrupt_id)
 					      PLIC_ENABLE_OFFSET +
 					      (interrupt_id >> 3));
 
-	current_value = *interrupt_disable_addr;
+	current_हालागा = *interrupt_disable_addr;
 
 	log_debug("interrupt_disable_addr = %x current_value = %x \n",
-		  interrupt_disable_addr, current_value);
+		  interrupt_disable_addr, current_हालागा);
 
 	/*unset the bit corresponding to the interrupt src*/
-	new_value = current_value & (~(0x1 << (interrupt_id % 8)));
+	new_हालागा = current_हालागा & (~(0x1 << (interrupt_id % 8)));
 
-	*interrupt_disable_addr = new_value;
+	*interrupt_disable_addr = new_हालागा;
 
 	hart0_interrupt_matrix[interrupt_id].state = INACTIVE;
 
@@ -259,7 +259,7 @@ void interrupt_disable(uint32_t interrupt_id)
  * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is ignored.
  * @param uint32_t priority_value
  */
-void set_interrupt_threshold(uint32_t priority_value)
+void set_interrupt_threshold(uint32_t priority_हालागा)
 {
 	log_trace("\nset interrupt_threshold entered\n");
 
@@ -268,7 +268,7 @@ void set_interrupt_threshold(uint32_t priority_value)
 	interrupt_threshold_priority = (uint32_t *) (PLIC_BASE_ADDRESS +
 						     PLIC_THRESHOLD_OFFSET);
 
-	*interrupt_threshold_priority = priority_value;
+	*interrupt_threshold_priority = priority_हालागा;
 
 	log_debug("plic threshold set to %d\n", *interrupt_threshold_priority);
 
@@ -281,9 +281,9 @@ void set_interrupt_threshold(uint32_t priority_value)
  * @param uint32_t priority_value
  * @param uint32_t int_id
  */
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
+void set_interrupt_priority(uint32_t priority_हालागा, uint32_t int_id)
 {
-	log_trace("\n set interrupt priority entered %x\n", priority_value);
+	log_trace("\n set interrupt priority entered %x\n", priority_हालागा);
 
 	uint32_t * interrupt_priority_address;
 
@@ -300,7 +300,7 @@ void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
 
 	log_debug("current data at interrupt_priority_address = %x\n", *interrupt_priority_address);
 
-	*interrupt_priority_address = priority_value;
+	*interrupt_priority_address = priority_हालागा;
 
 	log_debug(" new data at interrupt_priority_address = %x\n", *interrupt_priority_address);
 
@@ -367,14 +367,14 @@ void plic_init()
 	hart0_interrupt_matrix[0].state = INACTIVE;
 	hart0_interrupt_matrix[0].id = 0;
 	hart0_interrupt_matrix[0].priority = 0;
-	hart0_interrupt_matrix[0].count = 0;
+	hart0_interrupt_matrix[0].बिलांग = 0;
 
 	for(int_id = 1; int_id < PLIC_MAX_INTERRUPT_SRC; int_id++)
 	{
 		hart0_interrupt_matrix[int_id].state = INACTIVE;
 		hart0_interrupt_matrix[int_id].id = int_id;
 		hart0_interrupt_matrix[int_id].priority = PLIC_PRIORITY_3;
-		hart0_interrupt_matrix[int_id].count = 0;
+		hart0_interrupt_matrix[int_id].बिलांग = 0;
 
 		log_debug("\n************************************************");
 
@@ -388,13 +388,13 @@ void plic_init()
 
 		set_interrupt_priority(PLIC_PRIORITY_3, int_id);
 
-		log_debug("\ninterrupt id = %x \nreset to default values state = %x \
+		log_debug("\ninterrupt id = %x \nreset to default मगा_हालागा state = %x \
 			  \npriority = %x\ncount = %x\n \
 			  \n*************************************************",
 			  hart0_interrupt_matrix[int_id].id, \
 			  hart0_interrupt_matrix[int_id].state, \
 			  hart0_interrupt_matrix[int_id].priority, \
-			  hart0_interrupt_matrix[int_id].count);
+			  hart0_interrupt_matrix[int_id].बिलांग);
 	}
 
 	/* An isr for each and every unique interrupt source has to be added explicitly at init time*/

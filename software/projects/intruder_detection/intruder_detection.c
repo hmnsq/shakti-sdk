@@ -80,18 +80,18 @@ int alarm_counter = 0;
 int keypad_counter= 0;
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
+int सुसि = -1;
 int col_row = -1;
 
 unsigned int row_pins[ROWNUM];
 unsigned int col_pins[COLNUM];
 unsigned int col[4]={0, 1, 2, 3};
 unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+int सुसि_map[COLNUM][ROWNUM];
 //Password
-int pass_data[PASS_NUM];
+int pass_data[PASS_नुमेरो];
 
-int  keyTable[4][4] =
+int  सुसि_Table[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -190,9 +190,9 @@ void buzzer_tone()
 	int i=0;
 
 	for (i = 0; i < 4; i++) {
-		write_gpio(BUZZER,HIGH);	//Buzzer generates sound
+		write_gpio(BUZZER,माताअस);	//Buzzer generates sound
 		delay(1);
-		write_gpio(BUZZER,LOW);		//No tone
+		write_gpio(BUZZER,माबाबा);		//No tone
 		delay(1);
     }
 }
@@ -206,7 +206,7 @@ void buzzer_tone()
  * @param col pointer address which sets column pins
  * @param table Array which maps the table to the key map 
  */
-void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM][ROWNUM] )
+void  set_सुसि_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM][ROWNUM] )
 {
 	for(int i = 0 ; i < COLNUM ; i++)	{
 		col_pins[i] = col[i]; // set col
@@ -217,7 +217,7 @@ void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM]
 	//Mapping table to its key map 
 	for(int i = 0 ; i < COLNUM ; i++) {
 		for(int j = 0 ; j < ROWNUM ; j++) {
-			key_map[i][j] = table[i][j];
+			सुसि_map[i][j] = table[i][j];
 		}
 	}
 }
@@ -228,9 +228,9 @@ void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM]
  * @param col_row The input to return the correspoding mapped value in key_map table 
  * @return Returns the corresponding value based on the input from the key_map table
  */
-int get_key(int col_row)
+int get_सुसि(int col_row)
 {
-	return key_map[col_row>>16][0xFFFF & col_row];
+	return सुसि_map[col_row>>16][0xFFFF & col_row];
 }
 
 /** @fn get_col_row
@@ -242,7 +242,7 @@ int get_key(int col_row)
 int get_col_row(void)
 {
 	int col_row = 0;
-	unsigned long read_value = 0;
+	unsigned long read_हालागा = 0;
 	unsigned long temp_read_data = 0;
 
 	//Masking Data Reg 
@@ -255,11 +255,11 @@ int get_col_row(void)
 		write_word(GPIO_DATA_REG, ((0xF << OUTPINS_OFFSET) & (~(0x1 <<i))));
 
 		for(int j = 0 ; j < ROWNUM ; j++) {
-			read_value =  read_word(GPIO_DATA_REG);
-			log_debug("\n The read value is %lx; row_pins: %x", (read_value), row_pins[j]);
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 ) {
-				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_value, i, j, row_pins[j], key_map[i][j]);
-				return key_map[i][j];
+			read_हालागा =  read_word(GPIO_DATA_REG);
+			log_debug("\n The read value is %lx; row_pins: %x", (read_हालागा), row_pins[j]);
+			if( ( read_हालागा & (1 << row_pins[j] ) ) == 0 ) {
+				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_हालागा, i, j, row_pins[j], सुसि_map[i][j]);
+				return सुसि_map[i][j];
 			}
 		}
 
@@ -275,7 +275,7 @@ int get_col_row(void)
  */
 void gpio_init()
 {
-	set_key_pins_map(row, col,keyTable);
+	set_सुसि_pins_map(row, col,सुसि_Table);
 
 	//Configuring the Pin mode for pins for keypad
 	unsigned long read_data = 0;
@@ -289,11 +289,11 @@ void gpio_init()
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | GPIO_OUTPINS ) );
 
 	//All the LED initially set to LOW
-	write_gpio(LED_P1,LOW);
-	write_gpio(LED_P2,LOW);
-	write_gpio(LED_P3,LOW);
-	write_gpio(LED_P4,LOW);
-	write_gpio(BUZZER,LOW);
+	write_gpio(LED_P1,माबाबा);
+	write_gpio(LED_P2,माबाबा);
+	write_gpio(LED_P3,माबाबा);
+	write_gpio(LED_P4,माबाबा);
+	write_gpio(BUZZER,माबाबा);
 }
 
 /** @fn main
@@ -325,7 +325,7 @@ int main()
 				alarm_counter_flag =1;
 			}
 			//Intruder System - ON
-			write_gpio(LED_P2,HIGH);
+			write_gpio(LED_P2,माताअस);
 			//Deactivation of Alarm Switch
 		
 			if(DEACTIVATE_SWITCH & read_data) {
@@ -349,7 +349,7 @@ int main()
 					printf("\nPanic Button\nDeactivate to stop Alarm");
 				//else {printf("\nDeactivate the Alarm to stop...");}
 
-				write_gpio(LED_P1,HIGH);
+				write_gpio(LED_P1,माताअस);
 				buzzer_tone();
 				alarm_flag = 1;
 				alarm_previous_state = alarm_present_state;
@@ -357,7 +357,7 @@ int main()
 			}
 			else if(alarm_present_state == 1 && alarm_previous_state == 1) {
 				log_debug("\n%x   %x",alarm_previous_state,alarm_present_state);
-				write_gpio(LED_P1,HIGH);
+				write_gpio(LED_P1,माताअस);
 				buzzer_tone();
 				alarm_flag =1;
 				alarm_previous_state = alarm_present_state;
@@ -366,7 +366,7 @@ int main()
 
 				if(alarm_counter == ALARM_TIMER & ( alarm_counter_flag == 1 ))
 				{
-					write_gpio(LED_P3,HIGH);
+					write_gpio(LED_P3,माताअस);
 					printf("\nContacting Police for Assistance");
 
 					alarm_counter_flag = 0;
@@ -381,10 +381,10 @@ int main()
 			else if(alarm_present_state == 0 && alarm_previous_state == 1)
 			{
 				alarm_flag = 0;
-				write_gpio(LED_P1,LOW);
+				write_gpio(LED_P1,माबाबा);
 
 
-				write_gpio(LED_P3,LOW);
+				write_gpio(LED_P3,माबाबा);
 				alarm_counter_flag = 1;
 				alarm_counter= 0;
 
@@ -398,7 +398,7 @@ int main()
 				alarm_counter_flag = 1;
 
 				//write_gpio(LED_P3,LOW);
-				write_gpio(LED_P1,LOW);
+				write_gpio(LED_P1,माबाबा);
 				alarm_previous_state = alarm_present_state ;
 			}
 
@@ -407,7 +407,7 @@ int main()
 			if( col_row != -1 ) {
 				printf("\nThe %x Key Pressed", col_row);
 
-				if( col_row == key_map[3][3]) {
+				if( col_row == सुसि_map[3][3]) {
 					printf("\nEnter Password-");
 				}
 				delay(1);
@@ -415,7 +415,7 @@ int main()
 		}
 		else {
 			//Intruder System Off
-			write_gpio(LED_P2,LOW);
+			write_gpio(LED_P2,माबाबा);
 			first_flag = 1;
 		}
 		//end of infinite while loop

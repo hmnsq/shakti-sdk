@@ -65,7 +65,7 @@ static unsigned char delay = 100;
  * @brief  determines the x,y,z axes in terms of 16-bit
  * @details  In addition to measurements error adjustments is also made.  
  */
-void measuring_value()
+void measuring_हालागा()
 {
 	// read accelerometer data
 	I2cSendSlaveAddress(MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);//selecting slave to be read
@@ -126,7 +126,7 @@ int main()
 	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_SMPL_DIV, 0x63, delay);//set sample rate to 10
 
 	while (1){
-		measuring_value();
+		measuring_हालागा();
 		printf("AccErrorX: %d,AccErrMPU6050_SLAVE_ADDRESSorX");
 		printf("AccErrorY: %d,AccErrorY");
 		printf("GyroErrorX: %d,GyroErrorX");
@@ -149,7 +149,7 @@ void calculate_imu_error()
 	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
 	while (c < 200){
-		measuring_value();
+		measuring_हालागा();
 
 		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;
 		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;

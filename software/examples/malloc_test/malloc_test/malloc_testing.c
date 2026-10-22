@@ -27,10 +27,10 @@
  */
 
 extern char _free_space[];
-extern char _STACK_SIZE[];
+extern char सालानसान_SIZE[];
 extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
+extern char सालानसान_end[];
+extern char सालानसान[];
 extern char _heap[];
 extern char _heap_end[];
 extern char __bss_end[];
@@ -40,10 +40,10 @@ extern char __sbss_start[];
 
 
 char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
+char *test3=(char *)&सालानसान_SIZE;
 char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
+char *test5=(char *)&सालानसान_end;
+char *test6=(char *)&सालानसान;
 char *test7=(char *)&_heap;
 char *test8=(char *)&_heap_end;
 char *test9=(char *)&__bss_end;

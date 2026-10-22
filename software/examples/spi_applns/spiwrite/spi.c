@@ -45,9 +45,9 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
 {
 	for(int i = 0; i < length; ++i)
 	{
-		int read_value= flash_read(read_address);
+		int read_हालागा= flash_read(read_address);
 		printf("\nReading from adddress %x and data \
-			   %x\n",read_address,read_value);
+			   %x\n",read_address,read_हालागा);
 		read_address=read_address+4;
 	}
 }

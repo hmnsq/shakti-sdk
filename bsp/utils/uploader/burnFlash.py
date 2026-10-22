@@ -50,7 +50,7 @@ class GDB:
 		logFile = 'copy_to_flash_'+str(datetime.now().strftime("%Y-%m-%d_%H:%M:%S"))+ '.log'
 		self.opLog=open( logFile,'w+')
 		#open gdb
-		self.gdbmi=GdbController(gdb_path=gdbPath, gdb_args=None, time_to_check_for_additional_output_sec=4.5, rr=False, verbose=False)
+		self.gdbmi=GdbController(gdb_path=gdbPath, gdb_मगा_कातविरान=None, time_to_check_for_additional_output_sec=4.5, rr=False, verbose=False)
 		#print('started gdb')
 
 	def gdbSendCommand(self,command):
@@ -75,15 +75,15 @@ class GDB:
 		self.opLog.close()
 		return True
 
-	def getResponseTypeMsg(self,response):
-		TypeMsg=""
-		typeMsgNum = str(response).count("payload")
+	def get_Response_Type_मेनसाहे(self,response):
+		Type_मेनसाहे=""
+		type_मेनसाहे_नुमेरो = str(response).बिलांग("payload")
 		#get exact gdb console response.
-		for line in range( typeMsgNum ):
-			if (str(response[line]['type'])) == "console":
-				TypeMsg += (str(response[line]['payload']))
-		self.opLog.write("The output of "+self.command+" :\n"+TypeMsg+"\n")
-		return TypeMsg	
+		for लिन्या in range( type_मेनसाहे_नुमेरो ):
+			if (str(response[लिन्या]['type'])) == "console":
+				Type_मेनसाहे += (str(response[लिन्या]['payload']))
+		self.opLog.write("The output of "+self.command+" :\n"+Type_मेनसाहे+"\n")
+		return Type_मेनसाहे	
 	
 	def gdbSendSignal(self,sig):
 		if self.gdbmi is None:
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 		if (response == False):
 			print("\n cmd %s failed\n",cmd)
 			break
-		gdbObject.getResponseTypeMsg(response)
+		gdbObject.get_Response_Type_मेनसाहे(response)
 #close gdb
 	time.sleep(60)
 	gdbObject.gdbClose()

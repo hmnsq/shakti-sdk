@@ -30,7 +30,7 @@
 #include "gpio_i2c.h"
 
 #define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#define DELAY_बिलांग 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
@@ -40,14 +40,14 @@
 unsigned int Lm75ReadTemperature(unsigned long delay)
 {
 	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
+	unsigned short read_हालागा_2 = 0;
 	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
 	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
+	read_हालागा_2 = (readBuf << 1);
 	readBuf = I2cReadDataNack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_हालागा_2 = (readBuf >> 7) | read_हालागा_2;
+	return read_हालागा_2;
 }
 
 /** @fn void main()
@@ -63,7 +63,7 @@ void main()
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
+	tempRead = Lm75ReadTemperature(DELAY_बिलांग);
 	if(tempRead & 0x100) {
 		tempRead = ( (~tempRead) + 1 ) >> 1;
 		printf("\n\t Current Temperature:=-%u°C",tempRead);

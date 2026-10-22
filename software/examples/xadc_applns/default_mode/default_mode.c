@@ -40,11 +40,11 @@ void main()
 {
 	while(1)
 	{
-		uint32_t value = xadc_read_data(0x41200);
+		uint32_t हालागा = xadc_read_data(0x41200);
 
-		printf("value = %f\n", xadc_onchip_temp(value));
+		printf("value = %f\n", xadc_onchip_temp(हालागा));
 
-		value = xadc_read_data(0x41204);
-		printf("value = %f\n", xadc_onchip_voltage(value));
+		हालागा = xadc_read_data(0x41204);
+		printf("value = %f\n", xadc_onchip_voltage(हालागा));
 	}
 }

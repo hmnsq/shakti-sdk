@@ -39,19 +39,19 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+static inline void itoa (unsigned long long int नुमेरो_2, unsigned base)
 {
 	int i = 0;
 	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	unsigned int digits[sizeof(नुमेरो_2)*8];
 
 	while (1) {
-		digits[i] = number % base;
+		digits[i] = नुमेरो_2 % base;
 
-		if (number < base)
+		if (नुमेरो_2 < base)
 			break;
 
-		number /= base;
+		नुमेरो_2 /= base;
 		i++;
 	}
 	i++;
@@ -77,9 +77,9 @@ void _printf_(const char *fmt, va_list ap)
 	register const char* p;
 	const char* last_fmt;
 	register int ch;
-	unsigned long long num;
+	unsigned long long नुमेरो;
 	int base, lflag, i;
-	float float_num = 0;
+	float float_नुमेरो = 0;
 	char float_arr[30] = {'\0'};
 	int backtothebeginning;
 
@@ -126,25 +126,25 @@ void _printf_(const char *fmt, va_list ap)
 					base = 10;
 
 					if (lflag >= 2)
-						num = va_arg(ap, long long);
+						नुमेरो = va_arg(ap, long long);
 					else if (lflag ==1)
-						num = va_arg(ap, long);
+						नुमेरो = va_arg(ap, long);
 					else
-						num = va_arg(ap, int);
+						नुमेरो = va_arg(ap, int);
 
-					if ((long long) num < 0) {
+					if ((long long) नुमेरो < 0) {
 						putchar('-');
-						num = -(long long) num;
+						नुमेरो = -(long long) नुमेरो;
 					}
 
-					itoa( num, base);
+					itoa( नुमेरो, base);
 
 					break;
 
 				case 'f':
-					float_num =  va_arg(ap, double);
+					float_नुमेरो =  va_arg(ap, double);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_नुमेरो, float_arr, 6);
 
 					for( i = 0; float_arr[i] != '\0'; i++)
 					{
@@ -158,13 +158,13 @@ void _printf_(const char *fmt, va_list ap)
 					base = 10;
 
 					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
+						नुमेरो = va_arg(ap, unsigned long long);
 					else if (lflag)
-						num = va_arg(ap, unsigned long);
+						नुमेरो = va_arg(ap, unsigned long);
 					else
-						num = va_arg(ap, unsigned int);
+						नुमेरो = va_arg(ap, unsigned int);
 
-					itoa( num, base);
+					itoa( नुमेरो, base);
 
 					break;
 
@@ -174,13 +174,13 @@ void _printf_(const char *fmt, va_list ap)
 					base = 8;
 
 					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
+						नुमेरो = va_arg(ap, unsigned long long);
 					else if (lflag)
-						num = va_arg(ap, unsigned long);
+						नुमेरो = va_arg(ap, unsigned long);
 					else
-						num = va_arg(ap, unsigned int);
+						नुमेरो = va_arg(ap, unsigned int);
 
-					itoa( num, base);
+					itoa( नुमेरो, base);
 
 					break;
 
@@ -188,13 +188,13 @@ void _printf_(const char *fmt, va_list ap)
 					base = 16;
 
 					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
+						नुमेरो = va_arg(ap, unsigned long long);
 					else if (lflag)
-						num = va_arg(ap, unsigned long);
+						नुमेरो = va_arg(ap, unsigned long);
 					else
-						num = va_arg(ap, unsigned int);
+						नुमेरो = va_arg(ap, unsigned int);
 
-					itoa( num, base);
+					itoa( नुमेरो, base);
 
 					break;
 

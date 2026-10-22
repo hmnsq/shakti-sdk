@@ -40,7 +40,7 @@
  */
 void main(void){
 
-	uint64_t value = ( CLOCK_FREQUENCY / CLINT_DIVISOR );
+	uint64_t हालागा = ( CLOCK_FREQUENCY / CLINT_पांगहाति );
 
 	asm volatile("li      t0, 0x80\t\n"
 		     "csrrs   zero, mie, t0\t\n"
@@ -50,7 +50,7 @@ void main(void){
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 	printf("Configuring 1 second timer interrupt\n");
-	configure_counter(value);
+	configure_counter(हालागा);
 
 	while(1);
 }

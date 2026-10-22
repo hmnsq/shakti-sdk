@@ -40,7 +40,7 @@ void ftoa( float, char *, unsigned int);
 void delay_loop(unsigned long cntr1, unsigned long cntr2);
 unsigned long read_word(uint32_t *addr);
 void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
+int int_to_string(int नुमेरो_2, char str[], unsigned int afterpoint);
 void _printf_(const char *fmt, va_list ap);
 int printf(const char* fmt, ...);
 

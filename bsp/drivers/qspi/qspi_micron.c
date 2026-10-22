@@ -172,7 +172,7 @@ int flashReadStatusRegister(){
 	waitfor(1000);
 	int ret = wait_for_tcf(status);
 	waitfor(100);
-	int value = get_qspi_shakti(dr);
+	int हालागा = get_qspi_shakti(dr);
 	//	printf("Read status register value %08x \n", value);
 	reset_interrupt_flags();
 	if(ret){
@@ -181,7 +181,7 @@ int flashReadStatusRegister(){
 		return -1;
 	}
 	else
-		return value;
+		return हालागा;
 }
 
 /** @fn int wait_for_wip()
@@ -300,15 +300,15 @@ int flashIdentificationDevice(void){
 	set_qspi_shakti32(ar, 0);
 	status = 0; // Useless Variable but still!!!!
 	int ret = wait_for_tcf(status);
-	int value = get_qspi_shakti(dr);
-	log_info("\t device id %x\n",value);
+	int हालागा = get_qspi_shakti(dr);
+	log_info("\t device id %x\n",हालागा);
 	reset_interrupt_flags();
-	if(value == MEM_TYPE_N25Q256_ID){
+	if(हालागा == MEM_TYPE_N25Q256_ID){
 		printf("\tN25Q256 Device Detected \n");
 		return 0;
 	}
 	else{
-		log_fatal("\t Device Not Detected - Diagnose %08x\n",value);
+		log_fatal("\t Device Not Detected - Diagnose %08x\n",हालागा);
 		return -1;
 	}
 }
@@ -390,21 +390,21 @@ int flashEnable4ByteAddressingMode(void){  //Enable 4-byte addressing Mode and r
  * @param int adsize --- Address Size (8, 16, 24 & 32 bit address) 
  * @return Status of the performed operation; else -1
  */
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
-	set_qspi_shakti32(dlr,data_words);
+int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_मगा_सालिता, int adsize){
+	set_qspi_shakti32(dlr,data_मगा_सालिता);
 	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DCYC(dummy_cycles)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_ADSIZE(adsize)|CCR_INSTRUCTION(instruction)));
 	set_qspi_shakti32(ar,read_address);
 	status = 0;
 	int ret = wait_for_tcf(status);
-	int value = get_qspi_shakti(dr);
-	printf("\tThe Read Value: %08x\n",value);
+	int हालागा = get_qspi_shakti(dr);
+	printf("\tThe Read Value: %08x\n",हालागा);
 	//    printf("\tThe Read Value: %08x\n",value);
 	if(ret){
 		printf("\t Read Value Failed \n");
 		return -1;
 	}
 	reset_interrupt_flags();
-	return value;
+	return हालागा;
 }
 
 /** @fn int flashReadDualSPI(int address, int data_length)
@@ -420,8 +420,8 @@ int flashReadDualSPI(int address, int data_length){
 	set_qspi_shakti32(ar,address); 
 	//    printf("Status : %08x dcr : %08x cr : %08x ccr : %08x dlr: %08x ar: %08x\n",status,*dcr,*cr,*ccr,*dlr,*ar);
 	int ret = wait_for_tcf(status);
-	int value = get_qspi_shakti(dr);
-	printf("\tThe Read Value: %08x\n",value);	
+	int हालागा = get_qspi_shakti(dr);
+	printf("\tThe Read Value: %08x\n",हालागा);	
 	if(ret){
 		printf("\t QSPI: Read Value failed\n");
 		return -1;
@@ -429,7 +429,7 @@ int flashReadDualSPI(int address, int data_length){
 	//*config_string = get_qspi_shakti(dr);
 	//printf("\t Read Data is %08x\n",read_data);
 	reset_interrupt_flags();
-	return value;
+	return हालागा;
 }
 
 /** @fn int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize)
@@ -442,23 +442,23 @@ int flashReadDualSPI(int address, int data_length){
  * @param int adsize --- Address Size (8, 16, 24 & 32 bit address) 
  * @return Status of the performed operation; else -1
  */
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
-	set_qspi_shakti32(dlr,data_words);
+int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_मगा_सालिता, int adsize){
+	set_qspi_shakti32(dlr,data_मगा_सालिता);
 	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DCYC(dummy_cycles)|CCR_ADSIZE(adsize)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(instruction)));
 	set_qspi_shakti32(ar,read_address);
 	status = 0;
 	int ret = wait_for_tcf(status);
-	int value_1 = get_qspi_shakti(dr);
-	int value_2 = get_qspi_shakti(dr);
-	int value_3 = get_qspi_shakti(dr);
-	int value_4 = get_qspi_shakti(dr);
-	printf("\tThe Read Value: %08x, %08x, %08x and %08x \n",value_1,value_2,value_3,value_4);
+	int हालागा_1 = get_qspi_shakti(dr);
+	int हालागा_2_2 = get_qspi_shakti(dr);
+	int हालागा_3 = get_qspi_shakti(dr);
+	int हालागा_4 = get_qspi_shakti(dr);
+	printf("\tThe Read Value: %08x, %08x, %08x and %08x \n",हालागा_1,हालागा_2_2,हालागा_3,हालागा_4);
 	if(ret){
 		printf("\t Read Value Failed \n");
 		return -1; 
 	}   
 	reset_interrupt_flags();
-	return value_1;
+	return हालागा_1;
 }
 
 /** @fn int flashSingleSPIXip(int addr, int* dest_addr) 
@@ -565,8 +565,8 @@ int flashDualSPIDDRXip(int addr, int* dest_addr){
  * @param int value needs to written into Write Volatile Config Register.
  * @return Zero on Success
  */
-int flashWriteVolatileConfigReg(int value){
-	printf("\t Setting Volatile Configuration Register with the Value: %08x\n",value);
+int flashWriteVolatileConfigReg(int हालागा){
+	printf("\t Setting Volatile Configuration Register with the Value: %08x\n",हालागा);
 	if(micron_write_enable(status)){
 		printf("Panic: Write Enable Command Failed to execute\n");
 		return -1;
@@ -574,7 +574,7 @@ int flashWriteVolatileConfigReg(int value){
 	reset_interrupt_flags();
 	//	flashReadStatusRegister();
 	set_qspi_shakti32(dlr,DL(1));
-	set_qspi_shakti8(dr,value);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
+	set_qspi_shakti8(dr,हालागा);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
 	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x01)));
 	waitfor(50);
 	status=0;
@@ -719,10 +719,10 @@ int micron_enable_4byte_addressing(int status){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_configure_xip_volatile(int status, int value){
+int micron_configure_xip_volatile(int status, int हालागा){
 	log_debug("\tWrite Volatile Configuration Register\n");
 	set_qspi_shakti32(dlr,DL(1));
-	set_qspi_shakti8(dr,value);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
+	set_qspi_shakti8(dr,हालागा);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
 	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x81)));
 	waitfor(50);
 	int ret = wait_for_tcf(status);
@@ -738,7 +738,7 @@ int micron_configure_xip_volatile(int status, int value){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_disable_xip_volatile(int status, __attribute__ ((unused)) int value){
+int micron_disable_xip_volatile(int status, __attribute__ ((unused)) int हालागा){
 	log_debug("\tWrite Volatile Configuration Register to exit XIP\n");
 	set_qspi_shakti32(cr,(CR_PRESCALER(0x3)|CR_TOIE|CR_TCIE|CR_TEIE|CR_SMIE|CR_FTIE|CR_ABORT|CR_EN));
 	waitfor(30);
@@ -763,13 +763,13 @@ int micron_disable_xip_volatile(int status, __attribute__ ((unused)) int value){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_read_id_cmd(int status, int value){
+int micron_read_id_cmd(int status, int हालागा){
 	log_debug("\tRead ID Command to see if the Protocol is Proper\n");
 	set_qspi_shakti32(dlr,4);
 	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x9E)|CCR_DMODE(SINGLE)));
 	int ret = wait_for_tcf(status);
-	value = get_qspi_shakti(dr);
-	printf("Read ID: %08x",value);
+	हालागा = get_qspi_shakti(dr);
+	printf("Read ID: %08x",हालागा);
 	return ret;
 }
 
@@ -780,12 +780,12 @@ int micron_read_id_cmd(int status, int value){
  * @param int value  --- Values that needs to be configured.
  * @return Zero on Success
  */
-int micron_read_configuration_register(int status, int value){
+int micron_read_configuration_register(int status, int हालागा){
 	printf("\tRead ID Command to see if the Protocol is Proper\n");
 	set_qspi_shakti32(dlr,4);
 	set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)|CCR_DMODE(SINGLE)));
 	int ret = wait_for_tcf(status);
-	value = get_qspi_shakti(dr);
-	log_debug("Configuration Register Value: %08x",value);
+	हालागा = get_qspi_shakti(dr);
+	log_debug("Configuration Register Value: %08x",हालागा);
 	return ret;
 }

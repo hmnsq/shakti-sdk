@@ -35,8 +35,8 @@ extern volatile uint64_t* mtime;
 extern volatile uint64_t* mtimecmp;
 
 /* function prototype */
-uint64_t get_timer_value(void);
-void configure_counter(uint64_t value);
+uint64_t get_timer_हालागा(void);
+void configure_counter(uint64_t हालागा);
 void mach_clint_handler(uintptr_t int_id, uintptr_t epc);
 
 #endif

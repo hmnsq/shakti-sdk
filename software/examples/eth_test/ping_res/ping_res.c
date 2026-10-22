@@ -71,8 +71,8 @@ static XEmacLite EmacLite;
 #define ICMP_PACKET_SIZE 	98 //0x4A    /* ICMP packet length 74 Bytes
 					 /* including Src and Dest MAC Address */
 #define BROADCAST_ADDR 		0xFFFF  /* Broadcast Address */
-#define CORRECT_CKSUM_VALUE	0xFFFF  /* Correct checksum value */
-#define IDENT_FIELD_VALUE	0x9263	/* Identification field (random num) */
+#define CORRECT_CKSUM_हालागा	0xFFFF  /* Correct checksum value */
+#define IDENT_FIELD_हालागा	0x9263	/* Identification field (random num) */
 
 /*
  * Definitions for the locations and length of some of the fields in a
@@ -164,7 +164,7 @@ extern volatile u32 RecvFrameLength = 0;
 /*
  * Variable used to indicate the number of Ping replies sent.
  */
-u32 NumOfPingReplies;
+u32 नुमेरो_Of_Ping_Replies;
 u32 arpcount = 0;
 
 /****************************************************************************/
@@ -214,10 +214,10 @@ int main()
 ******************************************************************************/
 int EmacLitePingReplyExample(u16 DeviceId)
 {
-	int Status, count = 0;
+	int Status, बिलांग = 0;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
 	XEmacLite_Config *ConfigPtr;
-	NumOfPingReplies = 0;
+	नुमेरो_Of_Ping_Replies = 0;
 
 	/*
 	 * Initialize the EmacLite device.
@@ -258,7 +258,7 @@ int EmacLitePingReplyExample(u16 DeviceId)
 								(u8 *)RxFrame);
 		}
 #if 1
-		printf("\n Rcv. Frame %x: %x\n", NumOfPingReplies, RecvFrameLength);
+		printf("\n Rcv. Frame %x: %x\n", नुमेरो_Of_Ping_Replies, RecvFrameLength);
 		for(int i = 0; i < RecvFrameLength; i++)
 			printf("%x ", RxFrame[i]);
 		printf("\n");
@@ -278,7 +278,7 @@ int EmacLitePingReplyExample(u16 DeviceId)
 		 * If the number of ping replies sent is equal to that
 		 * specified by the user then exit out of this loop.
 		 */
-		if (NumOfPingReplies == MAX_PING_REPLIES) {
+		if (नुमेरो_Of_Ping_Replies == MAX_PING_REPLIES) {
 
 			return XST_SUCCESS;
 		}
@@ -503,7 +503,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 			 * Check the Data field checksum.
 			 */
 //			printf("\n ip checksum:%x", CheckSum);
-			if (CheckSum == CORRECT_CKSUM_VALUE) {
+			if (CheckSum == CORRECT_CKSUM_हालागा) {
 				CheckSum = CheckSumCalculation(RxFramePtr,
 						ICMP_DATA_START_LOC,
 						ICMP_DATA_FIELD_LEN);
@@ -515,7 +515,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 				
 				printf("\n data checksum:%x", CheckSum);
 #endif
-				if (CheckSum == CORRECT_CKSUM_VALUE) {
+				if (CheckSum == CORRECT_CKSUM_हालागा) {
 
 					/*
 					 * Add destination address
@@ -560,7 +560,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * Identification field a random number
 					 * which is set to IDENT_FIELD_VALUE.
 					 */
-					*TxFramePtr++ = IDENT_FIELD_VALUE;
+					*TxFramePtr++ = IDENT_FIELD_हालागा;
 
 					/*
 					 * Add fragment type, time to live and
@@ -653,7 +653,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * Transmit the frame.
 					 */
 #if 1
-					 printf("\n%x. ICMP Tx Packet \n", NumOfPingReplies);
+					 printf("\n%x. ICMP Tx Packet \n", नुमेरो_Of_Ping_Replies);
 					 for(int i = 0; i < ICMP_PACKET_SIZE; i++)
 					 	printf("%x ", TxFrame[i]);
 					 printf("\n End of ICMP Tx Packet");
@@ -666,7 +666,7 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * Increment the number of
 					 * Ping replies sent.
 					 */
-					NumOfPingReplies++;
+					नुमेरो_Of_Ping_Replies++;
 //					printf("NumOfPingReplies: %x", NumOfPingReplies);
 
 				}

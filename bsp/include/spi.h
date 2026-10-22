@@ -104,7 +104,7 @@ void flash_cmd_addr_data(int command, int addr, int data);
 void flash_write(int address, int data);
 void flash_erase(int address);
 int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
+int bitExtracted(int नुमेरो_2, int k, int p) ;
 int concat(int x, int y) ;
 int spi_rxne_enable(void);
 int spi_notbusy(void);

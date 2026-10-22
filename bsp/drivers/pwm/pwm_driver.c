@@ -42,18 +42,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_period_register(int module_number, int value)
+int set_pwm_period_register(int module_नुमेरो, int हालागा)
 {
-	if (value > PERIOD_REGISTER_MAX) {
+	if (हालागा > PERIOD_REGISTER_MAX) {
 		log_error("\nPeriod Register Value higher than max value (%x)", PERIOD_REGISTER_MAX);	
 		return 0;
 	}
 
-	volatile short* period_value;
-	period_value = (int*) (PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + PERIOD_REGISTER);
-	*period_value = value;
+	volatile short* period_हालागा;
+	period_हालागा = (int*) (PWM_BASE_ADDRESS + module_नुमेरो*PWM_MODULE_OFFSET + PERIOD_REGISTER);
+	*period_हालागा = हालागा;
 
-	log_info("\n Period Register of module number %d set to %x", module_number, value);
+	log_info("\n Period Register of module number %d set to %x", module_नुमेरो, हालागा);
 
 	return 1;
 }
@@ -65,19 +65,19 @@ int set_pwm_period_register(int module_number, int value)
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_duty_register(int module_number, int value)
+int set_pwm_duty_register(int module_नुमेरो, int हालागा)
 {
-	volatile short* duty_value;
+	volatile short* duty_हालागा;
 
-	if (value > DUTY_REGISTER_MAX) {
+	if (हालागा > DUTY_REGISTER_MAX) {
 		log_error("\nDuty Register Value higher than max value (%x)", DUTY_REGISTER_MAX);
 		return 0;
 	}
 
-	duty_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + DUTY_REGISTER;
-	*duty_value = value;
+	duty_हालागा = PWM_BASE_ADDRESS + module_नुमेरो*PWM_MODULE_OFFSET + DUTY_REGISTER;
+	*duty_हालागा = हालागा;
 
-	log_info("\n Duty Register of module number %d set to %x", module_number, value);
+	log_info("\n Duty Register of module number %d set to %x", module_नुमेरो, हालागा);
 
 	return 1;
 }
@@ -89,19 +89,19 @@ int set_pwm_duty_register(int module_number, int value)
  * @param int value - value to be set between 0x0000 to 0xff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_control_register(int module_number, int value)
+int set_pwm_control_register(int module_नुमेरो, int हालागा)
 {
-	volatile char* control_value;
+	volatile char* control_हालागा;
 
-	if (value > CONTROL_REGISTER_MAX) {
+	if (हालागा > CONTROL_REGISTER_MAX) {
 		log_error("\nControl Register Value higher than max value (%x)", CONTROL_REGISTER_MAX);	
 		return 0;
 	}
 
-	control_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	*control_value = value;
+	control_हालागा = PWM_BASE_ADDRESS + module_नुमेरो*PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	*control_हालागा = हालागा;
 
-	log_info("\n Control Register of module number %d set to %x", module_number, value);
+	log_info("\n Control Register of module number %d set to %x", module_नुमेरो, हालागा);
 
 	return 1;
 }
@@ -112,13 +112,13 @@ int set_pwm_control_register(int module_number, int value)
  * @param int module_number- specifies the pwm module to be selected 
  * @return int returns 1 if running in continuous mode, 0 if not.
  */
-int pwm_check_continuous_mode(int module_number)
+int pwm_check_continuous_mode(int module_नुमेरो)
 {
-	volatile char* control_value;
-	control_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	int value = *control_value & CONTINUOUS_ONCE;
-	log_info("\n Running in continuous mode(1/0): %d", (value>>3));
-	if( (value>>3) == 1)
+	volatile char* control_हालागा;
+	control_हालागा = PWM_BASE_ADDRESS + module_नुमेरो*PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	int हालागा = *control_हालागा & CONTINUOUS_ONCE;
+	log_info("\n Running in continuous mode(1/0): %d", (हालागा>>3));
+	if( (हालागा>>3) == 1)
 		return 1;
 	else
 		return 0;
@@ -131,17 +131,17 @@ int pwm_check_continuous_mode(int module_number)
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_clock_register(int module_number, int value)
+int set_pwm_clock_register(int module_नुमेरो, int हालागा)
 {
-	volatile short* clock_value;
+	volatile short* clock_हालागा;
 
-	if (value > CLOCK_REGISTER_MAX) {
+	if (हालागा > CLOCK_REGISTER_MAX) {
 		log_error("\nClock Register Value higher than max value (%x)", CLOCK_REGISTER_MAX);
 		return 0;
 	}
 
-	clock_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CLOCK_REGISTER;
-	*clock_value = value;
+	clock_हालागा = PWM_BASE_ADDRESS + module_नुमेरो*PWM_MODULE_OFFSET + CLOCK_REGISTER;
+	*clock_हालागा = हालागा;
 
 	return 1;
 }
@@ -151,14 +151,14 @@ int set_pwm_clock_register(int module_number, int value)
  * @details This function will be called to clear all registers in a specific pwm module
  * @param int module_number- specifies the pwm module to be selected
  */
-void pwm_clear_registers(int module_number)
+void pwm_clear_registers(int module_नुमेरो)
 {
-	set_pwm_period_register(module_number, 0);
-	set_pwm_duty_register(module_number, 0);
-	set_pwm_control_register(module_number, 0);
-	set_pwm_clock_register(module_number, 0);
+	set_pwm_period_register(module_नुमेरो, 0);
+	set_pwm_duty_register(module_नुमेरो, 0);
+	set_pwm_control_register(module_नुमेरो, 0);
+	set_pwm_clock_register(module_नुमेरो, 0);
 
-	log_info("\n All registers of module number %d cleared", module_number);
+	log_info("\n All registers of module number %d cleared", module_नुमेरो);
 }
 
 /** @fn void pwm_init
@@ -187,28 +187,28 @@ void pwm_init(void)
  */
 int configure_control_register_mode(int mode)
 {
-	int value = 0x0;
+	int हालागा = 0x0;
 
 	if (mode == 0) {
 		log_info("\n Current Module is set to PWM mode");
 
-		value += PWM_ENABLE;
-		value += PWM_START;
-		value += PWM_OUTPUT_ENABLE;
+		हालागा += PWM_ENABLE;
+		हालागा += PWM_START;
+		हालागा += PWM_OUTPUT_ENABLE;
 	}
 	else if (mode == 1) {
 		log_info("\n Current Module is set to timer once only mode");
 
-		value += PWM_START;
+		हालागा += PWM_START;
 	}
 	else if(mode == 2) {
 		log_info("\n Current Module is set to timer continuous mode");
 
-		value += PWM_START;
-		value += CONTINUOUS_ONCE;
+		हालागा += PWM_START;
+		हालागा += CONTINUOUS_ONCE;
 	}
 
-	return value;
+	return हालागा;
 }
 
 /** @fn void pwm_start(int module_number, int mode) 
@@ -220,18 +220,18 @@ int configure_control_register_mode(int mode)
  *                  1-Timer Mode run once
  *                  2-Timer Mode run contin )
  */
-void pwm_start(int module_number, int mode)
+void pwm_start(int module_नुमेरो, int mode)
 {
 	int control = configure_control_register_mode(mode);
 
-	if(set_pwm_control_register(module_number, control))
+	if(set_pwm_control_register(module_नुमेरो, control))
 	{
-		log_info("\n PWM module number %d has been entered", module_number);
+		log_info("\n PWM module number %d has been entered", module_नुमेरो);
 	}
 
-	if(!set_pwm_control_register(module_number, control))
+	if(!set_pwm_control_register(module_नुमेरो, control))
 	{
-		log_error("\n PWM module number %d not entered",module_number);
+		log_error("\n PWM module number %d not entered",module_नुमेरो);
 	}
 }
 
@@ -242,14 +242,14 @@ void pwm_start(int module_number, int mode)
  * @param int (value -true or 1  - External Clock 
  *                    false or 0 - Internal Clock )
  */
-void pwm_use_external_clock(int module_number, bool value)
+void pwm_use_external_clock(int module_नुमेरो, bool हालागा)
 {
-	unsigned char* control_value;
-	control_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	if(value == 1)
-	control_value += CLOCK_SELECTOR;
-	else if(control_value && CLOCK_SELECTOR)
-	control_value -= CLOCK_SELECTOR;	
+	unsigned char* control_हालागा;
+	control_हालागा = PWM_BASE_ADDRESS + module_नुमेरो * PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	if(हालागा == 1)
+	control_हालागा += CLOCK_SELECTOR;
+	else if(control_हालागा && CLOCK_SELECTOR)
+	control_हालागा -= CLOCK_SELECTOR;	
 }
 
 /** @fn void pwm_set_clock(int module_number, int clock_divisor) 
@@ -258,9 +258,9 @@ void pwm_use_external_clock(int module_number, bool value)
  * @param int module_number-  the pwm module to be selected
               int clock_divisor- value of clock divisor to be used to divide base clock speed of 50MHz.
  */
-void pwm_set_clock(int module_number, int clock_divisor)
+void pwm_set_clock(int module_नुमेरो, int clock_पांगहाति)
 {
-	if (set_pwm_clock_register(module_number, clock_divisor) == 0)
+	if (set_pwm_clock_register(module_नुमेरो, clock_पांगहाति) == 0)
 	{
 		log_error("\n Error in setting clock register");
 	}
@@ -272,9 +272,9 @@ void pwm_set_clock(int module_number, int clock_divisor)
  * @param int module_number-  the pwm module to be selected 
  * @param int duty - value of duty cycles to be used to decide how many period cycles the pwm signal is set to 1.
  */
-void pwm_set_duty_cycle(int module_number, int duty)
+void pwm_set_duty_cycle(int module_नुमेरो, int duty)
 {
-	if (set_pwm_duty_register(module_number, duty) == 0) {
+	if (set_pwm_duty_register(module_नुमेरो, duty) == 0) {
 		log_error("\n Error in setting duty register");
 	}
 }
@@ -286,9 +286,9 @@ void pwm_set_duty_cycle(int module_number, int duty)
  * @param int clock_divisor-  value of period cycles which is used to further divide the                                                      
  *         frequency into fixed period cycles.
  */
-void pwm_set_periodic_cycle(int module_number, int period)
+void pwm_set_periodic_cycle(int module_नुमेरो, int period)
 {
-	if(set_pwm_period_register(module_number, period) == 0) {
+	if(set_pwm_period_register(module_नुमेरो, period) == 0) {
 		log_error("\n Error in setting period register");
 	}
 }
@@ -302,13 +302,13 @@ void pwm_set_periodic_cycle(int module_number, int period)
  * @param int duty_cycle - value of duty cycle. It specifies how many cycles the signal is active out of the periodic cycle
  * @param bool external_clock - value of external clock selector. It specifies if external clock is to be used.
   */
-void pwm_configure(int module_number,int clock_divisor, int period, int duty, bool external_clock)
+void pwm_configure(int module_नुमेरो,int clock_पांगहाति, int period, int duty, bool external_clock)
 {
-	pwm_set_periodic_cycle(module_number, period);
-	pwm_set_duty_cycle(module_number, duty);
-	pwm_set_clock(module_number, clock_divisor);
-	pwm_use_external_clock(module_number, external_clock);
-	log_info("\nPWM %d succesfully configured",module_number);
+	pwm_set_periodic_cycle(module_नुमेरो, period);
+	pwm_set_duty_cycle(module_नुमेरो, duty);
+	pwm_set_clock(module_नुमेरो, clock_पांगहाति);
+	pwm_use_external_clock(module_नुमेरो, external_clock);
+	log_info("\nPWM %d succesfully configured",module_नुमेरो);
 }
 
 /** @fn void pwm_stop(int module_number)
@@ -316,10 +316,10 @@ void pwm_configure(int module_number,int clock_divisor, int period, int duty, bo
  * @details This function will stop a specific pwm module
  * @param int module_number-  the pwm module to be selected
  */
-void pwm_stop(int module_number)
+void pwm_stop(int module_नुमेरो)
 {
-	set_pwm_control_register(module_number, 0x0);
-	log_info("\n PWM module number %d has been stopped", module_number);
+	set_pwm_control_register(module_नुमेरो, 0x0);
+	log_info("\n PWM module number %d has been stopped", module_नुमेरो);
 }
 
 /** @fn void show_register_values(int module_number)
@@ -327,21 +327,21 @@ void pwm_stop(int module_number)
  * @details This function will print the values of all the registers of a specific pwm module
  * @param int module_number-  the pwm module to be selected
  */
-void show_register_values(int module_number)
+void show_register_मगा_हालागा(int module_नुमेरो)
 {
-	volatile unsigned short* period_value;
-	volatile unsigned short* duty_value;
-	volatile unsigned char*  control_value;
-	volatile unsigned short* clock_value;
+	volatile unsigned short* period_हालागा;
+	volatile unsigned short* duty_हालागा;
+	volatile unsigned char*  control_हालागा;
+	volatile unsigned short* clock_हालागा;
 
-	period_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + PERIOD_REGISTER;
-	duty_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + DUTY_REGISTER;
-	control_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	clock_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CLOCK_REGISTER;
+	period_हालागा = PWM_BASE_ADDRESS + module_नुमेरो * PWM_MODULE_OFFSET + PERIOD_REGISTER;
+	duty_हालागा = PWM_BASE_ADDRESS + module_नुमेरो * PWM_MODULE_OFFSET + DUTY_REGISTER;
+	control_हालागा = PWM_BASE_ADDRESS + module_नुमेरो * PWM_MODULE_OFFSET + CONTROL_REGISTER;
+	clock_हालागा = PWM_BASE_ADDRESS + module_नुमेरो * PWM_MODULE_OFFSET + CLOCK_REGISTER;
 
-	log_info("\nThe value of period register is %x",  *period_value);
-	log_info("\nThe value of duty register is %x",    *duty_value);
-	log_info("\nThe value of control register is %x", *control_value);
-	log_info("\nThe value of clock register is %x",   *clock_value);
+	log_info("\nThe value of period register is %x",  *period_हालागा);
+	log_info("\nThe value of duty register is %x",    *duty_हालागा);
+	log_info("\nThe value of control register is %x", *control_हालागा);
+	log_info("\nThe value of clock register is %x",   *clock_हालागा);
 }
 

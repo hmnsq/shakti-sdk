@@ -48,7 +48,7 @@
 #include "bmp280.h"
 
 // Replace the API KEY
-#define API_KEY "PPI6OVOI1A2LGXMZ"
+#define API_सुसि "PPI6OVOI1A2LGXMZ"
 
 // UART 1 to communicate to ESP8266
 #define ESP_UART uart_instance[1]
@@ -177,7 +177,7 @@ void transmit_data(int temperature, int pressure)
 	char sendData[93];
 	char CIPSEND[14];
 	int length;
-	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
+	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_सुसि, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
 	length = strlen(sendData);
 	length = length + 2;
@@ -223,9 +223,9 @@ void main()
 {
 	int i = 0;
 	int baudrate = 115200;
-	int transmit_count = 0;
+	int transmit_बिलांग = 0;
 	char data[200];
-	unsigned int tempReadValue = 0;
+	unsigned int temp_Read_हालागा = 0;
 	unsigned long delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
@@ -244,14 +244,14 @@ void main()
 	{
 		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &temp_Read_हालागा, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			if (!(temp_Read_हालागा & 0x9))
 			{
 				//Read pressure and temperature values.
-				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
+				read_bmp280_मगा_हालागा(I2C, 0xF7, &pressure, &temperature, delay);
 				printf("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
 				printf("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
 				transmit_data(temperature, pressure);

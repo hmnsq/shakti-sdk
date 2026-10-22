@@ -128,9 +128,9 @@ void spi_rx_enable(void)
  * @param int (p (position from where the bits to be extracted))
  * @return int (32 bit which have k bit from "number" and rest are zero)
  */
-int bitExtracted(int number, int k, int p)
+int bitExtracted(int नुमेरो_2, int k, int p)
 {
-	return (((1 << k) - 1) & (number >> (p - 1)));
+	return (((1 << k) - 1) & (नुमेरो_2 >> (p - 1)));
 }
 
 /**
@@ -141,12 +141,12 @@ int bitExtracted(int number, int k, int p)
  */
 int spi_rxne_enable(void)
 {
-	int value = 0;
+	int हालागा = 0;
 
-	while (!(value & 0x1))
+	while (!(हालागा & 0x1))
 	{
 		waitfor(100);
-		value = get_spi(spi_sr);
+		हालागा = get_spi(spi_sr);
 	}
 	return 1;
 }
@@ -160,12 +160,12 @@ int spi_rxne_enable(void)
  */
 int spi_notbusy(void)
 {
-	int value = 0x80;
+	int हालागा = 0x80;
 
-	while ((value & 0x80))
+	while ((हालागा & 0x80))
 	{
 		waitfor(10);
-		value = get_spi(spi_sr);
+		हालागा = get_spi(spi_sr);
 	}
 
 	return 1;
@@ -314,8 +314,8 @@ int flash_cmd_to_read(int command, int addr)
  */
 int flash_read(int address)
 {
-	int read_value = flash_cmd_to_read(0x0C000000,address);
-	return read_value;
+	int read_हालागा = flash_cmd_to_read(0x0C000000,address);
+	return read_हालागा;
 }
 
 /**

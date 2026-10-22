@@ -45,9 +45,9 @@ void waitfor(unsigned int secs)
  * @brief  sleeps for number of "count"
  * @param unsigned long (number of count)
  */
-void delay(unsigned long count)
+void delay(unsigned long बिलांग)
 {
-	unsigned long cntr1 = count *1000;
+	unsigned long cntr1 = बिलांग *1000;
 	unsigned long tmpCntr;
 
 	while (cntr1--){
@@ -105,17 +105,17 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+int int_to_string(int नुमेरो_2, char str[], unsigned int afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	while (नुमेरो_2 != 0)
 	{
-		str[i] = ((number%10) + '0');
+		str[i] = ((नुमेरो_2%10) + '0');
 		i++;
-		number = number/10;
+		नुमेरो_2 = नुमेरो_2/10;
 	}
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/

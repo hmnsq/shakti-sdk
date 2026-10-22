@@ -38,7 +38,7 @@
 //#define USE_WRITE_I2C_INTERRUPT 1
 //#define USE_READ_I2C_INTERRUPT 1
 
-i2c_struct *i2c_instance[MAX_I2C_COUNT];
+i2c_struct *i2c_instance[MAX_I2_C_बिलांग];
 
 /**
  * @fn void i2c_init()
@@ -47,7 +47,7 @@ i2c_struct *i2c_instance[MAX_I2C_COUNT];
  */
 void i2c_init()
 {
-	for(int i=0; i< MAX_I2C_COUNT; i++)
+	for(int i=0; i< MAX_I2_C_बिलांग; i++)
 	{
 		i2c_instance[i] = (i2c_struct*) (I2C0_BASE + (i * I2C_OFFSET));
 	}
@@ -215,11 +215,11 @@ int wait_till_txrx_operation_Completes(i2c_struct * instance, int *status)
  * @param int eni  --- External Interrupt Control
  * @return Returns number of bytes written else EREMOTEIO.
  */
-int sendbytes(i2c_struct * instance, const char *buf, int count, int last, int eni)
+int sendbytes(i2c_struct * instance, const char *buf, int बिलांग, int last, int eni)
 {
 	int wrcount, status, timeout;
 	printf("\tStarting Write Transaction -- Did you create tri1 nets for SDA and SCL in verilog?\n");
-	for (wrcount=0; wrcount<count; ++wrcount) {
+	for (wrcount=0; wrcount<बिलांग; ++wrcount) {
 		instance->data = buf[wrcount];
 		timeout = wait_till_txrx_operation_Completes(instance, &status);
 		if (timeout) {
@@ -260,20 +260,20 @@ int sendbytes(i2c_struct * instance, const char *buf, int count, int last, int e
  * @param int last --- If 1, I2C stop command can be sent
  * @return Returns number of bytest read over i2c bus. else -1.
  */
-int readbytes(i2c_struct * instance, char *buf, int count, int last)
+int readbytes(i2c_struct * instance, char *buf, int बिलांग, int last)
 {
 	int i, status;
 	int wfp;
 
 	/* increment number of bytes to read by one -- read dummy byte */
-	for (i = 0; i <= count; i++) {
+	for (i = 0; i <= बिलांग; i++) {
 		wfp = wait_till_txrx_operation_Completes(instance, &status);
 		if (wfp) {
 			instance->control = I2C_STOP;
 			return -1;
 		}
 
-		if ((status & I2C_LRB) && (i != count)) {
+		if ((status & I2C_LRB) && (i != बिलांग)) {
 			instance->control = I2C_STOP;
 			printf("\tNo ack\n");
 			return -1;
@@ -287,9 +287,9 @@ int readbytes(i2c_struct * instance, char *buf, int count, int last)
 		else
 			instance->data = !instance->data; /* dummy read */
 
-		if (i == count - 1) {
+		if (i == बिलांग - 1) {
 			instance->control = I2C_ESO;
-		} else if (i == count) {
+		} else if (i == बिलांग) {
 			if (last)
 				instance->control = I2C_STOP;
 			else

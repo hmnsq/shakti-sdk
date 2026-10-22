@@ -29,24 +29,24 @@
   pin is pressed. An interrupt is generated and it is handled by the isr.
  */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "uart.h"
+#अन्तर्भाव "utils.h"
+#अन्तर्भाव "traps.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "plic_driver.h"
+#अन्तर्भाव "log.h"
+#अन्तर्भाव "defines.h"
+#अन्तर्भाव "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+शून्य handle_button_press(__attribute__((unused)) uint32_t अङ्कः);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+शून्य handle_button_press(__attribute__((unused)) uint32_t अङ्कः)
 {
 	log_info("button pressed\n");
 
@@ -65,9 +65,9 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+पूर्णाङ्क main(शून्य){
+	पञ्जिका unsigned पूर्णाङ्क retval;
+	पूर्णाङ्क i;
 
 	//init plic module
 	plic_init();
@@ -79,16 +79,16 @@ int main(void){
 	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm चञ्चल("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
 	// Enable Local (PLIC) interrupts.
-	asm volatile("li      t0, 0x800\t\n"
+	asm चञ्चल("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm चञ्चल(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -98,7 +98,7 @@ int main(void){
 
 	log_debug("mstatus = %x\n", retval);
 
-	asm volatile(
+	asm चञ्चल(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -108,7 +108,7 @@ int main(void){
 
 	log_debug("mie = %x\n", retval);
 
-	asm volatile(
+	asm चञ्चल(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -118,12 +118,12 @@ int main(void){
 
 	log_debug("mip = %u\n", retval);
 
-	while(1){
+	याव(1){
 		i++;
 
-		if((i%10000000) == 0){
+		सचे((i%10000000) == 0){
 
-			asm volatile(
+			asm चञ्चल(
 				     "csrr %[retval], mip\n"
 				     :
 				     [retval]
@@ -133,5 +133,5 @@ int main(void){
 			log_debug("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	पटिनिवत्त 0;
 }

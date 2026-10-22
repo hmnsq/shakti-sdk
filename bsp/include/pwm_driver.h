@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#অন্তর্ভাৱ<stdbool.h>
 
 // PWM Registers 
 #define PERIOD_REGISTER     0x00000000	//16 bits (short)
@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+শূন্য pwm_configure(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক clock_ভাজক, পূর্ণাঙ্ক period, পূর্ণাঙ্ক duty, bool external_clock);
+শূন্য pwm_start(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক mode);
+পূর্ণাঙ্ক pwm_check_continuous_mode(পূর্ণাঙ্ক module_সংখ্যা);
+শূন্য pwm_clear_registers(পূর্ণাঙ্ক module_সংখ্যা);
+শূন্য pwm_init(শূন্য);
+শূন্য pwm_set_external_clock(পূর্ণাঙ্ক module_সংখ্যা, bool মান);
+শূন্য pwm_set_clock(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক clock_ভাজক);
+শূন্য pwm_set_duty_cycle(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক duty);
+শূন্য pwm_set_periodic_cycle(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক period);
+শূন্য pwm_stop(পূর্ণাঙ্ক module_সংখ্যা);
+শূন্য show_register_মানসমূহ(পূর্ণাঙ্ক module_সংখ্যা);
+পূর্ণাঙ্ক set_pwm_period_register(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক মান);
+পূর্ণাঙ্ক set_pwm_duty_register(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক মান);
+পূর্ণাঙ্ক set_pwm_control_register(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক মান);
+পূর্ণাঙ্ক set_pwm_clock_register(পূর্ণাঙ্ক module_সংখ্যা, পূর্ণাঙ্ক মান);
+পূর্ণাঙ্ক configure_control_register_mode(পূর্ণাঙ্ক mode);
+শূন্য pwm_use_external_clock(পূর্ণাঙ্ক module_সংখ্যা, bool মান);
 

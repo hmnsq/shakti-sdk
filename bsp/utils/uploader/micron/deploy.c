@@ -27,49 +27,49 @@
 @detail Writes an array of hex values into the flash memory using QSPI.
 */
 
-#include <stdint.h>
-#include "uart.h"
-#include "qspi.h"
-#include "flashdata.h"
+#অন্তর্ভাৱ <stdint.h>
+#অন্তর্ভাৱ "uart.h"
+#অন্তর্ভাৱ "qspi.h"
+#অন্তর্ভাৱ "flashdata.h"
 
 #define DEBUG 1
 #define ERASE 1024
 
-extern int  status;
+বাহ্য পূর্ণাঙ্ক  status;
 
 /** @fn void deploy()
  * @brief Deploys the hex file for a project to the flash device using QSPI
  * protocol. 
  */
-void deploy()
+শূন্য deploy()
 {
-	int ar_read,dum_data,i;
-	int write_address = 0x0;
-	int size_byte=0;
-	int *config_string = (const int*)0x80000000;
-	int* read_data = (int*)(0x90000000);
+	পূর্ণাঙ্ক ar_read,dum_data,i;
+	পূর্ণাঙ্ক write_address = 0x0;
+	পূর্ণাঙ্ক size_byte=0;
+	পূর্ণাঙ্ক *config_string = (ধ্রুৱ পূর্ণাঙ্ক*)0x80000000;
+	পূর্ণাঙ্ক* read_data = (পূর্ণাঙ্ক*)(0x90000000);
 
 	qspi_init(27,0,3,1,15,1);
 	waitfor(400);
 
-	if(flashMemInit())
-		return -1;
+	যদি(flashMemInit())
+		ঘূৰাই -1;
 
 	status=flashReadStatusRegister();
 
 	printf("\t qspi status register %08x\n",status);
 
-	if(flashWriteVolatileConfigReg(0x40404040)){
+	যদি(flashWriteVolatileConfigReg(0x40404040)){
 		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+		ঘূৰাই -1;
 	}
 
 	status = wait_for_wip();
 	printf("\t qspi write  status register %08x\n",status);
 
-	for(i=0;i<= write_data[0];i+=4)
+	বাবে(i=0;i<= write_data[0];i+=4)
 	{
-		if(i%ERASE==0)
+		যদি(i%ERASE==0)
 		{
 			eraseSector(0x21, write_address);
 		}
@@ -83,13 +83,13 @@ void deploy()
 		write_address+=16;
 	}
 
-#if DEBUG
+#যদি DEBUG
 	waitfor(400);
 
 	flashEnable4ByteAddressingMode();
 	flashQuadSPIDDRXip(0x000000, config_string);
 
-	for(i=0;i<write_data[0];++i)
+	বাবে(i=0;i<write_data[0];++i)
 	{
 		dum_data = get_qspi_shakti(read_data);
 		waitfor(100);
@@ -115,13 +115,13 @@ void deploy()
 	flashMemInit();
 #endif
 
-	asm volatile ("ebreak");
+	asm চঞ্চল ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function 
  */
-void main(){
+শূন্য main(){
 
 	deploy();
 }

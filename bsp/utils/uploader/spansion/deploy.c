@@ -29,20 +29,20 @@ flash device. SPI protocol is used for this purporse. The array is usually a
 project's hex file 
 */
 
-#include <stdint.h>
-#include <uart.h>
-#include <stdio.h>
-#include "spi.h"
-#include "flashdata.h"
+#অন্তর্ভাব <stdint.h>
+#অন্তর্ভাব <uart.h>
+#অন্তর্ভাব <stdio.h>
+#অন্তর্ভাব "spi.h"
+#অন্তর্ভাব "flashdata.h"
 
 /** @fn void deploy()
  * @brief Erases flash and writes the hex array entry by entry into the flash
  *       memory. Here SPI protocol is used.
  */
-void deploy()
+শূন্য deploy()
 {
-	int read_address = 0x00b00000;
-	double count=0.0;
+	পূর্ণসংখ্যা read_address = 0x00b00000;
+	দ্বিগুণ গুনতি=0.0;
 
 	configure_spi(SPI0_OFFSET);
 	spi_init();
@@ -56,29 +56,29 @@ void deploy()
 	flash_status_register_read();
 	printf("\nErase complete.\n");
 
-	flash_write(read_address,write_data[0]);
+	flash_write(read_address,write_তথ্য_2[0]);
 	read_address+=4;
 
 	printf("\nWriting...");
 
-	for(int i =0; i< write_data[0]; i++)
+	জন্য(পূর্ণসংখ্যা i =0; i< write_তথ্য_2[0]; i++)
 	{
 		waitfor(200);
-		flash_write(read_address,write_data[i+1]);
+		flash_write(read_address,write_তথ্য_2[i+1]);
 		read_address+=4;
 
-		if(i%512 == 0)
+		যদি(i%512 == 0)
 			printf(".");;
 	}
 
 	printf("\n\nWrite complete.\n");
 	printf("\nPlease reset.\n");
-	asm volatile ("ebreak");
+	asm অস্থির ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function
  */
-void main(){
+শূন্য প্রধান(){
 	deploy();
 }

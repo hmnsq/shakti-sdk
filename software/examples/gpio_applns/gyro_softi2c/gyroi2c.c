@@ -27,7 +27,7 @@
 @detail 
 */ 
 
-#include"gpio_i2c.h"
+#অন্তর্ভাব"gpio_i2c.h"
 
 #define I2C_WRITE 0
 #define I2C_READ 1
@@ -38,7 +38,7 @@
 #define MPU6050_SMPL_DIV           0x19
 #define MPU6050_ADDRESS            0x68 
 #define DEV_IDENTITY               0X68
-#define DEV_IDENTITY_DATA_REG      0X75
+#define DEV_IDENTITY_তথ্য_REG      0X75
 #define MPU6050_REG_PWR_MGMT       0X6B
 #define MPU6050_RESET              0x80
 #define MPU6050_ACC_SENS_8G        0x10
@@ -48,16 +48,16 @@
 
 #define PI 3.141592654
 
-char readbuf[20];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
-static unsigned char delay = 100;
+অক্ষর readbuf[20];
+পূর্ণসংখ্যা AccX,AccY,AccZ;
+পূর্ণসংখ্যা accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+পূর্ণসংখ্যা roll, pitch, yaw;
+পূর্ণসংখ্যা AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+পূর্ণসংখ্যা AccErrorX,AccErrory;
+পূর্ণসংখ্যা GyroX, GyroY, GyroZ;
+পূর্ণসংখ্যা c = 0;
+পূর্ণসংখ্যা i=0;
+স্থির unsigned অক্ষর delay = 100;
 
 //   soft float library need to be added, if hardfloat not there
  
@@ -65,11 +65,11 @@ static unsigned char delay = 100;
  * @brief  determines the x,y,z axes in terms of 16-bit
  * @details  In addition to measurements error adjustments is also made.  
  */
-void measuring_value()
+শূন্য measuring_মান()
 {
 	// read accelerometer data
 	I2cSendSlaveAddress(MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);//selecting slave to be read
-	I2cWriteData(MPU_6050_OUTPUT_BEGIN, delay);//selecting register to be read
+	I2c_Write_তথ্য(MPU_6050_OUTPUT_BEGIN, delay);//selecting register to be read
 	I2cSendSlaveAddress(MPU6050_SLAVE_ADDRESS, I2C_READ, delay);
 	I2c_shakti_readbytes(readbuf,14,1, delay);//to read the output values
 	printf("helloworld inside measuring value\n");
@@ -93,16 +93,16 @@ void measuring_value()
  * @details determines whether the initalisation as well as verfication is done properly or not 
  * @return int
  */
-int main()
+পূর্ণসংখ্যা প্রধান()
 {
 	I2cInit();//configuring data and clocks as output lines
 
 	printf("MPU6050 i2c Init completed\n");
 
-	if (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_DATA_REG, delay)){
+	যদি (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_তথ্য_REG, delay)){
 		printf("DEVICE SUCCESFULLY VERIFIED");
 	}
-	else{
+	অন্যথা{
 		printf("something went wrong , device identity not verified");
 	}
 	//configuring power management register
@@ -125,8 +125,8 @@ int main()
 	// configuring sample divider to 99(i.e sample rate= gyroscope output rate /(1+sample divider))
 	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_SMPL_DIV, 0x63, delay);//set sample rate to 10
 
-	while (1){
-		measuring_value();
+	যখন (1){
+		measuring_মান();
 		printf("AccErrorX: %d,AccErrMPU6050_SLAVE_ADDRESSorX");
 		printf("AccErrorY: %d,AccErrorY");
 		printf("GyroErrorX: %d,GyroErrorX");
@@ -134,7 +134,7 @@ int main()
 		printf("GyroErrorZ %d,GyroErrorZ");
 	}
 
-	return 0;
+	ফেরত 0;
 }
 
 /** @fn void calculate_imu_error()
@@ -142,14 +142,14 @@ int main()
  * @details 
  * @warning  
  */
-void calculate_imu_error()
+শূন্য calculate_imu_error()
 {
-	int c = 0;
-	int yaw;
-	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+	পূর্ণসংখ্যা c = 0;
+	পূর্ণসংখ্যা yaw;
+	দশমিক accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while (c < 200){
-		measuring_value();
+	যখন (c < 200){
+		measuring_মান();
 
 		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;
 		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;

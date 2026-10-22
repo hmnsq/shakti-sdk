@@ -40,15 +40,15 @@
 
 */
 
-#include "uart.h" //Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
-#include "bmp280.h"
+#অন্তর্ভাব "uart.h" //Includes the definitions of uart communication protocol//
+#অন্তর্ভাব "string.h"
+#অন্তর্ভাব "pinmux.h"
+#অন্তর্ভাব "i2c.h"
+#অন্তর্ভাব "log.h"
+#অন্তর্ভাব "bmp280.h"
 
 // Replace the API KEY
-#define API_KEY "PPI6OVOI1A2LGXMZ"
+#define API_চাবি "PPI6OVOI1A2LGXMZ"
 
 // UART 1 to communicate to ESP8266
 #define ESP_UART uart_instance[1]
@@ -64,12 +64,12 @@
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_to_esp8266(char *data)
+পূর্ণসংখ্যা write_to_esp8266(অক্ষর *তথ্য_2)
 {
-	while (*data != '\0')
+	যখন (*তথ্য_2 != '\0')
 	{
-		write_uart_character(ESP_UART, *data);
-		data++;
+		write_uart_character(ESP_UART, *তথ্য_2);
+		তথ্য_2++;
 	}
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -85,7 +85,7 @@ int write_to_esp8266(char *data)
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
 
-int write_enter_to_esp8266()
+পূর্ণসংখ্যা write_enter_to_esp8266()
 {
 	write_uart_character(ESP_UART, '\r');
 	write_uart_character(ESP_UART, '\n');
@@ -99,45 +99,45 @@ int write_enter_to_esp8266()
   * @param sel Uart that is connected to esp8266
   * @param baudrate Baudrate that is used to communicate with esp8266
 */
-int read_from_esp8266(char *data)
+পূর্ণসংখ্যা read_from_esp8266(অক্ষর *তথ্য_2)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 198; i++)
+	পূর্ণসংখ্যা ch;
+	অক্ষর *str = তথ্য_2;
+	অক্ষর *test = তথ্য_2;
+	জন্য (পূর্ণসংখ্যা i = 0; i < 198; i++)
 	{
 		read_uart_character(ESP_UART, &ch);
 		*str = ch;
 		str++;
 		*str = '\0';
-		if (strstr(test, "OK") != NULL)
+		যদি (strstr(test, "OK") != ফাঁকা)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ফেরত;
 		}
-		if (strstr(test, "ERROR") != NULL)
+		যদি (strstr(test, "ERROR") != ফাঁকা)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ফেরত;
 		}
-		if (strstr(test, ">") != NULL)
+		যদি (strstr(test, ">") != ফাঁকা)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ফেরত;
 		}
-		if (strstr(test, "RECV") != NULL)
+		যদি (strstr(test, "RECV") != ফাঁকা)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ফেরত;
 		}
-		if (strstr(test, "IP") != NULL)
+		যদি (strstr(test, "IP") != ফাঁকা)
 		{
 			log_debug("read from esp8266 %s\n", test);
-			return;
+			ফেরত;
 		}
 	}
 	*str = '\0';
-	return 1;
+	ফেরত 1;
 }
 
 /**
@@ -145,21 +145,21 @@ int read_from_esp8266(char *data)
   * @brief setup MUX mode in  esp8266
   * @details setup MUX mode in  esp8266
 */
-void setup_esp8266()
+শূন্য setup_esp8266()
 {
-	char data[200];
+	অক্ষর তথ্য_2[200];
 	write_to_esp8266("AT");
 	delay_loop(1000, 1000);
-	read_from_esp8266(data);
+	read_from_esp8266(তথ্য_2);
 
 	printf("sending AT Echo off command to esp\n");
 	write_to_esp8266("ATE0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
+	read_from_esp8266(তথ্য_2);
 	printf("write AT+CIPMUX\n");
 	write_to_esp8266("AT+CIPMUX=0");
 	delay_loop(50, 50);
-	read_from_esp8266(data);
+	read_from_esp8266(তথ্য_2);
 }
 /**
   * @fn void transmit_data(int temperature, int baudrate)
@@ -171,61 +171,61 @@ void setup_esp8266()
   * @param temperature temperate that has to be sent to database in cloud
   * @param baudrate baudrate used to communicate with esp8266
 */
-void transmit_data(int temperature, int pressure)
+শূন্য transmit_তথ্য(পূর্ণসংখ্যা temperature, পূর্ণসংখ্যা pressure)
 {
-	char data[200];
-	char sendData[93];
-	char CIPSEND[14];
-	int length;
-	sprintf(sendData, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_KEY, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
+	অক্ষর তথ্য_2[200];
+	অক্ষর send_তথ্য_2[93];
+	অক্ষর CIPSEND[14];
+	পূর্ণসংখ্যা দৈর্ঘ্য_2;
+	sprintf(send_তথ্য_2, "GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u&field2=%u.%u", API_চাবি, temperature / 100, temperature % 100, pressure / 1000, pressure % 1000);
 	//sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%u.%u",API_KEY,temperature/100,temperature%100);
-	length = strlen(sendData);
-	length = length + 2;
-	sprintf(CIPSEND, "AT+CIPSEND=%d", length);
+	দৈর্ঘ্য_2 = strlen(send_তথ্য_2);
+	দৈর্ঘ্য_2 = দৈর্ঘ্য_2 + 2;
+	sprintf(CIPSEND, "AT+CIPSEND=%d", দৈর্ঘ্য_2);
 	// Connect to Wifi using esp8266
 
 	// Connect to Wifi using esp8266
 	printf("\n Open connection to thingspeak.com\n");
-	printf("\n sending  %s\n", sendData);
+	printf("\n sending  %s\n", send_তথ্য_2);
 	flush_uart(ESP_UART);
 	write_to_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	read_from_esp8266(তথ্য_2);
+	printf(" data from esp :%s\n",তথ্য_2);
 
 	//delay_loop(2000,2000);
 	printf("\n%s\n", CIPSEND);
 	flush_uart(ESP_UART);
 	write_to_esp8266(CIPSEND);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	read_from_esp8266(তথ্য_2);
+	printf(" data from esp :%s\n",তথ্য_2);
 
 	printf(" write Data\n");
 	flush_uart(ESP_UART);
-	write_to_esp8266(sendData);
+	write_to_esp8266(send_তথ্য_2);
 
 	//flush_uart(ESP_UART);
 	write_enter_to_esp8266();
 	//delay(100,100);
-	read_from_esp8266(data);
-	printf(" data from esp :%s\n",data);
+	read_from_esp8266(তথ্য_2);
+	printf(" data from esp :%s\n",তথ্য_2);
 	// disconnect from link
 	printf(" write AT+CIPCLOSE\n");
 	flush_uart(ESP_UART);
 	write_to_esp8266("AT+CIPCLOSE");
-	read_from_esp8266(data);
+	read_from_esp8266(তথ্য_2);
 }
 
 /**
   * @fn void main()
   * @brief Entry point for the program
 */
-void main()
+শূন্য প্রধান()
 {
-	int i = 0;
-	int baudrate = 115200;
-	int transmit_count = 0;
-	char data[200];
-	unsigned int tempReadValue = 0;
+	পূর্ণসংখ্যা i = 0;
+	পূর্ণসংখ্যা baudrate = 115200;
+	পূর্ণসংখ্যা transmit_গুনতি = 0;
+	অক্ষর তথ্য_2[200];
+	unsigned পূর্ণসংখ্যা অস্থায়ী_Read_মান = 0;
 	unsigned long delay = 1000;
 	uint32_t pressure = 0, temperature = 0;
 
@@ -240,24 +240,24 @@ void main()
 	setup_esp8266();
 	setup_bmp280();
 
-	while (1)
+	যখন (1)
 	{
 		write_bmp280_register(I2C, BMP280_CTRL_MEANS, BMP280_NORMAL_MODE, delay); // Set it to NORMAL MODE
 		//log_info("write to bmp280\n   ");
-		if (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &tempReadValue, delay))
+		যদি (0 == read_bmp280_register(I2C, BMP280_STATUS_REGISTER, &অস্থায়ী_Read_মান, delay))
 		{
 			//log_info("read from bmp280");
 			delay_loop(50, 50);
-			if (!(tempReadValue & 0x9))
+			যদি (!(অস্থায়ী_Read_মান & 0x9))
 			{
 				//Read pressure and temperature values.
-				read_bmp280_values(I2C, 0xF7, &pressure, &temperature, delay);
+				read_bmp280_মানসমূহ(I2C, 0xF7, &pressure, &temperature, delay);
 				printf("\n temp is %u.%u Celcius", temperature / 100, temperature % 100);
 				printf("\n pressure is %u.%u kpa", pressure / 1000, pressure % 1000);
-				transmit_data(temperature, pressure);
+				transmit_তথ্য(temperature, pressure);
 			}
 		}
-		else
+		অন্যথা
 		{
 			//Display the error
 			log_error("\nTemperature read failed.");

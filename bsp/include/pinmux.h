@@ -27,9 +27,9 @@
 
 #ifndef PINMUX_H
 #define PINMUX_H
-#include "platform.h"
+#অন্তর্ভাব "platform.h"
 
-volatile unsigned int* pinmux_config_reg = PINMUX_CONFIGURE_REG;
+অস্থির unsigned পূর্ণসংখ্যা* pinmux_config_reg = PINMUX_CONFIGURE_REG;
 
 #define PINMUX_CONFIG_1 
 #define PINMUX_CONFIG_2 

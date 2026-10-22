@@ -22,28 +22,28 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#অন্তর্ভাব "uart.h"
+#অন্তর্ভাব <stdio.h>
+#অন্তর্ভাব <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
-}*head;
+কাঠামো গ্রন্থি {
+	পূর্ণসংখ্যা অঙ্ক;
+	কাঠামো গ্রন্থি *nptr;
+}*শীর্ষ;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+শূন্য create_list(পূর্ণসংখ্যা n);
+শূন্য display_list();
+শূন্য delete_গ্রন্থি(পূর্ণসংখ্যা position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+শূন্য প্রধান()
 {
-	int n,position,m;
-	char t[15];
+	পূর্ণসংখ্যা n,position,m;
+	অক্ষর t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -63,12 +63,12 @@ void main()
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_গ্রন্থি(position);
 
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	যখন(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,48 +76,48 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+শূন্য create_list(পূর্ণসংখ্যা n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	কাঠামো গ্রন্থি *গ্রন্থি, *tmp;
+	পূর্ণসংখ্যা তথ্য_2,m;
+	অক্ষর t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	শীর্ষ = (কাঠামো গ্রন্থি*)malloc(আকার(কাঠামো গ্রন্থি));
 
-	if(head == NULL)
+	যদি(শীর্ষ == ফাঁকা)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	অন্যথা
 	{
 		printf("\n\nInput data for node 1:");
 
 		read_uart_string(uart_instance[0],t);
 
-		data = atoi(t);
+		তথ্য_2 = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
-		tmp = head;
+		শীর্ষ->অঙ্ক = তথ্য_2;
+		শীর্ষ->nptr = ফাঁকা;
+		tmp = শীর্ষ;
 
-		for(int i = 2;i <= n; i++)
+		জন্য(পূর্ণসংখ্যা i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			গ্রন্থি = (কাঠামো গ্রন্থি*)malloc(আকার(কাঠামো গ্রন্থি));
 
-			if(node == NULL)
+			যদি(গ্রন্থি == ফাঁকা)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			অন্যথা 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
-				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				তথ্য_2 = atoi(t);
+				গ্রন্থি->অঙ্ক = তথ্য_2;
+				গ্রন্থি->nptr = ফাঁকা;
 
-				tmp->nptr = node;
+				tmp->nptr = গ্রন্থি;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,21 +129,21 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+শূন্য display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	পূর্ণসংখ্যা i = 0;
+	কাঠামো গ্রন্থি *tmp;
 
-	if(head == NULL)
+	যদি(শীর্ষ == ফাঁকা)
 	{
 		printf(" List is empty.");
 	}
-	else
+	অন্যথা
 	{
-		tmp = head;
-		while(tmp != NULL) 
+		tmp = শীর্ষ;
+		যখন(tmp != ফাঁকা) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
+			printf(" Node%d = %d",i,tmp->অঙ্ক);
 			printf("->");
 			tmp = tmp->nptr;
 			i++;
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+শূন্য delete_গ্রন্থি(পূর্ণসংখ্যা position)
 {
-	struct node *temp;
+	কাঠামো গ্রন্থি *অস্থায়ী;
 
-	if(head == NULL)
+	যদি(শীর্ষ == ফাঁকা)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	অন্যথা 
 	{
-		temp = head;
+		অস্থায়ী = শীর্ষ;
 
-		if (position == 0)//Delete head node
+		যদি (position == 0)//Delete head node
 		{
-			head = temp->nptr;
-			free(temp);
-			return;
+			শীর্ষ = অস্থায়ী->nptr;
+			মুক্ত(অস্থায়ী);
+			ফেরত;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		জন্য (পূর্ণসংখ্যা i = 0; অস্থায়ী != ফাঁকা && i < position-1; i++)//store previous of to be deleted node
 		{
-			temp = temp->nptr;
+			অস্থায়ী = অস্থায়ী->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		যদি (অস্থায়ী == ফাঁকা || অস্থায়ী->nptr == ফাঁকা)
+			ফেরত;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		কাঠামো গ্রন্থি *nptr = অস্থায়ী->nptr->nptr;
 
-		free(temp->nptr);
-		temp->nptr = nptr; 
+		মুক্ত(অস্থায়ী->nptr);
+		অস্থায়ী->nptr = nptr; 
 	}
 }

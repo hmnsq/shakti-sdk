@@ -29,8 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
@@ -42,20 +42,20 @@ add a method to set the GPIO pins that are to be used  */
 #define I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+শূন্য I2cInit();
+শূন্য I2cSendSlaveAddress(unsigned অক্ষর , unsigned অক্ষর , unsigned অক্ষর );
+শূন্য I2cWriteByte(unsigned অক্ষর , unsigned অক্ষর );
+unsigned অক্ষর I2cReadByte(unsigned অক্ষর );
+শূন্য I2c_Write_তথ্য(unsigned অক্ষর , unsigned অক্ষর );
+unsigned অক্ষর I2c_Read_তথ্য_Ack(unsigned অক্ষর );
+unsigned অক্ষর I2c_Read_তথ্য_Nack(unsigned অক্ষর );
+শূন্য I2cStart(unsigned অক্ষর );
+শূন্য I2cStop(unsigned অক্ষর );
+শূন্য I2c_Write_byte(unsigned অক্ষর, unsigned অক্ষর, unsigned অক্ষর, unsigned অক্ষর);
+পূর্ণসংখ্যা I2c_Read_byte(unsigned অক্ষর ,unsigned অক্ষর , unsigned অক্ষর );
+পূর্ণসংখ্যা I2c_shakti_readbytes(অক্ষর *, পূর্ণসংখ্যা , পূর্ণসংখ্যা , unsigned অক্ষর );
+শূন্য ReadAckForWrite(unsigned অক্ষর delay);
+শূন্য SendNackForRead(unsigned অক্ষর delay);
+শূন্য SendAckForRead(unsigned অক্ষর delay);
 
 #endif

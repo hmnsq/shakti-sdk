@@ -41,10 +41,10 @@
   on.
 */
 
-#include "platform.h"
-#include "gpio.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "gpio.h"
 
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
+বাহ্যিক শূন্য delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 #define MOTOR_ON (1 << 7)
 #define MOTOR_OFF 0
@@ -54,9 +54,9 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @brief Entry point for the program
  */
 
-void main()
+শূন্য প্রধান()
 {
-    unsigned long readData = 0;
+    unsigned long read_তথ্য = 0;
     unsigned long moistureDetetected = 0;
 
 /*********************************************************************
@@ -66,16 +66,16 @@ void main()
 *********************************************************************/
     write_word(GPIO_DIRECTION_CNTRL_REG, (0x00|MOTOR_ON));
     
-    while (1) {
-        readData = read_word(GPIO_DATA_REG);
-        printf("\n Read Data:=%d", readData);
-	moistureDetetected = ((readData & 1 ) == 1) ? 1 : 0;
-        if (moistureDetetected == 0) {
-            write_word(GPIO_DATA_REG, MOTOR_ON);
+    যখন (1) {
+        read_তথ্য = read_word(GPIO_তথ্য_REG);
+        printf("\n Read Data:=%d", read_তথ্য);
+	moistureDetetected = ((read_তথ্য & 1 ) == 1) ? 1 : 0;
+        যদি (moistureDetetected == 0) {
+            write_word(GPIO_তথ্য_REG, MOTOR_ON);
             printf("\nTurn on Motor");
         }
-        else {
-            write_word(GPIO_DATA_REG, MOTOR_OFF);
+        অন্যথা {
+            write_word(GPIO_তথ্য_REG, MOTOR_OFF);
             printf("\nTurn off Motor");
         }
         delay_loop(1000,1000);

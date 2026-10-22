@@ -27,8 +27,8 @@
  setup each xadc registers, isr routine and xadc interrupt handler are here.
 */
 
-#include<stdio.h>
-#include "xadc_driver.h"
+#অন্তর্ভাব<stdio.h>
+#অন্তর্ভাব "xadc_driver.h"
 
 //Dedicated mode
 
@@ -38,9 +38,9 @@
  * @param unsigned int (32-bit) address
  * @return unsigned int (32-bit) *address
  */
-uint32_t xadc_read_data(uint32_t *address)
+uint32_t xadc_read_তথ্য(uint32_t *address)
 {
-	return(*address);
+	ফেরত(*address);
 }
 
 /**
@@ -49,9 +49,9 @@ uint32_t xadc_read_data(uint32_t *address)
  * @param unsigned int (32-bit) address
  * @param unsigned int (32-bit) data
  */
-void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
+শূন্য xadc_write_ctrl_reg(uint32_t *address, uint32_t তথ্য_2)
 {
-	*address = data;
+	*address = তথ্য_2;
 }
 
 /**
@@ -61,9 +61,9 @@ void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_voltage(uint32_t value)
+দশমিক xadc_onchip_voltage(uint32_t মান)
 {
-	return (((value >> 4)*3.0f)/4096.0f );
+	ফেরত (((মান >> 4)*3.0f)/4096.0f );
 }
 
 /**
@@ -74,9 +74,9 @@ float xadc_onchip_voltage(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_onchip_temp(uint32_t value)
+দশমিক xadc_onchip_অস্থায়ী(uint32_t মান)
 {
-	return (((value/65536.0f)/0.00198421639f ) - 273.15f);
+	ফেরত (((মান/65536.0f)/0.00198421639f ) - 273.15f);
 }
 
 /**
@@ -85,7 +85,7 @@ float xadc_onchip_temp(uint32_t value)
  * @param unsigned int (32-bit) value
  * @return float
  */
-float xadc_dedicated_channel(uint32_t value)
+দশমিক xadc_dedicated_channel(uint32_t মান)
 {
-	return ((value >> 4)/4096.0f );
+	ফেরত ((মান >> 4)/4096.0f );
 }

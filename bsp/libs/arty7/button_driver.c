@@ -27,12 +27,12 @@
 @detail configures buttons to serve as Input 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#যদি defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
-#include "button_driver.h"
-#include "utils.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "gpio.h"
+#অন্তর্ভাব "button_driver.h"
+#অন্তর্ভাব "utils.h"
 
 /**
  * @fn void configure_btn(unsigned long pinCntrl)
@@ -41,11 +41,11 @@
  *          each BTN as input pin.
  * @param unsigned long (Pin that needs to be configured as BTN.)
  */
-void configure_btn(unsigned long pinCntrl)
+শূন্য configure_btn(unsigned long pinCntrl)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(pinCntrl) ) );
+	unsigned long read_তথ্য_2 = 0;
+	read_তথ্য_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_তথ্য_2 | ~(pinCntrl) ) );
 }
 
 /** @fn void configure_all_btn()
@@ -53,11 +53,11 @@ void configure_btn(unsigned long pinCntrl)
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          all BTNs as input pin.
  */
-void configure_all_btn()
+শূন্য configure_all_btn()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(ALL_BTNS) ) );
+	unsigned long read_তথ্য_2 = 0;
+	read_তথ্য_2 = read_word(GPIO_DIRECTION_CNTRL_REG);
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_তথ্য_2 | ~(ALL_BTNS) ) );
 }
 #endif
 

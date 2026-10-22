@@ -31,12 +31,12 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
+#অন্তর্ভাব "gpio.h"
+#অন্তর্ভাব "uart.h"
+#অন্তর্ভাব "traps.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "eth_driver.h"
+#অন্তর্ভাব "log.h"
 
 
 
@@ -48,7 +48,7 @@
  */
 #define EMAC_DEVICE_ID			240
 #define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+অস্থির unsigned পূর্ণসংখ্যা* eth_base_reg = ETH_BASE_REG;
 
 /**************************** Type Definitions *******************************/
 
@@ -56,15 +56,15 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-int EMACLiteSelfTestExample(u16 DeviceId);
-extern XEmacLite_Config XEmacLite_ConfigTable;
+পূর্ণসংখ্যা EMACLiteSelfTestExample(u16 DeviceId);
+বাহ্যিক XEmacLite_Config XEmacLite_ConfigTable;
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+স্থির XEmacLite EmacLite;
 
 /*****************************************************************************/
 /**
@@ -85,15 +85,15 @@ static XEmacLite EmacLite;
 * @note		None.
 *
 ******************************************************************************/
-int XEmacLite_SelfTest(XEmacLite * InstancePtr)
+পূর্ণসংখ্যা XEmacLite_SelfTest(XEmacLite * InstancePtr)
 {
 	UINTPTR BaseAddress;
-	volatile uint32_t * TempAddress;
-	u8 Index;
-#if 0
+	অস্থির uint32_t * অস্থায়ী_Address;
+	u8 সূচক;
+#যদি 0
 	u8 TestString[4] = { 0xDE, 0xAD, 0xBE, 0xEF };
 	u8 ReturnString[4] = { 0x0, 0x0, 0x0, 0x0 };
-#else
+#অন্যথা
 	u32 TestString[4] = { 0xDEADBEEF, 0xABCDABCD, 0xAABBCCDD, 0x12345678 };
 	u32 ReturnString[4] = { 0x0, 0x0, 0x0, 0x0 };
 
@@ -102,8 +102,8 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	যদি (InstancePtr == ফাঁকা) {
+		ফেরত -1;
 	}
 
 	/*
@@ -111,25 +111,25 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 	 */
 	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
 			XEL_TXBUFF_OFFSET;
-#if 0
+#যদি 0
 	log_info("\n Base Address is %x",  BaseAddress);
-	TempAddress = (volatile uint32_t *)BaseAddress;
-	*TempAddress = 0x12345678;
-	*(TempAddress++) = 0x9abcdef;
-	*(TempAddress++) = 0x11223344;
-	*(TempAddress++) = 0x55667788;
-	*(TempAddress++) = 0x99aabbcc;
-	*(TempAddress++) = 0xddeeff00;
+	অস্থায়ী_Address = (অস্থির uint32_t *)BaseAddress;
+	*অস্থায়ী_Address = 0x12345678;
+	*(অস্থায়ী_Address++) = 0x9abcdef;
+	*(অস্থায়ী_Address++) = 0x11223344;
+	*(অস্থায়ী_Address++) = 0x55667788;
+	*(অস্থায়ী_Address++) = 0x99aabbcc;
+	*(অস্থায়ী_Address++) = 0xddeeff00;
 
-	TempAddress = (volatile uint32_t *)BaseAddress;
-	printf("\n Value at %x: %x", TempAddress , *TempAddress );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
+	অস্থায়ী_Address = (অস্থির uint32_t *)BaseAddress;
+	printf("\n Value at %x: %x", অস্থায়ী_Address , *অস্থায়ী_Address );
+	printf("\n Value at %x: %x", (অস্থায়ী_Address) , *অস্থায়ী_Address++ );
+	printf("\n Value at %x: %x", অস্থায়ী_Address , *অস্থায়ী_Address++ );
+	printf("\n Value at %x: %x", (অস্থায়ী_Address) , *অস্থায়ী_Address++ );
+	printf("\n Value at %x: %x", অস্থায়ী_Address , *অস্থায়ী_Address++ );
+	printf("\n Value at %x: %x", (অস্থায়ী_Address) , *অস্থায়ী_Address++ );
+	printf("\n Value at %x: %x", অস্থায়ী_Address , *অস্থায়ী_Address++ );
+	printf("\n Value at %x: %x", (অস্থায়ী_Address) , *অস্থায়ী_Address++ );
 
 	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
 			(XEL_TXBUFF_OFFSET + 4);
@@ -139,46 +139,46 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 	 * back from the EMAC Lite and verify
 	 */
 	XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-			       sizeof(TestString));
+			       আকার(TestString));
 	XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-			      sizeof(ReturnString));
-	for (Index = 0; Index < 4; Index++) {
+			      আকার(ReturnString));
+	জন্য (সূচক = 0; সূচক < 4; সূচক++) {
 
-		printf("\n TestString[%x]: %x; ReturnString[%x]: %x", Index, TestString[Index], Index, ReturnString[Index]);
-		if (ReturnString[Index] != TestString[Index]) {
-			return FAILURE;
+		printf("\n TestString[%x]: %x; ReturnString[%x]: %x", সূচক, TestString[সূচক], সূচক, ReturnString[সূচক]);
+		যদি (ReturnString[সূচক] != TestString[সূচক]) {
+			ফেরত FAILURE;
 		}
 
 		/*
 		 * Zero the return string for the next test
 		 */
-		ReturnString[Index] = 0;
+		ReturnString[সূচক] = 0;
 	}
 
 	/*
 	 * If the second buffer is configured, test it also
 	 */
-	if (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
-		BaseAddress += XEL_BUFFER_OFFSET;
+	যদি (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
+		BaseAddress += XEL_বাফার_OFFSET;
 		/*
 		 * Write the TestString to the optional TX buffer in EMAC Lite
 		 * then back from the EMAC Lite and verify
 		 */
 		XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-				       sizeof(TestString));
+				       আকার(TestString));
 		XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-				      sizeof(ReturnString));
+				      আকার(ReturnString));
 
-		for (Index = 0; Index < 4; Index++) {
+		জন্য (সূচক = 0; সূচক < 4; সূচক++) {
 
-			if (ReturnString[Index] != TestString[Index]) {
-				return FAILURE;
+			যদি (ReturnString[সূচক] != TestString[সূচক]) {
+				ফেরত FAILURE;
 			}
 
 			/*
 			 * Zero the return string for the next test
 			 */
-			ReturnString[Index] = 0;
+			ReturnString[সূচক] = 0;
 		}
 	}
 
@@ -193,50 +193,50 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 	 * back from the EMAC Lite and verify
 	 */
 	XEmacLite_AlignedWrite(TestString, (UINTPTR *) (BaseAddress),
-			       sizeof(TestString));
+			       আকার(TestString));
 	XEmacLite_AlignedRead((UINTPTR *) (BaseAddress), ReturnString,
-			      sizeof(ReturnString));
+			      আকার(ReturnString));
 
-	for (Index = 0; Index < 4; Index++) {
+	জন্য (সূচক = 0; সূচক < 4; সূচক++) {
 
-		if (ReturnString[Index] != TestString[Index]) {
-			return FAILURE;
+		যদি (ReturnString[সূচক] != TestString[সূচক]) {
+			ফেরত FAILURE;
 		}
 
 		/*
 		 * Zero the return string for the next test
 		 */
-		ReturnString[Index] = 0;
+		ReturnString[সূচক] = 0;
 	}
 
 	/*
 	 * If the second buffer is configured, test it also
 	 */
-	if (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
-		BaseAddress += XEL_BUFFER_OFFSET;
+	যদি (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
+		BaseAddress += XEL_বাফার_OFFSET;
 		/*
 		 * Write the TestString to the optional RX buffer in EMAC Lite
 		 * then back from the EMAC Lite and verify
 		 */
 		XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-				       sizeof(TestString));
+				       আকার(TestString));
 		XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-				      sizeof(ReturnString));
+				      আকার(ReturnString));
 
-		for (Index = 0; Index < 4; Index++) {
+		জন্য (সূচক = 0; সূচক < 4; সূচক++) {
 
-			if (ReturnString[Index] != TestString[Index]) {
-				return FAILURE;
+			যদি (ReturnString[সূচক] != TestString[সূচক]) {
+				ফেরত FAILURE;
 			}
 
 			/*
 			 * Zero the return string for the next test
 			 */
-			ReturnString[Index] = 0;
+			ReturnString[সূচক] = 0;
 		}
 	}
 
-	return SUCCESS;
+	ফেরত SUCCESS;
 }
 
 
@@ -253,22 +253,22 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 * @note		None
 *
 *****************************************************************************/
-int main(void)
+পূর্ণসংখ্যা প্রধান(শূন্য)
 {
-	int Status;
+	পূর্ণসংখ্যা Status;
 
 	/*
 	 * Run the EmacLite Self test example, specify the Device ID that is
 	 * generated in xparameters.h
 	 */
 	Status = EMACLiteSelfTestExample(EMAC_DEVICE_ID);
-	if (Status != SUCCESS) {
+	যদি (Status != SUCCESS) {
 		log_error("Emaclite selftest Example Failed\r\n");
-		return FAILURE;
+		ফেরত FAILURE;
 	}
 
 	log_debug("Successfully ran Emaclite selftest Example\r\n");
-	return SUCCESS;
+	ফেরত SUCCESS;
 
 }
 
@@ -285,9 +285,9 @@ int main(void)
 * @note		None.
 *
 ******************************************************************************/
-int EMACLiteSelfTestExample(u16 DeviceId)
+পূর্ণসংখ্যা EMACLiteSelfTestExample(u16 DeviceId)
 {
-	int Status;
+	পূর্ণসংখ্যা Status;
 	XEmacLite_Config *ConfigPtr;
 	XEmacLite *InstancePtr = &EmacLite;
 	log_debug("\n Inside EMACLiteSelfTestExample");
@@ -295,8 +295,8 @@ int EMACLiteSelfTestExample(u16 DeviceId)
 	 * Initialize the EmacLite device.
 	 */
 	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	যদি (ConfigPtr == ফাঁকা) {
+		ফেরত -1;
 	}
 	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
 	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->BaseAddress);
@@ -308,8 +308,8 @@ int EMACLiteSelfTestExample(u16 DeviceId)
 	Status = XEmacLite_CfgInitialize(InstancePtr,
 					ConfigPtr,
 					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+	যদি (Status != 0) {
+		ফেরত -1;
 	}
 	
 	/*
@@ -317,10 +317,10 @@ int EMACLiteSelfTestExample(u16 DeviceId)
 	 */
 	log_debug("\n Calling self test function.");
 	Status = XEmacLite_SelfTest(InstancePtr);
-	if (Status != SUCCESS) {
-		return FAILURE;
+	যদি (Status != SUCCESS) {
+		ফেরত FAILURE;
 	}
 
-	return SUCCESS;
+	ফেরত SUCCESS;
 }
 

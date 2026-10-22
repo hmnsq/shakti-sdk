@@ -28,36 +28,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifndef UART_H
 #define UART_H
-#include <stdint.h>
-#include "platform.h"
+#অন্তর্ভাব <stdint.h>
+#অন্তর্ভাব "platform.h"
 
 #define USE_INTERRUPT 1 //Uncomment or add this line when interrupts are unused
 #define USE_RX_THRESHOLD 1 //uncomment or add this line when rx_threshold is required
 
 
 /* Struct to access UART registers as 32 bit registers */
-typedef struct
+প্রকারলেখ কাঠামো
 {
 	unsigned short baud;	 /*! Baud rate configuration Register -- 16 bits*/
 	unsigned short reserv0;	 /*! reserved */
-	unsigned int  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
-	unsigned int  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
-	unsigned char  status;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
-	unsigned char  reserv1;	 /*! reserved */
+	unsigned পূর্ণসংখ্যা  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
+	unsigned পূর্ণসংখ্যা  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
+	unsigned অক্ষর  status;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
+	unsigned অক্ষর  reserv1;	 /*! reserved */
 	unsigned short  reserv2; /*! reserved */
 	unsigned short delay;    /*! Delays the transmit with specified clock - 16bits*/
 	unsigned short reserv3;  /*! reserved */
 	unsigned short control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
 	unsigned short reserv5;  /*! reserved */
-	unsigned char ien;	     /*! Enables the required interrupts - 8 bits*/
-	unsigned char reserv6;   /*! reserved */
+	unsigned অক্ষর ien;	     /*! Enables the required interrupts - 8 bits*/
+	unsigned অক্ষর reserv6;   /*! reserved */
 	unsigned short reserv7;  /*! reserved */
-	unsigned char  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
-	unsigned char reserv8;   /*! reserved */
+	unsigned অক্ষর  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
+	unsigned অক্ষর reserv8;   /*! reserved */
 	unsigned short reserv9;  /*! reserved */
 #ifdef USE_RX_THRESHOLD /*! This is to be used only when support is there. */
-	unsigned char rx_threshold;	/*! RX FIFO size configuration register - 8 bits*/
-	unsigned char reserv10;    /*! reserved */ 
+	unsigned অক্ষর rx_threshold;	/*! RX FIFO size configuration register - 8 bits*/
+	unsigned অক্ষর reserv10;    /*! reserved */ 
 	unsigned short reserv11;    /*! reserved */
 #endif	
 } uart_struct;
@@ -82,52 +82,52 @@ typedef struct
 #define ENABLE_RX_NOT_EMPTY 	1 << 2
 #define ENABLE_TX_FULL 		1 << 1
 #define ENABLE_TX_EMPTY 	1 << 0
-#define UARTX_BUFFER_SIZE       10000
+#define UARTX_বাফার_আকার       10000
 
 /* UART control register */
 #define STOP_BITS(x) ( (x & 3) << 1) /*! 00 - 1 stop bits, 01 - 1.5 stop bits; 10 - 2 stop bits; 11 unused */
 #define PARITY(x) ( (x & 3)  << 3 ) /*! 00 --- No parity; 01 -Odd Parity; 10 - Even Parity;  11 - Unused */
 #define UART_TX_RX_LEN(x)       ( (x & 0x1F) << 5) /*! Maximum length 32 bits */
 
-extern uart_struct *uart_instance[MAX_UART_COUNT];
-extern unsigned char uart0_complete;
-extern unsigned char uart1_complete;
-extern unsigned char uart2_complete;
-extern unsigned int uart0_tx_isr_count ;
-extern unsigned int uart0_rcv_isr_count ;
-extern unsigned int uart1_tx_isr_count ;
-extern unsigned int uart1_rcv_isr_count ;
-extern unsigned int uart2_tx_isr_count ;
-extern unsigned int uart2_rcv_isr_count ;
+বাহ্যিক uart_struct *uart_instance[MAX_UART_গুনতি];
+বাহ্যিক unsigned অক্ষর uart0_complete;
+বাহ্যিক unsigned অক্ষর uart1_complete;
+বাহ্যিক unsigned অক্ষর uart2_complete;
+বাহ্যিক unsigned পূর্ণসংখ্যা uart0_tx_isr_গুনতি ;
+বাহ্যিক unsigned পূর্ণসংখ্যা uart0_rcv_isr_গুনতি ;
+বাহ্যিক unsigned পূর্ণসংখ্যা uart1_tx_isr_গুনতি ;
+বাহ্যিক unsigned পূর্ণসংখ্যা uart1_rcv_isr_গুনতি ;
+বাহ্যিক unsigned পূর্ণসংখ্যা uart2_tx_isr_গুনতি ;
+বাহ্যিক unsigned পূর্ণসংখ্যা uart2_rcv_isr_গুনতি ;
 
 #ifdef USE_INTERRUPT
-extern unsigned char u0_rcv_char[UARTX_BUFFER_SIZE];
-extern unsigned char u1_rcv_char[UARTX_BUFFER_SIZE];
-extern unsigned char u2_rcv_char[UARTX_BUFFER_SIZE];
+বাহ্যিক unsigned অক্ষর u0_rcv_char[UARTX_বাফার_আকার];
+বাহ্যিক unsigned অক্ষর u1_rcv_char[UARTX_বাফার_আকার];
+বাহ্যিক unsigned অক্ষর u2_rcv_char[UARTX_বাফার_আকার];
 #endif
 
-void uart_init(void);
-void set_baud_rate(uart_struct * uart_instance, unsigned int baudrate);
-void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt);
-void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold);
+শূন্য uart_init(শূন্য);
+শূন্য set_baud_rate(uart_struct * uart_instance, unsigned পূর্ণসংখ্যা baudrate);
+শূন্য enable_uart_interrupts(uart_struct * uart_instance, unsigned অক্ষর interrupt);
+শূন্য set_uart_rx_threshold(uart_struct * uart_instance, unsigned অক্ষর rxthreshold);
 uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character);
 uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string);
-uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character);
-uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string) ;
-void flush_uart(uart_struct * instance);
+uint8_t read_uart_character(uart_struct * uart_instance, অক্ষর * prn_character);
+uint8_t read_uart_string(uart_struct * uart_instance, অক্ষর * ptr_string) ;
+শূন্য flush_uart(uart_struct * instance);
 
 #ifdef USE_INTERRUPT
-unsigned char uart0_isr(void);
-unsigned char uart1_isr(void);
-unsigned char uart2_isr(void);
+unsigned অক্ষর uart0_isr(শূন্য);
+unsigned অক্ষর uart1_isr(শূন্য);
+unsigned অক্ষর uart2_isr(শূন্য);
 #endif
 
-int is_empty(void);
+পূর্ণসংখ্যা is_empty(শূন্য);
 
 #undef putchar
-int putchar(int ch);
+পূর্ণসংখ্যা putchar(পূর্ণসংখ্যা ch);
 
 #undef getchar
-int getchar(void);
+পূর্ণসংখ্যা getchar(শূন্য);
 
 #endif

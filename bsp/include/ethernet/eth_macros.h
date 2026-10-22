@@ -25,7 +25,7 @@
 #define XEL_MAC_LO_OFFSET (XEL_TXBUFF_OFFSET)		/**< MAC address lo
 							     offset */
 
-#define XEL_BUFFER_OFFSET (0x00000800)			/**< Next buffer's
+#define XEL_বাফার_OFFSET (0x00000800)			/**< Next buffer's
 							     offset  same for
 							     both TX and RX */
 /**
@@ -77,38 +77,38 @@
 /**
  * Transmit Packet Length Register (TPLR)
  */
-#define XEL_TPLR_LENGTH_MASK_HI		0x0000FF00 /**< Transmit packet length
+#define XEL_TPLR_দৈর্ঘ্য_MASK_HI		0x0000FF00 /**< Transmit packet length
 							  upper byte */
-#define XEL_TPLR_LENGTH_MASK_LO		0x000000FF /**< Transmit packet length
+#define XEL_TPLR_দৈর্ঘ্য_MASK_LO		0x000000FF /**< Transmit packet length
 							  lower byte */
 
 /**
  * Receive Packet Length Register (RPLR)
  */
-#define XEL_RPLR_LENGTH_MASK_HI		0x0000FF00 /**< Receive packet length
+#define XEL_RPLR_দৈর্ঘ্য_MASK_HI		0x0000FF00 /**< Receive packet length
 							  upper byte */
-#define XEL_RPLR_LENGTH_MASK_LO		0x000000FF /**< Receive packet length
+#define XEL_RPLR_দৈর্ঘ্য_MASK_LO		0x000000FF /**< Receive packet length
 							  lower byte */
 
-#define XEL_HEADER_SIZE			14  /**< Size of header in bytes */
-#define XEL_MTU_SIZE			1500 /**< Max size of data in frame */
-#define XEL_FCS_SIZE			4    /**< Size of CRC */
+#define XEL_HEADER_আকার			14  /**< Size of header in bytes */
+#define XEL_MTU_আকার			1500 /**< Max size of data in frame */
+#define XEL_FCS_আকার			4    /**< Size of CRC */
 
 #define XEL_HEADER_OFFSET		12   /**< Offset to length field */
 #define XEL_HEADER_SHIFT		16   /**< Right shift value to align
-						  length */
+দৈর্ঘ্য*/
 
 
-#define XEL_MAX_FRAME_SIZE (XEL_HEADER_SIZE+XEL_MTU_SIZE+ XEL_FCS_SIZE)	/**< Max
+#define XEL_MAX_FRAME_আকার (XEL_HEADER_আকার+XEL_MTU_আকার+ XEL_FCS_আকার)	/**< Max
 						length of Rx frame  used if
 						length/type field
 						contains the type (> 1500) */
 
-#define XEL_MAX_TX_FRAME_SIZE (XEL_HEADER_SIZE + XEL_MTU_SIZE)	/**< Max
+#define XEL_MAX_TX_FRAME_আকার (XEL_HEADER_আকার + XEL_MTU_আকার)	/**< Max
 						length of Tx frame */
 
 
-#define XEL_MAC_ADDR_SIZE		6	/**< length of MAC address */
+#define XEL_MAC_ADDR_আকার		6	/**< length of MAC address */
 
 
 /*
@@ -117,9 +117,9 @@
 #define XEL_ETHER_PROTO_TYPE_IP		0x0800  /**< IP Protocol */
 #define XEL_ETHER_PROTO_TYPE_ARP	0x0806  /**< ARP Protocol */
 #define XEL_ETHER_PROTO_TYPE_VLAN	0x8100  /**< VLAN Tagged */
-#define XEL_ARP_PACKET_SIZE		28  	/**< Max ARP packet size */
-#define XEL_HEADER_IP_LENGTH_OFFSET	16  	/**< IP Length Offset */
-#define XEL_VLAN_TAG_SIZE		4  	/**< VLAN Tag Size */
+#define XEL_ARP_PACKET_আকার		28  	/**< Max ARP packet size */
+#define XEL_HEADER_IP_দৈর্ঘ্য_OFFSET	16  	/**< IP Length Offset */
+#define XEL_VLAN_TAG_আকার		4  	/**< VLAN Tag Size */
 
 /***************** Macros (Inline Functions) Definitions *********************/
 

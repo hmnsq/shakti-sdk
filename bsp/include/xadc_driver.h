@@ -30,8 +30,8 @@
 #ifndef XADC_DRIVER
 #define XADC_DRIVER
 
-#include "platform.h"
-#include "traps.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "traps.h"
 
 /**@name Register offsets
  * The following constants provide access to each of the registers of the
@@ -54,7 +54,7 @@
 
 /* System Monitor/ADC Internal Channel Registers */
 
-#define XADC_TEMP_OFFSET	  (0x200)   /**< On-chip Temperature Reg */
+#define XADC_অস্থায়ী_OFFSET	  (0x200)   /**< On-chip Temperature Reg */
 #define XADC_VCCINT_OFFSET	  (0x204)   /**< On-chip VCCINT Data Reg */
 #define XADC_VCCAUX_OFFSET	  (0x208)   /**< On-chip VCCAUX Data Reg */
 #define XADC_VPVN_OFFSET	  (0x20C)   /**< ADC out of VP/VN	   */
@@ -82,11 +82,11 @@
  * System Monitor/ADC Registers for Maximum/Minimum data captured for the
  * on chip Temperature/VCCINT/VCCAUX data. 
  */
-#define XADC_MAX_TEMP_OFFSET	(0x280)   /**< Maximum Temperature Reg */
+#define XADC_MAX_অস্থায়ী_OFFSET	(0x280)   /**< Maximum Temperature Reg */
 #define XADC_MAX_VCCINT_OFFSET	(0x284)   /**< Maximum VCCINT Register */
 #define XADC_MAX_VCCAUX_OFFSET	(0x288)   /**< Maximum VCCAUX Register */
 #define XADC_MAX_VBRAM_OFFSET	(0x28C)   /**< Maximum VBRAM Reg / */
-#define XADC_MIN_TEMP_OFFSET	(0x290)   /**< Minimum Temperature Reg */
+#define XADC_MIN_অস্থায়ী_OFFSET	(0x290)   /**< Minimum Temperature Reg */
 #define XADC_MIN_VCCINT_OFFSET	(0x294)   /**< Minimum VCCINT Register */
 #define XADC_MIN_VCCAUX_OFFSET	(0x298)   /**< Minimum VCCAUX Register */
 #define XADC_MIN_VBRAM_OFFSET	(0x29C)   /**< Maximum VBRAM Reg / */
@@ -119,7 +119,7 @@
 
 /* @name System Monitor/ADC Software Reset Register (SRR) mask(s) */
 
-#define XADC_SRR_RESET_VALUE	0x0000000A   /**< Device Reset Mask */
+#define XADC_SRR_RESET_মান	0x0000000A   /**< Device Reset Mask */
 
 /* @name System Monitor/ADC Reset Register (ARR) mask(s) */
 
@@ -131,11 +131,11 @@
 
 /************************** Function Prototypes ******************************/
 
-void xadc_write_ctrl_reg(uint32_t *address, uint32_t data);
+শূন্য xadc_write_ctrl_reg(uint32_t *address, uint32_t তথ্য_2);
 uint32_t xadc_read_ctrl_reg(uint32_t *address);
-uint32_t xadc_read_data(uint32_t *address);
-float xadc_onchip_temp(uint32_t value);
-float xadc_onchip_voltage(uint32_t value);
-float xadc_dedicated_channel(uint32_t value);
+uint32_t xadc_read_তথ্য(uint32_t *address);
+দশমিক xadc_onchip_অস্থায়ী(uint32_t মান);
+দশমিক xadc_onchip_voltage(uint32_t মান);
+দশমিক xadc_dedicated_channel(uint32_t মান);
 
 #endif

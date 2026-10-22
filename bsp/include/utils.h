@@ -28,20 +28,20 @@
 
 #ifndef UTIL_H
 #define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#অন্তর্ভাব <stdio.h>
+#অন্তর্ভাব <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
+শূন্য waitfor(unsigned পূর্ণসংখ্যা secs);
+শূন্য delay(unsigned long seconds);
+দশমিক pow_10(unsigned পূর্ণসংখ্যা y);
+শূন্য reverse(অক্ষর *str, পূর্ণসংখ্যা len);
+শূন্য ftoa( দশমিক, অক্ষর *, unsigned পূর্ণসংখ্যা);
+শূন্য delay_loop(unsigned long cntr1, unsigned long cntr2);
 unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+শূন্য write_word(uint32_t *addr, unsigned long val);
+পূর্ণসংখ্যা int_to_string(পূর্ণসংখ্যা সংখ্যা, অক্ষর str[], unsigned পূর্ণসংখ্যা afterpoint);
+শূন্য _printf_(ধ্রুবক অক্ষর *fmt, va_list ap);
+পূর্ণসংখ্যা printf(ধ্রুবক অক্ষর* fmt, ...);
 
 #endif

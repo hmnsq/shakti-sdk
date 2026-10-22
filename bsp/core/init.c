@@ -30,50 +30,50 @@ uart is initialized. Trap handler is initialized.
 Disable Xip for Aardonyx
 */
 
-#include "traps.h"
-#include "plic_driver.h"
-#include "clint_driver.h"
-#include "log.h"
-#include "utils.h"
-#include "qspi.h"
-#include "platform.h"
-#include "defines.h"
-#include "uart.h"
+#অন্তর্ভাব "traps.h"
+#অন্তর্ভাব "plic_driver.h"
+#অন্তর্ভাব "clint_driver.h"
+#অন্তর্ভাব "log.h"
+#অন্তর্ভাব "utils.h"
+#অন্তর্ভাব "qspi.h"
+#অন্তর্ভাব "platform.h"
+#অন্তর্ভাব "defines.h"
+#অন্তর্ভাব "uart.h"
 
-extern void init(void);
-extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+বাহ্যিক শূন্য init(শূন্য);
+বাহ্যিক শূন্য trap_entry(শূন্য);
+বাহ্যিক uart_struct *uart_instance[MAX_UART_গুনতি];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+বাহ্যিক অক্ষর স্তূপ_end[];
+বাহ্যিক অক্ষর স্তূপ[];
+বাহ্যিক অক্ষর _heap[];
+বাহ্যিক অক্ষর _heap_end[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+অক্ষর *স্তূপ_end_2=(অক্ষর *)&স্তূপ_end;
+অক্ষর *স্তূপ_start=(অক্ষর *)&স্তূপ;
+অক্ষর *heap_start=(অক্ষর *)&_heap;
+অক্ষর *heap_end=(অক্ষর *)&_heap_end;
 
 /** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
  */
-static void section_init(void)
+স্থির শূন্য section_init(শূন্য)
 {
-#if 0
+#যদি 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	যখন(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	যখন(স্তূপ_end_2>=স্তূপ_start)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*স্তূপ_end_2=0x0;
+		স্তূপ_end_2--;
 	}
 #endif
 
@@ -84,7 +84,7 @@ static void section_init(void)
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
  */
-static void trap_init(void)
+স্থির শূন্য trap_init(শূন্য)
 {
 	log_trace("trap_init entered \n ");
 
@@ -144,7 +144,7 @@ static void trap_init(void)
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+শূন্য init(শূন্য)
 {
 //	section_init(); // uncomment on need basis
 	uart_init();
@@ -158,7 +158,7 @@ void init(void)
 
 	trap_init();
 
-	main();
+	প্রধান();
 
 	log_trace("init exited\n");
 }

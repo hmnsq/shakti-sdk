@@ -26,11 +26,11 @@
 @detail This file contains Trap handler routines.
 */
 
-#include "traps.h"
-#include "log.h"
+#ضمن "traps.h"
+#ضمن "log.h"
 
-mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+mtrap_fptr_t mcause_trap_table[MAX_TRAP_نيلاي];
+mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_نيلاي];
 
 /** @fn unsigned int extract_ie_code(unsigned int num)
  * @brief Extract the exception code from the mcause value
@@ -40,19 +40,19 @@ mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
  * @param unsigned int num - mcause value
  * @return unsigned int
  */
-unsigned int extract_ie_code(unsigned int num)
+unsigned صحيح extract_ie_code(unsigned صحيح اڠک)
 {
-	unsigned int exception_code;
+	unsigned صحيح exception_code;
 
 	log_trace("\nextract_ie_code entered\n");
 
-	exception_code = (num & 0X7FFFFFFF);
+	exception_code = (اڠک & 0X7FFFFFFF);
 
 	log_debug("exception code = %x\n",exception_code);
 
 	log_trace("extract_ie_code exited\n");
 
-	return exception_code;
+	أرجع exception_code;
 }
 
 /** @fn void default_handler(uintptr_t mcause, uintptr_t epc)
@@ -60,11 +60,11 @@ unsigned int extract_ie_code(unsigned int num)
  * @param unsigned int ptr mcause
  * @param unsigned int ptr epc
  */
-void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((unused)) uintptr_t epc)
+فراغ default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((unused)) uintptr_t epc)
 {
 	log_trace("\ndefault_handler entered\n");
 
-	while(1);
+	طالما(1);
 
 	log_trace("default_handler exited\n");
 }
@@ -79,7 +79,7 @@ void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((un
  */
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 {
-	unsigned int ie_entry = 0;;
+	unsigned صحيح ie_entry = 0;;
 	uint32_t shift_length = 0;
 
 	log_trace("\nhandle_trap entered\n");
@@ -104,11 +104,11 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 	   The Exception Code field contains a code identifying the last exception
 	 */
 
-	log_debug("sizeof(uintptr)  = %d \n",sizeof(uintptr_t));
+	log_debug("sizeof(uintptr)  = %d \n",حجم(uintptr_t));
 	shift_length = __riscv_xlen - 1;
 
 	 /* checking for type of trap */
-	if (mcause & (1 << (shift_length))){
+	إذا (mcause & (1 << (shift_length))){
 
 		ie_entry = extract_ie_code(mcause);
 
@@ -116,7 +116,7 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 
 		mcause_interrupt_table[ie_entry](mcause, epc);
 	}
-	else{
+	وإلا{
 		log_info("\nException: mcause = %x, epc = %x\n", mcause, epc);
 
 		mcause_trap_table[mcause](mcause, epc);
@@ -124,5 +124,5 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 
 	log_trace("handle_trap exited\n");
 
-return epc;
+أرجع epc;
 }

@@ -27,32 +27,32 @@
 @detail It helps to find the presence of moisture in the soil.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "utils.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
+#ضمن "utils.h"
 
 /** @fn void main()
 * @brief It used to check the moisture in the soil.
 * @details Soil moisture sensors typically refer to sensors that estimate volumetric water content
 * @warning  Connection should be done carefully.
 */
-void main()
+فراغ الرئيسية()
 {
     unsigned long readData = 0;
     
-    while (1) {
+    بينما (1) {
         	 write_word(GPIO_DIRECTION_CNTRL_REG, 0x00);
 		 readData = read_word(GPIO_DATA_REG);
 	
         	 printf("\n Read Data:=0x%x", readData);
 
-        	 if (readData == 0x00000001) {
+        	 إذا (readData == 0x00000001) {
             	 write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000002);
             	 write_word(GPIO_DATA_REG, 0x00000002);
 
             	 printf("\nTurn on Motor");
        		 }
-        	 else {
+        	 وإلا {
             	 printf("\nTurn off Motor");
         	 }
        		 delay_loop(1000,1000);

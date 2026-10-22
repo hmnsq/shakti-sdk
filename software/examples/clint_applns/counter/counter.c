@@ -30,28 +30,28 @@
  subsequent operation.
 */ 
 
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "clint_driver.h"
-#include "log.h"
+#شامل "uart.h"
+#شامل "traps.h"
+#شامل "platform.h"
+#شامل "clint_driver.h"
+#شامل "log.h"
 
 /** @fn int main(void)
  * @brief A simple application to use clint (mtime)
  */
-void main(void){
+تهی اصلی(تهی){
 
-	uint64_t value = 50000000;
+	uint64_t مقدار = 50000000;
 
-	asm volatile("li      t0, 0x80\t\n"
+	asm فرار("li      t0, 0x80\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 8\t\n"
+	asm فرار("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	configure_counter(value);
+	configure_counter(مقدار);
 
-	while(1);
+	وقتی(1);
 }

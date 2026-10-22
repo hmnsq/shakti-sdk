@@ -28,7 +28,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include<stdlib.h>
+#شامل<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI0_OFFSET 0x00000000
@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+تهی configure_spi(صحیح offset);
+تهی spi_init(تهی);
+تهی set_spi(صحیح* addr, صحیح val);
+تهی bin(unsigned n);
+تهی spi_tx_rx_start(تهی);
+تهی spi_enable(تهی);
+تهی spi_rx_enable(تهی);
+تهی flash_cmd_addr_data(صحیح command, صحیح addr, صحیح data);
+تهی flash_write(صحیح address, صحیح data);
+تهی flash_erase(صحیح address);
+صحیح get_spi(صحیح* addr);
+صحیح bitExtracted(صحیح عدد, صحیح k, صحیح p) ;
+صحیح concat(صحیح x, صحیح y) ;
+صحیح spi_rxne_enable(تهی);
+صحیح spi_notbusy(تهی);
+صحیح flash_write_enable(تهی);
+صحیح flash_clear_sr(تهی);
+صحیح flash_cmd_addr(صحیح command, صحیح addr);
+صحیح flash_cmd_to_read(صحیح command, صحیح addr);
+صحیح flash_read(صحیح address);
+صحیح flash_cmd_read(صحیح command);
+صحیح flash_status_register_read(تهی);
+صحیح flash_device_id(تهی);
 
 #endif

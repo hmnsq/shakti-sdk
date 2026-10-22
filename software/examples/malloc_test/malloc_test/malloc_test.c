@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+صحیح اصلی()
 {
 printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+صحیح *b,*c,*d;
+صحیح i=0;صحیح n;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*اندازه(صحیح))	;
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
 printf("\n b[%d]'s address is : %x",i,&b[i]);
 printf("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
+آزاد(b);
 printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
+c=malloc(n*اندازه(صحیح))	;
 printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
 printf("\n c[%d]'s address is : %x",i,&c[i]);
 printf("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+آزاد(c);
 printf("\nc=%x",c);
-int x;
+صحیح x;
 x=30;
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*اندازه(صحیح));
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+برای(i=0;i<x;i++)
 {
 printf("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+برای(i=0;i<x;i++)
 {
 printf("\n d[%d]'s address is : %x",i,&d[i]);
 printf("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
+آزاد(d);
 printf("\nd=%x",d);
 
-return 0;
+بازگشت 0;
 }
 

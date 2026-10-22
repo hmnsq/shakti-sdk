@@ -27,24 +27,24 @@
 @detail Contains driver codes to read and write flash using SPI interface.
 */
 
-#include <stdint.h>
-#include "xadc_driver.h"
-#include "uart.h"
+#شامل <stdint.h>
+#شامل "xadc_driver.h"
+#شامل "uart.h"
 
 /** 
  * @fn int main()
  * @brief Calls the xadc apis to read temperature and onchip voltage.
  * @return none
  */
-void main()
+تهی اصلی()
 {
-	while(1)
+	وقتی(1)
 	{
-		uint32_t value = xadc_read_data(0x41200);
+		uint32_t مقدار = xadc_read_data(0x41200);
 
-		printf("value = %f\n", xadc_onchip_temp(value));
+		printf("value = %f\n", xadc_onchip_temp(مقدار));
 
-		value = xadc_read_data(0x41204);
-		printf("value = %f\n", xadc_onchip_voltage(value));
+		مقدار = xadc_read_data(0x41204);
+		printf("value = %f\n", xadc_onchip_voltage(مقدار));
 	}
 }

@@ -26,120 +26,120 @@
  * @detail This file contains the tests to verify the working of malloc
  */
 
-extern char _free_space[];
-extern char _STACK_SIZE[];
-extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
-extern char __bss_end[];
-extern char __bss_start[];
-extern char __sbss_end[];
-extern char __sbss_start[];
+بیرونی نویسه _free_space[];
+بیرونی نویسه پشته_SIZE[];
+بیرونی نویسه _HEAP_SIZE[];
+بیرونی نویسه پشته_end[];
+بیرونی نویسه پشته[];
+بیرونی نویسه _heap[];
+بیرونی نویسه _heap_end[];
+بیرونی نویسه __bss_end[];
+بیرونی نویسه __bss_start[];
+بیرونی نویسه __sbss_end[];
+بیرونی نویسه __sbss_start[];
 
 
-char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
-char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
-char *test7=(char *)&_heap;
-char *test8=(char *)&_heap_end;
-char *test9=(char *)&__bss_end;
-char *test10=(char *)&__bss_start;
-char *test11=(char *)&__sbss_end;
-char *test12=(char *)&__sbss_start;
+نویسه *test1=(نویسه *)&_free_space;
+نویسه *test3=(نویسه *)&پشته_SIZE;
+نویسه *test4=(نویسه *)&_HEAP_SIZE;
+نویسه *test5=(نویسه *)&پشته_end;
+نویسه *test6=(نویسه *)&پشته;
+نویسه *test7=(نویسه *)&_heap;
+نویسه *test8=(نویسه *)&_heap_end;
+نویسه *test9=(نویسه *)&__bss_end;
+نویسه *test10=(نویسه *)&__bss_start;
+نویسه *test11=(نویسه *)&__sbss_end;
+نویسه *test12=(نویسه *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+صحیح c1,c2,c3,c4,c5;
+صحیح *pointer;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+صحیح اصلی()
 {
 
   printf("\n\n\n\n\n\nTest Running");
   printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
   printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
+  ایستا صحیح b1,b2,b3,b4,b5;
   printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
+  صحیح a1,a2,a3,a4,a5;
   printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+صحیح **a;
+صحیح *b,*c,*d;
+صحیح i=0;صحیح n;
 
 //Enter Size of Array;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*اندازه(صحیح))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
     printf("\n b[%d]'s address is : %x",i,&b[i]);
     printf("\n b[%d]'s value is : %d",i,b[i]);
 }
 
-free(b);
+آزاد(b);
 
 printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
+c=malloc(n*اندازه(صحیح))	;
 printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
 printf("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+برای(i=0;i<n;i++)
 {
     printf("\n c[%d]'s address is : %x",i,&c[i]);
     printf("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+آزاد(c);
 
 printf("\nc=%x",c);
 
-int x;
+صحیح x;
 x=30;
 
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*اندازه(صحیح));
 
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+برای(i=0;i<x;i++)
 {
     printf("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+برای(i=0;i<x;i++)
 {
     printf("\n d[%d]'s address is : %x",i,&d[i]);
     printf("\n d[%d]'s value is : %d",i,d[i]);
 }
 
-free(d);
+آزاد(d);
 
 printf("\nd=%x",d);
 

@@ -29,39 +29,39 @@
 
 #ifndef ETH_DRIVER_H
 #define ETH_DRIVER_H
-#include "platform.h"
-#include "traps.h"
-#include "eth_driver.h"
-#include "eth_macros.h"
+#شامل "platform.h"
+#شامل "traps.h"
+#شامل "eth_driver.h"
+#شامل "eth_macros.h"
 
-#define INLINE inline
+#define INLINE درونخطی
 #define __LITTLE_ENDIAN__ 1
 
 
 /*
  * guarded against xbasic_types.h.
  */
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
+تعریفنوع uint8_t u8;
+تعریفنوع uint16_t u16;
+تعریفنوع uint32_t u32;
 /** @}*/
 #define __XUINT64__
-typedef struct
+تعریفنوع ساختار
 {
 	u32 Upper;
 	u32 Lower;
 } Xuint64;
 
-typedef char char8;
-typedef int8_t s8;
-typedef int16_t s16;
-typedef int32_t s32;
-typedef int64_t s64;
-typedef uint64_t u64;
-typedef int sint32;
+تعریفنوع نویسه char8;
+تعریفنوع int8_t s8;
+تعریفنوع int16_t s16;
+تعریفنوع int32_t s32;
+تعریفنوع int64_t s64;
+تعریفنوع uint64_t u64;
+تعریفنوع صحیح sint32;
 
-typedef intptr_t INTPTR;
-typedef uintptr_t UINTPTR;
+تعریفنوع intptr_t INTPTR;
+تعریفنوع uintptr_t UINTPTR;
 //typedef ptrdiff_t PTRDIFF;
 
 /*****************************************************************************
@@ -69,7 +69,7 @@ typedef uintptr_t UINTPTR;
  * EmacLite defines .
  * DeviceID starts at 240
  */
-#define XPAR_XEMACLITE_NUM_INSTANCES    1
+#define XPAR_XEMACLITE_رقم_INSTANCES    1
 #define XPAR_EMACLITE_0_DEVICE_ID       240
 /* EK Change */
 #define XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
@@ -82,7 +82,7 @@ typedef uintptr_t UINTPTR;
 #define TRUE		1U
 #define FALSE		0U
 
-#define NULL		0U
+#define پوچ		0U
 #define SUCCESS 0
 #define FAILURE -1
 #define DEVICE_BUSY                 21L	/*!< Device is busy */
@@ -128,7 +128,7 @@ typedef uintptr_t UINTPTR;
 /**
  * This typedef contains configuration information for a device.
  */
-typedef struct {
+تعریفنوع ساختار {
 	u16 DeviceId;	 /**< Unique ID  of device */
 	UINTPTR BaseAddress; /**< Device base address */
 	u8 TxPingPong;	 /**< 1 if TX Pong buffer configured, 0 otherwise */
@@ -143,14 +143,14 @@ typedef struct {
  *		when setting the callback functions, and passed back to the
  *		upper layer when the callback is invoked.
  */
-typedef void (*XEmacLite_Handler) (void *CallBackRef);
+تعریفنوع تهی (*XEmacLite_Handler) (تهی *CallBackRef);
 
 /**
  * The XEmacLite driver instance data. The user is required to allocate a
  * variable of this type for every EmacLite device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+تعریفنوع ساختار {
 	XEmacLite_Config EmacLiteConfig; /* Device configuration */
 	u32 IsReady;			 /* Device is initialized and ready */
 
@@ -161,21 +161,21 @@ typedef struct {
 	 * Callbacks
 	 */
 	XEmacLite_Handler RecvHandler;
-	void *RecvRef;
+	تهی *RecvRef;
 	XEmacLite_Handler SendHandler;
-	void *SendRef;
+	تهی *SendRef;
 
 } XEmacLite;
 
 #ifndef ETH_VARI
-extern volatile u32 RecvFrameLength;
-extern UINTPTR TxBuffPtr;
-extern UINTPTR RxBuffPtr;
-extern volatile int FramesTx;
-extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
-extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+بیرونی فرار u32 RecvFrameLength;
+بیرونی UINTPTR TxBuffPtr;
+بیرونی UINTPTR RxBuffPtr;
+بیرونی فرار صحیح FramesTx;
+بیرونی فرار صحیح FramesRx;
+بیرونی فرار صحیح Tx_شمار;
+بیرونی فرار صحیح Rx_شمار;
+بیرونی فرار صحیح Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
 #endif
 
 
@@ -260,11 +260,11 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 /************************** Variable Definitions *****************************/
 
 
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
+تهی XEmacLite_AlignedWrite(تهی *SrcPtr, UINTPTR *DestPtr, unsigned Byte_شمار);
+تهی XEmacLite_AlignedRead(UINTPTR *SrcPtr, تهی *DestPtr, unsigned Byte_شمار);
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
-extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+بیرونی XEmacLite_Config XEmacLite_ConfigTable;
+بیرونی صحیح XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr);
 

@@ -27,49 +27,49 @@
 @detail Writes an array of hex values into the flash memory using QSPI.
 */
 
-#include <stdint.h>
-#include "uart.h"
-#include "qspi.h"
-#include "flashdata.h"
+#شامل <stdint.h>
+#شامل "uart.h"
+#شامل "qspi.h"
+#شامل "flashdata.h"
 
 #define DEBUG 1
 #define ERASE 1024
 
-extern int  status;
+بیرونی صحیح  status;
 
 /** @fn void deploy()
  * @brief Deploys the hex file for a project to the flash device using QSPI
  * protocol. 
  */
-void deploy()
+تهی deploy()
 {
-	int ar_read,dum_data,i;
-	int write_address = 0x0;
-	int size_byte=0;
-	int *config_string = (const int*)0x80000000;
-	int* read_data = (int*)(0x90000000);
+	صحیح ar_read,dum_data,i;
+	صحیح write_address = 0x0;
+	صحیح size_byte=0;
+	صحیح *config_string = (ثابت صحیح*)0x80000000;
+	صحیح* read_data = (صحیح*)(0x90000000);
 
 	qspi_init(27,0,3,1,15,1);
 	waitfor(400);
 
-	if(flashMemInit())
-		return -1;
+	اگر(flashMemInit())
+		بازگشت -1;
 
 	status=flashReadStatusRegister();
 
 	printf("\t qspi status register %08x\n",status);
 
-	if(flashWriteVolatileConfigReg(0x40404040)){
+	اگر(flashWriteVolatileConfigReg(0x40404040)){
 		printf("\t Volatile Configuration Register not Set -- Diagnose\n");
-		return -1;
+		بازگشت -1;
 	}
 
 	status = wait_for_wip();
 	printf("\t qspi write  status register %08x\n",status);
 
-	for(i=0;i<= write_data[0];i+=4)
+	برای(i=0;i<= write_data[0];i+=4)
 	{
-		if(i%ERASE==0)
+		اگر(i%ERASE==0)
 		{
 			eraseSector(0x21, write_address);
 		}
@@ -83,13 +83,13 @@ void deploy()
 		write_address+=16;
 	}
 
-#if DEBUG
+#اگر DEBUG
 	waitfor(400);
 
 	flashEnable4ByteAddressingMode();
 	flashQuadSPIDDRXip(0x000000, config_string);
 
-	for(i=0;i<write_data[0];++i)
+	برای(i=0;i<write_data[0];++i)
 	{
 		dum_data = get_qspi_shakti(read_data);
 		waitfor(100);
@@ -115,13 +115,13 @@ void deploy()
 	flashMemInit();
 #endif
 
-	asm volatile ("ebreak");
+	asm فرار ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function 
  */
-void main(){
+تهی اصلی(){
 
 	deploy();
 }

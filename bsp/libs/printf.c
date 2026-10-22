@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#شامل <stdint.h>
+#شامل <stdarg.h>
+#شامل "utils.h"
+#شامل "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+ایستا درونخطی تهی itoa (unsigned long long صحیح عدد, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	صحیح i = 0;
+	unsigned صحیح intermediate = 0;
+	unsigned صحیح digits[اندازه(عدد)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	وقتی (1) {
+		digits[i] = عدد % base;
 
-		if (number < base)
-			break;
+		اگر (عدد < base)
+			بشکن;
 
-		number /= base;
+		عدد /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	وقتی (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		اگر (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		وگرنه
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -72,21 +72,21 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+تهی _printf_(ثابت نویسه *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	ثبات ثابت نویسه* p;
+	ثابت نویسه* last_fmt;
+	ثبات صحیح ch;
+	unsigned long long رقم;
+	صحیح base, lflag, i;
+	اعشاری float_رقم = 0;
+	نویسه float_arr[30] = {'\0'};
+	صحیح backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	برای (;;) {
+		برای (;(ch = *(unsigned نویسه *) fmt) != '%'; fmt++) {
+			اگر (ch == '\0')
+				بازگشت;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,127 +96,127 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		برای (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			انتخاب (ch = *(unsigned نویسه *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				حالت 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					بشکن;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				حالت 'c':
+					putchar(va_arg(ap, صحیح));
+					بشکن;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				حالت 's':
+					اگر ((p = va_arg(ap, نویسه *)) == پوچ)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					برای (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
-					break;
+					بشکن;
 
 					// (signed) decimal
-				case 'd':
+				حالت 'd':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					اگر (lflag >= 2)
+						رقم = va_arg(ap, long long);
+					وگرنه اگر (lflag ==1)
+						رقم = va_arg(ap, long);
+					وگرنه
+						رقم = va_arg(ap, صحیح);
 
-					if ((long long) num < 0) {
+					اگر ((long long) رقم < 0) {
 						putchar('-');
-						num = -(long long) num;
+						رقم = -(long long) رقم;
 					}
 
-					itoa( num, base);
+					itoa( رقم, base);
 
-					break;
+					بشکن;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				حالت 'f':
+					float_رقم =  va_arg(ap, دوگانه);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_رقم, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					برای( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						اگر(i > 29) بشکن;
 					}
-					break;
+					بشکن;
 
 					// unsigned decimal
-				case 'u':
+				حالت 'u':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					اگر (lflag >= 2)
+						رقم = va_arg(ap, unsigned long long);
+					وگرنه اگر (lflag)
+						رقم = va_arg(ap, unsigned long);
+					وگرنه
+						رقم = va_arg(ap, unsigned صحیح);
 
-					itoa( num, base);
+					itoa( رقم, base);
 
-					break;
+					بشکن;
 
 					// (unsigned) octal
-				case 'o':
+				حالت 'o':
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					اگر (lflag >= 2)
+						رقم = va_arg(ap, unsigned long long);
+					وگرنه اگر (lflag)
+						رقم = va_arg(ap, unsigned long);
+					وگرنه
+						رقم = va_arg(ap, unsigned صحیح);
 
-					itoa( num, base);
+					itoa( رقم, base);
 
-					break;
+					بشکن;
 
-				case 'x':
+				حالت 'x':
 					base = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					اگر (lflag >= 2)
+						رقم = va_arg(ap, unsigned long long);
+					وگرنه اگر (lflag)
+						رقم = va_arg(ap, unsigned long);
+					وگرنه
+						رقم = va_arg(ap, unsigned صحیح);
 
-					itoa( num, base);
+					itoa( رقم, base);
 
-					break;
+					بشکن;
 
 					// escaped '%' character
-				case '%':
+				حالت '%':
 					putchar(ch);
-					break;
+					بشکن;
 
 					// unrecognized escape sequence - just print it literally
-				default:
+				پیشفرض:
 					putchar('%');
 					fmt = last_fmt;
-					break;
+					بشکن;
 			}
 
-			if (backtothebeginning)
+			اگر (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				ادامه;
 			}
-			else
-				break;
+			وگرنه
+				بشکن;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+صحیح printf(ثابت نویسه* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	بازگشت 0;// incorrect return value, but who cares, anyway?
 }

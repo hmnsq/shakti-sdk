@@ -61,16 +61,16 @@ char *heap_end=(char *)&_heap_end;
  */
 static void section_init(void)
 {
-#if 0
+#もし 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	ながら(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	ながら(stack_end>=stack_start)
 	{
 		*stack_end=0x0;
 		stack_end--;
@@ -158,7 +158,7 @@ void init(void)
 
 	trap_init();
 
-	main();
+	メインページ();
 
 	log_trace("init exited\n");
 }

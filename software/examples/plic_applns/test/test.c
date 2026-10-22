@@ -55,13 +55,13 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+整数 メインページ(void){
+	register unsigned 整数 retval;
+	整数 i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	ために(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i);
@@ -69,7 +69,7 @@ int main(void){
 	printf("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	ために(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_disable(i);
@@ -78,7 +78,7 @@ int main(void){
 
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	ために(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i + 1);
@@ -87,10 +87,10 @@ int main(void){
 
 	asm("ebreak");
 
-	while(1){
+	ながら(1){
 		i++;
 
-		if((i%10000000) == 0){
+		もし((i%10000000) == 0){
 
 			asm volatile(
 			     "csrr %[retval], mip\n"
@@ -102,5 +102,5 @@ int main(void){
 			printf("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	戻る 0;
 }

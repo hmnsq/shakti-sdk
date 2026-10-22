@@ -27,22 +27,22 @@
 #include <stdlib.h>
 
 struct node {
-	int num;
+	整数 num;
 	struct node *nptr;
 }*head;
 
-void create_list(int n);
+void create_list(整数 n);
 void display_list();
-void delete_node(int position);
+void delete_node(整数 position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+void メインページ()
 {
-	int n,position,m;
+	整数 n,position,m;
 	char t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
@@ -68,7 +68,7 @@ void main()
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	ながら(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+void create_list(整数 n)
 {
 	struct node *node, *tmp;
-	int data,m;
+	整数 data,m;
 	char t[12];
 
 	head = (struct node*)malloc(sizeof(struct node));
 
-	if(head == NULL)
+	もし(head == NULL)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	否则
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -100,15 +100,15 @@ void create_list(int n)
 		head->nptr = NULL;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		ために(整数 i = 2;i <= n; i++)
 		{
 			node = (struct node*)malloc(sizeof(struct node));
 
-			if(node == NULL)
+			もし(node == NULL)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			否则 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
@@ -131,17 +131,17 @@ void create_list(int n)
  */
 void display_list()
 {
-	int i = 0;
+	整数 i = 0;
 	struct node *tmp;
 
-	if(head == NULL)
+	もし(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else
+	否则
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		ながら(tmp != NULL) 
 		{
 			printf(" Node%d = %d",i,tmp->num);
 			printf("->");
@@ -157,32 +157,32 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+void delete_node(整数 position)
 {
 	struct node *temp;
 
-	if(head == NULL)
+	もし(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	否则 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		もし (position == 0)//Delete head node
 		{
 			head = temp->nptr;
 			free(temp);
-			return;
+			戻る;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		ために (整数 i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		もし (temp == NULL || temp->nptr == NULL)
+			戻る;
 
 		//delete node at pos (next of position-1)
 		struct node *nptr = temp->nptr->nptr;

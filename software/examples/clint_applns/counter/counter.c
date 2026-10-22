@@ -39,7 +39,7 @@
 /** @fn int main(void)
  * @brief A simple application to use clint (mtime)
  */
-void main(void){
+void メインページ(void){
 
 	uint64_t value = 50000000;
 
@@ -53,5 +53,5 @@ void main(void){
 
 	configure_counter(value);
 
-	while(1);
+	ながら(1);
 }

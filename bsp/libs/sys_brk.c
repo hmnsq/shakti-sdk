@@ -47,13 +47,13 @@ char *end_of_heap=(char *)&_heap_end;
  * @return  returns a pointer to the start of the heap
  */
 char * m_sbrk (nbytes)
-	int nbytes;
+	整数 nbytes;
 {
 	char *base;
 
 	log_debug("\nHeap pointer is %x",heap_ptr);
 
-	if(!heap_ptr)
+	もし(!heap_ptr)
 		heap_ptr = (char *)&_end;
 
 	base = heap_ptr;
@@ -61,10 +61,10 @@ char * m_sbrk (nbytes)
 
 	log_debug("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
 
-	if(heap_ptr>end_of_heap)
+	もし(heap_ptr>end_of_heap)
 	{
 		log_error("\nMemory allocation error: Insufficient Space");
-		return -1;
+		戻る -1;
 	}
-	return base;
+	戻る base;
 }

@@ -37,7 +37,7 @@ protocol.
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+void メインページ()
 {
 	configure_spi(SPI0_OFFSET);
 	spi_init();

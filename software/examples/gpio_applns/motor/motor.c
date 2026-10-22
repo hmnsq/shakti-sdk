@@ -37,12 +37,12 @@ shakti. The demonstration is done using the gpio pins.
 /** @fn void main()
  * @brief Performs the intilization of the corresponding registers of gpio pins.
  */
-void main()
+void メインページ()
 {
 	log_info("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-	while(1) {
+	ながら(1) {
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
 		log_info("Forward\n");
 		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);

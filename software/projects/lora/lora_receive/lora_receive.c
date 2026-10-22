@@ -49,22 +49,22 @@
  * @brief Reads data sent by lora module.
  * @param data responses read from lora module, mainly used for logging
  */
-int read_from_lora(char *data)
+整数 read_from_lora(char *data)
 {
-	int ch;
+	整数 ch;
 	char *str = data;
 	char *test = data;
-	for (int i = 0; i < 98; i++)
+	ために (整数 i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		もし (ch == '\n')
 		{
 			break;
 		}
 	}
-	return;	
+	戻る;	
 }
 
 
@@ -73,11 +73,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+整数 write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	戻る 0;
 }
 
 
@@ -87,7 +87,7 @@ int write_enter_to_lora()
  */
 void write_to_lora(char *data)
 {
-	while (*data != '\0')
+	ながら (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -194,7 +194,7 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Receive data 
  */
-void main()
+void メインページ()
 {
 	printf("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;
@@ -209,7 +209,7 @@ void main()
 	// check_set_lora_value();
 
 	/* Receiving Data */
-	while (1) 
+	ながら (1) 
 	{
 		receive_data();
 		delay_loop(1000, 1000);

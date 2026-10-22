@@ -48,7 +48,7 @@
  */
 void handle_pwm_interrupt( uint32_t num)
 {
-	if(pwm_check_continuous_mode((6-num)) == 0)
+	もし(pwm_check_continuous_mode((6-num)) == 0)
 	{
 		set_pwm_control_register((6-num),0x80);
 	}
@@ -58,10 +58,10 @@ void handle_pwm_interrupt( uint32_t num)
 /** @fn void main(void)
  * @brief sets up the environment for pwn interrupt feature
   */
-void main(void){
+void メインページ(void){
 
-	register unsigned int retval;
-	int i;
+	register unsigned 整数 retval;
+	整数 i;
 
 	plic_init();
 
@@ -136,7 +136,7 @@ void main(void){
 	pwm_start(PWM_5,1);
 */
 	
-	while(1){
+	ながら(1){
 		asm volatile(
 			     "csrr %[retval], mip\n"
 			     :
@@ -146,7 +146,7 @@ void main(void){
 			    );
 
 		i++;
-		if((i%10000000) == 0){
+		もし((i%10000000) == 0){
 			printf(" mip = %x\n", retval);
 		}
 	}

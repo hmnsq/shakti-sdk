@@ -42,7 +42,7 @@ volatile uint64_t* mtimecmp =  (MTIMECMP);
  */
 static uint32_t mtime_low(void)
 {
-  return *(uint32_t *)(MTIME);
+  戻る *(uint32_t *)(MTIME);
 }
 
 /*
@@ -57,7 +57,7 @@ Get each 32 bit and append for full timer value
  */
 static uint32_t mtime_high(void)
 {
-  return *(volatile uint32_t *)(MTIME + 4);
+  戻る *(volatile uint32_t *)(MTIME + 4);
 }
 
 /** @fn uint64_t get_timer_value()
@@ -69,10 +69,10 @@ static uint32_t mtime_high(void)
 uint64_t get_timer_value()
 {
 
-#if __riscv_xlen == 64
-   return ( ((uint64_t)mtime_high() << 32) | mtime_low());
-#else
-  return mtime_low();
+#もし __riscv_xlen == 64
+   戻る ( ((uint64_t)mtime_high() << 32) | mtime_low());
+#否则
+  戻る mtime_low();
 #endif
 }
 

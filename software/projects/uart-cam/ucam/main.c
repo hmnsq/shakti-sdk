@@ -34,15 +34,15 @@
 #include "pinmux.h"
 
 
-int main(void) {
+整数 メインページ(void) {
   *pinmux_config_reg = 85;
-  int brate = 115200;
+  整数 brate = 115200;
   set_baud_rate(uart_instance[1],brate);
   set_baud_rate(uart_instance[2],brate);
-  if( init_cam() < 0) 
-      return -1;
+  もし( init_cam() < 0) 
+      戻る -1;
   get_pic(1);
-  return 0;
+  戻る 0;
 }
 
 

@@ -35,7 +35,7 @@
 /** @fn void main()
  * @brief prints csr regiter values.
  */
-void main()
+void メインページ()
 {
 	register uint32_t retval;
 

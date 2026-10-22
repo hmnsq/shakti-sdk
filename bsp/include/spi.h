@@ -25,96 +25,96 @@
  * @brief Header to spi spansion driver
  * @detail this is the header file for spi_flash_w25q32.c,spi_spansion.c
  */
-#ifndef SPI_H
-#define SPI_H
+#اگر_تعریف_نشده SPI_H
+#تعریف_کن SPI_H
 
-#include<stdlib.h>
+#ضمن<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
-#define SPI0_OFFSET 0x00000000
-#define SPI1_OFFSET 0x00000100
-#define SPI2_OFFSET 0x00000200
+#تعریف_کن SPI0_جابه_جایی 0x00000000
+#تعریف_کن SPI1_جابه_جایی 0x00000100
+#تعریف_کن SPI2_جابه_جایی 0x00000200
 
-#define SPI_CR1	     0x00020000
-#define SPI_CR2	     0x00020004
-#define SPI_SR       0x00020008
-#define SPI_DR1	     0x0002000C
-#define SPI_DR2	     0x00020010
-#define SPI_DR3	     0x00020014
-#define SPI_DR4	     0x00020018
-#define SPI_DR5      0x0002001C
-#define SPI_CRCPR    0x00020020
-#define SPI_RXCRCR   0x00020024
-#define SPI_TXCRCR   0x00020028
+#تعریف_کن SPI_CR1	     0x00020000
+#تعریف_کن SPI_CR2	     0x00020004
+#تعریف_کن SPI_SR       0x00020008
+#تعریف_کن SPI_DR1	     0x0002000C
+#تعریف_کن SPI_DR2	     0x00020010
+#تعریف_کن SPI_DR3	     0x00020014
+#تعریف_کن SPI_DR4	     0x00020018
+#تعریف_کن SPI_DR5      0x0002001C
+#تعریف_کن SPI_CRCPR    0x00020020
+#تعریف_کن SPI_RXCRCR   0x00020024
+#تعریف_کن SPI_TXCRCR   0x00020028
 
 // defining SPI_CR1 register
-#define SPI_CPHA	      (1 << 0)
-#define SPI_CPOL	      (1 << 1)
-#define SPI_MSTR	      (1 << 2)
-#define SPI_BR(x)	      (x << 3)
-#define SPI_SPE		      (1 << 6)
-#define SPI_LSBFIRST	      (1 << 7)
-#define SPI_SSI		      (1 << 8)
-#define SPI_SSM		      (1 << 9)
-#define SPI_RXONLY	      (1 << 10)
-#define SPI_CRCL	      (1 << 11)
-#define SPI_CCRCNEXT	      (1 << 12)
-#define SPI_CRCEN	      (1 << 13)
-#define SPI_BIDIOE	      (1 << 14)
-#define SPI_BIDIMODE	      (1 << 15)
-#define SPI_TOTAL_BITS_TX(x)  (x << 16)
-#define SPI_TOTAL_BITS_RX(x)  (x << 24)
+#تعریف_کن SPI_CPHA	      (1 << 0)
+#تعریف_کن SPI_CPOL	      (1 << 1)
+#تعریف_کن SPI_MSTR	      (1 << 2)
+#تعریف_کن SPI_BR(x)	      (x << 3)
+#تعریف_کن SPI_SPE		      (1 << 6)
+#تعریف_کن SPI_LSBFIRST	      (1 << 7)
+#تعریف_کن SPI_SSI		      (1 << 8)
+#تعریف_کن SPI_SSM		      (1 << 9)
+#تعریف_کن SPI_RXONLY	      (1 << 10)
+#تعریف_کن SPI_CRCL	      (1 << 11)
+#تعریف_کن SPI_CCRCNEXT	      (1 << 12)
+#تعریف_کن SPI_CRCEN	      (1 << 13)
+#تعریف_کن SPI_BIDIOE	      (1 << 14)
+#تعریف_کن SPI_BIDIMODE	      (1 << 15)
+#تعریف_کن SPI_مجموع_بیتها_TX(x)  (x << 16)
+#تعریف_کن SPI_مجموع_بیتها_RX(x)  (x << 24)
 
 // defining SPI_CR2 register
-#define SPI_RX_IMM_START   (1 << 16)
-#define SPI_RX_START	   (1 << 15)
-#define SPI_LDMA_TX	   (1 << 14)
-#define SPI_LDMA_RX	   (1 << 13)
-#define SPI_FRXTH	   (1 << 12)
-#define SPI_DS(x)	   (x << 8)
-#define SPI_TXEIE	   (1 << 7)
-#define SPI_RXNEIE	   (1 << 6)
-#define SPI_ERRIE	   (1 << 5)
-#define SPI_FRF		   (1 << 4)
-#define SPI_NSSP	   (1 << 3)
-#define SPI_SSOE	   (1 << 2)
-#define SPI_TXDMAEN	   (1 << 1)
-#define SPI_RXDMAEN	   (1 << 0)
+#تعریف_کن SPI_RX_IMM_شروع   (1 << 16)
+#تعریف_کن SPI_RX_شروع	   (1 << 15)
+#تعریف_کن SPI_LDMA_TX	   (1 << 14)
+#تعریف_کن SPI_LDMA_RX	   (1 << 13)
+#تعریف_کن SPI_FRXTH	   (1 << 12)
+#تعریف_کن SPI_DS(x)	   (x << 8)
+#تعریف_کن SPI_TXEIE	   (1 << 7)
+#تعریف_کن SPI_RXNEIE	   (1 << 6)
+#تعریف_کن SPI_ERRIE	   (1 << 5)
+#تعریف_کن SPI_FRF		   (1 << 4)
+#تعریف_کن SPI_NSSP	   (1 << 3)
+#تعریف_کن SPI_SSOE	   (1 << 2)
+#تعریف_کن SPI_TXDMAEN	   (1 << 1)
+#تعریف_کن SPI_RXDMAEN	   (1 << 0)
 
 //defining SR register
-#define SPI_FTLVL(x)	(x << 11)
-#define SPI_FRLVL(x)	(x << 9)
-#define SPI_FRE		(1 << 8)
-#define SPI_OVR		(1 << 6)
-#define SPI_MODF	(1 << 5)
-#define SPI_CRCERR	(1 << 4)
-#define TXE		(1 << 1)
-#define RXNE		(1 << 0)
+#تعریف_کن SPI_FTLVL(x)	(x << 11)
+#تعریف_کن SPI_FRLVL(x)	(x << 9)
+#تعریف_کن SPI_FRE		(1 << 8)
+#تعریف_کن SPI_OVR		(1 << 6)
+#تعریف_کن SPI_MODF	(1 << 5)
+#تعریف_کن SPI_CRCERR	(1 << 4)
+#تعریف_کن TXE		(1 << 1)
+#تعریف_کن RXNE		(1 << 0)
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+فراغ configure_spi(صحيح جابه_جایی);
+فراغ spi_init(فراغ);
+فراغ مجموعه_spi(صحيح* addr, صحيح val);
+فراغ bin(بیعلامت n);
+فراغ spi_tx_rx_شروع(فراغ);
+فراغ spi_enable(فراغ);
+فراغ spi_rx_enable(فراغ);
+فراغ flash_cmd_addr_داده(صحيح command, صحيح addr, صحيح داده_2);
+فراغ flash_write(صحيح آدرس, صحيح داده_2);
+فراغ flash_erase(صحيح آدرس);
+صحيح get_spi(صحيح* addr);
+صحيح بیت_Extracted(صحيح عدد, صحيح k, صحيح p) ;
+صحيح concat(صحيح x, صحيح y) ;
+صحيح spi_rxne_enable(فراغ);
+صحيح spi_notbusy(فراغ);
+صحيح flash_write_enable(فراغ);
+صحيح flash_clear_sr(فراغ);
+صحيح flash_cmd_addr(صحيح command, صحيح addr);
+صحيح flash_cmd_مقصد_read(صحيح command, صحيح addr);
+صحيح flash_read(صحيح آدرس);
+صحيح flash_cmd_read(صحيح command);
+صحيح flash_وضعیت_ثبات_read(فراغ);
+صحيح flash_device_id(فراغ);
 
-#endif
+#پایان_اگر

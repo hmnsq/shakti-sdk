@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ضمن "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#تعریف_کن LM75_SLAVE_آدرس 0x90
+#تعریف_کن DELAY_شمار 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+بیعلامت صحيح Lm75ReadTemperature(بیعلامت دراز delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
-	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	بیعلامت حرف readBuf = 0;
+	بیعلامت کوتاه read_مقدار_2 = 0;
+	I2c_Send_Slave_آدرس(LM75_SLAVE_آدرس, I2C_READ, delay);
+	readBuf = I2c_Read_داده_Ack(delay);
+	read_مقدار_2 = (readBuf << 1);
+	readBuf = I2c_Read_داده_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_مقدار_2 = (readBuf >> 7) | read_مقدار_2;
+	أرجع read_مقدار_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+فراغ اصلی() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	بیعلامت کوتاه موقت_Read = 0;
+	بیعلامت کوتاه موقت = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	چاپ_کن("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	موقت_Read = Lm75ReadTemperature(DELAY_شمار);
+	إذا(موقت_Read & 0x100) {
+		موقت_Read = ( (~موقت_Read) + 1 ) >> 1;
+		چاپ_کن("\n\t Current Temperature:=-%u°C",موقت_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	وإلا {
+		موقت_Read = موقت_Read >> 1;
+		چاپ_کن("\n\t Current Temperature:=+%u°C",موقت_Read);
 	 }
 	delay_loop(10000,20000);
 }

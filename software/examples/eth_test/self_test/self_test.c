@@ -31,12 +31,12 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
+#ضمن "gpio.h"
+#ضمن "uart.h"
+#ضمن "traps.h"
+#ضمن "platform.h"
+#ضمن "eth_driver.h"
+#ضمن "log.h"
 
 
 
@@ -46,9 +46,9 @@
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID			240
-#define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+#تعریف_کن EMAC_DEVICE_ID			240
+#تعریف_کن ETH_پایه_REG 0x44000
+متطاير بیعلامت صحيح* eth_پایه_reg = ETH_پایه_REG;
 
 /**************************** Type Definitions *******************************/
 
@@ -56,15 +56,15 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-int EMACLiteSelfTestExample(u16 DeviceId);
-extern XEmacLite_Config XEmacLite_ConfigTable;
+صحيح EMACLiteSelfTestExample(u16 DeviceId);
+خارجي XEmacLite_Config XEmac_Lite_Config_جدول;
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+ساكن XEmacLite EmacLite;
 
 /*****************************************************************************/
 /**
@@ -85,158 +85,158 @@ static XEmacLite EmacLite;
 * @note		None.
 *
 ******************************************************************************/
-int XEmacLite_SelfTest(XEmacLite * InstancePtr)
+صحيح XEmacLite_SelfTest(XEmacLite * InstancePtr)
 {
-	UINTPTR BaseAddress;
-	volatile uint32_t * TempAddress;
-	u8 Index;
-#if 0
+	UINTPTR پایه_آدرس;
+	متطاير uint32_t * موقت_آدرس;
+	u8 شاخص;
+#إذا 0
 	u8 TestString[4] = { 0xDE, 0xAD, 0xBE, 0xEF };
 	u8 ReturnString[4] = { 0x0, 0x0, 0x0, 0x0 };
-#else
+#وإلا
 	u32 TestString[4] = { 0xDEADBEEF, 0xABCDABCD, 0xAABBCCDD, 0x12345678 };
 	u32 ReturnString[4] = { 0x0, 0x0, 0x0, 0x0 };
 
-#endif
+#پایان_اگر
 
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
-	if (InstancePtr == NULL) {
-		return -1;
+	إذا (InstancePtr == عدم) {
+		أرجع -1;
 	}
 
 	/*
 	 * Determine the TX buffer address
 	 */
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
-			XEL_TXBUFF_OFFSET;
-#if 0
-	log_info("\n Base Address is %x",  BaseAddress);
-	TempAddress = (volatile uint32_t *)BaseAddress;
-	*TempAddress = 0x12345678;
-	*(TempAddress++) = 0x9abcdef;
-	*(TempAddress++) = 0x11223344;
-	*(TempAddress++) = 0x55667788;
-	*(TempAddress++) = 0x99aabbcc;
-	*(TempAddress++) = 0xddeeff00;
+	پایه_آدرس = InstancePtr->EmacLiteConfig.پایه_آدرس +
+			XEL_TXBUFF_جابه_جایی;
+#إذا 0
+	log_info("\n Base Address is %x",  پایه_آدرس);
+	موقت_آدرس = (متطاير uint32_t *)پایه_آدرس;
+	*موقت_آدرس = 0x12345678;
+	*(موقت_آدرس++) = 0x9abcdef;
+	*(موقت_آدرس++) = 0x11223344;
+	*(موقت_آدرس++) = 0x55667788;
+	*(موقت_آدرس++) = 0x99aabbcc;
+	*(موقت_آدرس++) = 0xddeeff00;
 
-	TempAddress = (volatile uint32_t *)BaseAddress;
-	printf("\n Value at %x: %x", TempAddress , *TempAddress );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
-	printf("\n Value at %x: %x", TempAddress , *TempAddress++ );
-	printf("\n Value at %x: %x", (TempAddress) , *TempAddress++ );
+	موقت_آدرس = (متطاير uint32_t *)پایه_آدرس;
+	چاپ_کن("\n Value at %x: %x", موقت_آدرس , *موقت_آدرس );
+	چاپ_کن("\n Value at %x: %x", (موقت_آدرس) , *موقت_آدرس++ );
+	چاپ_کن("\n Value at %x: %x", موقت_آدرس , *موقت_آدرس++ );
+	چاپ_کن("\n Value at %x: %x", (موقت_آدرس) , *موقت_آدرس++ );
+	چاپ_کن("\n Value at %x: %x", موقت_آدرس , *موقت_آدرس++ );
+	چاپ_کن("\n Value at %x: %x", (موقت_آدرس) , *موقت_آدرس++ );
+	چاپ_کن("\n Value at %x: %x", موقت_آدرس , *موقت_آدرس++ );
+	چاپ_کن("\n Value at %x: %x", (موقت_آدرس) , *موقت_آدرس++ );
 
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
-			(XEL_TXBUFF_OFFSET + 4);
-#endif
+	پایه_آدرس = InstancePtr->EmacLiteConfig.پایه_آدرس +
+			(XEL_TXBUFF_جابه_جایی + 4);
+#پایان_اگر
 	/*
 	 * Write the TestString to the TX buffer in EMAC Lite then
 	 * back from the EMAC Lite and verify
 	 */
-	XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-			       sizeof(TestString));
-	XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-			      sizeof(ReturnString));
-	for (Index = 0; Index < 4; Index++) {
+	XEmacLite_AlignedWrite(TestString, (UINTPTR *) پایه_آدرس,
+			       حجم(TestString));
+	XEmacLite_AlignedRead((UINTPTR *) پایه_آدرس, ReturnString,
+			      حجم(ReturnString));
+	لكل (شاخص = 0; شاخص < 4; شاخص++) {
 
-		printf("\n TestString[%x]: %x; ReturnString[%x]: %x", Index, TestString[Index], Index, ReturnString[Index]);
-		if (ReturnString[Index] != TestString[Index]) {
-			return FAILURE;
+		چاپ_کن("\n TestString[%x]: %x; ReturnString[%x]: %x", شاخص, TestString[شاخص], شاخص, ReturnString[شاخص]);
+		إذا (ReturnString[شاخص] != TestString[شاخص]) {
+			أرجع FAILURE;
 		}
 
 		/*
 		 * Zero the return string for the next test
 		 */
-		ReturnString[Index] = 0;
+		ReturnString[شاخص] = 0;
 	}
 
 	/*
 	 * If the second buffer is configured, test it also
 	 */
-	if (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
-		BaseAddress += XEL_BUFFER_OFFSET;
+	إذا (InstancePtr->EmacLiteConfig.TxPingPong != 0) {
+		پایه_آدرس += XEL_میانگیر_جابه_جایی;
 		/*
 		 * Write the TestString to the optional TX buffer in EMAC Lite
 		 * then back from the EMAC Lite and verify
 		 */
-		XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-				       sizeof(TestString));
-		XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-				      sizeof(ReturnString));
+		XEmacLite_AlignedWrite(TestString, (UINTPTR *) پایه_آدرس,
+				       حجم(TestString));
+		XEmacLite_AlignedRead((UINTPTR *) پایه_آدرس, ReturnString,
+				      حجم(ReturnString));
 
-		for (Index = 0; Index < 4; Index++) {
+		لكل (شاخص = 0; شاخص < 4; شاخص++) {
 
-			if (ReturnString[Index] != TestString[Index]) {
-				return FAILURE;
+			إذا (ReturnString[شاخص] != TestString[شاخص]) {
+				أرجع FAILURE;
 			}
 
 			/*
 			 * Zero the return string for the next test
 			 */
-			ReturnString[Index] = 0;
+			ReturnString[شاخص] = 0;
 		}
 	}
 
 	/*
 	 * Determine the RX buffer address
 	 */
-	BaseAddress = InstancePtr->EmacLiteConfig.BaseAddress +
-				XEL_RXBUFF_OFFSET;
+	پایه_آدرس = InstancePtr->EmacLiteConfig.پایه_آدرس +
+				XEL_RXBUFF_جابه_جایی;
 
 	/*
 	 * Write the TestString to the RX buffer in EMAC Lite then
 	 * back from the EMAC Lite and verify
 	 */
-	XEmacLite_AlignedWrite(TestString, (UINTPTR *) (BaseAddress),
-			       sizeof(TestString));
-	XEmacLite_AlignedRead((UINTPTR *) (BaseAddress), ReturnString,
-			      sizeof(ReturnString));
+	XEmacLite_AlignedWrite(TestString, (UINTPTR *) (پایه_آدرس),
+			       حجم(TestString));
+	XEmacLite_AlignedRead((UINTPTR *) (پایه_آدرس), ReturnString,
+			      حجم(ReturnString));
 
-	for (Index = 0; Index < 4; Index++) {
+	لكل (شاخص = 0; شاخص < 4; شاخص++) {
 
-		if (ReturnString[Index] != TestString[Index]) {
-			return FAILURE;
+		إذا (ReturnString[شاخص] != TestString[شاخص]) {
+			أرجع FAILURE;
 		}
 
 		/*
 		 * Zero the return string for the next test
 		 */
-		ReturnString[Index] = 0;
+		ReturnString[شاخص] = 0;
 	}
 
 	/*
 	 * If the second buffer is configured, test it also
 	 */
-	if (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
-		BaseAddress += XEL_BUFFER_OFFSET;
+	إذا (InstancePtr->EmacLiteConfig.RxPingPong != 0) {
+		پایه_آدرس += XEL_میانگیر_جابه_جایی;
 		/*
 		 * Write the TestString to the optional RX buffer in EMAC Lite
 		 * then back from the EMAC Lite and verify
 		 */
-		XEmacLite_AlignedWrite(TestString, (UINTPTR *) BaseAddress,
-				       sizeof(TestString));
-		XEmacLite_AlignedRead((UINTPTR *) BaseAddress, ReturnString,
-				      sizeof(ReturnString));
+		XEmacLite_AlignedWrite(TestString, (UINTPTR *) پایه_آدرس,
+				       حجم(TestString));
+		XEmacLite_AlignedRead((UINTPTR *) پایه_آدرس, ReturnString,
+				      حجم(ReturnString));
 
-		for (Index = 0; Index < 4; Index++) {
+		لكل (شاخص = 0; شاخص < 4; شاخص++) {
 
-			if (ReturnString[Index] != TestString[Index]) {
-				return FAILURE;
+			إذا (ReturnString[شاخص] != TestString[شاخص]) {
+				أرجع FAILURE;
 			}
 
 			/*
 			 * Zero the return string for the next test
 			 */
-			ReturnString[Index] = 0;
+			ReturnString[شاخص] = 0;
 		}
 	}
 
-	return SUCCESS;
+	أرجع SUCCESS;
 }
 
 
@@ -253,22 +253,22 @@ int XEmacLite_SelfTest(XEmacLite * InstancePtr)
 * @note		None
 *
 *****************************************************************************/
-int main(void)
+صحيح اصلی(فراغ)
 {
-	int Status;
+	صحيح وضعیت;
 
 	/*
 	 * Run the EmacLite Self test example, specify the Device ID that is
 	 * generated in xparameters.h
 	 */
-	Status = EMACLiteSelfTestExample(EMAC_DEVICE_ID);
-	if (Status != SUCCESS) {
+	وضعیت = EMACLiteSelfTestExample(EMAC_DEVICE_ID);
+	إذا (وضعیت != SUCCESS) {
 		log_error("Emaclite selftest Example Failed\r\n");
-		return FAILURE;
+		أرجع FAILURE;
 	}
 
 	log_debug("Successfully ran Emaclite selftest Example\r\n");
-	return SUCCESS;
+	أرجع SUCCESS;
 
 }
 
@@ -285,42 +285,42 @@ int main(void)
 * @note		None.
 *
 ******************************************************************************/
-int EMACLiteSelfTestExample(u16 DeviceId)
+صحيح EMACLiteSelfTestExample(u16 DeviceId)
 {
-	int Status;
+	صحيح وضعیت;
 	XEmacLite_Config *ConfigPtr;
 	XEmacLite *InstancePtr = &EmacLite;
 	log_debug("\n Inside EMACLiteSelfTestExample");
 	/*
 	 * Initialize the EmacLite device.
 	 */
-	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	ConfigPtr = &XEmac_Lite_Config_جدول;
+	إذا (ConfigPtr == عدم) {
+		أرجع -1;
 	}
-	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
-	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->BaseAddress);
+	ConfigPtr->پایه_آدرس = (UINTPTR *) 0X44000;
+	log_debug("\n ConfigPtr: BaseAddress: %x", ConfigPtr->پایه_آدرس);
 	log_debug("\n ConfigPtr: DeviceId: %x", ConfigPtr->DeviceId);
 	log_debug("\n ConfigPtr: TxPingPong: %x", ConfigPtr->TxPingPong);
 	log_debug("\n ConfigPtr: RxPingPong: %x", ConfigPtr->RxPingPong);
 	log_debug("\n ConfigPtr: MdioInclude: %x", ConfigPtr->MdioInclude);
 	log_debug("\n ConfigPtr: Loopback: %x", ConfigPtr->Loopback);
-	Status = XEmacLite_CfgInitialize(InstancePtr,
+	وضعیت = XEmacLite_CfgInitialize(InstancePtr,
 					ConfigPtr,
-					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+					ConfigPtr->پایه_آدرس);
+	إذا (وضعیت != 0) {
+		أرجع -1;
 	}
 	
 	/*
 	 * Run the Self Test
 	 */
 	log_debug("\n Calling self test function.");
-	Status = XEmacLite_SelfTest(InstancePtr);
-	if (Status != SUCCESS) {
-		return FAILURE;
+	وضعیت = XEmacLite_SelfTest(InstancePtr);
+	إذا (وضعیت != SUCCESS) {
+		أرجع FAILURE;
 	}
 
-	return SUCCESS;
+	أرجع SUCCESS;
 }
 

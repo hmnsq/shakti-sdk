@@ -27,46 +27,46 @@
   setup each plic registers, isr routine and plic interrupt handler are here.
  */
 
-#include "pwm_driver.h"
-#include "plic_driver.h"
-#include "platform.h"
-#include "log.h"
-#include "stddef.h"
-#include "gpio.h"
-#include "utils.h"
+#ضمن "pwm_driver.h"
+#ضمن "plic_driver.h"
+#ضمن "platform.h"
+#ضمن "log.h"
+#ضمن "stddef.h"
+#ضمن "gpio.h"
+#ضمن "utils.h"
 
 /*
    Global interrupt data maintenance structure
  */
 
-plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
-interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
+plic_fptr_t isr_جدول[PLIC_MAX_وقفه_SRC];
+وقفه_داده_t hart0_وقفه_ماتریس[PLIC_MAX_وقفه_SRC];
 
 /** @fn void interrupt_complete(uint32_t interrupt_id)
  * @brief write the int_id to complete register
  * @details Signals completion of interrupt. From s/w side the interrupt claim/complete register is written with the interrupt id.
  * @param uint32_t interrupt_id
  */
-void interrupt_complete(uint32_t interrupt_id)
+فراغ وقفه_complete(uint32_t وقفه_id)
 {
 	log_trace("\ninterrupt_complete entered\n");
 
-	uint32_t *claim_addr =  (uint32_t *) (PLIC_BASE_ADDRESS +
-					      PLIC_CLAIM_OFFSET);
+	uint32_t *claim_addr =  (uint32_t *) (PLIC_پایه_آدرس +
+					      PLIC_CLAIM_جابه_جایی);
 
-	*claim_addr = interrupt_id;
-	hart0_interrupt_matrix[interrupt_id].state = SERVICED;
-	hart0_interrupt_matrix[interrupt_id].count++;
+	*claim_addr = وقفه_id;
+	hart0_وقفه_ماتریس[وقفه_id].state = SERVICED;
+	hart0_وقفه_ماتریس[وقفه_id].شمار++;
 
-	log_debug("interrupt id %d, state changed to %d\n", interrupt_id,
-		  hart0_interrupt_matrix[interrupt_id].state);
+	log_debug("interrupt id %d, state changed to %d\n", وقفه_id,
+		  hart0_وقفه_ماتریس[وقفه_id].state);
 
-	log_debug("interrupt id = %x \n reset to default values state = %x \
-		  \n priority = %x\n count = %x\n", \
-		  hart0_interrupt_matrix[interrupt_id].id, \
-		  hart0_interrupt_matrix[interrupt_id].state, \
-		  hart0_interrupt_matrix[interrupt_id].priority, \
-		  hart0_interrupt_matrix[interrupt_id].count);
+	log_debug("وقفه id = %x \n reset مقصد افتراضي مقادیر state = %x \
+		  \n اولویت = %x\n شمار = %x\n", \
+		  hart0_وقفه_ماتریس[وقفه_id].id, \
+		  hart0_وقفه_ماتریس[وقفه_id].state, \
+		  hart0_وقفه_ماتریس[وقفه_id].اولویت, \
+		  hart0_وقفه_ماتریس[وقفه_id].شمار);
 
 	log_trace("interrupt_complete exited\n");
 }
@@ -77,10 +77,10 @@ void interrupt_complete(uint32_t interrupt_id)
  *           of the highest priority pending interrupt
  * @return uint32_t
  */
-uint32_t interrupt_claim_request()
+uint32_t وقفه_claim_request()
 {
-	uint32_t *interrupt_claim_address = NULL;
-	uint32_t interrupt_id;
+	uint32_t *وقفه_claim_آدرس = عدم;
+	uint32_t وقفه_id;
 
 	log_trace("\ninterrupt_claim_request entered\n");
 
@@ -91,17 +91,17 @@ uint32_t interrupt_claim_request()
 	   refer https://gitlab.com/shaktiproject/uncore/devices/blob/master/plic/plic.bsv as on 26/8/2019
 	 */
 
-	interrupt_claim_address = (uint32_t *)(PLIC_BASE_ADDRESS +
-					       PLIC_CLAIM_OFFSET);
+	وقفه_claim_آدرس = (uint32_t *)(PLIC_پایه_آدرس +
+					       PLIC_CLAIM_جابه_جایی);
 
-	interrupt_id = *interrupt_claim_address;
+	وقفه_id = *وقفه_claim_آدرس;
 
-	log_debug("interrupt id [%x] claimed  at address %x\n", interrupt_id,
-		  interrupt_claim_address );
+	log_debug("interrupt id [%x] claimed  at address %x\n", وقفه_id,
+		  وقفه_claim_آدرس );
 
 	log_trace("interrupt_claim_request exited\n");
 
-	return interrupt_id;
+	أرجع وقفه_id;
 }
 
 /** @fn void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
@@ -111,19 +111,19 @@ uint32_t interrupt_claim_request()
  * @param uintptr_t int_id
  * @param uintptr_t epc
  */
-void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__((unused)) uintptr_t epc)
+فراغ mach_plic_handler( __attribute__((استفادهنشده)) uintptr_t int_id, __attribute__((استفادهنشده)) uintptr_t epc)
 {
-	uint32_t  interrupt_id;
+	uint32_t  وقفه_id;
 
 	log_trace("\nmach_plic_handler entered\n");
 
-	interrupt_id = interrupt_claim_request();
+	وقفه_id = وقفه_claim_request();
 
-	log_debug("interrupt id claimed = %x\n", interrupt_id);
+	log_debug("interrupt id claimed = %x\n", وقفه_id);
 
-	if (interrupt_id <= 0 || interrupt_id > PLIC_MAX_INTERRUPT_SRC)
+	إذا (وقفه_id <= 0 || وقفه_id > PLIC_MAX_وقفه_SRC)
 	{
-		log_fatal("Fatal error, interrupt id [%x] claimed is wrong\n", interrupt_id);
+		log_fatal("Fatal error, interrupt id [%x] claimed is wrong\n", وقفه_id);
 	}
 
 	/*
@@ -137,17 +137,17 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
 	 */
 
 	/*change state to active*/
-	hart0_interrupt_matrix[interrupt_id].state = ACTIVE;
+	hart0_وقفه_ماتریس[وقفه_id].state = فعال;
 
 	log_debug("interrupt id %d, state changed to %d\n",
-		  interrupt_id,hart0_interrupt_matrix[interrupt_id].state);
+		  وقفه_id,hart0_وقفه_ماتریس[وقفه_id].state);
 
 	/*call relevant interrupt service routine*/
-	isr_table[interrupt_id](interrupt_id);
+	isr_جدول[وقفه_id](وقفه_id);
 
-	interrupt_complete(interrupt_id);
+	وقفه_complete(وقفه_id);
 
-	log_debug("interrupt id %d complete \n", interrupt_id);
+	log_debug("interrupt id %d complete \n", وقفه_id);
 
 	log_trace("\nmach_plic_handler exited\n");
 }
@@ -158,23 +158,23 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
  * @param uint32_t interrupt_id
  * @return uint32_t
  */
-void isr_default(uint32_t interrupt_id)
+فراغ isr_default(uint32_t وقفه_id)
 {
 	log_trace("\nisr_default entered\n");
 
-	if( interrupt_id > 0 && interrupt_id < 7 )  //PWM Interrupts
+	إذا( وقفه_id > 0 && وقفه_id < 7 )  //PWM Interrupts
 	{
 		/*
 		   Assuming 6 pwm's are there
 		 */
 
-		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
+		إذا(pwm_check_continuous_نما((6-وقفه_id)) == 0)
 		{
-			set_pwm_control_register((6-interrupt_id),0x80);
+			مجموعه_pwm_control_ثبات((6-وقفه_id),0x80);
 		}
 	}
 
-	log_info("interrupt [%d] serviced\n",interrupt_id);
+	log_info("interrupt [%d] serviced\n",وقفه_id);
 
 	log_trace("\nisr_default exited\n");
 }
@@ -184,32 +184,32 @@ void isr_default(uint32_t interrupt_id)
  * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
  * @param uint32_t interrupt_id
  */
-void interrupt_enable(uint32_t interrupt_id)
+فراغ وقفه_enable(uint32_t وقفه_id)
 {
-	uint8_t *interrupt_enable_addr;
-	uint8_t current_value = 0x00, new_value;
+	uint8_t *وقفه_enable_addr;
+	uint8_t current_مقدار = 0x00, new_مقدار;
 
 	log_trace("\ninterrupt_enable entered \n");
 
-	log_debug("interrupt_id = %x\n", interrupt_id);
+	log_debug("interrupt_id = %x\n", وقفه_id);
 
 	log_debug("PLIC BASE ADDRESS = %x, PLIC ENABLE OFFSET = %x\n" \
-			,PLIC_BASE_ADDRESS, PLIC_ENABLE_OFFSET);
-	interrupt_enable_addr = (uint8_t *) (PLIC_BASE_ADDRESS +
-			PLIC_ENABLE_OFFSET +
-			((interrupt_id) >> 3));
+			,PLIC_پایه_آدرس, PLIC_ENABLE_جابه_جایی);
+	وقفه_enable_addr = (uint8_t *) (PLIC_پایه_آدرس +
+			PLIC_ENABLE_جابه_جایی +
+			((وقفه_id) >> 3));
 
-	current_value = *interrupt_enable_addr;
+	current_مقدار = *وقفه_enable_addr;
 
 	log_debug("interrupt_enable_addr = %x current_value = %x \n", \
-			interrupt_enable_addr, current_value);
+			وقفه_enable_addr, current_مقدار);
 
 	/*set the bit corresponding to the interrupt src*/
-	new_value = current_value | (0x1 << (interrupt_id % 8));
+	new_مقدار = current_مقدار | (0x1 << (وقفه_id % 8));
 
-	*((uint8_t*)interrupt_enable_addr) = new_value;
+	*((uint8_t*)وقفه_enable_addr) = new_مقدار;
 
-	log_debug("value read: new_value = %x\n", new_value);
+	log_debug("value read: new_value = %x\n", new_مقدار);
 
 	log_trace("\ninterrupt_enable exited \n");
 }
@@ -220,36 +220,36 @@ void interrupt_enable(uint32_t interrupt_id)
  *          The bit position corresponds to the interrupt id
  * @param uint32_t interrupt_id
  */
-void interrupt_disable(uint32_t interrupt_id)
+فراغ وقفه_disable(uint32_t وقفه_id)
 {
-	uint8_t *interrupt_disable_addr = 0;
-	uint8_t current_value = 0x00, new_value;
+	uint8_t *وقفه_disable_addr = 0;
+	uint8_t current_مقدار = 0x00, new_مقدار;
 
 	log_trace("\ninterrupt_disable entered \n");
 
-	log_debug("interrupt_id = %x\n", interrupt_id);
+	log_debug("interrupt_id = %x\n", وقفه_id);
 
 	log_debug("PLIC BASE ADDRESS = %x, PLIC ENABLE OFFSET = %x interrupt_id = %x\n",
-		  PLIC_BASE_ADDRESS, PLIC_ENABLE_OFFSET, interrupt_id);
+		  PLIC_پایه_آدرس, PLIC_ENABLE_جابه_جایی, وقفه_id);
 
-	interrupt_disable_addr = (uint8_t *) (PLIC_BASE_ADDRESS +
-					      PLIC_ENABLE_OFFSET +
-					      (interrupt_id >> 3));
+	وقفه_disable_addr = (uint8_t *) (PLIC_پایه_آدرس +
+					      PLIC_ENABLE_جابه_جایی +
+					      (وقفه_id >> 3));
 
-	current_value = *interrupt_disable_addr;
+	current_مقدار = *وقفه_disable_addr;
 
 	log_debug("interrupt_disable_addr = %x current_value = %x \n",
-		  interrupt_disable_addr, current_value);
+		  وقفه_disable_addr, current_مقدار);
 
 	/*unset the bit corresponding to the interrupt src*/
-	new_value = current_value & (~(0x1 << (interrupt_id % 8)));
+	new_مقدار = current_مقدار & (~(0x1 << (وقفه_id % 8)));
 
-	*interrupt_disable_addr = new_value;
+	*وقفه_disable_addr = new_مقدار;
 
-	hart0_interrupt_matrix[interrupt_id].state = INACTIVE;
+	hart0_وقفه_ماتریس[وقفه_id].state = INACTIVE;
 
 	log_debug("interrupt id %d, state changed to %d\n",
-		  interrupt_id,hart0_interrupt_matrix[interrupt_id].state);
+		  وقفه_id,hart0_وقفه_ماتریس[وقفه_id].state);
 
 	log_trace("interrupt_disable exited\n");
 }
@@ -259,18 +259,18 @@ void interrupt_disable(uint32_t interrupt_id)
  * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is ignored.
  * @param uint32_t priority_value
  */
-void set_interrupt_threshold(uint32_t priority_value)
+فراغ مجموعه_وقفه_آستانه(uint32_t اولویت_مقدار)
 {
 	log_trace("\nset interrupt_threshold entered\n");
 
-	uint32_t *interrupt_threshold_priority = NULL;
+	uint32_t *وقفه_آستانه_اولویت = عدم;
 
-	interrupt_threshold_priority = (uint32_t *) (PLIC_BASE_ADDRESS +
-						     PLIC_THRESHOLD_OFFSET);
+	وقفه_آستانه_اولویت = (uint32_t *) (PLIC_پایه_آدرس +
+						     PLIC_آستانه_جابه_جایی);
 
-	*interrupt_threshold_priority = priority_value;
+	*وقفه_آستانه_اولویت = اولویت_مقدار;
 
-	log_debug("plic threshold set to %d\n", *interrupt_threshold_priority);
+	log_debug("plic threshold set to %d\n", *وقفه_آستانه_اولویت);
 
 	log_trace("set interrupt_threshold exited\n");
 }
@@ -281,28 +281,28 @@ void set_interrupt_threshold(uint32_t priority_value)
  * @param uint32_t priority_value
  * @param uint32_t int_id
  */
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
+فراغ مجموعه_وقفه_اولویت(uint32_t اولویت_مقدار, uint32_t int_id)
 {
-	log_trace("\n set interrupt priority entered %x\n", priority_value);
+	log_trace("\n set interrupt priority entered %x\n", اولویت_مقدار);
 
-	uint32_t * interrupt_priority_address;
+	uint32_t * وقفه_اولویت_آدرس;
 
 	/*
 	   base address + priority offset + 4*interruptId
 	 */
 
-	interrupt_priority_address = (uint32_t *) (PLIC_BASE_ADDRESS +
-						   PLIC_PRIORITY_OFFSET +
+	وقفه_اولویت_آدرس = (uint32_t *) (PLIC_پایه_آدرس +
+						   PLIC_اولویت_جابه_جایی +
 						   (int_id <<
-						    PLIC_PRIORITY_SHIFT_PER_INT));
+						    PLIC_اولویت_لغزش_در_هر_INT));
 
-	log_debug("interrupt_priority_address = %x\n", interrupt_priority_address);
+	log_debug("interrupt_priority_address = %x\n", وقفه_اولویت_آدرس);
 
-	log_debug("current data at interrupt_priority_address = %x\n", *interrupt_priority_address);
+	log_debug("current data at interrupt_priority_address = %x\n", *وقفه_اولویت_آدرس);
 
-	*interrupt_priority_address = priority_value;
+	*وقفه_اولویت_آدرس = اولویت_مقدار;
 
-	log_debug(" new data at interrupt_priority_address = %x\n", *interrupt_priority_address);
+	log_debug(" new data at interrupt_priority_address = %x\n", *وقفه_اولویت_آدرس);
 
 	log_trace("set interrupt priority exited\n");
 }
@@ -312,11 +312,11 @@ void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
  * @details enable the corresponding gpio pin for a interrupt as read.
  * @param uint32_t id
  */
-void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
+فراغ configure_وقفه_pin( __attribute__((استفادهنشده)) uint32_t id)
 {
 	log_trace("\nconfigure interrupt pin entered\n");
 
-	uint32_t read_data;
+	uint32_t read_داده_2;
 
 	/*
 	   GPIO0 -> Int id 7
@@ -324,15 +324,15 @@ void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
 	   Refer platform.h for full memory map.
 	 */
 
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
+	read_داده_2 = read_کلمه(GPIO_DIRECTION_CNTRL_REG);
 
-	log_debug("GPIO DIRECTION REGISTER VALUE = %x\n", read_data);
+	log_debug("GPIO DIRECTION REGISTER VALUE = %x\n", read_داده_2);
 
-	write_word(GPIO_DIRECTION_CNTRL_REG, (read_data) & \
+	write_کلمه(GPIO_DIRECTION_CNTRL_REG, (read_داده_2) & \
 		   (0xFFFFFFFF & ~(1 << (id-7))));
 
 	log_debug("Data written to GPIO DIRECTION CTRL REG = %x\n", \
-		  read_word(GPIO_DIRECTION_CNTRL_REG));
+		  read_کلمه(GPIO_DIRECTION_CNTRL_REG));
 
 	log_trace("configure interrupt pin exited\n");
 }
@@ -343,16 +343,16 @@ void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
  *          Sets up the plic meta data table. Assigns the plic
  *          handler to mcause_interrupt_table.,By default interrupts are disabled.
  */
-void plic_init()
+فراغ plic_init()
 {
 	uint32_t int_id = 0;
 
 	log_trace("\nplic_init entered\n");
 
 	/*Assign service routine for external interrupt in machine mode*/
-	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT] = mach_plic_handler;
+	mcause_وقفه_جدول[MACH_EXTERNAL_وقفه] = mach_plic_handler;
 
-	log_debug("Assigned mach_plic_handler to trap id : %d\n", MACH_EXTERNAL_INTERRUPT);
+	log_debug("Assigned mach_plic_handler to trap id : %d\n", MACH_EXTERNAL_وقفه);
 
 	/*
 	   risc v priv spec v1.10 section 7.5 onwards
@@ -364,37 +364,37 @@ void plic_init()
 	   and interrupt priority increases with increasing integer values.
 	 */
 
-	hart0_interrupt_matrix[0].state = INACTIVE;
-	hart0_interrupt_matrix[0].id = 0;
-	hart0_interrupt_matrix[0].priority = 0;
-	hart0_interrupt_matrix[0].count = 0;
+	hart0_وقفه_ماتریس[0].state = INACTIVE;
+	hart0_وقفه_ماتریس[0].id = 0;
+	hart0_وقفه_ماتریس[0].اولویت = 0;
+	hart0_وقفه_ماتریس[0].شمار = 0;
 
-	for(int_id = 1; int_id < PLIC_MAX_INTERRUPT_SRC; int_id++)
+	لكل(int_id = 1; int_id < PLIC_MAX_وقفه_SRC; int_id++)
 	{
-		hart0_interrupt_matrix[int_id].state = INACTIVE;
-		hart0_interrupt_matrix[int_id].id = int_id;
-		hart0_interrupt_matrix[int_id].priority = PLIC_PRIORITY_3;
-		hart0_interrupt_matrix[int_id].count = 0;
+		hart0_وقفه_ماتریس[int_id].state = INACTIVE;
+		hart0_وقفه_ماتریس[int_id].id = int_id;
+		hart0_وقفه_ماتریس[int_id].اولویت = PLIC_اولویت_3;
+		hart0_وقفه_ماتریس[int_id].شمار = 0;
 
 		log_debug("\n************************************************");
 
 		/*Disable all interrupts at the beginning*/
-		interrupt_disable(int_id);
+		وقفه_disable(int_id);
 
 		/*assign a default isr for all interrupts*/
-		isr_table[int_id] = isr_default;
+		isr_جدول[int_id] = isr_default;
 
 		/*set priority for all interrupts*/
 
-		set_interrupt_priority(PLIC_PRIORITY_3, int_id);
+		مجموعه_وقفه_اولویت(PLIC_اولویت_3, int_id);
 
-		log_debug("\ninterrupt id = %x \nreset to default values state = %x \
+		log_debug("\ninterrupt id = %x \nreset مقصد افتراضي مقادیر state = %x \
 			  \npriority = %x\ncount = %x\n \
 			  \n*************************************************",
-			  hart0_interrupt_matrix[int_id].id, \
-			  hart0_interrupt_matrix[int_id].state, \
-			  hart0_interrupt_matrix[int_id].priority, \
-			  hart0_interrupt_matrix[int_id].count);
+			  hart0_وقفه_ماتریس[int_id].id, \
+			  hart0_وقفه_ماتریس[int_id].state, \
+			  hart0_وقفه_ماتریس[int_id].اولویت, \
+			  hart0_وقفه_ماتریس[int_id].شمار);
 	}
 
 	/* An isr for each and every unique interrupt source has to be added explicitly at init time*/
@@ -403,7 +403,7 @@ void plic_init()
 	  interrupt_enable(int_id);
 	 */
 	/*set threshold value for interrupts*/
-	set_interrupt_threshold(PLIC_PRIORITY_2);
+	مجموعه_وقفه_آستانه(PLIC_اولویت_2);
 
 	log_trace("plic_init exited \n");
 }
@@ -416,19 +416,19 @@ void plic_init()
  *          between interrupt enable bit and interrupt pin
  * @param uint32_t int_id
  */
-void configure_interrupt(uint32_t int_id)
+فراغ configure_وقفه(uint32_t int_id)
 {
 	log_trace("\nconfigure_interrupt entered \n");
 
 	/*
 	   Call only for GPIO pins
 	 */
-	if(int_id >6 && int_id < 22)
+	إذا(int_id >6 && int_id < 22)
 	{
-		configure_interrupt_pin(int_id);
+		configure_وقفه_pin(int_id);
 	}
 
-	interrupt_enable(int_id);
+	وقفه_enable(int_id);
 
 	log_trace("configure_interrupt exited \n");
 }

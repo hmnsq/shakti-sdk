@@ -20,122 +20,122 @@ platform.h - header file for Artix 100T C class SoC
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#اگر_تعریف_نشده PLATFORM_H
+#تعریف_کن PLATFORM_H
 
 /*
  *@brief RISCV - C CLASS SOC Memory mapping
  */
 
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   256
+#تعریف_کن CLINT_پایه 0x020000000
+#تعریف_کن MTIME      0x0200BFF8
+#تعریف_کن MTIMECMP   0x02004000
+#تعریف_کن CLINT_مقسوم_علیه   256
 
-#define CLOCK_FREQUENCY 20000000
+#تعریف_کن CLOCK_FREQUENCY 20000000
 
-#define MCAUSE_INT         0x80000000
-#define MCAUSE_CAUSE       0x7FFFFFFF
+#تعریف_کن MCAUSE_INT         0x80000000
+#تعریف_کن MCAUSE_CAUSE       0x7FFFFFFF
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#تعریف_کن PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000000
+#تعریف_کن DBG_MEM_شروع 0x00000000
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 128mB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
+#تعریف_کن TCM_MEM_شروع 0x80000000 /*! DDR3 Memory Start address */
 
 /*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x8000000 /*! DDR3 Memory Size */
+#تعریف_کن TCM_MEM_اندازه 0x8000000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#تعریف_کن پشته_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#تعریف_کن انباشته_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#تعریف_کن PWM_پایه_آدرس 0x00030000 /*PWM Base address*/
+#تعریف_کن PWM_MODULE_جابه_جایی 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART_OFFSET 0x100
-#define MAX_UART_COUNT 1
+#تعریف_کن UART0_شروع 0x00011300 /*! UART 0 */
+#تعریف_کن UART_جابه_جایی 0x100
+#تعریف_کن MAX_UART_شمار 1
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#تعریف_کن PINMUX_CONFIGURE_REG 0x40310
 
 /*! Core Local Interruptor CLINT */
 
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x020C0000 /*! I2C Start Address */
-#define I2C_OFFSET 0x000
-#define MAX_I2C_COUNT 1
+#تعریف_کن I2_C0_پایه 0x020C0000 /*! I2C Start Address */
+#تعریف_کن I2_C_جابه_جایی 0x000
+#تعریف_کن MAX_I2_C_شمار 1
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1
-#define PLIC_INTERRUPT_2   2
-#define PLIC_INTERRUPT_3   3
-#define PLIC_INTERRUPT_4   4
-#define PLIC_INTERRUPT_5   5
-#define PLIC_INTERRUPT_6   6
-#define PLIC_INTERRUPT_7   7
-#define PLIC_INTERRUPT_8   8
-#define PLIC_INTERRUPT_9   9
-#define PLIC_INTERRUPT_10  10
-#define PLIC_INTERRUPT_11  11
-#define PLIC_INTERRUPT_12  12
-#define PLIC_INTERRUPT_13  13
-#define PLIC_INTERRUPT_14  14
-#define PLIC_INTERRUPT_15  15
-#define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_26  26
+#تعریف_کن PLIC_پایه_آدرس 0x0C000000 /*! PLIC Interface Start */
+#تعریف_کن PLIC_وقفه_1   1
+#تعریف_کن PLIC_وقفه_2   2
+#تعریف_کن PLIC_وقفه_3   3
+#تعریف_کن PLIC_وقفه_4   4
+#تعریف_کن PLIC_وقفه_5   5
+#تعریف_کن PLIC_وقفه_6   6
+#تعریف_کن PLIC_وقفه_7   7
+#تعریف_کن PLIC_وقفه_8   8
+#تعریف_کن PLIC_وقفه_9   9
+#تعریف_کن PLIC_وقفه_10  10
+#تعریف_کن PLIC_وقفه_11  11
+#تعریف_کن PLIC_وقفه_12  12
+#تعریف_کن PLIC_وقفه_13  13
+#تعریف_کن PLIC_وقفه_14  14
+#تعریف_کن PLIC_وقفه_15  15
+#تعریف_کن PLIC_وقفه_16  16
+#تعریف_کن PLIC_وقفه_26  26
 
-#define PLIC_MAX_INTERRUPT_SRC 26
+#تعریف_کن PLIC_MAX_وقفه_SRC 26
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x020D0000 //GPIO Start Address */
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
+#تعریف_کن GPIO_شروع 0x020D0000 //GPIO Start Address */
+#تعریف_کن GPIO_جابه_جایی 0x08 /*!Generic offset used to access GPIO registers*/
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
-#define GPIO16 (1 << 16)
-#define GPIO17 (1 << 17)
-#define GPIO18 (1 << 18)
-#define GPIO19 (1 << 19)
-#define GPIO20 (1 << 20)
-#define GPIO21 (1 << 21)
-#define GPIO22 (1 << 22)
-#define GPIO23 (1 << 23)
-#define GPIO24 (1 << 24)
-#define GPIO25 (1 << 25)
-#define GPIO26 (1 << 26)
-#define GPIO27 (1 << 27)
-#define GPIO28 (1 << 28)
-#define GPIO29 (1 << 29)
-#define GPIO30 (1 << 30)
-#define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#تعریف_کن GPIO0  (1 <<  0)
+#تعریف_کن GPIO1  (1 <<  1)
+#تعریف_کن GPIO2  (1 <<  2)
+#تعریف_کن GPIO3  (1 <<  3)
+#تعریف_کن GPIO4  (1 <<  4)
+#تعریف_کن GPIO5  (1 <<  5)
+#تعریف_کن GPIO6  (1 <<  6)
+#تعریف_کن GPIO7  (1 <<  7)
+#تعریف_کن GPIO8  (1 <<  8)
+#تعریف_کن GPIO9  (1 <<  9)
+#تعریف_کن GPIO10 (1 << 10)
+#تعریف_کن GPIO11 (1 << 11)
+#تعریف_کن GPIO12 (1 << 12)
+#تعریف_کن GPIO13 (1 << 13)
+#تعریف_کن GPIO14 (1 << 14)
+#تعریف_کن GPIO15 (1 << 15)
+#تعریف_کن GPIO16 (1 << 16)
+#تعریف_کن GPIO17 (1 << 17)
+#تعریف_کن GPIO18 (1 << 18)
+#تعریف_کن GPIO19 (1 << 19)
+#تعریف_کن GPIO20 (1 << 20)
+#تعریف_کن GPIO21 (1 << 21)
+#تعریف_کن GPIO22 (1 << 22)
+#تعریف_کن GPIO23 (1 << 23)
+#تعریف_کن GPIO24 (1 << 24)
+#تعریف_کن GPIO25 (1 << 25)
+#تعریف_کن GPIO26 (1 << 26)
+#تعریف_کن GPIO27 (1 << 27)
+#تعریف_کن GPIO28 (1 << 28)
+#تعریف_کن GPIO29 (1 << 29)
+#تعریف_کن GPIO30 (1 << 30)
+#تعریف_کن GPIO31 (1 << 31)
+#تعریف_کن GPIO_شمار  0x20
 //#define PLIC_GPIO_OFFSET 0
 
-#endif
+#پایان_اگر

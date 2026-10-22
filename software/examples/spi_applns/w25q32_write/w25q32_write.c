@@ -33,43 +33,43 @@ d0 - spi miso
 clk -spi clk
 cs  -spi cs
 *************************************************/
-#include <stdint.h>
-#include "spi.h"
-#include "pinmux.h"
+#ضمن <stdint.h>
+#ضمن "spi.h"
+#ضمن "pinmux.h"
 
 /** @fn void w25q32()
  * @brief Writes the spi value to w25q32
  * @details Writes SPI over w25q32 interface
  */
-void w25q32()
+فراغ w25q32()
 {
-	int tmp = 0x00;//32 bits of data can be written at a time
-	int write_address = 0x0000100;  // read/write from/to this address
+	صحيح tmp = 0x00;//32 bits of data can be written at a time
+	صحيح write_آدرس = 0x0000100;  // read/write from/to this address
 
 	*pinmux_config_reg = 0x154000;	
 
 	waitfor(200);
-	configure_spi(SPI1_OFFSET);
+	configure_spi(SPI1_جابه_جایی);
 	spi_init();
 	
-	printf("SPI init done\n");
+	چاپ_کن("SPI init done\n");
 	
 	flash_device_id(); 
 
-	for ( int data=0;  data<=100;  data++)
+	لكل ( صحيح داده_2=0;  داده_2<=100;  داده_2++)
 	{
-	  flash_erase(write_address); //erases an entire sector
-	  flash_status_register_read();
+	  flash_erase(write_آدرس); //erases an entire sector
+	  flash_وضعیت_ثبات_read();
 	  //flash write
 	  flash_write_enable();
-	  flash_write( write_address,tmp);
+	  flash_write( write_آدرس,tmp);
 	  
-	  printf("Flash write done on address %x and tmp %x \n", write_address, data);
+	  چاپ_کن("Flash write done on address %x and tmp %x \n", write_آدرس, داده_2);
 	  
 	  tmp = tmp+0x1;
-	  write_address = write_address+4;
+	  write_آدرس = write_آدرس+4;
 	}
-	printf("SPI Write Success\n");
+	چاپ_کن("SPI Write Success\n");
 }
 
 /**  @fn void main()
@@ -77,8 +77,8 @@ void w25q32()
  * @details Configures the SPI Write FLASH values, Write the same 
  * prints the write values.
  */
-void main()
+فراغ اصلی()
 {
 	w25q32();
-	while (1);
+	طالما (1);
 }

@@ -26,10 +26,10 @@
 @detail Switches ON/OFF/TOGGLE the LEDs.
 */
 
-#include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
-#include "led_driver.h"
-#include "utils.h"
+#ضمن "platform.h"
+#ضمن "gpio.h" // includes definitions of gpio pins and read, write functions//
+#ضمن "led_driver.h"
+#ضمن "utils.h"
 
 /*! Define one of the the following macros to control LEDs in different ways. */
 //#define CONTROL_INDIVIDUAL_LEDS  /*! Controls LEDs Individually */
@@ -37,27 +37,27 @@
 //#define CONTROL_RGB_LEDX /*! Controls RGB LEDs individually */
 //#define CONTROL_RGB_LEDS /*! controls RGB leds only */
 //#define CONTROL_ALL_LEDS /*! Controls all LEDs */
-#define TOGGLE_LEDX /*! Toggles LEDs individually */
+#تعریف_کن TOGGLE_LEDX /*! Toggles LEDs individually */
 //#define TOGGLE_NORMAL_LEDX /*! Toggles Normal LEDx ONLY */
 //#define TOGGLE_RGB_LEDX //!Toggles RGB leds only 
 //#define TOGGLE_ALL_LEDX //Toggles all led
 
-#define DELAY1 1000
-#define DELAY2 1000
+#تعریف_کن DELAY1 1000
+#تعریف_کن DELAY2 1000
 
 /** @fn void main()
  * @brief Performs the toggling operation  with the help of button.
  * @details Based on the uncommented macro. Performs the on/off/toggle 
  * operation on LEDS.     
  */
-void main()
+فراغ اصلی()
 {
 	//  write_word(GPIO_DIRECTION_CNTRL_REG, 0x0);
 	//  write_word(GPIO_DATA_REG, 0x0);
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#إذا defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#ifdef CONTROL_INDIVIDUAL_LEDS
+#اگر_تعریف_شده CONTROL_INDIVIDUAL_LEDS
 	configure_ledx(LED0_B);
 	configure_ledx(LED0_R);
 	configure_ledx(LED0_G);
@@ -66,26 +66,26 @@ void main()
 	configure_ledx(LED1_G);
 	configure_ledx(LED2);
 	configure_ledx(LED3);
-#endif
+#پایان_اگر
 
-#ifdef  CONTROL_RGB_LEDX
+#اگر_تعریف_شده  CONTROL_RGB_LEDX
 	configure_rgb_ledx(RGB_LED0);
 	configure_rgb_ledx(RGB_LED1);
-#endif
+#پایان_اگر
 
-#ifdef  CONTROL_RGB_LEDS
+#اگر_تعریف_شده  CONTROL_RGB_LEDS
 	configure_rgb_leds();
-#endif
+#پایان_اگر
 
-#ifdef  CONTROL_NORMAL_LEDS
-	configure_normal_leds();
-#endif
+#اگر_تعریف_شده  CONTROL_نرمال_LEDS
+	configure_نرمال_leds();
+#پایان_اگر
 
-#ifdef CONTROL_ALL_LEDS
+#اگر_تعریف_شده CONTROL_ALL_LEDS
 	configure_all_leds();
-#endif
+#پایان_اگر
 
-#ifdef TOGGLE_LEDX
+#اگر_تعریف_شده TOGGLE_LEDX
 	configure_ledx(LED0_B);
 	configure_ledx(LED0_R);
 	configure_ledx(LED0_G);
@@ -94,25 +94,25 @@ void main()
 	configure_ledx(LED1_G);
 	configure_ledx(LED2);
 	configure_ledx(LED3);
-#endif
+#پایان_اگر
 
-#ifdef TOGGLE_NORMAL_LEDX
-	configure_normal_leds();
-#endif
+#اگر_تعریف_شده TOGGLE_نرمال_LEDX
+	configure_نرمال_leds();
+#پایان_اگر
 
-#ifdef TOGGLE_RGB_LEDX
+#اگر_تعریف_شده TOGGLE_RGB_LEDX
 	configure_rgb_leds();
-#endif
+#پایان_اگر
 
-#ifdef TOGGLE_ALL_LEDX
+#اگر_تعریف_شده TOGGLE_ALL_LEDX
 	configure_all_leds();
-#endif
+#پایان_اگر
 
 
-	write_word(GPIO_DATA_REG, 0x0);
+	write_کلمه(GPIO_داده_REG, 0x0);
 
-	while (1){
-#ifdef CONTROL_INDIVIDUAL_LEDS
+	طالما (1){
+#اگر_تعریف_شده CONTROL_INDIVIDUAL_LEDS
 		delay_loop(DELAY1, DELAY2);
 		turn_on_ledx( LED0_G);
 		delay_loop(DELAY1, DELAY2);
@@ -147,52 +147,52 @@ void main()
 		delay_loop(DELAY1, DELAY2);
 		turn_off_ledx( LED3);
 		delay_loop(DELAY1, DELAY2);
-#endif
+#پایان_اگر
 
-#ifdef CONTROL_NORMAL_LEDS
-		turn_on_normal_leds();
+#اگر_تعریف_شده CONTROL_نرمال_LEDS
+		turn_on_نرمال_leds();
 		delay_loop(DELAY1, DELAY2);
-		turn_off_normal_leds();
+		turn_off_نرمال_leds();
 		delay_loop(DELAY1, DELAY2);
-#endif
+#پایان_اگر
 
-#if 0
-#ifdef CONTROL_RGB_LEDX
+#إذا 0
+#اگر_تعریف_شده CONTROL_RGB_LEDX
 		turn_on_rgb_ledx( RGB_LED0);
 		turn_on_rgb_ledx( RGB_LED1);
 		delay_loop(DELAY1, DELAY2);
 		turn_off_rgb_ledx( RGB_LED0);
 		turn_off_rgb_ledx( RGB_LED1);
 		delay_loop(DELAY1, DELAY2);
-#endif
-#endif
-#ifdef CONTROL_RGB_LEDX
+#پایان_اگر
+#پایان_اگر
+#اگر_تعریف_شده CONTROL_RGB_LEDX
 		turn_on_rgb_ledx( RGB_LED0);
 		turn_off_rgb_ledx( RGB_LED1);
 		delay_loop(DELAY1, DELAY2);
 		turn_off_rgb_ledx( RGB_LED0);
 		turn_on_rgb_ledx( RGB_LED1);
 		delay_loop(DELAY1, DELAY2);
-#endif
+#پایان_اگر
 
-#ifdef CONTROL_RGB_LEDS
+#اگر_تعریف_شده CONTROL_RGB_LEDS
 		turn_on_rgb_leds();
 		delay_loop(DELAY1, DELAY2);
 		turn_off_rgb_leds();
 		delay_loop(DELAY1, DELAY2);
-#endif
+#پایان_اگر
 
 
-#ifdef CONTROL_ALL_LEDS
+#اگر_تعریف_شده CONTROL_ALL_LEDS
 		turn_on_all_leds();
 		delay_loop(DELAY1, DELAY2);
 		turn_off_all_leds();
 		delay_loop(DELAY1, DELAY2);
 		//  ToggleAllLeds(1000);
-#endif
+#پایان_اگر
 
 
-#ifdef TOGGLE_LEDX
+#اگر_تعریف_شده TOGGLE_LEDX
 		toggle_ledx(LED0_R, DELAY1, DELAY2);
 		toggle_ledx(LED0_G, DELAY1, DELAY2);
 		toggle_ledx(LED0_B, DELAY1, DELAY2);
@@ -201,19 +201,19 @@ void main()
 		toggle_ledx(LED1_B, DELAY1, DELAY2);
 		toggle_ledx(LED2, DELAY1, DELAY2);
 		toggle_ledx(LED3, DELAY1, DELAY2);
-#endif
+#پایان_اگر
 
-#ifdef TOGGLE_NORMAL_LEDX
-		toggle_normal_leds(DELAY1, DELAY2);
-#endif
+#اگر_تعریف_شده TOGGLE_نرمال_LEDX
+		toggle_نرمال_leds(DELAY1, DELAY2);
+#پایان_اگر
 
-#ifdef TOGGLE_RGB_LEDX
+#اگر_تعریف_شده TOGGLE_RGB_LEDX
 		toggle_rgb_leds(DELAY1, DELAY2);
-#endif
+#پایان_اگر
 
-#ifdef TOGGLE_ALL_LEDX
+#اگر_تعریف_شده TOGGLE_ALL_LEDX
 		toggle_all_leds(DELAY1, DELAY2);
-#endif
+#پایان_اگر
 	}
-#endif
+#پایان_اگر
 }

@@ -26,9 +26,9 @@
 @brief A library to display the memory contents at byte and word level.
 */
 
-#include "log.h"
-#include "memory.h"
-#include <stdint.h>
+#ضمن "log.h"
+#ضمن "memory.h"
+#ضمن <stdint.h>
 
 /** @fn void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @brief dump contents of word addressabe location in the memory,
@@ -37,17 +37,17 @@
  * @param uint32_t word_length
  */
 
-void dump_word_memory(uint32_t* start, uint32_t word_length)
+فراغ dump_کلمه_حافظه(uint32_t* شروع, uint32_t کلمه_درازی)
 {
 	uint32_t i=0;
-	void *address;
+	فراغ *آدرس;
 
-	address = (uint32_t *) start;
+	آدرس = (uint32_t *) شروع;
 
-	while(i++< word_length)
+	طالما(i++< کلمه_درازی)
 	{
-		log_info("address = %x data = %x\n", address, *(uint32_t *) address);
-		address += 4;
+		log_info("address = %x data = %x\n", آدرس, *(uint32_t *) آدرس);
+		آدرس += 4;
 	}
 }
 
@@ -58,17 +58,17 @@ void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @param uint32_t word_length
  */
 
-void dump_byte_memory(uint32_t* start, uint32_t word_length)
+فراغ dump_byte_حافظه(uint32_t* شروع, uint32_t کلمه_درازی)
 {
 	uint32_t i=0;
-	void *address;
+	فراغ *آدرس;
 
-	address = (unsigned char *) start;
+	آدرس = (بیعلامت حرف *) شروع;
 
-	while(i++< word_length)
+	طالما(i++< کلمه_درازی)
 	{
-		log_info("address = %x data = %x\n", address, *(unsigned char
-							       *) address);
-		address += 1;
+		log_info("address = %x data = %x\n", آدرس, *(بیعلامت حرف
+							       *) آدرس);
+		آدرس += 1;
 	}
 }

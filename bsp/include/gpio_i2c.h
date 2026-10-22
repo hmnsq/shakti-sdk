@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#اگر_تعریف_نشده GPIO_I2C_H
+#تعریف_کن GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#تعریف_کن I2C_SCL GPIO0 
+#تعریف_کن I2C_SDA GPIO1
+#تعریف_کن GPIOD_IS_درون 0
+#تعریف_کن GPIOD_IS_بیرون 1
+#تعریف_کن I2C_WRITE 0
+#تعریف_کن I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+فراغ I2cInit();
+فراغ I2c_Send_Slave_آدرس(بیعلامت حرف , بیعلامت حرف , بیعلامت حرف );
+فراغ I2cWriteByte(بیعلامت حرف , بیعلامت حرف );
+بیعلامت حرف I2cReadByte(بیعلامت حرف );
+فراغ I2c_Write_داده(بیعلامت حرف , بیعلامت حرف );
+بیعلامت حرف I2c_Read_داده_Ack(بیعلامت حرف );
+بیعلامت حرف I2c_Read_داده_Nack(بیعلامت حرف );
+فراغ I2c_شروع(بیعلامت حرف );
+فراغ I2cStop(بیعلامت حرف );
+فراغ I2c_Write_byte(بیعلامت حرف, بیعلامت حرف, بیعلامت حرف, بیعلامت حرف);
+صحيح I2c_Read_byte(بیعلامت حرف ,بیعلامت حرف , بیعلامت حرف );
+صحيح I2c_shakti_readbytes(حرف *, صحيح , صحيح , بیعلامت حرف );
+فراغ ReadAckForWrite(بیعلامت حرف delay);
+فراغ SendNackForRead(بیعلامت حرف delay);
+فراغ SendAckForRead(بیعلامت حرف delay);
 
-#endif
+#پایان_اگر

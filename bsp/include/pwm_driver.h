@@ -26,48 +26,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#ضمن<stdbool.h>
 
 // PWM Registers 
-#define PERIOD_REGISTER     0x00000000	//16 bits (short)
-#define DUTY_REGISTER       0x00000004	//16 bits (short)
-#define CONTROL_REGISTER    0x00000008	//8 bits (char)
-#define CLOCK_REGISTER      0x0000000c	//16 bits (short)
+#تعریف_کن PERIOD_ثبات     0x00000000	//16 bits (short)
+#تعریف_کن DUTY_ثبات       0x00000004	//16 bits (short)
+#تعریف_کن CONTROL_ثبات    0x00000008	//8 bits (char)
+#تعریف_کن CLOCK_ثبات      0x0000000c	//16 bits (short)
 
 // Control Register Individual Bits 
-#define CLOCK_SELECTOR      0x00000001
-#define PWM_ENABLE          0x00000002
-#define PWM_START           0x00000004
-#define CONTINUOUS_ONCE     0x00000008
-#define PWM_OUTPUT_ENABLE   0x00000010
-#define INTERRUPT           0x00000020
-#define READ_ONLY           0x00000040
-#define RESET_COUNTER       0x00000080
+#تعریف_کن CLOCK_SELECTOR      0x00000001
+#تعریف_کن PWM_ENABLE          0x00000002
+#تعریف_کن PWM_شروع           0x00000004
+#تعریف_کن CONTINUOUS_ONCE     0x00000008
+#تعریف_کن PWM_OUTPUT_ENABLE   0x00000010
+#تعریف_کن وقفه_2           0x00000020
+#تعریف_کن READ_ONLY           0x00000040
+#تعریف_کن RESET_COUNTER       0x00000080
 
 // PWM Modules 
-#define PWM_0 0
-#define PWM_1 1
-#define PWM_2 2
-#define PWM_3 3
-#define PWM_4 4
-#define PWM_5 5
+#تعریف_کن PWM_0 0
+#تعریف_کن PWM_1 1
+#تعریف_کن PWM_2 2
+#تعریف_کن PWM_3 3
+#تعریف_کن PWM_4 4
+#تعریف_کن PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+فراغ pwm_configure(صحيح module_عدد, صحيح clock_مقسوم_علیه, صحيح period, صحيح duty, bool external_clock);
+فراغ pwm_شروع(صحيح module_عدد, صحيح نما);
+صحيح pwm_check_continuous_نما(صحيح module_عدد);
+فراغ pwm_clear_registers(صحيح module_عدد);
+فراغ pwm_init(فراغ);
+فراغ pwm_مجموعه_external_clock(صحيح module_عدد, bool مقدار);
+فراغ pwm_مجموعه_clock(صحيح module_عدد, صحيح clock_مقسوم_علیه);
+فراغ pwm_مجموعه_duty_چرخه(صحيح module_عدد, صحيح duty);
+فراغ pwm_مجموعه_periodic_چرخه(صحيح module_عدد, صحيح period);
+فراغ pwm_stop(صحيح module_عدد);
+فراغ show_ثبات_مقادیر(صحيح module_عدد);
+صحيح مجموعه_pwm_period_ثبات(صحيح module_عدد, صحيح مقدار);
+صحيح مجموعه_pwm_duty_ثبات(صحيح module_عدد, صحيح مقدار);
+صحيح مجموعه_pwm_control_ثبات(صحيح module_عدد, صحيح مقدار);
+صحيح مجموعه_pwm_clock_ثبات(صحيح module_عدد, صحيح مقدار);
+صحيح configure_control_ثبات_نما(صحيح نما);
+فراغ pwm_use_external_clock(صحيح module_عدد, bool مقدار);
 

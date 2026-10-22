@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#اگر_تعریف_نشده UTIL_H
+#تعریف_کن UTIL_H
+#ضمن <stdio.h>
+#ضمن <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+فراغ waitfor(بیعلامت صحيح secs);
+فراغ delay(بیعلامت دراز seconds);
+عائم pow_10(بیعلامت صحيح y);
+فراغ معکوس(حرف *str, صحيح len);
+فراغ ftoa( عائم, حرف *, بیعلامت صحيح);
+فراغ delay_loop(بیعلامت دراز cntr1, بیعلامت دراز cntr2);
+بیعلامت دراز read_کلمه(uint32_t *addr);
+فراغ write_کلمه(uint32_t *addr, بیعلامت دراز val);
+صحيح int_مقصد_string(صحيح عدد, حرف str[], بیعلامت صحيح afterpoint);
+فراغ _printf_(ثابت حرف *fmt, va_list ap);
+صحيح چاپ_کن(ثابت حرف* fmt, ...);
 
-#endif
+#پایان_اگر

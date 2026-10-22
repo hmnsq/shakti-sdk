@@ -26,159 +26,159 @@
  * @detail this is the header file for qspi_micron.c
  */
 
-#ifndef QSPI_H
-#define QSPI_H
+#اگر_تعریف_نشده QSPI_H
+#تعریف_کن QSPI_H
 
 //#define BOOT
-#ifndef BOOT
+#اگر_تعریف_نشده BOOT
 
-#include<stdlib.h>
-#endif
-#include<stdint.h>
+#ضمن<stdlib.h>
+#پایان_اگر
+#ضمن<stdint.h>
 
-#define DEF_TIMEOUT 60
-#define BASE_ADDR 0x00000100 
+#تعریف_کن DEF_TIMEOUT 60
+#تعریف_کن پایه_ADDR 0x00000100 
                                                                                 
 //Memory Maps                                                                                       
-#define CR      0x00000100                                                      
-#define DCR     0x00000104                                                      
-#define SR      0x00000108                                                      
-#define FCR     0x0000010c                                                      
-#define DLR     0x00000110                                                      
-#define CCR     0x00000114                                                      
-#define AR      0x00000118                                                      
-#define ABR     0x0000011c                                                      
-#define DR      0x00000120                                                      
-#define PSMKR   0x00000124                                                      
-#define PSMAR   0x00000128                                                      
-#define PIR     0x0000012c                                                      
-#define LPRT    0x00000130                                                      
-#define STARTMM 0x90000000                                                      
-#define ENDMM   0x9FFFFFFF     
+#تعریف_کن CR      0x00000100                                                      
+#تعریف_کن DCR     0x00000104                                                      
+#تعریف_کن SR      0x00000108                                                      
+#تعریف_کن FCR     0x0000010c                                                      
+#تعریف_کن DLR     0x00000110                                                      
+#تعریف_کن CCR     0x00000114                                                      
+#تعریف_کن AR      0x00000118                                                      
+#تعریف_کن ABR     0x0000011c                                                      
+#تعریف_کن DR      0x00000120                                                      
+#تعریف_کن PSMKR   0x00000124                                                      
+#تعریف_کن PSMAR   0x00000128                                                      
+#تعریف_کن PIR     0x0000012c                                                      
+#تعریف_کن LPRT    0x00000130                                                      
+#تعریف_کن STARTMM 0x90000000                                                      
+#تعریف_کن ENDMM   0x9FFFFFFF     
 
 //Defines for configuring the registers at ease
 //Bit vectors for all the parameters in the CR
-#define CR_PRESCALER(x)   (x<<24)
-#define CR_PMM            (1<<23)
-#define CR_APMS           (1<<22)
-#define CR_TOIE           (1<<20)
-#define CR_SMIE           (1<<19)
-#define CR_FTIE           (1<<18)
-#define CR_TCIE           (1<<17)
-#define CR_TEIE           (1<<16)
-#define CR_FTHRES(x)      (x<<8 )
-#define CR_FSEL           (1<<7 )
-#define CR_DFM            (1<<6 )
-#define CR_SSHIFT         (1<<4 )
-#define CR_TCEN           (1<<3 )
-#define CR_DMAEN          (1<<2 )
-#define CR_ABORT          (1<<1 )
-#define CR_EN             (1<<0 )
+#تعریف_کن CR_PRESCALER(x)   (x<<24)
+#تعریف_کن CR_PMM            (1<<23)
+#تعریف_کن CR_APMS           (1<<22)
+#تعریف_کن CR_TOIE           (1<<20)
+#تعریف_کن CR_SMIE           (1<<19)
+#تعریف_کن CR_FTIE           (1<<18)
+#تعریف_کن CR_TCIE           (1<<17)
+#تعریف_کن CR_TEIE           (1<<16)
+#تعریف_کن CR_FTHRES(x)      (x<<8 )
+#تعریف_کن CR_FSEL           (1<<7 )
+#تعریف_کن CR_DFM            (1<<6 )
+#تعریف_کن CR_SSHIFT         (1<<4 )
+#تعریف_کن CR_TCEN           (1<<3 )
+#تعریف_کن CR_DMAEN          (1<<2 )
+#تعریف_کن CR_ABORT          (1<<1 )
+#تعریف_کن CR_EN             (1<<0 )
 
 //Bit vectors for DCR 
-#define DCR_FSIZE(x)       (x<<16) 
-#define DCR_MODE_BYTE(x)   (x<<21)
-#define DCR_CSHT(x)        (x<<8 )
-#define DCR_CKMODE(x)        (x) 
+#تعریف_کن DCR_FSIZE(x)       (x<<16) 
+#تعریف_کن DCR_نما_BYTE(x)   (x<<21)
+#تعریف_کن DCR_CSHT(x)        (x<<8 )
+#تعریف_کن DCR_CKMODE(x)        (x) 
 
 //Bit vectors for status register
-#define SR_FLEVEL(x)      (x<<8) 
-#define SR_TOF            (1<<4)
-#define SR_SMF            (1<<3)
-#define SR_FTF            (1<<2)
-#define SR_TCF            (1<<1)
-#define SR_TEF            (1<<0)
+#تعریف_کن SR_FLEVEL(x)      (x<<8) 
+#تعریف_کن SR_TOF            (1<<4)
+#تعریف_کن SR_SMF            (1<<3)
+#تعریف_کن SR_FTF            (1<<2)
+#تعریف_کن SR_TCF            (1<<1)
+#تعریف_کن SR_TEF            (1<<0)
 
 //Bit vectors for flag clear register 
-#define FCR_CTOF (1<<4)
-#define FCR_CSMF (1<<3)
-#define FCR_CTCF (1<<1)
-#define FCR_CTEF (1<<0)
+#تعریف_کن FCR_CTOF (1<<4)
+#تعریف_کن FCR_CSMF (1<<3)
+#تعریف_کن FCR_CTCF (1<<1)
+#تعریف_کن FCR_CTEF (1<<0)
 
 //Bit vectors for DLR
-#define DL(x)  x  //Useless -- but for better readability of the code
+#تعریف_کن DL(x)  x  //Useless -- but for better readability of the code
 
 //Bit vectors for CCR
-#define CCR_DDRM                   (1<<31) 
-#define CCR_DHHC                   (1<<30)
-#define CCR_DUMMY_BIT              (1<<29) // Needed by Micron Flash Memories
-#define CCR_SIOO                   (1<<28)
-#define CCR_FMODE(x)               (x<<26)
-#define CCR_DMODE(x)               (x<<24)
-#define CCR_DUMMY_CONFIRMATION     (1<<23) // Needed by Micron Flash Memories
-#define CCR_DCYC(x)                (x<<18)
-#define CCR_ABSIZE(x)              (x<<16)
-#define CCR_ABMODE(x)              (x<<14)
-#define CCR_ADSIZE(x)              (x<<12)
-#define CCR_ADMODE(x)              (x<<10)
-#define CCR_IMODE(x)               (x<<8 )
-#define CCR_INSTRUCTION(x)         (x<<0 )
+#تعریف_کن CCR_DDRM                   (1<<31) 
+#تعریف_کن CCR_DHHC                   (1<<30)
+#تعریف_کن CCR_DUMMY_بیت              (1<<29) // Needed by Micron Flash Memories
+#تعریف_کن CCR_SIOO                   (1<<28)
+#تعریف_کن CCR_FMODE(x)               (x<<26)
+#تعریف_کن CCR_DMODE(x)               (x<<24)
+#تعریف_کن CCR_DUMMY_CONFIRMATION     (1<<23) // Needed by Micron Flash Memories
+#تعریف_کن CCR_DCYC(x)                (x<<18)
+#تعریف_کن CCR_ABSIZE(x)              (x<<16)
+#تعریف_کن CCR_ABMODE(x)              (x<<14)
+#تعریف_کن CCR_ADSIZE(x)              (x<<12)
+#تعریف_کن CCR_ADMODE(x)              (x<<10)
+#تعریف_کن CCR_IMODE(x)               (x<<8 )
+#تعریف_کن CCR_INSTRUCTION(x)         (x<<0 )
 
-#define CCR_FMODE_INDWR 0x0
-#define CCR_FMODE_INDRD 0x1
-#define CCR_FMODE_APOLL 0x2
-#define CCR_FMODE_MMAPD 0x3
+#تعریف_کن CCR_FMODE_INDWR 0x0
+#تعریف_کن CCR_FMODE_INDRD 0x1
+#تعریف_کن CCR_FMODE_APOLL 0x2
+#تعریف_کن CCR_FMODE_MMAPD 0x3
 
-#define NDATA  0x0
-#define SINGLE 0x1
-#define DOUBLE 0x2
-#define QUAD   0x3
+#تعریف_کن NDATA  0x0
+#تعریف_کن SINGLE 0x1
+#تعریف_کن DOUBLE 0x2
+#تعریف_کن QUAD   0x3
 
-#define BYTE      0x0
-#define TWOBYTE   0x1
-#define THREEBYTE 0x2
-#define FOURBYTE  0x3
+#تعریف_کن BYTE      0x0
+#تعریف_کن TWOBYTE   0x1
+#تعریف_کن THREEBYTE 0x2
+#تعریف_کن FOURBYTE  0x3
 
-extern int* cr      ;
- extern int* dcr    ;
- extern int* sr     ; 
- extern int* fcr    ;
- extern int* ccr    ;
- extern int* ar     ; 
- extern int* abr    ;
- extern int* dr     ; 
- extern int* dlr    ;
- extern int* psmkr  ;
- extern int* pir    ;
- extern int* lprt   ;
- extern int* startmm;
- extern int* endmm ;
+خارجي صحيح* cr      ;
+ خارجي صحيح* dcr    ;
+ خارجي صحيح* sr     ; 
+ خارجي صحيح* fcr    ;
+ خارجي صحيح* ccr    ;
+ خارجي صحيح* ar     ; 
+ خارجي صحيح* abr    ;
+ خارجي صحيح* dr     ; 
+ خارجي صحيح* dlr    ;
+ خارجي صحيح* psmkr  ;
+ خارجي صحيح* pir    ;
+ خارجي صحيح* lprt   ;
+ خارجي صحيح* startmm;
+ خارجي صحيح* endmm ;
 
-void set_qspi_shakti32(int* addr, const int val);
-void set_qspi_shakti16(int16_t* addr, int16_t val);
-void set_qspi_shakti8(char* addr, char val);
-int get_qspi_shakti( int* addr);
-int check_fail_bit(void);
-void reset_interrupt_flags(void);
-int micron_write_enable(int status);
-int flashSingleSPIDDRXip(int addr, int* dest_addr);
-int wait_for_tcf(int status);
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode);
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address);
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address);
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int flashReadDualSPI(int address, int data_length);
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int micron_disable_xip_volatile(int,int);
-int flashSingleSPIXip(int addr, int* dest_addr);
-int flashMemInit(void);
-int flashDualSPIXip(int addr, int* dest_addr);
-int flashDualSPIDDRXip(int addr, int* dest_addr);
-int flashWriteVolatileConfigReg(int value);
-int flashQuadSPIXip(int addr, int* dest_addr);
-int flashQuadSPIDDRXip(int addr, int* dest_addr);
-int eraseSector(int command, int address);
-int micron_volatile_write_enable(int status);
-int micron_enable_4byte_addressing(int status);
-int micron_configure_xip_volatile(int status, int value);
-int micron_read_configuration_register(int status, int value);
-int micron_read_id_cmd(int status, int value);
-int wait_for_wip(void);
-int flashIdentificationDevice(void);
-int flashReadFlagRegister(void);
-int flashWriteEnable(void);
-int flashEnable4ByteAddressingMode(void);
-int flash_Write_disable(void);
+فراغ مجموعه_qspi_shakti32(صحيح* addr, ثابت صحيح val);
+فراغ مجموعه_qspi_shakti16(int16_t* addr, int16_t val);
+فراغ مجموعه_qspi_shakti8(حرف* addr, حرف val);
+صحيح get_qspi_shakti( صحيح* addr);
+صحيح check_fail_بیت(فراغ);
+فراغ reset_وقفه_flags(فراغ);
+صحيح micron_write_enable(صحيح وضعیت_2);
+صحيح flashSingleSPIDDRXip(صحيح addr, صحيح* dest_addr);
+صحيح wait_for_tcf(صحيح وضعیت_2);
+فراغ qspi_init(صحيح fsize, صحيح csht, صحيح prescaler, صحيح enable_interrupts, صحيح fthreshold, صحيح ck_نما);
+صحيح صفحه_برنامه_Single_SPI(صحيح value1, صحيح value2, صحيح value3, صحيح value4, صحيح آدرس);
+صحيح صفحه_برنامه_Quad_SPI(صحيح value1, صحيح value2, صحيح value3, صحيح value4, صحيح آدرس);
+صحيح flashReadSingleSPI(صحيح dummy_چرخهها, صحيح read_آدرس, صحيح instruction, صحيح داده_واژگان, صحيح adsize);
+صحيح flashReadDualSPI(صحيح آدرس, صحيح داده_درازی);
+صحيح flashReadQuadSPI(صحيح dummy_چرخهها, صحيح read_آدرس, صحيح instruction, صحيح داده_واژگان, صحيح adsize);
+صحيح micron_disable_xip_volatile(صحيح,صحيح);
+صحيح flashSingleSPIXip(صحيح addr, صحيح* dest_addr);
+صحيح flashMemInit(فراغ);
+صحيح flashDualSPIXip(صحيح addr, صحيح* dest_addr);
+صحيح flashDualSPIDDRXip(صحيح addr, صحيح* dest_addr);
+صحيح flashWriteVolatileConfigReg(صحيح مقدار);
+صحيح flashQuadSPIXip(صحيح addr, صحيح* dest_addr);
+صحيح flashQuadSPIDDRXip(صحيح addr, صحيح* dest_addr);
+صحيح eraseSector(صحيح command, صحيح آدرس);
+صحيح micron_volatile_write_enable(صحيح وضعیت_2);
+صحيح micron_enable_4byte_addressing(صحيح وضعیت_2);
+صحيح micron_configure_xip_volatile(صحيح وضعیت_2, صحيح مقدار);
+صحيح micron_read_configuration_ثبات(صحيح وضعیت_2, صحيح مقدار);
+صحيح micron_read_id_cmd(صحيح وضعیت_2, صحيح مقدار);
+صحيح wait_for_wip(فراغ);
+صحيح flashIdentificationDevice(فراغ);
+صحيح flash_Read_Flag_ثبات(فراغ);
+صحيح flashWriteEnable(فراغ);
+صحيح flash_Enable4_Byte_Addressing_نما(فراغ);
+صحيح flash_Write_disable(فراغ);
 
 
-#endif
+#پایان_اگر

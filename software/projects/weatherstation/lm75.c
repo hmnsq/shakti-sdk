@@ -26,22 +26,22 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 @brief Contains the driver routines to configure and read lm75.
 @detail I2C based routines to configures and read the temperature from LM75.
 */
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ضمن <stdint.h>//Includes the definitions of standard input/output functions//
+#ضمن "i2c.h"
+#ضمن "log.h"
+#ضمن "uart.h"
 
-#define I2C i2c_instance[1]
+#تعریف_کن I2C i2c_instance[1]
 
-#define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave//
-#define LM75_TEMP_REG_OFFSET 0x00
-#define LM75_CONF_REG_OFFSET 0x01
-#define LM75_HYST_REG_OFFSET 0x02
-#define LM75_OFFSET_REG_OFFSET 0x03
+#تعریف_کن LM75_SLAVE_آدرس 0x90//Defines the Starting address of slave//
+#تعریف_کن LM75_موقت_REG_جابه_جایی 0x00
+#تعریف_کن LM75_CONF_REG_جابه_جایی 0x01
+#تعریف_کن LM75_HYST_REG_جابه_جایی 0x02
+#تعریف_کن LM75_جابه_جایی_REG_جابه_جایی 0x03
 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#تعریف_کن DELAY_مقدار 900
+#تعریف_کن PRESCALER_شمار 0x1F
+#تعریف_کن SCLK_شمار 0x91
 
 /** @fn int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
  * @brief Read the lm75 register.
@@ -52,36 +52,36 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * @param delay
  * @return  Read Status (Zero on Success).
  */
-int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
+صحيح read_lm75_ثبات(i2c_struct * i2c_instance, بیعلامت صحيح reg_جابه_جایی, بیعلامت صحيح *read_موقت, بیعلامت دراز delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	بیعلامت حرف read_buf[4] = {'\0'};
+	صحيح i = 0, j = 0,  k = 0, وضعیت_2=0;
+	بیعلامت حرف موقت = 0;
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_آدرس(i2c_instance, LM75_SLAVE_آدرس, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset , delay);
+	i2c_write_داده(i2c_instance, reg_جابه_جایی , delay);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_آدرس(i2c_instance, LM75_SLAVE_آدرس, I2C_READ, 800);
 
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_داده(i2c_instance, &موقت, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	i2c_read_data(i2c_instance, &read_buf[1], delay);
+	i2c_read_داده(i2c_instance, &read_buf[1], delay);
 	i2c_instance->control = I2C_NACK;
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	i2c_read_data(i2c_instance, &read_buf[0], delay);
+	i2c_read_داده(i2c_instance, &read_buf[0], delay);
 	i2c_instance->control = I2C_STOP;
-	*readTemp = (read_buf[1] << 1) | (read_buf[0] >> 7);
+	*read_موقت = (read_buf[1] << 1) | (read_buf[0] >> 7);
 
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
@@ -93,19 +93,19 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
  * @param delay
  * @return Write Status (Zero on Success)
  */
-int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+صحيح write_lm75_ثبات(i2c_struct * i2c_instance, بیعلامت صحيح reg_جابه_جایی, بیعلامت صحيح write_مقدار, بیعلامت دراز delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset /*LM75_TEMP_REG_OFFSET */, delay);
-	i2c_write_data(i2c_instance,  ( (write_value >> 1) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
-	printf("\n Write Value[0]: %02x", (write_value >> 1) & 0xff);
-	i2c_write_data(i2c_instance,  ( ( (write_value & 0x01) << 7) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
-	printf("\n Write Value[1]: %02x", ( ( (write_value & 0x01) << 7) & 0xff));
+	صحيح i = 0, j = 0,  k = 0, وضعیت_2=0;
+	بیعلامت صحيح موقت = 0;
+	i2c_send_slave_آدرس(i2c_instance, LM75_SLAVE_آدرس, I2C_WRITE, delay);
+	i2c_write_داده(i2c_instance, reg_جابه_جایی /*LM75_TEMP_REG_OFFSET */, delay);
+	i2c_write_داده(i2c_instance,  ( (write_مقدار >> 1) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+	چاپ_کن("\n Write Value[0]: %02x", (write_مقدار >> 1) & 0xff);
+	i2c_write_داده(i2c_instance,  ( ( (write_مقدار & 0x01) << 7) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+	چاپ_کن("\n Write Value[1]: %02x", ( ( (write_مقدار & 0x01) << 7) & 0xff));
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int main()
@@ -114,73 +114,73 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
  * calculates the actual temperature value and prints the same.
  * @return Zero
  */
-int temperature_value()
+صحيح temperature_مقدار()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
+	صحيح timeout;
+	بیعلامت صحيح موقت_Read_مقدار = 0;
+	بیعلامت دراز delay = 1000;
     
 	log_debug("\n\tI2C: LM75 Temperature Sensor I2C read\n");
     i2c_init();
 	//Initialises I2C Controller
-		if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+		إذا(config_i2c(I2C, PRESCALER_شمار,SCLK_شمار))
 		{
 				log_error("\tSomething Wrong In Initialization\n");
-				return -1;
+				أرجع -1;
 		}
-	else
+	وإلا
 				log_info("\tIntilization Happened Fine\n");
-#ifdef LM75_HYST_CHECK
-	write_lm75_register(I2C, LM75_HYST_REG_OFFSET, 0x30, delay);
-		if(0 == read_lm75_register(I2C, LM75_HYST_REG_OFFSET, &tempReadValue, delay))
+#اگر_تعریف_شده LM75_HYST_CHECK
+	write_lm75_ثبات(I2C, LM75_HYST_REG_جابه_جایی, 0x30, delay);
+		إذا(0 == read_lm75_ثبات(I2C, LM75_HYST_REG_جابه_جایی, &موقت_Read_مقدار, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
 //				tempReadValue = ( (~tempReadValue) + 1 );
-				log_info("\n\t Hyst Reg Value:=%u",tempReadValue);
+				log_info("\n\t Hyst Reg Value:=%u",موقت_Read_مقدار);
 		}
-		else
+		وإلا
 		{
 	//Display the error
 			log_error("\nHyst Reg Value failed.");
 		}
-#endif
-#ifdef LM75_OFFSET_CHECK
-	write_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, 0x35, delay);
-	if(0 == read_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, &tempReadValue, delay))
+#پایان_اگر
+#اگر_تعریف_شده LM75_جابه_جایی_CHECK
+	write_lm75_ثبات(I2C, LM75_جابه_جایی_REG_جابه_جایی, 0x35, delay);
+	إذا(0 == read_lm75_ثبات(I2C, LM75_جابه_جایی_REG_جابه_جایی, &موقت_Read_مقدار, delay))
 	{
 		//Display Temperature value
-			log_info("\n\t Offset Reg Value:=%u",tempReadValue);
+			log_info("\n\t Offset Reg Value:=%u",موقت_Read_مقدار);
 	}
-	else
+	وإلا
 	{
 //Display the error
 		log_error("\nOffset Reg Value failed.");
 	}
-#endif
+#پایان_اگر
 
-		if(0 == read_lm75_register(I2C, LM75_TEMP_REG_OFFSET, &tempReadValue, delay))
+		إذا(0 == read_lm75_ثبات(I2C, LM75_موقت_REG_جابه_جایی, &موقت_Read_مقدار, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
-			if(tempReadValue & 0x100) {
-				tempReadValue = ( (~tempReadValue) + 1 ) >> 1;
-				log_info("\n\t Current Temperature:=-%u°C",tempReadValue);
+			إذا(موقت_Read_مقدار & 0x100) {
+				موقت_Read_مقدار = ( (~موقت_Read_مقدار) + 1 ) >> 1;
+				log_info("\n\t Current Temperature:=-%u°C",موقت_Read_مقدار);
 			}
-			else {
-				tempReadValue = tempReadValue >> 1;
-				log_info("\n\t Current Temperature:=+%u°C",tempReadValue);
+			وإلا {
+				موقت_Read_مقدار = موقت_Read_مقدار >> 1;
+				log_info("\n\t Current Temperature:=+%u°C",موقت_Read_مقدار);
 			 }
-			 return tempReadValue;
+			 أرجع موقت_Read_مقدار;
 		}
-		else
+		وإلا
 		{
 	//Display the error
 			log_error("\nTemperature read failed.");
-			 return 999;
+			 أرجع 999;
 		}
 		delay_loop(1000, 1000);
 
 
-	return 0;
+	أرجع 0;
 }

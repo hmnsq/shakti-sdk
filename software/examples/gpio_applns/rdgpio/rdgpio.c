@@ -25,10 +25,10 @@
 @brief Performs the reading operation with the help of gpio pins.
 */
 
-#include <stdio.h>
-#include "gpio.h"
-#include "utils.h"
-#include "platform.h"
+#ضمن <stdio.h>
+#ضمن "gpio.h"
+#ضمن "utils.h"
+#ضمن "platform.h"
 
 /** @fn void read_data()
  * @brief set the direction reg to input and start reading from the gpio data reg
@@ -36,14 +36,14 @@
  * pins. start reading the gpio pin value from data reg. delay for some time and
  * read data again 
  */
-void read_data()
+فراغ read_داده_2()
 {
-	unsigned long data = 0;
-	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
+	بیعلامت دراز داده_2 = 0;
+	write_کلمه(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
 
-	while (1) {
-		data =read_word(GPIO_DATA_REG);//copi GPIO_DATA_REG content
-		log_info("\n Read Data is :%x", data);
+	طالما (1) {
+		داده_2 =read_کلمه(GPIO_داده_REG);//copi GPIO_DATA_REG content
+		log_info("\n Read Data is :%x", داده_2);
 		delay_loop(3000, 5000);
 	}
 }
@@ -51,9 +51,9 @@ void read_data()
 /** @fn void main()
  * @brief initiate the reading from gpio
  */
-void main()
+فراغ اصلی()
 {
-    read_data();
+    read_داده_2();
 }
 
 

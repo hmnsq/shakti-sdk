@@ -26,22 +26,22 @@
 @brief Contains the driver routines to configure and read DS3231.
 @detail I2C based routines to configures and read the RTC information from DS3231.
 */
-#include <string.h>
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#شامل <string.h>
+#شامل <stdint.h>//Includes the definitions of standard input/output functions//
+#شامل "i2c.h"
+#شامل "log.h"
+#شامل "uart.h"
 
-#define UPDATE_TIME 1
-#define I2C i2c_instance[1]
-#define DS3231_SLAVE_ADDRESS 0XD0
-#define DS3231_REG_OFFSET 0
-#define DS3231_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#تعریف_کرو UPDATE_وقت 1
+#تعریف_کرو I2C i2c_instance[1]
+#تعریف_کرو DS3231_SLAVE_پتہ 0XD0
+#تعریف_کرو DS3231_REG_انحراف 0
+#تعریف_کرو DS3231_DEC_مقصد_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
+#تعریف_کرو DELAY_قدر 900
+#تعریف_کرو PRESCALER_گنتی 0x1F
+#تعریف_کرو SCLK_گنتی 0x91
 
-char sending_data[50];
+حرف sending_ڈیٹا[50];
 
 /** @fn int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the date and time field of DS3231 registers.
@@ -54,39 +54,39 @@ char sending_data[50];
  * @param delay
  * @return read status (Zero of success)
  */
-int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+صحیح read_ds3231_registers(i2c_struct * i2c_instance, غیرعلامتی صحیح reg_انحراف, غیرعلامتی صحیح *read_عارضی, غیرعلامتی حرف لمبائی_2, غیرعلامتی طویل delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	غیرعلامتی حرف read_buf[4] = {'\0'};
+	صحیح i = 0, j = 0,  k = 0, حالت_3=0;
+	غیرعلامتی حرف عارضی = 0;
 
 //Writes the slave address for write
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, 800);
+		i2c_send_slave_پتہ(i2c_instance, DS3231_SLAVE_پتہ, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-		i2c_write_data(i2c_instance, reg_offset, delay);
+		i2c_write_ڈیٹا(i2c_instance, reg_انحراف, delay);
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_READ, 800);
+		i2c_send_slave_پتہ(i2c_instance, DS3231_SLAVE_پتہ, I2C_READ, 800);
 
 
 /* Make a dummy read as per spec of the I2C controller */
-		i2c_read_data(i2c_instance, &temp, delay);
+		i2c_read_ڈیٹا(i2c_instance, &عارضی, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-		for(i = 0; i < length; i++)
+		برائے(i = 0; i < لمبائی_2; i++)
 		{
-			i2c_read_data(i2c_instance, &temp, delay);
-			*readTemp = temp;
+			i2c_read_ڈیٹا(i2c_instance, &عارضی, delay);
+			*read_عارضی = عارضی;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
-			if( i == (length - 2) )
+			اگر( i == (لمبائی_2 - 2) )
 				i2c_instance->control = I2C_NACK;
-			*readTemp++;
+			*read_عارضی++;
 		}
 		i2c_instance->control = I2C_STOP;
-		return 0;
+		واپس 0;
 }
 
 /** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -100,22 +100,22 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
  * @param delay
  * @return write status (Zero on SUCCESS.)
  */
-int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+صحیح write_ds3231_registers(i2c_struct * i2c_instance, غیرعلامتی صحیح reg_انحراف, غیرعلامتی صحیح *write_قدر, غیرعلامتی حرف لمبائی_2, غیرعلامتی طویل delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-		i2c_send_slave_address(i2c_instance, DS3231_SLAVE_ADDRESS, I2C_WRITE, delay);
-		i2c_write_data(i2c_instance, reg_offset, delay);
-		for(i = 0; i < length; i++)
+	صحیح i = 0, j = 0,  k = 0, حالت_3=0;
+	غیرعلامتی صحیح عارضی = 0;
+		i2c_send_slave_پتہ(i2c_instance, DS3231_SLAVE_پتہ, I2C_WRITE, delay);
+		i2c_write_ڈیٹا(i2c_instance, reg_انحراف, delay);
+		برائے(i = 0; i < لمبائی_2; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_ڈیٹا(i2c_instance,  ( *write_قدر++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 		i2c_instance->control = I2C_STOP;
 //		delay_loop(800, 800);
 
 
-			return 0;
+			واپس 0;
 }
 
 /** @fn int dayofweek(int d, int m, int y)
@@ -126,12 +126,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param y
  * @return Day of the week (0 - 6)
  */
-int dayofweek(int d, int m, int y)
+صحیح dayofweek(صحیح d, صحیح m, صحیح y)
 {
-    static int t[] = { 0, 3, 2, 5, 0, 3,
+    ساکن صحیح t[] = { 0, 3, 2, 5, 0, 3,
                        5, 1, 4, 6, 2, 4 };
     y -= m < 3;
-    return ( y + y / 4 - y / 100 +
+    واپس ( y + y / 4 - y / 100 +
              y / 400 + t[m - 1] + d) % 7;
 }
 
@@ -141,56 +141,56 @@ int dayofweek(int d, int m, int y)
  * @param decimal
  * @return Calculated hex value. 
  */
-unsigned int ds3231_decimal_to_hex(unsigned int decimal)
+غیرعلامتی صحیح ds3231_decimal_مقصد_hex(غیرعلامتی صحیح decimal)
 {
-	return( ((decimal / 10 ) << 4) | (decimal % 10) );
+	واپس( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
 /** @fn void intermediate()
  * @brief Do setup for DS3231
  * @details Configures the DS3231 
  */
-void intermediate(void)
+خالی intermediate(خالی)
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
-	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-	unsigned char length;
-	unsigned int hour, minute, second, date, month, year;
+	صحیح timeout;
+	غیرعلامتی صحیح عارضی_Read_قدر = 0;
+	غیرعلامتی طویل delay = 1000;
+	غیرعلامتی صحیح write_buf[7] = {0x00}, read_buf[7] = {0x00};
+	غیرعلامتی حرف لمبائی_2;
+	غیرعلامتی صحیح hour, minute, دوسرا, date, month, year;
 
 	hour = 11;
 	minute = 46;
-	second = 30;
+	دوسرا = 30;
 
 	date = 25;
 	month = 01;
 	year = 2020;
 
-	write_buf[0] = DS3231_DEC_TO_HEX(second); //Seconds
-	write_buf[1] = DS3231_DEC_TO_HEX(minute); //Minutes
-	write_buf[2] = DS3231_DEC_TO_HEX(hour); //Hours
+	write_buf[0] = DS3231_DEC_مقصد_HEX(دوسرا); //Seconds
+	write_buf[1] = DS3231_DEC_مقصد_HEX(minute); //Minutes
+	write_buf[2] = DS3231_DEC_مقصد_HEX(hour); //Hours
 
-	write_buf[4] = DS3231_DEC_TO_HEX(date); //Seconds
-	write_buf[5] = DS3231_DEC_TO_HEX(month); //Minutes
-	write_buf[6] = DS3231_DEC_TO_HEX( (year % 100) ); //Hours
+	write_buf[4] = DS3231_DEC_مقصد_HEX(date); //Seconds
+	write_buf[5] = DS3231_DEC_مقصد_HEX(month); //Minutes
+	write_buf[6] = DS3231_DEC_مقصد_HEX( (year % 100) ); //Hours
 
 	write_buf[3] = dayofweek(date, month, year) + 1;
-	length = 7;
+	لمبائی_2 = 7;
 
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	اگر(config_i2c(I2C, PRESCALER_گنتی, SCLK_گنتی))
 	{
 		log_error("\tSomething Wrong In Initialization\n");
-		return -1;
+		واپس -1;
 	}
-	else
+	ورنہ
 
-#ifdef UPDATE_TIME
-	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
-#endif
+#اگر_تعریف_شدہ UPDATE_وقت
+	write_ds3231_registers(I2C, 0x00, &write_buf[0], لمبائی_2, delay);
+#اگر_ختم
 }
 
 
@@ -198,19 +198,19 @@ void intermediate(void)
  * @brief Configures the DS3231
  * @details Reads Date and time information and returns the in string
  */
-const char* values()
+ثابت حرف* اقدار()
 {
-	unsigned int read_buf[7] = {0x00};
+	غیرعلامتی صحیح read_buf[7] = {0x00};
 
-	read_ds3231_registers(I2C, DS3231_REG_OFFSET, &read_buf[0], 7, 800);
+	read_ds3231_registers(I2C, DS3231_REG_انحراف, &read_buf[0], 7, 800);
 	
 	// log_info("\n Date: %x-%x-20%x Day: ", read_buf[4], read_buf[5], read_buf[6]);
 	// log_info("\n Time: %x:%x:%x", read_buf[2], read_buf[1], read_buf[0]);
 
-	sprintf(sending_data, "AT+SEND=0,50, Date: %x-%x-20%x  Time: %x:%x:%x", read_buf[4], read_buf[5], read_buf[6], read_buf[2], read_buf[1], read_buf[0]);
+	sprintf(sending_ڈیٹا, "AT+SEND=0,50, Date: %x-%x-20%x  Time: %x:%x:%x", read_buf[4], read_buf[5], read_buf[6], read_buf[2], read_buf[1], read_buf[0]);
 	// delay_loop(1500, 1500);		
 
-	return sending_data;
+	واپس sending_ڈیٹا;
 
 }
 

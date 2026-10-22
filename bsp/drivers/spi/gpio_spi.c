@@ -26,9 +26,9 @@
 @detail The GPIO_SPI module driver supports SPI driver routines using GPIO lines as SPI lines.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "gpio_spi.h"
+#شامل "platform.h"
+#شامل "gpio.h"
+#شامل "gpio_spi.h"
 
 /** @fn static void writebyte(unsigned char writeData, unsigned char delay)
  * @brief Writes a byte
@@ -37,29 +37,29 @@
  * @param unsigned char delay
  */
 // at starting  edge sending
-static void writebyte(unsigned char writeData, unsigned char delay)
+ساکن خالی writebyte(غیرعلامتی حرف write_ڈیٹا, غیرعلامتی حرف delay)
 {
-	unsigned char j = 0, k;
-	unsigned long readData = 0;
+	غیرعلامتی حرف j = 0, k;
+	غیرعلامتی طویل read_ڈیٹا = 0;
 	//readData = read_word(GPIO_DATA_REG);
 
     // Before initiating communication SS -> low
-       write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SS)) );
-	while (j < 8) {
-		k = writeData;
+       write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) & ~(SPI_SS)) );
+	جب (j < 8) {
+		k = write_ڈیٹا;
 		k = ( k << j ) & 0x80;
 
         // lowering sck --> FALLING EDGE 
         //write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SCLK)) );
         // increasing sck --> Rising EDGE
-        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
+        write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) | SPI_SCLK) );
 
-        if (k == 0) {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_MOSI)) );
+        اگر (k == 0) {
+			write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) & ~(SPI_MOSI)) );
 			delay_loop(delay, delay);
 		}
-		else {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_MOSI) );
+		ورنہ {
+			write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) | SPI_MOSI) );
 			delay_loop(delay, delay);
 		}
 
@@ -67,12 +67,12 @@ static void writebyte(unsigned char writeData, unsigned char delay)
         // making sck up 
 		//write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK));
         // sck down
-        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SCLK)) );
+        write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) & ~(SPI_SCLK)) );
         //delay_loop(delay, delay);
 		++j;
 	}
         // MAKE SS PIN high after transfer of a byte
-        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) |SPI_SS ));
+        write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) |SPI_SS ));
 }
 
 /** @fn unsigned char readbyte(unsigned char delay)
@@ -82,34 +82,34 @@ static void writebyte(unsigned char writeData, unsigned char delay)
  * @return Read value
  */
 //reading at rising edge reading 
-unsigned char readbyte(unsigned char delay)
+غیرعلامتی حرف readbyte(غیرعلامتی حرف delay)
 {
-	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
-	unsigned char readData = 0;
-        unsigned long readGpioData = 0;
-	readData = read_word(GPIO_DATA_REG);
-	while (j < 8) {
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
+	غیرعلامتی حرف j = 0, i = 0;
+	غیرعلامتی حرف ثنائی_ہندسہ_قدر;
+	غیرعلامتی حرف read_ڈیٹا = 0;
+        غیرعلامتی طویل read_Gpio_ڈیٹا = 0;
+	read_ڈیٹا = read_لفظ(GPIO_ڈیٹا_REG);
+	جب (j < 8) {
+		write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) | SPI_SCLK) );
 		delay_loop(delay, delay);
 
-		readGpioData = read_word(GPIO_DATA_REG)  & SPI_MISO;
+		read_Gpio_ڈیٹا = read_لفظ(GPIO_ڈیٹا_REG)  & SPI_MISO;
 
-        if (readGpioData != 0)
-			bitValue = 1;
-		else
-			bitValue = 0;
+        اگر (read_Gpio_ڈیٹا != 0)
+			ثنائی_ہندسہ_قدر = 1;
+		ورنہ
+			ثنائی_ہندسہ_قدر = 0;
 	    
-        readData = readData << 1;
-		readData = readData | bitValue;
+        read_ڈیٹا = read_ڈیٹا << 1;
+		read_ڈیٹا = read_ڈیٹا | ثنائی_ہندسہ_قدر;
 		
         delay_loop(delay, delay);
 
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SCLK)));
+		write_لفظ(GPIO_ڈیٹا_REG, (read_لفظ(GPIO_ڈیٹا_REG) & ~(SPI_SCLK)));
 		delay_loop(delay, delay);
 		++j;
 	}
-	return readData;
+	واپس read_ڈیٹا;
 }
 /*
   1.) MISO_pin  --> 1st GPIO //0 
@@ -122,18 +122,18 @@ unsigned char readbyte(unsigned char delay)
  * @brief Configures the GPIO pins for SPI functionality
  * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
  */
-int config()
+صحیح config()
 {
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
-    unsigned char writeData = (int) 'a';
-    unsigned char delay = 10;
-    for (;;)
+    write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_لفظ(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
+    write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_لفظ(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
+    write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_لفظ(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
+    write_لفظ(GPIO_DIRECTION_CNTRL_REG, (read_لفظ(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
+    غیرعلامتی حرف write_ڈیٹا = (صحیح) 'a';
+    غیرعلامتی حرف delay = 10;
+    برائے (;;)
     {
-    writebyte(writeData,delay);
-    printf("%d\n",writeData);
+    writebyte(write_ڈیٹا,delay);
+    لکھو("%d\n",write_ڈیٹا);
     delay_loop(100,120);
     }
 }

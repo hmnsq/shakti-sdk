@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+صحیح مین()
 {
-printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+لکھو("\nTest Running");
+صحیح *b,*c,*d;
+صحیح i=0;صحیح n;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+لکھو("\n size of array %d %x",n,&n);
+b=حافظہ_دو(n*حجم(صحیح))	;
+لکھو("\n B's address %x %x",b,&b);
+برائے(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+برائے(i=0;i<n;i++)
 {
-printf("\n b[%d]'s address is : %x",i,&b[i]);
-printf("\n b[%d]'s value is : %d",i,b[i]);
+لکھو("\n b[%d]'s address is : %x",i,&b[i]);
+لکھو("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
-printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+آزاد(b);
+لکھو("\nArray B is freed");
+لکھو("\nb=%x",b);
+لکھو("\n size of array %d",n);
+c=حافظہ_دو(n*حجم(صحیح))	;
+لکھو("\n C's address %x",c);
+برائے(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+برائے(i=0;i<n;i++)
 {
-printf("\n c[%d]'s address is : %x",i,&c[i]);
-printf("\n c[%d]'s value is : %d",i,c[i]);
+لکھو("\n c[%d]'s address is : %x",i,&c[i]);
+لکھو("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
-printf("\nc=%x",c);
-int x;
+آزاد(c);
+لکھو("\nc=%x",c);
+صحیح x;
 x=30;
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+لکھو("\n\n\nx address is %x",&x);
+d=حافظہ_دو(x*حجم(صحیح));
+لکھو("\n D's address %x",d);
+برائے(i=0;i<x;i++)
 {
-printf("\nSetting value %d , %x",i+1,&d[i]); 
+لکھو("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+برائے(i=0;i<x;i++)
 {
-printf("\n d[%d]'s address is : %x",i,&d[i]);
-printf("\n d[%d]'s value is : %d",i,d[i]);
+لکھو("\n d[%d]'s address is : %x",i,&d[i]);
+لکھو("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
-printf("\nd=%x",d);
+آزاد(d);
+لکھو("\nd=%x",d);
 
-return 0;
+واپس 0;
 }
 

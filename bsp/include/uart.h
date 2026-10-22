@@ -26,108 +26,108 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail this is the header file for uart.c   
  */
 
-#ifndef UART_H
-#define UART_H
-#include <stdint.h>
-#include "platform.h"
+#اگر_غیر_تعریف_شدہ UART_H
+#تعریف_کرو UART_H
+#شامل <stdint.h>
+#شامل "platform.h"
 
-#define USE_INTERRUPT 1 //Uncomment or add this line when interrupts are unused
-#define USE_RX_THRESHOLD 1 //uncomment or add this line when rx_threshold is required
+#تعریف_کرو USE_مداخلت 1 //Uncomment or add this line when interrupts are unused
+#تعریف_کرو USE_RX_حد 1 //uncomment or add this line when rx_threshold is required
 
 
 /* Struct to access UART registers as 32 bit registers */
-typedef struct
+قسمتعریف ساخت
 {
-	unsigned short baud;	 /*! Baud rate configuration Register -- 16 bits*/
-	unsigned short reserv0;	 /*! reserved */
-	unsigned int  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
-	unsigned int  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
-	unsigned char  status;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
-	unsigned char  reserv1;	 /*! reserved */
-	unsigned short  reserv2; /*! reserved */
-	unsigned short delay;    /*! Delays the transmit with specified clock - 16bits*/
-	unsigned short reserv3;  /*! reserved */
-	unsigned short control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
-	unsigned short reserv5;  /*! reserved */
-	unsigned char ien;	     /*! Enables the required interrupts - 8 bits*/
-	unsigned char reserv6;   /*! reserved */
-	unsigned short reserv7;  /*! reserved */
-	unsigned char  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
-	unsigned char reserv8;   /*! reserved */
-	unsigned short reserv9;  /*! reserved */
-#ifdef USE_RX_THRESHOLD /*! This is to be used only when support is there. */
-	unsigned char rx_threshold;	/*! RX FIFO size configuration register - 8 bits*/
-	unsigned char reserv10;    /*! reserved */ 
-	unsigned short reserv11;    /*! reserved */
-#endif	
+	غیرعلامتی مختصر baud;	 /*! Baud rate configuration Register -- 16 bits*/
+	غیرعلامتی مختصر reserv0;	 /*! reserved */
+	غیرعلامتی صحیح  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
+	غیرعلامتی صحیح  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
+	غیرعلامتی حرف  حالت_3;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
+	غیرعلامتی حرف  reserv1;	 /*! reserved */
+	غیرعلامتی مختصر  reserv2; /*! reserved */
+	غیرعلامتی مختصر delay;    /*! Delays the transmit with specified clock - 16bits*/
+	غیرعلامتی مختصر reserv3;  /*! reserved */
+	غیرعلامتی مختصر control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
+	غیرعلامتی مختصر reserv5;  /*! reserved */
+	غیرعلامتی حرف ien;	     /*! Enables the required interrupts - 8 bits*/
+	غیرعلامتی حرف reserv6;   /*! reserved */
+	غیرعلامتی مختصر reserv7;  /*! reserved */
+	غیرعلامتی حرف  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
+	غیرعلامتی حرف reserv8;   /*! reserved */
+	غیرعلامتی مختصر reserv9;  /*! reserved */
+#اگر_تعریف_شدہ USE_RX_حد /*! This is to be used only when support is there. */
+	غیرعلامتی حرف rx_حد;	/*! RX FIFO size configuration register - 8 bits*/
+	غیرعلامتی حرف reserv10;    /*! reserved */ 
+	غیرعلامتی مختصر reserv11;    /*! reserved */
+#اگر_ختم	
 } uart_struct;
 
-#define STS_RX_THRESHOLD    0x1 << 8
-#define BREAK_ERROR	    1 << 7
-#define FRAME_ERROR	    1 << 6
-#define OVERRUN        	    1 << 5
-#define PARITY_ERROR        1 << 4
-#define STS_RX_FULL 	    1 << 3
-#define STS_RX_NOT_EMPTY    1 << 2
-#define STS_TX_FULL 	    1 << 1
-#define STS_TX_EMPTY 	    1 << 0
+#تعریف_کرو STS_RX_حد    0x1 << 8
+#تعریف_کرو BREAK_ERROR	    1 << 7
+#تعریف_کرو چوکھٹا_ERROR	    1 << 6
+#تعریف_کرو OVERRUN        	    1 << 5
+#تعریف_کرو PARITY_ERROR        1 << 4
+#تعریف_کرو STS_RX_بھرا 	    1 << 3
+#تعریف_کرو STS_RX_NOT_خالی_خانے    1 << 2
+#تعریف_کرو STS_TX_بھرا 	    1 << 1
+#تعریف_کرو STS_TX_خالی_خانے 	    1 << 0
 
 /*! UART Interrupt Enable bits description */
-#define ENABLE_RX_THRESHOLD	1 << 8
-#define ENABLE_BREAK_ERROR      1 << 7
-#define ENABLE_FRAME_ERROR      1 << 6
-#define ENABLE_OVERRUN          1 << 5
-#define ENABLE_PARITY_ERROR     1 << 4
-#define ENABLE_RX_FULL 		1 << 3
-#define ENABLE_RX_NOT_EMPTY 	1 << 2
-#define ENABLE_TX_FULL 		1 << 1
-#define ENABLE_TX_EMPTY 	1 << 0
-#define UARTX_BUFFER_SIZE       10000
+#تعریف_کرو ENABLE_RX_حد	1 << 8
+#تعریف_کرو ENABLE_BREAK_ERROR      1 << 7
+#تعریف_کرو ENABLE_چوکھٹا_ERROR      1 << 6
+#تعریف_کرو ENABLE_OVERRUN          1 << 5
+#تعریف_کرو ENABLE_PARITY_ERROR     1 << 4
+#تعریف_کرو ENABLE_RX_بھرا 		1 << 3
+#تعریف_کرو ENABLE_RX_NOT_خالی_خانے 	1 << 2
+#تعریف_کرو ENABLE_TX_بھرا 		1 << 1
+#تعریف_کرو ENABLE_TX_خالی_خانے 	1 << 0
+#تعریف_کرو UARTX_بفر_سائز       10000
 
 /* UART control register */
-#define STOP_BITS(x) ( (x & 3) << 1) /*! 00 - 1 stop bits, 01 - 1.5 stop bits; 10 - 2 stop bits; 11 unused */
-#define PARITY(x) ( (x & 3)  << 3 ) /*! 00 --- No parity; 01 -Odd Parity; 10 - Even Parity;  11 - Unused */
-#define UART_TX_RX_LEN(x)       ( (x & 0x1F) << 5) /*! Maximum length 32 bits */
+#تعریف_کرو STOP_بٹ(x) ( (x & 3) << 1) /*! 00 - 1 stop bits, 01 - 1.5 stop bits; 10 - 2 stop bits; 11 unused */
+#تعریف_کرو PARITY(x) ( (x & 3)  << 3 ) /*! 00 --- No parity; 01 -Odd Parity; 10 - Even Parity;  11 - Unused */
+#تعریف_کرو UART_TX_RX_LEN(x)       ( (x & 0x1F) << 5) /*! Maximum length 32 bits */
 
-extern uart_struct *uart_instance[MAX_UART_COUNT];
-extern unsigned char uart0_complete;
-extern unsigned char uart1_complete;
-extern unsigned char uart2_complete;
-extern unsigned int uart0_tx_isr_count ;
-extern unsigned int uart0_rcv_isr_count ;
-extern unsigned int uart1_tx_isr_count ;
-extern unsigned int uart1_rcv_isr_count ;
-extern unsigned int uart2_tx_isr_count ;
-extern unsigned int uart2_rcv_isr_count ;
+خارجی uart_struct *uart_instance[MAX_UART_گنتی];
+خارجی غیرعلامتی حرف uart0_complete;
+خارجی غیرعلامتی حرف uart1_complete;
+خارجی غیرعلامتی حرف uart2_complete;
+خارجی غیرعلامتی صحیح uart0_tx_isr_گنتی ;
+خارجی غیرعلامتی صحیح uart0_rcv_isr_گنتی ;
+خارجی غیرعلامتی صحیح uart1_tx_isr_گنتی ;
+خارجی غیرعلامتی صحیح uart1_rcv_isr_گنتی ;
+خارجی غیرعلامتی صحیح uart2_tx_isr_گنتی ;
+خارجی غیرعلامتی صحیح uart2_rcv_isr_گنتی ;
 
-#ifdef USE_INTERRUPT
-extern unsigned char u0_rcv_char[UARTX_BUFFER_SIZE];
-extern unsigned char u1_rcv_char[UARTX_BUFFER_SIZE];
-extern unsigned char u2_rcv_char[UARTX_BUFFER_SIZE];
-#endif
+#اگر_تعریف_شدہ USE_مداخلت
+خارجی غیرعلامتی حرف u0_rcv_char[UARTX_بفر_سائز];
+خارجی غیرعلامتی حرف u1_rcv_char[UARTX_بفر_سائز];
+خارجی غیرعلامتی حرف u2_rcv_char[UARTX_بفر_سائز];
+#اگر_ختم
 
-void uart_init(void);
-void set_baud_rate(uart_struct * uart_instance, unsigned int baudrate);
-void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt);
-void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold);
+خالی uart_init(خالی);
+خالی سیٹ_baud_شرح(uart_struct * uart_instance, غیرعلامتی صحیح baudrate);
+خالی enable_uart_interrupts(uart_struct * uart_instance, غیرعلامتی حرف مداخلت);
+خالی سیٹ_uart_rx_حد(uart_struct * uart_instance, غیرعلامتی حرف rxthreshold);
 uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character);
 uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string);
-uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character);
-uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string) ;
-void flush_uart(uart_struct * instance);
+uint8_t read_uart_character(uart_struct * uart_instance, حرف * prn_character);
+uint8_t read_uart_string(uart_struct * uart_instance, حرف * ptr_string) ;
+خالی flush_uart(uart_struct * instance);
 
-#ifdef USE_INTERRUPT
-unsigned char uart0_isr(void);
-unsigned char uart1_isr(void);
-unsigned char uart2_isr(void);
-#endif
+#اگر_تعریف_شدہ USE_مداخلت
+غیرعلامتی حرف uart0_isr(خالی);
+غیرعلامتی حرف uart1_isr(خالی);
+غیرعلامتی حرف uart2_isr(خالی);
+#اگر_ختم
 
-int is_empty(void);
+صحیح is_خالی_خانے(خالی);
 
-#undef putchar
-int putchar(int ch);
+#تعریف_منسوخ حرف_لکھو
+صحیح حرف_لکھو(صحیح ch);
 
-#undef getchar
-int getchar(void);
+#تعریف_منسوخ getchar
+صحیح getchar(خالی);
 
-#endif
+#اگر_ختم

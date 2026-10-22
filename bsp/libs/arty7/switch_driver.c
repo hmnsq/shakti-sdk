@@ -26,12 +26,12 @@
 @detail Configures Switches and maps to the gpio pins 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#اگر defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
-#include "switch_driver.h"
-#include "utils.h"
+#شامل "platform.h"
+#شامل "gpio.h"
+#شامل "switch_driver.h"
+#شامل "utils.h"
 
 /** @fn void configure_switch(unsigned long pinCntrl)
  * @brief Function for configure Individual Switch pins as input.
@@ -39,11 +39,11 @@
  * each SW as input pin.
  * @param unsigned long (Pin that needs to be configured as SW.)
  */
-void configure_switch(unsigned long pinCntrl)
+خالی configure_switch(غیرعلامتی طویل pinCntrl)
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(pinCntrl) ) );
+	غیرعلامتی طویل read_ڈیٹا_2 = 0;
+	read_ڈیٹا_2 = read_لفظ(GPIO_DIRECTION_CNTRL_REG);
+	write_لفظ(GPIO_DIRECTION_CNTRL_REG, ( read_ڈیٹا_2 | ~(pinCntrl) ) );
 }
 
 /** @fn  void configure_all_switchs()
@@ -51,11 +51,11 @@ void configure_switch(unsigned long pinCntrl)
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  *          all SWs as input pin.
  */
-void configure_all_switchs()
+خالی configure_all_switchs()
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(ALL_SWITCHES) ) );
+	غیرعلامتی طویل read_ڈیٹا_2 = 0;
+	read_ڈیٹا_2 = read_لفظ(GPIO_DIRECTION_CNTRL_REG);
+	write_لفظ(GPIO_DIRECTION_CNTRL_REG, ( read_ڈیٹا_2 | ~(ALL_SWITCHES) ) );
 }
 
-#endif
+#اگر_ختم

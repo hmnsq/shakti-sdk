@@ -28,42 +28,42 @@
 */
 
 
-#ifndef INTRUDER_DETECTION_H
-#define INTRUDER_DETECTION_H
+#اگر_غیر_تعریف_شدہ INTRUDER_DETECTION_H
+#تعریف_کرو INTRUDER_DETECTION_H
 
-#define ROWNUM              4
-#define COLNUM              4
-#define OUTPINS_OFFSET      0
-#define INPINS_OFFSET       4
-#define OUTPINS             (0xF << OUTPINS_OFFSET)
-#define INPINS              (0xF << INPINS_OFFSET)
+#تعریف_کرو ROWNUM              4
+#تعریف_کرو COLNUM              4
+#تعریف_کرو OUTPINS_انحراف      0
+#تعریف_کرو INPINS_انحراف       4
+#تعریف_کرو OUTPINS             (0xF << OUTPINS_انحراف)
+#تعریف_کرو INPINS              (0xF << INPINS_انحراف)
 
 //Peripheral Pins
-#define BUZZER              GPIO11
-#define LED_P1              GPIO16
-#define LED_P2              GPIO18
-#define LED_P3              GPIO19
-#define LED_P4              GPIO21
-#define POWER_SWITCH        GPIO24
-#define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
-#define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
-#define PIR_IN	            GPIO8
-#define PANIC_BUTTON_OFFSET 28
-#define PIR_OFFSET          8
-#define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#تعریف_کرو BUZZER              GPIO11
+#تعریف_کرو LED_P1              GPIO16
+#تعریف_کرو LED_P2              GPIO18
+#تعریف_کرو LED_P3              GPIO19
+#تعریف_کرو LED_P4              GPIO21
+#تعریف_کرو POWER_SWITCH        GPIO24
+#تعریف_کرو DEACTIVATE_SWITCH   GPIO25
+#تعریف_کرو PANIC_BUTTON        GPIO28          //داخلہ
+#تعریف_کرو GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
+#تعریف_کرو PIR_اندر	            GPIO8
+#تعریف_کرو PANIC_BUTTON_انحراف 28
+#تعریف_کرو PIR_انحراف          8
+#تعریف_کرو ALARM_TIMER         5
+#تعریف_کرو بلند                1
+#تعریف_کرو کم                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#تعریف_کرو PASS_عدد            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+خالی سیٹ_کلید_pins_map(غیرعلامتی صحیح* صف, غیرعلامتی صحیح* ستون, صحیح جدول[COLNUM][ROWNUM]);
+صحیح get_کلید();
+صحیح get_ستون_صف(خالی);
+غیرعلامتی صحیح صف_pins[ROWNUM];
+غیرعلامتی صحیح ستون_pins[COLNUM];
+صحیح کلید_map[COLNUM][ROWNUM];
 
-#endif
+#اگر_ختم

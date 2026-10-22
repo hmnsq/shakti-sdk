@@ -26,9 +26,9 @@
 @brief A library to display the memory contents at byte and word level.
 */
 
-#include "log.h"
-#include "memory.h"
-#include <stdint.h>
+#شامل "log.h"
+#شامل "memory.h"
+#شامل <stdint.h>
 
 /** @fn void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @brief dump contents of word addressabe location in the memory,
@@ -37,17 +37,17 @@
  * @param uint32_t word_length
  */
 
-void dump_word_memory(uint32_t* start, uint32_t word_length)
+خالی dump_لفظ_حافظہ(uint32_t* آغاز, uint32_t لفظ_لمبائی)
 {
 	uint32_t i=0;
-	void *address;
+	خالی *پتہ;
 
-	address = (uint32_t *) start;
+	پتہ = (uint32_t *) آغاز;
 
-	while(i++< word_length)
+	جب(i++< لفظ_لمبائی)
 	{
-		log_info("address = %x data = %x\n", address, *(uint32_t *) address);
-		address += 4;
+		log_info("address = %x data = %x\n", پتہ, *(uint32_t *) پتہ);
+		پتہ += 4;
 	}
 }
 
@@ -58,17 +58,17 @@ void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @param uint32_t word_length
  */
 
-void dump_byte_memory(uint32_t* start, uint32_t word_length)
+خالی dump_byte_حافظہ(uint32_t* آغاز, uint32_t لفظ_لمبائی)
 {
 	uint32_t i=0;
-	void *address;
+	خالی *پتہ;
 
-	address = (unsigned char *) start;
+	پتہ = (غیرعلامتی حرف *) آغاز;
 
-	while(i++< word_length)
+	جب(i++< لفظ_لمبائی)
 	{
-		log_info("address = %x data = %x\n", address, *(unsigned char
-							       *) address);
-		address += 1;
+		log_info("address = %x data = %x\n", پتہ, *(غیرعلامتی حرف
+							       *) پتہ);
+		پتہ += 1;
 	}
 }

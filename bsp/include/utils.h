@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#اگر_غیر_تعریف_شدہ UTIL_H
+#تعریف_کرو UTIL_H
+#شامل <stdio.h>
+#شامل <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+خالی waitfor(غیرعلامتی صحیح secs);
+خالی delay(غیرعلامتی طویل seconds);
+اعشاری pow_10(غیرعلامتی صحیح y);
+خالی الٹ(حرف *str, صحیح len);
+خالی ftoa( اعشاری, حرف *, غیرعلامتی صحیح);
+خالی delay_loop(غیرعلامتی طویل cntr1, غیرعلامتی طویل cntr2);
+غیرعلامتی طویل read_لفظ(uint32_t *addr);
+خالی write_لفظ(uint32_t *addr, غیرعلامتی طویل val);
+صحیح int_مقصد_string(صحیح نمبر, حرف str[], غیرعلامتی صحیح afterpoint);
+خالی _printf_(ثابت حرف *fmt, va_list ap);
+صحیح لکھو(ثابت حرف* fmt, ...);
 
-#endif
+#اگر_ختم

@@ -27,37 +27,37 @@
 @detail 
 */ 
 
-#include"gpio_i2c.h"
+#شامل"gpio_i2c.h"
 
-#define I2C_WRITE 0
-#define I2C_READ 1
+#تعریف_کرو I2C_WRITE 0
+#تعریف_کرو I2C_READ 1
 
-#define MPU6050_SLAVE_ADDRESS      0xD0
-#define MPU_6050_OUTPUT_BEGIN      0x3B
-#define MPU6050_DLPF_CFG           0x20
-#define MPU6050_SMPL_DIV           0x19
-#define MPU6050_ADDRESS            0x68 
-#define DEV_IDENTITY               0X68
-#define DEV_IDENTITY_DATA_REG      0X75
-#define MPU6050_REG_PWR_MGMT       0X6B
-#define MPU6050_RESET              0x80
-#define MPU6050_ACC_SENS_8G        0x10
-#define MPU6050_REG_GYRO_CONFIG    0x1B // Gyroscope Configuration
-#define MPU6050_REG_ACCEL_CONFIG   0x1C // Accelerometer Configuration
-#define MPU6050_GYRO_SENS_500D     0x08
+#تعریف_کرو MPU6050_SLAVE_پتہ      0xD0
+#تعریف_کرو MPU_6050_OUTPUT_BEGIN      0x3B
+#تعریف_کرو MPU6050_DLPF_CFG           0x20
+#تعریف_کرو MPU6050_SMPL_DIV           0x19
+#تعریف_کرو MPU6050_پتہ            0x68 
+#تعریف_کرو DEV_شناختی_عنصر               0X68
+#تعریف_کرو DEV_شناختی_عنصر_ڈیٹا_REG      0X75
+#تعریف_کرو MPU6050_REG_PWR_MGMT       0X6B
+#تعریف_کرو MPU6050_RESET              0x80
+#تعریف_کرو MPU6050_ACC_SENS_8G        0x10
+#تعریف_کرو MPU6050_REG_GYRO_CONFIG    0x1B // Gyroscope Configuration
+#تعریف_کرو MPU6050_REG_ACCEL_CONFIG   0x1C // Accelerometer Configuration
+#تعریف_کرو MPU6050_GYRO_SENS_500D     0x08
 
-#define PI 3.141592654
+#تعریف_کرو PI 3.141592654
 
-char readbuf[20];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
-static unsigned char delay = 100;
+حرف readbuf[20];
+صحیح AccX,AccY,AccZ;
+صحیح accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+صحیح roll, pitch, yaw;
+صحیح AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+صحیح AccErrorX,AccErrory;
+صحیح GyroX, GyroY, GyroZ;
+صحیح c = 0;
+صحیح i=0;
+ساکن غیرعلامتی حرف delay = 100;
 
 //   soft float library need to be added, if hardfloat not there
  
@@ -65,14 +65,14 @@ static unsigned char delay = 100;
  * @brief  determines the x,y,z axes in terms of 16-bit
  * @details  In addition to measurements error adjustments is also made.  
  */
-void measuring_value()
+خالی measuring_قدر()
 {
 	// read accelerometer data
-	I2cSendSlaveAddress(MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);//selecting slave to be read
-	I2cWriteData(MPU_6050_OUTPUT_BEGIN, delay);//selecting register to be read
-	I2cSendSlaveAddress(MPU6050_SLAVE_ADDRESS, I2C_READ, delay);
+	I2c_Send_Slave_پتہ(MPU6050_SLAVE_پتہ, I2C_WRITE, delay);//selecting slave to be read
+	I2c_Write_ڈیٹا(MPU_6050_OUTPUT_BEGIN, delay);//selecting register to be read
+	I2c_Send_Slave_پتہ(MPU6050_SLAVE_پتہ, I2C_READ, delay);
 	I2c_shakti_readbytes(readbuf,14,1, delay);//to read the output values
-	printf("helloworld inside measuring value\n");
+	لکھو("helloworld inside measuring value\n");
 
 	AccX = (readbuf[0]<<8 |readbuf[1]) / 4096; //16-bit X-axis data
 	AccY = (readbuf[2]<<8 |readbuf[3]) / 4096; //16-bit Y-axis data
@@ -93,48 +93,48 @@ void measuring_value()
  * @details determines whether the initalisation as well as verfication is done properly or not 
  * @return int
  */
-int main()
+صحیح مین()
 {
 	I2cInit();//configuring data and clocks as output lines
 
-	printf("MPU6050 i2c Init completed\n");
+	لکھو("MPU6050 i2c Init completed\n");
 
-	if (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_DATA_REG, delay)){
-		printf("DEVICE SUCCESFULLY VERIFIED");
+	اگر (DEV_شناختی_عنصر == I2c_Read_byte(MPU6050_SLAVE_پتہ, DEV_شناختی_عنصر_ڈیٹا_REG, delay)){
+		لکھو("DEVICE SUCCESFULLY VERIFIED");
 	}
-	else{
-		printf("something went wrong , device identity not verified");
+	ورنہ{
+		لکھو("something went wrong , device identity not verified");
 	}
 	//configuring power management register
-	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_REG_PWR_MGMT, MPU6050_RESET, delay);
+	I2c_Write_byte(MPU6050_SLAVE_پتہ, MPU6050_REG_PWR_MGMT, MPU6050_RESET, delay);
 
 	delay_loop(1000,1000);   // we can use waitfor() function also (delay time to reset the device and initialisations proper)
 
 	//setting internal clock of MPU6050
-	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_REG_PWR_MGMT, 0x00, delay);
+	I2c_Write_byte(MPU6050_SLAVE_پتہ, MPU6050_REG_PWR_MGMT, 0x00, delay);
 
 	// configuring accelerometer -set sensitivity scale factor +-8g
-	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_REG_ACCEL_CONFIG, MPU6050_ACC_SENS_8G, delay);
+	I2c_Write_byte(MPU6050_SLAVE_پتہ, MPU6050_REG_ACCEL_CONFIG, MPU6050_ACC_SENS_8G, delay);
 
 	// configuring gyroscope-set  sensitivity scale factor to +-500deg/sec
-	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_REG_GYRO_CONFIG, MPU6050_GYRO_SENS_500D, delay);
+	I2c_Write_byte(MPU6050_SLAVE_پتہ, MPU6050_REG_GYRO_CONFIG, MPU6050_GYRO_SENS_500D, delay);
 
 	// configuirng gyroscope output rate as 1khz
-	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_DLPF_CFG,0x01, delay);
+	I2c_Write_byte(MPU6050_SLAVE_پتہ, MPU6050_DLPF_CFG,0x01, delay);
 
 	// configuring sample divider to 99(i.e sample rate= gyroscope output rate /(1+sample divider))
-	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_SMPL_DIV, 0x63, delay);//set sample rate to 10
+	I2c_Write_byte(MPU6050_SLAVE_پتہ, MPU6050_SMPL_DIV, 0x63, delay);//set sample rate to 10
 
-	while (1){
-		measuring_value();
-		printf("AccErrorX: %d,AccErrMPU6050_SLAVE_ADDRESSorX");
-		printf("AccErrorY: %d,AccErrorY");
-		printf("GyroErrorX: %d,GyroErrorX");
-		printf("GyroErrorY: %d,GyroErrorY");
-		printf("GyroErrorZ %d,GyroErrorZ");
+	جب (1){
+		measuring_قدر();
+		لکھو("AccErrorX: %d,AccErrMPU6050_SLAVE_ADDRESSorX");
+		لکھو("AccErrorY: %d,AccErrorY");
+		لکھو("GyroErrorX: %d,GyroErrorX");
+		لکھو("GyroErrorY: %d,GyroErrorY");
+		لکھو("GyroErrorZ %d,GyroErrorZ");
 	}
 
-	return 0;
+	واپس 0;
 }
 
 /** @fn void calculate_imu_error()
@@ -142,17 +142,17 @@ int main()
  * @details 
  * @warning  
  */
-void calculate_imu_error()
+خالی calculate_imu_error()
 {
-	int c = 0;
-	int yaw;
-	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+	صحیح c = 0;
+	صحیح yaw;
+	اعشاری accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while (c < 200){
-		measuring_value();
+	جب (c < 200){
+		measuring_قدر();
 
-		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;
-		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;
+		AccErrorX = AccErrorX + (atan(AccY / جذر(قوت(AccX, 2)) + قوت(AccZ, 2))) * 180 / PI;
+		AccErrorY = AccErrorY + (atan(AccY / جذر(قوت(AccX, 2)) + قوت(AccZ, 2))) * 180 / PI;
 
 		GyroErrorX = GyroErrorX + (GyroX / 65.5);
 		GyroErrorY = GyroErrorY + (GyroY / 65.5);
@@ -163,8 +163,8 @@ void calculate_imu_error()
 	AccErrorX = AccErrorX / 200;
 	AccErrorY = AccErrorY / 200;
 
-	accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorX; // AccErrorX
-	accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorY; // AccErrory
+	accAngleX = (atan(AccY / جذر(قوت(AccX, 2) + قوت(AccZ, 2))) * 180 / PI) - AccErrorX; // AccErrorX
+	accAngleY = (atan(-1 * AccX / جذر(قوت(AccY, 2) + قوت(AccZ, 2))) * 180 / PI) - AccErrorY; // AccErrory
 	// sum all reading
 	GyroErrorX = GyroErrorX / 200;
 	GyroErrorY = GyroErrorY / 200;

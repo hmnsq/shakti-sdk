@@ -41,42 +41,42 @@
   on.
 */
 
-#include "platform.h"
-#include "gpio.h"
+#شامل "platform.h"
+#شامل "gpio.h"
 
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
+خارجی خالی delay_loop(غیرعلامتی طویل cntr1, غیرعلامتی طویل cntr2);
 
-#define MOTOR_ON (1 << 7)
-#define MOTOR_OFF 0
+#تعریف_کرو MOTOR_ON (1 << 7)
+#تعریف_کرو MOTOR_OFF 0
 
 /**
  * @fn void main ()
  * @brief Entry point for the program
  */
 
-void main()
+خالی مین()
 {
-    unsigned long readData = 0;
-    unsigned long moistureDetetected = 0;
+    غیرعلامتی طویل read_ڈیٹا = 0;
+    غیرعلامتی طویل moistureDetetected = 0;
 
 /*********************************************************************
    set the read & write bits in GPIO Direction Control Register
    Bit 0 for read, this corresponds to GPIO0 
    Bit 7 for write, this corresponds to GPIO7
 *********************************************************************/
-    write_word(GPIO_DIRECTION_CNTRL_REG, (0x00|MOTOR_ON));
+    write_لفظ(GPIO_DIRECTION_CNTRL_REG, (0x00|MOTOR_ON));
     
-    while (1) {
-        readData = read_word(GPIO_DATA_REG);
-        printf("\n Read Data:=%d", readData);
-	moistureDetetected = ((readData & 1 ) == 1) ? 1 : 0;
-        if (moistureDetetected == 0) {
-            write_word(GPIO_DATA_REG, MOTOR_ON);
-            printf("\nTurn on Motor");
+    جب (1) {
+        read_ڈیٹا = read_لفظ(GPIO_ڈیٹا_REG);
+        لکھو("\n Read Data:=%d", read_ڈیٹا);
+	moistureDetetected = ((read_ڈیٹا & 1 ) == 1) ? 1 : 0;
+        اگر (moistureDetetected == 0) {
+            write_لفظ(GPIO_ڈیٹا_REG, MOTOR_ON);
+            لکھو("\nTurn on Motor");
         }
-        else {
-            write_word(GPIO_DATA_REG, MOTOR_OFF);
-            printf("\nTurn off Motor");
+        ورنہ {
+            write_لفظ(GPIO_ڈیٹا_REG, MOTOR_OFF);
+            لکھو("\nTurn off Motor");
         }
         delay_loop(1000,1000);
     } 

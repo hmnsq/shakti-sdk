@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#شامل <stdint.h>
+#شامل <stdarg.h>
+#شامل "utils.h"
+#شامل "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,30 +39,30 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+ساکن اندرونی خالی itoa (غیرعلامتی طویل طویل صحیح نمبر, غیرعلامتی بنیاد)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	صحیح i = 0;
+	غیرعلامتی صحیح intermediate = 0;
+	غیرعلامتی صحیح digits[حجم(نمبر)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	جب (1) {
+		digits[i] = نمبر % بنیاد;
 
-		if (number < base)
-			break;
+		اگر (نمبر < بنیاد)
+			توڑو;
 
-		number /= base;
+		نمبر /= بنیاد;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	جب (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		اگر (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		ورنہ
 			intermediate = '0';
 
-		putchar(digits[i] + intermediate);
+		حرف_لکھو(digits[i] + intermediate);
 	}
 }
 
@@ -72,151 +72,151 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+خالی _printf_(ثابت حرف *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	اندراج ثابت حرف* p;
+	ثابت حرف* آخری_fmt;
+	اندراج صحیح ch;
+	غیرعلامتی طویل طویل عدد;
+	صحیح بنیاد, lflag, i;
+	اعشاری float_عدد = 0;
+	حرف float_arr[30] = {'\0'};
+	صحیح backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
-			putchar(ch);
+	برائے (;;) {
+		برائے (;(ch = *(غیرعلامتی حرف *) fmt) != '%'; fmt++) {
+			اگر (ch == '\0')
+				واپس;
+			حرف_لکھو(ch);
 		}
 		fmt++;
 
 		// Process a %-escape sequence
-		last_fmt = fmt;
+		آخری_fmt = fmt;
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		برائے (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			انتخاب (ch = *(غیرعلامتی حرف *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				حالت 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					توڑو;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				حالت 'c':
+					حرف_لکھو(va_arg(ap, صحیح));
+					توڑو;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				حالت 's':
+					اگر ((p = va_arg(ap, حرف *)) == تہی)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
-						putchar(ch);
+					برائے (; (ch = *p) != '\0' ;) {
+						حرف_لکھو(ch);
 						p++;
 					}
-					break;
+					توڑو;
 
 					// (signed) decimal
-				case 'd':
-					base = 10;
+				حالت 'd':
+					بنیاد = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					اگر (lflag >= 2)
+						عدد = va_arg(ap, طویل طویل);
+					ورنہ اگر (lflag ==1)
+						عدد = va_arg(ap, طویل);
+					ورنہ
+						عدد = va_arg(ap, صحیح);
 
-					if ((long long) num < 0) {
-						putchar('-');
-						num = -(long long) num;
+					اگر ((طویل طویل) عدد < 0) {
+						حرف_لکھو('-');
+						عدد = -(طویل طویل) عدد;
 					}
 
-					itoa( num, base);
+					itoa( عدد, بنیاد);
 
-					break;
+					توڑو;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				حالت 'f':
+					float_عدد =  va_arg(ap, دوہرا);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_عدد, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					برائے( i = 0; float_arr[i] != '\0'; i++)
 					{
-						putchar(float_arr[i]);
-						if(i > 29) break;
+						حرف_لکھو(float_arr[i]);
+						اگر(i > 29) توڑو;
 					}
-					break;
+					توڑو;
 
 					// unsigned decimal
-				case 'u':
-					base = 10;
+				حالت 'u':
+					بنیاد = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					اگر (lflag >= 2)
+						عدد = va_arg(ap, غیرعلامتی طویل طویل);
+					ورنہ اگر (lflag)
+						عدد = va_arg(ap, غیرعلامتی طویل);
+					ورنہ
+						عدد = va_arg(ap, غیرعلامتی صحیح);
 
-					itoa( num, base);
+					itoa( عدد, بنیاد);
 
-					break;
+					توڑو;
 
 					// (unsigned) octal
-				case 'o':
+				حالت 'o':
 					// should do something with padding so it's always 3 octits
-					base = 8;
+					بنیاد = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					اگر (lflag >= 2)
+						عدد = va_arg(ap, غیرعلامتی طویل طویل);
+					ورنہ اگر (lflag)
+						عدد = va_arg(ap, غیرعلامتی طویل);
+					ورنہ
+						عدد = va_arg(ap, غیرعلامتی صحیح);
 
-					itoa( num, base);
+					itoa( عدد, بنیاد);
 
-					break;
+					توڑو;
 
-				case 'x':
-					base = 16;
+				حالت 'x':
+					بنیاد = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					اگر (lflag >= 2)
+						عدد = va_arg(ap, غیرعلامتی طویل طویل);
+					ورنہ اگر (lflag)
+						عدد = va_arg(ap, غیرعلامتی طویل);
+					ورنہ
+						عدد = va_arg(ap, غیرعلامتی صحیح);
 
-					itoa( num, base);
+					itoa( عدد, بنیاد);
 
-					break;
+					توڑو;
 
 					// escaped '%' character
-				case '%':
-					putchar(ch);
-					break;
+				حالت '%':
+					حرف_لکھو(ch);
+					توڑو;
 
 					// unrecognized escape sequence - just print it literally
-				default:
-					putchar('%');
-					fmt = last_fmt;
-					break;
+				طےشدہ:
+					حرف_لکھو('%');
+					fmt = آخری_fmt;
+					توڑو;
 			}
 
-			if (backtothebeginning)
+			اگر (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				جاری;
 			}
-			else
-				break;
+			ورنہ
+				توڑو;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+صحیح لکھو(ثابت حرف* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	واپس 0;// incorrect return value, but who cares, anyway?
 }

@@ -29,39 +29,39 @@
   also illustrates the use of inline assembly.
  */
 
-#include "uart.h"//Includes the definitions of uart communication protocol//
-#include <stdio.h>
+#شامل "uart.h"//Includes the definitions of uart communication protocol//
+#شامل <stdio.h>
 
 /** @fn void main()
  * @brief prints csr regiter values.
  */
-void main()
+خالی مین()
 {
-	register uint32_t retval;
+	اندراج uint32_t retval;
 
-	asm volatile("li      t0, 8\t\n"
+	asm متلون("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile( "csrr %[retval], mstatus\n"
+	asm متلون( "csrr %[retval], mstatus\n"
 		      :
 		      [retval]
 		      "=r"
 		      (retval)
 		    );
 
-	printf("mstatus = %x\n", retval);
+	لکھو("mstatus = %x\n", retval);
 
-	asm volatile("li      t0, 128\t\n"
+	asm متلون("li      t0, 128\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile( "csrr %[retval], mie\n"
+	asm متلون( "csrr %[retval], mie\n"
 		      :
 		      [retval]
 		      "=r"
 		      (retval)
 		    );
 
-	printf("mie = %x\n", retval);
+	لکھو("mie = %x\n", retval);
 }

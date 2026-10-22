@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#اگر_غیر_تعریف_شدہ GPIO_I2C_H
+#تعریف_کرو GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#شامل "platform.h"
+#شامل "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#تعریف_کرو I2C_SCL GPIO0 
+#تعریف_کرو I2C_SDA GPIO1
+#تعریف_کرو GPIOD_IS_اندر 0
+#تعریف_کرو GPIOD_IS_برآمد 1
+#تعریف_کرو I2C_WRITE 0
+#تعریف_کرو I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+خالی I2cInit();
+خالی I2c_Send_Slave_پتہ(غیرعلامتی حرف , غیرعلامتی حرف , غیرعلامتی حرف );
+خالی I2cWriteByte(غیرعلامتی حرف , غیرعلامتی حرف );
+غیرعلامتی حرف I2cReadByte(غیرعلامتی حرف );
+خالی I2c_Write_ڈیٹا(غیرعلامتی حرف , غیرعلامتی حرف );
+غیرعلامتی حرف I2c_Read_ڈیٹا_Ack(غیرعلامتی حرف );
+غیرعلامتی حرف I2c_Read_ڈیٹا_Nack(غیرعلامتی حرف );
+خالی I2c_آغاز(غیرعلامتی حرف );
+خالی I2cStop(غیرعلامتی حرف );
+خالی I2c_Write_byte(غیرعلامتی حرف, غیرعلامتی حرف, غیرعلامتی حرف, غیرعلامتی حرف);
+صحیح I2c_Read_byte(غیرعلامتی حرف ,غیرعلامتی حرف , غیرعلامتی حرف );
+صحیح I2c_shakti_readbytes(حرف *, صحیح , صحیح , غیرعلامتی حرف );
+خالی ReadAckForWrite(غیرعلامتی حرف delay);
+خالی SendNackForRead(غیرعلامتی حرف delay);
+خالی SendAckForRead(غیرعلامتی حرف delay);
 
-#endif
+#اگر_ختم

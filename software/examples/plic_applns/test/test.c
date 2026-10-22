@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#شامل "gpio.h"
+#شامل "uart.h"
+#شامل "utils.h"
+#شامل "traps.h"
+#شامل "platform.h"
+#شامل "plic_driver.h"
+#شامل "log.h"
+#شامل "defines.h"
+#شامل "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+خالی handle_button_press(__attribute__((غیر_مستعمل)) uint32_t عدد);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+خالی handle_button_press(__attribute__((غیر_مستعمل)) uint32_t عدد)
 {
 	log_info("button pressed\n");
 }
@@ -55,52 +55,52 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+صحیح مین(خالی){
+	اندراج غیرعلامتی صحیح retval;
+	صحیح i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	برائے(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
-		interrupt_enable(i);
+		لکھو("i %d\n",i);
+		مداخلت_enable(i);
 	}
-	printf("\n");
+	لکھو("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	برائے(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
-		interrupt_disable(i);
+		لکھو("i %d\n",i);
+		مداخلت_disable(i);
 	}
-	printf("\n");
-
-	asm("ebreak");
-
-	for(i=1;i<33;i++)
-	{
-		printf("i %d\n",i);
-		interrupt_enable(i + 1);
-	}
-	printf("\n");
+	لکھو("\n");
 
 	asm("ebreak");
 
-	while(1){
+	برائے(i=1;i<33;i++)
+	{
+		لکھو("i %d\n",i);
+		مداخلت_enable(i + 1);
+	}
+	لکھو("\n");
+
+	asm("ebreak");
+
+	جب(1){
 		i++;
 
-		if((i%10000000) == 0){
+		اگر((i%10000000) == 0){
 
-			asm volatile(
+			asm متلون(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
 			     "=r"
 			     (retval)
 			    );
-			printf("mip = %u\n", retval);
+			لکھو("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	واپس 0;
 }

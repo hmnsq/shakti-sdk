@@ -22,29 +22,29 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#شامل "uart.h"
+#شامل <stdio.h>
+#شامل <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
-}*head;
+ساخت گرہ {
+	صحیح عدد;
+	ساخت گرہ *nptr;
+}*سر;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+خالی create_list(صحیح n);
+خالی display_list();
+خالی delete_گرہ(صحیح position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+خالی مین()
 {
-	int n,position,m;
-	char t[15];
-	printf("\n Enter the number of nodes on the linked list:\n");
+	صحیح n,position,m;
+	حرف t[15];
+	لکھو("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
 
@@ -52,23 +52,23 @@ void main()
 
 	create_list(n);
 
-	printf("\n\n\nData entered in the list\n");
+	لکھو("\n\n\nData entered in the list\n");
 
 	display_list();
 
-	printf("\n\n Deletion\n");
-	printf("\nEnter the Node Position to be Deleted:\n");
+	لکھو("\n\n Deletion\n");
+	لکھو("\nEnter the Node Position to be Deleted:\n");
 
 	read_uart_string(uart_instance[0],t);
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_گرہ(position);
 
-	printf("\nLinked list after deletion\n");
+	لکھو("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	جب(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,48 +76,48 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+خالی create_list(صحیح n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	ساخت گرہ *گرہ, *tmp;
+	صحیح ڈیٹا_2,m;
+	حرف t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	سر = (ساخت گرہ*)حافظہ_دو(حجم(ساخت گرہ));
 
-	if(head == NULL)
+	اگر(سر == تہی)
 	{
-		printf("\n Memory cannot be allocated");
+		لکھو("\n Memory cannot be allocated");
 	}
-	else
+	ورنہ
 	{
-		printf("\n\nInput data for node 1:");
+		لکھو("\n\nInput data for node 1:");
 
 		read_uart_string(uart_instance[0],t);
 
-		data = atoi(t);
+		ڈیٹا_2 = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
-		tmp = head;
+		سر->عدد = ڈیٹا_2;
+		سر->nptr = تہی;
+		tmp = سر;
 
-		for(int i = 2;i <= n; i++)
+		برائے(صحیح i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			گرہ = (ساخت گرہ*)حافظہ_دو(حجم(ساخت گرہ));
 
-			if(node == NULL)
+			اگر(گرہ == تہی)
 			{
-				printf("\n Memory Cannot be allocated");
+				لکھو("\n Memory Cannot be allocated");
 			}
-			else 
+			ورنہ 
 			{
-				printf("\n\nInput Data for node %d :",i);
+				لکھو("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
-				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				ڈیٹا_2 = atoi(t);
+				گرہ->عدد = ڈیٹا_2;
+				گرہ->nptr = تہی;
 
-				tmp->nptr = node;
+				tmp->nptr = گرہ;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,22 +129,22 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+خالی display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	صحیح i = 0;
+	ساخت گرہ *tmp;
 
-	if(head == NULL)
+	اگر(سر == تہی)
 	{
-		printf(" List is empty.");
+		لکھو(" List is empty.");
 	}
-	else
+	ورنہ
 	{
-		tmp = head;
-		while(tmp != NULL) 
+		tmp = سر;
+		جب(tmp != تہی) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
-			printf("->");
+			لکھو(" Node%d = %d",i,tmp->عدد);
+			لکھو("->");
 			tmp = tmp->nptr;
 			i++;
 		}
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+خالی delete_گرہ(صحیح position)
 {
-	struct node *temp;
+	ساخت گرہ *عارضی;
 
-	if(head == NULL)
+	اگر(سر == تہی)
 	{
-		printf(" List is empty.");
+		لکھو(" List is empty.");
 	}
-	else 
+	ورنہ 
 	{
-		temp = head;
+		عارضی = سر;
 
-		if (position == 0)//Delete head node
+		اگر (position == 0)//Delete head node
 		{
-			head = temp->nptr;
-			free(temp);
-			return;
+			سر = عارضی->nptr;
+			آزاد(عارضی);
+			واپس;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		برائے (صحیح i = 0; عارضی != تہی && i < position-1; i++)//store previous of to be deleted node
 		{
-			temp = temp->nptr;
+			عارضی = عارضی->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		اگر (عارضی == تہی || عارضی->nptr == تہی)
+			واپس;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		ساخت گرہ *nptr = عارضی->nptr->nptr;
 
-		free(temp->nptr);
-		temp->nptr = nptr; 
+		آزاد(عارضی->nptr);
+		عارضی->nptr = nptr; 
 	}
 }

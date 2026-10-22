@@ -26,21 +26,21 @@
  * @detail Configures SPI, flash device and then do all basic flash oerations.
  */
 
-#include "spi.h"
-#include "log.h"
-#include "utils.h"
+#شامل "spi.h"
+#شامل "log.h"
+#شامل "utils.h"
 
-int* spi_cr1    = (int*) SPI_CR1;
-int* spi_cr2    = (int*) SPI_CR2;
-int* spi_sr     = (int*) SPI_SR ;
-int* spi_dr1    = (int*) SPI_DR1;
-int* spi_dr2    = (int*) SPI_DR2;
-int* spi_dr3    = (int*) SPI_DR3;
-int* spi_dr4    = (int*) SPI_DR4;
-int* spi_dr5    = (int*) SPI_DR5;
-int* spi_crcpr  = (int*) SPI_CRCPR;
-int* spi_rxcrcr = (int*) SPI_RXCRCR;
-int* spi_txcrcr = (int*) SPI_TXCRCR;
+صحیح* spi_cr1    = (صحیح*) SPI_CR1;
+صحیح* spi_cr2    = (صحیح*) SPI_CR2;
+صحیح* spi_sr     = (صحیح*) SPI_SR ;
+صحیح* spi_dr1    = (صحیح*) SPI_DR1;
+صحیح* spi_dr2    = (صحیح*) SPI_DR2;
+صحیح* spi_dr3    = (صحیح*) SPI_DR3;
+صحیح* spi_dr4    = (صحیح*) SPI_DR4;
+صحیح* spi_dr5    = (صحیح*) SPI_DR5;
+صحیح* spi_crcpr  = (صحیح*) SPI_CRCPR;
+صحیح* spi_rxcrcr = (صحیح*) SPI_RXCRCR;
+صحیح* spi_txcrcr = (صحیح*) SPI_TXCRCR;
 
 //By default, spi 0 is configured
 /**
@@ -50,19 +50,19 @@ int* spi_txcrcr = (int*) SPI_TXCRCR;
  *          spi registers..
  * @param int* ---> offset value
  */
-void configure_spi(int offset)
+خالی configure_spi(صحیح انحراف)
 {
-	spi_cr1    = (int*) (SPI_CR1 + offset);
-	spi_cr2    = (int*) (SPI_CR2 + offset);
-	spi_sr     = (int*) (SPI_SR + offset);
-	spi_dr1    = (int*) (SPI_DR1 + offset);
-	spi_dr2    = (int*) (SPI_DR2 + offset);
-	spi_dr3    = (int*) (SPI_DR3 + offset);
-	spi_dr4    = (int*) (SPI_DR4 + offset);
-	spi_dr5    = (int*) (SPI_DR5 + offset);
-	spi_crcpr  = (int*) (SPI_CRCPR + offset);
-	spi_rxcrcr = (int*) (SPI_RXCRCR + offset);
-	spi_txcrcr = (int*) (SPI_TXCRCR + offset);
+	spi_cr1    = (صحیح*) (SPI_CR1 + انحراف);
+	spi_cr2    = (صحیح*) (SPI_CR2 + انحراف);
+	spi_sr     = (صحیح*) (SPI_SR + انحراف);
+	spi_dr1    = (صحیح*) (SPI_DR1 + انحراف);
+	spi_dr2    = (صحیح*) (SPI_DR2 + انحراف);
+	spi_dr3    = (صحیح*) (SPI_DR3 + انحراف);
+	spi_dr4    = (صحیح*) (SPI_DR4 + انحراف);
+	spi_dr5    = (صحیح*) (SPI_DR5 + انحراف);
+	spi_crcpr  = (صحیح*) (SPI_CRCPR + انحراف);
+	spi_rxcrcr = (صحیح*) (SPI_RXCRCR + انحراف);
+	spi_txcrcr = (صحیح*) (SPI_TXCRCR + انحراف);
 }
 
 /**
@@ -72,7 +72,7 @@ void configure_spi(int offset)
  * @param int* addr 
  * @param int val 
  */
-void set_spi(int* addr, int val)
+خالی سیٹ_spi(صحیح* addr, صحیح val)
 {
 	*addr = val;
 }
@@ -84,18 +84,18 @@ void set_spi(int* addr, int val)
  * @param int* ---> address from where read has to happen
  * @return int ---> SPI Register read value.
  */
-int get_spi(int* addr)
+صحیح get_spi(صحیح* addr)
 {
-	return *addr;
+	واپس *addr;
 }
 
 /** @fn void spi_init(void)
  * @brief setting up baud rate and clock pole and phase 
  * @details Initialize the spi controller in Mode 3 (CPOL =1 & CPHA =1) with SCK= clk/16
  */
-void spi_init(void)
+خالی spi_init(خالی)
 {
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_CPHA|SPI_CPOL));
 }
 
 /** @fn  void spi_tx_rx_start(void)
@@ -104,9 +104,9 @@ void spi_init(void)
  *           in master mode use this function.
  * @warning Should be set before configuring the control register 1.
  */
-void spi_tx_rx_start(void)
+خالی spi_tx_rx_آغاز(خالی)
 {
-	set_spi(spi_cr2, (SPI_RX_IMM_START));
+	سیٹ_spi(spi_cr2, (SPI_RX_IMM_آغاز));
 }
 
 
@@ -114,9 +114,9 @@ void spi_tx_rx_start(void)
  * @brief to start receive state 
  * @details This is not in used when spi is in Master mode 
  */
-void spi_rx_enable(void)
+خالی spi_rx_enable(خالی)
 {
-	set_spi(spi_cr2, (SPI_RX_START));
+	سیٹ_spi(spi_cr2, (SPI_RX_آغاز));
 }
 
 /**
@@ -128,9 +128,9 @@ void spi_rx_enable(void)
  * @param int (p (position from where the bits to be extracted))
  * @return int (32 bit which have k bit from "number" and rest are zero)
  */
-int bitExtracted(int number, int k, int p)
+صحیح ثنائی_ہندسہ_Extracted(صحیح نمبر, صحیح k, صحیح p)
 {
-	return (((1 << k) - 1) & (number >> (p - 1)));
+	واپس (((1 << k) - 1) & (نمبر >> (p - 1)));
 }
 
 /**
@@ -139,16 +139,16 @@ int bitExtracted(int number, int k, int p)
  * @details As soons as data come to receive buffer this bit is set.  
  * @return int (1: if there is data into the RxFIFO else 0)
  */
-int spi_rxne_enable(void)
+صحیح spi_rxne_enable(خالی)
 {
-	int value = 0;
+	صحیح قدر = 0;
 
-	while (!(value & 0x1))
+	جب (!(قدر & 0x1))
 	{
 		waitfor(100);
-		value = get_spi(spi_sr);
+		قدر = get_spi(spi_sr);
 	}
-	return 1;
+	واپس 1;
 }
 
 /**
@@ -158,17 +158,17 @@ int spi_rxne_enable(void)
  * @warning One should check this bit before going to next transcation
  * @return int (0: SPI is busy in communication, 1: SPI nt busy)
  */
-int spi_notbusy(void)
+صحیح spi_notbusy(خالی)
 {
-	int value = 0x80;
+	صحیح قدر = 0x80;
 
-	while ((value & 0x80))
+	جب ((قدر & 0x80))
 	{
 		waitfor(10);
-		value = get_spi(spi_sr);
+		قدر = get_spi(spi_sr);
 	}
 
-	return 1;
+	واپس 1;
 }
 
 /**
@@ -178,14 +178,14 @@ int spi_notbusy(void)
  * @warning Without enabling this bit one cannot erase/write into the flash
  * @return int
  */
-int flash_write_enable(void)
+صحیح flash_write_enable(خالی)
 {
-	set_spi(spi_dr1, 0x06000000);
-	set_spi(spi_dr5, 0x06);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_dr1, 0x06000000);
+	سیٹ_spi(spi_dr5, 0x06);
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(8)|SPI_کل_بٹ_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	واپس 1;
 }
 
 /**
@@ -195,14 +195,14 @@ int flash_write_enable(void)
  * @return int
  */
 
-int flash_clear_sr(void)
+صحیح flash_clear_sr(خالی)
 {
-	set_spi(spi_dr1,0x30000000);
-	set_spi(spi_dr5,0x30);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_dr1,0x30000000);
+	سیٹ_spi(spi_dr5,0x30);
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(8)|SPI_کل_بٹ_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	واپس 1;
 }
 
 /**
@@ -214,21 +214,21 @@ int flash_clear_sr(void)
  * @param int (addr (address after the opcode))
  * @return int
  */
-int flash_cmd_addr(int command, int addr)
+صحیح flash_cmd_addr(صحیح command, صحیح addr)
 {
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int data1 = command | address1 ;
+	صحیح address1 = ثنائی_ہندسہ_Extracted(addr, 24, 9);
+	صحیح address2 = ثنائی_ہندسہ_Extracted(addr, 8, 1);
+	صحیح data1 = command | address1 ;
 	address2 = address2 << 24;
 
-	set_spi(spi_dr1, data1);
-	set_spi(spi_dr2, address2);
-	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_dr1, data1);
+	سیٹ_spi(spi_dr2, address2);
+	سیٹ_spi(spi_dr5, 0);
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(40)|SPI_کل_بٹ_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	واپس 1;
 }
 
 /**
@@ -240,22 +240,22 @@ int flash_cmd_addr(int command, int addr)
  * @param int (addr(address after the opcode))
  * @param int (data (data after the address))
  */
-void flash_cmd_addr_data(int command, int addr, int data)
+خالی flash_cmd_addr_ڈیٹا(صحیح command, صحیح addr, صحیح ڈیٹا_2)
 {
-	int cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
-	int data1 = ( (addr & 0xFF)  << 24 ) |( (data & 0xFFFFFF00)  >> 8);
-	int data2 = ( (data & 0xFF)  << 24 ) & 0xFF000000;
+	صحیح cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
+	صحیح data1 = ( (addr & 0xFF)  << 24 ) |( (ڈیٹا_2 & 0xFFFFFF00)  >> 8);
+	صحیح data2 = ( (ڈیٹا_2 & 0xFF)  << 24 ) & 0xFF000000;
 
 	log_debug("\n cmd: %x;d1: %x; d2: %x", cmd_addr, data1, data2);
 
-	set_spi(spi_dr1, cmd_addr);
-	set_spi(spi_dr2, data1);
-	set_spi(spi_dr3, data2);
-	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(72)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_dr1, cmd_addr);
+	سیٹ_spi(spi_dr2, data1);
+	سیٹ_spi(spi_dr3, data2);
+	سیٹ_spi(spi_dr5, 0);
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(72)|SPI_کل_بٹ_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
-	flash_status_register_read();
+	flash_حالت_رجسٹر_read();
 }
 
 /**
@@ -266,11 +266,11 @@ void flash_cmd_addr_data(int command, int addr, int data)
  * @param int (addres (write address))
  * @param int(data (write data))
  */
-void flash_write(int address, int data)
+خالی flash_write(صحیح پتہ, صحیح ڈیٹا_2)
 {
 	flash_write_enable();
-	flash_cmd_addr_data(0x12000000, address,data);
-	flash_status_register_read();
+	flash_cmd_addr_ڈیٹا(0x12000000, پتہ,ڈیٹا_2);
+	flash_حالت_رجسٹر_read();
 }
 
 /**
@@ -284,25 +284,25 @@ void flash_write(int address, int data)
  * @param int (addr(read_address))
  * @return int 
  */
-int flash_cmd_to_read(int command, int addr)
+صحیح flash_cmd_مقصد_read(صحیح command, صحیح addr)
 {
-	int dr5;
-	int address2 = bitExtracted(addr, 8, 1);
+	صحیح dr5;
+	صحیح address2 = ثنائی_ہندسہ_Extracted(addr, 8, 1);
 
 	address2 = address2 << 24;
-	set_spi(spi_dr1, ( command  | ( (addr & 0xFFFFFF00) >> 8) ));
-	set_spi(spi_dr2, ( (addr & 0xFF) << 24) );
-	set_spi(spi_dr5, 0);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(48)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_dr1, ( command  | ( (addr & 0xFFFFFF00) >> 8) ));
+	سیٹ_spi(spi_dr2, ( (addr & 0xFF) << 24) );
+	سیٹ_spi(spi_dr5, 0);
+	spi_tx_rx_آغاز();
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(48)|SPI_کل_بٹ_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(2000);
 
-	if(spi_rxne_enable()) 
+	اگر(spi_rxne_enable()) 
 	{
 		dr5 = *spi_dr5;
 	}
 
-	return dr5;
+	واپس dr5;
 
 }
 
@@ -312,10 +312,10 @@ int flash_cmd_to_read(int command, int addr)
  * @param int (address (read address))
  * @return int 
  */
-int flash_read(int address)
+صحیح flash_read(صحیح پتہ)
 {
-	int read_value = flash_cmd_to_read(0x0C000000,address);
-	return read_value;
+	صحیح read_قدر = flash_cmd_مقصد_read(0x0C000000,پتہ);
+	واپس read_قدر;
 }
 
 /**
@@ -325,17 +325,17 @@ int flash_read(int address)
  * @param int command (opcode)
  * @return int  value (flash response to opcode)
  */
-int flash_cmd_read(int command)
+صحیح flash_cmd_read(صحیح command)
 {
-	int dr5;
-	set_spi(spi_dr1, command);
-	set_spi(spi_dr5, command);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-	if(spi_rxne_enable()) {
+	صحیح dr5;
+	سیٹ_spi(spi_dr1, command);
+	سیٹ_spi(spi_dr5, command);
+	spi_tx_rx_آغاز();
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(8)|SPI_کل_بٹ_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	اگر(spi_rxne_enable()) {
 		dr5 = *spi_dr5;
 	}
-	return dr5;
+	واپس dr5;
 }
 
 /**
@@ -345,9 +345,9 @@ int flash_cmd_read(int command)
  * @warning before erasing the flash one should enable the WEL bit spi_sr by using write_enable()
  * @param int (address (address from which data should erase))
  */
-void flash_erase(int address)
+خالی flash_erase(صحیح پتہ)
 {
-	flash_cmd_addr(0xdc000000, address);
+	flash_cmd_addr(0xdc000000, پتہ);
 }
 
 /**
@@ -357,17 +357,17 @@ void flash_erase(int address)
  *           and WEL(Write Enable Latch) bit.
  * @return int
  */
-int flash_status_register_read(void)
+صحیح flash_حالت_رجسٹر_read(خالی)
 {
-	int stat = 0x3;
+	صحیح stat = 0x3;
 
-	while (stat & 0x03)
+	جب (stat & 0x03)
 	{
 		stat = flash_cmd_read(0x05000000);
 		log_debug("flash status register val %x\n", stat);
 	}
 
-	return 0;
+	واپس 0;
 }
 
 /**
@@ -378,27 +378,27 @@ int flash_status_register_read(void)
  * @warning to move data from data register to fifo there must be some data into spi_dr5
  * @return int
  */
-int flash_device_id(void)
+صحیح flash_device_id(خالی)
 {
-	int dr3;
-	int val1, val2;
+	صحیح dr3;
+	صحیح val1, val2;
 
 	flash_write_enable();
-	set_spi(spi_dr1, 0x9f000000);
-	set_spi(spi_dr5, 0x9f000000);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	سیٹ_spi(spi_dr1, 0x9f000000);
+	سیٹ_spi(spi_dr5, 0x9f000000);
+	spi_tx_rx_آغاز();
+	سیٹ_spi(spi_cr1, (SPI_BR(7)|SPI_کل_بٹ_TX(8)|SPI_کل_بٹ_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 
-	if(spi_rxne_enable())
+	اگر(spi_rxne_enable())
 	{
 		dr3 = *spi_dr5;
 	}
 
-	val1 = bitExtracted(dr3, 8, 17);
-	val2 = bitExtracted(dr3, 16, 1);
+	val1 = ثنائی_ہندسہ_Extracted(dr3, 8, 17);
+	val2 = ثنائی_ہندسہ_Extracted(dr3, 16, 1);
 
 	log_debug("Device ID %x \n", val1);
 	log_debug("extracted device id %x \n",val2);
 
-	return 1;
+	واپس 1;
 }

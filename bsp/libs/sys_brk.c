@@ -26,13 +26,13 @@
 @detail This file is used to the set the brk which specifies the start of the heap and the end of the text section.
 */ 
 
-#include "platform.h"
+#شامل "platform.h"
 
-extern char _end[];                /* _end is set in the linker file */
-extern char _heap_end[];	   /* _heap_end is set in the linker file */
+خارجی حرف انتہا[];                /* _end is set in the linker file */
+خارجی حرف ڈھیر_انتہا_2[];	   /* _heap_end is set in the linker file */
 
-char *heap_ptr=(char *)&_end;
-char *end_of_heap=(char *)&_heap_end;
+حرف *ڈھیر_ptr=(حرف *)&انتہا;
+حرف *انتہا_کا_ڈھیر=(حرف *)&ڈھیر_انتہا_2;
 
 /* OS LESS IMPLEMENTATION OF SBRK
  * sbrk -- changes heap size. Get nbytes more RAM.
@@ -46,25 +46,25 @@ char *end_of_heap=(char *)&_heap_end;
  * @param int nbytes - specifies the size of the heap 
  * @return  returns a pointer to the start of the heap
  */
-char * m_sbrk (nbytes)
-	int nbytes;
+حرف * m_sbrk (nbytes)
+	صحیح nbytes;
 {
-	char *base;
+	حرف *بنیاد;
 
-	log_debug("\nHeap pointer is %x",heap_ptr);
+	log_debug("\nHeap pointer is %x",ڈھیر_ptr);
 
-	if(!heap_ptr)
-		heap_ptr = (char *)&_end;
+	اگر(!ڈھیر_ptr)
+		ڈھیر_ptr = (حرف *)&انتہا;
 
-	base = heap_ptr;
-	heap_ptr += nbytes;
+	بنیاد = ڈھیر_ptr;
+	ڈھیر_ptr += nbytes;
 
-	log_debug("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
+	log_debug("\nNew System BRK: %x %x %x",بنیاد,ڈھیر_ptr,انتہا_کا_ڈھیر);
 
-	if(heap_ptr>end_of_heap)
+	اگر(ڈھیر_ptr>انتہا_کا_ڈھیر)
 	{
 		log_error("\nMemory allocation error: Insufficient Space");
-		return -1;
+		واپس -1;
 	}
-	return base;
+	واپس بنیاد;
 }

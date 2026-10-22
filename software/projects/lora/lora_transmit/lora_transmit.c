@@ -34,40 +34,40 @@
   * 5. Lora module send the data by specifing the length
 */
 
-#include <string.h>
-#include "uart.h"
-#include "pinmux.h"
-#include "i2c.h"
-#include "log.h"
+#شامل <string.h>
+#شامل "uart.h"
+#شامل "pinmux.h"
+#شامل "i2c.h"
+#شامل "log.h"
 
 // #include "ds3231.c"
-void intermediate(void);
-const char* values();
+خالی intermediate(خالی);
+ثابت حرف* اقدار();
 
-#define LORA_UART uart_instance[1]
-#define BAUDRATE 9600
-#define LENGTH 100
+#تعریف_کرو LORA_UART uart_instance[1]
+#تعریف_کرو BAUDRATE 9600
+#تعریف_کرو لمبائی_3 100
 
 /** @fn int read_from_lora(char *data)
  * @brief reads data sent by lora module using UART
  * @param data responses read from lora module is stored in it
  */
-int read_from_lora(char *data)
+صحیح read_from_lora(حرف *ڈیٹا_2)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	صحیح ch;
+	حرف *str = ڈیٹا_2;
+	حرف *test = ڈیٹا_2;
+	برائے (صحیح i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		اگر (ch == '\n')
 		{
-			break;
+			توڑو;
 		}
 	}
-	return;	
+	واپس;	
 }
 
 
@@ -76,11 +76,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+صحیح write_enter_مقصد_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	واپس 0;
 }
 
 
@@ -88,14 +88,14 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+خالی write_مقصد_lora(حرف *ڈیٹا_2)
 {
-	while (*data != '\0')
+	جب (*ڈیٹا_2 != '\0')
 	{
-		write_uart_character(LORA_UART, *data);
-		data++;
+		write_uart_character(LORA_UART, *ڈیٹا_2);
+		ڈیٹا_2++;
 	}
-	write_enter_to_lora();
+	write_enter_مقصد_lora();
 }
 
 
@@ -103,18 +103,18 @@ void write_to_lora(char *data)
  * @brief It helps to send the required data or message to another LORA module
  * @details Through AT commands the message can be send from one LORA to another LORA module.
  */
-void send_data(char *values)
+خالی send_ڈیٹا(حرف *اقدار)
 {
-	char data[LENGTH];
+	حرف ڈیٹا_2[لمبائی_3];
 
-	printf("\n Send DATA: %s", values);
+	لکھو("\n Send DATA: %s", اقدار);
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Sending DATA from");
-	write_to_lora(values);
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Sending DATA from");
+	write_مقصد_lora(اقدار);
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 }
 
 
@@ -123,30 +123,30 @@ void send_data(char *values)
  * @brief It helps to check the value set by the user, to the LORA module.
  * @details Through AT commands, the set values can be checked by these functions.
  */
-void check_set_lora_value()
+خالی check_سیٹ_lora_قدر()
 {
-	char data[LENGTH];
+	حرف ڈیٹا_2[لمبائی_3];
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Finding the Mode set for LORA module");
-	write_to_lora("AT+MODE?");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Finding the Mode set for LORA module");
+	write_مقصد_lora("AT+MODE?");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Finding the Address set to the LORA module");
-	write_to_lora("AT+ADDRESS?");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Finding the Address set to the LORA module");
+	write_مقصد_lora("AT+ADDRESS?");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Finding the BAND set for the LORA module");
-	write_to_lora("AT+BAND?");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Finding the BAND set for the LORA module");
+	write_مقصد_lora("AT+BAND?");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 }
 
 
@@ -154,37 +154,37 @@ void check_set_lora_value()
  * @brief all the necessary features can be set by thsese.
  * @details through AT commands the LORA module can be set and make it usable.
  */
-void setup_lora()
+خالی تیاری_lora()
 {
-	char data[LENGTH];
+	حرف ڈیٹا_2[لمبائی_3];
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT");
-	write_to_lora("AT");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Writing AT");
+	write_مقصد_lora("AT");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT+MODE = 0");
-	write_to_lora("AT+MODE=0");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Writing AT+MODE = 0");
+	write_مقصد_lora("AT+MODE=0");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT+ADDRESS = 1");
-	write_to_lora("AT+ADDRESS=1");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Writing AT+ADDRESS = 1");
+	write_مقصد_lora("AT+ADDRESS=1");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 
-	memset(data, 0, LENGTH);
+	memset(ڈیٹا_2, 0, لمبائی_3);
 	flush_uart(LORA_UART);
-	printf("\n Writing AT+BAND = 865000000");
-	write_to_lora("AT+BAND=865000000");
-	read_from_lora(data);
-	printf("\n Data from LORA module: %s", data);
+	لکھو("\n Writing AT+BAND = 865000000");
+	write_مقصد_lora("AT+BAND=865000000");
+	read_from_lora(ڈیٹا_2);
+	لکھو("\n Data from LORA module: %s", ڈیٹا_2);
 }
 
 
@@ -194,13 +194,13 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Send data 
  */
-void main()
+خالی مین()
 {
-	printf("\n Setting PIN MUX config to 2 ...... \n");
+	لکھو("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;
 
-	printf("\n Setting the BAUDRATE to: %d .... \n", BAUDRATE);
-	set_baud_rate(LORA_UART, BAUDRATE);
+	لکھو("\n Setting the BAUDRATE to: %d .... \n", BAUDRATE);
+	سیٹ_baud_شرح(LORA_UART, BAUDRATE);
 
 	/* To Setup the LORA Module */
 	// setup_lora();
@@ -213,9 +213,9 @@ void main()
 	intermediate();
 
 	/* Sending Time and date consequtively */
-	while (1)
+	جب (1)
 	{
-		send_data(values());
+		send_ڈیٹا(اقدار());
 		delay_loop(1500,1500);
 	}
 	

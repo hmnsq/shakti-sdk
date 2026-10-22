@@ -27,41 +27,41 @@
  * for the plic module is also defined here.
  */
 
-#ifndef ETH_DRIVER_H
-#define ETH_DRIVER_H
-#include "platform.h"
-#include "traps.h"
-#include "eth_driver.h"
-#include "eth_macros.h"
+#اگر_غیر_تعریف_شدہ ETH_DRIVER_H
+#تعریف_کرو ETH_DRIVER_H
+#شامل "platform.h"
+#شامل "traps.h"
+#شامل "eth_driver.h"
+#شامل "eth_macros.h"
 
-#define INLINE inline
-#define __LITTLE_ENDIAN__ 1
+#تعریف_کرو INLINE اندرونی
+#تعریف_کرو __LITTLE_ENDIAN__ 1
 
 
 /*
  * guarded against xbasic_types.h.
  */
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
+قسمتعریف uint8_t u8;
+قسمتعریف uint16_t u16;
+قسمتعریف uint32_t u32;
 /** @}*/
-#define __XUINT64__
-typedef struct
+#تعریف_کرو __XUINT64__
+قسمتعریف ساخت
 {
-	u32 Upper;
-	u32 Lower;
+	u32 بالائی;
+	u32 زیریں;
 } Xuint64;
 
-typedef char char8;
-typedef int8_t s8;
-typedef int16_t s16;
-typedef int32_t s32;
-typedef int64_t s64;
-typedef uint64_t u64;
-typedef int sint32;
+قسمتعریف حرف char8;
+قسمتعریف int8_t s8;
+قسمتعریف int16_t s16;
+قسمتعریف int32_t s32;
+قسمتعریف int64_t s64;
+قسمتعریف uint64_t u64;
+قسمتعریف صحیح sint32;
 
-typedef intptr_t INTPTR;
-typedef uintptr_t UINTPTR;
+قسمتعریف intptr_t INTPTR;
+قسمتعریف uintptr_t UINTPTR;
 //typedef ptrdiff_t PTRDIFF;
 
 /*****************************************************************************
@@ -69,58 +69,58 @@ typedef uintptr_t UINTPTR;
  * EmacLite defines .
  * DeviceID starts at 240
  */
-#define XPAR_XEMACLITE_NUM_INSTANCES    1
-#define XPAR_EMACLITE_0_DEVICE_ID       240
+#تعریف_کرو XPAR_XEMACLITE_عدد_INSTANCES    1
+#تعریف_کرو XPAR_EMACLITE_0_DEVICE_ID       240
 /* EK Change */
-#define XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
-#define XPAR_EMACLITE_0_TX_PING_PONG    1
-#define XPAR_EMACLITE_0_RX_PING_PONG    1
-#define XPAR_EMACLITE_0_INCLUDE_MDIO 1
-#define XPAR_EMACLITE_0_INCLUDE_INTERNAL_LOOPBACK 1
+#تعریف_کرو XPAR_EMACLITE_0_BASEADDR      0x00044000 //0
+#تعریف_کرو XPAR_EMACLITE_0_TX_PING_PONG    1
+#تعریف_کرو XPAR_EMACLITE_0_RX_PING_PONG    1
+#تعریف_کرو XPAR_EMACLITE_0_INCLUDE_MDIO 1
+#تعریف_کرو XPAR_EMACLITE_0_INCLUDE_اندرونی_LOOPBACK 1
 
 
-#define TRUE		1U
-#define FALSE		0U
+#تعریف_کرو TRUE		1U
+#تعریف_کرو FALSE		0U
 
-#define NULL		0U
-#define SUCCESS 0
-#define FAILURE -1
-#define DEVICE_BUSY                 21L	/*!< Device is busy */
-#define NO_CALLBACK 18L	/*!< A callback has not yet been
+#تعریف_کرو تہی		0U
+#تعریف_کرو SUCCESS 0
+#تعریف_کرو FAILURE -1
+#تعریف_کرو DEVICE_BUSY                 21L	/*!< Device is busy */
+#تعریف_کرو NO_CALLBACK 18L	/*!< A callback has not yet been
 						   registered */
-#define NO_DATA                     13L	/*!< There was no data available */
-#define XST_LOOPBACK_ERROR              17L	/*!< A loopback test failed */
-#define XST_NO_CALLBACK                 18L	/*!< A callback has not yet been
+#تعریف_کرو NO_ڈیٹا                     13L	/*!< There was no data available */
+#تعریف_کرو XST_LOOPBACK_ERROR              17L	/*!< A loopback test failed */
+#تعریف_کرو XST_NO_CALLBACK                 18L	/*!< A callback has not yet been
 						   registered */
-#define XST_NO_FEATURE                  19L	/*!< Device is not configured with
+#تعریف_کرو XST_NO_FEATURE                  19L	/*!< Device is not configured with
 						   the requested feature */
-#define XST_NOT_INTERRUPT               20L	/*!< Device is not configured for
+#تعریف_کرو XST_NOT_مداخلت               20L	/*!< Device is not configured for
 						   interrupt mode operation */
 
-#define XIL_COMPONENT_IS_READY     0x11111111U  /**< In device drivers, This macro will be
+#تعریف_کرو XIL_COMPONENT_IS_READY     0x11111111U  /**< In device drivers, This macro will be
                                                  assigend to "IsReady" member of driver
 												 instance to indicate that driver
 												 instance is initialized and ready to use. */
-#define XIL_COMPONENT_IS_STARTED   0x22222222U  /**< In device drivers, This macro will be assigend to
+#تعریف_کرو XIL_COMPONENT_IS_STARTED   0x22222222U  /**< In device drivers, This macro will be assigend to
                                                  "IsStarted" member of driver instance
 												 to indicate that driver instance is
 												 started and it can be enabled. */
-#define XST_SUCCESS SUCCESS
-#define XST_FAILURE FAILURE
-#define xil_printf log_debug
+#تعریف_کرو XST_SUCCESS SUCCESS
+#تعریف_کرو XST_FAILURE FAILURE
+#تعریف_کرو xil_printf log_debug
 
 /************************** Constant Definitions ****************************/
 
-#define PHY_REG0_OFFSET		0 /* Register 0 of PHY device */
-#define PHY_REG1_OFFSET 	1 /* Register 1 of PHY device */
+#تعریف_کرو PHY_REG0_انحراف		0 /* Register 0 of PHY device */
+#تعریف_کرو PHY_REG1_انحراف 	1 /* Register 1 of PHY device */
 
-#define PHY_REG0_RESET_MASK	0x8000  /* Reset Phy device */
-#define PHY_REG0_LOOPBACK_MASK	0x4000  /* Loopback Enable in Phy */
-#define PHY_REG0_SPD_100_MASK	0x2000  /* Speed of 100Mbps for Phy */
+#تعریف_کرو PHY_REG0_RESET_نقاب	0x8000  /* Reset Phy device */
+#تعریف_کرو PHY_REG0_LOOPBACK_نقاب	0x4000  /* Loopback Enable in Phy */
+#تعریف_کرو PHY_REG0_SPD_100_نقاب	0x2000  /* Speed of 100Mbps for Phy */
 
-#define PHY_REG1_DETECT_MASK	0x1808	/* Mask to detect PHY device */
+#تعریف_کرو PHY_REG1_DETECT_نقاب	0x1808	/* Mask to detect PHY device */
 
-#define EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
+#تعریف_کرو EMACLITE_PHY_DELAY_SEC	4	/* Amount of time to delay waiting on
 					 * PHY to reset.
 					 */
 
@@ -128,9 +128,9 @@ typedef uintptr_t UINTPTR;
 /**
  * This typedef contains configuration information for a device.
  */
-typedef struct {
+قسمتعریف ساخت {
 	u16 DeviceId;	 /**< Unique ID  of device */
-	UINTPTR BaseAddress; /**< Device base address */
+	UINTPTR بنیاد_پتہ; /**< Device base address */
 	u8 TxPingPong;	 /**< 1 if TX Pong buffer configured, 0 otherwise */
 	u8 RxPingPong;	 /**< 1 if RX Pong buffer configured, 0 otherwise */
 	u8 MdioInclude;  /**< 1 if MDIO is enabled, 0 otherwise */
@@ -143,40 +143,40 @@ typedef struct {
  *		when setting the callback functions, and passed back to the
  *		upper layer when the callback is invoked.
  */
-typedef void (*XEmacLite_Handler) (void *CallBackRef);
+قسمتعریف خالی (*XEmacLite_Handler) (خالی *Call_عقب_Ref);
 
 /**
  * The XEmacLite driver instance data. The user is required to allocate a
  * variable of this type for every EmacLite device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+قسمتعریف ساخت {
 	XEmacLite_Config EmacLiteConfig; /* Device configuration */
 	u32 IsReady;			 /* Device is initialized and ready */
 
-	u32 NextTxBufferToUse;		 /* Next TX buffer to write to */
-	u32 NextRxBufferToUse;		 /* Next RX buffer to read from */
+	u32 اگلا_Tx_بفر_مقصد_Use;		 /* Next TX buffer to write to */
+	u32 اگلا_Rx_بفر_مقصد_Use;		 /* Next RX buffer to read from */
 
 	/*
 	 * Callbacks
 	 */
 	XEmacLite_Handler RecvHandler;
-	void *RecvRef;
+	خالی *RecvRef;
 	XEmacLite_Handler SendHandler;
-	void *SendRef;
+	خالی *SendRef;
 
 } XEmacLite;
 
-#ifndef ETH_VARI
-extern volatile u32 RecvFrameLength;
-extern UINTPTR TxBuffPtr;
-extern UINTPTR RxBuffPtr;
-extern volatile int FramesTx;
-extern volatile int FramesRx;
-extern volatile int TxCount;
-extern volatile int RxCount;
-extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
-#endif
+#اگر_غیر_تعریف_شدہ ETH_VARI
+خارجی متلون u32 Recv_چوکھٹا_لمبائی;
+خارجی UINTPTR TxBuffPtr;
+خارجی UINTPTR RxBuffPtr;
+خارجی متلون صحیح چوکھٹے_Tx;
+خارجی متلون صحیح چوکھٹے_Rx;
+خارجی متلون صحیح Tx_گنتی;
+خارجی متلون صحیح Rx_گنتی;
+خارجی متلون صحیح Padding;	/* For 1588 Packets we need to pad 8 bytes time stamp value */
+#اگر_ختم
 
 
 
@@ -195,9 +195,9 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 * This is used to determine the destination of the next transmit data frame.
 *
 *****************************************************************************/
-#define XEmacLite_NextTransmitAddr(InstancePtr) 			\
-	((InstancePtr)->EmacLiteConfig.BaseAddress + 			\
-		(InstancePtr)->NextTxBufferToUse) + XEL_TXBUFF_OFFSET
+#تعریف_کرو XEmac_Lite_اگلا_Transmit_Addr(InstancePtr) 			\
+	((InstancePtr)->EmacLiteConfig.بنیاد_پتہ + 			\
+		(InstancePtr)->اگلا_Tx_بفر_مقصد_Use) + XEL_TXBUFF_انحراف
 
 /****************************************************************************/
 /**
@@ -214,9 +214,9 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 * This is the expected receive buffer address if the driver is in sync.
 *
 *****************************************************************************/
-#define XEmacLite_NextReceiveAddr(InstancePtr)				\
-	((InstancePtr)->EmacLiteConfig.BaseAddress + 			\
-	(InstancePtr)->NextRxBufferToUse)
+#تعریف_کرو XEmac_Lite_اگلا_Receive_Addr(InstancePtr)				\
+	((InstancePtr)->EmacLiteConfig.بنیاد_پتہ + 			\
+	(InstancePtr)->اگلا_Rx_بفر_مقصد_Use)
 
 /*****************************************************************************/
 /**
@@ -234,7 +234,7 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 *		int XEmacLite_IsMdioConfigured(XEmacLite *InstancePtr)
 *
 ******************************************************************************/
-#define XEmacLite_IsMdioConfigured(InstancePtr) 			\
+#تعریف_کرو XEmacLite_IsMdioConfigured(InstancePtr) 			\
 	((InstancePtr)->EmacLiteConfig.MdioInclude == 1)
 
 /*****************************************************************************/
@@ -254,19 +254,19 @@ extern volatile int Padding;	/* For 1588 Packets we need to pad 8 bytes time sta
 *		int XEmacLite_IsLoopbackConfigured(XEmacLite *InstancePtr)
 *
 ******************************************************************************/
-#define XEmacLite_IsLoopbackConfigured(InstancePtr) 			\
+#تعریف_کرو XEmacLite_IsLoopbackConfigured(InstancePtr) 			\
             ((InstancePtr)->EmacLiteConfig.Loopback == 1)
 
 /************************** Variable Definitions *****************************/
 
 
-void XEmacLite_AlignedWrite(void *SrcPtr, UINTPTR *DestPtr, unsigned ByteCount);
-void XEmacLite_AlignedRead(UINTPTR *SrcPtr, void *DestPtr, unsigned ByteCount);
+خالی XEmacLite_AlignedWrite(خالی *SrcPtr, UINTPTR *DestPtr, غیرعلامتی Byte_گنتی);
+خالی XEmacLite_AlignedRead(UINTPTR *SrcPtr, خالی *DestPtr, غیرعلامتی Byte_گنتی);
 
-extern XEmacLite_Config XEmacLite_ConfigTable;
-extern int XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
+خارجی XEmacLite_Config XEmac_Lite_Config_جدول;
+خارجی صحیح XEmacLite_CfgInitialize(XEmacLite *InstancePtr,
 				XEmacLite_Config *EmacLiteConfigPtr,
 				UINTPTR EffectiveAddr);
 
 
-#endif
+#اگر_ختم

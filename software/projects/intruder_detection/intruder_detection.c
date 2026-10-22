@@ -55,43 +55,43 @@
 /***********************************************************
 *		Include File Definitions
 ************************************************************/
-#include "gpio.h"
-#include "platform.h"
-#include "intruder_detection.h" 
-#include "log.h" 
+#شامل "gpio.h"
+#شامل "platform.h"
+#شامل "intruder_detection.h" 
+#شامل "log.h" 
 /* global variable definition*/
 
-int pir_present_state = 0;
-int pir_previous_state = 0;
+صحیح pir_present_state = 0;
+صحیح pir_پچھلا_state = 0;
 
-int panic_present_state=0;
-int panic_previous_state=0;
+صحیح panic_present_state=0;
+صحیح panic_پچھلا_state=0;
 
-int alarm_present_state=0;
-int alarm_previous_state=0;
+صحیح alarm_present_state=0;
+صحیح alarm_پچھلا_state=0;
 
-int first_flag = 1; 
-int alarm_flag = 0;
-int deactivate_flag = 0;
-int alarm_counter_flag=1; //Default value 1
-int keypad_password_flag=0;
+صحیح پہلا_flag = 1; 
+صحیح alarm_flag = 0;
+صحیح deactivate_flag = 0;
+صحیح alarm_شمار_flag=1; //Default value 1
+صحیح keypad_password_flag=0;
 
-int alarm_counter = 0;
-int keypad_counter= 0;
+صحیح alarm_شمار = 0;
+صحیح keypad_شمار= 0;
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
-int col_row = -1;
+صحیح کلید = -1;
+صحیح ستون_صف = -1;
 
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-unsigned int col[4]={0, 1, 2, 3};
-unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+غیرعلامتی صحیح صف_pins[ROWNUM];
+غیرعلامتی صحیح ستون_pins[COLNUM];
+غیرعلامتی صحیح ستون[4]={0, 1, 2, 3};
+غیرعلامتی صحیح صف[4]={4, 5, 6, 7};
+صحیح کلید_map[COLNUM][ROWNUM];
 //Password
-int pass_data[PASS_NUM];
+صحیح pass_ڈیٹا[PASS_عدد];
 
-int  keyTable[4][4] =
+صحیح  کلید_جدول_2[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -105,18 +105,18 @@ int  keyTable[4][4] =
  * @param  gpio_pin The pin number for which the function sets HIGH or LOW
  * @param gpio_pin_mode Mode = 0 - Sets the GPIO Pin to LOW, 1- Sets the GPIO Pin to HIGH 
  */
-void write_gpio(unsigned long gpio_pin, int gpio_pin_mode )
+خالی write_gpio(غیرعلامتی طویل gpio_pin, صحیح gpio_pin_منوال )
 {
-	unsigned long read_data = 0;
-	read_data = read_word(GPIO_DATA_REG);
+	غیرعلامتی طویل read_ڈیٹا_2 = 0;
+	read_ڈیٹا_2 = read_لفظ(GPIO_ڈیٹا_REG);
 
-	if(gpio_pin_mode == 1)
+	اگر(gpio_pin_منوال == 1)
 	{
-		write_word (GPIO_DATA_REG, ( read_data | (gpio_pin ) ) );
+		write_لفظ (GPIO_ڈیٹا_REG, ( read_ڈیٹا_2 | (gpio_pin ) ) );
 	}
-	else
+	ورنہ
 	{
-                write_word(GPIO_DATA_REG, ( read_data & ( ~gpio_pin ) ) );  
+                write_لفظ(GPIO_ڈیٹا_REG, ( read_ڈیٹا_2 & ( ~gpio_pin ) ) );  
 	}
 
 }
@@ -127,27 +127,27 @@ void write_gpio(unsigned long gpio_pin, int gpio_pin_mode )
  * @param temp_read_data Present Register Data of GPIO 
  * @return 0- State (1->0 or 0->0); 1- State (0->1);2- State (1->1) 
  */
-int pir_read_state(unsigned long temp_read_data)
+صحیح pir_read_state(غیرعلامتی طویل عارضی_read_ڈیٹا)
 {
-  pir_present_state= ((PIR_IN & temp_read_data) >>PIR_OFFSET);  
+  pir_present_state= ((PIR_اندر & عارضی_read_ڈیٹا) >>PIR_انحراف);  
 
-  if( (pir_present_state == 1) && (pir_previous_state == 0) ){
+  اگر( (pir_present_state == 1) && (pir_پچھلا_state == 0) ){
 	//State of 0->1
-   	log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_previous_state);
-	pir_previous_state = pir_present_state;
-    return 1;
+   	log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_پچھلا_state);
+	pir_پچھلا_state = pir_present_state;
+    واپس 1;
   }
-  else if((pir_present_state == 1) && (pir_previous_state == 1)) {
+  ورنہ اگر((pir_present_state == 1) && (pir_پچھلا_state == 1)) {
 	//State of 1 -> 1
-	log_debug("\nPIR Code 2 %x -- %x ",pir_present_state,pir_previous_state);
-	pir_previous_state = pir_present_state;
-	return 2;
+	log_debug("\nPIR Code 2 %x -- %x ",pir_present_state,pir_پچھلا_state);
+	pir_پچھلا_state = pir_present_state;
+	واپس 2;
   }
-  else {
+  ورنہ {
 	//State of 1->0 and 0->0
-   	log_debug("\nPIR Code 0 %x -- %x",pir_present_state,pir_previous_state);
-    pir_previous_state = pir_present_state;
-    return 0;
+   	log_debug("\nPIR Code 0 %x -- %x",pir_present_state,pir_پچھلا_state);
+    pir_پچھلا_state = pir_present_state;
+    واپس 0;
   }
 }
 
@@ -158,26 +158,26 @@ int pir_read_state(unsigned long temp_read_data)
  * @param temp_read_data Present Register Data of GPIO 
  * @return 0 - State (0->0 & 1->0) ;1 - State (0->1);2 - State (1->1) 
  */
-int panic_button_read_state(unsigned long temp_read_data)
+صحیح panic_button_read_state(غیرعلامتی طویل عارضی_read_ڈیٹا)
 {
-  panic_present_state= ( (PANIC_BUTTON & temp_read_data) >> PANIC_BUTTON_OFFSET);  
+  panic_present_state= ( (PANIC_BUTTON & عارضی_read_ڈیٹا) >> PANIC_BUTTON_انحراف);  
 
-  if( (panic_present_state == 1) && (panic_previous_state == 0) ) {
-	  log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_previous_state);
+  اگر( (panic_present_state == 1) && (panic_پچھلا_state == 0) ) {
+	  log_debug("\nHuman Detected - Intrusion Alert %x -- %x ",pir_present_state,pir_پچھلا_state);
 	  log_debug("\nSOS -Panic Button Activated");
-	  panic_previous_state = panic_present_state;
-	  return 1;
+	  panic_پچھلا_state = panic_present_state;
+	  واپس 1;
   }
-  else if( (panic_previous_state == 1) && (panic_present_state == 1) ) {
+  ورنہ اگر( (panic_پچھلا_state == 1) && (panic_present_state == 1) ) {
 	  //Function Returns 2 when mode is 1-1 (present and prev state)
-	  log_debug("\nPanic -Code 2 %x -- %x ",pir_present_state,pir_previous_state);
-	  panic_previous_state = panic_present_state;
-	  return 2;
+	  log_debug("\nPanic -Code 2 %x -- %x ",pir_present_state,pir_پچھلا_state);
+	  panic_پچھلا_state = panic_present_state;
+	  واپس 2;
   }
-  else {
-	  log_debug("\nPanic -Code 0 %x -- %x",pir_present_state,pir_previous_state);
-	  panic_previous_state = panic_present_state;
-	  return 0;
+  ورنہ {
+	  log_debug("\nPanic -Code 0 %x -- %x",pir_present_state,pir_پچھلا_state);
+	  panic_پچھلا_state = panic_present_state;
+	  واپس 0;
   }
 }
 
@@ -185,14 +185,14 @@ int panic_button_read_state(unsigned long temp_read_data)
  * @brief Outputs the Buzzer Tone
  * @details Generates a tone for the buzzer module
  */
-void buzzer_tone()
+خالی buzzer_tone()
 {
-	int i=0;
+	صحیح i=0;
 
-	for (i = 0; i < 4; i++) {
-		write_gpio(BUZZER,HIGH);	//Buzzer generates sound
+	برائے (i = 0; i < 4; i++) {
+		write_gpio(BUZZER,بلند);	//Buzzer generates sound
 		delay(1);
-		write_gpio(BUZZER,LOW);		//No tone
+		write_gpio(BUZZER,کم);		//No tone
 		delay(1);
     }
 }
@@ -206,18 +206,18 @@ void buzzer_tone()
  * @param col pointer address which sets column pins
  * @param table Array which maps the table to the key map 
  */
-void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM][ROWNUM] )
+خالی  سیٹ_کلید_pins_map( غیرعلامتی صحیح*  صف, غیرعلامتی صحیح* ستون, صحیح جدول[COLNUM][ROWNUM] )
 {
-	for(int i = 0 ; i < COLNUM ; i++)	{
-		col_pins[i] = col[i]; // set col
+	برائے(صحیح i = 0 ; i < COLNUM ; i++)	{
+		ستون_pins[i] = ستون[i]; // set col
 	}
-	for(int j = 0 ; j < ROWNUM ; j++) 	{
-		row_pins[j] = row[j]; 	// set row
+	برائے(صحیح j = 0 ; j < ROWNUM ; j++) 	{
+		صف_pins[j] = صف[j]; 	// set row
 	}
 	//Mapping table to its key map 
-	for(int i = 0 ; i < COLNUM ; i++) {
-		for(int j = 0 ; j < ROWNUM ; j++) {
-			key_map[i][j] = table[i][j];
+	برائے(صحیح i = 0 ; i < COLNUM ; i++) {
+		برائے(صحیح j = 0 ; j < ROWNUM ; j++) {
+			کلید_map[i][j] = جدول[i][j];
 		}
 	}
 }
@@ -228,9 +228,9 @@ void  set_key_pins_map( unsigned int*  row, unsigned int* col, int table[COLNUM]
  * @param col_row The input to return the correspoding mapped value in key_map table 
  * @return Returns the corresponding value based on the input from the key_map table
  */
-int get_key(int col_row)
+صحیح get_کلید(صحیح ستون_صف)
 {
-	return key_map[col_row>>16][0xFFFF & col_row];
+	واپس کلید_map[ستون_صف>>16][0xFFFF & ستون_صف];
 }
 
 /** @fn get_col_row
@@ -239,61 +239,61 @@ int get_key(int col_row)
    low and reading the row values     
  * @return -1 - No keys pressed ; else - Returns the key pressed by the Keypad
  */
-int get_col_row(void)
+صحیح get_ستون_صف(خالی)
 {
-	int col_row = 0;
-	unsigned long read_value = 0;
-	unsigned long temp_read_data = 0;
+	صحیح ستون_صف = 0;
+	غیرعلامتی طویل read_قدر = 0;
+	غیرعلامتی طویل عارضی_read_ڈیٹا = 0;
 
 	//Masking Data Reg 
-	temp_read_data = read_word(GPIO_DATA_REG);
-	write_word(GPIO_DATA_REG,( temp_read_data | (0xF << OUTPINS_OFFSET) ) );
+	عارضی_read_ڈیٹا = read_لفظ(GPIO_ڈیٹا_REG);
+	write_لفظ(GPIO_ڈیٹا_REG,( عارضی_read_ڈیٹا | (0xF << OUTPINS_انحراف) ) );
 
-	for(int i= 0 ; i < COLNUM ; i++)
+	برائے(صحیح i= 0 ; i < COLNUM ; i++)
 	{
-		temp_read_data = read_word(GPIO_DATA_REG);
-		write_word(GPIO_DATA_REG, ((0xF << OUTPINS_OFFSET) & (~(0x1 <<i))));
+		عارضی_read_ڈیٹا = read_لفظ(GPIO_ڈیٹا_REG);
+		write_لفظ(GPIO_ڈیٹا_REG, ((0xF << OUTPINS_انحراف) & (~(0x1 <<i))));
 
-		for(int j = 0 ; j < ROWNUM ; j++) {
-			read_value =  read_word(GPIO_DATA_REG);
-			log_debug("\n The read value is %lx; row_pins: %x", (read_value), row_pins[j]);
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 ) {
-				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_value, i, j, row_pins[j], key_map[i][j]);
-				return key_map[i][j];
+		برائے(صحیح j = 0 ; j < ROWNUM ; j++) {
+			read_قدر =  read_لفظ(GPIO_ڈیٹا_REG);
+			log_debug("\n The read value is %lx; row_pins: %x", (read_قدر), صف_pins[j]);
+			اگر( ( read_قدر & (1 << صف_pins[j] ) ) == 0 ) {
+				log_debug("\n The read value is %lx; [i:%d; j:%d] row_pins: %d; key_map=%d", read_قدر, i, j, صف_pins[j], کلید_map[i][j]);
+				واپس کلید_map[i][j];
 			}
 		}
 
-		temp_read_data = read_word(GPIO_DATA_REG);
-		write_word(GPIO_DATA_REG,(temp_read_data | (0xF << OUTPINS_OFFSET)));
+		عارضی_read_ڈیٹا = read_لفظ(GPIO_ڈیٹا_REG);
+		write_لفظ(GPIO_ڈیٹا_REG,(عارضی_read_ڈیٹا | (0xF << OUTPINS_انحراف)));
 	}
-	return -1;
+	واپس -1;
 }
 
 /** @fn gpio_init
  * @brief This function initializes the GPIOs, Keypad and PIR Sensor. 
  * @details Initializing the GPIOs used by the sensors and keypad to its mode.    
  */
-void gpio_init()
+خالی gpio_init()
 {
-	set_key_pins_map(row, col,keyTable);
+	سیٹ_کلید_pins_map(صف, ستون,کلید_جدول_2);
 
 	//Configuring the Pin mode for pins for keypad
-	unsigned long read_data = 0;
+	غیرعلامتی طویل read_ڈیٹا_2 = 0;
 
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-	write_word (GPIO_DIRECTION_CNTRL_REG, ( read_data | (OUTPINS ) ) );
+	read_ڈیٹا_2 = read_لفظ(GPIO_DIRECTION_CNTRL_REG);
+	write_لفظ (GPIO_DIRECTION_CNTRL_REG, ( read_ڈیٹا_2 | (OUTPINS ) ) );
 
 	//Configuring the Pin mode for GPIO pins for other peripherals
-	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
+	read_ڈیٹا_2 = read_لفظ(GPIO_DIRECTION_CNTRL_REG);
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
-	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | GPIO_OUTPINS ) );
+	write_لفظ(GPIO_DIRECTION_CNTRL_REG, ( read_ڈیٹا_2 | GPIO_OUTPINS ) );
 
 	//All the LED initially set to LOW
-	write_gpio(LED_P1,LOW);
-	write_gpio(LED_P2,LOW);
-	write_gpio(LED_P3,LOW);
-	write_gpio(LED_P4,LOW);
-	write_gpio(BUZZER,LOW);
+	write_gpio(LED_P1,کم);
+	write_gpio(LED_P2,کم);
+	write_gpio(LED_P3,کم);
+	write_gpio(LED_P4,کم);
+	write_gpio(BUZZER,کم);
 }
 
 /** @fn main
@@ -301,124 +301,124 @@ void gpio_init()
  * @details Initializes the necessary devices and pins and then runs the main intruder detection program   
  * @return 0 
  */
-int main()
+صحیح مین()
 {
 	//Clearing the Data Register
-	unsigned long read_data = 0;
-	int prev_col_row = 0;
+	غیرعلامتی طویل read_ڈیٹا_2 = 0;
+	صحیح پچھلا_ستون_صف = 0;
 
-	printf("\n\n\tIntrusion Detection System");
+	لکھو("\n\n\tIntrusion Detection System");
 	gpio_init(); //Intialization of gpio 
 
-	printf("\nInitialising...");
+	لکھو("\nInitialising...");
 
-	while(1)
+	جب(1)
 	{
-		read_data = read_word(GPIO_DATA_REG);
+		read_ڈیٹا_2 = read_لفظ(GPIO_ڈیٹا_REG);
 
-		if(POWER_SWITCH & read_data) {
-			if(first_flag){
+		اگر(POWER_SWITCH & read_ڈیٹا_2) {
+			اگر(پہلا_flag){
 				//First time giving the sensor to calibrate 
 				delay(30);
-				printf("\nIntruder System activated");
-				first_flag=0;
-				alarm_counter_flag =1;
+				لکھو("\nIntruder System activated");
+				پہلا_flag=0;
+				alarm_شمار_flag =1;
 			}
 			//Intruder System - ON
-			write_gpio(LED_P2,HIGH);
+			write_gpio(LED_P2,بلند);
 			//Deactivation of Alarm Switch
 		
-			if(DEACTIVATE_SWITCH & read_data) {
+			اگر(DEACTIVATE_SWITCH & read_ڈیٹا_2) {
 				deactivate_flag =1;
 			}
-			else {
+			ورنہ {
 				deactivate_flag =0;
 			}
 
-			int temp_read_PIR  = pir_read_state(read_data);
-			int temp_read_panic = panic_button_read_state(read_data);
+			صحیح عارضی_read_PIR  = pir_read_state(read_ڈیٹا_2);
+			صحیح عارضی_read_panic = panic_button_read_state(read_ڈیٹا_2);
 	
-			alarm_present_state= ((temp_read_PIR > 0) || (temp_read_panic == 1) || alarm_flag == 1 ) && (deactivate_flag == 0);
+			alarm_present_state= ((عارضی_read_PIR > 0) || (عارضی_read_panic == 1) || alarm_flag == 1 ) && (deactivate_flag == 0);
 
-			if(alarm_present_state == 1 && alarm_previous_state == 0) {
-				log_debug("\nAlarm state- %x   %x",alarm_previous_state,alarm_present_state);
+			اگر(alarm_present_state == 1 && alarm_پچھلا_state == 0) {
+				log_debug("\nAlarm state- %x   %x",alarm_پچھلا_state,alarm_present_state);
 
-				if(temp_read_PIR == 1)
-					printf("\nHuman Detection\nDeactivate to stop Alarm");
-				else if(temp_read_panic == 1)
-					printf("\nPanic Button\nDeactivate to stop Alarm");
+				اگر(عارضی_read_PIR == 1)
+					لکھو("\nHuman Detection\nDeactivate to stop Alarm");
+				ورنہ اگر(عارضی_read_panic == 1)
+					لکھو("\nPanic Button\nDeactivate to stop Alarm");
 				//else {printf("\nDeactivate the Alarm to stop...");}
 
-				write_gpio(LED_P1,HIGH);
+				write_gpio(LED_P1,بلند);
 				buzzer_tone();
 				alarm_flag = 1;
-				alarm_previous_state = alarm_present_state;
+				alarm_پچھلا_state = alarm_present_state;
 
 			}
-			else if(alarm_present_state == 1 && alarm_previous_state == 1) {
-				log_debug("\n%x   %x",alarm_previous_state,alarm_present_state);
-				write_gpio(LED_P1,HIGH);
+			ورنہ اگر(alarm_present_state == 1 && alarm_پچھلا_state == 1) {
+				log_debug("\n%x   %x",alarm_پچھلا_state,alarm_present_state);
+				write_gpio(LED_P1,بلند);
 				buzzer_tone();
 				alarm_flag =1;
-				alarm_previous_state = alarm_present_state;
-				alarm_counter++;
+				alarm_پچھلا_state = alarm_present_state;
+				alarm_شمار++;
 				//printf("\n\t\t\t%x",alarm_counter);
 
-				if(alarm_counter == ALARM_TIMER & ( alarm_counter_flag == 1 ))
+				اگر(alarm_شمار == ALARM_TIMER & ( alarm_شمار_flag == 1 ))
 				{
-					write_gpio(LED_P3,HIGH);
-					printf("\nContacting Police for Assistance");
+					write_gpio(LED_P3,بلند);
+					لکھو("\nContacting Police for Assistance");
 
-					alarm_counter_flag = 0;
-					alarm_counter = 0;
+					alarm_شمار_flag = 0;
+					alarm_شمار = 0;
 				}
-				else if(alarm_counter == ALARM_TIMER) {
+				ورنہ اگر(alarm_شمار == ALARM_TIMER) {
 					//Making Sure the alarm counter does not overflow
-					alarm_counter = 0;
+					alarm_شمار = 0;
 				}
 
 			}
-			else if(alarm_present_state == 0 && alarm_previous_state == 1)
+			ورنہ اگر(alarm_present_state == 0 && alarm_پچھلا_state == 1)
 			{
 				alarm_flag = 0;
-				write_gpio(LED_P1,LOW);
+				write_gpio(LED_P1,کم);
 
 
-				write_gpio(LED_P3,LOW);
-				alarm_counter_flag = 1;
-				alarm_counter= 0;
+				write_gpio(LED_P3,کم);
+				alarm_شمار_flag = 1;
+				alarm_شمار= 0;
 
-				printf("\nAlarm deactivated successfully");
-				alarm_previous_state = alarm_present_state;
+				لکھو("\nAlarm deactivated successfully");
+				alarm_پچھلا_state = alarm_present_state;
 			}
-			else {
+			ورنہ {
 				//Flags
 				alarm_flag = 0;
-				alarm_counter= 0;
-				alarm_counter_flag = 1;
+				alarm_شمار= 0;
+				alarm_شمار_flag = 1;
 
 				//write_gpio(LED_P3,LOW);
-				write_gpio(LED_P1,LOW);
-				alarm_previous_state = alarm_present_state ;
+				write_gpio(LED_P1,کم);
+				alarm_پچھلا_state = alarm_present_state ;
 			}
 
-			col_row = get_col_row();
+			ستون_صف = get_ستون_صف();
 			//KeyPad Sensor 
-			if( col_row != -1 ) {
-				printf("\nThe %x Key Pressed", col_row);
+			اگر( ستون_صف != -1 ) {
+				لکھو("\nThe %x Key Pressed", ستون_صف);
 
-				if( col_row == key_map[3][3]) {
-					printf("\nEnter Password-");
+				اگر( ستون_صف == کلید_map[3][3]) {
+					لکھو("\nEnter Password-");
 				}
 				delay(1);
 			}
 		}
-		else {
+		ورنہ {
 			//Intruder System Off
-			write_gpio(LED_P2,LOW);
-			first_flag = 1;
+			write_gpio(LED_P2,کم);
+			پہلا_flag = 1;
 		}
 		//end of infinite while loop
 	}
-	return 0;
+	واپس 0;
 }

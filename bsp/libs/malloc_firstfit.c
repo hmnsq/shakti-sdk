@@ -26,24 +26,24 @@
 @detail This algorithm implements the malloc function using the first-fit algorithm. It allocates and frees blocks of memory for usage.
 */ 
 
-#include<unistd.h>
-#include<sys/types.h>
-#include "platform.h"
-#include "defines.h"
-#include "log.h"
+#شامل<unistd.h>
+#شامل<sys/types.h>
+#شامل "platform.h"
+#شامل "defines.h"
+#شامل "log.h"
 
-extern char* _HEAP_SIZE[];
-char* HEAP_SIZE = (char *)&_HEAP_SIZE;
+خارجی حرف* ڈھیر_سائز[];
+حرف* ڈھیر_سائز_2 = (حرف *)&ڈھیر_سائز;
 
 //Header block denotes start of the segment
-struct Header
+ساخت سرخی
 {
-	size_t size;
-	int free;
-	struct Header* next;
+	size_t سائز;
+	صحیح آزاد;
+	ساخت سرخی* اگلا;
 };
 
-struct Header* global_base=NULL;
+ساخت سرخی* global_بنیاد=تہی;
 
 /** @fn  struct Header* allocate_block(struct Header* last, size_t size)
  * @brief it allocates a block of given size 
@@ -53,18 +53,18 @@ struct Header* global_base=NULL;
  * @return returns a pointer to the newly allocated block
  *         returns null if mmemory allocated or block allocation fails
  */
-struct Header* allocate_block(struct Header* last, size_t size)
+ساخت سرخی* allocate_بلاک(ساخت سرخی* آخری, size_t سائز)
 {
 	uintptr_t x=0;
 
 	log_trace("\nFunction allocate_block entered");
 
-	if(last->size > size)
+	اگر(آخری->سائز > سائز)
 	{
-		struct Header* newblock;
-		void *p = last;
+		ساخت سرخی* newblock;
+		خالی *p = آخری;
 
-		p += size + sizeof(struct Header);
+		p += سائز + حجم(ساخت سرخی);
 		x = p;
 
 		x = ((( x) + ((REGSIZE) - 1)) & ~((REGSIZE) - 1));
@@ -73,19 +73,19 @@ struct Header* allocate_block(struct Header* last, size_t size)
 
 		newblock = p;
 
-		newblock->size = last->size - size - sizeof(struct Header);
+		newblock->سائز = آخری->سائز - سائز - حجم(ساخت سرخی);
 
-		last->size = size;
-		last->free = 0;
-		last->next = newblock;
+		آخری->سائز = سائز;
+		آخری->آزاد = 0;
+		آخری->اگلا = newblock;
 
-		newblock->free = 1;
-		newblock->next = NULL;
+		newblock->آزاد = 1;
+		newblock->اگلا = تہی;
 
-		return last;
+		واپس آخری;
 	}
-	else
-		return NULL;
+	ورنہ
+		واپس تہی;
 	log_trace("\nFunction allocate_block entered");
 }
 
@@ -98,29 +98,29 @@ struct Header* allocate_block(struct Header* last, size_t size)
  * @return returns a free block if available
  *         returns null if unavailable
  */
-struct Header *find_free_block(struct Header **last, size_t size)
+ساخت سرخی *ڈھونڈو_free_بلاک(ساخت سرخی **آخری, size_t سائز)
 {
 	log_trace("\nfind free entered");
 
-	struct Header *current = global_base;
+	ساخت سرخی *current = global_بنیاد;
 
-	while (current && !(current->free && current->size >= size))
+	جب (current && !(current->آزاد && current->سائز >= سائز))
 	{
 
-		log_debug("\n Inside Loop %d %d %x %x",current->size,size,current,*last);
-		*last = current;
-		current = current->next;
+		log_debug("\n Inside Loop %d %d %x %x",current->سائز,سائز,current,*آخری);
+		*آخری = current;
+		current = current->اگلا;
 	}
 
-	log_debug("\n After Loop %d %d %x %x",current->size,size,current,*last);
+	log_debug("\n After Loop %d %d %x %x",current->سائز,سائز,current,*آخری);
 
-	if(current && current->size>=size)
+	اگر(current && current->سائز>=سائز)
 	{
-		*last=current;
-		return current;
+		*آخری=current;
+		واپس current;
 	}
-	else
-		return NULL;
+	ورنہ
+		واپس تہی;
 
 	log_trace("\nfind free exited");
 }
@@ -132,31 +132,31 @@ struct Header *find_free_block(struct Header **last, size_t size)
  * @return returns a pointer to the allocated heap
  *         returns NULL if heap is unable to be allocated
  */
-struct Header* request_heap()
+ساخت سرخی* request_ڈھیر()
 {
-	struct Header *block;
+	ساخت سرخی *بلاک;
 
-	block = m_sbrk(0);
+	بلاک = m_sbrk(0);
 
-	void *request = m_sbrk(HEAP_SIZE);
+	خالی *request = m_sbrk(ڈھیر_سائز_2);
 
-	if((void*)block == request); // Not thread safe.
-	block=request;
+	اگر((خالی*)بلاک == request); // Not thread safe.
+	بلاک=request;
 
-	log_debug("\nInitial Heap start address =%x",block);
+	log_debug("\nInitial Heap start address =%x",بلاک);
 
-	if (request == (void*) -1) {
+	اگر (request == (خالی*) -1) {
 		log_error("\nNo space left to allocate memory");
-		return NULL; // sbrk failed.
+		واپس تہی; // sbrk failed.
 	}
 
-	block->size = HEAP_SIZE;
-	block->next = NULL;
-	block->free = 1;
+	بلاک->سائز = ڈھیر_سائز_2;
+	بلاک->اگلا = تہی;
+	بلاک->آزاد = 1;
 
 	log_debug("\nBlock Assigned");
 
-	return block;
+	واپس بلاک;
 }
 
 //malloc function to allocate space
@@ -167,62 +167,62 @@ struct Header* request_heap()
  * @return  returns a pointer to the assigned block
  *          returns NULL if allocation fails
  */
-void *malloc(size_t size)
+خالی *حافظہ_دو(size_t سائز)
 {
-	struct Header *block;
+	ساخت سرخی *بلاک;
 
-	if (size <= 0) {
-               return NULL;
+	اگر (سائز <= 0) {
+               واپس تہی;
 	}
 
-	log_info("\n global_base: %x",global_base);
+	log_info("\n global_base: %x",global_بنیاد);
 
-	if(global_base==0x00000000)
+	اگر(global_بنیاد==0x00000000)
 	{
 		// First call. global_base is empty
 		log_debug("\n Requesting block");
 
-		block = request_heap();
+		بلاک = request_ڈھیر();
 
-		log_debug("\n block=%x",block);
+		log_debug("\n block=%x",بلاک);
 
-		if (!block)
+		اگر (!بلاک)
 		{
-			return NULL;
+			واپس تہی;
 		}
-		global_base = block;
+		global_بنیاد = بلاک;
 	}
 
-	struct Header *last = global_base;
+	ساخت سرخی *آخری = global_بنیاد;
 
-	block = find_free_block(&last, size);
+	بلاک = ڈھونڈو_free_بلاک(&آخری, سائز);
 
-	if(!block)
+	اگر(!بلاک)
 	{
 		log_error("\n No free blocks");
-		return NULL;
+		واپس تہی;
 	}
 
-	log_debug("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
+	log_debug("\nBlock = %x Block Size = %d Size = %d",بلاک,بلاک->سائز,سائز);
 
-	if (block->size>size)
+	اگر (بلاک->سائز>سائز)
 	{
 		// Failed to find free block.
-		block = allocate_block(last,size);
+		بلاک = allocate_بلاک(آخری,سائز);
 
-		if (!block)
+		اگر (!بلاک)
 		{
-			return NULL;
+			واپس تہی;
 		}
 	}
-	else if(block->size==size)
+	ورنہ اگر(بلاک->سائز==سائز)
 	{
 		// Found free block
 		log_debug("\nFound free block of same size");
-		block->free = 0;
+		بلاک->آزاد = 0;
 	}
 
-  return(block+1);
+  واپس(بلاک+1);
 }
 
 /** @fn  struct Header *get_block_ptr(void *ptr)
@@ -231,9 +231,9 @@ void *malloc(size_t size)
  * @param void* ptr - pointer to the block
  * @return returns pointer to the block
  */
-struct Header *get_block_ptr(void *ptr)
+ساخت سرخی *get_بلاک_ptr(خالی *ptr)
 {
-  return (struct Header*)ptr - 1;
+  واپس (ساخت سرخی*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
@@ -242,18 +242,18 @@ struct Header *get_block_ptr(void *ptr)
  * @detail  frees the memory assigned by malloc and when freed this memory is added back to the list to be reused
  * @param void *ptr - pointer to the memory assigned by malloc
  */
-void free(void *ptr)
+خالی آزاد(خالی *ptr)
 {
-	if (!ptr)
+	اگر (!ptr)
 	{
 		log_error("\n Wrong value passed to free");
-		return;
+		واپس;
 	}
 
-	struct Header* block_ptr = get_block_ptr(ptr);
+	ساخت سرخی* بلاک_ptr = get_بلاک_ptr(ptr);
 
-	log_debug("\n %x is freed",block_ptr);
+	log_debug("\n %x is freed",بلاک_ptr);
 
-	if(block_ptr->free==0)
-		block_ptr->free = 1;
+	اگر(بلاک_ptr->آزاد==0)
+		بلاک_ptr->آزاد = 1;
 }

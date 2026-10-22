@@ -34,7 +34,7 @@
  * @brief main function that runs the code
  * @return zero
  */
-int main()
+số_nguyên main()
 {
 	/**we need to set the period, duty cycle and the clock divisor in order
 	 *to set it to the frequency required. Base clock is 50MHz
@@ -44,5 +44,5 @@ int main()
 		
 	/*This function starts the PWM in the specified mode*/
 	pwm_start(PWM_0,0);
-	return 0;
+	trả_về 0;
 }

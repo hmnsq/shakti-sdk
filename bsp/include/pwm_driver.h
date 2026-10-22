@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(số_nguyên module_number, số_nguyên clock_divisor, số_nguyên period, số_nguyên duty, bool external_clock);
+void pwm_start(số_nguyên module_number, số_nguyên mode);
+số_nguyên pwm_check_continuous_mode(số_nguyên module_number);
+void pwm_clear_registers(số_nguyên module_number);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_set_external_clock(số_nguyên module_number, bool value);
+void pwm_set_clock(số_nguyên module_number, số_nguyên clock_divisor);
+void pwm_set_duty_cycle(số_nguyên module_number, số_nguyên duty);
+void pwm_set_periodic_cycle(số_nguyên module_number, số_nguyên period);
+void pwm_stop(số_nguyên module_number);
+void show_register_values(số_nguyên module_number);
+số_nguyên set_pwm_period_register(số_nguyên module_number, số_nguyên value);
+số_nguyên set_pwm_duty_register(số_nguyên module_number, số_nguyên value);
+số_nguyên set_pwm_control_register(số_nguyên module_number, số_nguyên value);
+số_nguyên set_pwm_clock_register(số_nguyên module_number, số_nguyên value);
+số_nguyên configure_control_register_mode(số_nguyên mode);
+void pwm_use_external_clock(số_nguyên module_number, bool value);
 

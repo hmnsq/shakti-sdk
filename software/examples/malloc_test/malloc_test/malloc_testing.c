@@ -51,45 +51,45 @@ char *test10=(char *)&__bss_start;
 char *test11=(char *)&__sbss_end;
 char *test12=(char *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+số_nguyên c1,c2,c3,c4,c5;
+số_nguyên *pointer;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+số_nguyên main()
 {
 
   printf("\n\n\n\n\n\nTest Running");
   printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
   printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
+  static số_nguyên b1,b2,b3,b4,b5;
   printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
+  số_nguyên a1,a2,a3,a4,a5;
   printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+số_nguyên **a;
+số_nguyên *b,*c,*d;
+số_nguyên i=0;số_nguyên n;
 
 //Enter Size of Array;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*sizeof(số_nguyên))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+cho(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+cho(i=0;i<n;i++)
 {
     printf("\n b[%d]'s address is : %x",i,&b[i]);
     printf("\n b[%d]'s value is : %d",i,b[i]);
@@ -101,17 +101,17 @@ printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
+c=malloc(n*sizeof(số_nguyên))	;
 printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
 printf("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+cho(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+cho(i=0;i<n;i++)
 {
     printf("\n c[%d]'s address is : %x",i,&c[i]);
     printf("\n c[%d]'s value is : %d",i,c[i]);
@@ -120,20 +120,20 @@ free(c);
 
 printf("\nc=%x",c);
 
-int x;
+số_nguyên x;
 x=30;
 
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*sizeof(số_nguyên));
 
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+cho(i=0;i<x;i++)
 {
     printf("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+cho(i=0;i<x;i++)
 {
     printf("\n d[%d]'s address is : %x",i,&d[i]);
     printf("\n d[%d]'s value is : %d",i,d[i]);

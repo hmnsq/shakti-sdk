@@ -44,7 +44,7 @@ void dump_word_memory(uint32_t* start, uint32_t word_length)
 
 	address = (uint32_t *) start;
 
-	while(i++< word_length)
+	trong_khi(i++< word_length)
 	{
 		log_info("address = %x data = %x\n", address, *(uint32_t *) address);
 		address += 4;
@@ -65,7 +65,7 @@ void dump_byte_memory(uint32_t* start, uint32_t word_length)
 
 	address = (unsigned char *) start;
 
-	while(i++< word_length)
+	trong_khi(i++< word_length)
 	{
 		log_info("address = %x data = %x\n", address, *(unsigned char
 							       *) address);

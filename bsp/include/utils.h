@@ -32,16 +32,16 @@
 #include <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
+void waitfor(unsigned số_nguyên secs);
 void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
+float pow_10(unsigned số_nguyên y);
+void reverse(char *str, số_nguyên len);
+void ftoa( float, char *, unsigned số_nguyên);
 void delay_loop(unsigned long cntr1, unsigned long cntr2);
 unsigned long read_word(uint32_t *addr);
 void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
+số_nguyên int_to_string(số_nguyên number, char str[], unsigned số_nguyên afterpoint);
 void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+số_nguyên printf(const char* fmt, ...);
 
 #endif

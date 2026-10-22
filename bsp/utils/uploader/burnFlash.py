@@ -55,46 +55,46 @@ class GDB:
 
 	def gdbSendCommand(self,command):
 		self.command=command
-		if self.gdbmi is None:
-			return False
+		nếu self.gdbmi is None:
+			trả_về False
 		#send command and get output.
 		response = self.gdbmi.write(command,timeout_sec=self.timeout)
-		if len(response) == 0:
-			return False
-		return response
+		nếu len(response) == 0:
+			trả_về False
+		trả_về response
 
 	def gdbClose(self):
 		#close gdb
-		if self.gdbmi is None:
-			return False
+		nếu self.gdbmi is None:
+			trả_về False
 		self.gdbmi.send_signal_to_gdb("SIGINT")
 		self.gdbmi.send_signal_to_gdb(2)
 		self.gdbmi.interrupt_gdb()
 		assert self.gdbmi.exit() is None
 		assert self.gdbmi.gdb_process is None
 		self.opLog.close()
-		return True
+		trả_về True
 
 	def getResponseTypeMsg(self,response):
 		TypeMsg=""
 		typeMsgNum = str(response).count("payload")
 		#get exact gdb console response.
-		for line in range( typeMsgNum ):
-			if (str(response[line]['type'])) == "console":
+		cho line in range( typeMsgNum ):
+			nếu (str(response[line]['type'])) == "console":
 				TypeMsg += (str(response[line]['payload']))
 		self.opLog.write("The output of "+self.command+" :\n"+TypeMsg+"\n")
-		return TypeMsg	
+		trả_về TypeMsg	
 	
 	def gdbSendSignal(self,sig):
-		if self.gdbmi is None:
-			return False
+		nếu self.gdbmi is None:
+			trả_về False
 		self.gdbmi.send_signal_to_gdb(sig)
 
-if __name__ == "__main__":
+nếu __name__ == "__main__":
 	print("Starting copy to Flash\n")
 	elf = "file "+ sys.argv[1]
 	path_to_sdk = os.getenv("SHAKTISDK")
-	if path_to_sdk == None:
+	nếu path_to_sdk == None:
 		print("Set environmental variable SHAKTISDK")
 		exit()
 	print(path_to_sdk)
@@ -119,9 +119,9 @@ if __name__ == "__main__":
 	gdbObject = GDB()
 	gdbObject.gdbStart(gdb)
 #execute commands 
-	for cmd in command:
+	cho cmd in command:
 		response = gdbObject.gdbSendCommand(cmd)
-		if (response == False):
+		nếu (response == False):
 			print("\n cmd %s failed\n",cmd)
 			break
 		gdbObject.getResponseTypeMsg(response)

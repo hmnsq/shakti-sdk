@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+static inline void itoa (unsigned long long số_nguyên number, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	số_nguyên i = 0;
+	unsigned số_nguyên intermediate = 0;
+	unsigned số_nguyên digits[sizeof(number)*8];
 
-	while (1) {
+	trong_khi (1) {
 		digits[i] = number % base;
 
-		if (number < base)
+		nếu (number < base)
 			break;
 
 		number /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	trong_khi (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		nếu (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		không_thì
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -76,17 +76,17 @@ void _printf_(const char *fmt, va_list ap)
 {
 	register const char* p;
 	const char* last_fmt;
-	register int ch;
+	register số_nguyên ch;
 	unsigned long long num;
-	int base, lflag, i;
+	số_nguyên base, lflag, i;
 	float float_num = 0;
 	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	số_nguyên backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	cho (;;) {
+		cho (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
+			nếu (ch == '\0')
+				trả_về;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,7 +96,7 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		cho (;;) {
 
 			switch (ch = *(unsigned char *) fmt++) {
 
@@ -108,14 +108,14 @@ void _printf_(const char *fmt, va_list ap)
 
 					// character
 				case 'c':
-					putchar(va_arg(ap, int));
+					putchar(va_arg(ap, số_nguyên));
 					break;
 
 					// string
 				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+					nếu ((p = va_arg(ap, char *)) == NULL)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					cho (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
@@ -125,14 +125,14 @@ void _printf_(const char *fmt, va_list ap)
 				case 'd':
 					base = 10;
 
-					if (lflag >= 2)
+					nếu (lflag >= 2)
 						num = va_arg(ap, long long);
-					else if (lflag ==1)
+					không_thì nếu (lflag ==1)
 						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					không_thì
+						num = va_arg(ap, số_nguyên);
 
-					if ((long long) num < 0) {
+					nếu ((long long) num < 0) {
 						putchar('-');
 						num = -(long long) num;
 					}
@@ -146,10 +146,10 @@ void _printf_(const char *fmt, va_list ap)
 
 					ftoa(float_num, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					cho( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						nếu(i > 29) break;
 					}
 					break;
 
@@ -157,12 +157,12 @@ void _printf_(const char *fmt, va_list ap)
 				case 'u':
 					base = 10;
 
-					if (lflag >= 2)
+					nếu (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					không_thì nếu (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					không_thì
+						num = va_arg(ap, unsigned số_nguyên);
 
 					itoa( num, base);
 
@@ -173,12 +173,12 @@ void _printf_(const char *fmt, va_list ap)
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
+					nếu (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					không_thì nếu (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					không_thì
+						num = va_arg(ap, unsigned số_nguyên);
 
 					itoa( num, base);
 
@@ -187,12 +187,12 @@ void _printf_(const char *fmt, va_list ap)
 				case 'x':
 					base = 16;
 
-					if (lflag >= 2)
+					nếu (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					không_thì nếu (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					không_thì
+						num = va_arg(ap, unsigned số_nguyên);
 
 					itoa( num, base);
 
@@ -210,12 +210,12 @@ void _printf_(const char *fmt, va_list ap)
 					break;
 			}
 
-			if (backtothebeginning)
+			nếu (backtothebeginning)
 			{
 				backtothebeginning = 0;
 				continue;
 			}
-			else
+			không_thì
 				break;
 		}
 	}
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+số_nguyên printf(const char* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	trả_về 0;// incorrect return value, but who cares, anyway?
 }

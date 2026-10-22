@@ -27,9 +27,9 @@
 shakti. The demonstration is done using the gpio pins.
 */
 
-#include <stdio.h>/* Includes definitions of standard input/output functions*/
-#include "gpio.h"/*Incudes the defintions of gpio functions and registers*/
-#include "platform.h"
+#ضمن <stdio.h>/* Includes definitions of standard input/output functions*/
+#ضمن "gpio.h"/*Incudes the defintions of gpio functions and registers*/
+#ضمن "platform.h"
 
 #define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
@@ -37,12 +37,12 @@ shakti. The demonstration is done using the gpio pins.
 /** @fn void main()
  * @brief Performs the intilization of the corresponding registers of gpio pins.
  */
-void main()
+فراغ main()
 {
 	log_info("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-	while(1) {
+	ܟܡܐ(1) {
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
 		log_info("Forward\n");
 		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);

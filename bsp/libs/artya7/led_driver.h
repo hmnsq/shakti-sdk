@@ -29,10 +29,10 @@
 #ifndef LED_DRIVER_H
 #define LED_DRIVER_H
 
-#include "platform.h" //Contains arty a7 gpio definitions.
-#include "gpio.h"  //Contains the methods to Access GPIOs
+#ضمن "platform.h" //Contains arty a7 gpio definitions.
+#ضمن "gpio.h"  //Contains the methods to Access GPIOs
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ܐܢ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 /*! RGB LED 0 defines */
 #define LED0_R GPIO16 
 #define LED0_G GPIO17
@@ -70,25 +70,25 @@
 #define RGB_LED1 1
 
 // function prototype
-void configure_ledx(unsigned long pin_cntrl);
-void configure_rgb_ledx(unsigned char led_no);
-void configure_normal_leds();
-void configure_rgb_leds();
-void configure_all_leds();
-void turn_on_ledx(unsigned long pin_cntrl);
-void turn_off_ledx(unsigned long pin_cntrl);
-void turn_on_normal_leds();
-void turn_off_normal_leds();
-void turn_on_rgb_ledx(unsigned char led_no);
-void turn_off_rgb_ledx(unsigned char led_no);
-void turn_on_rgb_leds();
-void turn_off_rgb_leds();
-void turn_on_all_leds();
-void turn_off_all_leds();
-void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2);
-void toggle_normal_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 );
-void toggle_all_leds( unsigned long delay1, unsigned long delay2);
+فراغ configure_ledx(unsigned long pin_cntrl);
+فراغ configure_rgb_ledx(unsigned حرف led_no);
+فراغ configure_normal_leds();
+فراغ configure_rgb_leds();
+فراغ configure_all_leds();
+فراغ turn_on_ledx(unsigned long pin_cntrl);
+فراغ turn_off_ledx(unsigned long pin_cntrl);
+فراغ turn_on_normal_leds();
+فراغ turn_off_normal_leds();
+فراغ turn_on_rgb_ledx(unsigned حرف led_no);
+فراغ turn_off_rgb_ledx(unsigned حرف led_no);
+فراغ turn_on_rgb_leds();
+فراغ turn_off_rgb_leds();
+فراغ turn_on_all_leds();
+فراغ turn_off_all_leds();
+فراغ toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2);
+فراغ toggle_normal_leds( unsigned long delay1, unsigned long delay2 );
+فراغ toggle_rgb_leds( unsigned long delay1, unsigned long delay2 );
+فراغ toggle_all_leds( unsigned long delay1, unsigned long delay2);
 
 
 #endif

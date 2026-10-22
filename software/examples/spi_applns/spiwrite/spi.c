@@ -27,10 +27,10 @@
 @detail Contains driver codes to read and write flash using SPI interface.
 */
 
-#include <stdint.h>
-#include "spi.h"
-#include "uart.h"
-#include "utils.h"
+#அந்தர்பாவ <stdint.h>
+#அந்தர்பாவ "spi.h"
+#அந்தர்பாவ "uart.h"
+#அந்தர்பாவ "utils.h"
 
 #define DELAY1 1000//Determines the duration of delay1//
 #define DELAY2 2000//Determines the duration of delay2//
@@ -41,13 +41,13 @@
  * @param unsigned int (32-bit).
  * @param unsigned int (16-bit).           
  */
-static void flash_read_locations(uint32_t read_address, uint16_t length)
+நிலையான வெறுமை flash_read_locations(uint32_t read_address, uint16_t length)
 {
-	for(int i = 0; i < length; ++i)
+	க்கு(முழு i = 0; i < length; ++i)
 	{
-		int read_value= flash_read(read_address);
+		முழு read_மதிப்பு= flash_read(read_address);
 		printf("\nReading from adddress %x and data \
-			   %x\n",read_address,read_value);
+			   %x\n",read_address,read_மதிப்பு);
 		read_address=read_address+4;
 	}
 }
@@ -57,11 +57,11 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+வெறுமை முதன்மை()
 {
-	int write_address = 0x00b00004;  // read/write from/to this address
-	int read_address  = 0x00b00004;  // read/write from/to this address
-	int data = 0xDEADBEEF; //32 bits of data can be written at a time
+	முழு write_address = 0x00b00004;  // read/write from/to this address
+	முழு read_address  = 0x00b00004;  // read/write from/to this address
+	முழு data = 0xDEADBEEF; //32 bits of data can be written at a time
 	uint16_t length = 11;
 
 	configure_spi(SPI0_OFFSET);
@@ -99,5 +99,5 @@ void main()
 
 	printf("\n After Write");
 	flash_read_locations(read_address, length);
-	asm volatile ("ebreak");
+	asm நிலையற்ற ("ebreak");
 }

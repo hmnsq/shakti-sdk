@@ -27,29 +27,29 @@
   and receive over UART interface.
  */
 
-#include "uart.h"
-#include "gpio.h"
-#include "utils.h"
+#அந்தர்பாவ "uart.h"
+#அந்தர்பாவ "gpio.h"
+#அந்தர்பாவ "utils.h"
 
-uart_struct *uart_instance[MAX_UART_COUNT];
+uart_struct *uart_instance[MAX_UART_மொத்தம்];
 
 #define RTS GPIO4
 //#define USE_INTERRUPT 
 
-unsigned char uart0_complete = 0;
-unsigned char uart1_complete = 0;
-unsigned char uart2_complete = 0;
-unsigned int uart0_tx_isr_count = 0;
-unsigned int uart0_rcv_isr_count = 0;
-unsigned int uart1_tx_isr_count = 0;
-unsigned int uart1_rcv_isr_count = 0;
-unsigned int uart2_tx_isr_count = 0;
-unsigned int uart2_rcv_isr_count = 0;
+unsigned எழுத்து uart0_complete = 0;
+unsigned எழுத்து uart1_complete = 0;
+unsigned எழுத்து uart2_complete = 0;
+unsigned முழு uart0_tx_isr_மொத்தம் = 0;
+unsigned முழு uart0_rcv_isr_மொத்தம் = 0;
+unsigned முழு uart1_tx_isr_மொத்தம் = 0;
+unsigned முழு uart1_rcv_isr_மொத்தம் = 0;
+unsigned முழு uart2_tx_isr_மொத்தம் = 0;
+unsigned முழு uart2_rcv_isr_மொத்தம் = 0;
 
 #ifdef USE_INTERRUPT
-unsigned char u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
-unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
+unsigned எழுத்து u0_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
+unsigned எழுத்து u1_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
+unsigned எழுத்து u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
 #endif
 
 /**
@@ -58,9 +58,9 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
  * @details Initialises given number of UART Arrays which has 
  *          complete set of UART registers.
  */
-void uart_init()
+வெறுமை uart_init()
 {
-	for(int i=0; i< MAX_UART_COUNT; i++)
+	க்கு(முழு i=0; i< MAX_UART_மொத்தம்; i++)
 	{
 		uart_instance[i] = (uart_struct*) (UART0_START+i*UART_OFFSET);
 	}
@@ -73,10 +73,10 @@ void uart_init()
  * @return integer equivalent of the received character.
  */
 #undef getchar
-int getchar()
+முழு getchar()
 {
-	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
-	return (uart_instance[0]->rcv_reg);
+	போது((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
+	திரும்பு (uart_instance[0]->rcv_reg);
 }
 
 /**
@@ -88,13 +88,13 @@ int getchar()
  * @return Zero
  */
 #undef putchar
-int putchar(int ch)
+முழு putchar(முழு ch)
 {
-	while(uart_instance[0]->status & STS_TX_FULL);
+	போது(uart_instance[0]->status & STS_TX_FULL);
 
 	uart_instance[0]->tx_reg = ch;
 
-	return 0;
+	திரும்பு 0;
 }
 
 /**
@@ -105,11 +105,11 @@ int putchar(int ch)
  * @param UART instance
  * @param unsigned int baudrate
  */
-void set_baud_rate(uart_struct *instance, unsigned int baudrate)
+வெறுமை set_baud_rate(uart_struct *instance, unsigned முழு baudrate)
 {
-	unsigned int baud_count = 0;
-	baud_count = CLOCK_FREQUENCY / (16 * baudrate);
-	instance->baud = baud_count;
+	unsigned முழு baud_மொத்தம் = 0;
+	baud_மொத்தம் = CLOCK_FREQUENCY / (16 * baudrate);
+	instance->baud = baud_மொத்தம்;
 }
 
 /**
@@ -120,7 +120,7 @@ void set_baud_rate(uart_struct *instance, unsigned int baudrate)
  * @param uart instance 
  * @param unsigned char interrupt
  */
-void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
+வெறுமை enable_uart_interrupts(uart_struct * instance, unsigned எழுத்து interrupt)
 {
 	instance->ien = interrupt; 
 }
@@ -134,7 +134,7 @@ void enable_uart_interrupts(uart_struct * instance, unsigned char interrupt)
  * @param uart instance 
  * @param unsigned char rxthreshold
  */
-void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
+வெறுமை set_uart_rx_threshold(uart_struct * instance, unsigned எழுத்து rxthreshold)
 {
 	instance->rx_threshold = rxthreshold;
 }
@@ -150,11 +150,11 @@ void set_uart_rx_threshold(uart_struct * instance, unsigned char rxthreshold)
  */
 uint32_t write_uart_character(uart_struct * instance, uint8_t prn_character)
 {
-	while(instance->status & STS_TX_FULL);
+	போது(instance->status & STS_TX_FULL);
 
 	instance->tx_reg = prn_character;
 
-	return 0;
+	திரும்பு 0;
 }
 
 /**
@@ -171,13 +171,13 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
 	uint32_t i = 0;
 	uint8_t temp;
 
-	do
+	செய்
 	{
 		temp = ptr_string[i++];
 		write_uart_character(instance, temp);
-	} while(temp != 0);
+	} போது(temp != 0);
 
-	return 0;
+	திரும்பு 0;
 }
 
 /**
@@ -189,16 +189,16 @@ uint32_t write_uart_string(uart_struct * instance, uint8_t * ptr_string)
  * @param pointer to a character.
  * @return number of characters read
  */
-uint8_t read_uart_character(uart_struct * instance, char * prn_character)
+uint8_t read_uart_character(uart_struct * instance, எழுத்து * prn_character)
 {
 	uint8_t temp = 0;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+	போது ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
 	temp = instance->rcv_reg;
 	*prn_character = temp;
 
-	return 1;
+	திரும்பு 1;
 }
 
 /**
@@ -210,24 +210,24 @@ uint8_t read_uart_character(uart_struct * instance, char * prn_character)
  * @param pointer to an array of character.
  * @return length of the received string
  */
-uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
+uint8_t read_uart_string(uart_struct * instance, எழுத்து * ptr_string)
 {
 	uint32_t i = 0;
 	uint8_t temp = 0;
 
-	while(1)
+	போது(1)
 	{
-		while ((instance->status & STS_RX_NOT_EMPTY) == 0);
+		போது ((instance->status & STS_RX_NOT_EMPTY) == 0);
 
 		temp = instance->rcv_reg;
 		ptr_string[i++] = temp;
 		putchar(temp);
 
-		if (temp == 0x0D)
+		எனில் (temp == 0x0D)
 		{
 			ptr_string[i++] = 0x0A;
 			ptr_string[i++] = 0x00;
-			return(i);
+			திரும்பு(i);
 		}
 	}
 }
@@ -239,11 +239,11 @@ uint8_t read_uart_string(uart_struct * instance, char * ptr_string)
  * passing UART number for different offset addresses.
  * @param UART instance.
  */
-void flush_uart(uart_struct * instance)
+வெறுமை flush_uart(uart_struct * instance)
 {
-	__attribute__((unused)) char temp;
+	__attribute__((unused)) எழுத்து temp;
 
-	while ((instance->status & STS_RX_NOT_EMPTY) != 0)
+	போது ((instance->status & STS_RX_NOT_EMPTY) != 0)
 	{
 		temp = instance->rcv_reg ;
 	}
@@ -260,39 +260,39 @@ void flush_uart(uart_struct * instance)
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart0_isr()
+unsigned எழுத்து uart0_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_மதிப்பு = '\0';
 
-	if(uart_instance[0]->status & STS_RX_THRESHOLD)
+	எனில்(uart_instance[0]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		போது(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_மதிப்பு = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+			write_uart_character(uart_instance[0], read_மதிப்பு);
 		}
 	}
-	else if(uart_instance[0]->status & STS_RX_FULL)
+	இல்லையெனில் எனில்(uart_instance[0]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+		போது(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[0]->rcv_reg;
-			u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[0], read_value);
+			read_மதிப்பு = uart_instance[0]->rcv_reg;
+			u0_rcv_char[uart0_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+			write_uart_character(uart_instance[0], read_மதிப்பு);
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[0]->status & STS_RX_NOT_EMPTY)
+	இல்லையெனில் எனில்(uart_instance[0]->status & STS_RX_NOT_EMPTY)
 	{
-		read_value = uart_instance[0]->rcv_reg;
-		u0_rcv_char[uart0_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[0], read_value);
+		read_மதிப்பு = uart_instance[0]->rcv_reg;
+		u0_rcv_char[uart0_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+		write_uart_character(uart_instance[0], read_மதிப்பு);
 	}
-	return 0;
+	திரும்பு 0;
 }
 
 /**
@@ -303,39 +303,39 @@ unsigned char uart0_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart1_isr()
+unsigned எழுத்து uart1_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_மதிப்பு = '\0';
 
-	if(uart_instance[1]->status & STS_RX_THRESHOLD)
+	எனில்(uart_instance[1]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		போது(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_மதிப்பு = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+			write_uart_character(uart_instance[1], read_மதிப்பு);
 		}
 	}
-	else if(uart_instance[1]->status & STS_RX_FULL)
+	இல்லையெனில் எனில்(uart_instance[1]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+		போது(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[1]->rcv_reg;
-			u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[1], read_value);
+			read_மதிப்பு = uart_instance[1]->rcv_reg;
+			u1_rcv_char[uart1_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+			write_uart_character(uart_instance[1], read_மதிப்பு);
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[1]->status & STS_RX_NOT_EMPTY)
+	இல்லையெனில் எனில்(uart_instance[1]->status & STS_RX_NOT_EMPTY)
 	{
-		read_value = uart_instance[1]->rcv_reg;
-		u1_rcv_char[uart1_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[1], read_value);
+		read_மதிப்பு = uart_instance[1]->rcv_reg;
+		u1_rcv_char[uart1_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+		write_uart_character(uart_instance[1], read_மதிப்பு);
 	}
-	return 0;
+	திரும்பு 0;
 }
 
 /**
@@ -346,38 +346,38 @@ unsigned char uart1_isr()
  * based on the Rx fifo status and handles accordingly.
  * @return Currently not returning any value
  */
-unsigned char uart2_isr()
+unsigned எழுத்து uart2_isr()
 {
-	uint32_t read_value = '\0';
+	uint32_t read_மதிப்பு = '\0';
 
-	if(uart_instance[2]->status & STS_RX_THRESHOLD)
+	எனில்(uart_instance[2]->status & STS_RX_THRESHOLD)
 	{
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		போது(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_மதிப்பு = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+			write_uart_character(uart_instance[2], read_மதிப்பு);
 		}
 	}
-	else if(uart_instance[2]->status & STS_RX_FULL)
+	இல்லையெனில் எனில்(uart_instance[2]->status & STS_RX_FULL)
 	{
 		write_word(GPIO_DIRECTION_CNTRL_REG, RTS);
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) | RTS);
 
-		while(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+		போது(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 		{
-			read_value = uart_instance[2]->rcv_reg;
-			u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-			write_uart_character(uart_instance[2], read_value);
+			read_மதிப்பு = uart_instance[2]->rcv_reg;
+			u2_rcv_char[uart2_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+			write_uart_character(uart_instance[2], read_மதிப்பு);
 		}
 		write_word(GPIO_DATA_REG, read_word(GPIO_DATA_REG) & ~(RTS));
 	}
-	else if(uart_instance[2]->status & STS_RX_NOT_EMPTY)
+	இல்லையெனில் எனில்(uart_instance[2]->status & STS_RX_NOT_EMPTY)
 	{
-		read_value = uart_instance[2]->rcv_reg;
-		u2_rcv_char[uart2_rcv_isr_count++] = read_value;
-		write_uart_character(uart_instance[2], read_value);
+		read_மதிப்பு = uart_instance[2]->rcv_reg;
+		u2_rcv_char[uart2_rcv_isr_மொத்தம்++] = read_மதிப்பு;
+		write_uart_character(uart_instance[2], read_மதிப்பு);
 	}
-	return 0;
+	திரும்பு 0;
 }
 #endif

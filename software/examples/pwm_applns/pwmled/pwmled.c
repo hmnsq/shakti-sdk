@@ -27,14 +27,14 @@
 @detail it runs the led and causes it to blink at specified frequency using the pwm module
 */
 
-#include "pwm_driver.h"
-#include "pinmux.h"
+#அந்தர்பாவ "pwm_driver.h"
+#அந்தர்பாவ "pinmux.h"
 
 /** @fn int main()
  * @brief main function that runs the code
  * @return zero
  */
-int main()
+முழு முதன்மை()
 {
 	/**we need to set the period, duty cycle and the clock divisor in order
 	 *to set it to the frequency required. Base clock is 50MHz
@@ -44,5 +44,5 @@ int main()
 		
 	/*This function starts the PWM in the specified mode*/
 	pwm_start(PWM_0,0);
-	return 0;
+	திரும்பு 0;
 }

@@ -27,14 +27,14 @@
 @detail it runs the motor using pwm module at specified frequency 
 */
 
-#include "pwm_driver.h"
+#அந்தர்பாவ "pwm_driver.h"
 
 /** @fn int main()
  * @brief main function that runs the code
  * @details runs the code 
  * @return zero
  */
-int main()
+முழு முதன்மை()
 {
 	/**we need to set the period, duty cycle and the clock divisor in order
 	 *to set it to the frequency required. Base clock is 50MHz
@@ -44,7 +44,7 @@ int main()
 	/*This function starts the PWM in the specified mode*/
 	pwm_start(PWM_0,2);
 
-	while(1);
+	போது(1);
 
-	return 0;
+	திரும்பு 0;
 }

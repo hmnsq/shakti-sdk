@@ -31,7 +31,7 @@ platform.h - header file for Artix 35 T E class SoC
 #define CLINT_BASE 0x020000000
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   16
+#define CLINT_வகுஎண்   16
 
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
@@ -48,7 +48,7 @@ platform.h - header file for Artix 35 T E class SoC
 #define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#define அடுக்கு_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
 #define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
@@ -65,7 +65,7 @@ platform.h - header file for Artix 35 T E class SoC
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
 #define UART0_START 0x00011300 /*! UART 0 */
 #define UART_OFFSET 0x100
-#define MAX_UART_COUNT 3
+#define MAX_UART_மொத்தம் 3
 
 
 #define PINMUX_CONFIGURE_REG 0x40310
@@ -76,7 +76,7 @@ platform.h - header file for Artix 35 T E class SoC
 /*! Inter Integrated Circuit (I2C) Interface */
 #define I2C0_BASE 0x00040000 /*! I2C Start Address */
 #define I2C_OFFSET 0x000
-#define MAX_I2C_COUNT 1
+#define MAX_I2_C_மொத்தம் 1
 
 
 /*! Programmable Logic Interrupt Interface */
@@ -144,6 +144,6 @@ platform.h - header file for Artix 35 T E class SoC
 #define GPIO29 (1 << 29)
 #define GPIO30 (1 << 30)
 #define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#define GPIO_மொத்தம்  0x20
 
 #endif

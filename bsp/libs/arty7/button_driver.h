@@ -28,10 +28,10 @@
 #ifndef BUTTON_DRIVER_H
 #define BUTTON_DRIVER_H
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#எனில் defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "gpio.h"
 
 //Buttons
 #define BTN0 GPIO28
@@ -42,8 +42,8 @@
 #define ALL_BTNS (BTN0 | BTN1 | BTN2 | BTN3)
 
 // function prototype
-void configure_btn(unsigned long pinCntrl);
-void configure_all_btn();
+வெறுமை configure_btn(unsigned long pinCntrl);
+வெறுமை configure_all_btn();
 
 #endif
 #endif

@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#அந்தர்பாவ "gpio.h"
+#அந்தர்பாவ "uart.h"
+#அந்தர்பாவ "utils.h"
+#அந்தர்பாவ "traps.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "plic_driver.h"
+#அந்தர்பாவ "log.h"
+#அந்தர்பாவ "defines.h"
+#அந்தர்பாவ "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+வெறுமை handle_button_press(__attribute__((unused)) uint32_t இலக்கம்);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+வெறுமை handle_button_press(__attribute__((unused)) uint32_t இலக்கம்)
 {
 	log_info("button pressed\n");
 }
@@ -55,13 +55,13 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+முழு முதன்மை(வெறுமை){
+	பதிவு unsigned முழு retval;
+	முழு i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	க்கு(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i);
@@ -69,7 +69,7 @@ int main(void){
 	printf("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	க்கு(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_disable(i);
@@ -78,7 +78,7 @@ int main(void){
 
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	க்கு(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i + 1);
@@ -87,12 +87,12 @@ int main(void){
 
 	asm("ebreak");
 
-	while(1){
+	போது(1){
 		i++;
 
-		if((i%10000000) == 0){
+		எனில்((i%10000000) == 0){
 
-			asm volatile(
+			asm நிலையற்ற(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -102,5 +102,5 @@ int main(void){
 			printf("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	திரும்பு 0;
 }

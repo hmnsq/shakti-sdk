@@ -23,55 +23,55 @@
 
  ***************************************************************************/
 //#include "gpiov2.h"
-#include "pinmux.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "uart.h"
+#அந்தர்பாவ "pinmux.h"
+#அந்தர்பாவ "traps.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "plic_driver.h"
+#அந்தர்பாவ "log.h"
+#அந்தர்பாவ "uart.h"
 
 
 
-unsigned int uart0_prev_rcv_isr_count_flag = 0;
-unsigned int uart1_prev_rcv_isr_count_flag = 0;
-unsigned int uart2_prev_rcv_isr_count_flag = 0;
+unsigned முழு uart0_prev_rcv_isr_மொத்தம்_flag = 0;
+unsigned முழு uart1_prev_rcv_isr_மொத்தம்_flag = 0;
+unsigned முழு uart2_prev_rcv_isr_மொத்தம்_flag = 0;
 
-unsigned int uart0_prev_tx_isr_count_flag = 0;
-unsigned int uart1_prev_tx_isr_count_flag = 0;
-unsigned int uart2_prev_tx_isr_count_flag = 0;
+unsigned முழு uart0_prev_tx_isr_மொத்தம்_flag = 0;
+unsigned முழு uart1_prev_tx_isr_மொத்தம்_flag = 0;
+unsigned முழு uart2_prev_tx_isr_மொத்தம்_flag = 0;
 
 
-void init_variables()
+வெறுமை init_variables()
 {
 	uart0_complete = 0;
 	uart1_complete = 0;
 	uart2_complete = 0;
-	uart0_tx_isr_count = 0;
-	uart0_rcv_isr_count = 0;
-	uart1_tx_isr_count = 0;
-	uart1_rcv_isr_count = 0;
-	uart2_tx_isr_count = 0;
-	uart2_rcv_isr_count = 0;
+	uart0_tx_isr_மொத்தம் = 0;
+	uart0_rcv_isr_மொத்தம் = 0;
+	uart1_tx_isr_மொத்தம் = 0;
+	uart1_rcv_isr_மொத்தம் = 0;
+	uart2_tx_isr_மொத்தம் = 0;
+	uart2_rcv_isr_மொத்தம் = 0;
 	memset(u0_rcv_char,'\0', UARTX_BUFFER_SIZE);
 	memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
 	memset(u2_rcv_char,'\0', UARTX_BUFFER_SIZE);
-	uart0_prev_rcv_isr_count_flag = 0;
-	uart1_prev_rcv_isr_count_flag = 0;
-	uart2_prev_rcv_isr_count_flag = 0;
+	uart0_prev_rcv_isr_மொத்தம்_flag = 0;
+	uart1_prev_rcv_isr_மொத்தம்_flag = 0;
+	uart2_prev_rcv_isr_மொத்தம்_flag = 0;
 
-	uart0_prev_tx_isr_count_flag = 0;
-	uart1_prev_tx_isr_count_flag = 0;
-	uart2_prev_tx_isr_count_flag = 0;
+	uart0_prev_tx_isr_மொத்தம்_flag = 0;
+	uart1_prev_tx_isr_மொத்தம்_flag = 0;
+	uart2_prev_tx_isr_மொத்தம்_flag = 0;
 }
-extern volatile unsigned int* pinmux_config_reg;
+வெளி நிலையற்ற unsigned முழு* pinmux_config_reg;
 
 
 
-int main(void){
+முழு முதன்மை(வெறுமை){
 
 
-	register uint32_t retval;
-	int i;
+	பதிவு uint32_t retval;
+	முழு i;
 	init_variables();
 
 	printf("\n---------------Uart 1 Interrupt Test---------------\n");
@@ -85,15 +85,15 @@ int main(void){
 	isr_table[PLIC_INTERRUPT_26] = uart1_isr;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm நிலையற்ற("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm நிலையற்ற("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm நிலையற்ற(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -102,7 +102,7 @@ int main(void){
 		    );
 
 	printf("\n retval = %x", retval);
-	asm volatile(
+	asm நிலையற்ற(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -112,7 +112,7 @@ int main(void){
 
 	printf("\t retval = %x", retval);
 
-	asm volatile(
+	asm நிலையற்ற(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -122,8 +122,8 @@ int main(void){
 	printf("\t retval = %x", retval);
 
 
-	uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
-	uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+	uart1_prev_tx_isr_மொத்தம்_flag = uart1_tx_isr_மொத்தம்;
+	uart1_prev_rcv_isr_மொத்தம்_flag = uart1_rcv_isr_மொத்தம்;
 
 
 	enable_uart_interrupts(uart_instance[1],  ENABLE_RX_NOT_EMPTY | ENABLE_RX_FULL);
@@ -131,35 +131,35 @@ int main(void){
 	i = 0;
 	write_uart_string(uart_instance[0], "\n---------------UART 0: Receiving char--------------");
 	write_uart_string(uart_instance[1], "\n-----------UART 1: Type the chars you want to transmit-----------\n");
-	while(1)
+	போது(1)
 	{
-#if 0
-		if(i % 2)
+#எனில் 0
+		எனில்(i % 2)
 			write_uart_string(uart_instance[1], "TeSt");
-		else
+		இல்லையெனில்
 			write_uart_string(uart_instance[1], "tEsT");
 #endif
 		delay_loop(2000,2000);
-		if(uart1_prev_tx_isr_count_flag != uart1_tx_isr_count)
+		எனில்(uart1_prev_tx_isr_மொத்தம்_flag != uart1_tx_isr_மொத்தம்)
 		{
-			uart1_prev_tx_isr_count_flag = uart1_tx_isr_count;
+			uart1_prev_tx_isr_மொத்தம்_flag = uart1_tx_isr_மொத்தம்;
 		}
-		if(uart1_prev_rcv_isr_count_flag != uart1_rcv_isr_count)
+		எனில்(uart1_prev_rcv_isr_மொத்தம்_flag != uart1_rcv_isr_மொத்தம்)
 		{
-			uart1_prev_rcv_isr_count_flag = uart1_rcv_isr_count;
+			uart1_prev_rcv_isr_மொத்தம்_flag = uart1_rcv_isr_மொத்தம்;
 		}
-		if(i++ >= 10)
+		எனில்(i++ >= 10)
 		{
-			u1_rcv_char[++uart1_rcv_isr_count] = '\0';
+			u1_rcv_char[++uart1_rcv_isr_மொத்தம்] = '\0';
 //			printf("\n TxISR Count Flag: %d", uart1_tx_isr_count);
-			printf("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_count-1);
+			printf("\n The characters received: %s\t Count: %d", u1_rcv_char, uart1_rcv_isr_மொத்தம்-1);
 			i = 0;
-			uart1_rcv_isr_count = 0;
+			uart1_rcv_isr_மொத்தம் = 0;
 			memset(u1_rcv_char,'\0', UARTX_BUFFER_SIZE);
 			//break;
 		}
 	};
 
 
-	return 0;
+	திரும்பு 0;
 }

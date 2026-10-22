@@ -32,9 +32,9 @@
 //#define BOOT
 #ifndef BOOT
 
-#include<stdlib.h>
+#அந்தர்பாவ<stdlib.h>
 #endif
-#include<stdint.h>
+#அந்தர்பாவ<stdint.h>
 
 #define DEF_TIMEOUT 60
 #define BASE_ADDR 0x00000100 
@@ -129,56 +129,56 @@
 #define THREEBYTE 0x2
 #define FOURBYTE  0x3
 
-extern int* cr      ;
- extern int* dcr    ;
- extern int* sr     ; 
- extern int* fcr    ;
- extern int* ccr    ;
- extern int* ar     ; 
- extern int* abr    ;
- extern int* dr     ; 
- extern int* dlr    ;
- extern int* psmkr  ;
- extern int* pir    ;
- extern int* lprt   ;
- extern int* startmm;
- extern int* endmm ;
+வெளி முழு* cr      ;
+ வெளி முழு* dcr    ;
+ வெளி முழு* sr     ; 
+ வெளி முழு* fcr    ;
+ வெளி முழு* ccr    ;
+ வெளி முழு* ar     ; 
+ வெளி முழு* abr    ;
+ வெளி முழு* dr     ; 
+ வெளி முழு* dlr    ;
+ வெளி முழு* psmkr  ;
+ வெளி முழு* pir    ;
+ வெளி முழு* lprt   ;
+ வெளி முழு* startmm;
+ வெளி முழு* endmm ;
 
-void set_qspi_shakti32(int* addr, const int val);
-void set_qspi_shakti16(int16_t* addr, int16_t val);
-void set_qspi_shakti8(char* addr, char val);
-int get_qspi_shakti( int* addr);
-int check_fail_bit(void);
-void reset_interrupt_flags(void);
-int micron_write_enable(int status);
-int flashSingleSPIDDRXip(int addr, int* dest_addr);
-int wait_for_tcf(int status);
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode);
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address);
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address);
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int flashReadDualSPI(int address, int data_length);
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int micron_disable_xip_volatile(int,int);
-int flashSingleSPIXip(int addr, int* dest_addr);
-int flashMemInit(void);
-int flashDualSPIXip(int addr, int* dest_addr);
-int flashDualSPIDDRXip(int addr, int* dest_addr);
-int flashWriteVolatileConfigReg(int value);
-int flashQuadSPIXip(int addr, int* dest_addr);
-int flashQuadSPIDDRXip(int addr, int* dest_addr);
-int eraseSector(int command, int address);
-int micron_volatile_write_enable(int status);
-int micron_enable_4byte_addressing(int status);
-int micron_configure_xip_volatile(int status, int value);
-int micron_read_configuration_register(int status, int value);
-int micron_read_id_cmd(int status, int value);
-int wait_for_wip(void);
-int flashIdentificationDevice(void);
-int flashReadFlagRegister(void);
-int flashWriteEnable(void);
-int flashEnable4ByteAddressingMode(void);
-int flash_Write_disable(void);
+வெறுமை set_qspi_shakti32(முழு* addr, மாறிலி முழு val);
+வெறுமை set_qspi_shakti16(int16_t* addr, int16_t val);
+வெறுமை set_qspi_shakti8(எழுத்து* addr, எழுத்து val);
+முழு get_qspi_shakti( முழு* addr);
+முழு check_fail_bit(வெறுமை);
+வெறுமை reset_interrupt_flags(வெறுமை);
+முழு micron_write_enable(முழு status);
+முழு flashSingleSPIDDRXip(முழு addr, முழு* dest_addr);
+முழு wait_for_tcf(முழு status);
+வெறுமை qspi_init(முழு fsize, முழு csht, முழு prescaler, முழு enable_interrupts, முழு fthreshold, முழு ck_mode);
+முழு pageProgramSingleSPI(முழு value1, முழு value2, முழு value3, முழு value4, முழு address);
+முழு pageProgramQuadSPI(முழு value1, முழு value2, முழு value3, முழு value4, முழு address);
+முழு flashReadSingleSPI(முழு dummy_cycles, முழு read_address, முழு instruction, முழு data_சொற்கள், முழு adsize);
+முழு flashReadDualSPI(முழு address, முழு data_length);
+முழு flashReadQuadSPI(முழு dummy_cycles, முழு read_address, முழு instruction, முழு data_சொற்கள், முழு adsize);
+முழு micron_disable_xip_volatile(முழு,முழு);
+முழு flashSingleSPIXip(முழு addr, முழு* dest_addr);
+முழு flashMemInit(வெறுமை);
+முழு flashDualSPIXip(முழு addr, முழு* dest_addr);
+முழு flashDualSPIDDRXip(முழு addr, முழு* dest_addr);
+முழு flashWriteVolatileConfigReg(முழு மதிப்பு);
+முழு flashQuadSPIXip(முழு addr, முழு* dest_addr);
+முழு flashQuadSPIDDRXip(முழு addr, முழு* dest_addr);
+முழு eraseSector(முழு command, முழு address);
+முழு micron_volatile_write_enable(முழு status);
+முழு micron_enable_4byte_addressing(முழு status);
+முழு micron_configure_xip_volatile(முழு status, முழு மதிப்பு);
+முழு micron_read_configuration_register(முழு status, முழு மதிப்பு);
+முழு micron_read_id_cmd(முழு status, முழு மதிப்பு);
+முழு wait_for_wip(வெறுமை);
+முழு flashIdentificationDevice(வெறுமை);
+முழு flashReadFlagRegister(வெறுமை);
+முழு flashWriteEnable(வெறுமை);
+முழு flashEnable4ByteAddressingMode(வெறுமை);
+முழு flash_Write_disable(வெறுமை);
 
 
 #endif

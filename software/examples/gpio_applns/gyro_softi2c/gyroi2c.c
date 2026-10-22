@@ -27,7 +27,7 @@
 @detail 
 */ 
 
-#include"gpio_i2c.h"
+#அந்தர்பாவ"gpio_i2c.h"
 
 #define I2C_WRITE 0
 #define I2C_READ 1
@@ -48,16 +48,16 @@
 
 #define PI 3.141592654
 
-char readbuf[20];
-int AccX,AccY,AccZ;
-int accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
-int roll, pitch, yaw;
-int AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-int AccErrorX,AccErrory;
-int GyroX, GyroY, GyroZ;
-int c = 0;
-int i=0;
-static unsigned char delay = 100;
+எழுத்து readbuf[20];
+முழு AccX,AccY,AccZ;
+முழு accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+முழு roll, pitch, yaw;
+முழு AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+முழு AccErrorX,AccErrory;
+முழு GyroX, GyroY, GyroZ;
+முழு c = 0;
+முழு i=0;
+நிலையான unsigned எழுத்து delay = 100;
 
 //   soft float library need to be added, if hardfloat not there
  
@@ -65,7 +65,7 @@ static unsigned char delay = 100;
  * @brief  determines the x,y,z axes in terms of 16-bit
  * @details  In addition to measurements error adjustments is also made.  
  */
-void measuring_value()
+வெறுமை measuring_மதிப்பு()
 {
 	// read accelerometer data
 	I2cSendSlaveAddress(MPU6050_SLAVE_ADDRESS, I2C_WRITE, delay);//selecting slave to be read
@@ -93,16 +93,16 @@ void measuring_value()
  * @details determines whether the initalisation as well as verfication is done properly or not 
  * @return int
  */
-int main()
+முழு முதன்மை()
 {
 	I2cInit();//configuring data and clocks as output lines
 
 	printf("MPU6050 i2c Init completed\n");
 
-	if (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_DATA_REG, delay)){
+	எனில் (DEV_IDENTITY == I2c_Read_byte(MPU6050_SLAVE_ADDRESS, DEV_IDENTITY_DATA_REG, delay)){
 		printf("DEVICE SUCCESFULLY VERIFIED");
 	}
-	else{
+	இல்லையெனில்{
 		printf("something went wrong , device identity not verified");
 	}
 	//configuring power management register
@@ -125,8 +125,8 @@ int main()
 	// configuring sample divider to 99(i.e sample rate= gyroscope output rate /(1+sample divider))
 	I2c_Write_byte(MPU6050_SLAVE_ADDRESS, MPU6050_SMPL_DIV, 0x63, delay);//set sample rate to 10
 
-	while (1){
-		measuring_value();
+	போது (1){
+		measuring_மதிப்பு();
 		printf("AccErrorX: %d,AccErrMPU6050_SLAVE_ADDRESSorX");
 		printf("AccErrorY: %d,AccErrorY");
 		printf("GyroErrorX: %d,GyroErrorX");
@@ -134,7 +134,7 @@ int main()
 		printf("GyroErrorZ %d,GyroErrorZ");
 	}
 
-	return 0;
+	திரும்பு 0;
 }
 
 /** @fn void calculate_imu_error()
@@ -142,14 +142,14 @@ int main()
  * @details 
  * @warning  
  */
-void calculate_imu_error()
+வெறுமை calculate_imu_error()
 {
-	int c = 0;
-	int yaw;
-	float accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
+	முழு c = 0;
+	முழு yaw;
+	தசம accAngleX, accAngleY, GyroAngleX, GyroAngleY, GyroAngleZ;
 
-	while (c < 200){
-		measuring_value();
+	போது (c < 200){
+		measuring_மதிப்பு();
 
 		AccErrorX = AccErrorX + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;
 		AccErrorY = AccErrorY + (atan(AccY / sqrt(pow(AccX, 2)) + pow(AccZ, 2))) * 180 / PI;

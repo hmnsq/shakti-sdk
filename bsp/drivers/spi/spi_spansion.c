@@ -26,21 +26,21 @@
  * @detail Configures SPI, flash device and then do all basic flash oerations.
  */
 
-#include "spi.h"
-#include "log.h"
-#include "utils.h"
+#அந்தர்பாவ "spi.h"
+#அந்தர்பாவ "log.h"
+#அந்தர்பாவ "utils.h"
 
-int* spi_cr1    = (int*) SPI_CR1;
-int* spi_cr2    = (int*) SPI_CR2;
-int* spi_sr     = (int*) SPI_SR ;
-int* spi_dr1    = (int*) SPI_DR1;
-int* spi_dr2    = (int*) SPI_DR2;
-int* spi_dr3    = (int*) SPI_DR3;
-int* spi_dr4    = (int*) SPI_DR4;
-int* spi_dr5    = (int*) SPI_DR5;
-int* spi_crcpr  = (int*) SPI_CRCPR;
-int* spi_rxcrcr = (int*) SPI_RXCRCR;
-int* spi_txcrcr = (int*) SPI_TXCRCR;
+முழு* spi_cr1    = (முழு*) SPI_CR1;
+முழு* spi_cr2    = (முழு*) SPI_CR2;
+முழு* spi_sr     = (முழு*) SPI_SR ;
+முழு* spi_dr1    = (முழு*) SPI_DR1;
+முழு* spi_dr2    = (முழு*) SPI_DR2;
+முழு* spi_dr3    = (முழு*) SPI_DR3;
+முழு* spi_dr4    = (முழு*) SPI_DR4;
+முழு* spi_dr5    = (முழு*) SPI_DR5;
+முழு* spi_crcpr  = (முழு*) SPI_CRCPR;
+முழு* spi_rxcrcr = (முழு*) SPI_RXCRCR;
+முழு* spi_txcrcr = (முழு*) SPI_TXCRCR;
 
 //By default, spi 0 is configured
 /**
@@ -50,19 +50,19 @@ int* spi_txcrcr = (int*) SPI_TXCRCR;
  *          spi registers..
  * @param int* ---> offset value
  */
-void configure_spi(int offset)
+வெறுமை configure_spi(முழு offset)
 {
-	spi_cr1    = (int*) (SPI_CR1 + offset);
-	spi_cr2    = (int*) (SPI_CR2 + offset);
-	spi_sr     = (int*) (SPI_SR + offset);
-	spi_dr1    = (int*) (SPI_DR1 + offset);
-	spi_dr2    = (int*) (SPI_DR2 + offset);
-	spi_dr3    = (int*) (SPI_DR3 + offset);
-	spi_dr4    = (int*) (SPI_DR4 + offset);
-	spi_dr5    = (int*) (SPI_DR5 + offset);
-	spi_crcpr  = (int*) (SPI_CRCPR + offset);
-	spi_rxcrcr = (int*) (SPI_RXCRCR + offset);
-	spi_txcrcr = (int*) (SPI_TXCRCR + offset);
+	spi_cr1    = (முழு*) (SPI_CR1 + offset);
+	spi_cr2    = (முழு*) (SPI_CR2 + offset);
+	spi_sr     = (முழு*) (SPI_SR + offset);
+	spi_dr1    = (முழு*) (SPI_DR1 + offset);
+	spi_dr2    = (முழு*) (SPI_DR2 + offset);
+	spi_dr3    = (முழு*) (SPI_DR3 + offset);
+	spi_dr4    = (முழு*) (SPI_DR4 + offset);
+	spi_dr5    = (முழு*) (SPI_DR5 + offset);
+	spi_crcpr  = (முழு*) (SPI_CRCPR + offset);
+	spi_rxcrcr = (முழு*) (SPI_RXCRCR + offset);
+	spi_txcrcr = (முழு*) (SPI_TXCRCR + offset);
 }
 
 /**
@@ -72,7 +72,7 @@ void configure_spi(int offset)
  * @param int* addr 
  * @param int val 
  */
-void set_spi(int* addr, int val)
+வெறுமை set_spi(முழு* addr, முழு val)
 {
 	*addr = val;
 }
@@ -84,16 +84,16 @@ void set_spi(int* addr, int val)
  * @param int* ---> address from where read has to happen
  * @return int ---> SPI Register read value.
  */
-int get_spi(int* addr)
+முழு get_spi(முழு* addr)
 {
-	return *addr;
+	திரும்பு *addr;
 }
 
 /** @fn void spi_init(void)
  * @brief setting up baud rate and clock pole and phase 
  * @details Initialize the spi controller in Mode 3 (CPOL =1 & CPHA =1) with SCK= clk/16
  */
-void spi_init(void)
+வெறுமை spi_init(வெறுமை)
 {
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_CPHA|SPI_CPOL));
 }
@@ -104,7 +104,7 @@ void spi_init(void)
  *           in master mode use this function.
  * @warning Should be set before configuring the control register 1.
  */
-void spi_tx_rx_start(void)
+வெறுமை spi_tx_rx_start(வெறுமை)
 {
 	set_spi(spi_cr2, (SPI_RX_IMM_START));
 }
@@ -114,7 +114,7 @@ void spi_tx_rx_start(void)
  * @brief to start receive state 
  * @details This is not in used when spi is in Master mode 
  */
-void spi_rx_enable(void)
+வெறுமை spi_rx_enable(வெறுமை)
 {
 	set_spi(spi_cr2, (SPI_RX_START));
 }
@@ -128,9 +128,9 @@ void spi_rx_enable(void)
  * @param int (p (position from where the bits to be extracted))
  * @return int (32 bit which have k bit from "number" and rest are zero)
  */
-int bitExtracted(int number, int k, int p)
+முழு bitExtracted(முழு எண், முழு k, முழு p)
 {
-	return (((1 << k) - 1) & (number >> (p - 1)));
+	திரும்பு (((1 << k) - 1) & (எண் >> (p - 1)));
 }
 
 /**
@@ -139,16 +139,16 @@ int bitExtracted(int number, int k, int p)
  * @details As soons as data come to receive buffer this bit is set.  
  * @return int (1: if there is data into the RxFIFO else 0)
  */
-int spi_rxne_enable(void)
+முழு spi_rxne_enable(வெறுமை)
 {
-	int value = 0;
+	முழு மதிப்பு = 0;
 
-	while (!(value & 0x1))
+	போது (!(மதிப்பு & 0x1))
 	{
 		waitfor(100);
-		value = get_spi(spi_sr);
+		மதிப்பு = get_spi(spi_sr);
 	}
-	return 1;
+	திரும்பு 1;
 }
 
 /**
@@ -158,17 +158,17 @@ int spi_rxne_enable(void)
  * @warning One should check this bit before going to next transcation
  * @return int (0: SPI is busy in communication, 1: SPI nt busy)
  */
-int spi_notbusy(void)
+முழு spi_notbusy(வெறுமை)
 {
-	int value = 0x80;
+	முழு மதிப்பு = 0x80;
 
-	while ((value & 0x80))
+	போது ((மதிப்பு & 0x80))
 	{
 		waitfor(10);
-		value = get_spi(spi_sr);
+		மதிப்பு = get_spi(spi_sr);
 	}
 
-	return 1;
+	திரும்பு 1;
 }
 
 /**
@@ -178,14 +178,14 @@ int spi_notbusy(void)
  * @warning Without enabling this bit one cannot erase/write into the flash
  * @return int
  */
-int flash_write_enable(void)
+முழு flash_write_enable(வெறுமை)
 {
 	set_spi(spi_dr1, 0x06000000);
 	set_spi(spi_dr5, 0x06);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	திரும்பு 1;
 }
 
 /**
@@ -195,14 +195,14 @@ int flash_write_enable(void)
  * @return int
  */
 
-int flash_clear_sr(void)
+முழு flash_clear_sr(வெறுமை)
 {
 	set_spi(spi_dr1,0x30000000);
 	set_spi(spi_dr5,0x30);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	திரும்பு 1;
 }
 
 /**
@@ -214,11 +214,11 @@ int flash_clear_sr(void)
  * @param int (addr (address after the opcode))
  * @return int
  */
-int flash_cmd_addr(int command, int addr)
+முழு flash_cmd_addr(முழு command, முழு addr)
 {
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int data1 = command | address1 ;
+	முழு address1 = bitExtracted(addr, 24, 9);
+	முழு address2 = bitExtracted(addr, 8, 1);
+	முழு data1 = command | address1 ;
 	address2 = address2 << 24;
 
 	set_spi(spi_dr1, data1);
@@ -228,7 +228,7 @@ int flash_cmd_addr(int command, int addr)
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	திரும்பு 1;
 }
 
 /**
@@ -240,11 +240,11 @@ int flash_cmd_addr(int command, int addr)
  * @param int (addr(address after the opcode))
  * @param int (data (data after the address))
  */
-void flash_cmd_addr_data(int command, int addr, int data)
+வெறுமை flash_cmd_addr_data(முழு command, முழு addr, முழு data)
 {
-	int cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
-	int data1 = ( (addr & 0xFF)  << 24 ) |( (data & 0xFFFFFF00)  >> 8);
-	int data2 = ( (data & 0xFF)  << 24 ) & 0xFF000000;
+	முழு cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
+	முழு data1 = ( (addr & 0xFF)  << 24 ) |( (data & 0xFFFFFF00)  >> 8);
+	முழு data2 = ( (data & 0xFF)  << 24 ) & 0xFF000000;
 
 	log_debug("\n cmd: %x;d1: %x; d2: %x", cmd_addr, data1, data2);
 
@@ -266,7 +266,7 @@ void flash_cmd_addr_data(int command, int addr, int data)
  * @param int (addres (write address))
  * @param int(data (write data))
  */
-void flash_write(int address, int data)
+வெறுமை flash_write(முழு address, முழு data)
 {
 	flash_write_enable();
 	flash_cmd_addr_data(0x12000000, address,data);
@@ -284,10 +284,10 @@ void flash_write(int address, int data)
  * @param int (addr(read_address))
  * @return int 
  */
-int flash_cmd_to_read(int command, int addr)
+முழு flash_cmd_to_read(முழு command, முழு addr)
 {
-	int dr5;
-	int address2 = bitExtracted(addr, 8, 1);
+	முழு dr5;
+	முழு address2 = bitExtracted(addr, 8, 1);
 
 	address2 = address2 << 24;
 	set_spi(spi_dr1, ( command  | ( (addr & 0xFFFFFF00) >> 8) ));
@@ -297,12 +297,12 @@ int flash_cmd_to_read(int command, int addr)
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(48)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(2000);
 
-	if(spi_rxne_enable()) 
+	எனில்(spi_rxne_enable()) 
 	{
 		dr5 = *spi_dr5;
 	}
 
-	return dr5;
+	திரும்பு dr5;
 
 }
 
@@ -312,10 +312,10 @@ int flash_cmd_to_read(int command, int addr)
  * @param int (address (read address))
  * @return int 
  */
-int flash_read(int address)
+முழு flash_read(முழு address)
 {
-	int read_value = flash_cmd_to_read(0x0C000000,address);
-	return read_value;
+	முழு read_மதிப்பு = flash_cmd_to_read(0x0C000000,address);
+	திரும்பு read_மதிப்பு;
 }
 
 /**
@@ -325,17 +325,17 @@ int flash_read(int address)
  * @param int command (opcode)
  * @return int  value (flash response to opcode)
  */
-int flash_cmd_read(int command)
+முழு flash_cmd_read(முழு command)
 {
-	int dr5;
+	முழு dr5;
 	set_spi(spi_dr1, command);
 	set_spi(spi_dr5, command);
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-	if(spi_rxne_enable()) {
+	எனில்(spi_rxne_enable()) {
 		dr5 = *spi_dr5;
 	}
-	return dr5;
+	திரும்பு dr5;
 }
 
 /**
@@ -345,7 +345,7 @@ int flash_cmd_read(int command)
  * @warning before erasing the flash one should enable the WEL bit spi_sr by using write_enable()
  * @param int (address (address from which data should erase))
  */
-void flash_erase(int address)
+வெறுமை flash_erase(முழு address)
 {
 	flash_cmd_addr(0xdc000000, address);
 }
@@ -357,17 +357,17 @@ void flash_erase(int address)
  *           and WEL(Write Enable Latch) bit.
  * @return int
  */
-int flash_status_register_read(void)
+முழு flash_status_register_read(வெறுமை)
 {
-	int stat = 0x3;
+	முழு stat = 0x3;
 
-	while (stat & 0x03)
+	போது (stat & 0x03)
 	{
 		stat = flash_cmd_read(0x05000000);
 		log_debug("flash status register val %x\n", stat);
 	}
 
-	return 0;
+	திரும்பு 0;
 }
 
 /**
@@ -378,10 +378,10 @@ int flash_status_register_read(void)
  * @warning to move data from data register to fifo there must be some data into spi_dr5
  * @return int
  */
-int flash_device_id(void)
+முழு flash_device_id(வெறுமை)
 {
-	int dr3;
-	int val1, val2;
+	முழு dr3;
+	முழு val1, val2;
 
 	flash_write_enable();
 	set_spi(spi_dr1, 0x9f000000);
@@ -389,7 +389,7 @@ int flash_device_id(void)
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 
-	if(spi_rxne_enable())
+	எனில்(spi_rxne_enable())
 	{
 		dr3 = *spi_dr5;
 	}
@@ -400,5 +400,5 @@ int flash_device_id(void)
 	log_debug("Device ID %x \n", val1);
 	log_debug("extracted device id %x \n",val2);
 
-	return 1;
+	திரும்பு 1;
 }

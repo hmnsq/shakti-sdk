@@ -22,28 +22,28 @@
 
  ***************************************************************************/
 
-#include "uart.h"
-#include <stdio.h>
-#include <stdlib.h>
+#அந்தர்பாவ "uart.h"
+#அந்தர்பாவ <stdio.h>
+#அந்தர்பாவ <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+கட்டமைப்பு முனை {
+	முழு இலக்கம்;
+	கட்டமைப்பு முனை *nptr;
 }*head;
 
-void create_list(int n);
-void display_list();
-void delete_node(int position);
+வெறுமை create_list(முழு n);
+வெறுமை display_list();
+வெறுமை delete_முனை(முழு position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+வெறுமை முதன்மை()
 {
-	int n,position,m;
-	char t[15];
+	முழு n,position,m;
+	எழுத்து t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -63,12 +63,12 @@ void main()
 
 	position = atoi(t);
 
-	delete_node(position);
+	delete_முனை(position);
 
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	போது(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+வெறுமை create_list(முழு n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	கட்டமைப்பு முனை *முனை, *tmp;
+	முழு data,m;
+	எழுத்து t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (கட்டமைப்பு முனை*)malloc(அளவு(கட்டமைப்பு முனை));
 
-	if(head == NULL)
+	எனில்(head == வெற்று)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	இல்லையெனில்
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -96,28 +96,28 @@ void create_list(int n)
 
 		data = atoi(t);
 
-		head->num = data;
-		head->nptr = NULL;
+		head->இலக்கம் = data;
+		head->nptr = வெற்று;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		க்கு(முழு i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			முனை = (கட்டமைப்பு முனை*)malloc(அளவு(கட்டமைப்பு முனை));
 
-			if(node == NULL)
+			எனில்(முனை == வெற்று)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			இல்லையெனில் 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
 
 				data = atoi(t);
-				node->num = data;
-				node->nptr = NULL;
+				முனை->இலக்கம் = data;
+				முனை->nptr = வெற்று;
 
-				tmp->nptr = node;
+				tmp->nptr = முனை;
 				tmp = tmp->nptr;
 			}
 		}
@@ -129,21 +129,21 @@ void create_list(int n)
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void display_list()
+வெறுமை display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	முழு i = 0;
+	கட்டமைப்பு முனை *tmp;
 
-	if(head == NULL)
+	எனில்(head == வெற்று)
 	{
 		printf(" List is empty.");
 	}
-	else
+	இல்லையெனில்
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		போது(tmp != வெற்று) 
 		{
-			printf(" Node%d = %d",i,tmp->num);
+			printf(" Node%d = %d",i,tmp->இலக்கம்);
 			printf("->");
 			tmp = tmp->nptr;
 			i++;
@@ -157,37 +157,37 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+வெறுமை delete_முனை(முழு position)
 {
-	struct node *temp;
+	கட்டமைப்பு முனை *temp;
 
-	if(head == NULL)
+	எனில்(head == வெற்று)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	இல்லையெனில் 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		எனில் (position == 0)//Delete head node
 		{
 			head = temp->nptr;
-			free(temp);
-			return;
+			விடுவி(temp);
+			திரும்பு;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		க்கு (முழு i = 0; temp != வெற்று && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		எனில் (temp == வெற்று || temp->nptr == வெற்று)
+			திரும்பு;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		கட்டமைப்பு முனை *nptr = temp->nptr->nptr;
 
-		free(temp->nptr);
+		விடுவி(temp->nptr);
 		temp->nptr = nptr; 
 	}
 }

@@ -28,16 +28,16 @@
 protocol.
 */
 
-#include <stdint.h>
-#include "spi.h"
-#include "uart.h"
+#அந்தர்பாவ <stdint.h>
+#அந்தர்பாவ "spi.h"
+#அந்தர்பாவ "uart.h"
 
 /** @fn void main()
  * @brief Configures the SPI flash and writes into a flash location.
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+வெறுமை முதன்மை()
 {
 	configure_spi(SPI0_OFFSET);
 	spi_init();
@@ -53,5 +53,5 @@ void main()
 	flash_status_register_read();
 	printf("\nErase complete");
 
-	asm volatile ("ebreak");
+	asm நிலையற்ற ("ebreak");
 }

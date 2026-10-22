@@ -29,28 +29,28 @@
  handles the interrupt. Subsequently the clint counter is configured for subsequent operation.
 */ 
 
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "clint_driver.h"
-#include "log.h"
+#அந்தர்பாவ "uart.h"
+#அந்தர்பாவ "traps.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "clint_driver.h"
+#அந்தர்பாவ "log.h"
 
 /** @fn int main(void)
  * @brief A simple application to use clint (mtime) and clint clock divisor to generate interrupt in 1 second. 
  */
-void main(void){
+வெறுமை முதன்மை(வெறுமை){
 
-	uint64_t value = ( CLOCK_FREQUENCY / CLINT_DIVISOR );
+	uint64_t மதிப்பு = ( CLOCK_FREQUENCY / CLINT_வகுஎண் );
 
-	asm volatile("li      t0, 0x80\t\n"
+	asm நிலையற்ற("li      t0, 0x80\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 8\t\n"
+	asm நிலையற்ற("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 	printf("Configuring 1 second timer interrupt\n");
-	configure_counter(value);
+	configure_counter(மதிப்பு);
 
-	while(1);
+	போது(1);
 }

@@ -27,11 +27,11 @@
 @detail Detects the pressed key/button and prints pressed button.
 */
 
-#include <stdio.h>        
-#include "platform.h"
-#include "gpio.h"         
-#include "button_driver.h"
-#include "utils.h"
+#அந்தர்பாவ <stdio.h>        
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "gpio.h"         
+#அந்தர்பாவ "button_driver.h"
+#அந்தர்பாவ "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
 #define READ_INDIVIDUAL_BTNS /*! Read each button value */
@@ -44,12 +44,12 @@ unsigned long read_data = 0;
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
  */
-void main()
+வெறுமை முதன்மை()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#எனில் defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	போது (1) {
 
 #ifdef READ_INDIVIDUAL_BTNS
 
@@ -90,9 +90,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x10000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
+		எனில்(read_data == 0x10000000)
 			printf("\n BTN0: HIGH"); 		
-		else
+		இல்லையெனில்
 			printf("\n BTN0: LOW");
 #endif
 
@@ -101,9 +101,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x20000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
+		எனில்(read_data == 0x20000000)
 			printf("\n BTN1: HIGH"); 		
-		else
+		இல்லையெனில்
 			printf("\n BTN1: LOW");
 #endif
 
@@ -112,9 +112,9 @@ void main()
 		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x40000000);
 		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
+		எனில்(read_data == 0x40000000)
 			printf("\n BTN2: HIGH"); 		
-		else
+		இல்லையெனில்
 			printf("\n BTN2: LOW");
 #endif
 
@@ -124,9 +124,9 @@ void main()
 		read_data = (read_data & 0x80000000);
 		printf("\n Read Data is :0x%x", read_data);
 
-		if(read_data == 0x80000000)
+		எனில்(read_data == 0x80000000)
 			printf("\n BTN3: HIGH"); 		
-		else
+		இல்லையெனில்
 			printf("\n BTN3: LOW");
 #endif
 
@@ -140,120 +140,120 @@ void main()
 		read_data = read_word(GPIO_DATA_REG);
 		printf("\n Read Data is :0x%x", read_data);
 
-		switch(read_data)
+		தேர்வு(read_data)
 		{
 
-		case 0x00000000:
+		நிலை 0x00000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x10000000:
+		நிலை 0x10000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x20000000:
+		நிலை 0x20000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x30000000:
+		நிலை 0x30000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x40000000:
+		நிலை 0x40000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x50000000:
+		நிலை 0x50000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x60000000:
+		நிலை 0x60000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x70000000:
+		நிலை 0x70000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: LOW");
-			break;
+			நிறுத்து;
 
-		case 0x80000000:
+		நிலை 0x80000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0x90000000:
+		நிலை 0x90000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0xA0000000:
+		நிலை 0xA0000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0xB0000000:
+		நிலை 0xB0000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: LOW");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0xC0000000:
+		நிலை 0xC0000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0xD0000000:
+		நிலை 0xD0000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: LOW");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0xE0000000:
+		நிலை 0xE0000000:
 			printf("\n BTN0: LOW");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 
-		case 0xF0000000:
+		நிலை 0xF0000000:
 			printf("\n BTN0: HIGH");
 			printf("\n BTN1: HIGH");
 			printf("\n BTN2: HIGH");
 			printf("\n BTN3: HIGH");
-			break;
+			நிறுத்து;
 		}
 
 		delay_loop(500, 500);

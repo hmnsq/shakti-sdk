@@ -28,7 +28,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include<stdlib.h>
+#அந்தர்பாவ<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI0_OFFSET 0x00000000
@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+வெறுமை configure_spi(முழு offset);
+வெறுமை spi_init(வெறுமை);
+வெறுமை set_spi(முழு* addr, முழு val);
+வெறுமை bin(unsigned n);
+வெறுமை spi_tx_rx_start(வெறுமை);
+வெறுமை spi_enable(வெறுமை);
+வெறுமை spi_rx_enable(வெறுமை);
+வெறுமை flash_cmd_addr_data(முழு command, முழு addr, முழு data);
+வெறுமை flash_write(முழு address, முழு data);
+வெறுமை flash_erase(முழு address);
+முழு get_spi(முழு* addr);
+முழு bitExtracted(முழு எண், முழு k, முழு p) ;
+முழு concat(முழு x, முழு y) ;
+முழு spi_rxne_enable(வெறுமை);
+முழு spi_notbusy(வெறுமை);
+முழு flash_write_enable(வெறுமை);
+முழு flash_clear_sr(வெறுமை);
+முழு flash_cmd_addr(முழு command, முழு addr);
+முழு flash_cmd_to_read(முழு command, முழு addr);
+முழு flash_read(முழு address);
+முழு flash_cmd_read(முழு command);
+முழு flash_status_register_read(வெறுமை);
+முழு flash_device_id(வெறுமை);
 
 #endif

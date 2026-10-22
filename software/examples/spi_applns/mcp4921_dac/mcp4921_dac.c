@@ -27,22 +27,22 @@
 @detail SPI interface is used to configure the DAC and then write passed 
         value to DAC for converstion.
 */
-#include "spi.h"
-#include <stdint.h>
-#include "platform.h"
-#include "pinmux.h"
+#அந்தர்பாவ "spi.h"
+#அந்தர்பாவ <stdint.h>
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "pinmux.h"
 
-extern volatile unsigned int* pinmux_config_reg;
-extern int* spi_cr1 ;
-extern int* spi_dr1 ;
-extern int* spi_dr5;
+வெளி நிலையற்ற unsigned முழு* pinmux_config_reg;
+வெளி முழு* spi_cr1 ;
+வெளி முழு* spi_dr1 ;
+வெளி முழு* spi_dr5;
 
 /** @fn void spi_dac()
  * @brief Configures DAC and write digital value to DAC.
  * @details configures the DAC and writes the digital value to DAC to convert 
  *          with digital to analog. Configuration is done using SPI.
  */
-void spi_dac()
+வெறுமை spi_dac()
 {
 	*(pinmux_config_reg) =  0x154000;
     configure_spi(SPI1_OFFSET);	
@@ -51,17 +51,17 @@ void spi_dac()
 	log_debug("SPI init done\n");
 
 	waitfor(200);
-	write_dac_value(0xfff);
+	write_dac_மதிப்பு(0xfff);
 
 	log_debug("\nDac Value Written\n");
 
-	while(1)
+	போது(1)
 	{
-		write_dac_value(0xFFF);
+		write_dac_மதிப்பு(0xFFF);
 		log_debug("Dac Value Written - 4096\n");
 
 		delay_loop(0x1750, 0x1750);
-		write_dac_value(0x0);
+		write_dac_மதிப்பு(0x0);
 		log_debug("Dac Value Written - 0\n");
 
 		delay_loop(0x1750, 0x1750);
@@ -74,9 +74,9 @@ void spi_dac()
  * @param dac_value
  * @return One.
  */
-int write_dac_value(unsigned dac_value)
+முழு write_dac_மதிப்பு(unsigned dac_மதிப்பு)
 {
-	int data1 = ((0x3 << 28) | (dac_value << 16));
+	முழு data1 = ((0x3 << 28) | (dac_மதிப்பு << 16));
 
 	log_info("\n Data value written: %x", data1);
 
@@ -87,7 +87,7 @@ int write_dac_value(unsigned dac_value)
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	திரும்பு 1;
 }
 
 /** @fn void main()
@@ -95,7 +95,7 @@ int write_dac_value(unsigned dac_value)
  * @details Configures DAC registers and then write the digital 
  *          that needs to be converted to analog.  
  */
-void main()
+வெறுமை முதன்மை()
 {
 	spi_dac();
 }

@@ -30,50 +30,50 @@ uart is initialized. Trap handler is initialized.
 Disable Xip for Aardonyx
 */
 
-#include "traps.h"
-#include "plic_driver.h"
-#include "clint_driver.h"
-#include "log.h"
-#include "utils.h"
-#include "qspi.h"
-#include "platform.h"
-#include "defines.h"
-#include "uart.h"
+#அந்தர்பாவ "traps.h"
+#அந்தர்பாவ "plic_driver.h"
+#அந்தர்பாவ "clint_driver.h"
+#அந்தர்பாவ "log.h"
+#அந்தர்பாவ "utils.h"
+#அந்தர்பாவ "qspi.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "defines.h"
+#அந்தர்பாவ "uart.h"
 
-extern void init(void);
-extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+வெளி வெறுமை init(வெறுமை);
+வெளி வெறுமை trap_entry(வெறுமை);
+வெளி uart_struct *uart_instance[MAX_UART_மொத்தம்];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+வெளி எழுத்து அடுக்கு_end[];
+வெளி எழுத்து அடுக்கு[];
+வெளி எழுத்து _heap[];
+வெளி எழுத்து _heap_end[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+எழுத்து *அடுக்கு_end_2=(எழுத்து *)&அடுக்கு_end;
+எழுத்து *அடுக்கு_start=(எழுத்து *)&அடுக்கு;
+எழுத்து *heap_start=(எழுத்து *)&_heap;
+எழுத்து *heap_end=(எழுத்து *)&_heap_end;
 
 /** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
  */
-static void section_init(void)
+நிலையான வெறுமை section_init(வெறுமை)
 {
-#if 0
+#எனில் 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	போது(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	போது(அடுக்கு_end_2>=அடுக்கு_start)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*அடுக்கு_end_2=0x0;
+		அடுக்கு_end_2--;
 	}
 #endif
 
@@ -84,7 +84,7 @@ static void section_init(void)
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
  */
-static void trap_init(void)
+நிலையான வெறுமை trap_init(வெறுமை)
 {
 	log_trace("trap_init entered \n ");
 
@@ -144,7 +144,7 @@ static void trap_init(void)
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+வெறுமை init(வெறுமை)
 {
 //	section_init(); // uncomment on need basis
 	uart_init();
@@ -158,7 +158,7 @@ void init(void)
 
 	trap_init();
 
-	main();
+	முதன்மை();
 
 	log_trace("init exited\n");
 }

@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#அந்தர்பாவ<stdbool.h>
 
 // PWM Registers 
 #define PERIOD_REGISTER     0x00000000	//16 bits (short)
@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+வெறுமை pwm_configure(முழு module_எண், முழு clock_வகுஎண், முழு period, முழு duty, bool external_clock);
+வெறுமை pwm_start(முழு module_எண், முழு mode);
+முழு pwm_check_continuous_mode(முழு module_எண்);
+வெறுமை pwm_clear_registers(முழு module_எண்);
+வெறுமை pwm_init(வெறுமை);
+வெறுமை pwm_set_external_clock(முழு module_எண், bool மதிப்பு);
+வெறுமை pwm_set_clock(முழு module_எண், முழு clock_வகுஎண்);
+வெறுமை pwm_set_duty_cycle(முழு module_எண், முழு duty);
+வெறுமை pwm_set_periodic_cycle(முழு module_எண், முழு period);
+வெறுமை pwm_stop(முழு module_எண்);
+வெறுமை show_register_மதிப்புகள்(முழு module_எண்);
+முழு set_pwm_period_register(முழு module_எண், முழு மதிப்பு);
+முழு set_pwm_duty_register(முழு module_எண், முழு மதிப்பு);
+முழு set_pwm_control_register(முழு module_எண், முழு மதிப்பு);
+முழு set_pwm_clock_register(முழு module_எண், முழு மதிப்பு);
+முழு configure_control_register_mode(முழு mode);
+வெறுமை pwm_use_external_clock(முழு module_எண், bool மதிப்பு);
 

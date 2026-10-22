@@ -207,14 +207,14 @@
 #define ETH_INTS_H			/* by using protection macros */
 
 #ifdef __cplusplus
-extern "C" {
+வெளி "C" {
 #endif
 
 
 /***************************** Include Files *********************************/
 
 
-#include "xintc_l.h"
+#அந்தர்பாவ "xintc_l.h"
 
 /************************** Constant Definitions *****************************/
 
@@ -272,25 +272,25 @@ extern "C" {
 /**
  * This typedef contains configuration information for the device.
  */
-typedef struct {
+வகைவரை கட்டமைப்பு {
 	u16 DeviceId;		/**< Unique ID  of device */
 	UINTPTR BaseAddress;	/**< Register base address */
 	u32 AckBeforeService;	/**< Ack location per interrupt */
-	int FastIntr;		/**< Fast Interrupt enabled */
+	முழு FastIntr;		/**< Fast Interrupt enabled */
 	u32 IntVectorAddr;	/**< Interrupt Vector Address */
-	int NumberofIntrs;      /**< Number of Interrupt sources */
+	முழு NumberofIntrs;      /**< Number of Interrupt sources */
 	u8 VectorAddrWidth;		/**< Width of vector address */
 	u32 Options;		/**< Device options */
-	int IntcType;		/**< Intc type 0 - No Cascade Mode
+	முழு IntcType;		/**< Intc type 0 - No Cascade Mode
 				               1 - primary instance
 				               2 - secondary instance
 				               3 - last instance */
 
 /** Static vector table of interrupt handlers */
-#if XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
+#எனில் XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
 	XIntc_VectorTableEntry HandlerTable[XIN_CONTROLLER_MAX_INTRS];
-#else
-	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_NUM_INTR_INPUTS];
+#இல்லையெனில்
+	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_இலக்கம்_INTR_INPUTS];
 #endif
 
 } XIntc_Config;
@@ -300,7 +300,7 @@ typedef struct {
  * variable of this type for every intc device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+வகைவரை கட்டமைப்பு {
 	UINTPTR BaseAddress;	 /**< Base address of registers */
 	u32 IsReady;		 /**< Device is initialized and ready */
 	u32 IsStarted;		 /**< Device has been started */
@@ -316,43 +316,43 @@ typedef struct {
 /*
  * Required functions in xintc.c
  */
-int XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
+முழு XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
 
-int XIntc_Start(XIntc * InstancePtr, u8 Mode);
-void XIntc_Stop(XIntc * InstancePtr);
+முழு XIntc_Start(XIntc * InstancePtr, u8 Mode);
+வெறுமை XIntc_Stop(XIntc * InstancePtr);
 
-int XIntc_Connect(XIntc * InstancePtr, u8 Id,
-		  XInterruptHandler Handler, void *CallBackRef);
-void XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
+முழு XIntc_Connect(XIntc * InstancePtr, u8 Id,
+		  XInterruptHandler Handler, வெறுமை *CallBackRef);
+வெறுமை XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
 
-void XIntc_Enable(XIntc * InstancePtr, u8 Id);
-void XIntc_Disable(XIntc * InstancePtr, u8 Id);
+வெறுமை XIntc_Enable(XIntc * InstancePtr, u8 Id);
+வெறுமை XIntc_Disable(XIntc * InstancePtr, u8 Id);
 
-void XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
+வெறுமை XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
 
 XIntc_Config *XIntc_LookupConfig(u16 DeviceId);
 
-int XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
+முழு XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
 				XFastInterruptHandler Handler);
-void XIntc_SetNormalIntrMode(XIntc *InstancePtr, u8 Id);
+வெறுமை XIntc_SetNormalIntrMode(XIntc *InstancePtr, u8 Id);
 
 /*
  * Interrupt functions in xintr_intr.c
  */
-void XIntc_VoidInterruptHandler(void);
-void XIntc_InterruptHandler(XIntc * InstancePtr);
+வெறுமை XIntc_VoidInterruptHandler(வெறுமை);
+வெறுமை XIntc_InterruptHandler(XIntc * InstancePtr);
 
 /*
  * Options functions in xintc_options.c
  */
-int XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
+முழு XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
 u32 XIntc_GetOptions(XIntc * InstancePtr);
 
 /*
  * Self-test functions in xintc_selftest.c
  */
-int XIntc_SelfTest(XIntc * InstancePtr);
-int XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
+முழு XIntc_SelfTest(XIntc * InstancePtr);
+முழு XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
 
 #ifdef __cplusplus
 }

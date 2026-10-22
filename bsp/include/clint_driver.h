@@ -28,15 +28,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifndef CLIC_DRIVER_H
 #define CLIC_DRIVER_H
-#include "traps.h"
-#include "platform.h"
+#அந்தர்பாவ "traps.h"
+#அந்தர்பாவ "platform.h"
 
-extern volatile uint64_t* mtime;
-extern volatile uint64_t* mtimecmp;
+வெளி நிலையற்ற uint64_t* mtime;
+வெளி நிலையற்ற uint64_t* mtimecmp;
 
 /* function prototype */
-uint64_t get_timer_value(void);
-void configure_counter(uint64_t value);
-void mach_clint_handler(uintptr_t int_id, uintptr_t epc);
+uint64_t get_timer_மதிப்பு(வெறுமை);
+வெறுமை configure_counter(uint64_t மதிப்பு);
+வெறுமை mach_clint_handler(uintptr_t int_id, uintptr_t epc);
 
 #endif

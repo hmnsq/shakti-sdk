@@ -28,10 +28,10 @@
 value based on there data type. Currently, shakti-sdk supports few formatting options.
 */
 
-#include <stdint.h>
-#include <stdarg.h>
-#include "utils.h"
-#include "uart.h"
+#அந்தர்பாவ <stdint.h>
+#அந்தர்பாவ <stdarg.h>
+#அந்தர்பாவ "utils.h"
+#அந்தர்பாவ "uart.h"
 
 /** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+நிலையான உள்வரி வெறுமை itoa (unsigned long long முழு எண், unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	முழு i = 0;
+	unsigned முழு intermediate = 0;
+	unsigned முழு digits[அளவு(எண்)*8];
 
-	while (1) {
-		digits[i] = number % base;
+	போது (1) {
+		digits[i] = எண் % base;
 
-		if (number < base)
-			break;
+		எனில் (எண் < base)
+			நிறுத்து;
 
-		number /= base;
+		எண் /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	போது (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		எனில் (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		இல்லையெனில்
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -72,21 +72,21 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @param const char * fmt - formatting strings
  * @param const va_list ap - arg list
  */
-void _printf_(const char *fmt, va_list ap)
+வெறுமை _printf_(மாறிலி எழுத்து *fmt, va_list ap)
 {
-	register const char* p;
-	const char* last_fmt;
-	register int ch;
-	unsigned long long num;
-	int base, lflag, i;
-	float float_num = 0;
-	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	பதிவு மாறிலி எழுத்து* p;
+	மாறிலி எழுத்து* last_fmt;
+	பதிவு முழு ch;
+	unsigned long long இலக்கம்;
+	முழு base, lflag, i;
+	தசம float_இலக்கம் = 0;
+	எழுத்து float_arr[30] = {'\0'};
+	முழு backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	க்கு (;;) {
+		க்கு (;(ch = *(unsigned எழுத்து *) fmt) != '%'; fmt++) {
+			எனில் (ch == '\0')
+				திரும்பு;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,127 +96,127 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		க்கு (;;) {
 
-			switch (ch = *(unsigned char *) fmt++) {
+			தேர்வு (ch = *(unsigned எழுத்து *) fmt++) {
 
 				// long flag (doubled for long long)
-				case 'l':
+				நிலை 'l':
 					lflag++;
 					backtothebeginning = 1;
-					break;
+					நிறுத்து;
 
 					// character
-				case 'c':
-					putchar(va_arg(ap, int));
-					break;
+				நிலை 'c':
+					putchar(va_arg(ap, முழு));
+					நிறுத்து;
 
 					// string
-				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+				நிலை 's':
+					எனில் ((p = va_arg(ap, எழுத்து *)) == வெற்று)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					க்கு (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
-					break;
+					நிறுத்து;
 
 					// (signed) decimal
-				case 'd':
+				நிலை 'd':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, long long);
-					else if (lflag ==1)
-						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					எனில் (lflag >= 2)
+						இலக்கம் = va_arg(ap, long long);
+					இல்லையெனில் எனில் (lflag ==1)
+						இலக்கம் = va_arg(ap, long);
+					இல்லையெனில்
+						இலக்கம் = va_arg(ap, முழு);
 
-					if ((long long) num < 0) {
+					எனில் ((long long) இலக்கம் < 0) {
 						putchar('-');
-						num = -(long long) num;
+						இலக்கம் = -(long long) இலக்கம்;
 					}
 
-					itoa( num, base);
+					itoa( இலக்கம், base);
 
-					break;
+					நிறுத்து;
 
-				case 'f':
-					float_num =  va_arg(ap, double);
+				நிலை 'f':
+					float_இலக்கம் =  va_arg(ap, இரட்டை);
 
-					ftoa(float_num, float_arr, 6);
+					ftoa(float_இலக்கம், float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					க்கு( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						எனில்(i > 29) நிறுத்து;
 					}
-					break;
+					நிறுத்து;
 
 					// unsigned decimal
-				case 'u':
+				நிலை 'u':
 					base = 10;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					எனில் (lflag >= 2)
+						இலக்கம் = va_arg(ap, unsigned long long);
+					இல்லையெனில் எனில் (lflag)
+						இலக்கம் = va_arg(ap, unsigned long);
+					இல்லையெனில்
+						இலக்கம் = va_arg(ap, unsigned முழு);
 
-					itoa( num, base);
+					itoa( இலக்கம், base);
 
-					break;
+					நிறுத்து;
 
 					// (unsigned) octal
-				case 'o':
+				நிலை 'o':
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					எனில் (lflag >= 2)
+						இலக்கம் = va_arg(ap, unsigned long long);
+					இல்லையெனில் எனில் (lflag)
+						இலக்கம் = va_arg(ap, unsigned long);
+					இல்லையெனில்
+						இலக்கம் = va_arg(ap, unsigned முழு);
 
-					itoa( num, base);
+					itoa( இலக்கம், base);
 
-					break;
+					நிறுத்து;
 
-				case 'x':
+				நிலை 'x':
 					base = 16;
 
-					if (lflag >= 2)
-						num = va_arg(ap, unsigned long long);
-					else if (lflag)
-						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					எனில் (lflag >= 2)
+						இலக்கம் = va_arg(ap, unsigned long long);
+					இல்லையெனில் எனில் (lflag)
+						இலக்கம் = va_arg(ap, unsigned long);
+					இல்லையெனில்
+						இலக்கம் = va_arg(ap, unsigned முழு);
 
-					itoa( num, base);
+					itoa( இலக்கம், base);
 
-					break;
+					நிறுத்து;
 
 					// escaped '%' character
-				case '%':
+				நிலை '%':
 					putchar(ch);
-					break;
+					நிறுத்து;
 
 					// unrecognized escape sequence - just print it literally
-				default:
+				இயல்பு:
 					putchar('%');
 					fmt = last_fmt;
-					break;
+					நிறுத்து;
 			}
 
-			if (backtothebeginning)
+			எனில் (backtothebeginning)
 			{
 				backtothebeginning = 0;
-				continue;
+				தொடர்;
 			}
-			else
-				break;
+			இல்லையெனில்
+				நிறுத்து;
 		}
 	}
 }
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+முழு printf(மாறிலி எழுத்து* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	திரும்பு 0;// incorrect return value, but who cares, anyway?
 }

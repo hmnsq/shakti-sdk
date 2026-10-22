@@ -29,8 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
@@ -42,20 +42,20 @@ add a method to set the GPIO pins that are to be used  */
 #define I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+வெறுமை I2cInit();
+வெறுமை I2cSendSlaveAddress(unsigned எழுத்து , unsigned எழுத்து , unsigned எழுத்து );
+வெறுமை I2cWriteByte(unsigned எழுத்து , unsigned எழுத்து );
+unsigned எழுத்து I2cReadByte(unsigned எழுத்து );
+வெறுமை I2cWriteData(unsigned எழுத்து , unsigned எழுத்து );
+unsigned எழுத்து I2cReadDataAck(unsigned எழுத்து );
+unsigned எழுத்து I2cReadDataNack(unsigned எழுத்து );
+வெறுமை I2cStart(unsigned எழுத்து );
+வெறுமை I2cStop(unsigned எழுத்து );
+வெறுமை I2c_Write_byte(unsigned எழுத்து, unsigned எழுத்து, unsigned எழுத்து, unsigned எழுத்து);
+முழு I2c_Read_byte(unsigned எழுத்து ,unsigned எழுத்து , unsigned எழுத்து );
+முழு I2c_shakti_readbytes(எழுத்து *, முழு , முழு , unsigned எழுத்து );
+வெறுமை ReadAckForWrite(unsigned எழுத்து delay);
+வெறுமை SendNackForRead(unsigned எழுத்து delay);
+வெறுமை SendAckForRead(unsigned எழுத்து delay);
 
 #endif

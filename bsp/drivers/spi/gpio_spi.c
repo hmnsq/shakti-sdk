@@ -26,9 +26,9 @@
 @detail The GPIO_SPI module driver supports SPI driver routines using GPIO lines as SPI lines.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "gpio_spi.h"
+#அந்தர்பாவ "platform.h"
+#அந்தர்பாவ "gpio.h"
+#அந்தர்பாவ "gpio_spi.h"
 
 /** @fn static void writebyte(unsigned char writeData, unsigned char delay)
  * @brief Writes a byte
@@ -37,15 +37,15 @@
  * @param unsigned char delay
  */
 // at starting  edge sending
-static void writebyte(unsigned char writeData, unsigned char delay)
+நிலையான வெறுமை writebyte(unsigned எழுத்து writeData, unsigned எழுத்து delay)
 {
-	unsigned char j = 0, k;
+	unsigned எழுத்து j = 0, k;
 	unsigned long readData = 0;
 	//readData = read_word(GPIO_DATA_REG);
 
     // Before initiating communication SS -> low
        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SS)) );
-	while (j < 8) {
+	போது (j < 8) {
 		k = writeData;
 		k = ( k << j ) & 0x80;
 
@@ -54,11 +54,11 @@ static void writebyte(unsigned char writeData, unsigned char delay)
         // increasing sck --> Rising EDGE
         write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
 
-        if (k == 0) {
+        எனில் (k == 0) {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_MOSI)) );
 			delay_loop(delay, delay);
 		}
-		else {
+		இல்லையெனில் {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_MOSI) );
 			delay_loop(delay, delay);
 		}
@@ -82,26 +82,26 @@ static void writebyte(unsigned char writeData, unsigned char delay)
  * @return Read value
  */
 //reading at rising edge reading 
-unsigned char readbyte(unsigned char delay)
+unsigned எழுத்து readbyte(unsigned எழுத்து delay)
 {
-	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
-	unsigned char readData = 0;
+	unsigned எழுத்து j = 0, i = 0;
+	unsigned எழுத்து bit_மதிப்பு;
+	unsigned எழுத்து readData = 0;
         unsigned long readGpioData = 0;
 	readData = read_word(GPIO_DATA_REG);
-	while (j < 8) {
+	போது (j < 8) {
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
 		delay_loop(delay, delay);
 
 		readGpioData = read_word(GPIO_DATA_REG)  & SPI_MISO;
 
-        if (readGpioData != 0)
-			bitValue = 1;
-		else
-			bitValue = 0;
+        எனில் (readGpioData != 0)
+			bit_மதிப்பு = 1;
+		இல்லையெனில்
+			bit_மதிப்பு = 0;
 	    
         readData = readData << 1;
-		readData = readData | bitValue;
+		readData = readData | bit_மதிப்பு;
 		
         delay_loop(delay, delay);
 
@@ -109,7 +109,7 @@ unsigned char readbyte(unsigned char delay)
 		delay_loop(delay, delay);
 		++j;
 	}
-	return readData;
+	திரும்பு readData;
 }
 /*
   1.) MISO_pin  --> 1st GPIO //0 
@@ -122,15 +122,15 @@ unsigned char readbyte(unsigned char delay)
  * @brief Configures the GPIO pins for SPI functionality
  * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
  */
-int config()
+முழு config()
 {
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
     write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
-    unsigned char writeData = (int) 'a';
-    unsigned char delay = 10;
-    for (;;)
+    unsigned எழுத்து writeData = (முழு) 'a';
+    unsigned எழுத்து delay = 10;
+    க்கு (;;)
     {
     writebyte(writeData,delay);
     printf("%d\n",writeData);

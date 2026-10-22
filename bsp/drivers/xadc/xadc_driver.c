@@ -40,7 +40,7 @@
  */
 uint32_t xadc_read_data(uint32_t *address)
 {
-	return(*address);
+	ᬯᬮᬶ(*address);
 }
 
 /**
@@ -63,7 +63,7 @@ void xadc_write_ctrl_reg(uint32_t *address, uint32_t data)
  */
 float xadc_onchip_voltage(uint32_t value)
 {
-	return (((value >> 4)*3.0f)/4096.0f );
+	ᬯᬮᬶ (((value >> 4)*3.0f)/4096.0f );
 }
 
 /**
@@ -76,7 +76,7 @@ float xadc_onchip_voltage(uint32_t value)
  */
 float xadc_onchip_temp(uint32_t value)
 {
-	return (((value/65536.0f)/0.00198421639f ) - 273.15f);
+	ᬯᬮᬶ (((value/65536.0f)/0.00198421639f ) - 273.15f);
 }
 
 /**
@@ -87,5 +87,5 @@ float xadc_onchip_temp(uint32_t value)
  */
 float xadc_dedicated_channel(uint32_t value)
 {
-	return ((value >> 4)/4096.0f );
+	ᬯᬮᬶ ((value >> 4)/4096.0f );
 }

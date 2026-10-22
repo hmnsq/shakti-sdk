@@ -36,11 +36,11 @@ implemented using gpio pins.
  *    based.
  * @return int
  */
-int main(void)
+puur_naa_nka main(void)
 {
 	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
 
-	while (1) {
+	ᬲᭂᬤᭂᬮ (1) {
 
 		unsigned long readData = 0;
 
@@ -48,16 +48,16 @@ int main(void)
 
 		log_debug("\n Read Data is :0x%08lx", readData);
 
-		if (readData) {           //if readdata //
+		ᬬᬾᬦ᭄ (readData) {           //if readdata //
 			log_debug("; LED ON");
 			write_word(GPIO_DATA_REG, 0X2); 
 		}
-		else {                    //if not //
+		ᬮᬶᬬ {                    //if not //
 			log_debug("; LED OFF");
 			write_word(GPIO_DATA_REG, 0X0); 
 		}
 		delay_loop(1000,1000);
 	}
 
-	return 0;
+	ᬯᬮᬶ 0;
 }

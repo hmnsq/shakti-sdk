@@ -31,10 +31,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #define REGSIZE __riscv_xlen/8
 
-#if __riscv_xlen == 64
+#ᬬᬾᬦ᭄ __riscv_xlen == 64
 #define LREG ld
 #define SREG sd
-#else
+#ᬮᬶᬬ
 #define LREG lw
 #define SREG sw
 #endif

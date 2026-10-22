@@ -272,24 +272,24 @@ extern "C" {
 /**
  * This typedef contains configuration information for the device.
  */
-typedef struct {
+typedef sa_nracanaa {
 	u16 DeviceId;		/**< Unique ID  of device */
 	UINTPTR BaseAddress;	/**< Register base address */
 	u32 AckBeforeService;	/**< Ack location per interrupt */
-	int FastIntr;		/**< Fast Interrupt enabled */
+	puur_naa_nka FastIntr;		/**< Fast Interrupt enabled */
 	u32 IntVectorAddr;	/**< Interrupt Vector Address */
-	int NumberofIntrs;      /**< Number of Interrupt sources */
+	puur_naa_nka NumberofIntrs;      /**< Number of Interrupt sources */
 	u8 VectorAddrWidth;		/**< Width of vector address */
 	u32 Options;		/**< Device options */
-	int IntcType;		/**< Intc type 0 - No Cascade Mode
+	puur_naa_nka IntcType;		/**< Intc type 0 - No Cascade Mode
 				               1 - primary instance
 				               2 - secondary instance
 				               3 - last instance */
 
 /** Static vector table of interrupt handlers */
-#if XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
+#ᬬᬾᬦ᭄ XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
 	XIntc_VectorTableEntry HandlerTable[XIN_CONTROLLER_MAX_INTRS];
-#else
+#ᬮᬶᬬ
 	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_NUM_INTR_INPUTS];
 #endif
 
@@ -300,7 +300,7 @@ typedef struct {
  * variable of this type for every intc device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
+typedef sa_nracanaa {
 	UINTPTR BaseAddress;	 /**< Base address of registers */
 	u32 IsReady;		 /**< Device is initialized and ready */
 	u32 IsStarted;		 /**< Device has been started */
@@ -316,12 +316,12 @@ typedef struct {
 /*
  * Required functions in xintc.c
  */
-int XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
+puur_naa_nka XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
 
-int XIntc_Start(XIntc * InstancePtr, u8 Mode);
+puur_naa_nka XIntc_Start(XIntc * InstancePtr, u8 Mode);
 void XIntc_Stop(XIntc * InstancePtr);
 
-int XIntc_Connect(XIntc * InstancePtr, u8 Id,
+puur_naa_nka XIntc_Connect(XIntc * InstancePtr, u8 Id,
 		  XInterruptHandler Handler, void *CallBackRef);
 void XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
 
@@ -332,7 +332,7 @@ void XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
 
 XIntc_Config *XIntc_LookupConfig(u16 DeviceId);
 
-int XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
+puur_naa_nka XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
 				XFastInterruptHandler Handler);
 void XIntc_SetNormalIntrMode(XIntc *InstancePtr, u8 Id);
 
@@ -345,14 +345,14 @@ void XIntc_InterruptHandler(XIntc * InstancePtr);
 /*
  * Options functions in xintc_options.c
  */
-int XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
+puur_naa_nka XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
 u32 XIntc_GetOptions(XIntc * InstancePtr);
 
 /*
  * Self-test functions in xintc_selftest.c
  */
-int XIntc_SelfTest(XIntc * InstancePtr);
-int XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
+puur_naa_nka XIntc_SelfTest(XIntc * InstancePtr);
+puur_naa_nka XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
 
 #ifdef __cplusplus
 }

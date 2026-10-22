@@ -30,8 +30,8 @@
 #ifndef XADC_DRIVER
 #define XADC_DRIVER
 
-#include "platform.h"
-#include "traps.h"
+#ضمن "platform.h"
+#ضمن "traps.h"
 
 /**@name Register offsets
  * The following constants provide access to each of the registers of the
@@ -131,11 +131,11 @@
 
 /************************** Function Prototypes ******************************/
 
-void xadc_write_ctrl_reg(uint32_t *address, uint32_t data);
+فراغ xadc_write_ctrl_reg(uint32_t *address, uint32_t data);
 uint32_t xadc_read_ctrl_reg(uint32_t *address);
 uint32_t xadc_read_data(uint32_t *address);
-float xadc_onchip_temp(uint32_t value);
-float xadc_onchip_voltage(uint32_t value);
-float xadc_dedicated_channel(uint32_t value);
+عائم xadc_onchip_temp(uint32_t value);
+عائم xadc_onchip_voltage(uint32_t value);
+عائم xadc_dedicated_channel(uint32_t value);
 
 #endif

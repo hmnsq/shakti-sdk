@@ -30,39 +30,39 @@
 #define IO_ACCESS_H           /* by using protection macros */
 
 #ifdef __cplusplus
-extern "C" {
+خارجي "C" {
 #endif
 
 /***************************** Include Files *********************************/
 
-#include "xil_types.h"
-#include "log_debug.h"
-#include "xstatus.h"
+#ضمن "xil_types.h"
+#ضمن "log_debug.h"
+#ضمن "xstatus.h"
 
-#if defined (__MICROBLAZE__)
-#include "mb_interface.h"
-#else
-#include "xpseudo_asm.h"
+#𐡄𐡍 defined (__MICROBLAZE__)
+#ضمن "mb_interface.h"
+#وإلا
+#ضمن "xpseudo_asm.h"
 #endif
 
 /************************** Function Prototypes ******************************/
 u16 Xil_EndianSwap16(u16 Data);
 u32 Xil_EndianSwap32(u32 Data);
 #ifdef ENABLE_SAFETY
-extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
+خارجي u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 #endif
 
 /***************** Macros (Inline Functions) Definitions *********************/
-#if defined __GNUC__
-#if defined (__MICROBLAZE__)
+#𐡄𐡍 defined __GNUC__
+#𐡄𐡍 defined (__MICROBLAZE__)
 #  define INST_SYNC		mbar(0)
 #  define DATA_SYNC		mbar(1)
-# else
+# وإلا
 #  define SYNCHRONIZE_IO	dmb()
 #  define INST_SYNC		isb()
 #  define DATA_SYNC		dsb()
 # endif
-#else
+#وإلا
 # define SYNCHRONIZE_IO
 # define INST_SYNC
 # define DATA_SYNC
@@ -70,9 +70,9 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 # define DATA_SYNC
 #endif
 
-#if defined (__GNUC__) || defined (__ICCARM__) || defined (__MICROBLAZE__)
-#define INLINE inline
-#else
+#𐡄𐡍 defined (__GNUC__) || defined (__ICCARM__) || defined (__MICROBLAZE__)
+#define INLINE مضمن
+#وإلا
 #define INLINE __inline
 #endif
 
@@ -89,9 +89,9 @@ extern u32 XStl_RegUpdate(u32 RegAddr, u32 RegVal);
 
 *
 ******************************************************************************/
-static INLINE uint8_t get_io8(UINTPTR Addr)
+ساكن INLINE uint8_t get_io8(UINTPTR Addr)
 {
-	return *(volatile uint8_t *) Addr;
+	أرجع *(متطاير uint8_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -106,9 +106,9 @@ static INLINE uint8_t get_io8(UINTPTR Addr)
 * @return	The 16 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE uin16_t get_io16(UINTPTR Addr)
+ساكن INLINE uin16_t get_io16(UINTPTR Addr)
 {
-	return *(volatile uin16_t *) Addr;
+	أرجع *(متطاير uin16_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -123,9 +123,9 @@ static INLINE uin16_t get_io16(UINTPTR Addr)
 * @return	The 32 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE uint32_t get_io32(UINTPTR Addr)
+ساكن INLINE uint32_t get_io32(UINTPTR Addr)
 {
-	return *(volatile uint32_t *) Addr;
+	أرجع *(متطاير uint32_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -140,9 +140,9 @@ static INLINE uint32_t get_io32(UINTPTR Addr)
 * @return	The 64 bit Value read from the specified input address.
 *
 ******************************************************************************/
-static INLINE uint64_t get_io64(UINTPTR Addr)
+ساكن INLINE uint64_t get_io64(UINTPTR Addr)
 {
-	return *(volatile uint64_t *) Addr;
+	أرجع *(متطاير uint64_t *) Addr;
 }
 
 /*****************************************************************************/
@@ -158,9 +158,9 @@ static INLINE uint64_t get_io64(UINTPTR Addr)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io8(UINTPTR Addr, uint8_t Value)
+ساكن INLINE فراغ set_io8(UINTPTR Addr, uint8_t Value)
 {
-	volatile uint8_t *LocalAddr = (volatile uint8_t *)Addr;
+	متطاير uint8_t *LocalAddr = (متطاير uint8_t *)Addr;
 	*LocalAddr = Value;
 }
 
@@ -176,9 +176,9 @@ static INLINE void set_io8(UINTPTR Addr, uint8_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io16(UINTPTR Addr, uint16_t Value)
+ساكن INLINE فراغ set_io16(UINTPTR Addr, uint16_t Value)
 {
-	volatile uint16_t *LocalAddr = (volatile uint16_t *)Addr;
+	متطاير uint16_t *LocalAddr = (متطاير uint16_t *)Addr;
 	*LocalAddr = Value;
 }
 
@@ -195,9 +195,9 @@ static INLINE void set_io16(UINTPTR Addr, uint16_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io32(UINTPTR Addr, uint32_t Value)
+ساكن INLINE فراغ set_io32(UINTPTR Addr, uint32_t Value)
 {
-	volatile uint32_t *LocalAddr = (volatile uint32_t *)Addr;
+	متطاير uint32_t *LocalAddr = (متطاير uint32_t *)Addr;
 	*LocalAddr = Value;
 }
 
@@ -213,9 +213,9 @@ static INLINE void set_io32(UINTPTR Addr, uint32_t Value)
 * @return	None.
 *
 ******************************************************************************/
-static INLINE void set_io64(UINTPTR Addr, uint64_t Value)
+ساكن INLINE فراغ set_io64(UINTPTR Addr, uint64_t Value)
 {
-	volatile uint64_t *LocalAddr = (volatile uint64_t *)Addr;
+	متطاير uint64_t *LocalAddr = (متطاير uint64_t *)Addr;
 	*LocalAddr = Value;
 }
 
@@ -234,7 +234,7 @@ static INLINE void set_io64(UINTPTR Addr, uint64_t Value)
  *        	- FAILURE on failure
  *
  *****************************************************************************/
-static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
+ساكن INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 {
 	u32 ReadReg;
 	u32 ReadRegTemp;
@@ -245,14 +245,14 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 	ReadReg = Xil_In32(Addr);
 	ReadRegTemp = Xil_In32(Addr);
 
-	if( (ReadReg == Value) && (ReadRegTemp == Value) ) {
+	𐡄𐡍( (ReadReg == Value) && (ReadRegTemp == Value) ) {
 		Status = (u32)SUCCESS;
 	}
 
-	return Status;
+	أرجع Status;
 }
 
-#if defined (__MICROBLAZE__)
+#𐡄𐡍 defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
 # define Xil_In16LE	get_io16
 # define Xil_In32LE	get_io32
@@ -262,7 +262,7 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Htonl	Xil_EndianSwap32
 # define Xil_Ntohs	Xil_EndianSwap16
 # define Xil_Ntohl	Xil_EndianSwap32
-# else
+# وإلا
 # define Xil_In16BE	get_io16
 # define Xil_In32BE	get_io32
 # define Xil_Out16BE	set_io16
@@ -272,7 +272,7 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Ntohs(Data) (Data)
 # define Xil_Ntohl(Data) (Data)
 #endif
-#else
+#وإلا
 # define Xil_In16LE	get_io16
 # define Xil_In32LE	get_io32
 # define Xil_Out16LE	set_io16
@@ -283,56 +283,56 @@ static INLINE u32 Xil_SecureOut32(UINTPTR Addr, u32 Value)
 # define Xil_Ntohl	Xil_EndianSwap32
 #endif
 
-#if defined (__MICROBLAZE__)
+#𐡄𐡍 defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE u16 Xil_In16BE(UINTPTR Addr)
-#else
-static INLINE u16 Xil_In16LE(UINTPTR Addr)
+ساكن INLINE u16 Xil_In16BE(UINTPTR Addr)
+#وإلا
+ساكن INLINE u16 Xil_In16LE(UINTPTR Addr)
 #endif
-#else
-static INLINE u16 Xil_In16BE(UINTPTR Addr)
+#وإلا
+ساكن INLINE u16 Xil_In16BE(UINTPTR Addr)
 #endif
 {
 	u16 value = Xil_In16(Addr);
-	return Xil_EndianSwap16(value);
+	أرجع Xil_EndianSwap16(value);
 }
 
-#if defined (__MICROBLAZE__)
+#𐡄𐡍 defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE u32 Xil_In32BE(UINTPTR Addr)
-#else
-static INLINE u32 Xil_In32LE(UINTPTR Addr)
+ساكن INLINE u32 Xil_In32BE(UINTPTR Addr)
+#وإلا
+ساكن INLINE u32 Xil_In32LE(UINTPTR Addr)
 #endif
-#else
-static INLINE u32 Xil_In32BE(UINTPTR Addr)
+#وإلا
+ساكن INLINE u32 Xil_In32BE(UINTPTR Addr)
 #endif
 {
 	u32 value = Xil_In32(Addr);
-	return Xil_EndianSwap32(value);
+	أرجع Xil_EndianSwap32(value);
 }
 
-#if defined (__MICROBLAZE__)
+#𐡄𐡍 defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
-#else
-static INLINE void Xil_Out16LE(UINTPTR Addr, u16 Value)
+ساكن INLINE فراغ Xil_Out16BE(UINTPTR Addr, u16 Value)
+#وإلا
+ساكن INLINE فراغ Xil_Out16LE(UINTPTR Addr, u16 Value)
 #endif
-#else
-static INLINE void Xil_Out16BE(UINTPTR Addr, u16 Value)
+#وإلا
+ساكن INLINE فراغ Xil_Out16BE(UINTPTR Addr, u16 Value)
 #endif
 {
 	Value = Xil_EndianSwap16(Value);
 	Xil_Out16(Addr, Value);
 }
 
-#if defined (__MICROBLAZE__)
+#𐡄𐡍 defined (__MICROBLAZE__)
 #ifdef __LITTLE_ENDIAN__
-static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
-#else
-static INLINE void Xil_Out32LE(UINTPTR Addr, u32 Value)
+ساكن INLINE فراغ Xil_Out32BE(UINTPTR Addr, u32 Value)
+#وإلا
+ساكن INLINE فراغ Xil_Out32LE(UINTPTR Addr, u32 Value)
 #endif
-#else
-static INLINE void Xil_Out32BE(UINTPTR Addr, u32 Value)
+#وإلا
+ساكن INLINE فراغ Xil_Out32BE(UINTPTR Addr, u32 Value)
 #endif
 {
 	Value = Xil_EndianSwap32(Value);

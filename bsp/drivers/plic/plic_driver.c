@@ -27,13 +27,13 @@
   setup each plic registers, isr routine and plic interrupt handler are here.
  */
 
-#include "pwm_driver.h"
-#include "plic_driver.h"
-#include "platform.h"
-#include "log.h"
-#include "stddef.h"
-#include "gpio.h"
-#include "utils.h"
+#ضمن "pwm_driver.h"
+#ضمن "plic_driver.h"
+#ضمن "platform.h"
+#ضمن "log.h"
+#ضمن "stddef.h"
+#ضمن "gpio.h"
+#ضمن "utils.h"
 
 /*
    Global interrupt data maintenance structure
@@ -47,7 +47,7 @@ interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
  * @details Signals completion of interrupt. From s/w side the interrupt claim/complete register is written with the interrupt id.
  * @param uint32_t interrupt_id
  */
-void interrupt_complete(uint32_t interrupt_id)
+فراغ interrupt_complete(uint32_t interrupt_id)
 {
 	log_trace("\ninterrupt_complete entered\n");
 
@@ -61,7 +61,7 @@ void interrupt_complete(uint32_t interrupt_id)
 	log_debug("interrupt id %d, state changed to %d\n", interrupt_id,
 		  hart0_interrupt_matrix[interrupt_id].state);
 
-	log_debug("interrupt id = %x \n reset to default values state = %x \
+	log_debug("interrupt id = %x \n reset to افتراضي values state = %x \
 		  \n priority = %x\n count = %x\n", \
 		  hart0_interrupt_matrix[interrupt_id].id, \
 		  hart0_interrupt_matrix[interrupt_id].state, \
@@ -79,7 +79,7 @@ void interrupt_complete(uint32_t interrupt_id)
  */
 uint32_t interrupt_claim_request()
 {
-	uint32_t *interrupt_claim_address = NULL;
+	uint32_t *interrupt_claim_address = عدم;
 	uint32_t interrupt_id;
 
 	log_trace("\ninterrupt_claim_request entered\n");
@@ -101,7 +101,7 @@ uint32_t interrupt_claim_request()
 
 	log_trace("interrupt_claim_request exited\n");
 
-	return interrupt_id;
+	أرجع interrupt_id;
 }
 
 /** @fn void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
@@ -111,7 +111,7 @@ uint32_t interrupt_claim_request()
  * @param uintptr_t int_id
  * @param uintptr_t epc
  */
-void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__((unused)) uintptr_t epc)
+فراغ mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__((unused)) uintptr_t epc)
 {
 	uint32_t  interrupt_id;
 
@@ -121,7 +121,7 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
 
 	log_debug("interrupt id claimed = %x\n", interrupt_id);
 
-	if (interrupt_id <= 0 || interrupt_id > PLIC_MAX_INTERRUPT_SRC)
+	𐡄𐡍 (interrupt_id <= 0 || interrupt_id > PLIC_MAX_INTERRUPT_SRC)
 	{
 		log_fatal("Fatal error, interrupt id [%x] claimed is wrong\n", interrupt_id);
 	}
@@ -158,17 +158,17 @@ void mach_plic_handler( __attribute__((unused)) uintptr_t int_id, __attribute__(
  * @param uint32_t interrupt_id
  * @return uint32_t
  */
-void isr_default(uint32_t interrupt_id)
+فراغ isr_default(uint32_t interrupt_id)
 {
 	log_trace("\nisr_default entered\n");
 
-	if( interrupt_id > 0 && interrupt_id < 7 )  //PWM Interrupts
+	𐡄𐡍( interrupt_id > 0 && interrupt_id < 7 )  //PWM Interrupts
 	{
 		/*
 		   Assuming 6 pwm's are there
 		 */
 
-		if(pwm_check_continuous_mode((6-interrupt_id)) == 0)
+		𐡄𐡍(pwm_check_continuous_mode((6-interrupt_id)) == 0)
 		{
 			set_pwm_control_register((6-interrupt_id),0x80);
 		}
@@ -184,7 +184,7 @@ void isr_default(uint32_t interrupt_id)
  * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
  * @param uint32_t interrupt_id
  */
-void interrupt_enable(uint32_t interrupt_id)
+فراغ interrupt_enable(uint32_t interrupt_id)
 {
 	uint8_t *interrupt_enable_addr;
 	uint8_t current_value = 0x00, new_value;
@@ -220,7 +220,7 @@ void interrupt_enable(uint32_t interrupt_id)
  *          The bit position corresponds to the interrupt id
  * @param uint32_t interrupt_id
  */
-void interrupt_disable(uint32_t interrupt_id)
+فراغ interrupt_disable(uint32_t interrupt_id)
 {
 	uint8_t *interrupt_disable_addr = 0;
 	uint8_t current_value = 0x00, new_value;
@@ -259,11 +259,11 @@ void interrupt_disable(uint32_t interrupt_id)
  * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is ignored.
  * @param uint32_t priority_value
  */
-void set_interrupt_threshold(uint32_t priority_value)
+فراغ set_interrupt_threshold(uint32_t priority_value)
 {
 	log_trace("\nset interrupt_threshold entered\n");
 
-	uint32_t *interrupt_threshold_priority = NULL;
+	uint32_t *interrupt_threshold_priority = عدم;
 
 	interrupt_threshold_priority = (uint32_t *) (PLIC_BASE_ADDRESS +
 						     PLIC_THRESHOLD_OFFSET);
@@ -281,7 +281,7 @@ void set_interrupt_threshold(uint32_t priority_value)
  * @param uint32_t priority_value
  * @param uint32_t int_id
  */
-void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
+فراغ set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
 {
 	log_trace("\n set interrupt priority entered %x\n", priority_value);
 
@@ -312,7 +312,7 @@ void set_interrupt_priority(uint32_t priority_value, uint32_t int_id)
  * @details enable the corresponding gpio pin for a interrupt as read.
  * @param uint32_t id
  */
-void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
+فراغ configure_interrupt_pin( __attribute__((unused)) uint32_t id)
 {
 	log_trace("\nconfigure interrupt pin entered\n");
 
@@ -343,7 +343,7 @@ void configure_interrupt_pin( __attribute__((unused)) uint32_t id)
  *          Sets up the plic meta data table. Assigns the plic
  *          handler to mcause_interrupt_table.,By default interrupts are disabled.
  */
-void plic_init()
+فراغ plic_init()
 {
 	uint32_t int_id = 0;
 
@@ -369,7 +369,7 @@ void plic_init()
 	hart0_interrupt_matrix[0].priority = 0;
 	hart0_interrupt_matrix[0].count = 0;
 
-	for(int_id = 1; int_id < PLIC_MAX_INTERRUPT_SRC; int_id++)
+	لكل(int_id = 1; int_id < PLIC_MAX_INTERRUPT_SRC; int_id++)
 	{
 		hart0_interrupt_matrix[int_id].state = INACTIVE;
 		hart0_interrupt_matrix[int_id].id = int_id;
@@ -388,7 +388,7 @@ void plic_init()
 
 		set_interrupt_priority(PLIC_PRIORITY_3, int_id);
 
-		log_debug("\ninterrupt id = %x \nreset to default values state = %x \
+		log_debug("\ninterrupt id = %x \nreset to افتراضي values state = %x \
 			  \npriority = %x\ncount = %x\n \
 			  \n*************************************************",
 			  hart0_interrupt_matrix[int_id].id, \
@@ -416,14 +416,14 @@ void plic_init()
  *          between interrupt enable bit and interrupt pin
  * @param uint32_t int_id
  */
-void configure_interrupt(uint32_t int_id)
+فراغ configure_interrupt(uint32_t int_id)
 {
 	log_trace("\nconfigure_interrupt entered \n");
 
 	/*
 	   Call only for GPIO pins
 	 */
-	if(int_id >6 && int_id < 22)
+	𐡄𐡍(int_id >6 && int_id < 22)
 	{
 		configure_interrupt_pin(int_id);
 	}

@@ -39,19 +39,19 @@
 /** @fn int main(void)
  * @brief A simple application to use clint (mtime)
  */
-void main(void){
+void หลัก(void){
 
 	uint64_t value = 50000000;
 
-	asm volatile("li      t0, 0x80\t\n"
+	asm ca_ncala("li      t0, 0x80\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 8\t\n"
+	asm ca_ncala("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
 	configure_counter(value);
 
-	while(1);
+	ขณะ(1);
 }

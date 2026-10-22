@@ -36,20 +36,20 @@
  * @details Printing the presence of a person near it
  * @warning We have to set the potentiometer correctly to get the correct result
  */
-void main()
+void หลัก()
 {
     unsigned long readData = 0;
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
     
-    while (1){
+    ขณะ (1){
         	readData = read_word(GPIO_DATA_REG);
 
-	        if (readData == 0x00000001){
+	        ถ้า (readData == 0x00000001){
 
  		printf("\nHuman Detected");
                 }
 
-                else{
+                มิฉะนั้น{
 		printf("\nNo one detected");
              	}
           

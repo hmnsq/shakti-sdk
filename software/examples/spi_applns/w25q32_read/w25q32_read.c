@@ -44,9 +44,9 @@ cs  -spi cs
  */
 void w25q32()
 {
-	int total_data = 100; //total data you want to read/write
-	int read_address = 0x00000100;  //read from this address
-	int* bram_address = (int*) 0x80000100; //write to this address
+	จำนวนเต็ม total_data = 100; //total data you want to read/write
+	จำนวนเต็ม read_address = 0x00000100;  //read from this address
+	จำนวนเต็ม* bram_address = (จำนวนเต็ม*) 0x80000100; //write to this address
 
 	*pinmux_config_reg = 0x154000;	
 
@@ -58,9 +58,9 @@ void w25q32()
 	flash_device_id();
 	waitfor(200);
 		
-	for(int i = 0; i < total_data; ++i)
+	สำหรับ(จำนวนเต็ม i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
+		จำนวนเต็ม read_value= flash_read(read_address);
 		printf("Reading from adddress %x and data \ %x\n",read_address,read_value);
 		*(bram_address+i) = read_value;
 		read_address=read_address+4;
@@ -74,9 +74,9 @@ void w25q32()
  * @details Configures the SPI read FLASH values, reads the same 
  * prints the read values.
  */
-void main()
+void หลัก()
 {
 	w25q32();
 
-	while(1);
+	ขณะ(1);
 }

@@ -53,21 +53,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
+void pwm_configure(จำนวนเต็ม module_number, จำนวนเต็ม clock_divisor, จำนวนเต็ม period, จำนวนเต็ม duty, bool external_clock);
+void pwm_start(จำนวนเต็ม module_number, จำนวนเต็ม mode);
+จำนวนเต็ม pwm_check_continuous_mode(จำนวนเต็ม module_number);
+void pwm_clear_registers(จำนวนเต็ม module_number);
 void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+void pwm_set_external_clock(จำนวนเต็ม module_number, bool value);
+void pwm_set_clock(จำนวนเต็ม module_number, จำนวนเต็ม clock_divisor);
+void pwm_set_duty_cycle(จำนวนเต็ม module_number, จำนวนเต็ม duty);
+void pwm_set_periodic_cycle(จำนวนเต็ม module_number, จำนวนเต็ม period);
+void pwm_stop(จำนวนเต็ม module_number);
+void show_register_values(จำนวนเต็ม module_number);
+จำนวนเต็ม set_pwm_period_register(จำนวนเต็ม module_number, จำนวนเต็ม value);
+จำนวนเต็ม set_pwm_duty_register(จำนวนเต็ม module_number, จำนวนเต็ม value);
+จำนวนเต็ม set_pwm_control_register(จำนวนเต็ม module_number, จำนวนเต็ม value);
+จำนวนเต็ม set_pwm_clock_register(จำนวนเต็ม module_number, จำนวนเต็ม value);
+จำนวนเต็ม configure_control_register_mode(จำนวนเต็ม mode);
+void pwm_use_external_clock(จำนวนเต็ม module_number, bool value);
 

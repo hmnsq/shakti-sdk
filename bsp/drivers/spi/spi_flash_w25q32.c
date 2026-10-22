@@ -27,17 +27,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 #include "spi.h"
 #include "utils.h"
-int* spi_cr1    = (int*) SPI_CR1;
-int* spi_cr2    = (int*) SPI_CR2;
-int* spi_sr     = (int*) SPI_SR ;
-int* spi_dr1    = (int*) SPI_DR1 ;
-int* spi_dr2    = (int*) SPI_DR2 ;
-int* spi_dr3    = (int*) SPI_DR3 ;
-int* spi_dr4    = (int*) SPI_DR4 ;
-int* spi_dr5    = (int*) SPI_DR5 ;
-int* spi_crcpr  = (int*) SPI_CRCPR;
-int* spi_rxcrcr = (int*) SPI_RXCRCR;
-int* spi_txcrcr = (int*) SPI_TXCRCR; 
+จำนวนเต็ม* spi_cr1    = (จำนวนเต็ม*) SPI_CR1;
+จำนวนเต็ม* spi_cr2    = (จำนวนเต็ม*) SPI_CR2;
+จำนวนเต็ม* spi_sr     = (จำนวนเต็ม*) SPI_SR ;
+จำนวนเต็ม* spi_dr1    = (จำนวนเต็ม*) SPI_DR1 ;
+จำนวนเต็ม* spi_dr2    = (จำนวนเต็ม*) SPI_DR2 ;
+จำนวนเต็ม* spi_dr3    = (จำนวนเต็ม*) SPI_DR3 ;
+จำนวนเต็ม* spi_dr4    = (จำนวนเต็ม*) SPI_DR4 ;
+จำนวนเต็ม* spi_dr5    = (จำนวนเต็ม*) SPI_DR5 ;
+จำนวนเต็ม* spi_crcpr  = (จำนวนเต็ม*) SPI_CRCPR;
+จำนวนเต็ม* spi_rxcrcr = (จำนวนเต็ม*) SPI_RXCRCR;
+จำนวนเต็ม* spi_txcrcr = (จำนวนเต็ม*) SPI_TXCRCR; 
 
 
 //By default, spi 0 is configured
@@ -48,19 +48,19 @@ int* spi_txcrcr = (int*) SPI_TXCRCR;
  *          spi registers..
  * @param int* ---> offset value 
  */
-void configure_spi(int offset)	
+void configure_spi(จำนวนเต็ม offset)	
 {
-	spi_cr1    = (int*) (SPI_CR1 + offset);
-	spi_cr2    = (int*) (SPI_CR2 + offset);
-	spi_sr     = (int*) (SPI_SR + offset);
-	spi_dr1    = (int*) (SPI_DR1 + offset);
-	spi_dr2    = (int*) (SPI_DR2 + offset);
-	spi_dr3    = (int*) (SPI_DR3 + offset);
-	spi_dr4    = (int*) (SPI_DR4 + offset);
-	spi_dr5    = (int*) (SPI_DR5 + offset);
-	spi_crcpr  = (int*) (SPI_CRCPR + offset);
-	spi_rxcrcr = (int*) (SPI_RXCRCR + offset);
-	spi_txcrcr = (int*) (SPI_TXCRCR + offset); 
+	spi_cr1    = (จำนวนเต็ม*) (SPI_CR1 + offset);
+	spi_cr2    = (จำนวนเต็ม*) (SPI_CR2 + offset);
+	spi_sr     = (จำนวนเต็ม*) (SPI_SR + offset);
+	spi_dr1    = (จำนวนเต็ม*) (SPI_DR1 + offset);
+	spi_dr2    = (จำนวนเต็ม*) (SPI_DR2 + offset);
+	spi_dr3    = (จำนวนเต็ม*) (SPI_DR3 + offset);
+	spi_dr4    = (จำนวนเต็ม*) (SPI_DR4 + offset);
+	spi_dr5    = (จำนวนเต็ม*) (SPI_DR5 + offset);
+	spi_crcpr  = (จำนวนเต็ม*) (SPI_CRCPR + offset);
+	spi_rxcrcr = (จำนวนเต็ม*) (SPI_RXCRCR + offset);
+	spi_txcrcr = (จำนวนเต็ม*) (SPI_TXCRCR + offset); 
 }
 
 /**
@@ -70,7 +70,7 @@ void configure_spi(int offset)
  * @param int* addr
  * @param int val
  */
-void set_spi(int* addr, int val)
+void set_spi(จำนวนเต็ม* addr, จำนวนเต็ม val)
 {
 	*addr = val;
 }
@@ -82,9 +82,9 @@ void set_spi(int* addr, int val)
  * @param int* ---> address from where read has to happen
  * @return int ---> SPI Register read value.
  */
-int get_spi(int* addr)
+จำนวนเต็ม get_spi(จำนวนเต็ม* addr)
 {
-	return *addr;
+	คืน *addr;
 }
 
 /** @fn void spi_init()
@@ -125,9 +125,9 @@ void spi_rx_enable()
  * @param int (p (position from where the bits to be extracted))
  * @return int (32 bit which have k bit from "number" and rest are zero)
  */
-int bitExtracted(int number, int k, int p) 
+จำนวนเต็ม bitExtracted(จำนวนเต็ม number, จำนวนเต็ม k, จำนวนเต็ม p) 
 {
-	return (((1 << k) - 1) & (number >> (p - 1))); 
+	คืน (((1 << k) - 1) & (number >> (p - 1))); 
 }
 
 /**
@@ -136,16 +136,16 @@ int bitExtracted(int number, int k, int p)
  * @details As soons as data come to receive buffer this bit is set.  
  * @return int (1: if there is data into the RxFIFO else 0)
  */
-int spi_rxne_enable()
+จำนวนเต็ม spi_rxne_enable()
 {
-	int value = 0;
+	จำนวนเต็ม value = 0;
 
-	while (!(value & 0x1))
+	ขณะ (!(value & 0x1))
 	{
 		waitfor(100);
 		value = get_spi(spi_sr);
 	}
-	return 1;
+	คืน 1;
 }
 
 /**
@@ -155,17 +155,17 @@ int spi_rxne_enable()
  * @warning One should check this bit before going to next transcation
  * @return int (0: SPI is busy in communication, 1: SPI nt busy)
  */
-int spi_notbusy()
+จำนวนเต็ม spi_notbusy()
 {
-	int value = 0x80;
+	จำนวนเต็ม value = 0x80;
 
-	while ((value & 0x80))
+	ขณะ ((value & 0x80))
 	{
 		waitfor(10);
 		value = get_spi(spi_sr);
 	}
 
-	return 1;
+	คืน 1;
 }
 
 /**
@@ -175,13 +175,13 @@ int spi_notbusy()
  * @warning Without enabling this bit one cannot erase/write into the flash
  * @return int
  */
-int flash_write_enable()
+จำนวนเต็ม flash_write_enable()
 {
 	set_spi(spi_dr1, 0x06000000);
 	set_spi(spi_dr5, 0x06);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
-	return 1;
+	คืน 1;
 }
 
 /**
@@ -190,13 +190,13 @@ int flash_write_enable()
  * @details It will reset the bits of status register
  * @return int
  */
-int flash_clear_sr()
+จำนวนเต็ม flash_clear_sr()
 {
 	set_spi(spi_dr1,0x30000000);
 	set_spi(spi_dr5,0x30);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
-	return 1;
+	คืน 1;
 }
 
 /**
@@ -208,7 +208,7 @@ int flash_clear_sr()
  * @param int (addr (address after the opcode))
  * @return int
  */
-int flash_cmd_addr(int command, int addr)
+จำนวนเต็ม flash_cmd_addr(จำนวนเต็ม command, จำนวนเต็ม addr)
 {
 	printf("Erase dr1 \n");
 	set_spi(spi_dr1, ((command << 24) | (addr) ) );
@@ -216,7 +216,7 @@ int flash_cmd_addr(int command, int addr)
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(32)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
-	return 1;
+	คืน 1;
 }
 
 /**
@@ -228,16 +228,16 @@ int flash_cmd_addr(int command, int addr)
  * @param int (addr(address after the opcode))
  * @param int (data (data after the address))
  */
-void flash_cmd_addr_data(int command, int addr, int data)
+void flash_cmd_addr_data(จำนวนเต็ม command, จำนวนเต็ม addr, จำนวนเต็ม data)
 {
-#if 0
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int cmd_addr = command  | address1;
+#ถ้า 0
+	จำนวนเต็ม address1 = bitExtracted(addr, 24, 9);
+	จำนวนเต็ม address2 = bitExtracted(addr, 8, 1);
+	จำนวนเต็ม cmd_addr = command  | address1;
 	address2 = address2 << 24;
-	int data1 = bitExtracted(data, 24, 9);
+	จำนวนเต็ม data1 = bitExtracted(data, 24, 9);
 	data1 = address2 | data1;
-	int data2 = bitExtracted(data, 8, 1);
+	จำนวนเต็ม data2 = bitExtracted(data, 8, 1);
 	data2 = data2 << 24;
 	set_spi(spi_dr1, cmd_addr);
 	set_spi(spi_dr2, data1);
@@ -246,7 +246,7 @@ void flash_cmd_addr_data(int command, int addr, int data)
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
-#else
+#มิฉะนั้น
 	set_spi(spi_dr1,  ( (command << 24) | (addr) ) );
 //	printf("\n Write Command: %x; Data: %x",  ((command << 24) | (addr) ), data );
 
@@ -268,7 +268,7 @@ void flash_cmd_addr_data(int command, int addr, int data)
  * @param int (addres (write address))
  * @param int(data (write data))
  */
-void flash_write(int address, int data)
+void flash_write(จำนวนเต็ม address, จำนวนเต็ม data)
 {
 	flash_cmd_addr_data(0x02, address,data);
 }
@@ -284,10 +284,10 @@ void flash_write(int address, int data)
  * @param int (addr(read_address))
  * @return int 
  */
-int flash_cmd_to_read(int command, int addr)
+จำนวนเต็ม flash_cmd_to_read(จำนวนเต็ม command, จำนวนเต็ม addr)
 {
 
-	int dr5;
+	จำนวนเต็ม dr5;
 //	int address1 = bitExtracted(addr, 24, 9);
 //    int address2 = bitExtracted(addr, 8, 1);
 //	int cmd_addr = command  | address1;
@@ -300,12 +300,12 @@ int flash_cmd_to_read(int command, int addr)
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	 
-	if(spi_rxne_enable()) 
+	ถ้า(spi_rxne_enable()) 
 	{
 		dr5 = *spi_dr5;
 	}
    // printf("Reading from dr5 %x \n", dr5);
-	return dr5;
+	คืน dr5;
 
 }
 
@@ -315,11 +315,11 @@ int flash_cmd_to_read(int command, int addr)
  * @param int (address (read address))
  * @return int 
  */
-int flash_read(int address)
+จำนวนเต็ม flash_read(จำนวนเต็ม address)
 {
-	int read_value = flash_cmd_to_read(0x0B,address);
+	จำนวนเต็ม read_value = flash_cmd_to_read(0x0B,address);
 	
-	return read_value;
+	คืน read_value;
 }
 
 /**
@@ -329,18 +329,18 @@ int flash_read(int address)
  * @param int command (opcode)
  * @return int  value (flash response to opcode)
  */
-int flash_cmd_read(int command)
+จำนวนเต็ม flash_cmd_read(จำนวนเต็ม command)
 {
-	int dr1, dr2, dr5;
+	จำนวนเต็ม dr1, dr2, dr5;
 	set_spi(spi_dr1, command);
 	set_spi(spi_dr5, command);
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-	if(spi_rxne_enable()) {
+	ถ้า(spi_rxne_enable()) {
 		dr5 = *spi_dr5;
 		}
 	
-	return dr5;
+	คืน dr5;
 }
 
 /**
@@ -350,7 +350,7 @@ int flash_cmd_read(int command)
  * @warning before erasing the flash one should enable the WEL bit spi_sr by using write_enable()
  * @param int (address (address from which data should erase))
  */
-void flash_erase(int address)
+void flash_erase(จำนวนเต็ม address)
 {
 	printf("Cypress erase \n");
 	flash_cmd_addr(0xD8, address);
@@ -364,17 +364,17 @@ void flash_erase(int address)
  *           and WEL(Write Enable Latch) bit.
  * @return int
  */
-int flash_status_register_read()
+จำนวนเต็ม flash_status_register_read()
 {
-	int stat = 0x3;
+	จำนวนเต็ม stat = 0x3;
 
-	while (stat & 0x03)
+	ขณะ (stat & 0x03)
 	{
 		stat = flash_cmd_read(0x05000000);
 		//printf("flash status register val %x\n", stat);
 	}
 
-	return 0;
+	คืน 0;
 }
 
 /**
@@ -385,17 +385,17 @@ int flash_status_register_read()
  * @warning to move data from data register to fifo there must be some data into spi_dr5
  * @return int
  */
-int flash_device_id()
+จำนวนเต็ม flash_device_id()
 {
-	int dr1, dr2, dr3;
-	int val1, val2;
+	จำนวนเต็ม dr1, dr2, dr3;
+	จำนวนเต็ม val1, val2;
 	flash_write_enable();
 	set_spi(spi_dr1, 0x9F000000);
 	set_spi(spi_dr5, 0x9F000000);
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 
-	if(spi_rxne_enable())
+	ถ้า(spi_rxne_enable())
 	{
 		dr3 = *spi_dr5;
 		dr2 = *spi_dr2;
@@ -407,6 +407,6 @@ int flash_device_id()
 	printf("Device ID %x \n", val1);
 	printf("extracted device id %x \n",val2);
 
-	return 1;	
+	คืน 1;	
 }
 

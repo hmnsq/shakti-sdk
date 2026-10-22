@@ -50,12 +50,12 @@
  * @details Based on the uncommented macro. Performs the on/off/toggle 
  * operation on LEDS.     
  */
-void main()
+void หลัก()
 {
 	//  write_word(GPIO_DIRECTION_CNTRL_REG, 0x0);
 	//  write_word(GPIO_DATA_REG, 0x0);
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ถ้า defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #ifdef CONTROL_INDIVIDUAL_LEDS
 	configure_ledx(LED0_B);
@@ -111,7 +111,7 @@ void main()
 
 	write_word(GPIO_DATA_REG, 0x0);
 
-	while (1){
+	ขณะ (1){
 #ifdef CONTROL_INDIVIDUAL_LEDS
 		delay_loop(DELAY1, DELAY2);
 		turn_on_ledx( LED0_G);
@@ -156,7 +156,7 @@ void main()
 		delay_loop(DELAY1, DELAY2);
 #endif
 
-#if 0
+#ถ้า 0
 #ifdef CONTROL_RGB_LEDX
 		turn_on_rgb_ledx( RGB_LED0);
 		turn_on_rgb_ledx( RGB_LED1);

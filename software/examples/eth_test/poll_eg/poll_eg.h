@@ -73,10 +73,10 @@ extern "C" {
 /*
  * Utility functions implemented in xemaclite_example_util.c
  */
-void EmacLitePhyDelay(unsigned int Seconds);
+void EmacLitePhyDelay(unsigned จำนวนเต็ม Seconds);
 u32 EmacLitePhyDetect(XEmacLite *InstancePtr);
-int EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
-int EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+จำนวนเต็ม EmacLiteEnablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
+จำนวนเต็ม EmacLiteDisablePhyLoopBack(XEmacLite *InstancePtr, u32 PhyAddress);
 
 /************************** Variable Definitions ****************************/
 /*
@@ -93,10 +93,10 @@ extern XEmacLite EmacLiteInstance;	/* Instance of the EmacLite */
 extern u8 TxFrame[XEL_MAX_FRAME_SIZE];
 extern u8 RxFrame[XEL_MAX_FRAME_SIZE];
 
-extern volatile u32 RecvFrameLength;	/* Indicates the length of the
+extern ca_ncala u32 RecvFrameLength;	/* Indicates the length of the
 					 * Received packet
 					 */
-extern volatile int TransmitComplete;	/* Flag to indicate that the
+extern ca_ncala จำนวนเต็ม TransmitComplete;	/* Flag to indicate that the
 					 * Transmission is complete
 					 */
 #ifdef __cplusplus

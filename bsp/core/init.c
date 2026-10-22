@@ -44,15 +44,15 @@ extern void init(void);
 extern void trap_entry(void);
 extern uart_struct *uart_instance[MAX_UART_COUNT];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+extern var_na _stack_end[];
+extern var_na _stack[];
+extern var_na _heap[];
+extern var_na _heap_end[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+var_na *stack_end=(var_na *)&_stack_end;
+var_na *stack_start=(var_na *)&_stack;
+var_na *heap_start=(var_na *)&_heap;
+var_na *heap_end=(var_na *)&_heap_end;
 
 /** @fn void section_init()
  * @brief resets the different sections
@@ -61,16 +61,16 @@ char *heap_end=(char *)&_heap_end;
  */
 static void section_init(void)
 {
-#if 0
+#ถ้า 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	ขณะ(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	ขณะ(stack_end>=stack_start)
 	{
 		*stack_end=0x0;
 		stack_end--;
@@ -158,7 +158,7 @@ void init(void)
 
 	trap_init();
 
-	main();
+	หลัก();
 
 	log_trace("init exited\n");
 }

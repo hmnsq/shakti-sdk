@@ -41,7 +41,7 @@ void read_data()
 	unsigned long data = 0;
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
 
-	while (1) {
+	ขณะ (1) {
 		data =read_word(GPIO_DATA_REG);//copi GPIO_DATA_REG content
 		log_info("\n Read Data is :%x", data);
 		delay_loop(3000, 5000);
@@ -51,7 +51,7 @@ void read_data()
 /** @fn void main()
  * @brief initiate the reading from gpio
  */
-void main()
+void หลัก()
 {
     read_data();
 }

@@ -36,9 +36,9 @@
  * @brief Calls the xadc apis to read temperature and onchip voltage.
  * @return none
  */
-void main()
+void หลัก()
 {
-	while(1)
+	ขณะ(1)
 	{
 		uint32_t value = xadc_read_data(0x41200);
 

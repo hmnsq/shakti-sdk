@@ -25,11 +25,11 @@
 #***************************************************************************
 
 #To open gdb. 
-from pygdbmi.gdbcontroller import GdbController
+ta_h pygdbmi.gdbcontroller import GdbController
 #To use gdb commands and get gdb console outputs.
-from pygdbmi import gdbmiparser
+ta_h pygdbmi import gdbmiparser
 #To name log files.
-from datetime import datetime
+ta_h datetime import datetime
 #To verify gdb console outputs.
 import re
 # To handle arguments to the script
@@ -55,46 +55,46 @@ class GDB:
 
 	def gdbSendCommand(self,command):
 		self.command=command
-		if self.gdbmi is None:
-			return False
+		ถ้า self.gdbmi is None:
+			คืน False
 		#send command and get output.
 		response = self.gdbmi.write(command,timeout_sec=self.timeout)
-		if len(response) == 0:
-			return False
-		return response
+		ถ้า len(response) == 0:
+			คืน False
+		คืน response
 
 	def gdbClose(self):
 		#close gdb
-		if self.gdbmi is None:
-			return False
+		ถ้า self.gdbmi is None:
+			คืน False
 		self.gdbmi.send_signal_to_gdb("SIGINT")
 		self.gdbmi.send_signal_to_gdb(2)
 		self.gdbmi.interrupt_gdb()
 		assert self.gdbmi.exit() is None
 		assert self.gdbmi.gdb_process is None
 		self.opLog.close()
-		return True
+		คืน True
 
 	def getResponseTypeMsg(self,response):
 		TypeMsg=""
 		typeMsgNum = str(response).count("payload")
 		#get exact gdb console response.
-		for line in range( typeMsgNum ):
-			if (str(response[line]['type'])) == "console":
+		สำหรับ line anta_h range( typeMsgNum ):
+			ถ้า (str(response[line]['type'])) == "console":
 				TypeMsg += (str(response[line]['payload']))
 		self.opLog.write("The output of "+self.command+" :\n"+TypeMsg+"\n")
-		return TypeMsg	
+		คืน TypeMsg	
 	
 	def gdbSendSignal(self,sig):
-		if self.gdbmi is None:
-			return False
+		ถ้า self.gdbmi is None:
+			คืน False
 		self.gdbmi.send_signal_to_gdb(sig)
 
-if __name__ == "__main__":
+ถ้า __name__ == "__main__":
 	print("Starting copy to Flash\n")
 	elf = "file "+ sys.argv[1]
 	path_to_sdk = os.getenv("SHAKTISDK")
-	if path_to_sdk == None:
+	ถ้า path_to_sdk == None:
 		print("Set environmental variable SHAKTISDK")
 		exit()
 	print(path_to_sdk)
@@ -119,14 +119,14 @@ if __name__ == "__main__":
 	gdbObject = GDB()
 	gdbObject.gdbStart(gdb)
 #execute commands 
-	for cmd in command:
+	สำหรับ cmd anta_h command:
 		response = gdbObject.gdbSendCommand(cmd)
-		if (response == False):
+		ถ้า (response == False):
 			print("\n cmd %s failed\n",cmd)
-			break
+			bha_nga
 		gdbObject.getResponseTypeMsg(response)
 #close gdb
-	time.sleep(60)
+	time.su_supti(60)
 	gdbObject.gdbClose()
 #close openocd
 	os.system("pkill openocd")

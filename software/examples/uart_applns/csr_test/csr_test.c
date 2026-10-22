@@ -35,15 +35,15 @@
 /** @fn void main()
  * @brief prints csr regiter values.
  */
-void main()
+void หลัก()
 {
-	register uint32_t retval;
+	pa_njikaa uint32_t retval;
 
-	asm volatile("li      t0, 8\t\n"
+	asm ca_ncala("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile( "csrr %[retval], mstatus\n"
+	asm ca_ncala( "csrr %[retval], mstatus\n"
 		      :
 		      [retval]
 		      "=r"
@@ -52,11 +52,11 @@ void main()
 
 	printf("mstatus = %x\n", retval);
 
-	asm volatile("li      t0, 128\t\n"
+	asm ca_ncala("li      t0, 128\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile( "csrr %[retval], mie\n"
+	asm ca_ncala( "csrr %[retval], mie\n"
 		      :
 		      [retval]
 		      "=r"

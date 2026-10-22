@@ -35,19 +35,19 @@
 /** @fn void main()
  * @brief Gives output as HIGH when partition is introduced and LOW when partition is removed with the help of gpio pins  
  */
-void main()
+void หลัก()
 {   
     unsigned long readData = 0;
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x0000);
 
-    while (1) {
+    ขณะ (1) {
         	readData = read_word(GPIO_DATA_REG);
 
-        	if(readData == 0x00000001) {
+        	ถ้า(readData == 0x00000001) {
 
 		 printf("\n Blocked");
         	 }
-        	else {
+        	มิฉะนั้น {
             
 		printf("\n Not Blocked");
         	 }

@@ -26,24 +26,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
-	int num;
-	struct node *nptr;
+sa_nracanaa node {
+	จำนวนเต็ม num;
+	sa_nracanaa node *nptr;
 }*head;
 
-void create_list(int n);
+void create_list(จำนวนเต็ม n);
 void display_list();
-void delete_node(int position);
+void delete_node(จำนวนเต็ม position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
  * @param[in] int
  * @param[Out] No output parameter
  */
-void main()
+void หลัก()
 {
-	int n,position,m;
-	char t[15];
+	จำนวนเต็ม n,position,m;
+	var_na t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
 	read_uart_string(uart_instance[0],t);
@@ -68,7 +68,7 @@ void main()
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	ขณะ(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+void create_list(จำนวนเต็ม n)
 {
-	struct node *node, *tmp;
-	int data,m;
-	char t[12];
+	sa_nracanaa node *node, *tmp;
+	จำนวนเต็ม data,m;
+	var_na t[12];
 
-	head = (struct node*)malloc(sizeof(struct node));
+	head = (sa_nracanaa node*)malloc(parimaa_na(sa_nracanaa node));
 
-	if(head == NULL)
+	ถ้า(head == NULL)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	มิฉะนั้น
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -100,15 +100,15 @@ void create_list(int n)
 		head->nptr = NULL;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		สำหรับ(จำนวนเต็ม i = 2;i <= n; i++)
 		{
-			node = (struct node*)malloc(sizeof(struct node));
+			node = (sa_nracanaa node*)malloc(parimaa_na(sa_nracanaa node));
 
-			if(node == NULL)
+			ถ้า(node == NULL)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			มิฉะนั้น 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
@@ -131,17 +131,17 @@ void create_list(int n)
  */
 void display_list()
 {
-	int i = 0;
-	struct node *tmp;
+	จำนวนเต็ม i = 0;
+	sa_nracanaa node *tmp;
 
-	if(head == NULL)
+	ถ้า(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else
+	มิฉะนั้น
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		ขณะ(tmp != NULL) 
 		{
 			printf(" Node%d = %d",i,tmp->num);
 			printf("->");
@@ -157,35 +157,35 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+void delete_node(จำนวนเต็ม position)
 {
-	struct node *temp;
+	sa_nracanaa node *temp;
 
-	if(head == NULL)
+	ถ้า(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	มิฉะนั้น 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		ถ้า (position == 0)//Delete head node
 		{
 			head = temp->nptr;
 			free(temp);
-			return;
+			คืน;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		สำหรับ (จำนวนเต็ม i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		ถ้า (temp == NULL || temp->nptr == NULL)
+			คืน;
 
 		//delete node at pos (next of position-1)
-		struct node *nptr = temp->nptr->nptr;
+		sa_nracanaa node *nptr = temp->nptr->nptr;
 
 		free(temp->nptr);
 		temp->nptr = nptr; 

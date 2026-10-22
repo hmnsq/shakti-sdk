@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
+void configure_spi(จำนวนเต็ม offset);
 void spi_init(void);
-void set_spi(int* addr, int val);
+void set_spi(จำนวนเต็ม* addr, จำนวนเต็ม val);
 void bin(unsigned n);
 void spi_tx_rx_start(void);
 void spi_enable(void);
 void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+void flash_cmd_addr_data(จำนวนเต็ม command, จำนวนเต็ม addr, จำนวนเต็ม data);
+void flash_write(จำนวนเต็ม address, จำนวนเต็ม data);
+void flash_erase(จำนวนเต็ม address);
+จำนวนเต็ม get_spi(จำนวนเต็ม* addr);
+จำนวนเต็ม bitExtracted(จำนวนเต็ม number, จำนวนเต็ม k, จำนวนเต็ม p) ;
+จำนวนเต็ม concat(จำนวนเต็ม x, จำนวนเต็ม y) ;
+จำนวนเต็ม spi_rxne_enable(void);
+จำนวนเต็ม spi_notbusy(void);
+จำนวนเต็ม flash_write_enable(void);
+จำนวนเต็ม flash_clear_sr(void);
+จำนวนเต็ม flash_cmd_addr(จำนวนเต็ม command, จำนวนเต็ม addr);
+จำนวนเต็ม flash_cmd_to_read(จำนวนเต็ม command, จำนวนเต็ม addr);
+จำนวนเต็ม flash_read(จำนวนเต็ม address);
+จำนวนเต็ม flash_cmd_read(จำนวนเต็ม command);
+จำนวนเต็ม flash_status_register_read(void);
+จำนวนเต็ม flash_device_id(void);
 
 #endif

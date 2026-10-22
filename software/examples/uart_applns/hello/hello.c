@@ -31,8 +31,8 @@
 /** @fn void main()
  * @brief prints hello world
  */
-void main()
+void หลัก()
 {
 	printf ("Hello World !\n");
-	while(1);
+	ขณะ(1);
 }

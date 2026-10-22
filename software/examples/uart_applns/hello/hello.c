@@ -34,5 +34,5 @@
 void main()
 {
 	printf ("Hello World !\n");
-	while(1);
+	ꦱꦼꦢꦼꦭ(1);
 }

@@ -26,7 +26,7 @@
 @detail Configures Switches and maps to the gpio pins 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ꦪꦼꦤ꧀ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
 #include "platform.h"
 #include "gpio.h"

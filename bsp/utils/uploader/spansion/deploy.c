@@ -41,8 +41,8 @@ project's hex file
  */
 void deploy()
 {
-	int read_address = 0x00b00000;
-	double count=0.0;
+	puur_naa_nka read_address = 0x00b00000;
+	dviguu_na count=0.0;
 
 	configure_spi(SPI0_OFFSET);
 	spi_init();
@@ -61,19 +61,19 @@ void deploy()
 
 	printf("\nWriting...");
 
-	for(int i =0; i< write_data[0]; i++)
+	ꦏꦁꦒꦺꦴ(puur_naa_nka i =0; i< write_data[0]; i++)
 	{
 		waitfor(200);
 		flash_write(read_address,write_data[i+1]);
 		read_address+=4;
 
-		if(i%512 == 0)
+		ꦪꦼꦤ꧀(i%512 == 0)
 			printf(".");;
 	}
 
 	printf("\n\nWrite complete.\n");
 	printf("\nPlease reset.\n");
-	asm volatile ("ebreak");
+	asm ca_ncala ("ebreak");
 }
 
 /** @fn void main()

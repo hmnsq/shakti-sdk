@@ -43,9 +43,9 @@
  */
 static void flash_read_locations(uint32_t read_address, uint16_t length)
 {
-	for(int i = 0; i < length; ++i)
+	ꦏꦁꦒꦺꦴ(puur_naa_nka i = 0; i < length; ++i)
 	{
-		int read_value= flash_read(read_address);
+		puur_naa_nka read_value= flash_read(read_address);
 		printf("\nReading from adddress %x and data \
 			   %x\n",read_address,read_value);
 		read_address=read_address+4;
@@ -59,9 +59,9 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
  */
 void main()
 {
-	int write_address = 0x00b00004;  // read/write from/to this address
-	int read_address  = 0x00b00004;  // read/write from/to this address
-	int data = 0xDEADBEEF; //32 bits of data can be written at a time
+	puur_naa_nka write_address = 0x00b00004;  // read/write from/to this address
+	puur_naa_nka read_address  = 0x00b00004;  // read/write from/to this address
+	puur_naa_nka data = 0xDEADBEEF; //32 bits of data can be written at a time
 	uint16_t length = 11;
 
 	configure_spi(SPI0_OFFSET);
@@ -99,5 +99,5 @@ void main()
 
 	printf("\n After Write");
 	flash_read_locations(read_address, length);
-	asm volatile ("ebreak");
+	asm ca_ncala ("ebreak");
 }

@@ -32,20 +32,20 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+puur_naa_nka main()
 {
 printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+puur_naa_nka *b,*c,*d;
+puur_naa_nka i=0;puur_naa_nka n;
 n= 25;
 printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+b=malloc(n*parimaa_na(puur_naa_nka))	;
 printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+ꦏꦁꦒꦺꦴ(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+ꦏꦁꦒꦺꦴ(i=0;i<n;i++)
 {
 printf("\n b[%d]'s address is : %x",i,&b[i]);
 printf("\n b[%d]'s value is : %d",i,b[i]);
@@ -54,30 +54,30 @@ free(b);
 printf("\nArray B is freed");
 printf("\nb=%x",b);
 printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
+c=malloc(n*parimaa_na(puur_naa_nka))	;
 printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+ꦏꦁꦒꦺꦴ(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+ꦏꦁꦒꦺꦴ(i=0;i<n;i++)
 {
 printf("\n c[%d]'s address is : %x",i,&c[i]);
 printf("\n c[%d]'s value is : %d",i,c[i]);
 }
 free(c);
 printf("\nc=%x",c);
-int x;
+puur_naa_nka x;
 x=30;
 printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+d=malloc(x*parimaa_na(puur_naa_nka));
 printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+ꦏꦁꦒꦺꦴ(i=0;i<x;i++)
 {
 printf("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+ꦏꦁꦒꦺꦴ(i=0;i<x;i++)
 {
 printf("\n d[%d]'s address is : %x",i,&d[i]);
 printf("\n d[%d]'s value is : %d",i,d[i]);
@@ -85,6 +85,6 @@ printf("\n d[%d]'s value is : %d",i,d[i]);
 free(d);
 printf("\nd=%x",d);
 
-return 0;
+ꦮꦭꦶ 0;
 }
 

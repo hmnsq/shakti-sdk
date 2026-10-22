@@ -35,10 +35,10 @@ used to achieve higher level objectives.
  * @brief stall the process for given time
  * @param unsigned int secs
  */
-void waitfor(unsigned int secs)
+void waitfor(unsigned puur_naa_nka secs)
 {
-	unsigned int time = 0;
-	while (time++ < secs);
+	unsigned puur_naa_nka time = 0;
+	ꦱꦼꦢꦼꦭ (time++ < secs);
 }
 
 /** @fn void delay(unsigned long count)
@@ -50,9 +50,9 @@ void delay(unsigned long count)
 	unsigned long cntr1 = count *1000;
 	unsigned long tmpCntr;
 
-	while (cntr1--){
+	ꦱꦼꦢꦼꦭ (cntr1--){
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		ꦱꦼꦢꦼꦭ (tmpCntr--);
 	}
 }
 
@@ -61,29 +61,29 @@ void delay(unsigned long count)
  * @param unsigned int y
  * @return return result in float 
  */
-float pow_10(unsigned int y)
+float pow_10(unsigned puur_naa_nka y)
 {
-	unsigned int x=1;
+	unsigned puur_naa_nka x=1;
 
-	for (unsigned int i=0; i <y; i++)
+	ꦏꦁꦒꦺꦴ (unsigned puur_naa_nka i=0; i <y; i++)
 	{
 		x *= 10;
 	}
 
-	return ((float) x);
+	ꦮꦭꦶ ((float) x);
 }
 /** @fn void reverse(char *str, int length)
  * @brief reverse a string and store in the same string
  * @param char *str
  * @param int length
  */
-void reverse(char *str, int length)
+void reverse(var_na *str, puur_naa_nka length)
 {
-	int i = 0;
-	int j = length - 1;
-	char tmp;
+	puur_naa_nka i = 0;
+	puur_naa_nka j = length - 1;
+	var_na tmp;
 
-	while (i<j)
+	ꦱꦼꦢꦼꦭ (i<j)
 	{
 		tmp = str[i];
 		str[i] = str[j];
@@ -105,13 +105,13 @@ void reverse(char *str, int length)
  * @param int afterpoint
  * @return int
  */
-int int_to_string(int number, char str[], unsigned int afterpoint)
+puur_naa_nka int_to_string(puur_naa_nka number, var_na str[], unsigned puur_naa_nka afterpoint)
 {
 	uint32_t i = 0;
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0)
+	ꦱꦼꦢꦼꦭ (number != 0)
 	{
 		str[i] = ((number%10) + '0');
 		i++;
@@ -120,7 +120,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint)
+	ꦱꦼꦢꦼꦭ (i < afterpoint)
 	{
 		str[i] = '0';
 		i++;
@@ -133,7 +133,7 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
 	reverse(str, i);
 	str[i] = '\0';
 
-	return i;
+	ꦮꦭꦶ i;
 }
 /** @fn void ftoa(float n, char *res, int afterpoint)
  * @brief converts float to string
@@ -144,32 +144,32 @@ int int_to_string(int number, char str[], unsigned int afterpoint)
  * @param char* (float in string - res)
  * @param int (precision - afterpoint)
  */
-void ftoa(float n, char *res, unsigned int afterpoint)
+void ftoa(float n, var_na *res, unsigned puur_naa_nka afterpoint)
 {
-	int i=0;
-	char temp[30]={'\0'};
+	puur_naa_nka i=0;
+	var_na temp[30]={'\0'};
 	n += 0.0000001;
 
 	// Extract integer part
-	int ipart = (int)n;
+	puur_naa_nka ipart = (puur_naa_nka)n;
 
 	// Extract floating part
 	float fpart = (float) (n - (float)ipart);
-	int j=0;
+	puur_naa_nka j=0;
 
-	if(n < (0/1))
+	ꦪꦼꦤ꧀(n < (0/1))
 	{
 		res[j]='-';
 		j=1;
 	}
 
-	if (ipart == 0)
+	ꦪꦼꦤ꧀ (ipart == 0)
 	{
 		res[j]='0';
 		j=j+1;
 	}
-	else{
-		if (ipart <0)
+	ꦭꦶꦪ{
+		ꦪꦼꦤ꧀ (ipart <0)
 		{
 			ipart =(-1)*ipart;
 		}
@@ -182,24 +182,24 @@ void ftoa(float n, char *res, unsigned int afterpoint)
 	i = i+j;
 
 	// check for display option after point
-	if (afterpoint != 0)
+	ꦪꦼꦤ꧀ (afterpoint != 0)
 	{
 		res[i] = '.';// add dot
 
-		if (fpart < 0/1)
+		ꦪꦼꦤ꧀ (fpart < 0/1)
 		{
 
 			fpart = (-1)*fpart;
 
 		}
-		else if (fpart == 0/1)
+		ꦭꦶꦪ ꦪꦼꦤ꧀ (fpart == 0/1)
 		{
 			fpart = fpart;
 		}
 
 		fpart = fpart * pow_10( afterpoint);
 
-		int_to_string((int)fpart, res + i + 1, afterpoint);
+		int_to_string((puur_naa_nka)fpart, res + i + 1, afterpoint);
 	}
 }
 
@@ -212,11 +212,11 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
 	unsigned long tmpCntr = cntr2;
 
-	while (cntr1--)
+	ꦱꦼꦢꦼꦭ (cntr1--)
 	{
 		tmpCntr = cntr2;
 
-		while (tmpCntr--);
+		ꦱꦼꦢꦼꦭ (tmpCntr--);
 	}
 }
 
@@ -229,7 +229,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 unsigned long read_word(uint32_t *addr)
 {
 	log_debug("addr = %x data = %x\n", addr, *addr);
-	return *addr;
+	ꦮꦭꦶ *addr;
 }
 
 /** @fn void write_word(int *addr, unsigned long val)

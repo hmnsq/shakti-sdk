@@ -40,12 +40,12 @@
 
 */
 
-#include "uart.h"//Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
+#अन्तर्भाव "uart.h"//Includes the definitions of uart communication protocol//
+#अन्तर्भाव "string.h"
+#अन्तर्भाव "pinmux.h"
 
 #define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave
-#define API_KEY   "PPI6OVOI1A2LGXMZ"
+#define API_किल्ली   "PPI6OVOI1A2LGXMZ"
 #define ESP_UART uart_instance[1]
 /**
   * @fn int write_to_esp8266(char *data)
@@ -53,8 +53,8 @@
   * @param data data that has to be sent to cloud
 */
 
-int write_to_esp8266(char *data) {
-	while (*data != '\0') {
+पूर्णाङ्क write_to_esp8266(वर्ण *data) {
+	यावत् (*data != '\0') {
 		write_uart_character(ESP_UART, *data);
 		data++;
 	}
@@ -70,7 +70,7 @@ int write_to_esp8266(char *data) {
   *         this method is neeed to indicate end to data transmission
 */
 
-int write_enter_to_esp8266(){
+पूर्णाङ्क write_enter_to_esp8266(){
 	write_uart_character(ESP_UART,'\r');
 	write_uart_character(ESP_UART,'\n');
 }
@@ -81,40 +81,40 @@ int write_enter_to_esp8266(){
   * @details Reads data sent by esp8266 until one of the key word is found
   * @param data responses read from esp8266, mainly used for logging
 */
-int read_from_esp8266(char *data) {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for(int i=0;i<198;i++) {
+पूर्णाङ्क read_from_esp8266(वर्ण *data) {
+	पूर्णाङ्क ch;
+	वर्ण *str = data;
+	वर्ण *test = data;
+	प्रति(पूर्णाङ्क i=0;i<198;i++) {
 		read_uart_character(ESP_UART,&ch);
 		//printf("read from esp %c  \n",ch);
 		*str = ch;
 		str++; 
 		*str = '\0';
 		//printf("read  %c\n",ch);
-		if(strstr(test,"OK") != NULL)  {
+		यदि(strstr(test,"OK") != रिक्त)  {
 			printf("read from esp8266 %s\n",test);
-			return;
+			प्रत्यागम;
 		}
-		if(strstr(test,"ERROR") != NULL) {
+		यदि(strstr(test,"ERROR") != रिक्त) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			प्रत्यागम;
 		}
-		if(strstr(test,">") != NULL) {
+		यदि(strstr(test,">") != रिक्त) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			प्रत्यागम;
 		}
-		if(strstr(test,"RECV") != NULL) {
+		यदि(strstr(test,"RECV") != रिक्त) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			प्रत्यागम;
 		}
-		if(strstr(test,"IP") != NULL) {
+		यदि(strstr(test,"IP") != रिक्त) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			प्रत्यागम;
 		}
 	}
 	*str = '\0';
-	return 1;
+	प्रत्यागम 1;
 }
 
 /**
@@ -122,8 +122,8 @@ int read_from_esp8266(char *data) {
   * @brief setup esp8266
   * @details set up esp8266 to send data
 */
-void setup_esp8266(){
-	char data[200];
+शून्य setup_esp8266(){
+	वर्ण data[200];
 	write_to_esp8266("AT");
 	delay(1);
 	read_from_esp8266(data);
@@ -152,7 +152,7 @@ void setup_esp8266(){
   * @details Open http connection to thingspeak.com, using GET method send data and close the connection
   * @param temperature value that has to eb transmitted.
 */
-void transmit_data(int temperature) {
+शून्य transmit_data(पूर्णाङ्क temperature) {
 /***************************************************
     AT – response OK
     AT+CWLAP – list nearby available WiFi networks
@@ -164,9 +164,9 @@ void transmit_data(int temperature) {
 **************************************************/
 
 
-	char data[200];
-	char sendData[76];
-	sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_KEY,temperature);
+	वर्ण data[200];
+	वर्ण sendData[76];
+	sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_किल्ली,temperature);
 	//printf("\n send data %s\n",sendData);
 	// Connect to Wifi using esp8266
 
@@ -210,14 +210,14 @@ void transmit_data(int temperature) {
   *      Set desired baudrate, get temperature from lm75 
   *      transmit data to thingspeak.com
 */
-void main()
+शून्य main()
 {	
-	int i=0;
+	पूर्णाङ्क i=0;
 	//int baudrate = 9600;
-	int baudrate = 115200;
-	int temperature = 24;
-	int transmit_count = 0;
-	char data[200];
+	पूर्णाङ्क baudrate = 115200;
+	पूर्णाङ्क temperature = 24;
+	पूर्णाङ्क transmit_मोजणी = 0;
+	वर्ण data[200];
    	printf("\n setting PIN MUX config to 2 .... \n");
     	*pinmux_config_reg = 0x5;
    	printf("\n set PIN MUX config to 2 .... \n");
@@ -227,9 +227,9 @@ void main()
 	printf("\n Waiting to ESP8266 to initialize \n");
 	delay(3);
 	setup_esp8266();
-	while (1) {
- 		temperature = temperature_value();
-		if (temperature != 999)
+	यावत् (1) {
+ 		temperature = temperature_मूल्य();
+		यदि (temperature != 999)
 			transmit_data(temperature); 
 		delay(60);
 

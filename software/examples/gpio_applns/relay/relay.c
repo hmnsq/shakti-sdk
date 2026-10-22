@@ -26,18 +26,18 @@
 @detail Helps to on and off the relay within a certain interval.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "utils.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "utils.h"
 
 /** @fn void main()
  * @brief writes the data to the output register based on control word with a delay
  */
-void main()
+शून्य main()
 {
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000001);
     
-    while (1) {
+    जाव (1) {
         write_word(GPIO_DATA_REG, 0x00000001);
         delay_loop(1000,5000);
         write_word(GPIO_DATA_REG, 0x00);

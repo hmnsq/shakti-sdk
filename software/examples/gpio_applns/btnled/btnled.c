@@ -28,19 +28,19 @@
 implemented using gpio pins.
 */
 
-#include "gpio.h"
-#include "platform.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "platform.h"
 
 /** @fn int main(void)
  * @brief on press of a button led grows. The technique used here is polling
  *    based.
  * @return int
  */
-int main(void)
+पूर्णाङ्क main(शून्य)
 {
 	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
 
-	while (1) {
+	जाव (1) {
 
 		unsigned long readData = 0;
 
@@ -48,16 +48,16 @@ int main(void)
 
 		log_debug("\n Read Data is :0x%08lx", readData);
 
-		if (readData) {           //if readdata //
+		जइ (readData) {           //if readdata //
 			log_debug("; LED ON");
 			write_word(GPIO_DATA_REG, 0X2); 
 		}
-		else {                    //if not //
+		अण्णहा {                    //if not //
 			log_debug("; LED OFF");
 			write_word(GPIO_DATA_REG, 0X0); 
 		}
 		delay_loop(1000,1000);
 	}
 
-	return 0;
+	प्रत्यागम 0;
 }

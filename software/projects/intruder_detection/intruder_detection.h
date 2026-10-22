@@ -28,42 +28,42 @@
 */
 
 
-#ifndef INTRUDER_DETECTION_H
-#define INTRUDER_DETECTION_H
+#که_نه_تعریف_شوی INTRUDER_DETECTION_H
+#تعریف_کړه INTRUDER_DETECTION_H
 
-#define ROWNUM              4
-#define COLNUM              4
-#define OUTPINS_OFFSET      0
-#define INPINS_OFFSET       4
-#define OUTPINS             (0xF << OUTPINS_OFFSET)
-#define INPINS              (0xF << INPINS_OFFSET)
+#تعریف_کړه ROWNUM              4
+#تعریف_کړه COLNUM              4
+#تعریف_کړه OUTPINS_دننه_واټن      0
+#تعریف_کړه INPINS_دننه_واټن       4
+#تعریف_کړه OUTPINS             (0xF << OUTPINS_دننه_واټن)
+#تعریف_کړه INPINS              (0xF << INPINS_دننه_واټن)
 
 //Peripheral Pins
-#define BUZZER              GPIO11
-#define LED_P1              GPIO16
-#define LED_P2              GPIO18
-#define LED_P3              GPIO19
-#define LED_P4              GPIO21
-#define POWER_SWITCH        GPIO24
-#define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
-#define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
-#define PIR_IN	            GPIO8
-#define PANIC_BUTTON_OFFSET 28
-#define PIR_OFFSET          8
-#define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#تعریف_کړه BUZZER              GPIO11
+#تعریف_کړه LED_P1              GPIO16
+#تعریف_کړه LED_P2              GPIO18
+#تعریف_کړه LED_P3              GPIO19
+#تعریف_کړه LED_P4              GPIO21
+#تعریف_کړه POWER_SWITCH        GPIO24
+#تعریف_کړه DEACTIVATE_SWITCH   GPIO25
+#تعریف_کړه PANIC_BUTTON        GPIO28          //ننوت
+#تعریف_کړه GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
+#تعریف_کړه PIR_دننه	            GPIO8
+#تعریف_کړه PANIC_BUTTON_دننه_واټن 28
+#تعریف_کړه PIR_دننه_واټن          8
+#تعریف_کړه ALARM_TIMER         5
+#تعریف_کړه لوړ                1
+#تعریف_کړه ټیټ                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#تعریف_کړه PASS_عدد            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+فراغ سېټ_کلی_pins_map(بینښه صحيح* لیکه, بینښه صحيح* ستون, صحيح جدول[COLNUM][ROWNUM]);
+صحيح get_کلی();
+صحيح get_ستون_لیکه(فراغ);
+بینښه صحيح لیکه_pins[ROWNUM];
+بینښه صحيح ستون_pins[COLNUM];
+صحيح کلی_map[COLNUM][ROWNUM];
 
-#endif
+#د_که_پای

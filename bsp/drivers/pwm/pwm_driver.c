@@ -26,14 +26,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail the device driver for the pwm module which is used to change the frequency, period and duty registers 
 */
 
-#include "pwm_driver.h"
-#include "platform.h"
-#include "log.h"
+#ضمن "pwm_driver.h"
+#ضمن "platform.h"
+#ضمن "log.h"
 
-#define PERIOD_REGISTER_MAX     0x0000FFFF 
-#define DUTY_REGISTER_MAX       0x0000FFFF 
-#define CLOCK_REGISTER_MAX      0x0000FFFF
-#define CONTROL_REGISTER_MAX    0x000000FF
+#تعریف_کړه PERIOD_ثبتوونکی_MAX     0x0000FFFF 
+#تعریف_کړه DUTY_ثبتوونکی_MAX       0x0000FFFF 
+#تعریف_کړه CLOCK_ثبتوونکی_MAX      0x0000FFFF
+#تعریف_کړه CONTROL_ثبتوونکی_MAX    0x000000FF
 
 /** @fn int set_pwm_period_register(int module_number, int value)
  * @brief Function to set the period register of the selected pwm module
@@ -42,20 +42,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_period_register(int module_number, int value)
+صحيح سېټ_pwm_period_ثبتوونکی(صحيح module_شمېره, صحيح ارزښت)
 {
-	if (value > PERIOD_REGISTER_MAX) {
-		log_error("\nPeriod Register Value higher than max value (%x)", PERIOD_REGISTER_MAX);	
-		return 0;
+	إذا (ارزښت > PERIOD_ثبتوونکی_MAX) {
+		log_error("\nPeriod Register Value higher than max value (%x)", PERIOD_ثبتوونکی_MAX);	
+		أرجع 0;
 	}
 
-	volatile short* period_value;
-	period_value = (int*) (PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + PERIOD_REGISTER);
-	*period_value = value;
+	متطاير لنډ* period_ارزښت;
+	period_ارزښت = (صحيح*) (PWM_بنسټ_پته + module_شمېره*PWM_MODULE_دننه_واټن + PERIOD_ثبتوونکی);
+	*period_ارزښت = ارزښت;
 
-	log_info("\n Period Register of module number %d set to %x", module_number, value);
+	log_info("\n Period Register of module number %d set to %x", module_شمېره, ارزښت);
 
-	return 1;
+	أرجع 1;
 }
 
 /** @fn int set_pwm_duty_register(int module_number, int value)
@@ -65,21 +65,21 @@ int set_pwm_period_register(int module_number, int value)
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_duty_register(int module_number, int value)
+صحيح سېټ_pwm_duty_ثبتوونکی(صحيح module_شمېره, صحيح ارزښت)
 {
-	volatile short* duty_value;
+	متطاير لنډ* duty_ارزښت;
 
-	if (value > DUTY_REGISTER_MAX) {
-		log_error("\nDuty Register Value higher than max value (%x)", DUTY_REGISTER_MAX);
-		return 0;
+	إذا (ارزښت > DUTY_ثبتوونکی_MAX) {
+		log_error("\nDuty Register Value higher than max value (%x)", DUTY_ثبتوونکی_MAX);
+		أرجع 0;
 	}
 
-	duty_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + DUTY_REGISTER;
-	*duty_value = value;
+	duty_ارزښت = PWM_بنسټ_پته + module_شمېره*PWM_MODULE_دننه_واټن + DUTY_ثبتوونکی;
+	*duty_ارزښت = ارزښت;
 
-	log_info("\n Duty Register of module number %d set to %x", module_number, value);
+	log_info("\n Duty Register of module number %d set to %x", module_شمېره, ارزښت);
 
-	return 1;
+	أرجع 1;
 }
 
 /** @fn int set_pwm_control_register(int module_number, int value)
@@ -89,21 +89,21 @@ int set_pwm_duty_register(int module_number, int value)
  * @param int value - value to be set between 0x0000 to 0xff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_control_register(int module_number, int value)
+صحيح سېټ_pwm_control_ثبتوونکی(صحيح module_شمېره, صحيح ارزښت)
 {
-	volatile char* control_value;
+	متطاير حرف* control_ارزښت;
 
-	if (value > CONTROL_REGISTER_MAX) {
-		log_error("\nControl Register Value higher than max value (%x)", CONTROL_REGISTER_MAX);	
-		return 0;
+	إذا (ارزښت > CONTROL_ثبتوونکی_MAX) {
+		log_error("\nControl Register Value higher than max value (%x)", CONTROL_ثبتوونکی_MAX);	
+		أرجع 0;
 	}
 
-	control_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	*control_value = value;
+	control_ارزښت = PWM_بنسټ_پته + module_شمېره*PWM_MODULE_دننه_واټن + CONTROL_ثبتوونکی;
+	*control_ارزښت = ارزښت;
 
-	log_info("\n Control Register of module number %d set to %x", module_number, value);
+	log_info("\n Control Register of module number %d set to %x", module_شمېره, ارزښت);
 
-	return 1;
+	أرجع 1;
 }
 
 /** @fn int pwm_check_continuous_mode(int module_number)
@@ -112,16 +112,16 @@ int set_pwm_control_register(int module_number, int value)
  * @param int module_number- specifies the pwm module to be selected 
  * @return int returns 1 if running in continuous mode, 0 if not.
  */
-int pwm_check_continuous_mode(int module_number)
+صحيح pwm_check_continuous_ډېرپېښ(صحيح module_شمېره)
 {
-	volatile char* control_value;
-	control_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	int value = *control_value & CONTINUOUS_ONCE;
-	log_info("\n Running in continuous mode(1/0): %d", (value>>3));
-	if( (value>>3) == 1)
-		return 1;
-	else
-		return 0;
+	متطاير حرف* control_ارزښت;
+	control_ارزښت = PWM_بنسټ_پته + module_شمېره*PWM_MODULE_دننه_واټن + CONTROL_ثبتوونکی;
+	صحيح ارزښت = *control_ارزښت & CONTINUOUS_ONCE;
+	log_info("\n Running in continuous mode(1/0): %d", (ارزښت>>3));
+	إذا( (ارزښت>>3) == 1)
+		أرجع 1;
+	وإلا
+		أرجع 0;
 }
 
 /** @fn int set_pwm_clock_register(int module_number, int value)
@@ -131,19 +131,19 @@ int pwm_check_continuous_mode(int module_number)
  * @param int value - value to be set between 0x0000 to 0xffff.
  * @return int returns 1 on success, 0 on failure.
  */
-int set_pwm_clock_register(int module_number, int value)
+صحيح سېټ_pwm_clock_ثبتوونکی(صحيح module_شمېره, صحيح ارزښت)
 {
-	volatile short* clock_value;
+	متطاير لنډ* clock_ارزښت;
 
-	if (value > CLOCK_REGISTER_MAX) {
-		log_error("\nClock Register Value higher than max value (%x)", CLOCK_REGISTER_MAX);
-		return 0;
+	إذا (ارزښت > CLOCK_ثبتوونکی_MAX) {
+		log_error("\nClock Register Value higher than max value (%x)", CLOCK_ثبتوونکی_MAX);
+		أرجع 0;
 	}
 
-	clock_value = PWM_BASE_ADDRESS + module_number*PWM_MODULE_OFFSET + CLOCK_REGISTER;
-	*clock_value = value;
+	clock_ارزښت = PWM_بنسټ_پته + module_شمېره*PWM_MODULE_دننه_واټن + CLOCK_ثبتوونکی;
+	*clock_ارزښت = ارزښت;
 
-	return 1;
+	أرجع 1;
 }
 
 /** @fn void pwm_clear_registers(int module_number)
@@ -151,25 +151,25 @@ int set_pwm_clock_register(int module_number, int value)
  * @details This function will be called to clear all registers in a specific pwm module
  * @param int module_number- specifies the pwm module to be selected
  */
-void pwm_clear_registers(int module_number)
+فراغ pwm_clear_registers(صحيح module_شمېره)
 {
-	set_pwm_period_register(module_number, 0);
-	set_pwm_duty_register(module_number, 0);
-	set_pwm_control_register(module_number, 0);
-	set_pwm_clock_register(module_number, 0);
+	سېټ_pwm_period_ثبتوونکی(module_شمېره, 0);
+	سېټ_pwm_duty_ثبتوونکی(module_شمېره, 0);
+	سېټ_pwm_control_ثبتوونکی(module_شمېره, 0);
+	سېټ_pwm_clock_ثبتوونکی(module_شمېره, 0);
 
-	log_info("\n All registers of module number %d cleared", module_number);
+	log_info("\n All registers of module number %d cleared", module_شمېره);
 }
 
 /** @fn void pwm_init
  * @brief Function to initialize all pwm modules
  * @details This function will be called to initialize all pwm modules
  */
-void pwm_init(void)
+فراغ pwm_init(فراغ)
 {
-	int i;
+	صحيح i;
 
-	for (i = 0; i < 5; i++) {
+	لكل (i = 0; i < 5; i++) {
 		pwm_clear_registers(i);
 	}
 
@@ -185,30 +185,30 @@ void pwm_init(void)
  *                2-Timer Mode run continuously.)
  * @return int (returns value to be set in the control register.)
  */
-int configure_control_register_mode(int mode)
+صحيح configure_control_ثبتوونکی_ډېرپېښ(صحيح ډېرپېښ)
 {
-	int value = 0x0;
+	صحيح ارزښت = 0x0;
 
-	if (mode == 0) {
+	إذا (ډېرپېښ == 0) {
 		log_info("\n Current Module is set to PWM mode");
 
-		value += PWM_ENABLE;
-		value += PWM_START;
-		value += PWM_OUTPUT_ENABLE;
+		ارزښت += PWM_ENABLE;
+		ارزښت += PWM_پیل;
+		ارزښت += PWM_OUTPUT_ENABLE;
 	}
-	else if (mode == 1) {
+	وإلا إذا (ډېرپېښ == 1) {
 		log_info("\n Current Module is set to timer once only mode");
 
-		value += PWM_START;
+		ارزښت += PWM_پیل;
 	}
-	else if(mode == 2) {
+	وإلا إذا(ډېرپېښ == 2) {
 		log_info("\n Current Module is set to timer continuous mode");
 
-		value += PWM_START;
-		value += CONTINUOUS_ONCE;
+		ارزښت += PWM_پیل;
+		ارزښت += CONTINUOUS_ONCE;
 	}
 
-	return value;
+	أرجع ارزښت;
 }
 
 /** @fn void pwm_start(int module_number, int mode) 
@@ -220,18 +220,18 @@ int configure_control_register_mode(int mode)
  *                  1-Timer Mode run once
  *                  2-Timer Mode run contin )
  */
-void pwm_start(int module_number, int mode)
+فراغ pwm_پیل(صحيح module_شمېره, صحيح ډېرپېښ)
 {
-	int control = configure_control_register_mode(mode);
+	صحيح control = configure_control_ثبتوونکی_ډېرپېښ(ډېرپېښ);
 
-	if(set_pwm_control_register(module_number, control))
+	إذا(سېټ_pwm_control_ثبتوونکی(module_شمېره, control))
 	{
-		log_info("\n PWM module number %d has been entered", module_number);
+		log_info("\n PWM module number %d has been entered", module_شمېره);
 	}
 
-	if(!set_pwm_control_register(module_number, control))
+	إذا(!سېټ_pwm_control_ثبتوونکی(module_شمېره, control))
 	{
-		log_error("\n PWM module number %d not entered",module_number);
+		log_error("\n PWM module number %d not entered",module_شمېره);
 	}
 }
 
@@ -242,14 +242,14 @@ void pwm_start(int module_number, int mode)
  * @param int (value -true or 1  - External Clock 
  *                    false or 0 - Internal Clock )
  */
-void pwm_use_external_clock(int module_number, bool value)
+فراغ pwm_use_external_clock(صحيح module_شمېره, bool ارزښت)
 {
-	unsigned char* control_value;
-	control_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	if(value == 1)
-	control_value += CLOCK_SELECTOR;
-	else if(control_value && CLOCK_SELECTOR)
-	control_value -= CLOCK_SELECTOR;	
+	بینښه حرف* control_ارزښت;
+	control_ارزښت = PWM_بنسټ_پته + module_شمېره * PWM_MODULE_دننه_واټن + CONTROL_ثبتوونکی;
+	إذا(ارزښت == 1)
+	control_ارزښت += CLOCK_SELECTOR;
+	وإلا إذا(control_ارزښت && CLOCK_SELECTOR)
+	control_ارزښت -= CLOCK_SELECTOR;	
 }
 
 /** @fn void pwm_set_clock(int module_number, int clock_divisor) 
@@ -258,9 +258,9 @@ void pwm_use_external_clock(int module_number, bool value)
  * @param int module_number-  the pwm module to be selected
               int clock_divisor- value of clock divisor to be used to divide base clock speed of 50MHz.
  */
-void pwm_set_clock(int module_number, int clock_divisor)
+فراغ pwm_سېټ_clock(صحيح module_شمېره, صحيح clock_وېشونکی)
 {
-	if (set_pwm_clock_register(module_number, clock_divisor) == 0)
+	إذا (سېټ_pwm_clock_ثبتوونکی(module_شمېره, clock_وېشونکی) == 0)
 	{
 		log_error("\n Error in setting clock register");
 	}
@@ -272,9 +272,9 @@ void pwm_set_clock(int module_number, int clock_divisor)
  * @param int module_number-  the pwm module to be selected 
  * @param int duty - value of duty cycles to be used to decide how many period cycles the pwm signal is set to 1.
  */
-void pwm_set_duty_cycle(int module_number, int duty)
+فراغ pwm_سېټ_duty_دوره(صحيح module_شمېره, صحيح duty)
 {
-	if (set_pwm_duty_register(module_number, duty) == 0) {
+	إذا (سېټ_pwm_duty_ثبتوونکی(module_شمېره, duty) == 0) {
 		log_error("\n Error in setting duty register");
 	}
 }
@@ -286,9 +286,9 @@ void pwm_set_duty_cycle(int module_number, int duty)
  * @param int clock_divisor-  value of period cycles which is used to further divide the                                                      
  *         frequency into fixed period cycles.
  */
-void pwm_set_periodic_cycle(int module_number, int period)
+فراغ pwm_سېټ_periodic_دوره(صحيح module_شمېره, صحيح period)
 {
-	if(set_pwm_period_register(module_number, period) == 0) {
+	إذا(سېټ_pwm_period_ثبتوونکی(module_شمېره, period) == 0) {
 		log_error("\n Error in setting period register");
 	}
 }
@@ -302,13 +302,13 @@ void pwm_set_periodic_cycle(int module_number, int period)
  * @param int duty_cycle - value of duty cycle. It specifies how many cycles the signal is active out of the periodic cycle
  * @param bool external_clock - value of external clock selector. It specifies if external clock is to be used.
   */
-void pwm_configure(int module_number,int clock_divisor, int period, int duty, bool external_clock)
+فراغ pwm_configure(صحيح module_شمېره,صحيح clock_وېشونکی, صحيح period, صحيح duty, bool external_clock)
 {
-	pwm_set_periodic_cycle(module_number, period);
-	pwm_set_duty_cycle(module_number, duty);
-	pwm_set_clock(module_number, clock_divisor);
-	pwm_use_external_clock(module_number, external_clock);
-	log_info("\nPWM %d succesfully configured",module_number);
+	pwm_سېټ_periodic_دوره(module_شمېره, period);
+	pwm_سېټ_duty_دوره(module_شمېره, duty);
+	pwm_سېټ_clock(module_شمېره, clock_وېشونکی);
+	pwm_use_external_clock(module_شمېره, external_clock);
+	log_info("\nPWM %d succesfully configured",module_شمېره);
 }
 
 /** @fn void pwm_stop(int module_number)
@@ -316,10 +316,10 @@ void pwm_configure(int module_number,int clock_divisor, int period, int duty, bo
  * @details This function will stop a specific pwm module
  * @param int module_number-  the pwm module to be selected
  */
-void pwm_stop(int module_number)
+فراغ pwm_stop(صحيح module_شمېره)
 {
-	set_pwm_control_register(module_number, 0x0);
-	log_info("\n PWM module number %d has been stopped", module_number);
+	سېټ_pwm_control_ثبتوونکی(module_شمېره, 0x0);
+	log_info("\n PWM module number %d has been stopped", module_شمېره);
 }
 
 /** @fn void show_register_values(int module_number)
@@ -327,21 +327,21 @@ void pwm_stop(int module_number)
  * @details This function will print the values of all the registers of a specific pwm module
  * @param int module_number-  the pwm module to be selected
  */
-void show_register_values(int module_number)
+فراغ show_ثبتوونکی_ارزښتونه(صحيح module_شمېره)
 {
-	volatile unsigned short* period_value;
-	volatile unsigned short* duty_value;
-	volatile unsigned char*  control_value;
-	volatile unsigned short* clock_value;
+	متطاير بینښه لنډ* period_ارزښت;
+	متطاير بینښه لنډ* duty_ارزښت;
+	متطاير بینښه حرف*  control_ارزښت;
+	متطاير بینښه لنډ* clock_ارزښت;
 
-	period_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + PERIOD_REGISTER;
-	duty_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + DUTY_REGISTER;
-	control_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CONTROL_REGISTER;
-	clock_value = PWM_BASE_ADDRESS + module_number * PWM_MODULE_OFFSET + CLOCK_REGISTER;
+	period_ارزښت = PWM_بنسټ_پته + module_شمېره * PWM_MODULE_دننه_واټن + PERIOD_ثبتوونکی;
+	duty_ارزښت = PWM_بنسټ_پته + module_شمېره * PWM_MODULE_دننه_واټن + DUTY_ثبتوونکی;
+	control_ارزښت = PWM_بنسټ_پته + module_شمېره * PWM_MODULE_دننه_واټن + CONTROL_ثبتوونکی;
+	clock_ارزښت = PWM_بنسټ_پته + module_شمېره * PWM_MODULE_دننه_واټن + CLOCK_ثبتوونکی;
 
-	log_info("\nThe value of period register is %x",  *period_value);
-	log_info("\nThe value of duty register is %x",    *duty_value);
-	log_info("\nThe value of control register is %x", *control_value);
-	log_info("\nThe value of clock register is %x",   *clock_value);
+	log_info("\nThe value of period register is %x",  *period_ارزښت);
+	log_info("\nThe value of duty register is %x",    *duty_ارزښت);
+	log_info("\nThe value of control register is %x", *control_ارزښت);
+	log_info("\nThe value of clock register is %x",   *clock_ارزښت);
 }
 

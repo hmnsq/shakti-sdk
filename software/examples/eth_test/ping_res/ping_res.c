@@ -31,12 +31,12 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "eth_driver.h"
-#include "log.h"
+#ضمن "gpio.h"
+#ضمن "uart.h"
+#ضمن "traps.h"
+#ضمن "platform.h"
+#ضمن "eth_driver.h"
+#ضمن "log.h"
 
 
 
@@ -46,13 +46,13 @@
  * xparameters.h file. They are defined here such that a user can easily
  * change all the needed parameters in one place.
  */
-#define EMAC_DEVICE_ID			240
-#define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+#تعریف_کړه EMAC_DEVICE_ID			240
+#تعریف_کړه ETH_بنسټ_REG 0x44000
+متطاير بینښه صحيح* eth_بنسټ_reg = ETH_بنسټ_REG;
 /*
  * Instance of the driver
  */
-static XEmacLite EmacLite;
+ساكن XEmacLite EmacLite;
 
 
 
@@ -60,61 +60,61 @@ static XEmacLite EmacLite;
  * Change this parameter to limit the number of ping replies sent by this
  * program.
  */
-#define MAX_PING_REPLIES	10000	/* Maximum number of ping replies */
+#تعریف_کړه MAX_PING_REPLIES	10000	/* Maximum number of ping replies */
 
-#define BROADCAST_PACKET	1	/* Broadcast packet */
-#define MAC_MATCHED_PACKET	2 	/* Dest MAC matched with local MAC */
-#define IP_ADDR_SIZE		4	/* IP Address size in Bytes */
-#define ARP_REQUEST 		0x0001	/* ARP Request bits in Rx packet */
-#define ARP_REPLY 		0x0002 	/* ARP status bits indicating reply */
-#define ARP_PACKET_SIZE 	0x3C    /* ARP packet len 60 Bytes */
-#define ICMP_PACKET_SIZE 	98 //0x4A    /* ICMP packet length 74 Bytes
+#تعریف_کړه خپرونه_PACKET	1	/* Broadcast packet */
+#تعریف_کړه MAC_MATCHED_PACKET	2 	/* Dest MAC matched with local MAC */
+#تعریف_کړه IP_ADDR_اندازه		4	/* IP Address size in Bytes */
+#تعریف_کړه ARP_REQUEST 		0x0001	/* ARP Request bits in Rx packet */
+#تعریف_کړه ARP_ځواب 		0x0002 	/* ARP status bits indicating reply */
+#تعریف_کړه ARP_PACKET_اندازه 	0x3C    /* ARP packet len 60 Bytes */
+#تعریف_کړه ICMP_PACKET_اندازه 	98 //0x4A    /* ICMP packet length 74 Bytes
 					 /* including Src and Dest MAC Address */
-#define BROADCAST_ADDR 		0xFFFF  /* Broadcast Address */
-#define CORRECT_CKSUM_VALUE	0xFFFF  /* Correct checksum value */
-#define IDENT_FIELD_VALUE	0x9263	/* Identification field (random num) */
+#تعریف_کړه خپرونه_ADDR 		0xFFFF  /* Broadcast Address */
+#تعریف_کړه CORRECT_CKSUM_ارزښت	0xFFFF  /* Correct checksum value */
+#تعریف_کړه IDENT_ډګر_ارزښت	0x9263	/* Identification field (random num) */
 
 /*
  * Definitions for the locations and length of some of the fields in a
  * IP packet. The lengths are defined in Half-Words (2 bytes).
  */
-#define ETHER_PROTO_TYPE_LEN	1  /* Ethernet protocol Type length  */
-#define SRC_MAC_ADDR_LOC	3  /* Source MAC address location */
-#define MAC_ADDR_LEN 		3  /* MAC address length */
-#define ETHER_PROTO_TYPE_LOC	6  /* Ethernet Proto type location */
+#تعریف_کړه ETHER_PROTO_TYPE_LEN	1  /* Ethernet protocol Type length  */
+#تعریف_کړه SRC_MAC_ADDR_LOC	3  /* Source MAC address location */
+#تعریف_کړه MAC_ADDR_LEN 		3  /* MAC address length */
+#تعریف_کړه ETHER_PROTO_TYPE_LOC	6  /* Ethernet Proto type location */
 
-#define ARP_HW_TYPE_LEN 	1  /* Hardware Type length  */
-#define ARP_PROTO_TYPE_LEN	1  /* Protocol Type length  */
-#define ARP_HW_ADD_LEN		1  /* Hardware address length */
-#define ARP_PROTO_ADD_LEN	1  /* Protocol address length */
-#define ARP_ZEROS_LEN		9  /* Length to be filled with zeros */
-#define ARP_REQ_STATUS_LOC 	10 /* ARP request location */
-#define ARP_REQ_SRC_IP_LOC 	14 /* Src IP address location of ARP request */
-#define ARP_REQ_DEST_IP_LOC_1 	19 /* Destination IP's 1st half word location */
-#define ARP_REQ_DEST_IP_LOC_2 	20 /* Destination IP's 2nd half word location */
+#تعریف_کړه ARP_HW_TYPE_LEN 	1  /* Hardware Type length  */
+#تعریف_کړه ARP_PROTO_TYPE_LEN	1  /* Protocol Type length  */
+#تعریف_کړه ARP_HW_جمع_کړه_LEN		1  /* Hardware address length */
+#تعریف_کړه ARP_PROTO_جمع_کړه_LEN	1  /* Protocol address length */
+#تعریف_کړه ARP_ZEROS_LEN		9  /* Length to be filled with zeros */
+#تعریف_کړه ARP_REQ_حالت_LOC 	10 /* ARP request location */
+#تعریف_کړه ARP_REQ_SRC_IP_LOC 	14 /* Src IP address location of ARP request */
+#تعریف_کړه ARP_REQ_DEST_IP_LOC_1 	19 /* Destination IP's 1st half word location */
+#تعریف_کړه ARP_REQ_DEST_IP_LOC_2 	20 /* Destination IP's 2nd half word location */
 
-#define IP_VERSION_LEN 		1  /* IP Version length  */
-#define IP_PACKET_LEN 		1  /* IP Packet length field  */
-#define IP_FRAG_FIELD_LEN	1  /* Fragment field len in ICMP packet */
-#define IP_TTL_ICM_LEN 		1  /* Time to live and ICM fields length */
-#define IP_ADDR_LEN 		2  /* Size of IP address in half-words */
-#define IP_CSUM_LOC_BACK	5  /* IP checksum location from end of frame */
-#define IP_HDR_START_LOC 	7  /* IP header start location */
-#define IP_HDR_LEN 		10 /* IP Header length */
-#define IP_FRAG_FIELD_LOC 	10 /* Fragment field location */
+#تعریف_کړه IP_نسخه_LEN 		1  /* IP Version length  */
+#تعریف_کړه IP_PACKET_LEN 		1  /* IP Packet length field  */
+#تعریف_کړه IP_FRAG_ډګر_LEN	1  /* Fragment field len in ICMP packet */
+#تعریف_کړه IP_TTL_ICM_LEN 		1  /* Time to live and ICM fields length */
+#تعریف_کړه IP_ADDR_LEN 		2  /* Size of IP address in half-words */
+#تعریف_کړه IP_CSUM_LOC_شا	5  /* IP checksum location from end of frame */
+#تعریف_کړه IP_HDR_پیل_LOC 	7  /* IP header start location */
+#تعریف_کړه IP_HDR_LEN 		10 /* IP Header length */
+#تعریف_کړه IP_FRAG_ډګر_LOC 	10 /* Fragment field location */
 
-#define ICMP_TYPE_LEN 		1  /* ICMP Type length */
-#define ICMP_ECHO_FIELD_LEN 	2  /* Echo field length in half-words */
-#define ICMP_REQ_SRC_IP_LOC 	13 /* Src IP address location of ICMP request */
-#define ICMP_ECHO_FIELD_LOC 	17 /* Echo field location */
-#define ICMP_DATA_START_LOC 	17 /* Data field start location */
-#define ICMP_DATA_LEN 		30  //18  /* ICMP data length */
-#define ICMP_DATA_LOC 		19 /* ICMP data location including
+#تعریف_کړه ICMP_TYPE_LEN 		1  /* ICMP Type length */
+#تعریف_کړه ICMP_ECHO_ډګر_LEN 	2  /* Echo field length in half-words */
+#تعریف_کړه ICMP_REQ_SRC_IP_LOC 	13 /* Src IP address location of ICMP request */
+#تعریف_کړه ICMP_ECHO_ډګر_LOC 	17 /* Echo field location */
+#تعریف_کړه ICMP_معلومات_پیل_LOC 	17 /* Data field start location */
+#تعریف_کړه ICMP_معلومات_LEN 		30  //18  /* ICMP data length */
+#تعریف_کړه ICMP_معلومات_LOC 		19 /* ICMP data location including
 				      identifier number and sequence number */
-#define ICMP_DATA_CSUM_LOC_BACK 31 //19 
+#تعریف_کړه ICMP_معلومات_CSUM_LOC_شا 31 //19 
 /* Data checksum location from end of
-					frame */
-#define ICMP_DATA_FIELD_LEN 	32 //20 /* Data field length */
+چوکاټ*/
+#تعریف_کړه ICMP_معلومات_ډګر_LEN 	32 //20 /* Data field length */
 
 /**************************** Type Definitions *******************************/
 
@@ -122,18 +122,18 @@ static XEmacLite EmacLite;
 
 /************************** Function Prototypes ******************************/
 
-static int EmacLitePingReplyExample(u16 DeviceId);
+ساكن صحيح Emac_Lite_Ping_ځواب_Example(u16 DeviceId);
 
-static void ProcessRecvFrame(XEmacLite *InstancePtr);
+ساكن فراغ Process_Recv_چوکاټ(XEmacLite *InstancePtr);
 
-static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length);
+ساكن u16 Check_مجموعه_Calculation(u16 *Rx_چوکاټ_Ptr, صحيح پیل_Loc, صحيح اوږدتیا);
 
 /************************** Variable Definitions *****************************/
 
 /*
  * Set up a local MAC address.
  */
-static u8 LocalMacAddr[XEL_MAC_ADDR_SIZE] =
+ساكن u8 LocalMacAddr[XEL_MAC_ADDR_اندازه] =
 {
 	0x00, 0x00, 0x5E, 0x00, 0xFA, 0xCE
 };
@@ -142,29 +142,29 @@ static u8 LocalMacAddr[XEL_MAC_ADDR_SIZE] =
  * The IP address was set to 172.16.63.121. User need to set a free IP address
  * based on the network on which this example is to be run.
  */
-static u8 LocalIpAddr[IP_ADDR_SIZE] =
+ساكن u8 LocalIpAddr[IP_ADDR_اندازه] =
 {
 	192, 168, 1, 25
 };
 
-static XEmacLite EmacLiteInstance;	/* Instance of the EmacLite driver */
+ساكن XEmacLite EmacLiteInstance;	/* Instance of the EmacLite driver */
 
 /*
  * Buffers used for Transmission and Reception of Packets. These are declared as
  * global so that they are not a part of the stack.
  */
-static u8 RxFrame[XEL_MAX_FRAME_SIZE];
-static u8 TxFrame[XEL_MAX_FRAME_SIZE];
+ساكن u8 Rx_چوکاټ[XEL_MAX_چوکاټ_اندازه];
+ساكن u8 Tx_چوکاټ[XEL_MAX_چوکاټ_اندازه];
 
 /*
  * Variable used to indicate the length of the received frame.
  */
-extern volatile u32 RecvFrameLength = 0;
+خارجي متطاير u32 Recv_چوکاټ_اوږدتیا = 0;
 
 /*
  * Variable used to indicate the number of Ping replies sent.
  */
-u32 NumOfPingReplies;
+u32 عدد_د_Ping_Replies;
 u32 arpcount = 0;
 
 /****************************************************************************/
@@ -181,21 +181,21 @@ u32 arpcount = 0;
 * @note		None.
 *
 *****************************************************************************/
-int main()
+صحيح اصلي()
 {
-	int Status;
+	صحيح حالت;
 	arpcount = 0;
 	/*
 	 * Run the EmacLite Ping reply example.
 	 */
-	Status = EmacLitePingReplyExample(EMAC_DEVICE_ID);
-	if (Status != XST_SUCCESS) {
+	حالت = Emac_Lite_Ping_ځواب_Example(EMAC_DEVICE_ID);
+	إذا (حالت != XST_SUCCESS) {
 		xil_printf("Emaclite ping reply Example Failed\r\n");
-		return XST_FAILURE;
+		أرجع XST_FAILURE;
 	}
 
 	xil_printf("Successfully ran Emaclite ping reply Example\r\n");
-	return XST_SUCCESS;
+	أرجع XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -212,57 +212,57 @@ int main()
 *		ping replies as defined by MAX_PING_REPLIES.
 *
 ******************************************************************************/
-int EmacLitePingReplyExample(u16 DeviceId)
+صحيح Emac_Lite_Ping_ځواب_Example(u16 DeviceId)
 {
-	int Status, count = 0;
+	صحيح حالت, شمېر = 0;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
 	XEmacLite_Config *ConfigPtr;
-	NumOfPingReplies = 0;
+	عدد_د_Ping_Replies = 0;
 
 	/*
 	 * Initialize the EmacLite device.
 	 */
-	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	ConfigPtr = &XEmac_Lite_Config_جدول;
+	إذا (ConfigPtr == عدم) {
+		أرجع -1;
 	}
-	printf("\n ");
+	چاپ_کړه("\n ");
 
-	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
+	ConfigPtr->بنسټ_پته = (UINTPTR *) 0X44000;
 	ConfigPtr->RxPingPong = XPAR_EMACLITE_0_RX_PING_PONG;
 	ConfigPtr->MdioInclude = XPAR_EMACLITE_0_INCLUDE_MDIO;
 	ConfigPtr->TxPingPong = XPAR_EMACLITE_0_TX_PING_PONG;
-	Status = XEmacLite_CfgInitialize(EmacLiteInstPtr,
+	حالت = XEmacLite_CfgInitialize(EmacLiteInstPtr,
 					ConfigPtr,
-					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+					ConfigPtr->بنسټ_پته);
+	إذا (حالت != 0) {
+		أرجع -1;
 	}
 	
 	/*
 	 * Set the MAC address.
 	 */
-	XEmacLite_SetMacAddress(EmacLiteInstPtr, LocalMacAddr);
+	XEmac_Lite_سېټ_Mac_پته(EmacLiteInstPtr, LocalMacAddr);
 	/*
 	 * Empty any existing receive frames.
 	 */
 	XEmacLite_FlushReceive(EmacLiteInstPtr);
 
-	while (1) {
+	طالما (1) {
 
 		/*
 		 * Wait for a Receive packet.
 		 */
-		while (RecvFrameLength == 0) {
-			RecvFrameLength = XEmacLite_Recv(EmacLiteInstPtr,
-								(u8 *)RxFrame);
+		طالما (Recv_چوکاټ_اوږدتیا == 0) {
+			Recv_چوکاټ_اوږدتیا = XEmacLite_Recv(EmacLiteInstPtr,
+								(u8 *)Rx_چوکاټ);
 		}
-#if 1
-		printf("\n Rcv. Frame %x: %x\n", NumOfPingReplies, RecvFrameLength);
-		for(int i = 0; i < RecvFrameLength; i++)
-			printf("%x ", RxFrame[i]);
-		printf("\n");
-#endif			
+#إذا 1
+		چاپ_کړه("\n Rcv. Frame %x: %x\n", عدد_د_Ping_Replies, Recv_چوکاټ_اوږدتیا);
+		لكل(صحيح i = 0; i < Recv_چوکاټ_اوږدتیا; i++)
+			چاپ_کړه("%x ", Rx_چوکاټ[i]);
+		چاپ_کړه("\n");
+#د_که_پای			
 		/*
 		 * Empty any existing receive frames.
 		 */
@@ -271,16 +271,16 @@ int EmacLitePingReplyExample(u16 DeviceId)
 		/*
 		 * Process the Receive frame.
 		 */
-		ProcessRecvFrame(EmacLiteInstPtr);
-		RecvFrameLength = 0;
+		Process_Recv_چوکاټ(EmacLiteInstPtr);
+		Recv_چوکاټ_اوږدتیا = 0;
 
 		/*
 		 * If the number of ping replies sent is equal to that
 		 * specified by the user then exit out of this loop.
 		 */
-		if (NumOfPingReplies == MAX_PING_REPLIES) {
+		إذا (عدد_د_Ping_Replies == MAX_PING_REPLIES) {
 
-			return XST_SUCCESS;
+			أرجع XST_SUCCESS;
 		}
 
 	}
@@ -299,72 +299,72 @@ int EmacLitePingReplyExample(u16 DeviceId)
 * @note		This function assumes MAC does not strip padding or CRC.
 *
 ******************************************************************************/
-static void ProcessRecvFrame(XEmacLite *InstancePtr)
+ساكن فراغ Process_Recv_چوکاټ(XEmacLite *InstancePtr)
 {
-	u16 *RxFramePtr;
-	u16 *TxFramePtr;
-	u16 *TempPtr;
-	u16 CheckSum;
-	u32 NextTxBuffBaseAddr;
-	int Index;
-	int PacketType = 0;
+	u16 *Rx_چوکاټ_Ptr;
+	u16 *Tx_چوکاټ_Ptr;
+	u16 *لنډمهاله_Ptr;
+	u16 Check_مجموعه;
+	u32 بل_Tx_Buff_بنسټ_Addr;
+	صحيح شاخص;
+	صحيح PacketType = 0;
 
-	TxFramePtr = (u16 *)TxFrame;
-	RxFramePtr = (u16 *)RxFrame;
+	Tx_چوکاټ_Ptr = (u16 *)Tx_چوکاټ;
+	Rx_چوکاټ_Ptr = (u16 *)Rx_چوکاټ;
 
 	/*
 	 * Determine the next expected Tx buffer address.
 	 */
-	NextTxBuffBaseAddr = XEmacLite_NextTransmitAddr(InstancePtr);
+	بل_Tx_Buff_بنسټ_Addr = XEmac_Lite_بل_Transmit_Addr(InstancePtr);
 
 	/*
 	 * Check the packet type.
 	 */
-	Index = MAC_ADDR_LEN;
-	TempPtr = (u16 *)LocalMacAddr;
-	while (Index--) {
-		if (Xil_Ntohs((*(RxFramePtr + Index)) == BROADCAST_ADDR) &&
+	شاخص = MAC_ADDR_LEN;
+	لنډمهاله_Ptr = (u16 *)LocalMacAddr;
+	طالما (شاخص--) {
+		إذا (Xil_Ntohs((*(Rx_چوکاټ_Ptr + شاخص)) == خپرونه_ADDR) &&
 					(PacketType != MAC_MATCHED_PACKET)) {
-			PacketType = BROADCAST_PACKET;
-		} else if (Xil_Ntohs((*(RxFramePtr + Index)) == *(TempPtr + Index)) &&
-					(PacketType != BROADCAST_PACKET)) {
+			PacketType = خپرونه_PACKET;
+		} وإلا إذا (Xil_Ntohs((*(Rx_چوکاټ_Ptr + شاخص)) == *(لنډمهاله_Ptr + شاخص)) &&
+					(PacketType != خپرونه_PACKET)) {
 			PacketType = MAC_MATCHED_PACKET;
-		} else {
+		} وإلا {
 			PacketType = 0;
-			break;
+			اكسر;
 		}
 	}
-#if 0
-	printf("\n Packet type is %x", PacketType);
-#endif
+#إذا 0
+	چاپ_کړه("\n Packet type is %x", PacketType);
+#د_که_پای
 	/*
 	 * Process broadcast packet.
 	 */
-	if (PacketType == BROADCAST_PACKET) {
+	إذا (PacketType == خپرونه_PACKET) {
 
 		/*
 		 * Check for an ARP Packet if so generate a reply.
 		 */
-		if (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
+		إذا (Xil_Ntohs(*(Rx_چوکاټ_Ptr + ETHER_PROTO_TYPE_LOC)) ==
 				XEL_ETHER_PROTO_TYPE_ARP) {
 
 			/*
 			 * IP address of the local machine.
 			 */
-			TempPtr = (u16 *)LocalIpAddr;
+			لنډمهاله_Ptr = (u16 *)LocalIpAddr;
 
 			/*
 			 * Check destination IP address of the packet with
 			 * local IP address.
 			 */
-			if (
-			((*(RxFramePtr + ARP_REQ_DEST_IP_LOC_1)) == *TempPtr++) &&
-			((*(RxFramePtr + ARP_REQ_DEST_IP_LOC_2)) == *TempPtr++)) {
+			إذا (
+			((*(Rx_چوکاټ_Ptr + ARP_REQ_DEST_IP_LOC_1)) == *لنډمهاله_Ptr++) &&
+			((*(Rx_چوکاټ_Ptr + ARP_REQ_DEST_IP_LOC_2)) == *لنډمهاله_Ptr++)) {
 
 				/*
 				 * Check ARP packet type(request/reply).
 				 */
-				if (Xil_Ntohs(*(RxFramePtr + ARP_REQ_STATUS_LOC)) ==
+				إذا (Xil_Ntohs(*(Rx_چوکاټ_Ptr + ARP_REQ_حالت_LOC)) ==
 								ARP_REQUEST) {
 
 					/*
@@ -372,23 +372,23 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * to the reply packet (i.e) source
 					 * address of the received packet.
 					 */
-					Index = SRC_MAC_ADDR_LOC;
-					while (Index < (SRC_MAC_ADDR_LOC +
+					شاخص = SRC_MAC_ADDR_LOC;
+					طالما (شاخص < (SRC_MAC_ADDR_LOC +
 							MAC_ADDR_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Add source (local) MAC address
 					 * to the reply packet.
 					 */
-					Index = 0;
-					TempPtr = (u16 *)LocalMacAddr;
-					while (Index < MAC_ADDR_LEN) {
-						*TxFramePtr++ = *TempPtr++;
-						Index++;
+					شاخص = 0;
+					لنډمهاله_Ptr = (u16 *)LocalMacAddr;
+					طالما (شاخص < MAC_ADDR_LEN) {
+						*Tx_چوکاټ_Ptr++ = *لنډمهاله_Ptr++;
+						شاخص++;
 					}
 
 					/*
@@ -397,43 +397,43 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * protocol address len (i.e)same as in
 					 * the received packet
 					 */
-					Index = ETHER_PROTO_TYPE_LOC;
-					while (Index < (ETHER_PROTO_TYPE_LOC +
+					شاخص = ETHER_PROTO_TYPE_LOC;
+					طالما (شاخص < (ETHER_PROTO_TYPE_LOC +
 							ETHER_PROTO_TYPE_LEN +
 							ARP_HW_TYPE_LEN +
-							ARP_HW_ADD_LEN
-							+ ARP_PROTO_ADD_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+							ARP_HW_جمع_کړه_LEN
+							+ ARP_PROTO_جمع_کړه_LEN)) {
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Add ARP reply status to the reply
 					 * packet.
 					 */
-					*TxFramePtr++ = Xil_Htons(ARP_REPLY);
+					*Tx_چوکاټ_Ptr++ = Xil_Htons(ARP_ځواب);
 
 					/*
 					 * Add local MAC Address
 					 * to the reply packet.
 					 */
-					TempPtr = (u16 *)LocalMacAddr;
-					Index = 0;
-					while (Index < MAC_ADDR_LEN) {
-						*TxFramePtr++ = *TempPtr++;
-						Index++;
+					لنډمهاله_Ptr = (u16 *)LocalMacAddr;
+					شاخص = 0;
+					طالما (شاخص < MAC_ADDR_LEN) {
+						*Tx_چوکاټ_Ptr++ = *لنډمهاله_Ptr++;
+						شاخص++;
 					}
 
 					/*
 					 * Add local IP Address
 					 * to the reply packet.
 					 */
-					TempPtr = (u16 *)LocalIpAddr;
-					Index = 0;
-					while (Index < IP_ADDR_LEN) {
-						*TxFramePtr++ = *TempPtr++ ;
-						Index++;
+					لنډمهاله_Ptr = (u16 *)LocalIpAddr;
+					شاخص = 0;
+					طالما (شاخص < IP_ADDR_LEN) {
+						*Tx_چوکاټ_Ptr++ = *لنډمهاله_Ptr++ ;
+						شاخص++;
 					}
 
 					/*
@@ -441,41 +441,41 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * to the reply packet from the received
 					 * packet.
 					 */
-					Index = SRC_MAC_ADDR_LOC;
-					while (Index < (SRC_MAC_ADDR_LOC +
+					شاخص = SRC_MAC_ADDR_LOC;
+					طالما (شاخص < (SRC_MAC_ADDR_LOC +
 							MAC_ADDR_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Add Destination IP Address
 					 * to the reply packet.
 					 */
-					Index = ARP_REQ_SRC_IP_LOC;
-					while (Index < (ARP_REQ_SRC_IP_LOC +
+					شاخص = ARP_REQ_SRC_IP_LOC;
+					طالما (شاخص < (ARP_REQ_SRC_IP_LOC +
 							IP_ADDR_LEN)) {
-						*TxFramePtr++ =
-								*(RxFramePtr + Index);
-						Index++;
+						*Tx_چوکاټ_Ptr++ =
+								*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Fill zeros as per protocol.
 					 */
-					Index = 0;
-					while (Index < ARP_ZEROS_LEN) {
-						*TxFramePtr++ = 0x0000;
-						Index++;
+					شاخص = 0;
+					طالما (شاخص < ARP_ZEROS_LEN) {
+						*Tx_چوکاټ_Ptr++ = 0x0000;
+						شاخص++;
 					}
 
 					/*
 					 * Transmit the Reply Packet.
 					 */
 					XEmacLite_Send(InstancePtr,
-							(u8 *)&TxFrame,
-							ARP_PACKET_SIZE);
+							(u8 *)&Tx_چوکاټ,
+							ARP_PACKET_اندازه);
 				}
 			}
 		}
@@ -484,61 +484,61 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 	/*
 	 * Process packets whose MAC address is matched.
 	 */
-	if (PacketType == MAC_MATCHED_PACKET) {
+	إذا (PacketType == MAC_MATCHED_PACKET) {
 //		printf("\n MAC matched packet");
 		/*
 		 * Check ICMP packet.
 		 */
-		if (Xil_Ntohs(*(RxFramePtr + ETHER_PROTO_TYPE_LOC)) ==
+		إذا (Xil_Ntohs(*(Rx_چوکاټ_Ptr + ETHER_PROTO_TYPE_LOC)) ==
 						XEL_ETHER_PROTO_TYPE_IP) {
 //			printf("\n calculate ip header checksum");
 			/*
 			 * Check the IP header checksum.
 			 */
-			CheckSum = CheckSumCalculation(RxFramePtr,
-						IP_HDR_START_LOC,
+			Check_مجموعه = Check_مجموعه_Calculation(Rx_چوکاټ_Ptr,
+						IP_HDR_پیل_LOC,
 						IP_HDR_LEN);
 
 			/*
 			 * Check the Data field checksum.
 			 */
 //			printf("\n ip checksum:%x", CheckSum);
-			if (CheckSum == CORRECT_CKSUM_VALUE) {
-				CheckSum = CheckSumCalculation(RxFramePtr,
-						ICMP_DATA_START_LOC,
-						ICMP_DATA_FIELD_LEN);
-#if 0
-			printf("\nICMP Rcv Packet: \n");
-			for(int i = ICMP_DATA_START_LOC; i <= ICMP_DATA_FIELD_LEN; i++)
-			   printf("%x ", RxFramePtr[i]);
-			printf("\n End of ICMP Rcv Packet");
+			إذا (Check_مجموعه == CORRECT_CKSUM_ارزښت) {
+				Check_مجموعه = Check_مجموعه_Calculation(Rx_چوکاټ_Ptr,
+						ICMP_معلومات_پیل_LOC,
+						ICMP_معلومات_ډګر_LEN);
+#إذا 0
+			چاپ_کړه("\nICMP Rcv Packet: \n");
+			لكل(صحيح i = ICMP_معلومات_پیل_LOC; i <= ICMP_معلومات_ډګر_LEN; i++)
+			   چاپ_کړه("%x ", Rx_چوکاټ_Ptr[i]);
+			چاپ_کړه("\n End of ICMP Rcv Packet");
 				
-				printf("\n data checksum:%x", CheckSum);
-#endif
-				if (CheckSum == CORRECT_CKSUM_VALUE) {
+				چاپ_کړه("\n data checksum:%x", Check_مجموعه);
+#د_که_پای
+				إذا (Check_مجموعه == CORRECT_CKSUM_ارزښت) {
 
 					/*
 					 * Add destination address
 					 * to the reply packet (i.e)source
 					 * address of the received packet.
 					 */
-					Index = SRC_MAC_ADDR_LOC;
-					while (Index < (SRC_MAC_ADDR_LOC +
+					شاخص = SRC_MAC_ADDR_LOC;
+					طالما (شاخص < (SRC_MAC_ADDR_LOC +
 							MAC_ADDR_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Add local MAC address
 					 * to the reply packet.
 					 */
-					Index = 0;
-					TempPtr = (u16 *)LocalMacAddr;
-					while (Index < MAC_ADDR_LEN) {
-						*TxFramePtr++ = *TempPtr++;
-						Index++;
+					شاخص = 0;
+					لنډمهاله_Ptr = (u16 *)LocalMacAddr;
+					طالما (شاخص < MAC_ADDR_LEN) {
+						*Tx_چوکاټ_Ptr++ = *لنډمهاله_Ptr++;
+						شاخص++;
 					}
 
 					/*
@@ -546,135 +546,135 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 					 * header length and, packet
 					 * length(60 Bytes) to the reply packet.
 					 */
-					Index = ETHER_PROTO_TYPE_LOC;
-					while (Index < (ETHER_PROTO_TYPE_LOC +
+					شاخص = ETHER_PROTO_TYPE_LOC;
+					طالما (شاخص < (ETHER_PROTO_TYPE_LOC +
 							ETHER_PROTO_TYPE_LEN +
-							IP_VERSION_LEN +
+							IP_نسخه_LEN +
 							IP_PACKET_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Identification field a random number
 					 * which is set to IDENT_FIELD_VALUE.
 					 */
-					*TxFramePtr++ = IDENT_FIELD_VALUE;
+					*Tx_چوکاټ_Ptr++ = IDENT_ډګر_ارزښت;
 
 					/*
 					 * Add fragment type, time to live and
 					 * ICM field. It is same as in the
 					 * received packet.
 					 */
-					Index = IP_FRAG_FIELD_LOC;
-					while (Index < (IP_FRAG_FIELD_LOC +
+					شاخص = IP_FRAG_ډګر_LOC;
+					طالما (شاخص < (IP_FRAG_ډګر_LOC +
 							IP_TTL_ICM_LEN +
-							IP_FRAG_FIELD_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+							IP_FRAG_ډګر_LEN)) {
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Checksum first set to 0 and
 					 * added in this field later.
 					 */
-					*TxFramePtr++ = 0x0000;
+					*Tx_چوکاټ_Ptr++ = 0x0000;
 
 					/*
 					 * Add Source IP address
 					 */
-					Index = 0;
-					TempPtr = (u16 *)LocalIpAddr;
-					while (Index < IP_ADDR_LEN) {
-						*TxFramePtr++ = *TempPtr++;
-						Index++;
+					شاخص = 0;
+					لنډمهاله_Ptr = (u16 *)LocalIpAddr;
+					طالما (شاخص < IP_ADDR_LEN) {
+						*Tx_چوکاټ_Ptr++ = *لنډمهاله_Ptr++;
+						شاخص++;
 					}
 
 					/*
 					 * Add Destination IP address.
 					 */
-					Index = ICMP_REQ_SRC_IP_LOC;
-					while (Index < (ICMP_REQ_SRC_IP_LOC +
+					شاخص = ICMP_REQ_SRC_IP_LOC;
+					طالما (شاخص < (ICMP_REQ_SRC_IP_LOC +
 							IP_ADDR_LEN)) {
-						*TxFramePtr++ =
-							*(RxFramePtr + Index);
-						Index++;
+						*Tx_چوکاټ_Ptr++ =
+							*(Rx_چوکاټ_Ptr + شاخص);
+						شاخص++;
 					}
 
 					/*
 					 * Calculate checksum, and
 					 * add it in the appropriate field.
 					 */
-					CheckSum = CheckSumCalculation(
-							(u16 *)TxFrame,
-							IP_HDR_START_LOC,
+					Check_مجموعه = Check_مجموعه_Calculation(
+							(u16 *)Tx_چوکاټ,
+							IP_HDR_پیل_LOC,
 							IP_HDR_LEN);
-					CheckSum = ~CheckSum;
-					*(TxFramePtr - IP_CSUM_LOC_BACK) =
-								Xil_Htons(CheckSum);
+					Check_مجموعه = ~Check_مجموعه;
+					*(Tx_چوکاټ_Ptr - IP_CSUM_LOC_شا) =
+								Xil_Htons(Check_مجموعه);
 
 					/*
 					 * Echo reply status & checksum.
 					 */
-					Index = ICMP_ECHO_FIELD_LOC;
-					while (Index < (ICMP_ECHO_FIELD_LOC +
-							ICMP_ECHO_FIELD_LEN)) {
-						*TxFramePtr++ = 0x0000;
-						Index++;
+					شاخص = ICMP_ECHO_ډګر_LOC;
+					طالما (شاخص < (ICMP_ECHO_ډګر_LOC +
+							ICMP_ECHO_ډګر_LEN)) {
+						*Tx_چوکاټ_Ptr++ = 0x0000;
+						شاخص++;
 					}
 
 					/*
 					 * Add data to buffer which was
 					 * received from the packet.
 					 */
-					Index = ICMP_DATA_LOC;
-					while (Index < (ICMP_DATA_LOC +
-							ICMP_DATA_LEN)) {
-						*TxFramePtr++ =
-								(*(RxFramePtr + Index));
-						Index++;
+					شاخص = ICMP_معلومات_LOC;
+					طالما (شاخص < (ICMP_معلومات_LOC +
+							ICMP_معلومات_LEN)) {
+						*Tx_چوکاټ_Ptr++ =
+								(*(Rx_چوکاټ_Ptr + شاخص));
+						شاخص++;
 					}
 
 					/*
 					 * Generate checksum for the data and
 					 * add it in the appropriate field.
 					 */
-					CheckSum = CheckSumCalculation(
-							(u16 *)TxFrame,
-							ICMP_DATA_START_LOC,
-							ICMP_DATA_FIELD_LEN);
-					CheckSum = ~CheckSum;
-					*(TxFramePtr - ICMP_DATA_CSUM_LOC_BACK)
-								= Xil_Htons(CheckSum);
+					Check_مجموعه = Check_مجموعه_Calculation(
+							(u16 *)Tx_چوکاټ,
+							ICMP_معلومات_پیل_LOC,
+							ICMP_معلومات_ډګر_LEN);
+					Check_مجموعه = ~Check_مجموعه;
+					*(Tx_چوکاټ_Ptr - ICMP_معلومات_CSUM_LOC_شا)
+								= Xil_Htons(Check_مجموعه);
 
 					/*
 					 * Transmit the frame.
 					 */
-#if 1
-					 printf("\n%x. ICMP Tx Packet \n", NumOfPingReplies);
-					 for(int i = 0; i < ICMP_PACKET_SIZE; i++)
-					 	printf("%x ", TxFrame[i]);
-					 printf("\n End of ICMP Tx Packet");
-#endif					 
+#إذا 1
+					 چاپ_کړه("\n%x. ICMP Tx Packet \n", عدد_د_Ping_Replies);
+					 لكل(صحيح i = 0; i < ICMP_PACKET_اندازه; i++)
+					 	چاپ_کړه("%x ", Tx_چوکاټ[i]);
+					 چاپ_کړه("\n End of ICMP Tx Packet");
+#د_که_پای					 
 					XEmacLite_Send(InstancePtr,
-							(u8 *)&TxFrame,
-							ICMP_PACKET_SIZE);
+							(u8 *)&Tx_چوکاټ,
+							ICMP_PACKET_اندازه);
 
 					/*
 					 * Increment the number of
 					 * Ping replies sent.
 					 */
-					NumOfPingReplies++;
+					عدد_د_Ping_Replies++;
 //					printf("NumOfPingReplies: %x", NumOfPingReplies);
 
 				}
-				else
-					printf("\n Data check sum error");
+				وإلا
+					چاپ_کړه("\n Data check sum error");
 			}
-			else
-				printf("\n IP Check sum error");
+			وإلا
+				چاپ_کړه("\n IP Check sum error");
 		}
 	}
 }
@@ -697,26 +697,26 @@ static void ProcessRecvFrame(XEmacLite *InstancePtr)
 * 		complement of this return value will give the final checksum.
 *
 ******************************************************************************/
-static u16 CheckSumCalculation(u16 *RxFramePtr, int StartLoc, int Length)
+ساكن u16 Check_مجموعه_Calculation(u16 *Rx_چوکاټ_Ptr, صحيح پیل_Loc, صحيح اوږدتیا)
 {
-	u32 Sum = 0;
-	u16 CheckSum = 0;
-	int Index;
+	u32 مجموعه = 0;
+	u16 Check_مجموعه = 0;
+	صحيح شاخص;
 
 	/*
 	 * Add all the 16 bit data.
 	 */
-	Index = StartLoc;
-	while (Index < (StartLoc + Length)) {
-		Sum = Sum + Xil_Ntohs(*(RxFramePtr + Index));
-		Index++;
+	شاخص = پیل_Loc;
+	طالما (شاخص < (پیل_Loc + اوږدتیا)) {
+		مجموعه = مجموعه + Xil_Ntohs(*(Rx_چوکاټ_Ptr + شاخص));
+		شاخص++;
 	}
 
 	/*
 	 * Add upper 16 bits to lower 16 bits.
 	 */
-	CheckSum = Sum;
-	Sum = Sum >> 16;
-	CheckSum = Sum + CheckSum;
-	return CheckSum;
+	Check_مجموعه = مجموعه;
+	مجموعه = مجموعه >> 16;
+	Check_مجموعه = مجموعه + Check_مجموعه;
+	أرجع Check_مجموعه;
 }

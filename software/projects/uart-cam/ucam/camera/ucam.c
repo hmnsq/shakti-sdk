@@ -30,36 +30,36 @@
 
 
 
-#include "ucam.h"
+#ضمن "ucam.h"
 
 /** @fn assert_check(int bool,int track)
  * @brief assert function, exits if assert failed.
  * @param int bool-false or true
  * @param int track - 0 if host, 1 if camera
  */
-void assert_check(int bool,int track) {
-    if(bool) return;
-    if(track) 
-      printf("Camera response error!!\n");
-    else {
-      printf("Host response error!!\nIs host connected?");
-      return;
+فراغ assert_check(صحيح bool,صحيح track) {
+    إذا(bool) أرجع;
+    إذا(track) 
+      چاپ_کړه("Camera response error!!\n");
+    وإلا {
+      چاپ_کړه("Host response error!!\nIs host connected?");
+      أرجع;
     }
-    exit(-1);
+    وتل(-1);
 }
 
 /** @fn delay_milli(unsigned long milli_seconds)
  * @brief delay function 
  * @param unsigned long milli_seconds - delay for given milliseconds
  */
-void delay_milli(unsigned long milli_seconds)
+فراغ delay_milli(بینښه اوږد milli_seconds)
 {
-	unsigned long cntr1 = milli_seconds;
-	unsigned long tmpCntr;
+	بینښه اوږد cntr1 = milli_seconds;
+	بینښه اوږد tmpCntr;
 
-	while (cntr1--) {
+	طالما (cntr1--) {
 		tmpCntr = 1000;
-		while (tmpCntr--);
+		طالما (tmpCntr--);
 	}
 }
 
@@ -68,10 +68,10 @@ void delay_milli(unsigned long milli_seconds)
  * @param const uint8_t* str-pointer to command string  
  * @param int len- length of command string
  */
-void send(const uint8_t* str,int len){
-  int i;
+فراغ send(ثابت uint8_t* str,صحيح len){
+  صحيح i;
   flush_uart(CAM);
-  for(i =0;i<len;i++){
+  لكل(i =0;i<len;i++){
     write_uart_character(CAM,*str);
     str++;
   }
@@ -82,11 +82,11 @@ void send(const uint8_t* str,int len){
  * @param int cmdno-command number of ACK 
  * @param int pid- packet ID
  */
-void recieve_ack(int cmdno,int pid)
+فراغ recieve_ack(صحيح cmdno,صحيح pid)
 {
   uint8_t str[6]; 
-  int i = 0;
-  for(i=0;i<6;i++){
+  صحيح i = 0;
+  لكل(i=0;i<6;i++){
     read_uart_character(CAM,(str+i));
   }
   uint8_t cc = (uint8_t)cmdno; 
@@ -101,7 +101,7 @@ void recieve_ack(int cmdno,int pid)
  * @param int pid- packet ID 
  * @param uint8_t str[]- pointer to command string
  */
-void get_ack(int cmdno,int pid, uint8_t str[])
+فراغ get_ack(صحيح cmdno,صحيح pid, uint8_t str[])
 {
   str[0] = (uint8_t)(0xAA);
   str[1] = (uint8_t)(0x0E);
@@ -116,10 +116,10 @@ void get_ack(int cmdno,int pid, uint8_t str[])
  * @param uint8_t str[]- pointer to string 
  * @param int len - number of bytes to recieve from camera
  */
-void recieve_gen(uint8_t str[],int len)
+فراغ recieve_gen(uint8_t str[],صحيح len)
 {
-  int i;
-  for(i = 0;i < len; i++)
+  صحيح i;
+  لكل(i = 0;i < len; i++)
   {
     read_uart_character(CAM,str+i);
   }
@@ -130,20 +130,20 @@ void recieve_gen(uint8_t str[],int len)
  * @param int count- Packet ID of current packet 
  * @param int limit- number of bytes in current packet
  */ 
-void recieve_img(int count,int limit){
+فراغ recieve_img(صحيح شمېر,صحيح حد){
   uint8_t ptr[256];
-  int i=0;
-  uint8_t ack_temp[6];
-  get_ack(0,count,ack_temp);
-  send(ack_temp, 6);
+  صحيح i=0;
+  uint8_t ack_لنډمهاله[6];
+  get_ack(0,شمېر,ack_لنډمهاله);
+  send(ack_لنډمهاله, 6);
   // if limit=6 it means we don't expect any data bytes
-  if(limit==6) return;
-  while(1){
+  إذا(حد==6) أرجع;
+  طالما(1){
     read_uart_character(CAM,(ptr+i));
     i++;
-    if(i==limit) break;
+    إذا(i==حد) اكسر;
   }
-  for(int j=4;j<i-2;j++){
+  لكل(صحيح j=4;j<i-2;j++){
     write_uart_character(HOST,ptr[j]);
   }
 }
@@ -152,58 +152,58 @@ void recieve_img(int count,int limit){
  * @brief Function to wake up camera
  * @return int - 0 if success, -1 if error
  */ 
-int init_cam()
+صحيح init_cam()
 {
-  int delay_time = 4;
-  int no=0;
-  const uint8_t  sync_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0D), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  const uint8_t  ack_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0D),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  const uint8_t  ack_command_reply[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
-  start:
+  صحيح delay_وخت = 4;
+  صحيح no=0;
+  ثابت uint8_t  sync_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0D), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  ثابت uint8_t  ack_command[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0D),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  ثابت uint8_t  ack_command_ځواب[] = {(uint8_t)(0xAA),(uint8_t)(0x0E), (uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
+  پیل:
   {
     no++;
-    printf("Round : %d\n",no);
+    چاپ_کړه("Round : %d\n",no);
     send(sync_command,6);
-    delay_milli(delay_time++); 
-    if(CAM->status & STS_RX_NOT_EMPTY)
+    delay_milli(delay_وخت++); 
+    إذا(CAM->حالت_2 & STS_RX_NOT_تشه)
     {
         // code to read 12 characters from the buffer and if it matches with the ACK and sync commands go to succes
-        int i;
-        for(i = 0;i<6;i++) 
+        صحيح i;
+        لكل(i = 0;i<6;i++) 
         {
            uint8_t ch;
            read_uart_character(CAM,&ch);
-           if(i == 3)continue; // don't care xx thing
-           if(ch != ack_command[i]) goto fail;
+           إذا(i == 3)استمر; // don't care xx thing
+           إذا(ch != ack_command[i]) اذهب fail;
         }
-        for(i = 0;i<6;i++)
+        لكل(i = 0;i<6;i++)
         {
             uint8_t ch;
             read_uart_character(CAM,&ch);
-            if(ch != sync_command[i]) goto fail;
+            إذا(ch != sync_command[i]) اذهب fail;
         }
-        goto success;
+        اذهب success;
     }
   }
   fail:
-  if(delay_time>15000) {
-    printf("Can't wake up camera! Is camera connected?\n");
-    return -1;
+  إذا(delay_وخت>15000) {
+    چاپ_کړه("Can't wake up camera! Is camera connected?\n");
+    أرجع -1;
   }
-  goto start;
+  اذهب پیل;
   success:
   flush_uart(CAM);
-  send(ack_command_reply,6);
-  printf("\n synchronisation process done waiting for 2 seconds for stabilisation \n");
+  send(ack_command_ځواب,6);
+  چاپ_کړه("\n synchronisation process done waiting for 2 seconds for stabilisation \n");
   delay(2);
-  printf("\n you are all set \n");
-  return 0;
+  چاپ_کړه("\n you are all set \n");
+  أرجع 0;
 }
 
 /** @fn send_full_reset()
  * @brief Send Full reset to camera
  */ 
-void send_full_reset() {
+فراغ send_ډک_reset() {
   uint8_t reset_command[] = {(uint8_t)(0xAA),(uint8_t)(0x08),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
   send(reset_command,6);
   recieve_ack(8,0);
@@ -213,7 +213,7 @@ void send_full_reset() {
  * @brief Function to get picture
  * @param int mode - 0 for one image, 1 for continuous
  */ 
-void get_pic(int mode)
+فراغ get_pic(صحيح ډېرپېښ)
 {
   //INITIAL_command : AA 01 00 07 xx 07 ( specific for JPEG,640x480 xx=don't care )
   uint8_t initial_command[] = {(uint8_t)(0xAA),(uint8_t)(0x1),(uint8_t)(0x0),(uint8_t)(0x7),(uint8_t)(0x3),(uint8_t)(0x7)};
@@ -221,53 +221,53 @@ void get_pic(int mode)
   recieve_ack(1,0);
 
   //SET_PACKAGE_SIZE_command : AA 06 08 00 01 00 (size=256)
-  uint8_t set_package_command[] = {(uint8_t)(0xAA),(uint8_t)(0x6),(uint8_t)(0x8),(uint8_t)(0x0),(uint8_t)(0x1),(uint8_t)(0x0)};
-  send(set_package_command,6);
+  uint8_t سېټ_package_command[] = {(uint8_t)(0xAA),(uint8_t)(0x6),(uint8_t)(0x8),(uint8_t)(0x0),(uint8_t)(0x1),(uint8_t)(0x0)};
+  send(سېټ_package_command,6);
   recieve_ack(6,0);
 
   //GET_PICTURE_command : AA 04 05 00 00 00 ( Current JPEG  )
   uint8_t get_pic_command[] = {(uint8_t)(0xAA),(uint8_t)(0x4),(uint8_t)(0x5),(uint8_t)(0x0),(uint8_t)(0x0),(uint8_t)(0x0)};
   
-  start : 
+  پیل : 
   send(get_pic_command,6);
   recieve_ack(4,0);
-  uint8_t data[6];
-  recieve_gen(data,6);
+  uint8_t معلومات_2[6];
+  recieve_gen(معلومات_2,6);
 
   //DATA_command : AA 0A 05 xx yy zz ( current JPEG mode )
-  assert_check(data[0]==0xAA,1);
-  assert_check(data[1]==0xA,1);
-  assert_check(data[2]==0x5,1);
+  assert_check(معلومات_2[0]==0xAA,1);
+  assert_check(معلومات_2[1]==0xA,1);
+  assert_check(معلومات_2[2]==0x5,1);
 
-  long no_of_pg = (int)data[3] + (((long)data[4])<<8) + (((long)data[5])<<16) ;
-  printf("New size : %ld\n",no_of_pg);
+  اوږد no_د_pg = (صحيح)معلومات_2[3] + (((اوږد)معلومات_2[4])<<8) + (((اوږد)معلومات_2[5])<<16) ;
+  چاپ_کړه("New size : %ld\n",no_د_pg);
 
   // Send data to host
   flush_uart(HOST);
-  for(int i=0;i<6;i++)
-    write_uart_character(HOST,data[i]);
+  لكل(صحيح i=0;i<6;i++)
+    write_uart_character(HOST,معلومات_2[i]);
 
-  int counter = no_of_pg/250 ;
-  int i = 0;
-  char recv;
+  صحيح counter = no_د_pg/250 ;
+  صحيح i = 0;
+  حرف recv;
   //Wait for HOST to confirm that DATA_command is recieved.
   //Host should reply with 'K'
   read_uart_character(HOST,&recv);
   assert_check(recv=='K',0);
-  for(i=0;i<counter;i++){
+  لكل(i=0;i<counter;i++){
     recieve_img(i,256);
   }
-  recieve_img(counter,6+(no_of_pg%250));
-  if(no_of_pg%250 != 0) {     
-    uint8_t ack_temp[6];
-    get_ack(0,counter+1,ack_temp);
-    send(ack_temp, 6);
+  recieve_img(counter,6+(no_د_pg%250));
+  إذا(no_د_pg%250 != 0) {     
+    uint8_t ack_لنډمهاله[6];
+    get_ack(0,counter+1,ack_لنډمهاله);
+    send(ack_لنډمهاله, 6);
   }
   //Wait for HOST to confirm that image is recieved.
   //Host should reply with 'O'
   read_uart_character(HOST,&recv);
   assert_check(recv=='O',0);
-  printf("Imgdone\n");
+  چاپ_کړه("Imgdone\n");
 
-  if(mode) goto start;
+  إذا(ډېرپېښ) اذهب پیل;
 }

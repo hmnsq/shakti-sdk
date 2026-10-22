@@ -26,24 +26,24 @@
  * @brief Declaration for keypad library.
  * @detail Include File Definitions	
  */
-#if !defined(KYPD_H)
-#define KYPD_H
+#إذا !defined(KYPD_H)
+#تعریف_کړه KYPD_H
 
-#define ROWNUM 4
-#define COLNUM 4
+#تعریف_کړه ROWNUM 4
+#تعریف_کړه COLNUM 4
 
-#define OUTPINS_OFFSET 0
-#define INPINS_OFFSET 4
-#define OUTPINS (0xF << OUTPINS_OFFSET)
-#define INPINS  (0xF << INPINS_OFFSET)
+#تعریف_کړه OUTPINS_دننه_واټن 0
+#تعریف_کړه INPINS_دننه_واټن 4
+#تعریف_کړه OUTPINS (0xF << OUTPINS_دننه_واټن)
+#تعریف_کړه INPINS  (0xF << INPINS_دننه_واټن)
 
 //function prototype
-void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+فراغ سېټ_pins(بینښه صحيح* لیکه, بینښه صحيح* ستون);
+فراغ سېټ_کلی_map(صحيح جدول[COLNUM][ROWNUM]);
+صحيح get_کلی();
+صحيح get_ستون_لیکه(فراغ);
+بینښه صحيح لیکه_pins[ROWNUM];
+بینښه صحيح ستون_pins[COLNUM];
+صحيح کلی_map[COLNUM][ROWNUM];
 
-#endif
+#د_که_پای

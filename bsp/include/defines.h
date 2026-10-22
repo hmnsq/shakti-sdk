@@ -26,21 +26,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail This is the header file to hold some risc-v system definitions.
  */
 
-#ifndef DEFINES_H
-#define DEFINES_H
+#که_نه_تعریف_شوی تعریفوي_H
+#تعریف_کړه تعریفوي_H
 
-#define REGSIZE __riscv_xlen/8
+#تعریف_کړه REGSIZE __riscv_xlen/8
 
-#if __riscv_xlen == 64
-#define LREG ld
-#define SREG sd
-#else
-#define LREG lw
-#define SREG sw
-#endif
+#إذا __riscv_xlen == 64
+#تعریف_کړه LREG ld
+#تعریف_کړه SREG sd
+#وإلا
+#تعریف_کړه LREG lw
+#تعریف_کړه SREG sw
+#د_که_پای
 
-#define MSTATUS_MPP         0x00001800
-#define MSTATUS_FS          0x00006000
+#تعریف_کړه MSTATUS_MPP         0x00001800
+#تعریف_کړه MSTATUS_FS          0x00006000
 
-#endif
+#د_که_پای
 

@@ -30,52 +30,52 @@ uart is initialized. Trap handler is initialized.
 Disable Xip for Aardonyx
 */
 
-#include "traps.h"
-#include "plic_driver.h"
-#include "clint_driver.h"
-#include "log.h"
-#include "utils.h"
-#include "qspi.h"
-#include "platform.h"
-#include "defines.h"
-#include "uart.h"
+#ضمن "traps.h"
+#ضمن "plic_driver.h"
+#ضمن "clint_driver.h"
+#ضمن "log.h"
+#ضمن "utils.h"
+#ضمن "qspi.h"
+#ضمن "platform.h"
+#ضمن "defines.h"
+#ضمن "uart.h"
 
-extern void init(void);
-extern void trap_entry(void);
-extern uart_struct *uart_instance[MAX_UART_COUNT];
+خارجي فراغ init(فراغ);
+خارجي فراغ trap_ثبت(فراغ);
+خارجي uart_struct *uart_instance[MAX_UART_شمېر];
 
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
+خارجي حرف ډېری_پای_ټکی[];
+خارجي حرف ډېری[];
+خارجي حرف ډېرۍ[];
+خارجي حرف ډېرۍ_پای_ټکی[];
 
-char *stack_end=(char *)&_stack_end;
-char *stack_start=(char *)&_stack;
-char *heap_start=(char *)&_heap;
-char *heap_end=(char *)&_heap_end;
+حرف *ډېری_پای_ټکی_2=(حرف *)&ډېری_پای_ټکی;
+حرف *ډېری_پیل=(حرف *)&ډېری;
+حرف *ډېرۍ_پیل=(حرف *)&ډېرۍ;
+حرف *ډېرۍ_پای_ټکی_2=(حرف *)&ډېرۍ_پای_ټکی;
 
 /** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
  */
-static void section_init(void)
+ساكن فراغ section_init(فراغ)
 {
-#if 0
+#إذا 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	طالما(ډېرۍ_پیل<=ډېرۍ_پای_ټکی_2)
 	{
-		*heap_start=0xff;
-		heap_start++;
+		*ډېرۍ_پیل=0xff;
+		ډېرۍ_پیل++;
 	}
 
-	while(stack_end>=stack_start)
+	طالما(ډېری_پای_ټکی_2>=ډېری_پیل)
 	{
-		*stack_end=0x0;
-		stack_end--;
+		*ډېری_پای_ټکی_2=0x0;
+		ډېری_پای_ټکی_2--;
 	}
-#endif
+#د_که_پای
 
 }
 
@@ -84,58 +84,58 @@ static void section_init(void)
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
  */
-static void trap_init(void)
+ساكن فراغ trap_init(فراغ)
 {
 	log_trace("trap_init entered \n ");
 
-	mcause_interrupt_table[USER_SW_INTERRUPT]        = default_handler;
-	mcause_interrupt_table[SUPER_SW_INTERRUPT]       = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT0]      = default_handler;
-	mcause_interrupt_table[MACH_SW_INTERRUPT]        = default_handler;
-	mcause_interrupt_table[USER_TIMER_INTERRUPT]     = default_handler;
-	mcause_interrupt_table[SUPER_TIMER_INTERRUPT]    = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT1]      = default_handler;
-	mcause_interrupt_table[MACH_TIMER_INTERRUPT]     = mach_clint_handler;
-	mcause_interrupt_table[USER_EXT_INTERRUPT]       = default_handler;
-	mcause_interrupt_table[SUPERVISOR_EXT_INTERRUPT] = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT2]      = default_handler;
-	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT]  = mach_plic_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT3]      = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT4]      = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT5]      = default_handler;
-	mcause_interrupt_table[RESERVED_INTERRUPT6]      = default_handler;
+	mcause_مداخله_جدول[USER_SW_مداخله]        = default_handler;
+	mcause_مداخله_جدول[SUPER_SW_مداخله]       = default_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT0]      = default_handler;
+	mcause_مداخله_جدول[MACH_SW_مداخله]        = default_handler;
+	mcause_مداخله_جدول[USER_TIMER_مداخله]     = default_handler;
+	mcause_مداخله_جدول[SUPER_TIMER_مداخله]    = default_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT1]      = default_handler;
+	mcause_مداخله_جدول[MACH_TIMER_مداخله]     = mach_clint_handler;
+	mcause_مداخله_جدول[USER_EXT_مداخله]       = default_handler;
+	mcause_مداخله_جدول[SUPERVISOR_EXT_مداخله] = default_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT2]      = default_handler;
+	mcause_مداخله_جدول[MACH_EXTERNAL_مداخله]  = mach_plic_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT3]      = default_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT4]      = default_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT5]      = default_handler;
+	mcause_مداخله_جدول[RESERVED_INTERRUPT6]      = default_handler;
 
-	mcause_trap_table[INSTRUCTION_ADDRESS_MISALIGNED] =
+	mcause_trap_جدول[INSTRUCTION_پته_MISALIGNED] =
 		default_handler;
-	mcause_trap_table[INSTRUCTION_ACCESS_FAULT] =
+	mcause_trap_جدول[INSTRUCTION_ACCESS_FAULT] =
 		default_handler;
-	mcause_trap_table[ILLEGAL_INSTRUCTION] =
+	mcause_trap_جدول[ILLEGAL_INSTRUCTION] =
 		default_handler;
-	mcause_trap_table[BREAKPOINT] =
+	mcause_trap_جدول[BREAKPOINT] =
 		default_handler;
-	mcause_trap_table[LOAD_ADDRESS_MISALIGNED] =
+	mcause_trap_جدول[بارول_پته_MISALIGNED] =
 		default_handler;
-	mcause_trap_table[LOAD_ACCESS_FAULT] =
+	mcause_trap_جدول[بارول_ACCESS_FAULT] =
 		default_handler;
-	mcause_trap_table[STORE_AMO_ADDRESS_MISALIGNED] =
+	mcause_trap_جدول[STORE_AMO_پته_MISALIGNED] =
 		default_handler;
-	mcause_trap_table[STORE_AMO_ACCESS_FAULT] =
+	mcause_trap_جدول[STORE_AMO_ACCESS_FAULT] =
 		default_handler;
-	mcause_trap_table[ENVIRONMENT_CALL_FROM_U_MODE] =
+	mcause_trap_جدول[ENVIRONMENT_CALL_FROM_U_ډېرپېښ] =
 		default_handler;
-	mcause_trap_table[ENVIRONMENT_CALL_FROM_S_MODE] =
+	mcause_trap_جدول[ENVIRONMENT_CALL_FROM_S_ډېرپېښ] =
 		default_handler;
-	mcause_trap_table[RESERVED_TRAP1] =
+	mcause_trap_جدول[RESERVED_TRAP1] =
 		default_handler;
-	mcause_trap_table[ENVIRONMENT_CALL_FROM_M_MODE] =
+	mcause_trap_جدول[ENVIRONMENT_CALL_FROM_M_ډېرپېښ] =
 		default_handler;
-	mcause_trap_table[INSTRUCTION_PAGE_FAULT] =
+	mcause_trap_جدول[INSTRUCTION_پاڼه_FAULT] =
 		default_handler;
-	mcause_trap_table[LOAD_PAGE_FAULT] =
+	mcause_trap_جدول[بارول_پاڼه_FAULT] =
 		default_handler;
-	mcause_trap_table[RESERVED_TRAP2] =
+	mcause_trap_جدول[RESERVED_TRAP2] =
 		default_handler;
-	mcause_trap_table[STORE_AMO_PAGE_FAULT] =
+	mcause_trap_جدول[STORE_AMO_پاڼه_FAULT] =
 		default_handler;
 
 	log_trace("trap_init exited \n ");
@@ -144,21 +144,21 @@ static void trap_init(void)
 /** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+فراغ init(فراغ)
 {
 //	section_init(); // uncomment on need basis
 	uart_init();
 
 	log_trace("init entered \n ");
 
-#ifdef AARDONYX
+#که_تعریف_شوی AARDONYX
 	micron_disable_xip_volatile(0,0);
 	flashMemInit();
-#endif
+#د_که_پای
 
 	trap_init();
 
-	main();
+	اصلي();
 
 	log_trace("init exited\n");
 }

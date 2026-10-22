@@ -26,108 +26,108 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail this is the header file for uart.c   
  */
 
-#ifndef UART_H
-#define UART_H
-#include <stdint.h>
-#include "platform.h"
+#که_نه_تعریف_شوی UART_H
+#تعریف_کړه UART_H
+#ضمن <stdint.h>
+#ضمن "platform.h"
 
-#define USE_INTERRUPT 1 //Uncomment or add this line when interrupts are unused
-#define USE_RX_THRESHOLD 1 //uncomment or add this line when rx_threshold is required
+#تعریف_کړه USE_مداخله 1 //Uncomment or add this line when interrupts are unused
+#تعریف_کړه USE_RX_پوله 1 //uncomment or add this line when rx_threshold is required
 
 
 /* Struct to access UART registers as 32 bit registers */
-typedef struct
+تعريفنوع بنية
 {
-	unsigned short baud;	 /*! Baud rate configuration Register -- 16 bits*/
-	unsigned short reserv0;	 /*! reserved */
-	unsigned int  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
-	unsigned int  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
-	unsigned char  status;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
-	unsigned char  reserv1;	 /*! reserved */
-	unsigned short  reserv2; /*! reserved */
-	unsigned short delay;    /*! Delays the transmit with specified clock - 16bits*/
-	unsigned short reserv3;  /*! reserved */
-	unsigned short control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
-	unsigned short reserv5;  /*! reserved */
-	unsigned char ien;	     /*! Enables the required interrupts - 8 bits*/
-	unsigned char reserv6;   /*! reserved */
-	unsigned short reserv7;  /*! reserved */
-	unsigned char  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
-	unsigned char reserv8;   /*! reserved */
-	unsigned short reserv9;  /*! reserved */
-#ifdef USE_RX_THRESHOLD /*! This is to be used only when support is there. */
-	unsigned char rx_threshold;	/*! RX FIFO size configuration register - 8 bits*/
-	unsigned char reserv10;    /*! reserved */ 
-	unsigned short reserv11;    /*! reserved */
-#endif	
+	بینښه لنډ baud;	 /*! Baud rate configuration Register -- 16 bits*/
+	بینښه لنډ reserv0;	 /*! reserved */
+	بینښه صحيح  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
+	بینښه صحيح  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
+	بینښه حرف  حالت_2;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
+	بینښه حرف  reserv1;	 /*! reserved */
+	بینښه لنډ  reserv2; /*! reserved */
+	بینښه لنډ delay;    /*! Delays the transmit with specified clock - 16bits*/
+	بینښه لنډ reserv3;  /*! reserved */
+	بینښه لنډ control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
+	بینښه لنډ reserv5;  /*! reserved */
+	بینښه حرف ien;	     /*! Enables the required interrupts - 8 bits*/
+	بینښه حرف reserv6;   /*! reserved */
+	بینښه لنډ reserv7;  /*! reserved */
+	بینښه حرف  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
+	بینښه حرف reserv8;   /*! reserved */
+	بینښه لنډ reserv9;  /*! reserved */
+#که_تعریف_شوی USE_RX_پوله /*! This is to be used only when support is there. */
+	بینښه حرف rx_پوله;	/*! RX FIFO size configuration register - 8 bits*/
+	بینښه حرف reserv10;    /*! reserved */ 
+	بینښه لنډ reserv11;    /*! reserved */
+#د_که_پای	
 } uart_struct;
 
-#define STS_RX_THRESHOLD    0x1 << 8
-#define BREAK_ERROR	    1 << 7
-#define FRAME_ERROR	    1 << 6
-#define OVERRUN        	    1 << 5
-#define PARITY_ERROR        1 << 4
-#define STS_RX_FULL 	    1 << 3
-#define STS_RX_NOT_EMPTY    1 << 2
-#define STS_TX_FULL 	    1 << 1
-#define STS_TX_EMPTY 	    1 << 0
+#تعریف_کړه STS_RX_پوله    0x1 << 8
+#تعریف_کړه BREAK_ERROR	    1 << 7
+#تعریف_کړه چوکاټ_ERROR	    1 << 6
+#تعریف_کړه OVERRUN        	    1 << 5
+#تعریف_کړه PARITY_ERROR        1 << 4
+#تعریف_کړه STS_RX_ډک 	    1 << 3
+#تعریف_کړه STS_RX_NOT_تشه    1 << 2
+#تعریف_کړه STS_TX_ډک 	    1 << 1
+#تعریف_کړه STS_TX_تشه 	    1 << 0
 
 /*! UART Interrupt Enable bits description */
-#define ENABLE_RX_THRESHOLD	1 << 8
-#define ENABLE_BREAK_ERROR      1 << 7
-#define ENABLE_FRAME_ERROR      1 << 6
-#define ENABLE_OVERRUN          1 << 5
-#define ENABLE_PARITY_ERROR     1 << 4
-#define ENABLE_RX_FULL 		1 << 3
-#define ENABLE_RX_NOT_EMPTY 	1 << 2
-#define ENABLE_TX_FULL 		1 << 1
-#define ENABLE_TX_EMPTY 	1 << 0
-#define UARTX_BUFFER_SIZE       10000
+#تعریف_کړه ENABLE_RX_پوله	1 << 8
+#تعریف_کړه ENABLE_BREAK_ERROR      1 << 7
+#تعریف_کړه ENABLE_چوکاټ_ERROR      1 << 6
+#تعریف_کړه ENABLE_OVERRUN          1 << 5
+#تعریف_کړه ENABLE_PARITY_ERROR     1 << 4
+#تعریف_کړه ENABLE_RX_ډک 		1 << 3
+#تعریف_کړه ENABLE_RX_NOT_تشه 	1 << 2
+#تعریف_کړه ENABLE_TX_ډک 		1 << 1
+#تعریف_کړه ENABLE_TX_تشه 	1 << 0
+#تعریف_کړه UARTX_بفر_اندازه       10000
 
 /* UART control register */
-#define STOP_BITS(x) ( (x & 3) << 1) /*! 00 - 1 stop bits, 01 - 1.5 stop bits; 10 - 2 stop bits; 11 unused */
-#define PARITY(x) ( (x & 3)  << 3 ) /*! 00 --- No parity; 01 -Odd Parity; 10 - Even Parity;  11 - Unused */
-#define UART_TX_RX_LEN(x)       ( (x & 0x1F) << 5) /*! Maximum length 32 bits */
+#تعریف_کړه STOP_بټونه(x) ( (x & 3) << 1) /*! 00 - 1 stop bits, 01 - 1.5 stop bits; 10 - 2 stop bits; 11 unused */
+#تعریف_کړه PARITY(x) ( (x & 3)  << 3 ) /*! 00 --- No parity; 01 -Odd Parity; 10 - Even Parity;  11 - Unused */
+#تعریف_کړه UART_TX_RX_LEN(x)       ( (x & 0x1F) << 5) /*! Maximum length 32 bits */
 
-extern uart_struct *uart_instance[MAX_UART_COUNT];
-extern unsigned char uart0_complete;
-extern unsigned char uart1_complete;
-extern unsigned char uart2_complete;
-extern unsigned int uart0_tx_isr_count ;
-extern unsigned int uart0_rcv_isr_count ;
-extern unsigned int uart1_tx_isr_count ;
-extern unsigned int uart1_rcv_isr_count ;
-extern unsigned int uart2_tx_isr_count ;
-extern unsigned int uart2_rcv_isr_count ;
+خارجي uart_struct *uart_instance[MAX_UART_شمېر];
+خارجي بینښه حرف uart0_complete;
+خارجي بینښه حرف uart1_complete;
+خارجي بینښه حرف uart2_complete;
+خارجي بینښه صحيح uart0_tx_isr_شمېر ;
+خارجي بینښه صحيح uart0_rcv_isr_شمېر ;
+خارجي بینښه صحيح uart1_tx_isr_شمېر ;
+خارجي بینښه صحيح uart1_rcv_isr_شمېر ;
+خارجي بینښه صحيح uart2_tx_isr_شمېر ;
+خارجي بینښه صحيح uart2_rcv_isr_شمېر ;
 
-#ifdef USE_INTERRUPT
-extern unsigned char u0_rcv_char[UARTX_BUFFER_SIZE];
-extern unsigned char u1_rcv_char[UARTX_BUFFER_SIZE];
-extern unsigned char u2_rcv_char[UARTX_BUFFER_SIZE];
-#endif
+#که_تعریف_شوی USE_مداخله
+خارجي بینښه حرف u0_rcv_char[UARTX_بفر_اندازه];
+خارجي بینښه حرف u1_rcv_char[UARTX_بفر_اندازه];
+خارجي بینښه حرف u2_rcv_char[UARTX_بفر_اندازه];
+#د_که_پای
 
-void uart_init(void);
-void set_baud_rate(uart_struct * uart_instance, unsigned int baudrate);
-void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt);
-void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold);
+فراغ uart_init(فراغ);
+فراغ سېټ_baud_شرح(uart_struct * uart_instance, بینښه صحيح baudrate);
+فراغ enable_uart_interrupts(uart_struct * uart_instance, بینښه حرف مداخله);
+فراغ سېټ_uart_rx_پوله(uart_struct * uart_instance, بینښه حرف rxthreshold);
 uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character);
 uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string);
-uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character);
-uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string) ;
-void flush_uart(uart_struct * instance);
+uint8_t read_uart_character(uart_struct * uart_instance, حرف * prn_character);
+uint8_t read_uart_string(uart_struct * uart_instance, حرف * ptr_string) ;
+فراغ flush_uart(uart_struct * instance);
 
-#ifdef USE_INTERRUPT
-unsigned char uart0_isr(void);
-unsigned char uart1_isr(void);
-unsigned char uart2_isr(void);
-#endif
+#که_تعریف_شوی USE_مداخله
+بینښه حرف uart0_isr(فراغ);
+بینښه حرف uart1_isr(فراغ);
+بینښه حرف uart2_isr(فراغ);
+#د_که_پای
 
-int is_empty(void);
+صحيح is_تشه(فراغ);
 
-#undef putchar
-int putchar(int ch);
+#تعریف_لغوه توری_چاپ_کړه
+صحيح توری_چاپ_کړه(صحيح ch);
 
-#undef getchar
-int getchar(void);
+#تعریف_لغوه getchar
+صحيح getchar(فراغ);
 
-#endif
+#د_که_پای

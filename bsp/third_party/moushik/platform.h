@@ -20,125 +20,125 @@ platform.h - header file for moushik E class SoC
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#که_نه_تعریف_شوی PLATFORM_H
+#تعریف_کړه PLATFORM_H
 
 /*
  *@brief RISCV - E CLASS SOC Memory mapping
  */
 
-#define CLOCK_FREQUENCY 40000000
+#تعریف_کړه CLOCK_FREQUENCY 40000000
 
 /*! Core Local Interruptor CLINT */
 
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   16
+#تعریف_کړه CLINT_بنسټ 0x020000000
+#تعریف_کړه MTIME      0x0200BFF8
+#تعریف_کړه MTIMECMP   0x02004000
+#تعریف_کړه CLINT_وېشونکی   16
 
-#define MCAUSE_INT         0x80000000
-#define MCAUSE_CAUSE       0x7FFFFFFF
+#تعریف_کړه MCAUSE_INT         0x80000000
+#تعریف_کړه MCAUSE_CAUSE       0x7FFFFFFF
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#تعریف_کړه PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000010
+#تعریف_کړه DBG_MEM_پیل 0x00000010
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 128kB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
+#تعریف_کړه TCM_MEM_پیل 0x80000000 /*! DDR3 Memory Start address */
 
 /*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
+#تعریف_کړه TCM_MEM_اندازه 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#تعریف_کړه ډېری_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#تعریف_کړه ډېرۍ_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#تعریف_کړه PWM_بنسټ_پته 0x00030000 /*PWM Base address*/
+#تعریف_کړه PWM_MODULE_دننه_واټن 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Serial Peripheral Interface Offsets */
-#define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
-#define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
-#define SPI2_START 0x00020200 /* Serial Peripheral Interface 2 */
+#تعریف_کړه SPI0_پیل 0x00020000 /* Serial Peripheral Interface 0 */
+#تعریف_کړه SPI1_پیل 0x00020100 /* Serial Peripheral Interface 1 */
+#تعریف_کړه SPI2_پیل 0x00020200 /* Serial Peripheral Interface 2 */
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART1_START 0x00011400 /*! UART 1 */
-#define UART2_START 0x00011500 /*! UART 2 */
-#define UART_OFFSET 0x100
-#define UART_BASE 0x11300
-#define MAX_UART_COUNT 3
+#تعریف_کړه UART0_پیل 0x00011300 /*! UART 0 */
+#تعریف_کړه UART1_پیل 0x00011400 /*! UART 1 */
+#تعریف_کړه UART2_پیل 0x00011500 /*! UART 2 */
+#تعریف_کړه UART_دننه_واټن 0x100
+#تعریف_کړه UART_بنسټ 0x11300
+#تعریف_کړه MAX_UART_شمېر 3
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#تعریف_کړه PINMUX_CONFIGURE_REG 0x40310
 
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x00040000
-#define I2C_OFFSET 0x400
-#define MAX_I2C_COUNT 2
+#تعریف_کړه I2_C0_بنسټ 0x00040000
+#تعریف_کړه I2_C_دننه_واټن 0x400
+#تعریف_کړه MAX_I2_C_شمېر 2
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1
-#define PLIC_INTERRUPT_2   2
-#define PLIC_INTERRUPT_3   3
-#define PLIC_INTERRUPT_4   4
-#define PLIC_INTERRUPT_5   5
-#define PLIC_INTERRUPT_6   6
-#define PLIC_INTERRUPT_7   7
-#define PLIC_INTERRUPT_8   8
-#define PLIC_INTERRUPT_9   9
-#define PLIC_INTERRUPT_10  10
-#define PLIC_INTERRUPT_11  11
-#define PLIC_INTERRUPT_12  12
-#define PLIC_INTERRUPT_13  13
-#define PLIC_INTERRUPT_14  14
-#define PLIC_INTERRUPT_15  15
-#define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_17  17
-#define PLIC_INTERRUPT_18  18
-#define PLIC_INTERRUPT_19  19
-#define PLIC_INTERRUPT_20  20
-#define PLIC_INTERRUPT_21  21
-#define PLIC_INTERRUPT_22  22
-#define PLIC_INTERRUPT_23  23
-#define PLIC_INTERRUPT_24  24
-#define PLIC_INTERRUPT_25  25 //uart 0
-#define PLIC_INTERRUPT_26  26 //uart 1
-#define PLIC_INTERRUPT_27  27 //uart 2
+#تعریف_کړه PLIC_بنسټ_پته 0x0C000000 /*! PLIC Interface Start */
+#تعریف_کړه PLIC_مداخله_1   1
+#تعریف_کړه PLIC_مداخله_2   2
+#تعریف_کړه PLIC_مداخله_3   3
+#تعریف_کړه PLIC_مداخله_4   4
+#تعریف_کړه PLIC_مداخله_5   5
+#تعریف_کړه PLIC_مداخله_6   6
+#تعریف_کړه PLIC_مداخله_7   7
+#تعریف_کړه PLIC_مداخله_8   8
+#تعریف_کړه PLIC_مداخله_9   9
+#تعریف_کړه PLIC_مداخله_10  10
+#تعریف_کړه PLIC_مداخله_11  11
+#تعریف_کړه PLIC_مداخله_12  12
+#تعریف_کړه PLIC_مداخله_13  13
+#تعریف_کړه PLIC_مداخله_14  14
+#تعریف_کړه PLIC_مداخله_15  15
+#تعریف_کړه PLIC_مداخله_16  16
+#تعریف_کړه PLIC_مداخله_17  17
+#تعریف_کړه PLIC_مداخله_18  18
+#تعریف_کړه PLIC_مداخله_19  19
+#تعریف_کړه PLIC_مداخله_20  20
+#تعریف_کړه PLIC_مداخله_21  21
+#تعریف_کړه PLIC_مداخله_22  22
+#تعریف_کړه PLIC_مداخله_23  23
+#تعریف_کړه PLIC_مداخله_24  24
+#تعریف_کړه PLIC_مداخله_25  25 //uart 0
+#تعریف_کړه PLIC_مداخله_26  26 //uart 1
+#تعریف_کړه PLIC_مداخله_27  27 //uart 2
 
-#define PLIC_MAX_INTERRUPT_SRC 28
+#تعریف_کړه PLIC_MAX_مداخله_SRC 28
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x00040100 //GPIO Start Address */
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
-#define PLIC_GPIO_OFFSET 6
+#تعریف_کړه GPIO_پیل 0x00040100 //GPIO Start Address */
+#تعریف_کړه GPIO_دننه_واټن 0x08 /*!Generic offset used to access GPIO registers*/
+#تعریف_کړه PLIC_GPIO_دننه_واټن 6
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
+#تعریف_کړه GPIO0  (1 <<  0)
+#تعریف_کړه GPIO1  (1 <<  1)
+#تعریف_کړه GPIO2  (1 <<  2)
+#تعریف_کړه GPIO3  (1 <<  3)
+#تعریف_کړه GPIO4  (1 <<  4)
+#تعریف_کړه GPIO5  (1 <<  5)
+#تعریف_کړه GPIO6  (1 <<  6)
+#تعریف_کړه GPIO7  (1 <<  7)
+#تعریف_کړه GPIO8  (1 <<  8)
+#تعریف_کړه GPIO9  (1 <<  9)
+#تعریف_کړه GPIO10 (1 << 10)
+#تعریف_کړه GPIO11 (1 << 11)
+#تعریف_کړه GPIO12 (1 << 12)
+#تعریف_کړه GPIO13 (1 << 13)
+#تعریف_کړه GPIO14 (1 << 14)
+#تعریف_کړه GPIO15 (1 << 15)
 
-#define GPIO_COUNT  0x10
+#تعریف_کړه GPIO_شمېر  0x10
 
-#endif
+#د_که_پای

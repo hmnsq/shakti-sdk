@@ -40,23 +40,23 @@
 
 */
 
-#include "uart.h"//Includes the definitions of uart communication protocol//
-#include "string.h"
-#include "pinmux.h"
+#ضمن "uart.h"//Includes the definitions of uart communication protocol//
+#ضمن "string.h"
+#ضمن "pinmux.h"
 
-#define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave
-#define API_KEY   "PPI6OVOI1A2LGXMZ"
-#define ESP_UART uart_instance[1]
+#تعریف_کړه LM75_SLAVE_پته 0x90//Defines the Starting address of slave
+#تعریف_کړه API_کلی   "PPI6OVOI1A2LGXMZ"
+#تعریف_کړه ESP_UART uart_instance[1]
 /**
   * @fn int write_to_esp8266(char *data)
   * @brief sends data to esp8266 using UART
   * @param data data that has to be sent to cloud
 */
 
-int write_to_esp8266(char *data) {
-	while (*data != '\0') {
-		write_uart_character(ESP_UART, *data);
-		data++;
+صحيح write_منزل_esp8266(حرف *معلومات_2) {
+	طالما (*معلومات_2 != '\0') {
+		write_uart_character(ESP_UART, *معلومات_2);
+		معلومات_2++;
 	}
 	write_uart_character(ESP_UART,'\r');
 	write_uart_character(ESP_UART,'\n');
@@ -70,7 +70,7 @@ int write_to_esp8266(char *data) {
   *         this method is neeed to indicate end to data transmission
 */
 
-int write_enter_to_esp8266(){
+صحيح write_enter_منزل_esp8266(){
 	write_uart_character(ESP_UART,'\r');
 	write_uart_character(ESP_UART,'\n');
 }
@@ -81,40 +81,40 @@ int write_enter_to_esp8266(){
   * @details Reads data sent by esp8266 until one of the key word is found
   * @param data responses read from esp8266, mainly used for logging
 */
-int read_from_esp8266(char *data) {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for(int i=0;i<198;i++) {
+صحيح read_from_esp8266(حرف *معلومات_2) {
+	صحيح ch;
+	حرف *str = معلومات_2;
+	حرف *test = معلومات_2;
+	لكل(صحيح i=0;i<198;i++) {
 		read_uart_character(ESP_UART,&ch);
 		//printf("read from esp %c  \n",ch);
 		*str = ch;
 		str++; 
 		*str = '\0';
 		//printf("read  %c\n",ch);
-		if(strstr(test,"OK") != NULL)  {
-			printf("read from esp8266 %s\n",test);
-			return;
+		إذا(مزي_پلټنه(test,"OK") != عدم)  {
+			چاپ_کړه("read from esp8266 %s\n",test);
+			أرجع;
 		}
-		if(strstr(test,"ERROR") != NULL) {
-			printf("read from esp8266 %s\n",test);
-			return;
+		إذا(مزي_پلټنه(test,"ERROR") != عدم) {
+			چاپ_کړه("read from esp8266 %s\n",test);
+			أرجع;
 		}
-		if(strstr(test,">") != NULL) {
-			printf("read from esp8266 %s\n",test);
-			return;
+		إذا(مزي_پلټنه(test,">") != عدم) {
+			چاپ_کړه("read from esp8266 %s\n",test);
+			أرجع;
 		}
-		if(strstr(test,"RECV") != NULL) {
-			printf("read from esp8266 %s\n",test);
-			return;
+		إذا(مزي_پلټنه(test,"RECV") != عدم) {
+			چاپ_کړه("read from esp8266 %s\n",test);
+			أرجع;
 		}
-		if(strstr(test,"IP") != NULL) {
-			printf("read from esp8266 %s\n",test);
-			return;
+		إذا(مزي_پلټنه(test,"IP") != عدم) {
+			چاپ_کړه("read from esp8266 %s\n",test);
+			أرجع;
 		}
 	}
 	*str = '\0';
-	return 1;
+	أرجع 1;
 }
 
 /**
@@ -122,11 +122,11 @@ int read_from_esp8266(char *data) {
   * @brief setup esp8266
   * @details set up esp8266 to send data
 */
-void setup_esp8266(){
-	char data[200];
-	write_to_esp8266("AT");
+فراغ تیاری_esp8266(){
+	حرف معلومات_2[200];
+	write_منزل_esp8266("AT");
 	delay(1);
-	read_from_esp8266(data);
+	read_from_esp8266(معلومات_2);
 /*
 	printf(" set esp8266 as AP\n");
 	write_to_esp8266("AT+CWMODE=1");
@@ -137,14 +137,14 @@ void setup_esp8266(){
 	delay(3);
 	read_from_esp8266(data);
 */
-	printf(" sending AT Echo off command to esp\n");
-	write_to_esp8266("ATE0");
+	چاپ_کړه(" sending AT Echo off command to esp\n");
+	write_منزل_esp8266("ATE0");
 	delay(1);
-	read_from_esp8266(data);
-	printf(" write AT+CIPMUX\n");
-	write_to_esp8266("AT+CIPMUX=0");
+	read_from_esp8266(معلومات_2);
+	چاپ_کړه(" write AT+CIPMUX\n");
+	write_منزل_esp8266("AT+CIPMUX=0");
 	delay(1);
-	read_from_esp8266(data);
+	read_from_esp8266(معلومات_2);
 }
 /**
   * @fn void transmit_data (int temperature )
@@ -152,7 +152,7 @@ void setup_esp8266(){
   * @details Open http connection to thingspeak.com, using GET method send data and close the connection
   * @param temperature value that has to eb transmitted.
 */
-void transmit_data(int temperature) {
+فراغ transmit_معلومات(صحيح temperature) {
 /***************************************************
     AT – response OK
     AT+CWLAP – list nearby available WiFi networks
@@ -164,42 +164,42 @@ void transmit_data(int temperature) {
 **************************************************/
 
 
-	char data[200];
-	char sendData[76];
-	sprintf(sendData,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_KEY,temperature);
+	حرف معلومات_2[200];
+	حرف send_معلومات_2[76];
+	sprintf(send_معلومات_2,"GET https://api.thingspeak.com/update?api_key=%s&field1=%d",API_کلی,temperature);
 	//printf("\n send data %s\n",sendData);
 	// Connect to Wifi using esp8266
 
 		// Connect to Wifi using esp8266
-		printf(" Open connection to thingspeak.com\n",data);
+		چاپ_کړه(" Open connection to thingspeak.com\n",معلومات_2);
 		flush_uart(ESP_UART);
-		write_to_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
-		read_from_esp8266(data);
-		printf(" data from esp :%s\n",data);
+		write_منزل_esp8266("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80");
+		read_from_esp8266(معلومات_2);
+		چاپ_کړه(" data from esp :%s\n",معلومات_2);
 	
 		//delay_loop(2000,2000);
-		printf(" write AT+CIPSEND\n");
+		چاپ_کړه(" write AT+CIPSEND\n");
 		flush_uart(ESP_UART);
-		write_to_esp8266("AT+CIPSEND=75");
-		read_from_esp8266(data);
-		printf(" data from esp :%s\n",data);
+		write_منزل_esp8266("AT+CIPSEND=75");
+		read_from_esp8266(معلومات_2);
+		چاپ_کړه(" data from esp :%s\n",معلومات_2);
 	
-		printf(" write Data\n");
+		چاپ_کړه(" write Data\n");
 		flush_uart(ESP_UART);
-		write_to_esp8266(sendData);
+		write_منزل_esp8266(send_معلومات_2);
 	
 		//flush_uart(ESP_UART);
-		write_enter_to_esp8266();
+		write_enter_منزل_esp8266();
 		delay_loop(1000,1000);
-		read_from_esp8266(data);
-		printf(" data from esp :%s\n",data);
+		read_from_esp8266(معلومات_2);
+		چاپ_کړه(" data from esp :%s\n",معلومات_2);
 	
 		// disconnect from link
-		printf(" write AT+CIPCLOSE\n");
+		چاپ_کړه(" write AT+CIPCLOSE\n");
 		flush_uart(ESP_UART);
-		write_to_esp8266("AT+CIPCLOSE");
-		read_from_esp8266(data);
-		printf(" data from esp :%s\n",data);
+		write_منزل_esp8266("AT+CIPCLOSE");
+		read_from_esp8266(معلومات_2);
+		چاپ_کړه(" data from esp :%s\n",معلومات_2);
 
 }
 
@@ -210,27 +210,27 @@ void transmit_data(int temperature) {
   *      Set desired baudrate, get temperature from lm75 
   *      transmit data to thingspeak.com
 */
-void main()
+فراغ اصلي()
 {	
-	int i=0;
+	صحيح i=0;
 	//int baudrate = 9600;
-	int baudrate = 115200;
-	int temperature = 24;
-	int transmit_count = 0;
-	char data[200];
-   	printf("\n setting PIN MUX config to 2 .... \n");
+	صحيح baudrate = 115200;
+	صحيح temperature = 24;
+	صحيح transmit_شمېر = 0;
+	حرف معلومات_2[200];
+   	چاپ_کړه("\n setting PIN MUX config to 2 .... \n");
     	*pinmux_config_reg = 0x5;
-   	printf("\n set PIN MUX config to 2 .... \n");
-	set_baud_rate(ESP_UART,baudrate);	
-	printf("\n Sending temperature data to cloud server!....\n");
-	printf("\n Baud rate set to %d \n",baudrate);
-	printf("\n Waiting to ESP8266 to initialize \n");
+   	چاپ_کړه("\n set PIN MUX config to 2 .... \n");
+	سېټ_baud_شرح(ESP_UART,baudrate);	
+	چاپ_کړه("\n Sending temperature data to cloud server!....\n");
+	چاپ_کړه("\n Baud rate set to %d \n",baudrate);
+	چاپ_کړه("\n Waiting to ESP8266 to initialize \n");
 	delay(3);
-	setup_esp8266();
-	while (1) {
- 		temperature = temperature_value();
-		if (temperature != 999)
-			transmit_data(temperature); 
+	تیاری_esp8266();
+	طالما (1) {
+ 		temperature = temperature_ارزښت();
+		إذا (temperature != 999)
+			transmit_معلومات(temperature); 
 		delay(60);
 
 	}

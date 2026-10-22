@@ -27,239 +27,239 @@
 @detail Detects the pressed key/button and prints pressed button.
 */
 
-#include <stdio.h>        
-#include "platform.h"
-#include "gpio.h"         
-#include "button_driver.h"
-#include "utils.h"
+#ضمن <stdio.h>        
+#ضمن "platform.h"
+#ضمن "gpio.h"         
+#ضمن "button_driver.h"
+#ضمن "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
-#define READ_INDIVIDUAL_BTNS /*! Read each button value */
+#تعریف_کړه READ_INDIVIDUAL_BTNS /*! Read each button value */
 //#define READ_ALL_BTNS /*! Read All button values */
 
-unsigned long read_data = 0;
+بینښه اوږد read_معلومات_2 = 0;
 
 /** @fn void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
  */
-void main()
+فراغ اصلي()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#إذا defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	طالما (1) {
 
-#ifdef READ_INDIVIDUAL_BTNS
+#که_تعریف_شوی READ_INDIVIDUAL_BTNS
 
 		/*! Define any one button from below at a time */
-#define BTN_0  /*! Read BTN0 value */
+#تعریف_کړه BTN_0  /*! Read BTN0 value */
 		//#define BTN_1 /*! Read BTN1 value */
 		//#define BTN_2 /*! Read BTN2 value */
 		//#define BTN_3 /*! Read BTN3 value */
 
-#ifdef BTN_0
+#که_تعریف_شوی BTN_0
 		configure_btn(BTN0);
-#endif
+#د_که_پای
 
-#ifdef BTN_1
+#که_تعریف_شوی BTN_1
 		configure_btn(BTN1);
-#endif
+#د_که_پای
 
-#ifdef BTN_2
+#که_تعریف_شوی BTN_2
 		configure_btn(BTN2);
-#endif
+#د_که_پای
 
-#ifdef BTN_3
+#که_تعریف_شوی BTN_3
 		configure_btn(BTN3);
-#endif
+#د_که_پای
 
-#endif
+#د_که_پای
 
-#ifdef READ_ALL_BTNS
+#که_تعریف_شوی READ_ALL_BTNS
 
 		configure_all_btn();
 
-#endif
+#د_که_پای
 
-#ifdef READ_INDIVIDUAL_BTNS
+#که_تعریف_شوی READ_INDIVIDUAL_BTNS
 
-#ifdef BTN_0
-		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x10000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
-			printf("\n BTN0: HIGH"); 		
-		else
-			printf("\n BTN0: LOW");
-#endif
+#که_تعریف_شوی BTN_0
+		read_معلومات_2 = read_کلمه(GPIO_معلومات_REG); /* Copies the GPIO_DATA_REG Register contents */
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		read_معلومات_2 = (read_معلومات_2 & 0x10000000);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		إذا(read_معلومات_2 == 0x10000000)
+			چاپ_کړه("\n BTN0: HIGH"); 		
+		وإلا
+			چاپ_کړه("\n BTN0: LOW");
+#د_که_پای
 
-#ifdef BTN_1
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x20000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
-			printf("\n BTN1: HIGH"); 		
-		else
-			printf("\n BTN1: LOW");
-#endif
+#که_تعریف_شوی BTN_1
+		read_معلومات_2 = read_کلمه(GPIO_معلومات_REG);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		read_معلومات_2 = (read_معلومات_2 & 0x20000000);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		إذا(read_معلومات_2 == 0x20000000)
+			چاپ_کړه("\n BTN1: HIGH"); 		
+		وإلا
+			چاپ_کړه("\n BTN1: LOW");
+#د_که_پای
 
-#ifdef BTN_2
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x40000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
-			printf("\n BTN2: HIGH"); 		
-		else
-			printf("\n BTN2: LOW");
-#endif
+#که_تعریف_شوی BTN_2
+		read_معلومات_2 = read_کلمه(GPIO_معلومات_REG);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		read_معلومات_2 = (read_معلومات_2 & 0x40000000);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		إذا(read_معلومات_2 == 0x40000000)
+			چاپ_کړه("\n BTN2: HIGH"); 		
+		وإلا
+			چاپ_کړه("\n BTN2: LOW");
+#د_که_پای
 
-#ifdef BTN_3
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x80000000);
-		printf("\n Read Data is :0x%x", read_data);
+#که_تعریف_شوی BTN_3
+		read_معلومات_2 = read_کلمه(GPIO_معلومات_REG);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		read_معلومات_2 = (read_معلومات_2 & 0x80000000);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
 
-		if(read_data == 0x80000000)
-			printf("\n BTN3: HIGH"); 		
-		else
-			printf("\n BTN3: LOW");
-#endif
+		إذا(read_معلومات_2 == 0x80000000)
+			چاپ_کړه("\n BTN3: HIGH"); 		
+		وإلا
+			چاپ_کړه("\n BTN3: LOW");
+#د_که_پای
 
 		delay_loop(500, 500);
 
-#endif
+#د_که_پای
 
-#ifdef READ_ALL_BTNS	
+#که_تعریف_شوی READ_ALL_BTNS	
 
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
+		read_معلومات_2 = read_کلمه(GPIO_معلومات_REG);
+		چاپ_کړه("\n Read Data is :0x%x", read_معلومات_2);
 
-		switch(read_data)
+		بدل(read_معلومات_2)
 		{
 
-		case 0x00000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x00000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x10000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x10000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x20000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x20000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x30000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x30000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x40000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x40000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x50000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x50000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x60000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x60000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x70000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		حالة 0x70000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: LOW");
+			اكسر;
 
-		case 0x80000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0x80000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0x90000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0x90000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0xA0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0xA0000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0xB0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0xB0000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: LOW");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0xC0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0xC0000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0xD0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0xD0000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: LOW");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0xE0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0xE0000000:
+			چاپ_کړه("\n BTN0: LOW");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 
-		case 0xF0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		حالة 0xF0000000:
+			چاپ_کړه("\n BTN0: HIGH");
+			چاپ_کړه("\n BTN1: HIGH");
+			چاپ_کړه("\n BTN2: HIGH");
+			چاپ_کړه("\n BTN3: HIGH");
+			اكسر;
 		}
 
 		delay_loop(500, 500);
-#endif
+#د_که_پای
 	}
 	delay_loop(500, 500);
-#endif
+#د_که_پای
 }
 

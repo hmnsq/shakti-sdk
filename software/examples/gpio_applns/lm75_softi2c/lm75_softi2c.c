@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ضمن "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#تعریف_کړه LM75_SLAVE_پته 0x90
+#تعریف_کړه DELAY_شمېر 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+بینښه صحيح Lm75ReadTemperature(بینښه اوږد delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
-	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	بینښه حرف readBuf = 0;
+	بینښه لنډ read_ارزښت_2 = 0;
+	I2c_Send_Slave_پته(LM75_SLAVE_پته, I2C_READ, delay);
+	readBuf = I2c_Read_معلومات_Ack(delay);
+	read_ارزښت_2 = (readBuf << 1);
+	readBuf = I2c_Read_معلومات_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_ارزښت_2 = (readBuf >> 7) | read_ارزښت_2;
+	أرجع read_ارزښت_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+فراغ اصلي() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	بینښه لنډ لنډمهاله_Read = 0;
+	بینښه لنډ لنډمهاله = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	چاپ_کړه("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	لنډمهاله_Read = Lm75ReadTemperature(DELAY_شمېر);
+	إذا(لنډمهاله_Read & 0x100) {
+		لنډمهاله_Read = ( (~لنډمهاله_Read) + 1 ) >> 1;
+		چاپ_کړه("\n\t Current Temperature:=-%u°C",لنډمهاله_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	وإلا {
+		لنډمهاله_Read = لنډمهاله_Read >> 1;
+		چاپ_کړه("\n\t Current Temperature:=+%u°C",لنډمهاله_Read);
 	 }
 	delay_loop(10000,20000);
 }

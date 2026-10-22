@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+صحيح اصلي()
 {
-printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+چاپ_کړه("\nTest Running");
+صحيح *b,*c,*d;
+صحيح i=0;صحيح n;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+چاپ_کړه("\n size of array %d %x",n,&n);
+b=حافظه_ورکړه(n*حجم(صحيح))	;
+چاپ_کړه("\n B's address %x %x",b,&b);
+لكل(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+لكل(i=0;i<n;i++)
 {
-printf("\n b[%d]'s address is : %x",i,&b[i]);
-printf("\n b[%d]'s value is : %d",i,b[i]);
+چاپ_کړه("\n b[%d]'s address is : %x",i,&b[i]);
+چاپ_کړه("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
-printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+حرر(b);
+چاپ_کړه("\nArray B is freed");
+چاپ_کړه("\nb=%x",b);
+چاپ_کړه("\n size of array %d",n);
+c=حافظه_ورکړه(n*حجم(صحيح))	;
+چاپ_کړه("\n C's address %x",c);
+لكل(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+لكل(i=0;i<n;i++)
 {
-printf("\n c[%d]'s address is : %x",i,&c[i]);
-printf("\n c[%d]'s value is : %d",i,c[i]);
+چاپ_کړه("\n c[%d]'s address is : %x",i,&c[i]);
+چاپ_کړه("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
-printf("\nc=%x",c);
-int x;
+حرر(c);
+چاپ_کړه("\nc=%x",c);
+صحيح x;
 x=30;
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+چاپ_کړه("\n\n\nx address is %x",&x);
+d=حافظه_ورکړه(x*حجم(صحيح));
+چاپ_کړه("\n D's address %x",d);
+لكل(i=0;i<x;i++)
 {
-printf("\nSetting value %d , %x",i+1,&d[i]); 
+چاپ_کړه("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+لكل(i=0;i<x;i++)
 {
-printf("\n d[%d]'s address is : %x",i,&d[i]);
-printf("\n d[%d]'s value is : %d",i,d[i]);
+چاپ_کړه("\n d[%d]'s address is : %x",i,&d[i]);
+چاپ_کړه("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
-printf("\nd=%x",d);
+حرر(d);
+چاپ_کړه("\nd=%x",d);
 
-return 0;
+أرجع 0;
 }
 

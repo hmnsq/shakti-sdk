@@ -29,11 +29,11 @@
   @detail Helps to write the values in flash of cdceic to set clock frequecy.
  */
 
-#include "gpio_i2c.h"
+#ضمن "gpio_i2c.h"
 
-#define CDCE913_SLAVE_ADDRESS 0xCA
-#define DELAY_COUNT 50
-#define _50MHZ
+#تعریف_کړه CDCE913_SLAVE_پته 0xCA
+#تعریف_کړه DELAY_شمېر 50
+#تعریف_کړه _50MHZ
 //#define _75MHZ
 //#define _100MHZ
 //#define _125MHZ
@@ -47,23 +47,23 @@
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int reg_count, unsigned int *write_data, unsigned long delay)
+بینښه صحيح cdce913_write_all_registers(بینښه صحيح reg_دننه_واټن, بینښه صحيح reg_شمېر, بینښه صحيح *write_معلومات_2, بینښه اوږد delay)
 {
-	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_WRITE, delay);
-	if(reg_count > 1)
-		I2cWriteData(reg_offset, delay);
-	else
-		I2cWriteData(reg_offset | 0x80, delay);
-	I2cWriteData(reg_count, delay);
+	I2c_Send_Slave_پته(CDCE913_SLAVE_پته, I2C_WRITE, delay);
+	إذا(reg_شمېر > 1)
+		I2c_Write_معلومات(reg_دننه_واټن, delay);
+	وإلا
+		I2c_Write_معلومات(reg_دننه_واټن | 0x80, delay);
+	I2c_Write_معلومات(reg_شمېر, delay);
 
-	for(int i = 0; i < reg_count; i++)
+	لكل(صحيح i = 0; i < reg_شمېر; i++)
 	{
-		I2cWriteData(*write_data, delay);
-		if(reg_count > 1)
-			*write_data++;
+		I2c_Write_معلومات(*write_معلومات_2, delay);
+		إذا(reg_شمېر > 1)
+			*write_معلومات_2++;
 	}
 	I2cStop(delay);
-	return 0;
+	أرجع 0;
 }
 
 /** @fn unsigned int cdceReadunsigned long delay)
@@ -71,112 +71,112 @@ unsigned int cdce913_write_all_registers(unsigned int reg_offset, unsigned int r
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int cdce913_read_all_registers(unsigned int reg_offset, unsigned int reg_count, unsigned long delay)
+بینښه صحيح cdce913_read_all_registers(بینښه صحيح reg_دننه_واټن, بینښه صحيح reg_شمېر, بینښه اوږد delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
+	بینښه حرف readBuf = 0;
+	بینښه لنډ read_ارزښت_2 = 0;
 
-	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_WRITE, delay);
+	I2c_Send_Slave_پته(CDCE913_SLAVE_پته, I2C_WRITE, delay);
 
-	if(reg_count > 1)
-		I2cWriteData(reg_offset, delay);
-	else
-		I2cWriteData(reg_offset | 0x80, delay);
+	إذا(reg_شمېر > 1)
+		I2c_Write_معلومات(reg_دننه_واټن, delay);
+	وإلا
+		I2c_Write_معلومات(reg_دننه_واټن | 0x80, delay);
 
-	I2cStart(delay);
-	I2cSendSlaveAddress(CDCE913_SLAVE_ADDRESS, I2C_READ, delay);
+	I2c_پیل(delay);
+	I2c_Send_Slave_پته(CDCE913_SLAVE_پته, I2C_READ, delay);
 
-	if(reg_count > 1)
+	إذا(reg_شمېر > 1)
 	{
-		for(int i = 0; i < reg_count; i++)
+		لكل(صحيح i = 0; i < reg_شمېر; i++)
 		{
-			readBuf = I2cReadDataAck(delay);
-			printf("\n Read Value: %x", readBuf);
+			readBuf = I2c_Read_معلومات_Ack(delay);
+			چاپ_کړه("\n Read Value: %x", readBuf);
 		}
 	}
-	else
+	وإلا
 	{
-		readBuf = I2cReadDataAck(delay);
-		printf("\n Value @ [%x]: [%x]", reg_offset , readBuf);
+		readBuf = I2c_Read_معلومات_Ack(delay);
+		چاپ_کړه("\n Value @ [%x]: [%x]", reg_دننه_واټن , readBuf);
 	}
 	I2cStop(delay);
 
-	return readBuf;
+	أرجع readBuf;
 }
 
 /** @fn void main()
  * @brief Calling cdceRead to check the register value
  * @details to check the given value
  */
-void main()
+فراغ اصلي()
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	بینښه لنډ لنډمهاله_Read = 0;
+	بینښه لنډ لنډمهاله = 0;
 
-#ifdef _50MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x04, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
-#endif
-#ifdef _75MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x03, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xFE, 0xBA, 0x32, 0x7, 0xFE, 0xBA, 0x32, 0x04};
-#endif
-#ifdef _100MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x02, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
-#endif
-#ifdef _125MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x8C, 0xA7, 0xE2, 0x49, 0x8C, 0xA7, 0xE2, 0x48};
-#endif
-#ifdef _130MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x92, 0x43, 0xF2, 0x69, 0x92, 0x43, 0xF2, 0x68};
-#endif
-#ifdef _150MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xAF, 0x03, 0x82, 0xCA, 0xAF, 0x03, 0x82, 0xC8};
-#endif
-#ifdef _175MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xC4, 0xEE, 0x23, 0x2B, 0xC4, 0xEE, 0x23, 0x28};
-#endif
-#ifdef _200MHZ
-	unsigned int write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
-	unsigned int write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
-#endif
+#که_تعریف_شوی _50MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x04, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
+#د_که_پای
+#که_تعریف_شوی _75MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x03, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xFE, 0xBA, 0x32, 0x7, 0xFE, 0xBA, 0x32, 0x04};
+#د_که_پای
+#که_تعریف_شوی _100MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x02, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
+#د_که_پای
+#که_تعریف_شوی _125MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x8C, 0xA7, 0xE2, 0x49, 0x8C, 0xA7, 0xE2, 0x48};
+#د_که_پای
+#که_تعریف_شوی _130MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0x92, 0x43, 0xF2, 0x69, 0x92, 0x43, 0xF2, 0x68};
+#د_که_پای
+#که_تعریف_شوی _150MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xAF, 0x03, 0x82, 0xCA, 0xAF, 0x03, 0x82, 0xC8};
+#د_که_پای
+#که_تعریف_شوی _175MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xC4, 0xEE, 0x23, 0x2B, 0xC4, 0xEE, 0x23, 0x28};
+#د_که_پای
+#که_تعریف_شوی _200MHZ
+	بینښه صحيح write_buf1[] = {0x00, 0x07, 0x01, 0x01, 0xb4, 0x01, 0x02, 0x90, 0x40};
+	بینښه صحيح write_buf2[] = {0x10, 16, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x02, 0x00, 0x00, 0xE1, 0x09, 0x93, 0xAB, 0xE1, 0x09, 0x93, 0xA8};
+#د_که_پای
 
-	unsigned int eeprom_write = 0;
-	unsigned int read_value = 0xff;
+	بینښه صحيح eeprom_write = 0;
+	بینښه صحيح read_ارزښت = 0xff;
 
-	printf("\n\ttemp sensor initiating!");
+	چاپ_کړه("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	cdce913_write_all_registers(write_buf1[0], write_buf1[1], &write_buf1[2], DELAY_COUNT);
-	cdce913_write_all_registers(write_buf2[0], write_buf2[1], &write_buf2[2], DELAY_COUNT);
+	cdce913_write_all_registers(write_buf1[0], write_buf1[1], &write_buf1[2], DELAY_شمېر);
+	cdce913_write_all_registers(write_buf2[0], write_buf2[1], &write_buf2[2], DELAY_شمېر);
 
 	eeprom_write = 0x21;
-	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_COUNT);
+	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_شمېر);
 
-	while(1)
+	طالما(1)
 	{
-		read_value = cdce913_read_all_registers(0x02, 1, DELAY_COUNT);
-		if(0 == (read_value & 0x40) )
-			break;
+		read_ارزښت = cdce913_read_all_registers(0x02, 1, DELAY_شمېر);
+		إذا(0 == (read_ارزښت & 0x40) )
+			اكسر;
 	}
 	eeprom_write = 0x20;
-	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_COUNT);
+	cdce913_write_all_registers(0x06, 1, &eeprom_write, DELAY_شمېر);
 
-	printf("\n After Write");
+	چاپ_کړه("\n After Write");
 
-	for(int i = 0; i < 32; i++)
+	لكل(صحيح i = 0; i < 32; i++)
 	{
-		if  ( (i >= 7) && (i <= 15) )
-			continue;
-		cdce913_read_all_registers(i, 1, DELAY_COUNT);
+		إذا  ( (i >= 7) && (i <= 15) )
+			استمر;
+		cdce913_read_all_registers(i, 1, DELAY_شمېر);
 		delay_loop(1000,2000);
 	}
 
-	while(1);
+	طالما(1);
 }

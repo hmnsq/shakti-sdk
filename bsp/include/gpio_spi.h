@@ -26,24 +26,24 @@
 @detail this is header file for gpio_spi.c
 */ 
  
-#ifndef GPIO_SPI_H
-#define GPIO_SPI_H
+#که_نه_تعریف_شوی GPIO_SPI_H
+#تعریف_کړه GPIO_SPI_H
 
-#define IR_1 (1 << 4)
-#define IR_2 (1 << 5)
-#define IR_3 (1 << 6)
-#define IR_4 (1 << 7)
-#define IR_5 (1 << 8)
+#تعریف_کړه IR_1 (1 << 4)
+#تعریف_کړه IR_2 (1 << 5)
+#تعریف_کړه IR_3 (1 << 6)
+#تعریف_کړه IR_4 (1 << 7)
+#تعریف_کړه IR_5 (1 << 8)
 
-#define SPI_MISO 1<<0 //1st bit 
-#define SPI_MOSI 1<<1 //2nd bit
-#define SPI_SCLK 1<<2 //3rd bit
-#define SPI_SS   1<<3 //4th bit
-#define SPI_ADC_IN 0xC0
+#تعریف_کړه SPI_MISO 1<<0 //1st bit 
+#تعریف_کړه SPI_MOSI 1<<1 //2nd bit
+#تعریف_کړه SPI_SCLK 1<<2 //3rd bit
+#تعریف_کړه SPI_SS   1<<3 //4th bit
+#تعریف_کړه SPI_ADC_دننه 0xC0
 
 // function prototype
- unsigned char readbyte(unsigned char delay);
- int config();
+ بینښه حرف readbyte(بینښه حرف delay);
+ صحيح config();
 
-#endif/* GPIO_SPI_H*/
+#د_که_پای/* GPIO_SPI_H*/
 

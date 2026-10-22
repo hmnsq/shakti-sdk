@@ -26,36 +26,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail this is the header file for gpio_i2c.c
 */ 
  
-#ifndef GPIO_I2C_H
-#define GPIO_I2C_H
+#که_نه_تعریف_شوی GPIO_I2C_H
+#تعریف_کړه GPIO_I2C_H
 
-#include "platform.h"
-#include "gpio.h"
+#ضمن "platform.h"
+#ضمن "gpio.h"
 
 /* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
 add a method to set the GPIO pins that are to be used  */
-#define I2C_SCL GPIO0 
-#define I2C_SDA GPIO1
-#define GPIOD_IS_IN 0
-#define GPIOD_IS_OUT 1
-#define I2C_WRITE 0
-#define I2C_READ 1
+#تعریف_کړه I2C_SCL GPIO0 
+#تعریف_کړه I2C_SDA GPIO1
+#تعریف_کړه GPIOD_IS_دننه 0
+#تعریف_کړه GPIOD_IS_بهر 1
+#تعریف_کړه I2C_WRITE 0
+#تعریف_کړه I2C_READ 1
 
 // function prototype 
-void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+فراغ I2cInit();
+فراغ I2c_Send_Slave_پته(بینښه حرف , بینښه حرف , بینښه حرف );
+فراغ I2cWriteByte(بینښه حرف , بینښه حرف );
+بینښه حرف I2cReadByte(بینښه حرف );
+فراغ I2c_Write_معلومات(بینښه حرف , بینښه حرف );
+بینښه حرف I2c_Read_معلومات_Ack(بینښه حرف );
+بینښه حرف I2c_Read_معلومات_Nack(بینښه حرف );
+فراغ I2c_پیل(بینښه حرف );
+فراغ I2cStop(بینښه حرف );
+فراغ I2c_Write_byte(بینښه حرف, بینښه حرف, بینښه حرف, بینښه حرف);
+صحيح I2c_Read_byte(بینښه حرف ,بینښه حرف , بینښه حرف );
+صحيح I2c_shakti_readbytes(حرف *, صحيح , صحيح , بینښه حرف );
+فراغ ReadAckForWrite(بینښه حرف delay);
+فراغ SendNackForRead(بینښه حرف delay);
+فراغ SendAckForRead(بینښه حرف delay);
 
-#endif
+#د_که_پای

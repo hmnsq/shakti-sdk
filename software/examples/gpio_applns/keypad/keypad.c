@@ -27,24 +27,24 @@
 @detail Detects the pressed key/button and prints decoded keypad value (0 - 15).
 */
 
-#include "gpio.h"
-#include "platform.h"
-#include "keypad.h"//Includes the definitions of keypad function//
+#ضمن "gpio.h"
+#ضمن "platform.h"
+#ضمن "keypad.h"//Includes the definitions of keypad function//
 
 /* global variable definition*/
 
 // initialize key and colrow to -1 indicate no key is pressed
-int key = -1;
-int col_row = -1;
+صحيح کلی = -1;
+صحيح ستون_لیکه = -1;
 
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-unsigned int col[4]={0, 1, 2, 3};
-unsigned int row[4]={4, 5, 6, 7};
-int key_map[COLNUM][ROWNUM];
+بینښه صحيح لیکه_pins[ROWNUM];
+بینښه صحيح ستون_pins[COLNUM];
+بینښه صحيح ستون[4]={0, 1, 2, 3};
+بینښه صحيح لیکه[4]={4, 5, 6, 7};
+صحيح کلی_map[COLNUM][ROWNUM];
 
 
-int  key_table[4][4] =
+صحيح  کلی_جدول[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -58,15 +58,15 @@ int  key_table[4][4] =
  * @param unsigned int* row
  * @param unsigned int* col
  */
-void set_pins(unsigned int*  row, unsigned int* col)
+فراغ سېټ_pins(بینښه صحيح*  لیکه, بینښه صحيح* ستون)
 {
-	for(int i = 0 ; i < COLNUM ; i++)
+	لكل(صحيح i = 0 ; i < COLNUM ; i++)
 	{
-		col_pins[i] = col[i];// set col
+		ستون_pins[i] = ستون[i];// set col
 	}
-	for(int j = 0 ; j < ROWNUM ; j++) // set row
+	لكل(صحيح j = 0 ; j < ROWNUM ; j++) // set row
 	{
-		row_pins[j] = row[j];
+		لیکه_pins[j] = لیکه[j];
 	}
 }
 
@@ -75,13 +75,13 @@ void set_pins(unsigned int*  row, unsigned int* col)
  * @details Fills the passed array values into key_map array.
  * @param int table
  */
-void set_key_map(int table[COLNUM][ROWNUM])
+فراغ سېټ_کلی_map(صحيح جدول[COLNUM][ROWNUM])
 {
-	for(int i = 0 ; i < COLNUM ; i++)
+	لكل(صحيح i = 0 ; i < COLNUM ; i++)
 	{
-		for(int j = 0 ; j < ROWNUM ; j++)
+		لكل(صحيح j = 0 ; j < ROWNUM ; j++)
 		{
-			key_map[i][j] = table[i][j];
+			کلی_map[i][j] = جدول[i][j];
 		}
 	}
 }
@@ -92,26 +92,26 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * and returns the decoded key value.
  * @return Key value pressed
  */
-int get_key_another_way()
+صحيح get_کلی_another_way()
 {
 
-	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+	write_کلمه(GPIO_معلومات_REG, (0xF << OUTPINS_دننه_واټن) );
 
-	for (int i = 0 ; i < COLNUM ; i++)
+	لكل (صحيح i = 0 ; i < COLNUM ; i++)
 	{
-		write_word(GPIO_DATA_REG, ~(0x1 << (OUTPINS_OFFSET + i) )   );
+		write_کلمه(GPIO_معلومات_REG, ~(0x1 << (OUTPINS_دننه_واټن + i) )   );
 
-		for (int j = 0 ; j < ROWNUM ; j++)
+		لكل (صحيح j = 0 ; j < ROWNUM ; j++)
 		{
-			if ( ( read_word(row_pins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
+			إذا ( ( read_کلمه(لیکه_pins[j]) & (INPINS << INPINS_دننه_واټن )  ) == 0)
 			{
-				return key_map[i][j];
+				أرجع کلی_map[i][j];
 			}
 		}
-		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+		write_کلمه(GPIO_معلومات_REG, (0xF << OUTPINS_دننه_واټن) );
 	}
 
-	return 0;
+	أرجع 0;
 }
 
 /** @fn int get_key(int col_row)
@@ -121,9 +121,9 @@ int get_key_another_way()
  * @param int col row
  * @return Key value pressed
  */
-int get_key(int col_row)
+صحيح get_کلی(صحيح ستون_لیکه)
 {
-    return key_map[col_row>>16][0xFFFF & col_row];
+    أرجع کلی_map[ستون_لیکه>>16][0xFFFF & ستون_لیکه];
 }
 
 /** @fn int get_col_row(void)
@@ -132,45 +132,45 @@ int get_key(int col_row)
    low and reading the row values     
  * @return Column and row combination.
  */
-int get_col_row(void)
+صحيح get_ستون_لیکه(فراغ)
 {
-	int col_row = 0;
-	unsigned long read_value = 0;
+	صحيح ستون_لیکه = 0;
+	بینښه اوږد read_ارزښت = 0;
 
-	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+	write_کلمه(GPIO_معلومات_REG, (0xF << OUTPINS_دننه_واټن) );
 
-	for(int i = 0 ; i < COLNUM ; i++)
+	لكل(صحيح i = 0 ; i < COLNUM ; i++)
 	{
-		write_word(GPIO_DATA_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
+		write_کلمه(GPIO_معلومات_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
 
-		for(int j = 0 ; j < ROWNUM ; j++)
+		لكل(صحيح j = 0 ; j < ROWNUM ; j++)
 		{
-			read_value =  read_word(GPIO_DATA_REG);
+			read_ارزښت =  read_کلمه(GPIO_معلومات_REG);
 
-			if( ( read_value & (1 << row_pins[j] ) ) == 0 )
+			إذا( ( read_ارزښت & (1 << لیکه_pins[j] ) ) == 0 )
 			{
-					return key_map[i][j];
+					أرجع کلی_map[i][j];
 			}
 		}
 
-		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
+		write_کلمه(GPIO_معلومات_REG, (0xF << OUTPINS_دننه_واټن) );
 	}
 
-	return -1;
+	أرجع -1;
 }
 
 /** @fn void gpio_init()
  * @brief This maps the keypad from pins
  * @details  Initialises Rows pins and coloumn pins of the mapped GPIO lines to keypad.  
  */
-void gpio_init()
+فراغ gpio_init()
 {
-	set_pins(row, col);
+	سېټ_pins(لیکه, ستون);
 
-	set_key_map(key_table);
+	سېټ_کلی_map(کلی_جدول);
 
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
-	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
+	write_کلمه(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
 }
 
 /** @fn int main()
@@ -178,22 +178,22 @@ void gpio_init()
  * @details  Detects the pressed key and prints its decoded value.  
  * @return Zero 
  */
-int main()
+صحيح اصلي()
 {
-	int prev_col_row = 0;
+	صحيح prev_ستون_لیکه = 0;
 	gpio_init(); //Intialization of gpio //
 
-	printf("\nGPIO Init Done");
-	while(1)
+	چاپ_کړه("\nGPIO Init Done");
+	طالما(1)
 	{
-		col_row = get_col_row();
+		ستون_لیکه = get_ستون_لیکه();
 
-		if( col_row != -1 )
+		إذا( ستون_لیکه != -1 )
 		{
-			log_info("\nThe %x Key Pressed", col_row);
+			log_info("\nThe %x Key Pressed", ستون_لیکه);
 				delay_loop(600, 2000);
 		}
 	}
 
-	return 0;
+	أرجع 0;
 }

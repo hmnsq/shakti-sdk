@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#که_نه_تعریف_شوی UTIL_H
+#تعریف_کړه UTIL_H
+#ضمن <stdio.h>
+#ضمن <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+فراغ waitfor(بینښه صحيح secs);
+فراغ delay(بینښه اوږد seconds);
+عائم pow_10(بینښه صحيح y);
+فراغ سرچپه(حرف *str, صحيح len);
+فراغ ftoa( عائم, حرف *, بینښه صحيح);
+فراغ delay_loop(بینښه اوږد cntr1, بینښه اوږد cntr2);
+بینښه اوږد read_کلمه(uint32_t *addr);
+فراغ write_کلمه(uint32_t *addr, بینښه اوږد val);
+صحيح int_منزل_string(صحيح شمېره, حرف str[], بینښه صحيح afterpoint);
+فراغ _printf_(ثابت حرف *fmt, va_list ap);
+صحيح چاپ_کړه(ثابت حرف* fmt, ...);
 
-#endif
+#د_که_پای

@@ -29,56 +29,56 @@ flash device. SPI protocol is used for this purporse. The array is usually a
 project's hex file 
 */
 
-#include <stdint.h>
-#include <uart.h>
-#include <stdio.h>
-#include "spi.h"
-#include "flashdata.h"
+#ضمن <stdint.h>
+#ضمن <uart.h>
+#ضمن <stdio.h>
+#ضمن "spi.h"
+#ضمن "flashdata.h"
 
 /** @fn void deploy()
  * @brief Erases flash and writes the hex array entry by entry into the flash
  *       memory. Here SPI protocol is used.
  */
-void deploy()
+فراغ deploy()
 {
-	int read_address = 0x00b00000;
-	double count=0.0;
+	صحيح read_پته = 0x00b00000;
+	مزدوج شمېر=0.0;
 
-	configure_spi(SPI0_OFFSET);
+	configure_spi(SPI0_دننه_واټن);
 	spi_init();
 	flash_device_id();
 
 	waitfor(200);
-	printf("\nErasing...\n");
+	چاپ_کړه("\nErasing...\n");
 
 	flash_write_enable();
-	flash_erase(read_address);
-	flash_status_register_read();
-	printf("\nErase complete.\n");
+	flash_erase(read_پته);
+	flash_حالت_ثبتوونکی_read();
+	چاپ_کړه("\nErase complete.\n");
 
-	flash_write(read_address,write_data[0]);
-	read_address+=4;
+	flash_write(read_پته,write_معلومات_2[0]);
+	read_پته+=4;
 
-	printf("\nWriting...");
+	چاپ_کړه("\nWriting...");
 
-	for(int i =0; i< write_data[0]; i++)
+	لكل(صحيح i =0; i< write_معلومات_2[0]; i++)
 	{
 		waitfor(200);
-		flash_write(read_address,write_data[i+1]);
-		read_address+=4;
+		flash_write(read_پته,write_معلومات_2[i+1]);
+		read_پته+=4;
 
-		if(i%512 == 0)
-			printf(".");;
+		إذا(i%512 == 0)
+			چاپ_کړه(".");;
 	}
 
-	printf("\n\nWrite complete.\n");
-	printf("\nPlease reset.\n");
-	asm volatile ("ebreak");
+	چاپ_کړه("\n\nWrite complete.\n");
+	چاپ_کړه("\nPlease reset.\n");
+	asm متطاير ("ebreak");
 }
 
 /** @fn void main()
  * @brief initiates by calling deploy function
  */
-void main(){
+فراغ اصلي(){
 	deploy();
 }

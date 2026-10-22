@@ -13,11 +13,11 @@
  * @fn void main()
  * @brief Uart loopback application
  */
-void main()
+void 主要()
 {
     printf("-- UART Loopback Test --\n");
-    while(1) {
-        int val = getchar();
+    当(1) {
+        整数 val = getchar();
         putchar(val);
     };
 }

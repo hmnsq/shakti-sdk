@@ -40,9 +40,9 @@ mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
  * @param unsigned int num - mcause value
  * @return unsigned int
  */
-unsigned int extract_ie_code(unsigned int num)
+unsigned 整数 extract_ie_code(unsigned 整数 num)
 {
-	unsigned int exception_code;
+	unsigned 整数 exception_code;
 
 	log_trace("\nextract_ie_code entered\n");
 
@@ -52,7 +52,7 @@ unsigned int extract_ie_code(unsigned int num)
 
 	log_trace("extract_ie_code exited\n");
 
-	return exception_code;
+	返回 exception_code;
 }
 
 /** @fn void default_handler(uintptr_t mcause, uintptr_t epc)
@@ -64,7 +64,7 @@ void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((un
 {
 	log_trace("\ndefault_handler entered\n");
 
-	while(1);
+	当(1);
 
 	log_trace("default_handler exited\n");
 }
@@ -79,7 +79,7 @@ void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((un
  */
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 {
-	unsigned int ie_entry = 0;;
+	unsigned 整数 ie_entry = 0;;
 	uint32_t shift_length = 0;
 
 	log_trace("\nhandle_trap entered\n");
@@ -108,7 +108,7 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 	shift_length = __riscv_xlen - 1;
 
 	 /* checking for type of trap */
-	if (mcause & (1 << (shift_length))){
+	如果 (mcause & (1 << (shift_length))){
 
 		ie_entry = extract_ie_code(mcause);
 
@@ -116,7 +116,7 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 
 		mcause_interrupt_table[ie_entry](mcause, epc);
 	}
-	else{
+	否则{
 		log_info("\nException: mcause = %x, epc = %x\n", mcause, epc);
 
 		mcause_trap_table[mcause](mcause, epc);
@@ -124,5 +124,5 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 
 	log_trace("handle_trap exited\n");
 
-return epc;
+返回 epc;
 }

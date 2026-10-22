@@ -38,7 +38,7 @@
 /** @fn int main(void)
  * @brief A simple application to use clint (mtime) and clint clock divisor to generate interrupt in 1 second. 
  */
-void main(void){
+void 主要(void){
 
 	uint64_t value = ( CLOCK_FREQUENCY / CLINT_DIVISOR );
 
@@ -52,5 +52,5 @@ void main(void){
 	printf("Configuring 1 second timer interrupt\n");
 	configure_counter(value);
 
-	while(1);
+	当(1);
 }

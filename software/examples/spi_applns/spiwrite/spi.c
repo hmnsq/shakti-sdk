@@ -43,9 +43,9 @@
  */
 static void flash_read_locations(uint32_t read_address, uint16_t length)
 {
-	for(int i = 0; i < length; ++i)
+	为(整数 i = 0; i < length; ++i)
 	{
-		int read_value= flash_read(read_address);
+		整数 read_value= flash_read(read_address);
 		printf("\nReading from adddress %x and data \
 			   %x\n",read_address,read_value);
 		read_address=read_address+4;
@@ -57,11 +57,11 @@ static void flash_read_locations(uint32_t read_address, uint16_t length)
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+void 主要()
 {
-	int write_address = 0x00b00004;  // read/write from/to this address
-	int read_address  = 0x00b00004;  // read/write from/to this address
-	int data = 0xDEADBEEF; //32 bits of data can be written at a time
+	整数 write_address = 0x00b00004;  // read/write from/to this address
+	整数 read_address  = 0x00b00004;  // read/write from/to this address
+	整数 data = 0xDEADBEEF; //32 bits of data can be written at a time
 	uint16_t length = 11;
 
 	configure_spi(SPI0_OFFSET);

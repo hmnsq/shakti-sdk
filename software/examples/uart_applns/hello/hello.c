@@ -31,8 +31,8 @@
 /** @fn void main()
  * @brief prints hello world
  */
-void main()
+void 主要()
 {
 	printf ("Hello World !\n");
-	while(1);
+	当(1);
 }

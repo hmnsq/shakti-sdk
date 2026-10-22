@@ -52,10 +52,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * @param delay
  * @return  Read Status (Zero on Success).
  */
-int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
+整数 read_lm75_register(i2c_struct * i2c_instance, unsigned 整数 reg_offset, unsigned 整数 *readTemp, unsigned long delay)
 {
 	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
+	整数 i = 0, j = 0,  k = 0, status=0;
 	unsigned char temp = 0;
 //Writes the slave address for write
 	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -81,7 +81,7 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 	i2c_instance->control = I2C_STOP;
 	*readTemp = (read_buf[1] << 1) | (read_buf[0] >> 7);
 
-	return 0;
+	返回 0;
 }
 
 /** @fn int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
@@ -93,10 +93,10 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
  * @param delay
  * @return Write Status (Zero on Success)
  */
-int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+整数 write_lm75_register(i2c_struct * i2c_instance, unsigned 整数 reg_offset, unsigned 整数 write_value, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	整数 i = 0, j = 0,  k = 0, status=0;
+	unsigned 整数 temp = 0;
 	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, delay);
 	i2c_write_data(i2c_instance, reg_offset /*LM75_TEMP_REG_OFFSET */, delay);
 	i2c_write_data(i2c_instance,  ( (write_value >> 1) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
@@ -105,7 +105,7 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
 	printf("\n Write Value[1]: %02x", ( ( (write_value & 0x01) << 7) & 0xff));
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	返回 0;
 }
 
 /** @fn int main()
@@ -114,32 +114,32 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
  * calculates the actual temperature value and prints the same.
  * @return Zero
  */
-int temperature_value()
+整数 temperature_value()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
+	整数 timeout;
+	unsigned 整数 tempReadValue = 0;
 	unsigned long delay = 1000;
     
 	log_debug("\n\tI2C: LM75 Temperature Sensor I2C read\n");
     i2c_init();
 	//Initialises I2C Controller
-		if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+		如果(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
 		{
 				log_error("\tSomething Wrong In Initialization\n");
-				return -1;
+				返回 -1;
 		}
-	else
+	否则
 				log_info("\tIntilization Happened Fine\n");
 #ifdef LM75_HYST_CHECK
 	write_lm75_register(I2C, LM75_HYST_REG_OFFSET, 0x30, delay);
-		if(0 == read_lm75_register(I2C, LM75_HYST_REG_OFFSET, &tempReadValue, delay))
+		如果(0 == read_lm75_register(I2C, LM75_HYST_REG_OFFSET, &tempReadValue, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
 //				tempReadValue = ( (~tempReadValue) + 1 );
 				log_info("\n\t Hyst Reg Value:=%u",tempReadValue);
 		}
-		else
+		否则
 		{
 	//Display the error
 			log_error("\nHyst Reg Value failed.");
@@ -147,40 +147,40 @@ int temperature_value()
 #endif
 #ifdef LM75_OFFSET_CHECK
 	write_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, 0x35, delay);
-	if(0 == read_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, &tempReadValue, delay))
+	如果(0 == read_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, &tempReadValue, delay))
 	{
 		//Display Temperature value
 			log_info("\n\t Offset Reg Value:=%u",tempReadValue);
 	}
-	else
+	否则
 	{
 //Display the error
 		log_error("\nOffset Reg Value failed.");
 	}
 #endif
 
-		if(0 == read_lm75_register(I2C, LM75_TEMP_REG_OFFSET, &tempReadValue, delay))
+		如果(0 == read_lm75_register(I2C, LM75_TEMP_REG_OFFSET, &tempReadValue, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
-			if(tempReadValue & 0x100) {
+			如果(tempReadValue & 0x100) {
 				tempReadValue = ( (~tempReadValue) + 1 ) >> 1;
 				log_info("\n\t Current Temperature:=-%u°C",tempReadValue);
 			}
-			else {
+			否则 {
 				tempReadValue = tempReadValue >> 1;
 				log_info("\n\t Current Temperature:=+%u°C",tempReadValue);
 			 }
-			 return tempReadValue;
+			 返回 tempReadValue;
 		}
-		else
+		否则
 		{
 	//Display the error
 			log_error("\nTemperature read failed.");
-			 return 999;
+			 返回 999;
 		}
 		delay_loop(1000, 1000);
 
 
-	return 0;
+	返回 0;
 }

@@ -53,8 +53,8 @@
   * @param data data that has to be sent to cloud
 */
 
-int write_to_esp8266(char *data) {
-	while (*data != '\0') {
+整数 write_to_esp8266(char *data) {
+	当 (*data != '\0') {
 		write_uart_character(ESP_UART, *data);
 		data++;
 	}
@@ -70,7 +70,7 @@ int write_to_esp8266(char *data) {
   *         this method is neeed to indicate end to data transmission
 */
 
-int write_enter_to_esp8266(){
+整数 write_enter_to_esp8266(){
 	write_uart_character(ESP_UART,'\r');
 	write_uart_character(ESP_UART,'\n');
 }
@@ -81,40 +81,40 @@ int write_enter_to_esp8266(){
   * @details Reads data sent by esp8266 until one of the key word is found
   * @param data responses read from esp8266, mainly used for logging
 */
-int read_from_esp8266(char *data) {
-	int ch;
+整数 read_from_esp8266(char *data) {
+	整数 ch;
 	char *str = data;
 	char *test = data;
-	for(int i=0;i<198;i++) {
+	为(整数 i=0;i<198;i++) {
 		read_uart_character(ESP_UART,&ch);
 		//printf("read from esp %c  \n",ch);
 		*str = ch;
 		str++; 
 		*str = '\0';
 		//printf("read  %c\n",ch);
-		if(strstr(test,"OK") != NULL)  {
+		如果(strstr(test,"OK") != NULL)  {
 			printf("read from esp8266 %s\n",test);
-			return;
+			返回;
 		}
-		if(strstr(test,"ERROR") != NULL) {
+		如果(strstr(test,"ERROR") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			返回;
 		}
-		if(strstr(test,">") != NULL) {
+		如果(strstr(test,">") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			返回;
 		}
-		if(strstr(test,"RECV") != NULL) {
+		如果(strstr(test,"RECV") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			返回;
 		}
-		if(strstr(test,"IP") != NULL) {
+		如果(strstr(test,"IP") != NULL) {
 			printf("read from esp8266 %s\n",test);
-			return;
+			返回;
 		}
 	}
 	*str = '\0';
-	return 1;
+	返回 1;
 }
 
 /**
@@ -152,7 +152,7 @@ void setup_esp8266(){
   * @details Open http connection to thingspeak.com, using GET method send data and close the connection
   * @param temperature value that has to eb transmitted.
 */
-void transmit_data(int temperature) {
+void transmit_data(整数 temperature) {
 /***************************************************
     AT – response OK
     AT+CWLAP – list nearby available WiFi networks
@@ -210,13 +210,13 @@ void transmit_data(int temperature) {
   *      Set desired baudrate, get temperature from lm75 
   *      transmit data to thingspeak.com
 */
-void main()
+void 主要()
 {	
-	int i=0;
+	整数 i=0;
 	//int baudrate = 9600;
-	int baudrate = 115200;
-	int temperature = 24;
-	int transmit_count = 0;
+	整数 baudrate = 115200;
+	整数 temperature = 24;
+	整数 transmit_count = 0;
 	char data[200];
    	printf("\n setting PIN MUX config to 2 .... \n");
     	*pinmux_config_reg = 0x5;
@@ -227,9 +227,9 @@ void main()
 	printf("\n Waiting to ESP8266 to initialize \n");
 	delay(3);
 	setup_esp8266();
-	while (1) {
+	当 (1) {
  		temperature = temperature_value();
-		if (temperature != 999)
+		如果 (temperature != 999)
 			transmit_data(temperature); 
 		delay(60);
 

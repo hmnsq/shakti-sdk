@@ -85,62 +85,62 @@
 */
 
 unsigned char i2c_complete_flag;
-unsigned int i2c_read_value;
+unsigned 整数 i2c_read_value;
 
 /* Struct to access I2C registers as 32 bit registers */
 typedef struct
 {
 /* 0x00 */
-	unsigned int  prescale;     /*! Prescale Register */
-	unsigned int   prescale_rsvd;
+	unsigned 整数  prescale;     /*! Prescale Register */
+	unsigned 整数   prescale_rsvd;
 
 /* 0x08 */
-	unsigned int   control;
-	unsigned int   control_rsvd;
+	unsigned 整数   control;
+	unsigned 整数   control_rsvd;
 
 /* 0x10 */
-	unsigned int  data;	 /*! Prescale Register */
-	unsigned int   data_rsvd;
+	unsigned 整数  data;	 /*! Prescale Register */
+	unsigned 整数   data_rsvd;
 
 /* 0x18 */
-	unsigned int  status;	 /*! Prescale Register */
-	unsigned int   status_rsvd;
+	unsigned 整数  status;	 /*! Prescale Register */
+	unsigned 整数   status_rsvd;
 
 /* 0x20 */
-	unsigned int  s01;	 /*! Prescale Register */
-	unsigned int   s01_rsvd;
+	unsigned 整数  s01;	 /*! Prescale Register */
+	unsigned 整数   s01_rsvd;
 
 /* 0x28 */
-	unsigned int  s3;	 /*! Prescale Register */
-	unsigned int   s3_rsvd;
+	unsigned 整数  s3;	 /*! Prescale Register */
+	unsigned 整数   s3_rsvd;
 
 /* 0x30 */
-	unsigned int  time;	 /*! Prescale Register */
-	unsigned int   time_rsvd;
+	unsigned 整数  time;	 /*! Prescale Register */
+	unsigned 整数   time_rsvd;
 
 /* 0x38 */
-	unsigned int  scl;	 /*! Prescale Register */
-	unsigned int   scl_rsvd;
+	unsigned 整数  scl;	 /*! Prescale Register */
+	unsigned 整数   scl_rsvd;
 } i2c_struct;
 
 void i2c_init(void);
-int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
-int wait_till_I2c_bus_free(i2c_struct *);
-int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int readbytes(i2c_struct *,char *buf, int count, int last);
-int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
+整数 config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
+整数 wait_till_I2c_bus_free(i2c_struct *);
+整数 wait_till_txrx_operation_Completes(i2c_struct *,整数 *status);
+整数 sendbytes(i2c_struct *, const char *buf, 整数 count, 整数 last, 整数 eni);
+整数 readbytes(i2c_struct *,char *buf, 整数 count, 整数 last);
+整数 i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned
 			   char rdWrCntrl, unsigned long delay);
-int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
-int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
+整数 i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
+整数 i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
+整数 i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char
 				     slaveAddress, unsigned char rdWrCntrl,
 				     unsigned long delay);
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
+整数 i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data,
 			    unsigned char delay, unsigned char last);
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
+整数 i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData,
 			     unsigned char delay, unsigned char last);
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
+整数 i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
 		       char delay);
 
 extern i2c_struct *i2c_instance[MAX_I2C_COUNT];

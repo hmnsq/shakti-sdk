@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
+void configure_spi(整数 offset);
 void spi_init(void);
-void set_spi(int* addr, int val);
+void set_spi(整数* addr, 整数 val);
 void bin(unsigned n);
 void spi_tx_rx_start(void);
 void spi_enable(void);
 void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+void flash_cmd_addr_data(整数 command, 整数 addr, 整数 data);
+void flash_write(整数 address, 整数 data);
+void flash_erase(整数 address);
+整数 get_spi(整数* addr);
+整数 bitExtracted(整数 number, 整数 k, 整数 p) ;
+整数 concat(整数 x, 整数 y) ;
+整数 spi_rxne_enable(void);
+整数 spi_notbusy(void);
+整数 flash_write_enable(void);
+整数 flash_clear_sr(void);
+整数 flash_cmd_addr(整数 command, 整数 addr);
+整数 flash_cmd_to_read(整数 command, 整数 addr);
+整数 flash_read(整数 address);
+整数 flash_cmd_read(整数 command);
+整数 flash_status_register_read(void);
+整数 flash_device_id(void);
 
 #endif

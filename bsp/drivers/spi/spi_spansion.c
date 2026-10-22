@@ -30,17 +30,17 @@
 #include "log.h"
 #include "utils.h"
 
-int* spi_cr1    = (int*) SPI_CR1;
-int* spi_cr2    = (int*) SPI_CR2;
-int* spi_sr     = (int*) SPI_SR ;
-int* spi_dr1    = (int*) SPI_DR1;
-int* spi_dr2    = (int*) SPI_DR2;
-int* spi_dr3    = (int*) SPI_DR3;
-int* spi_dr4    = (int*) SPI_DR4;
-int* spi_dr5    = (int*) SPI_DR5;
-int* spi_crcpr  = (int*) SPI_CRCPR;
-int* spi_rxcrcr = (int*) SPI_RXCRCR;
-int* spi_txcrcr = (int*) SPI_TXCRCR;
+整数* spi_cr1    = (整数*) SPI_CR1;
+整数* spi_cr2    = (整数*) SPI_CR2;
+整数* spi_sr     = (整数*) SPI_SR ;
+整数* spi_dr1    = (整数*) SPI_DR1;
+整数* spi_dr2    = (整数*) SPI_DR2;
+整数* spi_dr3    = (整数*) SPI_DR3;
+整数* spi_dr4    = (整数*) SPI_DR4;
+整数* spi_dr5    = (整数*) SPI_DR5;
+整数* spi_crcpr  = (整数*) SPI_CRCPR;
+整数* spi_rxcrcr = (整数*) SPI_RXCRCR;
+整数* spi_txcrcr = (整数*) SPI_TXCRCR;
 
 //By default, spi 0 is configured
 /**
@@ -50,19 +50,19 @@ int* spi_txcrcr = (int*) SPI_TXCRCR;
  *          spi registers..
  * @param int* ---> offset value
  */
-void configure_spi(int offset)
+void configure_spi(整数 offset)
 {
-	spi_cr1    = (int*) (SPI_CR1 + offset);
-	spi_cr2    = (int*) (SPI_CR2 + offset);
-	spi_sr     = (int*) (SPI_SR + offset);
-	spi_dr1    = (int*) (SPI_DR1 + offset);
-	spi_dr2    = (int*) (SPI_DR2 + offset);
-	spi_dr3    = (int*) (SPI_DR3 + offset);
-	spi_dr4    = (int*) (SPI_DR4 + offset);
-	spi_dr5    = (int*) (SPI_DR5 + offset);
-	spi_crcpr  = (int*) (SPI_CRCPR + offset);
-	spi_rxcrcr = (int*) (SPI_RXCRCR + offset);
-	spi_txcrcr = (int*) (SPI_TXCRCR + offset);
+	spi_cr1    = (整数*) (SPI_CR1 + offset);
+	spi_cr2    = (整数*) (SPI_CR2 + offset);
+	spi_sr     = (整数*) (SPI_SR + offset);
+	spi_dr1    = (整数*) (SPI_DR1 + offset);
+	spi_dr2    = (整数*) (SPI_DR2 + offset);
+	spi_dr3    = (整数*) (SPI_DR3 + offset);
+	spi_dr4    = (整数*) (SPI_DR4 + offset);
+	spi_dr5    = (整数*) (SPI_DR5 + offset);
+	spi_crcpr  = (整数*) (SPI_CRCPR + offset);
+	spi_rxcrcr = (整数*) (SPI_RXCRCR + offset);
+	spi_txcrcr = (整数*) (SPI_TXCRCR + offset);
 }
 
 /**
@@ -72,7 +72,7 @@ void configure_spi(int offset)
  * @param int* addr 
  * @param int val 
  */
-void set_spi(int* addr, int val)
+void set_spi(整数* addr, 整数 val)
 {
 	*addr = val;
 }
@@ -84,9 +84,9 @@ void set_spi(int* addr, int val)
  * @param int* ---> address from where read has to happen
  * @return int ---> SPI Register read value.
  */
-int get_spi(int* addr)
+整数 get_spi(整数* addr)
 {
-	return *addr;
+	返回 *addr;
 }
 
 /** @fn void spi_init(void)
@@ -128,9 +128,9 @@ void spi_rx_enable(void)
  * @param int (p (position from where the bits to be extracted))
  * @return int (32 bit which have k bit from "number" and rest are zero)
  */
-int bitExtracted(int number, int k, int p)
+整数 bitExtracted(整数 number, 整数 k, 整数 p)
 {
-	return (((1 << k) - 1) & (number >> (p - 1)));
+	返回 (((1 << k) - 1) & (number >> (p - 1)));
 }
 
 /**
@@ -139,16 +139,16 @@ int bitExtracted(int number, int k, int p)
  * @details As soons as data come to receive buffer this bit is set.  
  * @return int (1: if there is data into the RxFIFO else 0)
  */
-int spi_rxne_enable(void)
+整数 spi_rxne_enable(void)
 {
-	int value = 0;
+	整数 value = 0;
 
-	while (!(value & 0x1))
+	当 (!(value & 0x1))
 	{
 		waitfor(100);
 		value = get_spi(spi_sr);
 	}
-	return 1;
+	返回 1;
 }
 
 /**
@@ -158,17 +158,17 @@ int spi_rxne_enable(void)
  * @warning One should check this bit before going to next transcation
  * @return int (0: SPI is busy in communication, 1: SPI nt busy)
  */
-int spi_notbusy(void)
+整数 spi_notbusy(void)
 {
-	int value = 0x80;
+	整数 value = 0x80;
 
-	while ((value & 0x80))
+	当 ((value & 0x80))
 	{
 		waitfor(10);
 		value = get_spi(spi_sr);
 	}
 
-	return 1;
+	返回 1;
 }
 
 /**
@@ -178,14 +178,14 @@ int spi_notbusy(void)
  * @warning Without enabling this bit one cannot erase/write into the flash
  * @return int
  */
-int flash_write_enable(void)
+整数 flash_write_enable(void)
 {
 	set_spi(spi_dr1, 0x06000000);
 	set_spi(spi_dr5, 0x06);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	返回 1;
 }
 
 /**
@@ -195,14 +195,14 @@ int flash_write_enable(void)
  * @return int
  */
 
-int flash_clear_sr(void)
+整数 flash_clear_sr(void)
 {
 	set_spi(spi_dr1,0x30000000);
 	set_spi(spi_dr5,0x30);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	返回 1;
 }
 
 /**
@@ -214,11 +214,11 @@ int flash_clear_sr(void)
  * @param int (addr (address after the opcode))
  * @return int
  */
-int flash_cmd_addr(int command, int addr)
+整数 flash_cmd_addr(整数 command, 整数 addr)
 {
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int data1 = command | address1 ;
+	整数 address1 = bitExtracted(addr, 24, 9);
+	整数 address2 = bitExtracted(addr, 8, 1);
+	整数 data1 = command | address1 ;
 	address2 = address2 << 24;
 
 	set_spi(spi_dr1, data1);
@@ -228,7 +228,7 @@ int flash_cmd_addr(int command, int addr)
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	返回 1;
 }
 
 /**
@@ -240,11 +240,11 @@ int flash_cmd_addr(int command, int addr)
  * @param int (addr(address after the opcode))
  * @param int (data (data after the address))
  */
-void flash_cmd_addr_data(int command, int addr, int data)
+void flash_cmd_addr_data(整数 command, 整数 addr, 整数 data)
 {
-	int cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
-	int data1 = ( (addr & 0xFF)  << 24 ) |( (data & 0xFFFFFF00)  >> 8);
-	int data2 = ( (data & 0xFF)  << 24 ) & 0xFF000000;
+	整数 cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
+	整数 data1 = ( (addr & 0xFF)  << 24 ) |( (data & 0xFFFFFF00)  >> 8);
+	整数 data2 = ( (data & 0xFF)  << 24 ) & 0xFF000000;
 
 	log_debug("\n cmd: %x;d1: %x; d2: %x", cmd_addr, data1, data2);
 
@@ -266,7 +266,7 @@ void flash_cmd_addr_data(int command, int addr, int data)
  * @param int (addres (write address))
  * @param int(data (write data))
  */
-void flash_write(int address, int data)
+void flash_write(整数 address, 整数 data)
 {
 	flash_write_enable();
 	flash_cmd_addr_data(0x12000000, address,data);
@@ -284,10 +284,10 @@ void flash_write(int address, int data)
  * @param int (addr(read_address))
  * @return int 
  */
-int flash_cmd_to_read(int command, int addr)
+整数 flash_cmd_to_read(整数 command, 整数 addr)
 {
-	int dr5;
-	int address2 = bitExtracted(addr, 8, 1);
+	整数 dr5;
+	整数 address2 = bitExtracted(addr, 8, 1);
 
 	address2 = address2 << 24;
 	set_spi(spi_dr1, ( command  | ( (addr & 0xFFFFFF00) >> 8) ));
@@ -297,12 +297,12 @@ int flash_cmd_to_read(int command, int addr)
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(48)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(2000);
 
-	if(spi_rxne_enable()) 
+	如果(spi_rxne_enable()) 
 	{
 		dr5 = *spi_dr5;
 	}
 
-	return dr5;
+	返回 dr5;
 
 }
 
@@ -312,10 +312,10 @@ int flash_cmd_to_read(int command, int addr)
  * @param int (address (read address))
  * @return int 
  */
-int flash_read(int address)
+整数 flash_read(整数 address)
 {
-	int read_value = flash_cmd_to_read(0x0C000000,address);
-	return read_value;
+	整数 read_value = flash_cmd_to_read(0x0C000000,address);
+	返回 read_value;
 }
 
 /**
@@ -325,17 +325,17 @@ int flash_read(int address)
  * @param int command (opcode)
  * @return int  value (flash response to opcode)
  */
-int flash_cmd_read(int command)
+整数 flash_cmd_read(整数 command)
 {
-	int dr5;
+	整数 dr5;
 	set_spi(spi_dr1, command);
 	set_spi(spi_dr5, command);
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-	if(spi_rxne_enable()) {
+	如果(spi_rxne_enable()) {
 		dr5 = *spi_dr5;
 	}
-	return dr5;
+	返回 dr5;
 }
 
 /**
@@ -345,7 +345,7 @@ int flash_cmd_read(int command)
  * @warning before erasing the flash one should enable the WEL bit spi_sr by using write_enable()
  * @param int (address (address from which data should erase))
  */
-void flash_erase(int address)
+void flash_erase(整数 address)
 {
 	flash_cmd_addr(0xdc000000, address);
 }
@@ -357,17 +357,17 @@ void flash_erase(int address)
  *           and WEL(Write Enable Latch) bit.
  * @return int
  */
-int flash_status_register_read(void)
+整数 flash_status_register_read(void)
 {
-	int stat = 0x3;
+	整数 stat = 0x3;
 
-	while (stat & 0x03)
+	当 (stat & 0x03)
 	{
 		stat = flash_cmd_read(0x05000000);
 		log_debug("flash status register val %x\n", stat);
 	}
 
-	return 0;
+	返回 0;
 }
 
 /**
@@ -378,10 +378,10 @@ int flash_status_register_read(void)
  * @warning to move data from data register to fifo there must be some data into spi_dr5
  * @return int
  */
-int flash_device_id(void)
+整数 flash_device_id(void)
 {
-	int dr3;
-	int val1, val2;
+	整数 dr3;
+	整数 val1, val2;
 
 	flash_write_enable();
 	set_spi(spi_dr1, 0x9f000000);
@@ -389,7 +389,7 @@ int flash_device_id(void)
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 
-	if(spi_rxne_enable())
+	如果(spi_rxne_enable())
 	{
 		dr3 = *spi_dr5;
 	}
@@ -400,5 +400,5 @@ int flash_device_id(void)
 	log_debug("Device ID %x \n", val1);
 	log_debug("extracted device id %x \n",val2);
 
-	return 1;
+	返回 1;
 }

@@ -32,7 +32,7 @@
 #include "platform.h" //Contains arty a7 gpio definitions.
 #include "gpio.h"  //Contains the methods to Access GPIOs
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#만약 defined(ARTIX7_35T) || defined(ARTIX7_100T)
 /*! RGB LED 0 defines */
 #define LED0_R GPIO16 
 #define LED0_G GPIO17

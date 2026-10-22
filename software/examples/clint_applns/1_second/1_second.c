@@ -52,5 +52,5 @@ void main(void){
 	printf("Configuring 1 second timer interrupt\n");
 	configure_counter(value);
 
-	while(1);
+	동안(1);
 }

@@ -61,16 +61,16 @@ char *heap_end=(char *)&_heap_end;
  */
 static void section_init(void)
 {
-#if 0
+#만약 0
 	/*Enable below code only on need
 	 */
-	while(heap_start<=heap_end)
+	동안(heap_start<=heap_end)
 	{
 		*heap_start=0xff;
 		heap_start++;
 	}
 
-	while(stack_end>=stack_start)
+	동안(stack_end>=stack_start)
 	{
 		*stack_end=0x0;
 		stack_end--;

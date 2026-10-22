@@ -48,7 +48,7 @@
  */
 #define EMAC_DEVICE_ID			240
 #define ETH_BASE_REG 0x44000
-volatile unsigned int* eth_base_reg = ETH_BASE_REG;
+volatile unsigned 정수* eth_base_reg = ETH_BASE_REG;
 /*
  * The Size of the Test Frame.
  */
@@ -60,11 +60,11 @@ volatile unsigned int* eth_base_reg = ETH_BASE_REG;
 
 /************************** Function Prototypes ******************************/
 
-int EmacLitePolledExample(u16 DeviceId);
+정수 EmacLitePolledExample(u16 DeviceId);
 
-static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize);
+static 정수 EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize);
 
-static int EmacLiteRecvFrame(u32 PayloadSize);
+static 정수 EmacLiteRecvFrame(u32 PayloadSize);
 
 extern u16 Xil_EndianSwap16(u16 Data);
 
@@ -104,22 +104,22 @@ static XEmacLite EmacLite;
 * @note		None.
 *
 *****************************************************************************/
-int main()
+정수 main()
 {
-	int Status;
+	정수 Status;
 
 	/*
 	 * Run the EmacLite Polled example, specify the Device ID that is
 	 * generated in xparameters.h.
 	 */
 	Status = EmacLitePolledExample(EMAC_DEVICE_ID);
-	if (Status != SUCCESS) {
+	만약 (Status != SUCCESS) {
 		log_debug("Emaclite polled Example Failed\r\n");
-		return FAILURE;
+		반환 FAILURE;
 	}
 
 	log_debug("Successfully ran Emaclite polled Example\r\n");
-	return SUCCESS;
+	반환 SUCCESS;
 }
 
 
@@ -142,17 +142,17 @@ int main()
 * @note		None.
 *
 ******************************************************************************/
-int EmacLitePolledExample(u16 DeviceId)
+정수 EmacLitePolledExample(u16 DeviceId)
 {
-	int Status;
+	정수 Status;
 	XEmacLite *EmacLiteInstPtr = &EmacLiteInstance;
 	u32 PhyAddress = 0;
 	RecvFrameLength = 0;
 	XEmacLite_Config *ConfigPtr;
 
 	ConfigPtr = &XEmacLite_ConfigTable;
-	if (ConfigPtr == NULL) {
-		return -1;
+	만약 (ConfigPtr == NULL) {
+		반환 -1;
 	}
 	ConfigPtr->BaseAddress = (UINTPTR *) 0X44000;
 	ConfigPtr->RxPingPong = XPAR_EMACLITE_0_RX_PING_PONG;
@@ -167,8 +167,8 @@ int EmacLitePolledExample(u16 DeviceId)
 	Status = XEmacLite_CfgInitialize(EmacLiteInstPtr,
 					ConfigPtr,
 					ConfigPtr->BaseAddress);
-	if (Status != 0) {
-		return -1;
+	만약 (Status != 0) {
+		반환 -1;
 	}
 
 	/*
@@ -180,14 +180,14 @@ int EmacLitePolledExample(u16 DeviceId)
 	 * Check if there is a TX buffer available, if there isn't it is an
 	 * error.
 	 */
-	if (XEmacLite_TxBufferAvailable(EmacLiteInstPtr) != TRUE) {
-		return FAILURE;
+	만약 (XEmacLite_TxBufferAvailable(EmacLiteInstPtr) != TRUE) {
+		반환 FAILURE;
 	}
 
 	/*
 	 * If the MDIO is configured in the device.
 	 */
-	if (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+	만약 (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
 		/*
 		 * Detect the PHY device and enable the MAC Loop back
 		 * in the PHY.
@@ -195,8 +195,8 @@ int EmacLitePolledExample(u16 DeviceId)
 		PhyAddress = EmacLitePhyDetect(EmacLiteInstPtr);
 		Status = EmacLiteEnablePhyLoopBack(EmacLiteInstPtr,
 							 PhyAddress);
-		if (Status != SUCCESS) {
-			return FAILURE;
+		만약 (Status != SUCCESS) {
+			반환 FAILURE;
 		}
 	}
 
@@ -210,14 +210,14 @@ int EmacLitePolledExample(u16 DeviceId)
 	 */
 	RecvFrameLength = 0;
 	Status = EmacLiteSendFrame(EmacLiteInstPtr, EMACLITE_TEST_FRAME_SIZE);
-	if (Status != SUCCESS) {
-		if (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+	만약 (Status != SUCCESS) {
+		만약 (XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
 			/*
 			 * Disable the MAC Loop back in the PHY.
 			 */
 			EmacLiteDisablePhyLoopBack(EmacLiteInstPtr,
 							 PhyAddress);
-			return FAILURE;
+			반환 FAILURE;
 		}
 	}
 
@@ -225,15 +225,15 @@ int EmacLitePolledExample(u16 DeviceId)
 	 * If the MDIO is not configured in the core then return SUCCESS
 	 * as the frame has been transmitted.
 	 */
-	if (!XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
-		return SUCCESS;
+	만약 (!XEmacLite_IsMdioConfigured(EmacLiteInstPtr)) {
+		반환 SUCCESS;
 	}
 
 
 	/*
 	 * Poll for receive packet.
 	 */
-	while ((volatile u32)RecvFrameLength == 0)  {
+	동안 ((volatile u32)RecvFrameLength == 0)  {
 		RecvFrameLength = XEmacLite_Recv(EmacLiteInstPtr,
 						(u8 *)RxFrame);
 	}
@@ -242,12 +242,12 @@ int EmacLitePolledExample(u16 DeviceId)
 	 * Check the received frame.
 	 */
 	Status = EmacLiteRecvFrame(EMACLITE_TEST_FRAME_SIZE);
-	if ((Status != SUCCESS) && (Status != NO_DATA)) {
+	만약 ((Status != SUCCESS) && (Status != NO_DATA)) {
 		/*
 		 * Disable the MAC Loop back in the PHY.
 		 */
 		EmacLiteDisablePhyLoopBack(EmacLiteInstPtr, PhyAddress);
-		return FAILURE;
+		반환 FAILURE;
 	}
 
 
@@ -256,7 +256,7 @@ int EmacLitePolledExample(u16 DeviceId)
 	 */
 	EmacLiteDisablePhyLoopBack(EmacLiteInstPtr, PhyAddress);
 
-	return SUCCESS;
+	반환 SUCCESS;
 }
 
 /******************************************************************************/
@@ -274,17 +274,17 @@ int EmacLitePolledExample(u16 DeviceId)
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
+static 정수 EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
 {
 	u8 *FramePtr;
-	int Index;
+	정수 Index;
 	FramePtr = (u8 *)TxFrame;
 
 	/*
 	 * Set up the destination address as the local address for
 	 * Phy Loopback.
 	 */
-	if (XEmacLite_IsMdioConfigured(InstancePtr)) {
+	만약 (XEmacLite_IsMdioConfigured(InstancePtr)) {
 
 		*FramePtr++ = LocalAddress[0];
 		*FramePtr++ = LocalAddress[1];
@@ -292,7 +292,7 @@ static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
 		*FramePtr++ = LocalAddress[3];
 		*FramePtr++ = LocalAddress[4];
 		*FramePtr++ = LocalAddress[5];
-	} else {
+	} 아니면 {
 		/*
 		 * Fill in the valid Destination MAC address if
 		 * the Loopback is not enabled.
@@ -326,14 +326,14 @@ static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
 	 * Now fill in the data field with known values so we can verify them
 	 * on receive.
 	 */
-	for (Index = 0; Index < PayloadSize; Index++) {
+	위해 (Index = 0; Index < PayloadSize; Index++) {
 		*FramePtr++ = (u8)Index;
 	}
 
 	/*
 	 * Now send the frame.
 	 */
-	return XEmacLite_Send(InstancePtr, (u8 *)TxFrame,
+	반환 XEmacLite_Send(InstancePtr, (u8 *)TxFrame,
 				PayloadSize + XEL_HEADER_SIZE);
 
 }
@@ -354,22 +354,22 @@ static int EmacLiteSendFrame(XEmacLite *InstancePtr, u32 PayloadSize)
 * @note		None.
 *
 ******************************************************************************/
-static int EmacLiteRecvFrame(u32 PayloadSize)
+static 정수 EmacLiteRecvFrame(u32 PayloadSize)
 {
 	u8 *FramePtr;
 
 	/*
 	 * This assumes MAC does not strip padding or CRC.
 	 */
-	if (RecvFrameLength != 0) {
-		int Index;
+	만약 (RecvFrameLength != 0) {
+		정수 Index;
 
 		/*
 		 * Verify length, which should be the payload size.
 		 */
-		if ((RecvFrameLength- (XEL_HEADER_SIZE + XEL_FCS_SIZE)) !=
+		만약 ((RecvFrameLength- (XEL_HEADER_SIZE + XEL_FCS_SIZE)) !=
 				PayloadSize) {
-			return XST_LOOPBACK_ERROR;
+			반환 XST_LOOPBACK_ERROR;
 		}
 
 		/*
@@ -378,12 +378,12 @@ static int EmacLiteRecvFrame(u32 PayloadSize)
 		FramePtr = (u8 *)RxFrame;
 		FramePtr += XEL_HEADER_SIZE;	/* Get past the header */
 
-		for (Index = 0; Index < PayloadSize; Index++) {
-			if (*FramePtr++ != (u8)Index) {
-				return XST_LOOPBACK_ERROR;
+		위해 (Index = 0; Index < PayloadSize; Index++) {
+			만약 (*FramePtr++ != (u8)Index) {
+				반환 XST_LOOPBACK_ERROR;
 			}
 		}
 	}
 
-	return SUCCESS;
+	반환 SUCCESS;
 }

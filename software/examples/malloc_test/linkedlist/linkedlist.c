@@ -27,13 +27,13 @@
 #include <stdlib.h>
 
 struct node {
-	int num;
+	정수 num;
 	struct node *nptr;
 }*head;
 
-void create_list(int n);
+void create_list(정수 n);
 void display_list();
-void delete_node(int position);
+void delete_node(정수 position);
 
 /** @fn void main()
  * @brief Get the user input for the linked list creation and deletion. Also displays the linked list.
@@ -42,7 +42,7 @@ void delete_node(int position);
  */
 void main()
 {
-	int n,position,m;
+	정수 n,position,m;
 	char t[15];
 	printf("\n Enter the number of nodes on the linked list:\n");
 
@@ -68,7 +68,7 @@ void main()
 	printf("\nLinked list after deletion\n");
 	display_list();
 
-	while(1);
+	동안(1);
 }
 
 /** @fn void create_list(int n) 
@@ -76,19 +76,19 @@ void main()
  * @param[in] int
  * @param[Out] No output parameter
  */
-void create_list(int n)
+void create_list(정수 n)
 {
 	struct node *node, *tmp;
-	int data,m;
+	정수 data,m;
 	char t[12];
 
 	head = (struct node*)malloc(sizeof(struct node));
 
-	if(head == NULL)
+	만약(head == NULL)
 	{
 		printf("\n Memory cannot be allocated");
 	}
-	else
+	아니면
 	{
 		printf("\n\nInput data for node 1:");
 
@@ -100,15 +100,15 @@ void create_list(int n)
 		head->nptr = NULL;
 		tmp = head;
 
-		for(int i = 2;i <= n; i++)
+		위해(정수 i = 2;i <= n; i++)
 		{
 			node = (struct node*)malloc(sizeof(struct node));
 
-			if(node == NULL)
+			만약(node == NULL)
 			{
 				printf("\n Memory Cannot be allocated");
 			}
-			else 
+			아니면 
 			{
 				printf("\n\nInput Data for node %d :",i);
 				read_uart_string(uart_instance[0],t);
@@ -131,17 +131,17 @@ void create_list(int n)
  */
 void display_list()
 {
-	int i = 0;
+	정수 i = 0;
 	struct node *tmp;
 
-	if(head == NULL)
+	만약(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else
+	아니면
 	{
 		tmp = head;
-		while(tmp != NULL) 
+		동안(tmp != NULL) 
 		{
 			printf(" Node%d = %d",i,tmp->num);
 			printf("->");
@@ -157,32 +157,32 @@ void display_list()
  * @param[Out] No output parameter
 
  */
-void delete_node(int position)
+void delete_node(정수 position)
 {
 	struct node *temp;
 
-	if(head == NULL)
+	만약(head == NULL)
 	{
 		printf(" List is empty.");
 	}
-	else 
+	아니면 
 	{
 		temp = head;
 
-		if (position == 0)//Delete head node
+		만약 (position == 0)//Delete head node
 		{
 			head = temp->nptr;
 			free(temp);
-			return;
+			반환;
 		}
 
-		for (int i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
+		위해 (정수 i = 0; temp != NULL && i < position-1; i++)//store previous of to be deleted node
 		{
 			temp = temp->nptr;
 		}
 
-		if (temp == NULL || temp->nptr == NULL)
-			return;
+		만약 (temp == NULL || temp->nptr == NULL)
+			반환;
 
 		//delete node at pos (next of position-1)
 		struct node *nptr = temp->nptr->nptr;

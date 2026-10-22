@@ -51,10 +51,10 @@
  * @param delay
  * @return read status (zero on success)
  */
-int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+정수 read_pcf8591_registers(i2c_struct * i2c_instance, unsigned 정수 reg_offset, unsigned 정수 *readTemp, unsigned char length, unsigned long delay)
 {
 	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
+	정수 i = 0, j = 0,  k = 0, status=0;
 	unsigned char temp = 0;
 //Writes the slave address for write
 	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_WRITE, 800);
@@ -71,17 +71,17 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	위해(i = 0; i < length; i++)
 	{
 		i2c_read_data(i2c_instance, &temp, delay);
 		*readTemp = temp;
-		if( i == (length - 2) )
+		만약( i == (length - 2) )
 		i2c_instance->control = I2C_NACK;
 		*readTemp++;
 	}
 	
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	반환 0;
 }
 
 /** @fn int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -94,19 +94,19 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+정수 write_pcf8591_registers(i2c_struct * i2c_instance, unsigned 정수 reg_offset, unsigned 정수 *write_value, unsigned char length, unsigned long delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
+	정수 i = 0, j = 0,  k = 0, status=0;
+	unsigned 정수 temp = 0;
 	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_WRITE, delay);
 	i2c_write_data(i2c_instance, reg_offset, delay);
-	for(i = 0; i < length; i++)
+	위해(i = 0; i < length; i++)
 	{
 		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;;
-	return 0;
+	반환 0;
 }
 
 /** @fn int main()
@@ -115,40 +115,40 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
  * prints the read values
  * @return Zero
  */
-int main()
+정수 main()
 {
 	unsigned char i = 0;
-	int timeout;
-	unsigned int tempReadValue = 0;
+	정수 timeout;
+	unsigned 정수 tempReadValue = 0;
 	unsigned long delay = 1000;
-	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
+	unsigned 정수 write_buf[7] = {0x00}, read_buf[7] = {0x00};
 	unsigned char length = 0;
 	
 	log_debug("\tI2C: PCF8591 - ADC test\n");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	만약(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+			반환 -1;
 	}
-	else
+	아니면
 		log_info("\tIntilization Happened Fine\n");
 		length = 1;
 		write_buf[0] = PCF8591_CONTROL_REGISTER_VALUE;
 		write_pcf8591_registers(I2C, 0x00, &write_buf[0], length, delay);
 		log_debug("\n Write complete");
 		length = 5;
-	while(1)
+	동안(1)
 	{
 			read_pcf8591_registers(I2C, PCF8591_CONTROL_REGISTER_VALUE, &read_buf[0], length, 800);
 			log_info("\n");
-			for( i = 1; i < length; i++)
+			위해( i = 1; i < length; i++)
 			log_info("\nADC Input[%d]: %x", i, read_buf[i]);
 			delay_loop(3000, 2000);
 	}
 
-	return 0;
+	반환 0;
 }
 

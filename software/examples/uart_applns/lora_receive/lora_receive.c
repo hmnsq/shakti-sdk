@@ -49,22 +49,22 @@
  * @brief Reads data sent by lora module.
  * @param data responses read from lora module, mainly used for logging
  */
-int read_from_lora(char *data)
+정수 read_from_lora(char *data)
 {
-	int ch;
+	정수 ch;
 	char *str = data;
 	char *test = data;
-	for (int i = 0; i < 98; i++)
+	위해 (정수 i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		만약 (ch == '\n')
 		{
 			break;
 		}
 	}
-	return;	
+	반환;	
 }
 
 
@@ -73,11 +73,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+정수 write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	반환 0;
 }
 
 
@@ -87,7 +87,7 @@ int write_enter_to_lora()
  */
 void write_to_lora(char *data)
 {
-	while (*data != '\0')
+	동안 (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;

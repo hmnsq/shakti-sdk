@@ -65,9 +65,9 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+정수 main(void){
+	register unsigned 정수 retval;
+	정수 i;
 
 	//init plic module
 	plic_init();
@@ -118,10 +118,10 @@ int main(void){
 
 	log_debug("mip = %u\n", retval);
 
-	while(1){
+	동안(1){
 		i++;
 
-		if((i%10000000) == 0){
+		만약((i%10000000) == 0){
 
 			asm volatile(
 				     "csrr %[retval], mip\n"
@@ -133,5 +133,5 @@ int main(void){
 			log_debug("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	반환 0;
 }

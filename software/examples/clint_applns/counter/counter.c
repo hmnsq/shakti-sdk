@@ -53,5 +53,5 @@ void main(void){
 
 	configure_counter(value);
 
-	while(1);
+	동안(1);
 }

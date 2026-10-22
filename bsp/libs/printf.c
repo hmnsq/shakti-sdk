@@ -39,27 +39,27 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
  * @param unsigned
  */
 
-static inline void itoa (unsigned long long int number, unsigned base)
+static inline void itoa (unsigned long long 정수 number, unsigned base)
 {
-	int i = 0;
-	unsigned int intermediate = 0;
-	unsigned int digits[sizeof(number)*8];
+	정수 i = 0;
+	unsigned 정수 intermediate = 0;
+	unsigned 정수 digits[sizeof(number)*8];
 
-	while (1) {
+	동안 (1) {
 		digits[i] = number % base;
 
-		if (number < base)
+		만약 (number < base)
 			break;
 
 		number /= base;
 		i++;
 	}
 	i++;
-	while (i-- > 0)
+	동안 (i-- > 0)
 	{
-		if (digits[i] >= 10)
+		만약 (digits[i] >= 10)
 			intermediate = 'a' - 10;
-		else
+		아니면
 			intermediate = '0';
 
 		putchar(digits[i] + intermediate);
@@ -76,17 +76,17 @@ void _printf_(const char *fmt, va_list ap)
 {
 	register const char* p;
 	const char* last_fmt;
-	register int ch;
+	register 정수 ch;
 	unsigned long long num;
-	int base, lflag, i;
+	정수 base, lflag, i;
 	float float_num = 0;
 	char float_arr[30] = {'\0'};
-	int backtothebeginning;
+	정수 backtothebeginning;
 
-	for (;;) {
-		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
-			if (ch == '\0')
-				return;
+	위해 (;;) {
+		위해 (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
+			만약 (ch == '\0')
+				반환;
 			putchar(ch);
 		}
 		fmt++;
@@ -96,7 +96,7 @@ void _printf_(const char *fmt, va_list ap)
 		lflag = 0;
 
 		backtothebeginning = 0;
-		for (;;) {
+		위해 (;;) {
 
 			switch (ch = *(unsigned char *) fmt++) {
 
@@ -108,14 +108,14 @@ void _printf_(const char *fmt, va_list ap)
 
 					// character
 				case 'c':
-					putchar(va_arg(ap, int));
+					putchar(va_arg(ap, 정수));
 					break;
 
 					// string
 				case 's':
-					if ((p = va_arg(ap, char *)) == NULL)
+					만약 ((p = va_arg(ap, char *)) == NULL)
 						p = "(null)";
-					for (; (ch = *p) != '\0' ;) {
+					위해 (; (ch = *p) != '\0' ;) {
 						putchar(ch);
 						p++;
 					}
@@ -125,14 +125,14 @@ void _printf_(const char *fmt, va_list ap)
 				case 'd':
 					base = 10;
 
-					if (lflag >= 2)
+					만약 (lflag >= 2)
 						num = va_arg(ap, long long);
-					else if (lflag ==1)
+					아니면 만약 (lflag ==1)
 						num = va_arg(ap, long);
-					else
-						num = va_arg(ap, int);
+					아니면
+						num = va_arg(ap, 정수);
 
-					if ((long long) num < 0) {
+					만약 ((long long) num < 0) {
 						putchar('-');
 						num = -(long long) num;
 					}
@@ -146,10 +146,10 @@ void _printf_(const char *fmt, va_list ap)
 
 					ftoa(float_num, float_arr, 6);
 
-					for( i = 0; float_arr[i] != '\0'; i++)
+					위해( i = 0; float_arr[i] != '\0'; i++)
 					{
 						putchar(float_arr[i]);
-						if(i > 29) break;
+						만약(i > 29) break;
 					}
 					break;
 
@@ -157,12 +157,12 @@ void _printf_(const char *fmt, va_list ap)
 				case 'u':
 					base = 10;
 
-					if (lflag >= 2)
+					만약 (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					아니면 만약 (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					아니면
+						num = va_arg(ap, unsigned 정수);
 
 					itoa( num, base);
 
@@ -173,12 +173,12 @@ void _printf_(const char *fmt, va_list ap)
 					// should do something with padding so it's always 3 octits
 					base = 8;
 
-					if (lflag >= 2)
+					만약 (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					아니면 만약 (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					아니면
+						num = va_arg(ap, unsigned 정수);
 
 					itoa( num, base);
 
@@ -187,12 +187,12 @@ void _printf_(const char *fmt, va_list ap)
 				case 'x':
 					base = 16;
 
-					if (lflag >= 2)
+					만약 (lflag >= 2)
 						num = va_arg(ap, unsigned long long);
-					else if (lflag)
+					아니면 만약 (lflag)
 						num = va_arg(ap, unsigned long);
-					else
-						num = va_arg(ap, unsigned int);
+					아니면
+						num = va_arg(ap, unsigned 정수);
 
 					itoa( num, base);
 
@@ -210,12 +210,12 @@ void _printf_(const char *fmt, va_list ap)
 					break;
 			}
 
-			if (backtothebeginning)
+			만약 (backtothebeginning)
 			{
 				backtothebeginning = 0;
 				continue;
 			}
-			else
+			아니면
 				break;
 		}
 	}
@@ -227,7 +227,7 @@ void _printf_(const char *fmt, va_list ap)
  * @param const char*
  * @return int
  */
-int printf(const char* fmt, ...)
+정수 printf(const char* fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -235,5 +235,5 @@ int printf(const char* fmt, ...)
 	_printf_(fmt, ap);
 
 	va_end(ap);
-	return 0;// incorrect return value, but who cares, anyway?
+	반환 0;// incorrect return value, but who cares, anyway?
 }

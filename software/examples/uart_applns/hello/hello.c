@@ -34,5 +34,5 @@
 void main()
 {
 	printf ("Hello World !\n");
-	while(1);
+	동안(1);
 }

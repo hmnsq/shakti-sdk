@@ -28,20 +28,20 @@
 
 #ifndef UTIL_H
 #define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#ضمن <stdio.h>
+#ضمن <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
+فراغ waitfor(unsigned صحيح secs);
+فراغ delay(unsigned long seconds);
+عائم pow_10(unsigned صحيح y);
+فراغ reverse(حرف *str, صحيح len);
+فراغ ftoa( عائم, حرف *, unsigned صحيح);
+فراغ delay_loop(unsigned long cntr1, unsigned long cntr2);
 unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+فراغ write_word(uint32_t *addr, unsigned long val);
+صحيح int_to_string(صحيح رقم_2, حرف str[], unsigned صحيح afterpoint);
+فراغ _printf_(ثابت حرف *fmt, va_list ap);
+صحيح printf(ثابت حرف* fmt, ...);
 
 #endif

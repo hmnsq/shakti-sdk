@@ -44,7 +44,7 @@ platform.h - header file for parashu E class SoC on artix7_100t
 #define CLINT_BASE 0x020000000
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   256
+#define CLINT_قاسم   256
 
 #define CLOCK_FREQUENCY 50000000
 
@@ -56,7 +56,7 @@ platform.h - header file for parashu E class SoC on artix7_100t
 #define TCM_MEM_SIZE 0x10000000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#define مكدس_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
 #define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
@@ -72,12 +72,12 @@ platform.h - header file for parashu E class SoC on artix7_100t
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
 #define UART0_START 0x00011300 /*! UART 0 */
 #define UART_OFFSET 0x100
-#define MAX_UART_COUNT 3
+#define MAX_UART_عدد 3
 
 /*! Inter Integrated Circuit (I2C) Interface */
 #define I2C0_BASE 0x00040000 /*! I2C Start Address */
 #define I2C_OFFSET 0x1400
-#define MAX_I2C_COUNT 2
+#define MAX_I2_C_عدد 2
 
 /*! Xilinx Analog to Digital converter */
 #define XADC_BASE_ADDRESS 0x00041000
@@ -158,6 +158,6 @@ platform.h - header file for parashu E class SoC on artix7_100t
 #define GPIO29 (1 << 29)
 #define GPIO30 (1 << 30)
 #define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#define GPIO_عدد  0x20
 
 #endif

@@ -54,7 +54,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @brief Entry point for the program
  */
 
-void main()
+void གཙོ()
 {
     unsigned long readData = 0;
     unsigned long moistureDetetected = 0;
@@ -66,15 +66,15 @@ void main()
 *********************************************************************/
     write_word(GPIO_DIRECTION_CNTRL_REG, (0x00|MOTOR_ON));
     
-    while (1) {
+    སྐབས (1) {
         readData = read_word(GPIO_DATA_REG);
         printf("\n Read Data:=%d", readData);
 	moistureDetetected = ((readData & 1 ) == 1) ? 1 : 0;
-        if (moistureDetetected == 0) {
+        གལ་ཏེ (moistureDetetected == 0) {
             write_word(GPIO_DATA_REG, MOTOR_ON);
             printf("\nTurn on Motor");
         }
-        else {
+        དེ་མིན {
             write_word(GPIO_DATA_REG, MOTOR_OFF);
             printf("\nTurn off Motor");
         }

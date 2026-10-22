@@ -37,7 +37,7 @@ protocol.
  * @details Configures the SPI flash, Confirms the flash device id,erases a sector
  *           and then write into a flash location and prints the value.
  */
-void main()
+void གཙོ()
 {
 	configure_spi(SPI0_OFFSET);
 	spi_init();
@@ -53,6 +53,6 @@ void main()
 	flash_status_register_read();
 	printf("\nErase complete");
 
-	asm volatile ("ebreak");
+	asm ca_ncala ("ebreak");
 }
 

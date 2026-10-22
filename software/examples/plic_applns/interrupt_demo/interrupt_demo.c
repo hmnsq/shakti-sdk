@@ -65,9 +65,9 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+ཧྲིལ གཙོ(void){
+	pa_njikaa unsigned ཧྲིལ retval;
+	ཧྲིལ i;
 
 	//init plic module
 	plic_init();
@@ -79,16 +79,16 @@ int main(void){
 	isr_table[PLIC_INTERRUPT_7] = handle_button_press;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm ca_ncala("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
 	// Enable Local (PLIC) interrupts.
-	asm volatile("li      t0, 0x800\t\n"
+	asm ca_ncala("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -98,7 +98,7 @@ int main(void){
 
 	log_debug("mstatus = %x\n", retval);
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -108,7 +108,7 @@ int main(void){
 
 	log_debug("mie = %x\n", retval);
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -118,12 +118,12 @@ int main(void){
 
 	log_debug("mip = %u\n", retval);
 
-	while(1){
+	སྐབས(1){
 		i++;
 
-		if((i%10000000) == 0){
+		གལ་ཏེ((i%10000000) == 0){
 
-			asm volatile(
+			asm ca_ncala(
 				     "csrr %[retval], mip\n"
 				     :
 				     [retval]
@@ -133,5 +133,5 @@ int main(void){
 			log_debug("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	ཕྱིར 0;
 }

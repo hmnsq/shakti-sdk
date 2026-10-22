@@ -49,22 +49,22 @@
  * @brief Reads data sent by lora module.
  * @param data responses read from lora module, mainly used for logging
  */
-int read_from_lora(char *data)
+ཧྲིལ read_from_lora(var_na *data)
 {
-	int ch;
-	char *str = data;
-	char *test = data;
-	for (int i = 0; i < 98; i++)
+	ཧྲིལ ch;
+	var_na *str = data;
+	var_na *test = data;
+	ཆེད་དུ (ཧྲིལ i = 0; i < 98; i++)
 	{
 		read_uart_character(LORA_UART, &ch);
 		*str = ch;
 		str++;
-		if (ch == '\n')
+		གལ་ཏེ (ch == '\n')
 		{
-			break;
+			bha_nga;
 		}
 	}
-	return;	
+	ཕྱིར;	
 }
 
 
@@ -73,11 +73,11 @@ int read_from_lora(char *data)
  * @details sends carriage return and new line charector to lora,
  *  		this method is neeed to indicate end to data transmission.
  */
-int write_enter_to_lora()
+ཧྲིལ write_enter_to_lora()
 {
 	write_uart_character(LORA_UART, '\r');
 	write_uart_character(LORA_UART, '\n');
-	return 0;
+	ཕྱིར 0;
 }
 
 
@@ -85,9 +85,9 @@ int write_enter_to_lora()
  * @brief sends data to Lora using UART.
  * @param data send data from one Lora to another Lora module.
  */
-void write_to_lora(char *data)
+void write_to_lora(var_na *data)
 {
-	while (*data != '\0')
+	སྐབས (*data != '\0')
 	{
 		write_uart_character(LORA_UART, *data);
 		data++;
@@ -102,7 +102,7 @@ void write_to_lora(char *data)
  */
 void receive_data()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -118,7 +118,7 @@ void receive_data()
  */
 void check_set_lora_value()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	memset(data, 0, LENGTH);
 	flush_uart(LORA_UART);
@@ -149,7 +149,7 @@ void check_set_lora_value()
  */
 void setup_lora()
 {
-	char data[LENGTH];
+	var_na data[LENGTH];
 
 	// memset(data, 0, LENGTH);
 	// flush_uart(LORA_UART);
@@ -194,7 +194,7 @@ void setup_lora()
  *          Setup the Lora module with the address, baud rate  
  *          Receive data 
  */
-void main()
+void གཙོ()
 {
 	printf("\n Setting PIN MUX config to 2 ...... \n");
 	*pinmux_config_reg = 0x5;

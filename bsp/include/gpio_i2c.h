@@ -43,19 +43,19 @@ add a method to set the GPIO pins that are to be used  */
 
 // function prototype 
 void I2cInit();
-void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
-void I2cWriteByte(unsigned char , unsigned char );
-unsigned char I2cReadByte(unsigned char );
-void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataAck(unsigned char );
-unsigned char I2cReadDataNack(unsigned char );
-void I2cStart(unsigned char );
-void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
-int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
-int I2c_shakti_readbytes(char *, int , int , unsigned char );
-void ReadAckForWrite(unsigned char delay);
-void SendNackForRead(unsigned char delay);
-void SendAckForRead(unsigned char delay);
+void I2cSendSlaveAddress(unsigned var_na , unsigned var_na , unsigned var_na );
+void I2cWriteByte(unsigned var_na , unsigned var_na );
+unsigned var_na I2cReadByte(unsigned var_na );
+void I2cWriteData(unsigned var_na , unsigned var_na );
+unsigned var_na I2cReadDataAck(unsigned var_na );
+unsigned var_na I2cReadDataNack(unsigned var_na );
+void I2cStart(unsigned var_na );
+void I2cStop(unsigned var_na );
+void I2c_Write_byte(unsigned var_na, unsigned var_na, unsigned var_na, unsigned var_na);
+ཧྲིལ I2c_Read_byte(unsigned var_na ,unsigned var_na , unsigned var_na );
+ཧྲིལ I2c_shakti_readbytes(var_na *, ཧྲིལ , ཧྲིལ , unsigned var_na );
+void ReadAckForWrite(unsigned var_na delay);
+void SendNackForRead(unsigned var_na delay);
+void SendAckForRead(unsigned var_na delay);
 
 #endif

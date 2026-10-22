@@ -24,29 +24,29 @@
 
 ***************************************************************************/
 
-#define I2C i2c_instance[1]
+#ವ್ಯಾಖ್ಯಾನಿಸು I2C i2c_instance[1]
 
-#define BMP280_SLAVE_ADDRESS 0xEC       //Defines the Starting address of slave//
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
-#define BMP280_CTRL_MEANS 0xF4
-#define BMP280_NORMAL_MODE 0x26
-#define BMP280_STATUS_REGISTER 0xF3
-#define BMP280_CONFIG_REGISTER 0xF5
-#define BMP280_RESET_REGISTER 0xE0
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_SLAVE_ವಿಳಾಸ 0xEC       //Defines the Starting address of slave//
+#ವ್ಯಾಖ್ಯಾನಿಸು DELAY_ಮೌಲ್ಯ 900
+#ವ್ಯಾಖ್ಯಾನಿಸು PRESCALER_ಎಣಿಕೆ 0x1F
+#ವ್ಯಾಖ್ಯಾನಿಸು SCLK_ಎಣಿಕೆ 0x91
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_CTRL_MEANS 0xF4
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_ಸಾಮಾನ್ಯ_ಬಹುಲಕ 0x26
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_ಸ್ಥಿತಿ_ರಿಜಿಸ್ಟರ್ 0xF3
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_CONFIG_ರಿಜಿಸ್ಟರ್ 0xF5
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_RESET_ರಿಜಿಸ್ಟರ್ 0xE0
 
-#define BMP280_REG_DIG_T1 0x88
-#define BMP280_REG_DIG_T2 0x8A
-#define BMP280_REG_DIG_T3 0x8C
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_T1 0x88
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_T2 0x8A
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_T3 0x8C
 
-#define BMP280_REG_DIG_P1 0x8E
-#define BMP280_REG_DIG_P2 0x90
-#define BMP280_REG_DIG_P3 0x92
-#define BMP280_REG_DIG_P4 0x94
-#define BMP280_REG_DIG_P5 0x96
-#define BMP280_REG_DIG_P6 0x98
-#define BMP280_REG_DIG_P7 0x9A
-#define BMP280_REG_DIG_P8 0x9C
-#define BMP280_REG_DIG_P9 0x9E
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P1 0x8E
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P2 0x90
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P3 0x92
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P4 0x94
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P5 0x96
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P6 0x98
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P7 0x9A
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P8 0x9C
+#ವ್ಯಾಖ್ಯಾನಿಸು BMP280_REG_DIG_P9 0x9E
 

@@ -26,24 +26,24 @@
  * @brief Declaration for keypad library.
  * @detail Include File Definitions	
  */
-#if !defined(KYPD_H)
-#define KYPD_H
+#ಆದರೆ !defined(KYPD_H)
+#ವ್ಯಾಖ್ಯಾನಿಸು KYPD_H
 
-#define ROWNUM 4
-#define COLNUM 4
+#ವ್ಯಾಖ್ಯಾನಿಸು ROWNUM 4
+#ವ್ಯಾಖ್ಯಾನಿಸು COLNUM 4
 
-#define OUTPINS_OFFSET 0
-#define INPINS_OFFSET 4
-#define OUTPINS (0xF << OUTPINS_OFFSET)
-#define INPINS  (0xF << INPINS_OFFSET)
+#ವ್ಯಾಖ್ಯಾನಿಸು OUTPINS_ಸ್ಥಾನಾಂತರ 0
+#ವ್ಯಾಖ್ಯಾನಿಸು INPINS_ಸ್ಥಾನಾಂತರ 4
+#ವ್ಯಾಖ್ಯಾನಿಸು OUTPINS (0xF << OUTPINS_ಸ್ಥಾನಾಂತರ)
+#ವ್ಯಾಖ್ಯಾನಿಸು INPINS  (0xF << INPINS_ಸ್ಥಾನಾಂತರ)
 
 //function prototype
-void set_pins(unsigned int* row, unsigned int* col);
-void set_key_map(int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+ಶೂನ್ಯ ಗಣ_pins(ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ* ಅಡ್ಡಸಾಲು, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ* ಲಂಬಸಾಲು);
+ಶೂನ್ಯ ಗಣ_ಕೀಲಿ_map(ಪೂರ್ಣಾಂಕ ಕೋಷ್ಟಕ[COLNUM][ROWNUM]);
+ಪೂರ್ಣಾಂಕ get_ಕೀಲಿ();
+ಪೂರ್ಣಾಂಕ get_ಲಂಬಸಾಲು_ಅಡ್ಡಸಾಲು(ಶೂನ್ಯ);
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಅಡ್ಡಸಾಲು_pins[ROWNUM];
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಲಂಬಸಾಲು_pins[COLNUM];
+ಪೂರ್ಣಾಂಕ ಕೀಲಿ_map[COLNUM][ROWNUM];
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

@@ -27,9 +27,9 @@
  * handling traps are declared.
  */
 
-#ifndef TRAPS_H
-#define TRAPS_H
-#include <stdint.h>
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ TRAPS_H
+#ವ್ಯಾಖ್ಯಾನಿಸು TRAPS_H
+#ಅನ್ತರ್ಭಾವ <stdint.h>
 
 /*
    Table 3.6 risc v priv spec v1.10 chapter 7
@@ -72,59 +72,59 @@
    Off the 32 entries in the table, some index positions reserved for future use
  */
 
-#define MAX_MCAUSE_VALUE               32
+#ವ್ಯಾಖ್ಯಾನಿಸು MAX_MCAUSE_ಮೌಲ್ಯ               32
 
 
 /*  Interrupts */
-#define MAX_INTERRUPT_VALUE            16
+#ವ್ಯಾಖ್ಯಾನಿಸು MAX_ಅಡಚಣೆ_ಮೌಲ್ಯ            16
 
-#define USER_SW_INTERRUPT               0
-#define SUPER_SW_INTERRUPT              1
-#define RESERVED_INTERRUPT0             2
-#define MACH_SW_INTERRUPT               3
-#define USER_TIMER_INTERRUPT            4
-#define SUPER_TIMER_INTERRUPT           5
-#define RESERVED_INTERRUPT1             6
-#define MACH_TIMER_INTERRUPT            7
-#define USER_EXT_INTERRUPT              8
-#define SUPERVISOR_EXT_INTERRUPT        9
-#define RESERVED_INTERRUPT2            10
-#define MACH_EXTERNAL_INTERRUPT        11
-#define RESERVED_INTERRUPT3            12
-#define RESERVED_INTERRUPT4            13
-#define RESERVED_INTERRUPT5            14
-#define RESERVED_INTERRUPT6            15
+#ವ್ಯಾಖ್ಯಾನಿಸು USER_SW_ಅಡಚಣೆ               0
+#ವ್ಯಾಖ್ಯಾನಿಸು SUPER_SW_ಅಡಚಣೆ              1
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT0             2
+#ವ್ಯಾಖ್ಯಾನಿಸು MACH_SW_ಅಡಚಣೆ               3
+#ವ್ಯಾಖ್ಯಾನಿಸು USER_TIMER_ಅಡಚಣೆ            4
+#ವ್ಯಾಖ್ಯಾನಿಸು SUPER_TIMER_ಅಡಚಣೆ           5
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT1             6
+#ವ್ಯಾಖ್ಯಾನಿಸು MACH_TIMER_ಅಡಚಣೆ            7
+#ವ್ಯಾಖ್ಯಾನಿಸು USER_EXT_ಅಡಚಣೆ              8
+#ವ್ಯಾಖ್ಯಾನಿಸು SUPERVISOR_EXT_ಅಡಚಣೆ        9
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT2            10
+#ವ್ಯಾಖ್ಯಾನಿಸು MACH_EXTERNAL_ಅಡಚಣೆ        11
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT3            12
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT4            13
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT5            14
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_INTERRUPT6            15
 
 /* Traps */
-#define MAX_TRAP_VALUE                 16
+#ವ್ಯಾಖ್ಯಾನಿಸು MAX_TRAP_ಮೌಲ್ಯ                 16
 
-#define INSTRUCTION_ADDRESS_MISALIGNED  0
-#define INSTRUCTION_ACCESS_FAULT        1
-#define ILLEGAL_INSTRUCTION             2
-#define BREAKPOINT                      3
-#define LOAD_ADDRESS_MISALIGNED         4
-#define LOAD_ACCESS_FAULT               5
-#define STORE_AMO_ADDRESS_MISALIGNED    6
-#define STORE_AMO_ACCESS_FAULT          7
-#define ENVIRONMENT_CALL_FROM_U_MODE    8
-#define ENVIRONMENT_CALL_FROM_S_MODE    9
-#define RESERVED_TRAP1                 10
-#define ENVIRONMENT_CALL_FROM_M_MODE   11
-#define INSTRUCTION_PAGE_FAULT         12
-#define LOAD_PAGE_FAULT                13
-#define RESERVED_TRAP2                 14
-#define STORE_AMO_PAGE_FAULT           15
+#ವ್ಯಾಖ್ಯಾನಿಸು INSTRUCTION_ವಿಳಾಸ_MISALIGNED  0
+#ವ್ಯಾಖ್ಯಾನಿಸು INSTRUCTION_ACCESS_FAULT        1
+#ವ್ಯಾಖ್ಯಾನಿಸು ILLEGAL_INSTRUCTION             2
+#ವ್ಯಾಖ್ಯಾನಿಸು BREAKPOINT                      3
+#ವ್ಯಾಖ್ಯಾನಿಸು ತುಂಬು_ವಿಳಾಸ_MISALIGNED         4
+#ವ್ಯಾಖ್ಯಾನಿಸು ತುಂಬು_ACCESS_FAULT               5
+#ವ್ಯಾಖ್ಯಾನಿಸು STORE_AMO_ವಿಳಾಸ_MISALIGNED    6
+#ವ್ಯಾಖ್ಯಾನಿಸು STORE_AMO_ACCESS_FAULT          7
+#ವ್ಯಾಖ್ಯಾನಿಸು ENVIRONMENT_CALL_FROM_U_ಬಹುಲಕ    8
+#ವ್ಯಾಖ್ಯಾನಿಸು ENVIRONMENT_CALL_FROM_S_ಬಹುಲಕ    9
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_TRAP1                 10
+#ವ್ಯಾಖ್ಯಾನಿಸು ENVIRONMENT_CALL_FROM_M_ಬಹುಲಕ   11
+#ವ್ಯಾಖ್ಯಾನಿಸು INSTRUCTION_ಪುಟ_FAULT         12
+#ವ್ಯಾಖ್ಯಾನಿಸು ತುಂಬು_ಪುಟ_FAULT                13
+#ವ್ಯಾಖ್ಯಾನಿಸು RESERVED_TRAP2                 14
+#ವ್ಯಾಖ್ಯಾನಿಸು STORE_AMO_ಪುಟ_FAULT           15
 
 /*
    Trap table -  Each entry in the table corresponds to a service routine for a Trap
  */
 
-typedef void (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
-extern mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-extern mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+ಪ್ರಕಾರವ್ಯಾಖ್ಯೆ ಶೂನ್ಯ (*mtrap_fptr_t) (uintptr_t trap_cause, uintptr_t epc);
+ಬಾಹ್ಯ mtrap_fptr_t mcause_trap_ಕೋಷ್ಟಕ[MAX_TRAP_ಮೌಲ್ಯ];
+ಬಾಹ್ಯ mtrap_fptr_t mcause_ಅಡಚಣೆ_ಕೋಷ್ಟಕ[MAX_ಅಡಚಣೆ_ಮೌಲ್ಯ];
 
-void default_handler(uintptr_t cause, uintptr_t epc);
-unsigned int extract_ie_code(unsigned int num);
+ಶೂನ್ಯ default_handler(uintptr_t cause, uintptr_t epc);
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಹೊರತೆಗೆ_ie_ಸಂಕೇತ(ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಅಂಕೆ);
 uintptr_t handle_trap(uintptr_t cause, uintptr_t epc);
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

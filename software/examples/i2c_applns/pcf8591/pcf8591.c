@@ -26,20 +26,20 @@
 @detail I2C based routines to configures and read the adc value from pcf8591.
 */
 
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ಅನ್ತರ್ಭಾವ <stdint.h>//Includes the definitions of standard input/output functions//
+#ಅನ್ತರ್ಭಾವ "i2c.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
+#ಅನ್ತರ್ಭಾವ "uart.h"
 
-#define PCF8591_SLAVE_ADDRESS 0x90 // I2C bus address //doubt
-#define PCF8591_CONTROL_REGISTER_VALUE 0x04
-#define PCF8591_REG_OFFSET 0
+#ವ್ಯಾಖ್ಯಾನಿಸು PCF8591_SLAVE_ವಿಳಾಸ 0x90 // I2C bus address //doubt
+#ವ್ಯಾಖ್ಯಾನಿಸು PCF8591_CONTROL_ರಿಜಿಸ್ಟರ್_ಮೌಲ್ಯ 0x04
+#ವ್ಯಾಖ್ಯಾನಿಸು PCF8591_REG_ಸ್ಥಾನಾಂತರ 0
 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#ವ್ಯಾಖ್ಯಾನಿಸು DELAY_ಮೌಲ್ಯ 900
+#ವ್ಯಾಖ್ಯಾನಿಸು PRESCALER_ಎಣಿಕೆ 0x1F
+#ವ್ಯಾಖ್ಯಾನಿಸು SCLK_ಎಣಿಕೆ 0x91
 
-#define I2C i2c_instance[0]
+#ವ್ಯಾಖ್ಯಾನಿಸು I2C i2c_instance[0]
 
 /** @fn int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the ADC value from PCF8591
@@ -51,37 +51,37 @@
  * @param delay
  * @return read status (zero on success)
  */
-int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
+ಪೂರ್ಣಾಂಕ read_pcf8591_registers(i2c_struct * i2c_instance, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ reg_ಸ್ಥಾನಾಂತರ, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ *read_ತಾತ್ಕಾಲಿಕ, ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ ಉದ್ದಳತೆ_2, ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ read_buf[4] = {'\0'};
+	ಪೂರ್ಣಾಂಕ i = 0, j = 0,  k = 0, ಸ್ಥಿತಿ_3=0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ ತಾತ್ಕಾಲಿಕ = 0;
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_ವಿಳಾಸ(i2c_instance, PCF8591_SLAVE_ವಿಳಾಸ, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset, delay);
+	i2c_write_ದತ್ತಾಂಶ(i2c_instance, reg_ಸ್ಥಾನಾಂತರ, delay);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_ವಿಳಾಸ(i2c_instance, PCF8591_SLAVE_ವಿಳಾಸ, I2C_READ, 800);
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_ದತ್ತಾಂಶ(i2c_instance, &ತಾತ್ಕಾಲಿಕ, delay);
 
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	for(i = 0; i < length; i++)
+	ಗಾಗಿ(i = 0; i < ಉದ್ದಳತೆ_2; i++)
 	{
-		i2c_read_data(i2c_instance, &temp, delay);
-		*readTemp = temp;
-		if( i == (length - 2) )
+		i2c_read_ದತ್ತಾಂಶ(i2c_instance, &ತಾತ್ಕಾಲಿಕ, delay);
+		*read_ತಾತ್ಕಾಲಿಕ = ತಾತ್ಕಾಲಿಕ;
+		ಆದರೆ( i == (ಉದ್ದಳತೆ_2 - 2) )
 		i2c_instance->control = I2C_NACK;
-		*readTemp++;
+		*read_ತಾತ್ಕಾಲಿಕ++;
 	}
 	
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }
 
 /** @fn int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -94,19 +94,19 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @param delay
  * @return Write status (Zero on success)
  */
-int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
+ಪೂರ್ಣಾಂಕ write_pcf8591_registers(i2c_struct * i2c_instance, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ reg_ಸ್ಥಾನಾಂತರ, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ *write_ಮೌಲ್ಯ, ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ ಉದ್ದಳತೆ_2, ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset, delay);
-	for(i = 0; i < length; i++)
+	ಪೂರ್ಣಾಂಕ i = 0, j = 0,  k = 0, ಸ್ಥಿತಿ_3=0;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ತಾತ್ಕಾಲಿಕ = 0;
+	i2c_send_slave_ವಿಳಾಸ(i2c_instance, PCF8591_SLAVE_ವಿಳಾಸ, I2C_WRITE, delay);
+	i2c_write_ದತ್ತಾಂಶ(i2c_instance, reg_ಸ್ಥಾನಾಂತರ, delay);
+	ಗಾಗಿ(i = 0; i < ಉದ್ದಳತೆ_2; i++)
 	{
-		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+		i2c_write_ದತ್ತಾಂಶ(i2c_instance,  ( *write_ಮೌಲ್ಯ++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;;
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }
 
 /** @fn int main()
@@ -115,40 +115,40 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
  * prints the read values
  * @return Zero
  */
-int main()
+ಪೂರ್ಣಾಂಕ ಮುಖ್ಯ()
 {
-	unsigned char i = 0;
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
-	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
-	unsigned char length = 0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ i = 0;
+	ಪೂರ್ಣಾಂಕ timeout;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ = 0;
+	ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay = 1000;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ write_buf[7] = {0x00}, read_buf[7] = {0x00};
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ ಉದ್ದಳತೆ_2 = 0;
 	
 	log_debug("\tI2C: PCF8591 - ADC test\n");
 
 	i2c_init();
 
-	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	ಆದರೆ(config_i2c(I2C, PRESCALER_ಎಣಿಕೆ, SCLK_ಎಣಿಕೆ))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+			ಹಿಂತಿರುಗಿ -1;
 	}
-	else
+	ಇಲ್ಲದಿದ್ದರೆ
 		log_info("\tIntilization Happened Fine\n");
-		length = 1;
-		write_buf[0] = PCF8591_CONTROL_REGISTER_VALUE;
-		write_pcf8591_registers(I2C, 0x00, &write_buf[0], length, delay);
+		ಉದ್ದಳತೆ_2 = 1;
+		write_buf[0] = PCF8591_CONTROL_ರಿಜಿಸ್ಟರ್_ಮೌಲ್ಯ;
+		write_pcf8591_registers(I2C, 0x00, &write_buf[0], ಉದ್ದಳತೆ_2, delay);
 		log_debug("\n Write complete");
-		length = 5;
-	while(1)
+		ಉದ್ದಳತೆ_2 = 5;
+	ಆಗ(1)
 	{
-			read_pcf8591_registers(I2C, PCF8591_CONTROL_REGISTER_VALUE, &read_buf[0], length, 800);
+			read_pcf8591_registers(I2C, PCF8591_CONTROL_ರಿಜಿಸ್ಟರ್_ಮೌಲ್ಯ, &read_buf[0], ಉದ್ದಳತೆ_2, 800);
 			log_info("\n");
-			for( i = 1; i < length; i++)
+			ಗಾಗಿ( i = 1; i < ಉದ್ದಳತೆ_2; i++)
 			log_info("\nADC Input[%d]: %x", i, read_buf[i]);
 			delay_loop(3000, 2000);
 	}
 
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }
 

@@ -26,121 +26,121 @@
  * @detail This file contains the tests to verify the working of malloc
  */
 
-extern char _free_space[];
-extern char _STACK_SIZE[];
-extern char _HEAP_SIZE[];
-extern char _stack_end[];
-extern char _stack[];
-extern char _heap[];
-extern char _heap_end[];
-extern char __bss_end[];
-extern char __bss_start[];
-extern char __sbss_end[];
-extern char __sbss_start[];
+ಬಾಹ್ಯ ಅಕ್ಷರ _free_space[];
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ_ಗಾತ್ರ_3[];
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ_ಗಾತ್ರ[];
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ_ಕೊನೆ[];
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ[];
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ_2[];
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ_ಕೊನೆ_2[];
+ಬಾಹ್ಯ ಅಕ್ಷರ __bss_end[];
+ಬಾಹ್ಯ ಅಕ್ಷರ __bss_start[];
+ಬಾಹ್ಯ ಅಕ್ಷರ __sbss_end[];
+ಬಾಹ್ಯ ಅಕ್ಷರ __sbss_start[];
 
 
-char *test1=(char *)&_free_space;
-char *test3=(char *)&_STACK_SIZE;
-char *test4=(char *)&_HEAP_SIZE;
-char *test5=(char *)&_stack_end;
-char *test6=(char *)&_stack;
-char *test7=(char *)&_heap;
-char *test8=(char *)&_heap_end;
-char *test9=(char *)&__bss_end;
-char *test10=(char *)&__bss_start;
-char *test11=(char *)&__sbss_end;
-char *test12=(char *)&__sbss_start;
+ಅಕ್ಷರ *test1=(ಅಕ್ಷರ *)&_free_space;
+ಅಕ್ಷರ *test3=(ಅಕ್ಷರ *)&ರಾಶಿ_ಗಾತ್ರ_3;
+ಅಕ್ಷರ *test4=(ಅಕ್ಷರ *)&ರಾಶಿ_ಗಾತ್ರ;
+ಅಕ್ಷರ *test5=(ಅಕ್ಷರ *)&ರಾಶಿ_ಕೊನೆ;
+ಅಕ್ಷರ *test6=(ಅಕ್ಷರ *)&ರಾಶಿ;
+ಅಕ್ಷರ *test7=(ಅಕ್ಷರ *)&ರಾಶಿ_2;
+ಅಕ್ಷರ *test8=(ಅಕ್ಷರ *)&ರಾಶಿ_ಕೊನೆ_2;
+ಅಕ್ಷರ *test9=(ಅಕ್ಷರ *)&__bss_end;
+ಅಕ್ಷರ *test10=(ಅಕ್ಷರ *)&__bss_start;
+ಅಕ್ಷರ *test11=(ಅಕ್ಷರ *)&__sbss_end;
+ಅಕ್ಷರ *test12=(ಅಕ್ಷರ *)&__sbss_start;
 
-int c1,c2,c3,c4,c5;
-int *pointer;
+ಪೂರ್ಣಾಂಕ c1,c2,c3,c4,c5;
+ಪೂರ್ಣಾಂಕ *ಸೂಚಕ_2;
 
 /** @fn int main()
  * @brief main runs the code to test malloc
  * @details runs the code to test malloc
  * @return returns int
  */
-int main()
+ಪೂರ್ಣಾಂಕ ಮುಖ್ಯ()
 {
 
-  printf("\n\n\n\n\n\nTest Running");
-  printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
-  printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
+  ಬರೆ("\n\n\n\n\n\nTest Running");
+  ಬರೆ("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
+  ಬರೆ("\n %x %d %x %x %x %x %x",&ಸೂಚಕ_2,c1,&c1,&c2,&c3,&c4,&c5);
   
-  static int b1,b2,b3,b4,b5;
-  printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
+  ಸ್ಥಿರ ಪೂರ್ಣಾಂಕ b1,b2,b3,b4,b5;
+  ಬರೆ("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 
-  int a1,a2,a3,a4,a5;
-  printf("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
+  ಪೂರ್ಣಾಂಕ a1,a2,a3,a4,a5;
+  ಬರೆ("\n %x %x %x %x %x",&a1,&a2,&a3,&a4,&a5);
 
-int **a;
-int *b,*c,*d;
-int i=0;int n;
+ಪೂರ್ಣಾಂಕ **a;
+ಪೂರ್ಣಾಂಕ *b,*c,*d;
+ಪೂರ್ಣಾಂಕ i=0;ಪೂರ್ಣಾಂಕ n;
 
 //Enter Size of Array;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
+ಬರೆ("\n size of array %d %x",n,&n);
+b=ಸ್ಮರಣೆ_ಕೊಡು(n*ಗಾತ್ರ(ಪೂರ್ಣಾಂಕ))	;
 
 //printf("\n\n\n\n\n\n\n %x %x %x %x %x %x %x  \n\n\n\n\n",test1,test3,test4,test5,test6,test7,test8);
 
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+ಬರೆ("\n B's address %x %x",b,&b);
+ಗಾಗಿ(i=0;i<n;i++)
 {
   b[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+ಗಾಗಿ(i=0;i<n;i++)
 {
-    printf("\n b[%d]'s address is : %x",i,&b[i]);
-    printf("\n b[%d]'s value is : %d",i,b[i]);
+    ಬರೆ("\n b[%d]'s address is : %x",i,&b[i]);
+    ಬರೆ("\n b[%d]'s value is : %d",i,b[i]);
 }
 
-free(b);
+ಬಿಡುಗಡೆ(b);
 
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
+ಬರೆ("\nArray B is freed");
+ಬರೆ("\nb=%x",b);
+ಬರೆ("\n size of array %d",n);
 
-c=malloc(n*sizeof(int))	;
-printf("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
+c=ಸ್ಮರಣೆ_ಕೊಡು(n*ಗಾತ್ರ(ಪೂರ್ಣಾಂಕ))	;
+ಬರೆ("\n The previously allocated block from the free list is used to allocate Array C since they are of the same size");
 
-printf("\n C's address %x",c);
+ಬರೆ("\n C's address %x",c);
 
-for(i=0;i<n;i++)
+ಗಾಗಿ(i=0;i<n;i++)
 {
     c[i]=i+1;
 }
 
-for(i=0;i<n;i++)
+ಗಾಗಿ(i=0;i<n;i++)
 {
-    printf("\n c[%d]'s address is : %x",i,&c[i]);
-    printf("\n c[%d]'s value is : %d",i,c[i]);
+    ಬರೆ("\n c[%d]'s address is : %x",i,&c[i]);
+    ಬರೆ("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
+ಬಿಡುಗಡೆ(c);
 
-printf("\nc=%x",c);
+ಬರೆ("\nc=%x",c);
 
-int x;
+ಪೂರ್ಣಾಂಕ x;
 x=30;
 
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
+ಬರೆ("\n\n\nx address is %x",&x);
+d=ಸ್ಮರಣೆ_ಕೊಡು(x*ಗಾತ್ರ(ಪೂರ್ಣಾಂಕ));
 
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+ಬರೆ("\n D's address %x",d);
+ಗಾಗಿ(i=0;i<x;i++)
 {
-    printf("\nSetting value %d , %x",i+1,&d[i]); 
+    ಬರೆ("\nSetting value %d , %x",i+1,&d[i]); 
     d[i]=i+1;
 }
 
-for(i=0;i<x;i++)
+ಗಾಗಿ(i=0;i<x;i++)
 {
-    printf("\n d[%d]'s address is : %x",i,&d[i]);
-    printf("\n d[%d]'s value is : %d",i,d[i]);
+    ಬರೆ("\n d[%d]'s address is : %x",i,&d[i]);
+    ಬರೆ("\n d[%d]'s value is : %d",i,d[i]);
 }
 
-free(d);
+ಬಿಡುಗಡೆ(d);
 
-printf("\nd=%x",d);
+ಬರೆ("\nd=%x",d);
 
 }

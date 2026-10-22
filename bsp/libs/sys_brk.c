@@ -26,13 +26,13 @@
 @detail This file is used to the set the brk which specifies the start of the heap and the end of the text section.
 */ 
 
-#include "platform.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
 
-extern char _end[];                /* _end is set in the linker file */
-extern char _heap_end[];	   /* _heap_end is set in the linker file */
+ಬಾಹ್ಯ ಅಕ್ಷರ ಕೊನೆ[];                /* _end is set in the linker file */
+ಬಾಹ್ಯ ಅಕ್ಷರ ರಾಶಿ_ಕೊನೆ_2[];	   /* _heap_end is set in the linker file */
 
-char *heap_ptr=(char *)&_end;
-char *end_of_heap=(char *)&_heap_end;
+ಅಕ್ಷರ *ರಾಶಿ_ptr=(ಅಕ್ಷರ *)&ಕೊನೆ;
+ಅಕ್ಷರ *ಕೊನೆ_ದ_ರಾಶಿ=(ಅಕ್ಷರ *)&ರಾಶಿ_ಕೊನೆ_2;
 
 /* OS LESS IMPLEMENTATION OF SBRK
  * sbrk -- changes heap size. Get nbytes more RAM.
@@ -46,25 +46,25 @@ char *end_of_heap=(char *)&_heap_end;
  * @param int nbytes - specifies the size of the heap 
  * @return  returns a pointer to the start of the heap
  */
-char * m_sbrk (nbytes)
-	int nbytes;
+ಅಕ್ಷರ * m_sbrk (nbytes)
+	ಪೂರ್ಣಾಂಕ nbytes;
 {
-	char *base;
+	ಅಕ್ಷರ *ತಳ;
 
-	log_debug("\nHeap pointer is %x",heap_ptr);
+	log_debug("\nHeap pointer is %x",ರಾಶಿ_ptr);
 
-	if(!heap_ptr)
-		heap_ptr = (char *)&_end;
+	ಆದರೆ(!ರಾಶಿ_ptr)
+		ರಾಶಿ_ptr = (ಅಕ್ಷರ *)&ಕೊನೆ;
 
-	base = heap_ptr;
-	heap_ptr += nbytes;
+	ತಳ = ರಾಶಿ_ptr;
+	ರಾಶಿ_ptr += nbytes;
 
-	log_debug("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
+	log_debug("\nNew System BRK: %x %x %x",ತಳ,ರಾಶಿ_ptr,ಕೊನೆ_ದ_ರಾಶಿ);
 
-	if(heap_ptr>end_of_heap)
+	ಆದರೆ(ರಾಶಿ_ptr>ಕೊನೆ_ದ_ರಾಶಿ)
 	{
 		log_error("\nMemory allocation error: Insufficient Space");
-		return -1;
+		ಹಿಂತಿರುಗಿ -1;
 	}
-	return base;
+	ಹಿಂತಿರುಗಿ ತಳ;
 }

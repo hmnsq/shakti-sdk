@@ -26,22 +26,22 @@
  * @detail This is the header file for util.c
  */
 
-#ifndef UTIL_H
-#define UTIL_H
-#include <stdio.h>
-#include <stdint.h>
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ UTIL_H
+#ವ್ಯಾಖ್ಯಾನಿಸು UTIL_H
+#ಅನ್ತರ್ಭಾವ <stdio.h>
+#ಅನ್ತರ್ಭಾವ <stdint.h>
 
 /* function prototype */
-void waitfor(unsigned int secs);
-void delay(unsigned long seconds);
-float pow_10(unsigned int y);
-void reverse(char *str, int len);
-void ftoa( float, char *, unsigned int);
-void delay_loop(unsigned long cntr1, unsigned long cntr2);
-unsigned long read_word(uint32_t *addr);
-void write_word(uint32_t *addr, unsigned long val);
-int int_to_string(int number, char str[], unsigned int afterpoint);
-void _printf_(const char *fmt, va_list ap);
-int printf(const char* fmt, ...);
+ಶೂನ್ಯ waitfor(ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ secs);
+ಶೂನ್ಯ delay(ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ seconds);
+ದಶಮಾಂಶ pow_10(ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ y);
+ಶೂನ್ಯ ಹಿಮ್ಮುಖ(ಅಕ್ಷರ *str, ಪೂರ್ಣಾಂಕ len);
+ಶೂನ್ಯ ftoa( ದಶಮಾಂಶ, ಅಕ್ಷರ *, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ);
+ಶೂನ್ಯ delay_loop(ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ cntr1, ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ cntr2);
+ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ read_ಶಬ್ದ(uint32_t *addr);
+ಶೂನ್ಯ write_ಶಬ್ದ(uint32_t *addr, ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ val);
+ಪೂರ್ಣಾಂಕ int_ಗಮ್ಯ_string(ಪೂರ್ಣಾಂಕ ಸಂಖ್ಯೆ, ಅಕ್ಷರ str[], ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ afterpoint);
+ಶೂನ್ಯ _printf_(ಸ್ಥಿರಾಂಕ ಅಕ್ಷರ *fmt, va_list ap);
+ಪೂರ್ಣಾಂಕ ಬರೆ(ಸ್ಥಿರಾಂಕ ಅಕ್ಷರ* fmt, ...);
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

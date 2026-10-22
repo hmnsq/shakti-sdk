@@ -20,130 +20,130 @@ platform.h - header file for Artix 35 T E class SoC
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ PLATFORM_H
+#ವ್ಯಾಖ್ಯಾನಿಸು PLATFORM_H
 
 /*
  *@brief RISCV - E CLASS SOC Memory mapping
  */
 
-#define CLOCK_FREQUENCY 50000000
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   16
+#ವ್ಯಾಖ್ಯಾನಿಸು CLOCK_FREQUENCY 50000000
+#ವ್ಯಾಖ್ಯಾನಿಸು CLINT_ತಳ 0x020000000
+#ವ್ಯಾಖ್ಯಾನಿಸು MTIME      0x0200BFF8
+#ವ್ಯಾಖ್ಯಾನಿಸು MTIMECMP   0x02004000
+#ವ್ಯಾಖ್ಯಾನಿಸು CLINT_ಭಾಜಕ   16
 
-#define MCAUSE_INT         0x80000000
-#define MCAUSE_CAUSE       0x7FFFFFFF
+#ವ್ಯಾಖ್ಯಾನಿಸು MCAUSE_INT         0x80000000
+#ವ್ಯಾಖ್ಯಾನಿಸು MCAUSE_CAUSE       0x7FFFFFFF
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#ವ್ಯಾಖ್ಯಾನಿಸು PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
-#define DBG_MEM_START 0x00000010
+#ವ್ಯಾಖ್ಯಾನಿಸು DBG_MEM_ಆರಂಭ 0x00000010
 
 /*!Tightly Coupled Memory(TCM) Offset. Size 128kB */
-#define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
+#ವ್ಯಾಖ್ಯಾನಿಸು TCM_MEM_ಆರಂಭ 0x80000000 /*! DDR3 Memory Start address */
 
 /*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
+#ವ್ಯಾಖ್ಯಾನಿಸು TCM_MEM_ಗಾತ್ರ 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
+#ವ್ಯಾಖ್ಯಾನಿಸು ರಾಶಿ_PERCENTAGE 50 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
-#define HEAP_PERCENTAGE 50 /*! DDR3 Memory Size */
+#ವ್ಯಾಖ್ಯಾನಿಸು ರಾಶಿ_PERCENTAGE_2 50 /*! DDR3 Memory Size */
 
 /*!Pulse Width Modulation Start Offsets */
-#define PWM_BASE_ADDRESS 0x00030000 /*PWM Base address*/
-#define PWM_MODULE_OFFSET 0x00000100 /*Offset value to be incremented for each interface*/
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_ತಳ_ವಿಳಾಸ 0x00030000 /*PWM Base address*/
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_MODULE_ಸ್ಥಾನಾಂತರ 0x00000100 /*Offset value to be incremented for each interface*/
 
 /*!Serial Peripheral Interface Offsets */
-#define SPI0_START 0x00020000 /* Serial Peripheral Interface 0 */
-#define SPI1_START 0x00020100 /* Serial Peripheral Interface 1 */
-#define SPI2_START 0x00020200 /* Serial Peripheral Interface 2 */
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI0_ಆರಂಭ 0x00020000 /* Serial Peripheral Interface 0 */
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI1_ಆರಂಭ 0x00020100 /* Serial Peripheral Interface 1 */
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI2_ಆರಂಭ 0x00020200 /* Serial Peripheral Interface 2 */
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
-#define UART0_START 0x00011300 /*! UART 0 */
-#define UART_OFFSET 0x100
-#define MAX_UART_COUNT 3
+#ವ್ಯಾಖ್ಯಾನಿಸು UART0_ಆರಂಭ 0x00011300 /*! UART 0 */
+#ವ್ಯಾಖ್ಯಾನಿಸು UART_ಸ್ಥಾನಾಂತರ 0x100
+#ವ್ಯಾಖ್ಯಾನಿಸು MAX_UART_ಎಣಿಕೆ 3
 
 
-#define PINMUX_CONFIGURE_REG 0x40310
+#ವ್ಯಾಖ್ಯಾನಿಸು PINMUX_CONFIGURE_REG 0x40310
 
 /*! Core Local Interruptor CLINT */
 
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C0_BASE 0x00040000 /*! I2C Start Address */
-#define I2C_OFFSET 0x000
-#define MAX_I2C_COUNT 1
+#ವ್ಯಾಖ್ಯಾನಿಸು I2_C0_ತಳ 0x00040000 /*! I2C Start Address */
+#ವ್ಯಾಖ್ಯಾನಿಸು I2_C_ಸ್ಥಾನಾಂತರ 0x000
+#ವ್ಯಾಖ್ಯಾನಿಸು MAX_I2_C_ಎಣಿಕೆ 1
 
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1
-#define PLIC_INTERRUPT_2   2
-#define PLIC_INTERRUPT_3   3
-#define PLIC_INTERRUPT_4   4
-#define PLIC_INTERRUPT_5   5
-#define PLIC_INTERRUPT_6   6
-#define PLIC_INTERRUPT_7   7
-#define PLIC_INTERRUPT_8   8
-#define PLIC_INTERRUPT_9   9
-#define PLIC_INTERRUPT_10  10
-#define PLIC_INTERRUPT_11  11
-#define PLIC_INTERRUPT_12  12
-#define PLIC_INTERRUPT_13  13
-#define PLIC_INTERRUPT_14  14
-#define PLIC_INTERRUPT_15  15
-#define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_25  25 //uart 0
-#define PLIC_INTERRUPT_26  26 //uart 1
-#define PLIC_INTERRUPT_27  27 //uart 2
-#define PLIC_MAX_INTERRUPT_SRC 28
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ತಳ_ವಿಳಾಸ 0x0C000000 /*! PLIC Interface Start */
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_1   1
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_2   2
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_3   3
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_4   4
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_5   5
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_6   6
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_7   7
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_8   8
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_9   9
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_10  10
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_11  11
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_12  12
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_13  13
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_14  14
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_15  15
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_16  16
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_25  25 //uart 0
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_26  26 //uart 1
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_ಅಡಚಣೆ_27  27 //uart 2
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_MAX_ಅಡಚಣೆ_SRC 28
 
 
 /*!General Purpose Input Output */
-#define GPIO_START 0x00040100 //GPIO Start Address 
-#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
-#define PLIC_GPIO_OFFSET 6
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO_ಆರಂಭ 0x00040100 //GPIO Start Address 
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO_ಸ್ಥಾನಾಂತರ 0x08 /*!Generic offset used to access GPIO registers*/
+#ವ್ಯಾಖ್ಯಾನಿಸು PLIC_GPIO_ಸ್ಥಾನಾಂತರ 6
 
 /*
  * General Purpose IOs supported
  */
 
-#define GPIO0  (1 <<  0)
-#define GPIO1  (1 <<  1)
-#define GPIO2  (1 <<  2)
-#define GPIO3  (1 <<  3)
-#define GPIO4  (1 <<  4)
-#define GPIO5  (1 <<  5)
-#define GPIO6  (1 <<  6)
-#define GPIO7  (1 <<  7)
-#define GPIO8  (1 <<  8)
-#define GPIO9  (1 <<  9)
-#define GPIO10 (1 << 10)
-#define GPIO11 (1 << 11)
-#define GPIO12 (1 << 12)
-#define GPIO13 (1 << 13)
-#define GPIO14 (1 << 14)
-#define GPIO15 (1 << 15)
-#define GPIO16 (1 << 16)
-#define GPIO17 (1 << 17)
-#define GPIO18 (1 << 18)
-#define GPIO19 (1 << 19)
-#define GPIO20 (1 << 20)
-#define GPIO21 (1 << 21)
-#define GPIO22 (1 << 22)
-#define GPIO23 (1 << 23)
-#define GPIO24 (1 << 24)
-#define GPIO25 (1 << 25)
-#define GPIO26 (1 << 26)
-#define GPIO27 (1 << 27)
-#define GPIO28 (1 << 28)
-#define GPIO29 (1 << 29)
-#define GPIO30 (1 << 30)
-#define GPIO31 (1 << 31)
-#define GPIO_COUNT  0x20
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO0  (1 <<  0)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO1  (1 <<  1)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO2  (1 <<  2)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO3  (1 <<  3)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO4  (1 <<  4)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO5  (1 <<  5)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO6  (1 <<  6)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO7  (1 <<  7)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO8  (1 <<  8)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO9  (1 <<  9)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO10 (1 << 10)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO11 (1 << 11)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO12 (1 << 12)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO13 (1 << 13)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO14 (1 << 14)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO15 (1 << 15)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO16 (1 << 16)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO17 (1 << 17)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO18 (1 << 18)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO19 (1 << 19)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO20 (1 << 20)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO21 (1 << 21)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO22 (1 << 22)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO23 (1 << 23)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO24 (1 << 24)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO25 (1 << 25)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO26 (1 << 26)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO27 (1 << 27)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO28 (1 << 28)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO29 (1 << 29)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO30 (1 << 30)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO31 (1 << 31)
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO_ಎಣಿಕೆ  0x20
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

@@ -26,9 +26,9 @@
 @detail The GPIO_SPI module driver supports SPI driver routines using GPIO lines as SPI lines.
 */
 
-#include "platform.h"
-#include "gpio.h"
-#include "gpio_spi.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "gpio.h"
+#ಅನ್ತರ್ಭಾವ "gpio_spi.h"
 
 /** @fn static void writebyte(unsigned char writeData, unsigned char delay)
  * @brief Writes a byte
@@ -37,29 +37,29 @@
  * @param unsigned char delay
  */
 // at starting  edge sending
-static void writebyte(unsigned char writeData, unsigned char delay)
+ಸ್ಥಿರ ಶೂನ್ಯ writebyte(ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ write_ದತ್ತಾಂಶ, ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ delay)
 {
-	unsigned char j = 0, k;
-	unsigned long readData = 0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ j = 0, k;
+	ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ read_ದತ್ತಾಂಶ = 0;
 	//readData = read_word(GPIO_DATA_REG);
 
     // Before initiating communication SS -> low
-       write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SS)) );
-	while (j < 8) {
-		k = writeData;
+       write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) & ~(SPI_SS)) );
+	ಆಗ (j < 8) {
+		k = write_ದತ್ತಾಂಶ;
 		k = ( k << j ) & 0x80;
 
         // lowering sck --> FALLING EDGE 
         //write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SCLK)) );
         // increasing sck --> Rising EDGE
-        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
+        write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) | SPI_SCLK) );
 
-        if (k == 0) {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_MOSI)) );
+        ಆದರೆ (k == 0) {
+			write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) & ~(SPI_MOSI)) );
 			delay_loop(delay, delay);
 		}
-		else {
-			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_MOSI) );
+		ಇಲ್ಲದಿದ್ದರೆ {
+			write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) | SPI_MOSI) );
 			delay_loop(delay, delay);
 		}
 
@@ -67,12 +67,12 @@ static void writebyte(unsigned char writeData, unsigned char delay)
         // making sck up 
 		//write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK));
         // sck down
-        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SCLK)) );
+        write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) & ~(SPI_SCLK)) );
         //delay_loop(delay, delay);
 		++j;
 	}
         // MAKE SS PIN high after transfer of a byte
-        write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) |SPI_SS ));
+        write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) |SPI_SS ));
 }
 
 /** @fn unsigned char readbyte(unsigned char delay)
@@ -82,34 +82,34 @@ static void writebyte(unsigned char writeData, unsigned char delay)
  * @return Read value
  */
 //reading at rising edge reading 
-unsigned char readbyte(unsigned char delay)
+ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ readbyte(ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ delay)
 {
-	unsigned char j = 0, i = 0;
-	unsigned char bitValue;
-	unsigned char readData = 0;
-        unsigned long readGpioData = 0;
-	readData = read_word(GPIO_DATA_REG);
-	while (j < 8) {
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | SPI_SCLK) );
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ j = 0, i = 0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ ಬಿಟ್_ಮೌಲ್ಯ;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ read_ದತ್ತಾಂಶ = 0;
+        ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ read_Gpio_ದತ್ತಾಂಶ = 0;
+	read_ದತ್ತಾಂಶ = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG);
+	ಆಗ (j < 8) {
+		write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) | SPI_SCLK) );
 		delay_loop(delay, delay);
 
-		readGpioData = read_word(GPIO_DATA_REG)  & SPI_MISO;
+		read_Gpio_ದತ್ತಾಂಶ = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG)  & SPI_MISO;
 
-        if (readGpioData != 0)
-			bitValue = 1;
-		else
-			bitValue = 0;
+        ಆದರೆ (read_Gpio_ದತ್ತಾಂಶ != 0)
+			ಬಿಟ್_ಮೌಲ್ಯ = 1;
+		ಇಲ್ಲದಿದ್ದರೆ
+			ಬಿಟ್_ಮೌಲ್ಯ = 0;
 	    
-        readData = readData << 1;
-		readData = readData | bitValue;
+        read_ದತ್ತಾಂಶ = read_ದತ್ತಾಂಶ << 1;
+		read_ದತ್ತಾಂಶ = read_ದತ್ತಾಂಶ | ಬಿಟ್_ಮೌಲ್ಯ;
 		
         delay_loop(delay, delay);
 
-		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(SPI_SCLK)));
+		write_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG, (read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG) & ~(SPI_SCLK)));
 		delay_loop(delay, delay);
 		++j;
 	}
-	return readData;
+	ಹಿಂತಿರುಗಿ read_ದತ್ತಾಂಶ;
 }
 /*
   1.) MISO_pin  --> 1st GPIO //0 
@@ -122,18 +122,18 @@ unsigned char readbyte(unsigned char delay)
  * @brief Configures the GPIO pins for SPI functionality
  * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
  */
-int config()
+ಪೂರ್ಣಾಂಕ config()
 {
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
-    write_word(GPIO_DIRECTION_CNTRL_REG, (read_word(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
-    unsigned char writeData = (int) 'a';
-    unsigned char delay = 10;
-    for (;;)
+    write_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG, (read_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG) & ~(SPI_MISO)));
+    write_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG, (read_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG) | SPI_MOSI));
+    write_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG, (read_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG) | SPI_SS));
+    write_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG, (read_ಶಬ್ದ(GPIO_DIRECTION_CNTRL_REG) | SPI_SCLK));
+    ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ write_ದತ್ತಾಂಶ = (ಪೂರ್ಣಾಂಕ) 'a';
+    ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ delay = 10;
+    ಗಾಗಿ (;;)
     {
-    writebyte(writeData,delay);
-    printf("%d\n",writeData);
+    writebyte(write_ದತ್ತಾಂಶ,delay);
+    ಬರೆ("%d\n",write_ದತ್ತಾಂಶ);
     delay_loop(100,120);
     }
 }

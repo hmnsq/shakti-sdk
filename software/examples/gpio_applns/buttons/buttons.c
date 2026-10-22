@@ -27,239 +27,239 @@
 @detail Detects the pressed key/button and prints pressed button.
 */
 
-#include <stdio.h>        
-#include "platform.h"
-#include "gpio.h"         
-#include "button_driver.h"
-#include "utils.h"
+#ಅನ್ತರ್ಭಾವ <stdio.h>        
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "gpio.h"         
+#ಅನ್ತರ್ಭಾವ "button_driver.h"
+#ಅನ್ತರ್ಭಾವ "utils.h"
 
 /*! Define one of the the following macros to read buttons in different ways. */
-#define READ_INDIVIDUAL_BTNS /*! Read each button value */
+#ವ್ಯಾಖ್ಯಾನಿಸು READ_INDIVIDUAL_BTNS /*! Read each button value */
 //#define READ_ALL_BTNS /*! Read All button values */
 
-unsigned long read_data = 0;
+ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ read_ದತ್ತಾಂಶ_2 = 0;
 
 /** @fn void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
  */
-void main()
+ಶೂನ್ಯ ಮುಖ್ಯ()
 {
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#ಆದರೆ defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-	while (1) {
+	ಆಗ (1) {
 
-#ifdef READ_INDIVIDUAL_BTNS
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ READ_INDIVIDUAL_BTNS
 
 		/*! Define any one button from below at a time */
-#define BTN_0  /*! Read BTN0 value */
+#ವ್ಯಾಖ್ಯಾನಿಸು BTN_0  /*! Read BTN0 value */
 		//#define BTN_1 /*! Read BTN1 value */
 		//#define BTN_2 /*! Read BTN2 value */
 		//#define BTN_3 /*! Read BTN3 value */
 
-#ifdef BTN_0
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_0
 		configure_btn(BTN0);
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef BTN_1
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_1
 		configure_btn(BTN1);
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef BTN_2
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_2
 		configure_btn(BTN2);
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef BTN_3
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_3
 		configure_btn(BTN3);
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef READ_ALL_BTNS
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ READ_ALL_BTNS
 
 		configure_all_btn();
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef READ_INDIVIDUAL_BTNS
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ READ_INDIVIDUAL_BTNS
 
-#ifdef BTN_0
-		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x10000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x10000000)
-			printf("\n BTN0: HIGH"); 		
-		else
-			printf("\n BTN0: LOW");
-#endif
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_0
+		read_ದತ್ತಾಂಶ_2 = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG); /* Copies the GPIO_DATA_REG Register contents */
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		read_ದತ್ತಾಂಶ_2 = (read_ದತ್ತಾಂಶ_2 & 0x10000000);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		ಆದರೆ(read_ದತ್ತಾಂಶ_2 == 0x10000000)
+			ಬರೆ("\n BTN0: HIGH"); 		
+		ಇಲ್ಲದಿದ್ದರೆ
+			ಬರೆ("\n BTN0: LOW");
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef BTN_1
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x20000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x20000000)
-			printf("\n BTN1: HIGH"); 		
-		else
-			printf("\n BTN1: LOW");
-#endif
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_1
+		read_ದತ್ತಾಂಶ_2 = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		read_ದತ್ತಾಂಶ_2 = (read_ದತ್ತಾಂಶ_2 & 0x20000000);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		ಆದರೆ(read_ದತ್ತಾಂಶ_2 == 0x20000000)
+			ಬರೆ("\n BTN1: HIGH"); 		
+		ಇಲ್ಲದಿದ್ದರೆ
+			ಬರೆ("\n BTN1: LOW");
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef BTN_2
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x40000000);
-		printf("\n Read Data is :0x%x", read_data);
-		if(read_data == 0x40000000)
-			printf("\n BTN2: HIGH"); 		
-		else
-			printf("\n BTN2: LOW");
-#endif
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_2
+		read_ದತ್ತಾಂಶ_2 = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		read_ದತ್ತಾಂಶ_2 = (read_ದತ್ತಾಂಶ_2 & 0x40000000);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		ಆದರೆ(read_ದತ್ತಾಂಶ_2 == 0x40000000)
+			ಬರೆ("\n BTN2: HIGH"); 		
+		ಇಲ್ಲದಿದ್ದರೆ
+			ಬರೆ("\n BTN2: LOW");
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef BTN_3
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = (read_data & 0x80000000);
-		printf("\n Read Data is :0x%x", read_data);
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ BTN_3
+		read_ದತ್ತಾಂಶ_2 = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		read_ದತ್ತಾಂಶ_2 = (read_ದತ್ತಾಂಶ_2 & 0x80000000);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
 
-		if(read_data == 0x80000000)
-			printf("\n BTN3: HIGH"); 		
-		else
-			printf("\n BTN3: LOW");
-#endif
+		ಆದರೆ(read_ದತ್ತಾಂಶ_2 == 0x80000000)
+			ಬರೆ("\n BTN3: HIGH"); 		
+		ಇಲ್ಲದಿದ್ದರೆ
+			ಬರೆ("\n BTN3: LOW");
+#ಆದರೆ_ಅಂತ್ಯ
 
 		delay_loop(500, 500);
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#ifdef READ_ALL_BTNS	
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ READ_ALL_BTNS	
 
-		printf("\n Read Data is :0x%x", read_data);
-		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%x", read_data);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
+		read_ದತ್ತಾಂಶ_2 = read_ಶಬ್ದ(GPIO_ದತ್ತಾಂಶ_REG);
+		ಬರೆ("\n Read Data is :0x%x", read_ದತ್ತಾಂಶ_2);
 
-		switch(read_data)
+		ಆಯ್ಕೆ(read_ದತ್ತಾಂಶ_2)
 		{
 
-		case 0x00000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x00000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x10000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x10000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x20000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x20000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x30000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x30000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x40000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x40000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x50000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x50000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x60000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x60000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x70000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: LOW");
-			break;
+		ಸ್ಥಿತಿ 0x70000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: LOW");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x80000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0x80000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0x90000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0x90000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0xA0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0xA0000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0xB0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: LOW");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0xB0000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: LOW");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0xC0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0xC0000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0xD0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: LOW");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0xD0000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: LOW");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0xE0000000:
-			printf("\n BTN0: LOW");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0xE0000000:
+			ಬರೆ("\n BTN0: LOW");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 
-		case 0xF0000000:
-			printf("\n BTN0: HIGH");
-			printf("\n BTN1: HIGH");
-			printf("\n BTN2: HIGH");
-			printf("\n BTN3: HIGH");
-			break;
+		ಸ್ಥಿತಿ 0xF0000000:
+			ಬರೆ("\n BTN0: HIGH");
+			ಬರೆ("\n BTN1: HIGH");
+			ಬರೆ("\n BTN2: HIGH");
+			ಬರೆ("\n BTN3: HIGH");
+			ನಿಲ್ಲಿಸು;
 		}
 
 		delay_loop(500, 500);
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 	}
 	delay_loop(500, 500);
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 }
 

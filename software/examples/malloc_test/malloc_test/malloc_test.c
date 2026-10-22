@@ -32,59 +32,59 @@
  * @details runs the code to test malloc
  * @return returns 0
  */
-int main()
+ಪೂರ್ಣಾಂಕ ಮುಖ್ಯ()
 {
-printf("\nTest Running");
-int *b,*c,*d;
-int i=0;int n;
+ಬರೆ("\nTest Running");
+ಪೂರ್ಣಾಂಕ *b,*c,*d;
+ಪೂರ್ಣಾಂಕ i=0;ಪೂರ್ಣಾಂಕ n;
 n= 25;
-printf("\n size of array %d %x",n,&n);
-b=malloc(n*sizeof(int))	;
-printf("\n B's address %x %x",b,&b);
-for(i=0;i<n;i++)
+ಬರೆ("\n size of array %d %x",n,&n);
+b=ಸ್ಮರಣೆ_ಕೊಡು(n*ಗಾತ್ರ(ಪೂರ್ಣಾಂಕ))	;
+ಬರೆ("\n B's address %x %x",b,&b);
+ಗಾಗಿ(i=0;i<n;i++)
 {
 b[i]=i+1;
 }
-for(i=0;i<n;i++)
+ಗಾಗಿ(i=0;i<n;i++)
 {
-printf("\n b[%d]'s address is : %x",i,&b[i]);
-printf("\n b[%d]'s value is : %d",i,b[i]);
+ಬರೆ("\n b[%d]'s address is : %x",i,&b[i]);
+ಬರೆ("\n b[%d]'s value is : %d",i,b[i]);
 }
-free(b);
-printf("\nArray B is freed");
-printf("\nb=%x",b);
-printf("\n size of array %d",n);
-c=malloc(n*sizeof(int))	;
-printf("\n C's address %x",c);
-for(i=0;i<n;i++)
+ಬಿಡುಗಡೆ(b);
+ಬರೆ("\nArray B is freed");
+ಬರೆ("\nb=%x",b);
+ಬರೆ("\n size of array %d",n);
+c=ಸ್ಮರಣೆ_ಕೊಡು(n*ಗಾತ್ರ(ಪೂರ್ಣಾಂಕ))	;
+ಬರೆ("\n C's address %x",c);
+ಗಾಗಿ(i=0;i<n;i++)
 {
 c[i]=i+1;
 }
-for(i=0;i<n;i++)
+ಗಾಗಿ(i=0;i<n;i++)
 {
-printf("\n c[%d]'s address is : %x",i,&c[i]);
-printf("\n c[%d]'s value is : %d",i,c[i]);
+ಬರೆ("\n c[%d]'s address is : %x",i,&c[i]);
+ಬರೆ("\n c[%d]'s value is : %d",i,c[i]);
 }
-free(c);
-printf("\nc=%x",c);
-int x;
+ಬಿಡುಗಡೆ(c);
+ಬರೆ("\nc=%x",c);
+ಪೂರ್ಣಾಂಕ x;
 x=30;
-printf("\n\n\nx address is %x",&x);
-d=malloc(x*sizeof(int));
-printf("\n D's address %x",d);
-for(i=0;i<x;i++)
+ಬರೆ("\n\n\nx address is %x",&x);
+d=ಸ್ಮರಣೆ_ಕೊಡು(x*ಗಾತ್ರ(ಪೂರ್ಣಾಂಕ));
+ಬರೆ("\n D's address %x",d);
+ಗಾಗಿ(i=0;i<x;i++)
 {
-printf("\nSetting value %d , %x",i+1,&d[i]); 
+ಬರೆ("\nSetting value %d , %x",i+1,&d[i]); 
 d[i]=i+1;
 }
-for(i=0;i<x;i++)
+ಗಾಗಿ(i=0;i<x;i++)
 {
-printf("\n d[%d]'s address is : %x",i,&d[i]);
-printf("\n d[%d]'s value is : %d",i,d[i]);
+ಬರೆ("\n d[%d]'s address is : %x",i,&d[i]);
+ಬರೆ("\n d[%d]'s value is : %d",i,d[i]);
 }
-free(d);
-printf("\nd=%x",d);
+ಬಿಡುಗಡೆ(d);
+ಬರೆ("\nd=%x",d);
 
-return 0;
+ಹಿಂತಿರುಗಿ 0;
 }
 

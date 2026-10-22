@@ -28,42 +28,42 @@
 */
 
 
-#ifndef INTRUDER_DETECTION_H
-#define INTRUDER_DETECTION_H
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ INTRUDER_DETECTION_H
+#ವ್ಯಾಖ್ಯಾನಿಸು INTRUDER_DETECTION_H
 
-#define ROWNUM              4
-#define COLNUM              4
-#define OUTPINS_OFFSET      0
-#define INPINS_OFFSET       4
-#define OUTPINS             (0xF << OUTPINS_OFFSET)
-#define INPINS              (0xF << INPINS_OFFSET)
+#ವ್ಯಾಖ್ಯಾನಿಸು ROWNUM              4
+#ವ್ಯಾಖ್ಯಾನಿಸು COLNUM              4
+#ವ್ಯಾಖ್ಯಾನಿಸು OUTPINS_ಸ್ಥಾನಾಂತರ      0
+#ವ್ಯಾಖ್ಯಾನಿಸು INPINS_ಸ್ಥಾನಾಂತರ       4
+#ವ್ಯಾಖ್ಯಾನಿಸು OUTPINS             (0xF << OUTPINS_ಸ್ಥಾನಾಂತರ)
+#ವ್ಯಾಖ್ಯಾನಿಸು INPINS              (0xF << INPINS_ಸ್ಥಾನಾಂತರ)
 
 //Peripheral Pins
-#define BUZZER              GPIO11
-#define LED_P1              GPIO16
-#define LED_P2              GPIO18
-#define LED_P3              GPIO19
-#define LED_P4              GPIO21
-#define POWER_SWITCH        GPIO24
-#define DEACTIVATE_SWITCH   GPIO25
-#define PANIC_BUTTON        GPIO28          //Input 
-#define GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
-#define PIR_IN	            GPIO8
-#define PANIC_BUTTON_OFFSET 28
-#define PIR_OFFSET          8
-#define ALARM_TIMER         5
-#define HIGH                1
-#define LOW                 0
+#ವ್ಯಾಖ್ಯಾನಿಸು BUZZER              GPIO11
+#ವ್ಯಾಖ್ಯಾನಿಸು LED_P1              GPIO16
+#ವ್ಯಾಖ್ಯಾನಿಸು LED_P2              GPIO18
+#ವ್ಯಾಖ್ಯಾನಿಸು LED_P3              GPIO19
+#ವ್ಯಾಖ್ಯಾನಿಸು LED_P4              GPIO21
+#ವ್ಯಾಖ್ಯಾನಿಸು POWER_SWITCH        GPIO24
+#ವ್ಯಾಖ್ಯಾನಿಸು DEACTIVATE_SWITCH   GPIO25
+#ವ್ಯಾಖ್ಯಾನಿಸು PANIC_BUTTON        GPIO28          //ಒಳಹರಿವು
+#ವ್ಯಾಖ್ಯಾನಿಸು GPIO_OUTPINS        (LED_P1 | LED_P2 | LED_P3 | LED_P4 | BUZZER)
+#ವ್ಯಾಖ್ಯಾನಿಸು PIR_ಒಳ	            GPIO8
+#ವ್ಯಾಖ್ಯಾನಿಸು PANIC_BUTTON_ಸ್ಥಾನಾಂತರ 28
+#ವ್ಯಾಖ್ಯಾನಿಸು PIR_ಸ್ಥಾನಾಂತರ          8
+#ವ್ಯಾಖ್ಯಾನಿಸು ALARM_TIMER         5
+#ವ್ಯಾಖ್ಯಾನಿಸು ಮೇಲಿನ                1
+#ವ್ಯಾಖ್ಯಾನಿಸು ಕೆಳಗಿನ                 0
 
 //Keypad 
-#define PASS_NUM            4               //Number of Digits Password
+#ವ್ಯಾಖ್ಯಾನಿಸು PASS_ಅಂಕೆ            4               //Number of Digits Password
 
 //function prototype
-void set_key_pins_map(unsigned int* row, unsigned int* col, int table[COLNUM][ROWNUM]);
-int get_key();
-int get_col_row(void);
-unsigned int row_pins[ROWNUM];
-unsigned int col_pins[COLNUM];
-int key_map[COLNUM][ROWNUM];
+ಶೂನ್ಯ ಗಣ_ಕೀಲಿ_pins_map(ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ* ಅಡ್ಡಸಾಲು, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ* ಲಂಬಸಾಲು, ಪೂರ್ಣಾಂಕ ಕೋಷ್ಟಕ[COLNUM][ROWNUM]);
+ಪೂರ್ಣಾಂಕ get_ಕೀಲಿ();
+ಪೂರ್ಣಾಂಕ get_ಲಂಬಸಾಲು_ಅಡ್ಡಸಾಲು(ಶೂನ್ಯ);
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಅಡ್ಡಸಾಲು_pins[ROWNUM];
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಲಂಬಸಾಲು_pins[COLNUM];
+ಪೂರ್ಣಾಂಕ ಕೀಲಿ_map[COLNUM][ROWNUM];
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#ಅನ್ತರ್ಭಾವ "gpio.h"
+#ಅನ್ತರ್ಭಾವ "uart.h"
+#ಅನ್ತರ್ಭಾವ "utils.h"
+#ಅನ್ತರ್ಭಾವ "traps.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
+#ಅನ್ತರ್ಭಾವ "plic_driver.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
+#ಅನ್ತರ್ಭಾವ "defines.h"
+#ಅನ್ತರ್ಭಾವ "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+ಶೂನ್ಯ handle_button_press(__attribute__((ಬಳಸದ)) uint32_t ಅಂಕೆ);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+ಶೂನ್ಯ handle_button_press(__attribute__((ಬಳಸದ)) uint32_t ಅಂಕೆ)
 {
 	log_info("button pressed\n");
 }
@@ -55,52 +55,52 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+ಪೂರ್ಣಾಂಕ ಮುಖ್ಯ(ಶೂನ್ಯ){
+	ನೋಂದಣಿ ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ retval;
+	ಪೂರ್ಣಾಂಕ i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	ಗಾಗಿ(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
-		interrupt_enable(i);
+		ಬರೆ("i %d\n",i);
+		ಅಡಚಣೆ_enable(i);
 	}
-	printf("\n");
+	ಬರೆ("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	ಗಾಗಿ(i=1;i<33;i++)
 	{
-		printf("i %d\n",i);
-		interrupt_disable(i);
+		ಬರೆ("i %d\n",i);
+		ಅಡಚಣೆ_disable(i);
 	}
-	printf("\n");
-
-	asm("ebreak");
-
-	for(i=1;i<33;i++)
-	{
-		printf("i %d\n",i);
-		interrupt_enable(i + 1);
-	}
-	printf("\n");
+	ಬರೆ("\n");
 
 	asm("ebreak");
 
-	while(1){
+	ಗಾಗಿ(i=1;i<33;i++)
+	{
+		ಬರೆ("i %d\n",i);
+		ಅಡಚಣೆ_enable(i + 1);
+	}
+	ಬರೆ("\n");
+
+	asm("ebreak");
+
+	ಆಗ(1){
 		i++;
 
-		if((i%10000000) == 0){
+		ಆದರೆ((i%10000000) == 0){
 
-			asm volatile(
+			asm ಅಸ್ಥಿರ(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
 			     "=r"
 			     (retval)
 			    );
-			printf("mip = %u\n", retval);
+			ಬರೆ("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }

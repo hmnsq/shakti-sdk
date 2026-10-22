@@ -25,96 +25,96 @@
  * @brief Header to spi spansion driver
  * @detail this is the header file for spi_flash_w25q32.c,spi_spansion.c
  */
-#ifndef SPI_H
-#define SPI_H
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ SPI_H
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_H
 
-#include<stdlib.h>
+#ಅನ್ತರ್ಭಾವ<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
-#define SPI0_OFFSET 0x00000000
-#define SPI1_OFFSET 0x00000100
-#define SPI2_OFFSET 0x00000200
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI0_ಸ್ಥಾನಾಂತರ 0x00000000
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI1_ಸ್ಥಾನಾಂತರ 0x00000100
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI2_ಸ್ಥಾನಾಂತರ 0x00000200
 
-#define SPI_CR1	     0x00020000
-#define SPI_CR2	     0x00020004
-#define SPI_SR       0x00020008
-#define SPI_DR1	     0x0002000C
-#define SPI_DR2	     0x00020010
-#define SPI_DR3	     0x00020014
-#define SPI_DR4	     0x00020018
-#define SPI_DR5      0x0002001C
-#define SPI_CRCPR    0x00020020
-#define SPI_RXCRCR   0x00020024
-#define SPI_TXCRCR   0x00020028
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CR1	     0x00020000
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CR2	     0x00020004
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_SR       0x00020008
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_DR1	     0x0002000C
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_DR2	     0x00020010
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_DR3	     0x00020014
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_DR4	     0x00020018
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_DR5      0x0002001C
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CRCPR    0x00020020
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_RXCRCR   0x00020024
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_TXCRCR   0x00020028
 
 // defining SPI_CR1 register
-#define SPI_CPHA	      (1 << 0)
-#define SPI_CPOL	      (1 << 1)
-#define SPI_MSTR	      (1 << 2)
-#define SPI_BR(x)	      (x << 3)
-#define SPI_SPE		      (1 << 6)
-#define SPI_LSBFIRST	      (1 << 7)
-#define SPI_SSI		      (1 << 8)
-#define SPI_SSM		      (1 << 9)
-#define SPI_RXONLY	      (1 << 10)
-#define SPI_CRCL	      (1 << 11)
-#define SPI_CCRCNEXT	      (1 << 12)
-#define SPI_CRCEN	      (1 << 13)
-#define SPI_BIDIOE	      (1 << 14)
-#define SPI_BIDIMODE	      (1 << 15)
-#define SPI_TOTAL_BITS_TX(x)  (x << 16)
-#define SPI_TOTAL_BITS_RX(x)  (x << 24)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CPHA	      (1 << 0)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CPOL	      (1 << 1)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_MSTR	      (1 << 2)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_BR(x)	      (x << 3)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_SPE		      (1 << 6)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_LSBFIRST	      (1 << 7)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_SSI		      (1 << 8)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_SSM		      (1 << 9)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_RXONLY	      (1 << 10)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CRCL	      (1 << 11)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CCRCNEXT	      (1 << 12)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CRCEN	      (1 << 13)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_BIDIOE	      (1 << 14)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_BIDIMODE	      (1 << 15)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(x)  (x << 16)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(x)  (x << 24)
 
 // defining SPI_CR2 register
-#define SPI_RX_IMM_START   (1 << 16)
-#define SPI_RX_START	   (1 << 15)
-#define SPI_LDMA_TX	   (1 << 14)
-#define SPI_LDMA_RX	   (1 << 13)
-#define SPI_FRXTH	   (1 << 12)
-#define SPI_DS(x)	   (x << 8)
-#define SPI_TXEIE	   (1 << 7)
-#define SPI_RXNEIE	   (1 << 6)
-#define SPI_ERRIE	   (1 << 5)
-#define SPI_FRF		   (1 << 4)
-#define SPI_NSSP	   (1 << 3)
-#define SPI_SSOE	   (1 << 2)
-#define SPI_TXDMAEN	   (1 << 1)
-#define SPI_RXDMAEN	   (1 << 0)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_RX_IMM_ಆರಂಭ   (1 << 16)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_RX_ಆರಂಭ	   (1 << 15)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_LDMA_TX	   (1 << 14)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_LDMA_RX	   (1 << 13)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_FRXTH	   (1 << 12)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_DS(x)	   (x << 8)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_TXEIE	   (1 << 7)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_RXNEIE	   (1 << 6)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_ERRIE	   (1 << 5)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_FRF		   (1 << 4)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_NSSP	   (1 << 3)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_SSOE	   (1 << 2)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_TXDMAEN	   (1 << 1)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_RXDMAEN	   (1 << 0)
 
 //defining SR register
-#define SPI_FTLVL(x)	(x << 11)
-#define SPI_FRLVL(x)	(x << 9)
-#define SPI_FRE		(1 << 8)
-#define SPI_OVR		(1 << 6)
-#define SPI_MODF	(1 << 5)
-#define SPI_CRCERR	(1 << 4)
-#define TXE		(1 << 1)
-#define RXNE		(1 << 0)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_FTLVL(x)	(x << 11)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_FRLVL(x)	(x << 9)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_FRE		(1 << 8)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_OVR		(1 << 6)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_MODF	(1 << 5)
+#ವ್ಯಾಖ್ಯಾನಿಸು SPI_CRCERR	(1 << 4)
+#ವ್ಯಾಖ್ಯಾನಿಸು TXE		(1 << 1)
+#ವ್ಯಾಖ್ಯಾನಿಸು RXNE		(1 << 0)
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+ಶೂನ್ಯ configure_spi(ಪೂರ್ಣಾಂಕ ಸ್ಥಾನಾಂತರ);
+ಶೂನ್ಯ spi_init(ಶೂನ್ಯ);
+ಶೂನ್ಯ ಗಣ_spi(ಪೂರ್ಣಾಂಕ* addr, ಪೂರ್ಣಾಂಕ val);
+ಶೂನ್ಯ bin(ಚಿಹ್ನೆರಹಿತ n);
+ಶೂನ್ಯ spi_tx_rx_ಆರಂಭ(ಶೂನ್ಯ);
+ಶೂನ್ಯ spi_enable(ಶೂನ್ಯ);
+ಶೂನ್ಯ spi_rx_enable(ಶೂನ್ಯ);
+ಶೂನ್ಯ flash_cmd_addr_ದತ್ತಾಂಶ(ಪೂರ್ಣಾಂಕ command, ಪೂರ್ಣಾಂಕ addr, ಪೂರ್ಣಾಂಕ ದತ್ತಾಂಶ_2);
+ಶೂನ್ಯ flash_write(ಪೂರ್ಣಾಂಕ ವಿಳಾಸ, ಪೂರ್ಣಾಂಕ ದತ್ತಾಂಶ_2);
+ಶೂನ್ಯ flash_erase(ಪೂರ್ಣಾಂಕ ವಿಳಾಸ);
+ಪೂರ್ಣಾಂಕ get_spi(ಪೂರ್ಣಾಂಕ* addr);
+ಪೂರ್ಣಾಂಕ ಬಿಟ್_Extracted(ಪೂರ್ಣಾಂಕ ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ k, ಪೂರ್ಣಾಂಕ p) ;
+ಪೂರ್ಣಾಂಕ concat(ಪೂರ್ಣಾಂಕ x, ಪೂರ್ಣಾಂಕ y) ;
+ಪೂರ್ಣಾಂಕ spi_rxne_enable(ಶೂನ್ಯ);
+ಪೂರ್ಣಾಂಕ spi_notbusy(ಶೂನ್ಯ);
+ಪೂರ್ಣಾಂಕ flash_write_enable(ಶೂನ್ಯ);
+ಪೂರ್ಣಾಂಕ flash_clear_sr(ಶೂನ್ಯ);
+ಪೂರ್ಣಾಂಕ flash_cmd_addr(ಪೂರ್ಣಾಂಕ command, ಪೂರ್ಣಾಂಕ addr);
+ಪೂರ್ಣಾಂಕ flash_cmd_ಗಮ್ಯ_read(ಪೂರ್ಣಾಂಕ command, ಪೂರ್ಣಾಂಕ addr);
+ಪೂರ್ಣಾಂಕ flash_read(ಪೂರ್ಣಾಂಕ ವಿಳಾಸ);
+ಪೂರ್ಣಾಂಕ flash_cmd_read(ಪೂರ್ಣಾಂಕ command);
+ಪೂರ್ಣಾಂಕ flash_ಸ್ಥಿತಿ_ರಿಜಿಸ್ಟರ್_read(ಶೂನ್ಯ);
+ಪೂರ್ಣಾಂಕ flash_device_id(ಶೂನ್ಯ);
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

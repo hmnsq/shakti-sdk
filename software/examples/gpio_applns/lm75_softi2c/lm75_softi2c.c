@@ -27,50 +27,50 @@
 @detail Helps to find out temperature of a surrounding with the help of gpio pins.
 */
 
-#include "gpio_i2c.h"
+#ಅನ್ತರ್ಭಾವ "gpio_i2c.h"
 
-#define LM75_SLAVE_ADDRESS 0x90
-#define DELAY_COUNT 200
+#ವ್ಯಾಖ್ಯಾನಿಸು LM75_SLAVE_ವಿಳಾಸ 0x90
+#ವ್ಯಾಖ್ಯಾನಿಸು DELAY_ಎಣಿಕೆ 200
 
 /** @fn unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Complete function to read value from LM75 sensors 
  * @param unsigned long delay
  * @return unsigned int
  */
-unsigned int Lm75ReadTemperature(unsigned long delay)
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ Lm75ReadTemperature(ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay)
 {
-	unsigned char readBuf = 0;
-	unsigned short readValue = 0;
-	I2cSendSlaveAddress(LM75_SLAVE_ADDRESS, I2C_READ, delay);
-	readBuf = I2cReadDataAck(delay);
-	readValue = (readBuf << 1);
-	readBuf = I2cReadDataNack(delay);
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ readBuf = 0;
+	ಚಿಹ್ನೆರಹಿತ ಗಿಡ್ಡ read_ಮೌಲ್ಯ_2 = 0;
+	I2c_Send_Slave_ವಿಳಾಸ(LM75_SLAVE_ವಿಳಾಸ, I2C_READ, delay);
+	readBuf = I2c_Read_ದತ್ತಾಂಶ_Ack(delay);
+	read_ಮೌಲ್ಯ_2 = (readBuf << 1);
+	readBuf = I2c_Read_ದತ್ತಾಂಶ_Nack(delay);
 	I2cStop(delay);  
-	readValue = (readBuf >> 7) | readValue;
-	return readValue;
+	read_ಮೌಲ್ಯ_2 = (readBuf >> 7) | read_ಮೌಲ್ಯ_2;
+	ಹಿಂತಿರುಗಿ read_ಮೌಲ್ಯ_2;
 }
 
 /** @fn void main()
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  */
-void main() 
+ಶೂನ್ಯ ಮುಖ್ಯ() 
 {
-	unsigned short tempRead = 0;
-	unsigned short temp = 0;
+	ಚಿಹ್ನೆರಹಿತ ಗಿಡ್ಡ ತಾತ್ಕಾಲಿಕ_Read = 0;
+	ಚಿಹ್ನೆರಹಿತ ಗಿಡ್ಡ ತಾತ್ಕಾಲಿಕ = 0;
 
-	printf("\n\ttemp sensor initiating!");
+	ಬರೆ("\n\ttemp sensor initiating!");
 
 	I2cInit();
 
-	tempRead = Lm75ReadTemperature(DELAY_COUNT);
-	if(tempRead & 0x100) {
-		tempRead = ( (~tempRead) + 1 ) >> 1;
-		printf("\n\t Current Temperature:=-%u°C",tempRead);
+	ತಾತ್ಕಾಲಿಕ_Read = Lm75ReadTemperature(DELAY_ಎಣಿಕೆ);
+	ಆದರೆ(ತಾತ್ಕಾಲಿಕ_Read & 0x100) {
+		ತಾತ್ಕಾಲಿಕ_Read = ( (~ತಾತ್ಕಾಲಿಕ_Read) + 1 ) >> 1;
+		ಬರೆ("\n\t Current Temperature:=-%u°C",ತಾತ್ಕಾಲಿಕ_Read);
 	}		
-	else {
-		tempRead = tempRead >> 1;
-		printf("\n\t Current Temperature:=+%u°C",tempRead);
+	ಇಲ್ಲದಿದ್ದರೆ {
+		ತಾತ್ಕಾಲಿಕ_Read = ತಾತ್ಕಾಲಿಕ_Read >> 1;
+		ಬರೆ("\n\t Current Temperature:=+%u°C",ತಾತ್ಕಾಲಿಕ_Read);
 	 }
 	delay_loop(10000,20000);
 }

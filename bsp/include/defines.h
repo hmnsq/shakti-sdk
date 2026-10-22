@@ -26,21 +26,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail This is the header file to hold some risc-v system definitions.
  */
 
-#ifndef DEFINES_H
-#define DEFINES_H
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ ನಿರೂಪಿಸುತ್ತದೆ_H
+#ವ್ಯಾಖ್ಯಾನಿಸು ನಿರೂಪಿಸುತ್ತದೆ_H
 
-#define REGSIZE __riscv_xlen/8
+#ವ್ಯಾಖ್ಯಾನಿಸು REGSIZE __riscv_xlen/8
 
-#if __riscv_xlen == 64
-#define LREG ld
-#define SREG sd
-#else
-#define LREG lw
-#define SREG sw
-#endif
+#ಆದರೆ __riscv_xlen == 64
+#ವ್ಯಾಖ್ಯಾನಿಸು LREG ld
+#ವ್ಯಾಖ್ಯಾನಿಸು SREG sd
+#ಇಲ್ಲದಿದ್ದರೆ
+#ವ್ಯಾಖ್ಯಾನಿಸು LREG lw
+#ವ್ಯಾಖ್ಯಾನಿಸು SREG sw
+#ಆದರೆ_ಅಂತ್ಯ
 
-#define MSTATUS_MPP         0x00001800
-#define MSTATUS_FS          0x00006000
+#ವ್ಯಾಖ್ಯಾನಿಸು MSTATUS_MPP         0x00001800
+#ವ್ಯಾಖ್ಯಾನಿಸು MSTATUS_FS          0x00006000
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 

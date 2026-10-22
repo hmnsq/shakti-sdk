@@ -26,48 +26,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail the header file for the pwm module which is used to change the frequency, period and duty registers
  */
 
-#include<stdbool.h>
+#ಅನ್ತರ್ಭಾವ<stdbool.h>
 
 // PWM Registers 
-#define PERIOD_REGISTER     0x00000000	//16 bits (short)
-#define DUTY_REGISTER       0x00000004	//16 bits (short)
-#define CONTROL_REGISTER    0x00000008	//8 bits (char)
-#define CLOCK_REGISTER      0x0000000c	//16 bits (short)
+#ವ್ಯಾಖ್ಯಾನಿಸು PERIOD_ರಿಜಿಸ್ಟರ್     0x00000000	//16 bits (short)
+#ವ್ಯಾಖ್ಯಾನಿಸು DUTY_ರಿಜಿಸ್ಟರ್       0x00000004	//16 bits (short)
+#ವ್ಯಾಖ್ಯಾನಿಸು CONTROL_ರಿಜಿಸ್ಟರ್    0x00000008	//8 bits (char)
+#ವ್ಯಾಖ್ಯಾನಿಸು CLOCK_ರಿಜಿಸ್ಟರ್      0x0000000c	//16 bits (short)
 
 // Control Register Individual Bits 
-#define CLOCK_SELECTOR      0x00000001
-#define PWM_ENABLE          0x00000002
-#define PWM_START           0x00000004
-#define CONTINUOUS_ONCE     0x00000008
-#define PWM_OUTPUT_ENABLE   0x00000010
-#define INTERRUPT           0x00000020
-#define READ_ONLY           0x00000040
-#define RESET_COUNTER       0x00000080
+#ವ್ಯಾಖ್ಯಾನಿಸು CLOCK_SELECTOR      0x00000001
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_ENABLE          0x00000002
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_ಆರಂಭ           0x00000004
+#ವ್ಯಾಖ್ಯಾನಿಸು CONTINUOUS_ONCE     0x00000008
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_OUTPUT_ENABLE   0x00000010
+#ವ್ಯಾಖ್ಯಾನಿಸು ಅಡಚಣೆ_2           0x00000020
+#ವ್ಯಾಖ್ಯಾನಿಸು READ_ONLY           0x00000040
+#ವ್ಯಾಖ್ಯಾನಿಸು RESET_COUNTER       0x00000080
 
 // PWM Modules 
-#define PWM_0 0
-#define PWM_1 1
-#define PWM_2 2
-#define PWM_3 3
-#define PWM_4 4
-#define PWM_5 5
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_0 0
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_1 1
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_2 2
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_3 3
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_4 4
+#ವ್ಯಾಖ್ಯಾನಿಸು PWM_5 5
 
 //function prototype
-void pwm_configure(int module_number, int clock_divisor, int period, int duty, bool external_clock);
-void pwm_start(int module_number, int mode);
-int pwm_check_continuous_mode(int module_number);
-void pwm_clear_registers(int module_number);
-void pwm_init(void);
-void pwm_set_external_clock(int module_number, bool value);
-void pwm_set_clock(int module_number, int clock_divisor);
-void pwm_set_duty_cycle(int module_number, int duty);
-void pwm_set_periodic_cycle(int module_number, int period);
-void pwm_stop(int module_number);
-void show_register_values(int module_number);
-int set_pwm_period_register(int module_number, int value);
-int set_pwm_duty_register(int module_number, int value);
-int set_pwm_control_register(int module_number, int value);
-int set_pwm_clock_register(int module_number, int value);
-int configure_control_register_mode(int mode);
-void pwm_use_external_clock(int module_number, bool value);
+ಶೂನ್ಯ pwm_configure(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ clock_ಭಾಜಕ, ಪೂರ್ಣಾಂಕ period, ಪೂರ್ಣಾಂಕ duty, bool external_clock);
+ಶೂನ್ಯ pwm_ಆರಂಭ(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ ಬಹುಲಕ);
+ಪೂರ್ಣಾಂಕ pwm_check_continuous_ಬಹುಲಕ(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ);
+ಶೂನ್ಯ pwm_clear_registers(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ);
+ಶೂನ್ಯ pwm_init(ಶೂನ್ಯ);
+ಶೂನ್ಯ pwm_ಗಣ_external_clock(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, bool ಮೌಲ್ಯ);
+ಶೂನ್ಯ pwm_ಗಣ_clock(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ clock_ಭಾಜಕ);
+ಶೂನ್ಯ pwm_ಗಣ_duty_ಚಕ್ರ(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ duty);
+ಶೂನ್ಯ pwm_ಗಣ_periodic_ಚಕ್ರ(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ period);
+ಶೂನ್ಯ pwm_stop(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ);
+ಶೂನ್ಯ show_ರಿಜಿಸ್ಟರ್_ಮೌಲ್ಯಗಳು(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ);
+ಪೂರ್ಣಾಂಕ ಗಣ_pwm_period_ರಿಜಿಸ್ಟರ್(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ ಮೌಲ್ಯ);
+ಪೂರ್ಣಾಂಕ ಗಣ_pwm_duty_ರಿಜಿಸ್ಟರ್(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ ಮೌಲ್ಯ);
+ಪೂರ್ಣಾಂಕ ಗಣ_pwm_control_ರಿಜಿಸ್ಟರ್(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ ಮೌಲ್ಯ);
+ಪೂರ್ಣಾಂಕ ಗಣ_pwm_clock_ರಿಜಿಸ್ಟರ್(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ ಮೌಲ್ಯ);
+ಪೂರ್ಣಾಂಕ configure_control_ರಿಜಿಸ್ಟರ್_ಬಹುಲಕ(ಪೂರ್ಣಾಂಕ ಬಹುಲಕ);
+ಶೂನ್ಯ pwm_use_external_clock(ಪೂರ್ಣಾಂಕ module_ಸಂಖ್ಯೆ, bool ಮೌಲ್ಯ);
 

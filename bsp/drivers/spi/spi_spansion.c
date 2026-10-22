@@ -26,21 +26,21 @@
  * @detail Configures SPI, flash device and then do all basic flash oerations.
  */
 
-#include "spi.h"
-#include "log.h"
-#include "utils.h"
+#ಅನ್ತರ್ಭಾವ "spi.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
+#ಅನ್ತರ್ಭಾವ "utils.h"
 
-int* spi_cr1    = (int*) SPI_CR1;
-int* spi_cr2    = (int*) SPI_CR2;
-int* spi_sr     = (int*) SPI_SR ;
-int* spi_dr1    = (int*) SPI_DR1;
-int* spi_dr2    = (int*) SPI_DR2;
-int* spi_dr3    = (int*) SPI_DR3;
-int* spi_dr4    = (int*) SPI_DR4;
-int* spi_dr5    = (int*) SPI_DR5;
-int* spi_crcpr  = (int*) SPI_CRCPR;
-int* spi_rxcrcr = (int*) SPI_RXCRCR;
-int* spi_txcrcr = (int*) SPI_TXCRCR;
+ಪೂರ್ಣಾಂಕ* spi_cr1    = (ಪೂರ್ಣಾಂಕ*) SPI_CR1;
+ಪೂರ್ಣಾಂಕ* spi_cr2    = (ಪೂರ್ಣಾಂಕ*) SPI_CR2;
+ಪೂರ್ಣಾಂಕ* spi_sr     = (ಪೂರ್ಣಾಂಕ*) SPI_SR ;
+ಪೂರ್ಣಾಂಕ* spi_dr1    = (ಪೂರ್ಣಾಂಕ*) SPI_DR1;
+ಪೂರ್ಣಾಂಕ* spi_dr2    = (ಪೂರ್ಣಾಂಕ*) SPI_DR2;
+ಪೂರ್ಣಾಂಕ* spi_dr3    = (ಪೂರ್ಣಾಂಕ*) SPI_DR3;
+ಪೂರ್ಣಾಂಕ* spi_dr4    = (ಪೂರ್ಣಾಂಕ*) SPI_DR4;
+ಪೂರ್ಣಾಂಕ* spi_dr5    = (ಪೂರ್ಣಾಂಕ*) SPI_DR5;
+ಪೂರ್ಣಾಂಕ* spi_crcpr  = (ಪೂರ್ಣಾಂಕ*) SPI_CRCPR;
+ಪೂರ್ಣಾಂಕ* spi_rxcrcr = (ಪೂರ್ಣಾಂಕ*) SPI_RXCRCR;
+ಪೂರ್ಣಾಂಕ* spi_txcrcr = (ಪೂರ್ಣಾಂಕ*) SPI_TXCRCR;
 
 //By default, spi 0 is configured
 /**
@@ -50,19 +50,19 @@ int* spi_txcrcr = (int*) SPI_TXCRCR;
  *          spi registers..
  * @param int* ---> offset value
  */
-void configure_spi(int offset)
+ಶೂನ್ಯ configure_spi(ಪೂರ್ಣಾಂಕ ಸ್ಥಾನಾಂತರ)
 {
-	spi_cr1    = (int*) (SPI_CR1 + offset);
-	spi_cr2    = (int*) (SPI_CR2 + offset);
-	spi_sr     = (int*) (SPI_SR + offset);
-	spi_dr1    = (int*) (SPI_DR1 + offset);
-	spi_dr2    = (int*) (SPI_DR2 + offset);
-	spi_dr3    = (int*) (SPI_DR3 + offset);
-	spi_dr4    = (int*) (SPI_DR4 + offset);
-	spi_dr5    = (int*) (SPI_DR5 + offset);
-	spi_crcpr  = (int*) (SPI_CRCPR + offset);
-	spi_rxcrcr = (int*) (SPI_RXCRCR + offset);
-	spi_txcrcr = (int*) (SPI_TXCRCR + offset);
+	spi_cr1    = (ಪೂರ್ಣಾಂಕ*) (SPI_CR1 + ಸ್ಥಾನಾಂತರ);
+	spi_cr2    = (ಪೂರ್ಣಾಂಕ*) (SPI_CR2 + ಸ್ಥಾನಾಂತರ);
+	spi_sr     = (ಪೂರ್ಣಾಂಕ*) (SPI_SR + ಸ್ಥಾನಾಂತರ);
+	spi_dr1    = (ಪೂರ್ಣಾಂಕ*) (SPI_DR1 + ಸ್ಥಾನಾಂತರ);
+	spi_dr2    = (ಪೂರ್ಣಾಂಕ*) (SPI_DR2 + ಸ್ಥಾನಾಂತರ);
+	spi_dr3    = (ಪೂರ್ಣಾಂಕ*) (SPI_DR3 + ಸ್ಥಾನಾಂತರ);
+	spi_dr4    = (ಪೂರ್ಣಾಂಕ*) (SPI_DR4 + ಸ್ಥಾನಾಂತರ);
+	spi_dr5    = (ಪೂರ್ಣಾಂಕ*) (SPI_DR5 + ಸ್ಥಾನಾಂತರ);
+	spi_crcpr  = (ಪೂರ್ಣಾಂಕ*) (SPI_CRCPR + ಸ್ಥಾನಾಂತರ);
+	spi_rxcrcr = (ಪೂರ್ಣಾಂಕ*) (SPI_RXCRCR + ಸ್ಥಾನಾಂತರ);
+	spi_txcrcr = (ಪೂರ್ಣಾಂಕ*) (SPI_TXCRCR + ಸ್ಥಾನಾಂತರ);
 }
 
 /**
@@ -72,7 +72,7 @@ void configure_spi(int offset)
  * @param int* addr 
  * @param int val 
  */
-void set_spi(int* addr, int val)
+ಶೂನ್ಯ ಗಣ_spi(ಪೂರ್ಣಾಂಕ* addr, ಪೂರ್ಣಾಂಕ val)
 {
 	*addr = val;
 }
@@ -84,18 +84,18 @@ void set_spi(int* addr, int val)
  * @param int* ---> address from where read has to happen
  * @return int ---> SPI Register read value.
  */
-int get_spi(int* addr)
+ಪೂರ್ಣಾಂಕ get_spi(ಪೂರ್ಣಾಂಕ* addr)
 {
-	return *addr;
+	ಹಿಂತಿರುಗಿ *addr;
 }
 
 /** @fn void spi_init(void)
  * @brief setting up baud rate and clock pole and phase 
  * @details Initialize the spi controller in Mode 3 (CPOL =1 & CPHA =1) with SCK= clk/16
  */
-void spi_init(void)
+ಶೂನ್ಯ spi_init(ಶೂನ್ಯ)
 {
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_CPHA|SPI_CPOL));
 }
 
 /** @fn  void spi_tx_rx_start(void)
@@ -104,9 +104,9 @@ void spi_init(void)
  *           in master mode use this function.
  * @warning Should be set before configuring the control register 1.
  */
-void spi_tx_rx_start(void)
+ಶೂನ್ಯ spi_tx_rx_ಆರಂಭ(ಶೂನ್ಯ)
 {
-	set_spi(spi_cr2, (SPI_RX_IMM_START));
+	ಗಣ_spi(spi_cr2, (SPI_RX_IMM_ಆರಂಭ));
 }
 
 
@@ -114,9 +114,9 @@ void spi_tx_rx_start(void)
  * @brief to start receive state 
  * @details This is not in used when spi is in Master mode 
  */
-void spi_rx_enable(void)
+ಶೂನ್ಯ spi_rx_enable(ಶೂನ್ಯ)
 {
-	set_spi(spi_cr2, (SPI_RX_START));
+	ಗಣ_spi(spi_cr2, (SPI_RX_ಆರಂಭ));
 }
 
 /**
@@ -128,9 +128,9 @@ void spi_rx_enable(void)
  * @param int (p (position from where the bits to be extracted))
  * @return int (32 bit which have k bit from "number" and rest are zero)
  */
-int bitExtracted(int number, int k, int p)
+ಪೂರ್ಣಾಂಕ ಬಿಟ್_Extracted(ಪೂರ್ಣಾಂಕ ಸಂಖ್ಯೆ, ಪೂರ್ಣಾಂಕ k, ಪೂರ್ಣಾಂಕ p)
 {
-	return (((1 << k) - 1) & (number >> (p - 1)));
+	ಹಿಂತಿರುಗಿ (((1 << k) - 1) & (ಸಂಖ್ಯೆ >> (p - 1)));
 }
 
 /**
@@ -139,16 +139,16 @@ int bitExtracted(int number, int k, int p)
  * @details As soons as data come to receive buffer this bit is set.  
  * @return int (1: if there is data into the RxFIFO else 0)
  */
-int spi_rxne_enable(void)
+ಪೂರ್ಣಾಂಕ spi_rxne_enable(ಶೂನ್ಯ)
 {
-	int value = 0;
+	ಪೂರ್ಣಾಂಕ ಮೌಲ್ಯ = 0;
 
-	while (!(value & 0x1))
+	ಆಗ (!(ಮೌಲ್ಯ & 0x1))
 	{
 		waitfor(100);
-		value = get_spi(spi_sr);
+		ಮೌಲ್ಯ = get_spi(spi_sr);
 	}
-	return 1;
+	ಹಿಂತಿರುಗಿ 1;
 }
 
 /**
@@ -158,17 +158,17 @@ int spi_rxne_enable(void)
  * @warning One should check this bit before going to next transcation
  * @return int (0: SPI is busy in communication, 1: SPI nt busy)
  */
-int spi_notbusy(void)
+ಪೂರ್ಣಾಂಕ spi_notbusy(ಶೂನ್ಯ)
 {
-	int value = 0x80;
+	ಪೂರ್ಣಾಂಕ ಮೌಲ್ಯ = 0x80;
 
-	while ((value & 0x80))
+	ಆಗ ((ಮೌಲ್ಯ & 0x80))
 	{
 		waitfor(10);
-		value = get_spi(spi_sr);
+		ಮೌಲ್ಯ = get_spi(spi_sr);
 	}
 
-	return 1;
+	ಹಿಂತಿರುಗಿ 1;
 }
 
 /**
@@ -178,14 +178,14 @@ int spi_notbusy(void)
  * @warning Without enabling this bit one cannot erase/write into the flash
  * @return int
  */
-int flash_write_enable(void)
+ಪೂರ್ಣಾಂಕ flash_write_enable(ಶೂನ್ಯ)
 {
-	set_spi(spi_dr1, 0x06000000);
-	set_spi(spi_dr5, 0x06);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_dr1, 0x06000000);
+	ಗಣ_spi(spi_dr5, 0x06);
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(8)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	ಹಿಂತಿರುಗಿ 1;
 }
 
 /**
@@ -195,14 +195,14 @@ int flash_write_enable(void)
  * @return int
  */
 
-int flash_clear_sr(void)
+ಪೂರ್ಣಾಂಕ flash_clear_sr(ಶೂನ್ಯ)
 {
-	set_spi(spi_dr1,0x30000000);
-	set_spi(spi_dr5,0x30);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_dr1,0x30000000);
+	ಗಣ_spi(spi_dr5,0x30);
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(8)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	spi_notbusy();
 
-	return 1;
+	ಹಿಂತಿರುಗಿ 1;
 }
 
 /**
@@ -214,21 +214,21 @@ int flash_clear_sr(void)
  * @param int (addr (address after the opcode))
  * @return int
  */
-int flash_cmd_addr(int command, int addr)
+ಪೂರ್ಣಾಂಕ flash_cmd_addr(ಪೂರ್ಣಾಂಕ command, ಪೂರ್ಣಾಂಕ addr)
 {
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int data1 = command | address1 ;
+	ಪೂರ್ಣಾಂಕ address1 = ಬಿಟ್_Extracted(addr, 24, 9);
+	ಪೂರ್ಣಾಂಕ address2 = ಬಿಟ್_Extracted(addr, 8, 1);
+	ಪೂರ್ಣಾಂಕ data1 = command | address1 ;
 	address2 = address2 << 24;
 
-	set_spi(spi_dr1, data1);
-	set_spi(spi_dr2, address2);
-	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_dr1, data1);
+	ಗಣ_spi(spi_dr2, address2);
+	ಗಣ_spi(spi_dr5, 0);
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(40)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
 
-	return 1;
+	ಹಿಂತಿರುಗಿ 1;
 }
 
 /**
@@ -240,22 +240,22 @@ int flash_cmd_addr(int command, int addr)
  * @param int (addr(address after the opcode))
  * @param int (data (data after the address))
  */
-void flash_cmd_addr_data(int command, int addr, int data)
+ಶೂನ್ಯ flash_cmd_addr_ದತ್ತಾಂಶ(ಪೂರ್ಣಾಂಕ command, ಪೂರ್ಣಾಂಕ addr, ಪೂರ್ಣಾಂಕ ದತ್ತಾಂಶ_2)
 {
-	int cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
-	int data1 = ( (addr & 0xFF)  << 24 ) |( (data & 0xFFFFFF00)  >> 8);
-	int data2 = ( (data & 0xFF)  << 24 ) & 0xFF000000;
+	ಪೂರ್ಣಾಂಕ cmd_addr = command | ( (addr & 0xFFFFFF00)  >> 8);
+	ಪೂರ್ಣಾಂಕ data1 = ( (addr & 0xFF)  << 24 ) |( (ದತ್ತಾಂಶ_2 & 0xFFFFFF00)  >> 8);
+	ಪೂರ್ಣಾಂಕ data2 = ( (ದತ್ತಾಂಶ_2 & 0xFF)  << 24 ) & 0xFF000000;
 
 	log_debug("\n cmd: %x;d1: %x; d2: %x", cmd_addr, data1, data2);
 
-	set_spi(spi_dr1, cmd_addr);
-	set_spi(spi_dr2, data1);
-	set_spi(spi_dr3, data2);
-	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(72)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_dr1, cmd_addr);
+	ಗಣ_spi(spi_dr2, data1);
+	ಗಣ_spi(spi_dr3, data2);
+	ಗಣ_spi(spi_dr5, 0);
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(72)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
-	flash_status_register_read();
+	flash_ಸ್ಥಿತಿ_ರಿಜಿಸ್ಟರ್_read();
 }
 
 /**
@@ -266,11 +266,11 @@ void flash_cmd_addr_data(int command, int addr, int data)
  * @param int (addres (write address))
  * @param int(data (write data))
  */
-void flash_write(int address, int data)
+ಶೂನ್ಯ flash_write(ಪೂರ್ಣಾಂಕ ವಿಳಾಸ, ಪೂರ್ಣಾಂಕ ದತ್ತಾಂಶ_2)
 {
 	flash_write_enable();
-	flash_cmd_addr_data(0x12000000, address,data);
-	flash_status_register_read();
+	flash_cmd_addr_ದತ್ತಾಂಶ(0x12000000, ವಿಳಾಸ,ದತ್ತಾಂಶ_2);
+	flash_ಸ್ಥಿತಿ_ರಿಜಿಸ್ಟರ್_read();
 }
 
 /**
@@ -284,25 +284,25 @@ void flash_write(int address, int data)
  * @param int (addr(read_address))
  * @return int 
  */
-int flash_cmd_to_read(int command, int addr)
+ಪೂರ್ಣಾಂಕ flash_cmd_ಗಮ್ಯ_read(ಪೂರ್ಣಾಂಕ command, ಪೂರ್ಣಾಂಕ addr)
 {
-	int dr5;
-	int address2 = bitExtracted(addr, 8, 1);
+	ಪೂರ್ಣಾಂಕ dr5;
+	ಪೂರ್ಣಾಂಕ address2 = ಬಿಟ್_Extracted(addr, 8, 1);
 
 	address2 = address2 << 24;
-	set_spi(spi_dr1, ( command  | ( (addr & 0xFFFFFF00) >> 8) ));
-	set_spi(spi_dr2, ( (addr & 0xFF) << 24) );
-	set_spi(spi_dr5, 0);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(48)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_dr1, ( command  | ( (addr & 0xFFFFFF00) >> 8) ));
+	ಗಣ_spi(spi_dr2, ( (addr & 0xFF) << 24) );
+	ಗಣ_spi(spi_dr5, 0);
+	spi_tx_rx_ಆರಂಭ();
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(48)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(2000);
 
-	if(spi_rxne_enable()) 
+	ಆದರೆ(spi_rxne_enable()) 
 	{
 		dr5 = *spi_dr5;
 	}
 
-	return dr5;
+	ಹಿಂತಿರುಗಿ dr5;
 
 }
 
@@ -312,10 +312,10 @@ int flash_cmd_to_read(int command, int addr)
  * @param int (address (read address))
  * @return int 
  */
-int flash_read(int address)
+ಪೂರ್ಣಾಂಕ flash_read(ಪೂರ್ಣಾಂಕ ವಿಳಾಸ)
 {
-	int read_value = flash_cmd_to_read(0x0C000000,address);
-	return read_value;
+	ಪೂರ್ಣಾಂಕ read_ಮೌಲ್ಯ = flash_cmd_ಗಮ್ಯ_read(0x0C000000,ವಿಳಾಸ);
+	ಹಿಂತಿರುಗಿ read_ಮೌಲ್ಯ;
 }
 
 /**
@@ -325,17 +325,17 @@ int flash_read(int address)
  * @param int command (opcode)
  * @return int  value (flash response to opcode)
  */
-int flash_cmd_read(int command)
+ಪೂರ್ಣಾಂಕ flash_cmd_read(ಪೂರ್ಣಾಂಕ command)
 {
-	int dr5;
-	set_spi(spi_dr1, command);
-	set_spi(spi_dr5, command);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-	if(spi_rxne_enable()) {
+	ಪೂರ್ಣಾಂಕ dr5;
+	ಗಣ_spi(spi_dr1, command);
+	ಗಣ_spi(spi_dr5, command);
+	spi_tx_rx_ಆರಂಭ();
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(8)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಆದರೆ(spi_rxne_enable()) {
 		dr5 = *spi_dr5;
 	}
-	return dr5;
+	ಹಿಂತಿರುಗಿ dr5;
 }
 
 /**
@@ -345,9 +345,9 @@ int flash_cmd_read(int command)
  * @warning before erasing the flash one should enable the WEL bit spi_sr by using write_enable()
  * @param int (address (address from which data should erase))
  */
-void flash_erase(int address)
+ಶೂನ್ಯ flash_erase(ಪೂರ್ಣಾಂಕ ವಿಳಾಸ)
 {
-	flash_cmd_addr(0xdc000000, address);
+	flash_cmd_addr(0xdc000000, ವಿಳಾಸ);
 }
 
 /**
@@ -357,17 +357,17 @@ void flash_erase(int address)
  *           and WEL(Write Enable Latch) bit.
  * @return int
  */
-int flash_status_register_read(void)
+ಪೂರ್ಣಾಂಕ flash_ಸ್ಥಿತಿ_ರಿಜಿಸ್ಟರ್_read(ಶೂನ್ಯ)
 {
-	int stat = 0x3;
+	ಪೂರ್ಣಾಂಕ stat = 0x3;
 
-	while (stat & 0x03)
+	ಆಗ (stat & 0x03)
 	{
 		stat = flash_cmd_read(0x05000000);
 		log_debug("flash status register val %x\n", stat);
 	}
 
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }
 
 /**
@@ -378,27 +378,27 @@ int flash_status_register_read(void)
  * @warning to move data from data register to fifo there must be some data into spi_dr5
  * @return int
  */
-int flash_device_id(void)
+ಪೂರ್ಣಾಂಕ flash_device_id(ಶೂನ್ಯ)
 {
-	int dr3;
-	int val1, val2;
+	ಪೂರ್ಣಾಂಕ dr3;
+	ಪೂರ್ಣಾಂಕ val1, val2;
 
 	flash_write_enable();
-	set_spi(spi_dr1, 0x9f000000);
-	set_spi(spi_dr5, 0x9f000000);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	ಗಣ_spi(spi_dr1, 0x9f000000);
+	ಗಣ_spi(spi_dr5, 0x9f000000);
+	spi_tx_rx_ಆರಂಭ();
+	ಗಣ_spi(spi_cr1, (SPI_BR(7)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_TX(8)|SPI_ಒಟ್ಟು_ಬಿಟ್ಟುಗಳು_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 
-	if(spi_rxne_enable())
+	ಆದರೆ(spi_rxne_enable())
 	{
 		dr3 = *spi_dr5;
 	}
 
-	val1 = bitExtracted(dr3, 8, 17);
-	val2 = bitExtracted(dr3, 16, 1);
+	val1 = ಬಿಟ್_Extracted(dr3, 8, 17);
+	val2 = ಬಿಟ್_Extracted(dr3, 16, 1);
 
 	log_debug("Device ID %x \n", val1);
 	log_debug("extracted device id %x \n",val2);
 
-	return 1;
+	ಹಿಂತಿರುಗಿ 1;
 }

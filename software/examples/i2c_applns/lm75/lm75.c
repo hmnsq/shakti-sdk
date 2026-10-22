@@ -26,22 +26,22 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 @brief Contains the driver routines to configure and read lm75.
 @detail I2C based routines to configures and read the temperature from LM75.
 */
-#include <stdint.h>//Includes the definitions of standard input/output functions//
-#include "i2c.h"
-#include "log.h"
-#include "uart.h"
+#ಅನ್ತರ್ಭಾವ <stdint.h>//Includes the definitions of standard input/output functions//
+#ಅನ್ತರ್ಭಾವ "i2c.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
+#ಅನ್ತರ್ಭಾವ "uart.h"
 
-#define I2C i2c_instance[0]
+#ವ್ಯಾಖ್ಯಾನಿಸು I2C i2c_instance[0]
 
-#define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave//
-#define LM75_TEMP_REG_OFFSET 0x00
-#define LM75_CONF_REG_OFFSET 0x01
-#define LM75_HYST_REG_OFFSET 0x02
-#define LM75_OFFSET_REG_OFFSET 0x03
+#ವ್ಯಾಖ್ಯಾನಿಸು LM75_SLAVE_ವಿಳಾಸ 0x90//Defines the Starting address of slave//
+#ವ್ಯಾಖ್ಯಾನಿಸು LM75_ತಾತ್ಕಾಲಿಕ_REG_ಸ್ಥಾನಾಂತರ 0x00
+#ವ್ಯಾಖ್ಯಾನಿಸು LM75_CONF_REG_ಸ್ಥಾನಾಂತರ 0x01
+#ವ್ಯಾಖ್ಯಾನಿಸು LM75_HYST_REG_ಸ್ಥಾನಾಂತರ 0x02
+#ವ್ಯಾಖ್ಯಾನಿಸು LM75_ಸ್ಥಾನಾಂತರ_REG_ಸ್ಥಾನಾಂತರ 0x03
 
-#define DELAY_VALUE 900
-#define PRESCALER_COUNT 0x1F
-#define SCLK_COUNT 0x91
+#ವ್ಯಾಖ್ಯಾನಿಸು DELAY_ಮೌಲ್ಯ 900
+#ವ್ಯಾಖ್ಯಾನಿಸು PRESCALER_ಎಣಿಕೆ 0x1F
+#ವ್ಯಾಖ್ಯಾನಿಸು SCLK_ಎಣಿಕೆ 0x91
 
 /** @fn int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
  * @brief Read the lm75 register.
@@ -52,36 +52,36 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * @param delay
  * @return  Read Status (Zero on Success).
  */
-int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
+ಪೂರ್ಣಾಂಕ read_lm75_ರಿಜಿಸ್ಟರ್(i2c_struct * i2c_instance, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ reg_ಸ್ಥಾನಾಂತರ, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ *read_ತಾತ್ಕಾಲಿಕ, ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay)
 {
-	unsigned char read_buf[4] = {'\0'};
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned char temp = 0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ read_buf[4] = {'\0'};
+	ಪೂರ್ಣಾಂಕ i = 0, j = 0,  k = 0, ಸ್ಥಿತಿ_3=0;
+	ಚಿಹ್ನೆರಹಿತ ಅಕ್ಷರ ತಾತ್ಕಾಲಿಕ = 0;
 //Writes the slave address for write
-	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, 800);
+	i2c_send_slave_ವಿಳಾಸ(i2c_instance, LM75_SLAVE_ವಿಳಾಸ, I2C_WRITE, 800);
 //Writes the pointer to address that needs to be read
-	i2c_write_data(i2c_instance, reg_offset , delay);
+	i2c_write_ದತ್ತಾಂಶ(i2c_instance, reg_ಸ್ಥಾನಾಂತರ , delay);
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
-	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_READ, 800);
+	i2c_send_slave_ವಿಳಾಸ(i2c_instance, LM75_SLAVE_ವಿಳಾಸ, I2C_READ, 800);
 
 
 /* Make a dummy read as per spec of the I2C controller */
-	i2c_read_data(i2c_instance, &temp, delay);
+	i2c_read_ದತ್ತಾಂಶ(i2c_instance, &ತಾತ್ಕಾಲಿಕ, delay);
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	i2c_read_data(i2c_instance, &read_buf[1], delay);
+	i2c_read_ದತ್ತಾಂಶ(i2c_instance, &read_buf[1], delay);
 	i2c_instance->control = I2C_NACK;
 
 //Reads the MSB Byte of temperature [D9 - D1]
-	i2c_read_data(i2c_instance, &read_buf[0], delay);
+	i2c_read_ದತ್ತಾಂಶ(i2c_instance, &read_buf[0], delay);
 	i2c_instance->control = I2C_STOP;
-	*readTemp = (read_buf[1] << 1) | (read_buf[0] >> 7);
+	*read_ತಾತ್ಕಾಲಿಕ = (read_buf[1] << 1) | (read_buf[0] >> 7);
 
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }
 
 /** @fn int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
@@ -93,19 +93,19 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
  * @param delay
  * @return Write Status (Zero on Success)
  */
-int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
+ಪೂರ್ಣಾಂಕ write_lm75_ರಿಜಿಸ್ಟರ್(i2c_struct * i2c_instance, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ reg_ಸ್ಥಾನಾಂತರ, ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ write_ಮೌಲ್ಯ, ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay)
 {
-	int i = 0, j = 0,  k = 0, status=0;
-	unsigned int temp = 0;
-	i2c_send_slave_address(i2c_instance, LM75_SLAVE_ADDRESS, I2C_WRITE, delay);
-	i2c_write_data(i2c_instance, reg_offset /*LM75_TEMP_REG_OFFSET */, delay);
-	i2c_write_data(i2c_instance,  ( (write_value >> 1) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
-	printf("\n Write Value[0]: %02x", (write_value >> 1) & 0xff);
-	i2c_write_data(i2c_instance,  ( ( (write_value & 0x01) << 7) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
-	printf("\n Write Value[1]: %02x", ( ( (write_value & 0x01) << 7) & 0xff));
+	ಪೂರ್ಣಾಂಕ i = 0, j = 0,  k = 0, ಸ್ಥಿತಿ_3=0;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ತಾತ್ಕಾಲಿಕ = 0;
+	i2c_send_slave_ವಿಳಾಸ(i2c_instance, LM75_SLAVE_ವಿಳಾಸ, I2C_WRITE, delay);
+	i2c_write_ದತ್ತಾಂಶ(i2c_instance, reg_ಸ್ಥಾನಾಂತರ /*LM75_TEMP_REG_OFFSET */, delay);
+	i2c_write_ದತ್ತಾಂಶ(i2c_instance,  ( (write_ಮೌಲ್ಯ >> 1) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+	ಬರೆ("\n Write Value[0]: %02x", (write_ಮೌಲ್ಯ >> 1) & 0xff);
+	i2c_write_ದತ್ತಾಂಶ(i2c_instance,  ( ( (write_ಮೌಲ್ಯ & 0x01) << 7) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
+	ಬರೆ("\n Write Value[1]: %02x", ( ( (write_ಮೌಲ್ಯ & 0x01) << 7) & 0xff));
 //Stops the I2C transaction to start reading the temperature value.
 	i2c_instance->control = I2C_STOP;
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }
 
 /** @fn int main()
@@ -114,68 +114,68 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
  * calculates the actual temperature value and prints the same.
  * @return Zero
  */
-int main()
+ಪೂರ್ಣಾಂಕ ಮುಖ್ಯ()
 {
-	int timeout;
-	unsigned int tempReadValue = 0;
-	unsigned long delay = 1000;
+	ಪೂರ್ಣಾಂಕ timeout;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ = 0;
+	ಚಿಹ್ನೆರಹಿತ ದೀರ್ಘ delay = 1000;
 //	set_baud_rate(uart_instance[0], 115200);
     
 	log_debug("\n\tI2C: LM75 Temperature Sensor I2C read\n");
     i2c_init();
 	//Initialises I2C Controller
-		if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+		ಆದರೆ(config_i2c(I2C, PRESCALER_ಎಣಿಕೆ,SCLK_ಎಣಿಕೆ))
 		{
 				log_error("\tSomething Wrong In Initialization\n");
-				return -1;
+				ಹಿಂತಿರುಗಿ -1;
 		}
-	else
+	ಇಲ್ಲದಿದ್ದರೆ
 				log_info("\tIntilization Happened Fine\n");
-#ifdef LM75_HYST_CHECK
-	write_lm75_register(I2C, LM75_HYST_REG_OFFSET, 0x30, delay);
-		if(0 == read_lm75_register(I2C, LM75_HYST_REG_OFFSET, &tempReadValue, delay))
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ LM75_HYST_CHECK
+	write_lm75_ರಿಜಿಸ್ಟರ್(I2C, LM75_HYST_REG_ಸ್ಥಾನಾಂತರ, 0x30, delay);
+		ಆದರೆ(0 == read_lm75_ರಿಜಿಸ್ಟರ್(I2C, LM75_HYST_REG_ಸ್ಥಾನಾಂತರ, &ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
 //				tempReadValue = ( (~tempReadValue) + 1 );
-				log_info("\n\t Hyst Reg Value:=%u",tempReadValue);
+				log_info("\n\t Hyst Reg Value:=%u",ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ);
 		}
-		else
+		ಇಲ್ಲದಿದ್ದರೆ
 		{
 	//Display the error
 			log_error("\nHyst Reg Value failed.");
 		}
-#endif
-#ifdef LM75_OFFSET_CHECK
-	write_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, 0x35, delay);
-	if(0 == read_lm75_register(I2C, LM75_OFFSET_REG_OFFSET, &tempReadValue, delay))
+#ಆದರೆ_ಅಂತ್ಯ
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ LM75_ಸ್ಥಾನಾಂತರ_CHECK
+	write_lm75_ರಿಜಿಸ್ಟರ್(I2C, LM75_ಸ್ಥಾನಾಂತರ_REG_ಸ್ಥಾನಾಂತರ, 0x35, delay);
+	ಆದರೆ(0 == read_lm75_ರಿಜಿಸ್ಟರ್(I2C, LM75_ಸ್ಥಾನಾಂತರ_REG_ಸ್ಥಾನಾಂತರ, &ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ, delay))
 	{
 		//Display Temperature value
-			log_info("\n\t Offset Reg Value:=%u",tempReadValue);
+			log_info("\n\t Offset Reg Value:=%u",ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ);
 	}
-	else
+	ಇಲ್ಲದಿದ್ದರೆ
 	{
 //Display the error
 		log_error("\nOffset Reg Value failed.");
 	}
-#endif
-	while(1)
+#ಆದರೆ_ಅಂತ್ಯ
+	ಆಗ(1)
 	{
 
-		if(0 == read_lm75_register(I2C, LM75_TEMP_REG_OFFSET, &tempReadValue, delay))
+		ಆದರೆ(0 == read_lm75_ರಿಜಿಸ್ಟರ್(I2C, LM75_ತಾತ್ಕಾಲಿಕ_REG_ಸ್ಥಾನಾಂತರ, &ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ, delay))
 		{
 			//Display Temperature value
 //			printf("\nTemperature read value is %x", tempReadValue);
-			if(tempReadValue & 0x100) {
-				tempReadValue = ( (~tempReadValue) + 1 ) >> 1;
-				log_info("\n\t Current Temperature:=-%u°C",tempReadValue);
+			ಆದರೆ(ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ & 0x100) {
+				ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ = ( (~ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ) + 1 ) >> 1;
+				log_info("\n\t Current Temperature:=-%u°C",ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ);
 			}
-			else {
-				tempReadValue = tempReadValue >> 1;
-				log_info("\n\t Current Temperature:=+%u°C",tempReadValue);
+			ಇಲ್ಲದಿದ್ದರೆ {
+				ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ = ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ >> 1;
+				log_info("\n\t Current Temperature:=+%u°C",ತಾತ್ಕಾಲಿಕ_Read_ಮೌಲ್ಯ);
 			 }
 		}
-		else
+		ಇಲ್ಲದಿದ್ದರೆ
 		{
 	//Display the error
 			log_error("\nTemperature read failed.");
@@ -184,5 +184,5 @@ int main()
 	}
 
 
-	return 0;
+	ಹಿಂತಿರುಗಿ 0;
 }

@@ -26,11 +26,11 @@
 @detail This file contains Trap handler routines.
 */
 
-#include "traps.h"
-#include "log.h"
+#ಅನ್ತರ್ಭಾವ "traps.h"
+#ಅನ್ತರ್ಭಾವ "log.h"
 
-mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
-mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+mtrap_fptr_t mcause_trap_ಕೋಷ್ಟಕ[MAX_TRAP_ಮೌಲ್ಯ];
+mtrap_fptr_t mcause_ಅಡಚಣೆ_ಕೋಷ್ಟಕ[MAX_ಅಡಚಣೆ_ಮೌಲ್ಯ];
 
 /** @fn unsigned int extract_ie_code(unsigned int num)
  * @brief Extract the exception code from the mcause value
@@ -40,19 +40,19 @@ mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
  * @param unsigned int num - mcause value
  * @return unsigned int
  */
-unsigned int extract_ie_code(unsigned int num)
+ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಹೊರತೆಗೆ_ie_ಸಂಕೇತ(ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ಅಂಕೆ)
 {
-	unsigned int exception_code;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ exception_ಸಂಕೇತ;
 
 	log_trace("\nextract_ie_code entered\n");
 
-	exception_code = (num & 0X7FFFFFFF);
+	exception_ಸಂಕೇತ = (ಅಂಕೆ & 0X7FFFFFFF);
 
-	log_debug("exception code = %x\n",exception_code);
+	log_debug("exception code = %x\n",exception_ಸಂಕೇತ);
 
 	log_trace("extract_ie_code exited\n");
 
-	return exception_code;
+	ಹಿಂತಿರುಗಿ exception_ಸಂಕೇತ;
 }
 
 /** @fn void default_handler(uintptr_t mcause, uintptr_t epc)
@@ -60,11 +60,11 @@ unsigned int extract_ie_code(unsigned int num)
  * @param unsigned int ptr mcause
  * @param unsigned int ptr epc
  */
-void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((unused)) uintptr_t epc)
+ಶೂನ್ಯ default_handler(__attribute__((ಬಳಸದ)) uintptr_t mcause, __attribute__((ಬಳಸದ)) uintptr_t epc)
 {
 	log_trace("\ndefault_handler entered\n");
 
-	while(1);
+	ಆಗ(1);
 
 	log_trace("default_handler exited\n");
 }
@@ -79,8 +79,8 @@ void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((un
  */
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 {
-	unsigned int ie_entry = 0;;
-	uint32_t shift_length = 0;
+	ಚಿಹ್ನೆರಹಿತ ಪೂರ್ಣಾಂಕ ie_ನಮೂದು = 0;;
+	uint32_t ಸರಿಸು_ಉದ್ದಳತೆ = 0;
 
 	log_trace("\nhandle_trap entered\n");
 
@@ -104,25 +104,25 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 	   The Exception Code field contains a code identifying the last exception
 	 */
 
-	log_debug("sizeof(uintptr)  = %d \n",sizeof(uintptr_t));
-	shift_length = __riscv_xlen - 1;
+	log_debug("sizeof(uintptr)  = %d \n",ಗಾತ್ರ(uintptr_t));
+	ಸರಿಸು_ಉದ್ದಳತೆ = __riscv_xlen - 1;
 
 	 /* checking for type of trap */
-	if (mcause & (1 << (shift_length))){
+	ಆದರೆ (mcause & (1 << (ಸರಿಸು_ಉದ್ದಳತೆ))){
 
-		ie_entry = extract_ie_code(mcause);
+		ie_ನಮೂದು = ಹೊರತೆಗೆ_ie_ಸಂಕೇತ(mcause);
 
 		log_info("\nInterrupt: mcause = %x, epc = %x\n", mcause, epc);
 
-		mcause_interrupt_table[ie_entry](mcause, epc);
+		mcause_ಅಡಚಣೆ_ಕೋಷ್ಟಕ[ie_ನಮೂದು](mcause, epc);
 	}
-	else{
+	ಇಲ್ಲದಿದ್ದರೆ{
 		log_info("\nException: mcause = %x, epc = %x\n", mcause, epc);
 
-		mcause_trap_table[mcause](mcause, epc);
+		mcause_trap_ಕೋಷ್ಟಕ[mcause](mcause, epc);
 	}
 
 	log_trace("handle_trap exited\n");
 
-return epc;
+ಹಿಂತಿರುಗಿ epc;
 }

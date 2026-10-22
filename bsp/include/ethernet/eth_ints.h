@@ -203,18 +203,18 @@
 *
 ******************************************************************************/
 
-#ifndef ETH_INTS_H			/* prevent circular inclusions */
-#define ETH_INTS_H			/* by using protection macros */
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ ETH_INTS_H			/* prevent circular inclusions */
+#ವ್ಯಾಖ್ಯಾನಿಸು ETH_INTS_H			/* by using protection macros */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ __cplusplus
+ಬಾಹ್ಯ "C" {
+#ಆದರೆ_ಅಂತ್ಯ
 
 
 /***************************** Include Files *********************************/
 
 
-#include "xintc_l.h"
+#ಅನ್ತರ್ಭಾವ "xintc_l.h"
 
 /************************** Constant Definitions *****************************/
 
@@ -231,8 +231,8 @@ extern "C" {
  *				return.
  * </pre>
  */
-#define XIN_SVC_SGL_ISR_OPTION  1UL
-#define XIN_SVC_ALL_ISRS_OPTION 2UL
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_SVC_SGL_ISR_OPTION  1UL
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_SVC_ALL_ISRS_OPTION 2UL
 /*@}*/
 
 /**
@@ -241,19 +241,19 @@ extern "C" {
  * @{
  */
 /** Simulation only mode, no hardware interrupts recognized */
-#define XIN_SIMULATION_MODE     0
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_SIMULATION_ಬಹುಲಕ     0
 /** Real mode, no simulation allowed, hardware interrupts recognized */
-#define XIN_REAL_MODE           1
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_REAL_ಬಹುಲಕ           1
 /*@}*/
 
 /**
  * @name Masks to specify Interrupt Controller Mode
  * @{
  */
-#define XIN_INTC_NOCASCADE     	0	/* Normal - No Cascade Mode */
-#define XIN_INTC_PRIMARY     	1	/* Master/Primary controller */
-#define XIN_INTC_SECONDARY     	2	/* Secondary Slave Controllers */
-#define XIN_INTC_LAST     	3	/* Last Slave Controller */
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_INTC_NOCASCADE     	0	/* Normal - No Cascade Mode */
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_INTC_PRIMARY     	1	/* Master/Primary controller */
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_INTC_SECONDARY     	2	/* Secondary Slave Controllers */
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_INTC_ಕೊನೆಯ     	3	/* Last Slave Controller */
 
 /*@}*/
 
@@ -261,10 +261,10 @@ extern "C" {
  * @name Mask to specify maximum number of interrupt sources per controller
  * @{
  */
-#define XIN_CONTROLLER_MAX_INTRS	32  /* Each Controller has 32
+#ವ್ಯಾಖ್ಯಾನಿಸು XIN_CONTROLLER_MAX_INTRS	32  /* Each Controller has 32
 					       interrupt pins */
 
-#define XINTC_STANDARD_VECTOR_ADDRESS_WIDTH	32U
+#ವ್ಯಾಖ್ಯಾನಿಸು XINTC_STANDARD_ಸದಿಶ_ವಿಳಾಸ_ಅಗಲ	32U
 /*@}*/
 
 /**************************** Type Definitions *******************************/
@@ -272,26 +272,26 @@ extern "C" {
 /**
  * This typedef contains configuration information for the device.
  */
-typedef struct {
+ಪ್ರಕಾರವ್ಯಾಖ್ಯೆ ರಚನೆ {
 	u16 DeviceId;		/**< Unique ID  of device */
-	UINTPTR BaseAddress;	/**< Register base address */
+	UINTPTR ತಳ_ವಿಳಾಸ;	/**< Register base address */
 	u32 AckBeforeService;	/**< Ack location per interrupt */
-	int FastIntr;		/**< Fast Interrupt enabled */
-	u32 IntVectorAddr;	/**< Interrupt Vector Address */
-	int NumberofIntrs;      /**< Number of Interrupt sources */
-	u8 VectorAddrWidth;		/**< Width of vector address */
+	ಪೂರ್ಣಾಂಕ FastIntr;		/**< Fast Interrupt enabled */
+	u32 Int_ಸದಿಶ_Addr;	/**< Interrupt Vector Address */
+	ಪೂರ್ಣಾಂಕ NumberofIntrs;      /**< Number of Interrupt sources */
+	u8 ಸದಿಶ_Addr_ಅಗಲ;		/**< Width of vector address */
 	u32 Options;		/**< Device options */
-	int IntcType;		/**< Intc type 0 - No Cascade Mode
+	ಪೂರ್ಣಾಂಕ IntcType;		/**< Intc type 0 - No Cascade Mode
 				               1 - primary instance
 				               2 - secondary instance
 				               3 - last instance */
 
 /** Static vector table of interrupt handlers */
-#if XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
-	XIntc_VectorTableEntry HandlerTable[XIN_CONTROLLER_MAX_INTRS];
-#else
-	XIntc_VectorTableEntry HandlerTable[XPAR_INTC_MAX_NUM_INTR_INPUTS];
-#endif
+#ಆದರೆ XPAR_INTC_0_INTC_TYPE != XIN_INTC_NOCASCADE
+	XIntc_ಸದಿಶ_ಕೋಷ್ಟಕ_ನಮೂದು Handler_ಕೋಷ್ಟಕ[XIN_CONTROLLER_MAX_INTRS];
+#ಇಲ್ಲದಿದ್ದರೆ
+	XIntc_ಸದಿಶ_ಕೋಷ್ಟಕ_ನಮೂದು Handler_ಕೋಷ್ಟಕ[XPAR_INTC_MAX_ಅಂಕೆ_INTR_INPUTS];
+#ಆದರೆ_ಅಂತ್ಯ
 
 } XIntc_Config;
 
@@ -300,8 +300,8 @@ typedef struct {
  * variable of this type for every intc device in the system. A pointer
  * to a variable of this type is then passed to the driver API functions.
  */
-typedef struct {
-	UINTPTR BaseAddress;	 /**< Base address of registers */
+ಪ್ರಕಾರವ್ಯಾಖ್ಯೆ ರಚನೆ {
+	UINTPTR ತಳ_ವಿಳಾಸ;	 /**< Base address of registers */
 	u32 IsReady;		 /**< Device is initialized and ready */
 	u32 IsStarted;		 /**< Device has been started */
 	u32 UnhandledInterrupts; /**< Intc Statistics */
@@ -316,48 +316,48 @@ typedef struct {
 /*
  * Required functions in xintc.c
  */
-int XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
+ಪೂರ್ಣಾಂಕ XIntc_Initialize(XIntc * InstancePtr, u16 DeviceId);
 
-int XIntc_Start(XIntc * InstancePtr, u8 Mode);
-void XIntc_Stop(XIntc * InstancePtr);
+ಪೂರ್ಣಾಂಕ XIntc_ಆರಂಭ(XIntc * InstancePtr, u8 ಬಹುಲಕ_2);
+ಶೂನ್ಯ XIntc_Stop(XIntc * InstancePtr);
 
-int XIntc_Connect(XIntc * InstancePtr, u8 Id,
-		  XInterruptHandler Handler, void *CallBackRef);
-void XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
+ಪೂರ್ಣಾಂಕ XIntc_Connect(XIntc * InstancePtr, u8 Id,
+		  XInterruptHandler Handler, ಶೂನ್ಯ *Call_ಹಿಂಭಾಗ_Ref);
+ಶೂನ್ಯ XIntc_Disconnect(XIntc * InstancePtr, u8 Id);
 
-void XIntc_Enable(XIntc * InstancePtr, u8 Id);
-void XIntc_Disable(XIntc * InstancePtr, u8 Id);
+ಶೂನ್ಯ XIntc_Enable(XIntc * InstancePtr, u8 Id);
+ಶೂನ್ಯ XIntc_Disable(XIntc * InstancePtr, u8 Id);
 
-void XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
+ಶೂನ್ಯ XIntc_Acknowledge(XIntc * InstancePtr, u8 Id);
 
 XIntc_Config *XIntc_LookupConfig(u16 DeviceId);
 
-int XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
-				XFastInterruptHandler Handler);
-void XIntc_SetNormalIntrMode(XIntc *InstancePtr, u8 Id);
+ಪೂರ್ಣಾಂಕ XIntc_ConnectFastHandler(XIntc *InstancePtr, u8 Id,
+				XFast_ಅಡಚಣೆ_Handler Handler);
+ಶೂನ್ಯ XIntc_ಗಣ_ಸಾಮಾನ್ಯ_Intr_ಬಹುಲಕ(XIntc *InstancePtr, u8 Id);
 
 /*
  * Interrupt functions in xintr_intr.c
  */
-void XIntc_VoidInterruptHandler(void);
-void XIntc_InterruptHandler(XIntc * InstancePtr);
+ಶೂನ್ಯ XIntc_Void_ಅಡಚಣೆ_Handler(ಶೂನ್ಯ);
+ಶೂನ್ಯ XIntc_ಅಡಚಣೆ_Handler(XIntc * InstancePtr);
 
 /*
  * Options functions in xintc_options.c
  */
-int XIntc_SetOptions(XIntc * InstancePtr, u32 Options);
+ಪೂರ್ಣಾಂಕ XIntc_ಗಣ_Options(XIntc * InstancePtr, u32 Options);
 u32 XIntc_GetOptions(XIntc * InstancePtr);
 
 /*
  * Self-test functions in xintc_selftest.c
  */
-int XIntc_SelfTest(XIntc * InstancePtr);
-int XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
+ಪೂರ್ಣಾಂಕ XIntc_SelfTest(XIntc * InstancePtr);
+ಪೂರ್ಣಾಂಕ XIntc_SimulateIntr(XIntc * InstancePtr, u8 Id);
 
-#ifdef __cplusplus
+#ವ್ಯಾಖ್ಯಾನಿತವಾದರೆ __cplusplus
 }
-#endif
+#ಆದರೆ_ಅಂತ್ಯ
 
-#endif /* end of protection macro */
+#ಆದರೆ_ಅಂತ್ಯ /* end of protection macro */
 /** @} */
 

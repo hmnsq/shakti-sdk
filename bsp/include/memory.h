@@ -24,11 +24,11 @@
  * @file memory.h
  * @brief dumps values at memory mapped locations, useful for debugging
  */
-#ifndef _MEMORY_H
-#define _MEMORY_H
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ ಸ್ಮರಣೆ_H
+#ವ್ಯಾಖ್ಯಾನಿಸು ಸ್ಮರಣೆ_H
 
-#include<stdint.h>
+#ಅನ್ತರ್ಭಾವ<stdint.h>
 
-void dump_word_memory(uint32_t* start, uint32_t word_length);
-void dump_byte_memory(uint32_t* start, uint32_t word_length);
-#endif
+ಶೂನ್ಯ dump_ಶಬ್ದ_ಸ್ಮರಣೆ(uint32_t* ಆರಂಭ, uint32_t ಶಬ್ದ_ಉದ್ದಳತೆ);
+ಶೂನ್ಯ dump_byte_ಸ್ಮರಣೆ(uint32_t* ಆರಂಭ, uint32_t ಶಬ್ದ_ಉದ್ದಳತೆ);
+#ಆದರೆ_ಅಂತ್ಯ

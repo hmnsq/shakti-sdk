@@ -26,17 +26,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  * @detail This is the header file for clint_driver.c
  */
 
-#ifndef CLIC_DRIVER_H
-#define CLIC_DRIVER_H
-#include "traps.h"
-#include "platform.h"
+#ವ್ಯಾಖ್ಯಾನಿತವಾಗದಿದ್ದರೆ CLIC_DRIVER_H
+#ವ್ಯಾಖ್ಯಾನಿಸು CLIC_DRIVER_H
+#ಅನ್ತರ್ಭಾವ "traps.h"
+#ಅನ್ತರ್ಭಾವ "platform.h"
 
-extern volatile uint64_t* mtime;
-extern volatile uint64_t* mtimecmp;
+ಬಾಹ್ಯ ಅಸ್ಥಿರ uint64_t* mtime;
+ಬಾಹ್ಯ ಅಸ್ಥಿರ uint64_t* mtimecmp;
 
 /* function prototype */
-uint64_t get_timer_value(void);
-void configure_counter(uint64_t value);
-void mach_clint_handler(uintptr_t int_id, uintptr_t epc);
+uint64_t get_timer_ಮೌಲ್ಯ(ಶೂನ್ಯ);
+ಶೂನ್ಯ configure_counter(uint64_t ಮೌಲ್ಯ);
+ಶೂನ್ಯ mach_clint_handler(uintptr_t int_id, uintptr_t epc);
 
-#endif
+#ಆದರೆ_ಅಂತ್ಯ

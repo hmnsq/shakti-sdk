@@ -29,20 +29,20 @@
 
 
 
-#include <stdio.h>
-#include "camera/ucam.h"
-#include "pinmux.h"
+#અન્તર્ભાવ <stdio.h>
+#અન્તર્ભાવ "camera/ucam.h"
+#અન્તર્ભાવ "pinmux.h"
 
 
-int main(void) {
+પૂર્ણાંક મુખ્ય(શૂન્ય) {
   *pinmux_config_reg = 85;
-  int brate = 115200;
+  પૂર્ણાંક brate = 115200;
   set_baud_rate(uart_instance[1],brate);
   set_baud_rate(uart_instance[2],brate);
-  if( init_cam() < 0) 
-      return -1;
+  જો( init_cam() < 0) 
+      પાછા -1;
   get_pic(1);
-  return 0;
+  પાછા 0;
 }
 
 

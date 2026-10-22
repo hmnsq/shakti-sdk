@@ -32,9 +32,9 @@
 //#define BOOT
 #ifndef BOOT
 
-#include<stdlib.h>
+#અન્તર્ભાવ<stdlib.h>
 #endif
-#include<stdint.h>
+#અન્તર્ભાવ<stdint.h>
 
 #define DEF_TIMEOUT 60
 #define BASE_ADDR 0x00000100 
@@ -129,56 +129,56 @@
 #define THREEBYTE 0x2
 #define FOURBYTE  0x3
 
-extern int* cr      ;
- extern int* dcr    ;
- extern int* sr     ; 
- extern int* fcr    ;
- extern int* ccr    ;
- extern int* ar     ; 
- extern int* abr    ;
- extern int* dr     ; 
- extern int* dlr    ;
- extern int* psmkr  ;
- extern int* pir    ;
- extern int* lprt   ;
- extern int* startmm;
- extern int* endmm ;
+બાહ્ય પૂર્ણાંક* cr      ;
+ બાહ્ય પૂર્ણાંક* dcr    ;
+ બાહ્ય પૂર્ણાંક* sr     ; 
+ બાહ્ય પૂર્ણાંક* fcr    ;
+ બાહ્ય પૂર્ણાંક* ccr    ;
+ બાહ્ય પૂર્ણાંક* ar     ; 
+ બાહ્ય પૂર્ણાંક* abr    ;
+ બાહ્ય પૂર્ણાંક* dr     ; 
+ બાહ્ય પૂર્ણાંક* dlr    ;
+ બાહ્ય પૂર્ણાંક* psmkr  ;
+ બાહ્ય પૂર્ણાંક* pir    ;
+ બાહ્ય પૂર્ણાંક* lprt   ;
+ બાહ્ય પૂર્ણાંક* startmm;
+ બાહ્ય પૂર્ણાંક* endmm ;
 
-void set_qspi_shakti32(int* addr, const int val);
-void set_qspi_shakti16(int16_t* addr, int16_t val);
-void set_qspi_shakti8(char* addr, char val);
-int get_qspi_shakti( int* addr);
-int check_fail_bit(void);
-void reset_interrupt_flags(void);
-int micron_write_enable(int status);
-int flashSingleSPIDDRXip(int addr, int* dest_addr);
-int wait_for_tcf(int status);
-void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode);
-int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address);
-int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address);
-int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int flashReadDualSPI(int address, int data_length);
-int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize);
-int micron_disable_xip_volatile(int,int);
-int flashSingleSPIXip(int addr, int* dest_addr);
-int flashMemInit(void);
-int flashDualSPIXip(int addr, int* dest_addr);
-int flashDualSPIDDRXip(int addr, int* dest_addr);
-int flashWriteVolatileConfigReg(int value);
-int flashQuadSPIXip(int addr, int* dest_addr);
-int flashQuadSPIDDRXip(int addr, int* dest_addr);
-int eraseSector(int command, int address);
-int micron_volatile_write_enable(int status);
-int micron_enable_4byte_addressing(int status);
-int micron_configure_xip_volatile(int status, int value);
-int micron_read_configuration_register(int status, int value);
-int micron_read_id_cmd(int status, int value);
-int wait_for_wip(void);
-int flashIdentificationDevice(void);
-int flashReadFlagRegister(void);
-int flashWriteEnable(void);
-int flashEnable4ByteAddressingMode(void);
-int flash_Write_disable(void);
+શૂન્ય set_qspi_shakti32(પૂર્ણાંક* addr, અચલ પૂર્ણાંક val);
+શૂન્ય set_qspi_shakti16(int16_t* addr, int16_t val);
+શૂન્ય set_qspi_shakti8(અક્ષર* addr, અક્ષર val);
+પૂર્ણાંક get_qspi_shakti( પૂર્ણાંક* addr);
+પૂર્ણાંક check_fail_bit(શૂન્ય);
+શૂન્ય reset_interrupt_flags(શૂન્ય);
+પૂર્ણાંક micron_write_enable(પૂર્ણાંક status);
+પૂર્ણાંક flashSingleSPIDDRXip(પૂર્ણાંક addr, પૂર્ણાંક* dest_addr);
+પૂર્ણાંક wait_for_tcf(પૂર્ણાંક status);
+શૂન્ય qspi_init(પૂર્ણાંક fsize, પૂર્ણાંક csht, પૂર્ણાંક prescaler, પૂર્ણાંક enable_interrupts, પૂર્ણાંક fthreshold, પૂર્ણાંક ck_mode);
+પૂર્ણાંક pageProgramSingleSPI(પૂર્ણાંક value1, પૂર્ણાંક value2, પૂર્ણાંક value3, પૂર્ણાંક value4, પૂર્ણાંક address);
+પૂર્ણાંક pageProgramQuadSPI(પૂર્ણાંક value1, પૂર્ણાંક value2, પૂર્ણાંક value3, પૂર્ણાંક value4, પૂર્ણાંક address);
+પૂર્ણાંક flashReadSingleSPI(પૂર્ણાંક dummy_cycles, પૂર્ણાંક read_address, પૂર્ણાંક instruction, પૂર્ણાંક data_શબ્દો, પૂર્ણાંક adsize);
+પૂર્ણાંક flashReadDualSPI(પૂર્ણાંક address, પૂર્ણાંક data_length);
+પૂર્ણાંક flashReadQuadSPI(પૂર્ણાંક dummy_cycles, પૂર્ણાંક read_address, પૂર્ણાંક instruction, પૂર્ણાંક data_શબ્દો, પૂર્ણાંક adsize);
+પૂર્ણાંક micron_disable_xip_volatile(પૂર્ણાંક,પૂર્ણાંક);
+પૂર્ણાંક flashSingleSPIXip(પૂર્ણાંક addr, પૂર્ણાંક* dest_addr);
+પૂર્ણાંક flashMemInit(શૂન્ય);
+પૂર્ણાંક flashDualSPIXip(પૂર્ણાંક addr, પૂર્ણાંક* dest_addr);
+પૂર્ણાંક flashDualSPIDDRXip(પૂર્ણાંક addr, પૂર્ણાંક* dest_addr);
+પૂર્ણાંક flashWriteVolatileConfigReg(પૂર્ણાંક કિંમત);
+પૂર્ણાંક flashQuadSPIXip(પૂર્ણાંક addr, પૂર્ણાંક* dest_addr);
+પૂર્ણાંક flashQuadSPIDDRXip(પૂર્ણાંક addr, પૂર્ણાંક* dest_addr);
+પૂર્ણાંક eraseSector(પૂર્ણાંક command, પૂર્ણાંક address);
+પૂર્ણાંક micron_volatile_write_enable(પૂર્ણાંક status);
+પૂર્ણાંક micron_enable_4byte_addressing(પૂર્ણાંક status);
+પૂર્ણાંક micron_configure_xip_volatile(પૂર્ણાંક status, પૂર્ણાંક કિંમત);
+પૂર્ણાંક micron_read_configuration_register(પૂર્ણાંક status, પૂર્ણાંક કિંમત);
+પૂર્ણાંક micron_read_id_cmd(પૂર્ણાંક status, પૂર્ણાંક કિંમત);
+પૂર્ણાંક wait_for_wip(શૂન્ય);
+પૂર્ણાંક flashIdentificationDevice(શૂન્ય);
+પૂર્ણાંક flashReadFlagRegister(શૂન્ય);
+પૂર્ણાંક flashWriteEnable(શૂન્ય);
+પૂર્ણાંક flashEnable4ByteAddressingMode(શૂન્ય);
+પૂર્ણાંક flash_Write_disable(શૂન્ય);
 
 
 #endif

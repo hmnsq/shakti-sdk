@@ -28,7 +28,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include<stdlib.h>
+#અન્તર્ભાવ<stdlib.h>
 /*By default SPI0 is enabled at initialization.
   SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI0_OFFSET 0x00000000
@@ -93,28 +93,28 @@
 
 // function prototype
 
-void configure_spi(int offset);
-void spi_init(void);
-void set_spi(int* addr, int val);
-void bin(unsigned n);
-void spi_tx_rx_start(void);
-void spi_enable(void);
-void spi_rx_enable(void);
-void flash_cmd_addr_data(int command, int addr, int data);
-void flash_write(int address, int data);
-void flash_erase(int address);
-int get_spi(int* addr);
-int bitExtracted(int number, int k, int p) ;
-int concat(int x, int y) ;
-int spi_rxne_enable(void);
-int spi_notbusy(void);
-int flash_write_enable(void);
-int flash_clear_sr(void);
-int flash_cmd_addr(int command, int addr);
-int flash_cmd_to_read(int command, int addr);
-int flash_read(int address);
-int flash_cmd_read(int command);
-int flash_status_register_read(void);
-int flash_device_id(void);
+શૂન્ય configure_spi(પૂર્ણાંક offset);
+શૂન્ય spi_init(શૂન્ય);
+શૂન્ય set_spi(પૂર્ણાંક* addr, પૂર્ણાંક val);
+શૂન્ય bin(unsigned n);
+શૂન્ય spi_tx_rx_start(શૂન્ય);
+શૂન્ય spi_enable(શૂન્ય);
+શૂન્ય spi_rx_enable(શૂન્ય);
+શૂન્ય flash_cmd_addr_data(પૂર્ણાંક command, પૂર્ણાંક addr, પૂર્ણાંક data);
+શૂન્ય flash_write(પૂર્ણાંક address, પૂર્ણાંક data);
+શૂન્ય flash_erase(પૂર્ણાંક address);
+પૂર્ણાંક get_spi(પૂર્ણાંક* addr);
+પૂર્ણાંક bitExtracted(પૂર્ણાંક સંખ્યા, પૂર્ણાંક k, પૂર્ણાંક p) ;
+પૂર્ણાંક concat(પૂર્ણાંક x, પૂર્ણાંક y) ;
+પૂર્ણાંક spi_rxne_enable(શૂન્ય);
+પૂર્ણાંક spi_notbusy(શૂન્ય);
+પૂર્ણાંક flash_write_enable(શૂન્ય);
+પૂર્ણાંક flash_clear_sr(શૂન્ય);
+પૂર્ણાંક flash_cmd_addr(પૂર્ણાંક command, પૂર્ણાંક addr);
+પૂર્ણાંક flash_cmd_to_read(પૂર્ણાંક command, પૂર્ણાંક addr);
+પૂર્ણાંક flash_read(પૂર્ણાંક address);
+પૂર્ણાંક flash_cmd_read(પૂર્ણાંક command);
+પૂર્ણાંક flash_status_register_read(શૂન્ય);
+પૂર્ણાંક flash_device_id(શૂન્ય);
 
 #endif

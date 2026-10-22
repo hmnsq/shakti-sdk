@@ -29,24 +29,24 @@ The interrupts are enabled for a gpio pin. Once the button connected to the gpio
  pin is pressed. An interrupt is generated and it is handled by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "utils.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "defines.h"
-#include "memory.h"
+#અન્તર્ભાવ "gpio.h"
+#અન્તર્ભાવ "uart.h"
+#અન્તર્ભાવ "utils.h"
+#અન્તર્ભાવ "traps.h"
+#અન્તર્ભાવ "platform.h"
+#અન્તર્ભાવ "plic_driver.h"
+#અન્તર્ભાવ "log.h"
+#અન્તર્ભાવ "defines.h"
+#અન્તર્ભાવ "memory.h"
 
-void handle_button_press(__attribute__((unused)) uint32_t num);
+શૂન્ય handle_button_press(__attribute__((unused)) uint32_t અંક);
 
 /** @fn handle_button_press
  * @brief a default handler to handle button press event
  * @param unsigned num
  * @return unsigned
  */
-void handle_button_press(__attribute__((unused)) uint32_t num)
+શૂન્ય handle_button_press(__attribute__((unused)) uint32_t અંક)
 {
 	log_info("button pressed\n");
 }
@@ -55,13 +55,13 @@ void handle_button_press(__attribute__((unused)) uint32_t num)
  * @brief sets up the environment for plic feature
  * @return int
  */
-int main(void){
-	register unsigned int retval;
-	int i;
+પૂર્ણાંક મુખ્ય(શૂન્ય){
+	નોંધણી unsigned પૂર્ણાંક retval;
+	પૂર્ણાંક i;
 
 	plic_init();
 
-	for(i=1;i<33;i++)
+	માટે(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i);
@@ -69,7 +69,7 @@ int main(void){
 	printf("\n");
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	માટે(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_disable(i);
@@ -78,7 +78,7 @@ int main(void){
 
 	asm("ebreak");
 
-	for(i=1;i<33;i++)
+	માટે(i=1;i<33;i++)
 	{
 		printf("i %d\n",i);
 		interrupt_enable(i + 1);
@@ -87,12 +87,12 @@ int main(void){
 
 	asm("ebreak");
 
-	while(1){
+	જ્યારે(1){
 		i++;
 
-		if((i%10000000) == 0){
+		જો((i%10000000) == 0){
 
-			asm volatile(
+			asm અસ્થિર(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -102,5 +102,5 @@ int main(void){
 			printf("mip = %u\n", retval);
 		}
 	}
-	return 0;
+	પાછા 0;
 }

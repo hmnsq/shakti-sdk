@@ -28,9 +28,9 @@
 
 /* Enable these bits only when corresponding interrupt is needed.*/
 
-#include "i2c.h"//Includes the definitions of i2c communication protocol//
-#include "log.h"
-#include "utils.h"
+#અન્તર્ભાવ "i2c.h"//Includes the definitions of i2c communication protocol//
+#અન્તર્ભાવ "log.h"
+#અન્તર્ભાવ "utils.h"
 
 /* Enable these bits only when corresponding interrupt is needed.*/
 
@@ -38,16 +38,16 @@
 //#define USE_WRITE_I2C_INTERRUPT 1
 //#define USE_READ_I2C_INTERRUPT 1
 
-i2c_struct *i2c_instance[MAX_I2C_COUNT];
+i2c_struct *i2c_instance[MAX_I2_C_ગણતરી];
 
 /**
  * @fn void i2c_init()
  * @brief Initialises the i2c modules.
  * @details Initialises the i2c array modules to the max. no of i2c modules present
  */
-void i2c_init()
+શૂન્ય i2c_init()
 {
-	for(int i=0; i< MAX_I2C_COUNT; i++)
+	માટે(પૂર્ણાંક i=0; i< MAX_I2_C_ગણતરી; i++)
 	{
 		i2c_instance[i] = (i2c_struct*) (I2C0_BASE + (i * I2C_OFFSET));
 	}
@@ -65,30 +65,30 @@ void i2c_init()
  * @param unsigned char scl_div
  * @return REturns 0 if success; else returns -ENXIO.
  */
-int config_i2c(i2c_struct * instance, unsigned char prescale_div, unsigned char scl_div)
+પૂર્ણાંક config_i2c(i2c_struct * instance, unsigned અક્ષર prescale_div, unsigned અક્ષર scl_div)
 {
-	unsigned char temp = 0;
+	unsigned અક્ષર temp = 0;
 	log_debug("\tI2C: Initializing the Controller\n");
 
-	if(prescale_div  != instance->prescale )
+	જો(prescale_div  != instance->prescale )
 	{
 		instance->prescale = prescale_div;
 #ifdef DEBUG 
 		temp = instance->prescale;
 
-		if((temp | 0x00) != prescale_div)
+		જો((temp | 0x00) != prescale_div)
 		{
 			log_error("\t Failed to write Prescale division Written Value: 0x%x; read Value: 0x%x\n", prescale_div, instance->prescale);
-			return -ENXIO;
+			પાછા -ENXIO;
 		}
-		else
+		નહીંતર
 		{
 			log_debug("\tPrescaler successfully initalized\n");
 		}
 #endif
 	}
 
-	if(scl_div != instance->scl )
+	જો(scl_div != instance->scl )
 	{
 		instance->scl = scl_div;  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
 
@@ -97,12 +97,12 @@ int config_i2c(i2c_struct * instance, unsigned char prescale_div, unsigned char 
 		temp = instance->scl;
 
 		/* Just reading the written value to see if all is well -- Compiler should not optimize this load!!! Compiler can just optimize the store to pointer address followed by load pointer to a register to just an immediate load to the register since clock register is not used anywhere -- but the purpose is lost. Don't give compiler optimizations */
-		if((temp | 0x00) != scl_div)
+		જો((temp | 0x00) != scl_div)
 		{
 			log_error("\tClock initialization failed Write Value: 0x%x; read Value: 0x%x\n", scl_div, temp);
-			return -ENXIO;
+			પાછા -ENXIO;
 		}
-		else
+		નહીંતર
 		{
 			log_debug("\tClock successfully initalized\n");
 		}
@@ -118,9 +118,9 @@ int config_i2c(i2c_struct * instance, unsigned char prescale_div, unsigned char 
 	temp = instance->control;
 
 	//Check whether the status register is cleared or not.
-	if((temp & 0x7f) != 0){
+	જો((temp & 0x7f) != 0){
 		log_error("\tDevice Not Recognized\n");
-		return -ENXIO;
+		પાછા -ENXIO;
 	}
 
 	log_debug("\tWaiting for a specified time\n ");
@@ -134,13 +134,13 @@ int config_i2c(i2c_struct * instance, unsigned char prescale_div, unsigned char 
 	temp = instance->status;
 
 	/* Check to see if I2C is really in Idle and see if we can access the status register -- If not something wrong in initialization. This also verifies if Control is properly written since zero bit will be initialized to zero*/
-	if(temp != (I2C_PIN | I2C_BB)){
+	જો(temp != (I2C_PIN | I2C_BB)){
 		log_error("\n\tInitialization failed; Status Reg: %x\n", temp);
-		return -ENXIO;
+		પાછા -ENXIO;
 	}
 
 	log_info("\tI2C Initialization success\n");
-	return 0;
+	પાછા 0;
 }
 
 /**
@@ -152,25 +152,25 @@ int config_i2c(i2c_struct * instance, unsigned char prescale_div, unsigned char 
  * @param i2c_struct*
  * @return Returns 0 if the bus becomes free; else returns ETIMEDOUT.
  */
-int wait_till_I2c_bus_free(i2c_struct * instance)
+પૂર્ણાંક wait_till_I2c_bus_free(i2c_struct * instance)
 {
 	log_debug("\tCheck for I2C Bus Busy to be free.\n");
-	int timeout = DEF_TIMEOUT;
-	int status;
+	પૂર્ણાંક timeout = DEF_TIMEOUT;
+	પૂર્ણાંક status;
 
 	status = instance->status;
 
-	while (!(status & I2C_BB) && --timeout) {
+	જ્યારે (!(status & I2C_BB) && --timeout) {
 		waitfor(20000); /* wait for 100 us */
 		status = instance->status;
 	}
 
-	if (timeout == 0) {
+	જો (timeout == 0) {
 		log_error("\t Bus busy wait - timed out. Resetting\n");
-		return ETIMEDOUT;
+		પાછા ETIMEDOUT;
 	}
 
-	return 0;
+	પાછા 0;
 }
 
 /**
@@ -182,26 +182,26 @@ int wait_till_I2c_bus_free(i2c_struct * instance)
  * @param int *status  --> contents of the status register
  * @return zero if success; else -ETIMEOUT
  */
-int wait_till_txrx_operation_Completes(i2c_struct * instance, int *status)
+પૂર્ણાંક wait_till_txrx_operation_Completes(i2c_struct * instance, પૂર્ણાંક *status)
 {
 
-	int timeout = DEF_TIMEOUT;
+	પૂર્ણાંક timeout = DEF_TIMEOUT;
 
 	*status = instance->status;
 
-	while ((*status & I2C_PIN) && --timeout) {
+	જ્યારે ((*status & I2C_PIN) && --timeout) {
 		waitfor(10000); /* wait for 100 us */
 		*status = instance->status;
 	}
 
-	if (timeout == 0){
+	જો (timeout == 0){
 		log_info("\tWait for pin timed out\n");
-		return ETIMEDOUT;
+		પાછા ETIMEDOUT;
 	}
 
 	waitfor(10000); /* wait for 100 us */
 	log_debug("\n I2C tx_rx operation is completed");
-	return 0;
+	પાછા 0;
 }
 
 /**
@@ -215,38 +215,38 @@ int wait_till_txrx_operation_Completes(i2c_struct * instance, int *status)
  * @param int eni  --- External Interrupt Control
  * @return Returns number of bytes written else EREMOTEIO.
  */
-int sendbytes(i2c_struct * instance, const char *buf, int count, int last, int eni)
+પૂર્ણાંક sendbytes(i2c_struct * instance, અચલ અક્ષર *buf, પૂર્ણાંક ગણતરી, પૂર્ણાંક last, પૂર્ણાંક eni)
 {
-	int wrcount, status, timeout;
+	પૂર્ણાંક wrcount, status, timeout;
 	printf("\tStarting Write Transaction -- Did you create tri1 nets for SDA and SCL in verilog?\n");
-	for (wrcount=0; wrcount<count; ++wrcount) {
+	માટે (wrcount=0; wrcount<ગણતરી; ++wrcount) {
 		instance->data = buf[wrcount];
 		timeout = wait_till_txrx_operation_Completes(instance, &status);
-		if (timeout) {
+		જો (timeout) {
 			printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 			instance->control = I2C_STOP;
-			return EREMOTEIO;
+			પાછા EREMOTEIO;
 		}
-		if (status & I2C_LRB) { // What error is this?
+		જો (status & I2C_LRB) { // What error is this?
 			instance->control = I2C_STOP;//~
 			printf("\tSome status check failing\n");
-			return EREMOTEIO;
+			પાછા EREMOTEIO;
 		}
 	}
-	if (last){
+	જો (last){
 		printf("\tLast byte sent : Issue a stop\n");
 		instance->control = I2C_STOP;
 	}
-	else{
+	નહીંતર{
 		printf("\tSending Rep Start and doing some other R/W transaction\n");
 
-		if(!eni)
+		જો(!eni)
 			instance->control = I2C_REPSTART;
-		else
+		નહીંતર
 			instance->control = I2C_REPSTART_ENI;
 	}
 
-	return wrcount;
+	પાછા wrcount;
 }
 
 /**
@@ -260,45 +260,45 @@ int sendbytes(i2c_struct * instance, const char *buf, int count, int last, int e
  * @param int last --- If 1, I2C stop command can be sent
  * @return Returns number of bytest read over i2c bus. else -1.
  */
-int readbytes(i2c_struct * instance, char *buf, int count, int last)
+પૂર્ણાંક readbytes(i2c_struct * instance, અક્ષર *buf, પૂર્ણાંક ગણતરી, પૂર્ણાંક last)
 {
-	int i, status;
-	int wfp;
+	પૂર્ણાંક i, status;
+	પૂર્ણાંક wfp;
 
 	/* increment number of bytes to read by one -- read dummy byte */
-	for (i = 0; i <= count; i++) {
+	માટે (i = 0; i <= ગણતરી; i++) {
 		wfp = wait_till_txrx_operation_Completes(instance, &status);
-		if (wfp) {
+		જો (wfp) {
 			instance->control = I2C_STOP;
-			return -1;
+			પાછા -1;
 		}
 
-		if ((status & I2C_LRB) && (i != count)) {
+		જો ((status & I2C_LRB) && (i != ગણતરી)) {
 			instance->control = I2C_STOP;
 			printf("\tNo ack\n");
-			return -1;
+			પાછા -1;
 		}
 
-		if (i)
+		જો (i)
 		{
 			buf[i - 1] = instance->data;
 			printf("\n Read Value: %x", buf[i - 1]);
 		}
-		else
+		નહીંતર
 			instance->data = !instance->data; /* dummy read */
 
-		if (i == count - 1) {
+		જો (i == ગણતરી - 1) {
 			instance->control = I2C_ESO;
-		} else if (i == count) {
-			if (last)
+		} નહીંતર જો (i == ગણતરી) {
+			જો (last)
 				instance->control = I2C_STOP;
-			else
+			નહીંતર
 				instance->control = I2C_REPSTART_ENI;
 		}
 
 	}
 
-	return i-1; //excluding the dummy read
+	પાછા i-1; //excluding the dummy read
 }
 
 /**
@@ -311,17 +311,17 @@ int readbytes(i2c_struct * instance, char *buf, int count, int last)
  * @param unsigned long delay
  * @return Zero if success; else non zero
  */
-int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
+પૂર્ણાંક i2c_send_slave_address(i2c_struct * instance, unsigned અક્ષર slaveAddress, unsigned અક્ષર rdWrCntrl, unsigned long delay)
 {
-	int timeout;
-	unsigned char temp = 0;
-	int status = 0;
+	પૂર્ણાંક timeout;
+	unsigned અક્ષર temp = 0;
+	પૂર્ણાંક status = 0;
 
 	delay = delay;
 
-	if(rdWrCntrl == 0)
+	જો(rdWrCntrl == 0)
 		slaveAddress |= I2C_WRITE;
-	else
+	નહીંતર
 		slaveAddress |= I2C_READ;
 
 	//Writing the slave address that needs to be written into data register.
@@ -331,18 +331,18 @@ int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, un
 	//Reads back the data register to confirm
 	temp = instance->data; //Reads the slave address from I2C controller
 
-	if(slaveAddress != (int)temp)
+	જો(slaveAddress != (પૂર્ણાંક)temp)
 	{
 		log_error("\tSlave address is not matching; Written Add. Value: 0x%x; Read Add. Value: 0x%x\n", slaveAddress, temp);
 		log_error("\n There is some issue in AXI interface. Please check.");
-		return EAXI_ERROR;
+		પાછા EAXI_ERROR;
 	}
 
 	//Waits till the bus becomes free.
-	while(wait_till_I2c_bus_free(instance))
+	જ્યારે(wait_till_I2c_bus_free(instance))
 	{
 		log_error("\tError in Waiting for BB\n");
-		return EI2C_BUS_ERROR;
+		પાછા EI2C_BUS_ERROR;
 	}
 
 
@@ -352,28 +352,28 @@ int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, un
 	waitfor(900);
 	//Wait for PIN to become low.
 	timeout = wait_till_txrx_operation_Completes(instance, &status);
-	if (timeout) {//Asking the controller to send a start signal to initiate the transaction
+	જો (timeout) {//Asking the controller to send a start signal to initiate the transaction
 		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 		instance->control = I2C_STOP; //~
-		return EI2C_PIN_ERROR;
+		પાછા EI2C_PIN_ERROR;
 	}
 
-	if (status & I2C_LRB) {
+	જો (status & I2C_LRB) {
 		instance->control = I2C_STOP; //~
 		printf("\tSome status check failing\n");
-		return EI2C_LRB_ERROR;
+		પાછા EI2C_LRB_ERROR;
 	}
 
-#else
+#નહીંતર
 	i2c_complete_flag = 0;
 
 	instance->control = I2C_START_ENI; //Sending the slave address to the I2C slave
-	while(!i2c_complete_flag);
+	જ્યારે(!i2c_complete_flag);
 	log_info("\n Slave Address Write Operation is complete.");
 	i2c_complete_flag = 0;
 #endif
 
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }
 
 /**
@@ -385,38 +385,38 @@ int i2c_send_slave_address(i2c_struct * instance, unsigned char slaveAddress, un
  * @param unsigned char delay
  * @return Returns Zeron on success; else -EREMOTEIO
  */
-int i2c_write_data(i2c_struct * instance, unsigned char writeData, unsigned char delay)
+પૂર્ણાંક i2c_write_data(i2c_struct * instance, unsigned અક્ષર writeData, unsigned અક્ષર delay)
 {
-	int timeout;
-	int status = 0;
+	પૂર્ણાંક timeout;
+	પૂર્ણાંક status = 0;
 	delay = delay;
 
 	instance->data= writeData;
 
 #ifndef USE_WRITE_I2C_INTERRUPT
 	timeout = wait_till_txrx_operation_Completes(instance, &status);
-	if (timeout) {
+	જો (timeout) {
 		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 		instance->control = I2C_STOP; //~
-		return EREMOTEIO;
+		પાછા EREMOTEIO;
 	}
 
-	if (status & I2C_LRB)
+	જો (status & I2C_LRB)
 	{ // What error is this?
 		instance->control = I2C_STOP; //~
 		printf("\tSome status check failing\n");
-		return EI2C_LRB_ERROR;
+		પાછા EI2C_LRB_ERROR;
 	}
-#else
+#નહીંતર
 	i2c_complete_flag = 0;
 	instance->control = I2C_STOP_ENI; //Sending the sslave address to the I2C slave
 
-	while(!i2c_complete_flag);
+	જ્યારે(!i2c_complete_flag);
 	log_info("\n Write Operation is complete.");
 	i2c_complete_flag = 0;
 #endif
 
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }
 
 /**
@@ -429,9 +429,9 @@ int i2c_write_data(i2c_struct * instance, unsigned char writeData, unsigned char
  * @return Zero on success; else -ETIMEOUT
  */
 //#define READ_INTERRUPT 1
-int i2c_read_data(i2c_struct * instance, unsigned char *read_data, unsigned char delay)
+પૂર્ણાંક i2c_read_data(i2c_struct * instance, unsigned અક્ષર *read_data, unsigned અક્ષર delay)
 {
-	int status = 0;
+	પૂર્ણાંક status = 0;
 
 	/* Make a dummy read as per spec of the I2C controller */
 
@@ -441,18 +441,18 @@ int i2c_read_data(i2c_struct * instance, unsigned char *read_data, unsigned char
 	i2c_complete_flag = 0;
 	instance->control = I2C_REPSTART_ENI; //~
 
-	while(!i2c_complete_flag);
+	જ્યારે(!i2c_complete_flag);
 	*read_data = instance->data;
 
 	printf("\n I2C Read Data = %x", i2c_read_data);
-#else
-	while(wait_till_txrx_operation_Completes(instance, &status))
+#નહીંતર
+	જ્યારે(wait_till_txrx_operation_Completes(instance, &status))
 	{
 		printf("\twaiting for pin\n");
 		waitfor(delay);
 	}
 #endif
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }
 
 
@@ -467,7 +467,7 @@ int i2c_read_data(i2c_struct * instance, unsigned char *read_data, unsigned char
  * @return Zero on success; else -ETIMEOUT
  */
 //#define READ_INTERRUPT 1
-int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned char delay)
+પૂર્ણાંક i2c_read_data_nack(i2c_struct * instance, unsigned અક્ષર *read_data, unsigned અક્ષર delay)
 {
 	/* Make a dummy read as per spec of the I2C controller */
 	*read_data = instance->data; //~
@@ -476,10 +476,10 @@ int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
 #ifdef USE_WRITE_I2C_INTERRUPT
 	i2c_complete_flag = 0;
 	instance->control = I2C_REPSTART_ENI; //~
-	while(!i2c_complete_flag);
+	જ્યારે(!i2c_complete_flag);
 	*read_data = instance->data;
 	printf("\n I2C Read Data = %x", i2c_read_data);
-#else
+#નહીંતર
 /*
 	while(wait_till_txrx_operation_Completes(instance, &status))
 	{
@@ -489,7 +489,7 @@ int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
 */	
 #endif
 	printf("\n I2C Read Data = %x", *read_data);
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }
 
 /**
@@ -502,16 +502,16 @@ int i2c_read_data_nack(i2c_struct * instance, unsigned char *read_data, unsigned
  * @param unsigned long delay
  * @return Zero on success. Else corresponding error value.
  */
-int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
+પૂર્ણાંક i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned અક્ષર slaveAddress, unsigned અક્ષર rdWrCntrl, unsigned long delay)
 {
-	int timeout;
-	unsigned char temp = 0;
-	int status = 0;
+	પૂર્ણાંક timeout;
+	unsigned અક્ષર temp = 0;
+	પૂર્ણાંક status = 0;
 	delay = delay;
 
-	if(rdWrCntrl == 0)
+	જો(rdWrCntrl == 0)
 		slaveAddress |= I2C_WRITE;
-	else
+	નહીંતર
 		slaveAddress |= I2C_READ;
 
 	log_debug("\n\tSetting Slave Address : 0x%x\n", slaveAddress);/* Writes the slave address to I2C controller */
@@ -523,18 +523,18 @@ int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char slaveA
 	temp = instance->data; //Reads the slave address from I2C controller
 	log_debug("\tSet slave address read again, which is 0x%x\n",temp);
 
-	if(slaveAddress != (int)temp)
+	જો(slaveAddress != (પૂર્ણાંક)temp)
 	{
 		log_error("\tSlave address is not matching; Written Add. Value: 0x%x; Read Add. Value: 0x%x\n", slaveAddress, temp);
 		log_error("\n There is some issue in AXI interface. Please check.");
-		return EAXI_ERROR;
+		પાછા EAXI_ERROR;
 	}
 
 	//Waits till the bus becomes free.
-	while(wait_till_I2c_bus_free(instance))
+	જ્યારે(wait_till_I2c_bus_free(instance))
 	{
 		log_error("\tError in Waiting for BB\n");
-		return EI2C_BUS_ERROR;
+		પાછા EI2C_BUS_ERROR;
 	}
 
 	//Send the start condition and slave address to slave
@@ -542,26 +542,26 @@ int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char slaveA
 	instance->control = I2C_START;; //Sending the slave address to the I2C slave
 	//Wait for PIN to become low.
 	timeout = wait_till_txrx_operation_Completes(instance, &status);
-	if (timeout) {//Asking the controller to send a start signal to initiate the transaction
+	જો (timeout) {//Asking the controller to send a start signal to initiate the transaction
 		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 		instance->control = I2C_STOP; //~
-		return EI2C_PIN_ERROR;
+		પાછા EI2C_PIN_ERROR;
 	}
 
-	if (status & I2C_LRB) {
+	જો (status & I2C_LRB) {
 		instance->control = I2C_STOP; //~
 		printf("\tSome status check failing\n");
-		return EI2C_LRB_ERROR;
+		પાછા EI2C_LRB_ERROR;
 	}
-#else
+#નહીંતર
 	i2c_complete_flag = 0;
 	instance->control = I2C_REPSTART_ENI; //Sending the slave address to the I2C slave
-	while(!i2c_complete_flag);
+	જ્યારે(!i2c_complete_flag);
 	log_info("\n Slave Address Write Operation is complete.");
 	i2c_complete_flag = 0;
 #endif
 	log_info("\n Slave address is written successfully");
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }
 
 /**
@@ -574,9 +574,9 @@ int i2c_send_interrupt_slave_address(i2c_struct * instance, unsigned char slaveA
  * @param unsigned char last
  * @return Zero on success.
  */
-int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data, unsigned char delay, unsigned char last)
+પૂર્ણાંક i2c_read_interrupt_data(i2c_struct * instance, unsigned અક્ષર *read_data, unsigned અક્ષર delay, unsigned અક્ષર last)
 {
-	int status = 0;
+	પૂર્ણાંક status = 0;
 
 	/* Make a dummy read as per spec of the I2C controller */
 	*read_data = instance->data;
@@ -584,12 +584,12 @@ int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data, uns
 #ifdef USE_READ_I2C_INTERRUPT	
 	i2c_complete_flag = 0;
 
-	if(last)
+	જો(last)
 	{
 		instance->control = I2C_STOP_ENI; //~
-		while(!i2c_complete_flag);
+		જ્યારે(!i2c_complete_flag);
 	}
-	else
+	નહીંતર
 	{
 		/* Needs to be tested */
 		//			instance->control = I2C_REPSTART_ENI;
@@ -597,24 +597,24 @@ int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data, uns
 		//			while(!i2c_complete_flag);
 	}
 	printf("\n I2C Read Data = %x", *read_data);
-#else
-	while(wait_till_txrx_operation_Completes(instance, &status))
+#નહીંતર
+	જ્યારે(wait_till_txrx_operation_Completes(instance, &status))
 	{
 		printf("\twaiting for pin\n");
 		waitfor(delay);
 	}
-	if(!last)
+	જો(!last)
 	{
 		printf("\n Rep Start");				
 		//				instance->control = I2C_REPSTART;
 	}
-	else
+	નહીંતર
 	{
 		printf("\nCall I2C Stop");
 		instance->control = I2C_STOP;
 	}
 #endif
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }
 
 /**
@@ -627,44 +627,44 @@ int i2c_read_interrupt_data(i2c_struct * instance, unsigned char *read_data, uns
  * @param unsigned char last
  * @return Zero on success. Else based on the error.
  */
-int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData, unsigned char delay, unsigned char last)
+પૂર્ણાંક i2c_write_interrupt_data(i2c_struct * instance, unsigned અક્ષર writeData, unsigned અક્ષર delay, unsigned અક્ષર last)
 {
-	int timeout;
-	int status = 0;
+	પૂર્ણાંક timeout;
+	પૂર્ણાંક status = 0;
 	delay = delay;
 
 	instance->data = writeData;
 
 #ifndef USE_WRITE_I2C_INTERRUPT
 	timeout = wait_till_txrx_operation_Completes(instance, &status);
-	if (timeout) {
+	જો (timeout) {
 		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 		instance->control = I2C_STOP; //~
-		return EREMOTEIO;
+		પાછા EREMOTEIO;
 	}
 
-	if (status & I2C_LRB)
+	જો (status & I2C_LRB)
 	{ // What error is this?
 		instance->control = I2C_STOP;//~
 		printf("\tSome status check failing\n");
-		return EI2C_LRB_ERROR;
+		પાછા EI2C_LRB_ERROR;
 	}
 
-	if(1 == last)
+	જો(1 == last)
 	{
 		instance->control = I2C_STOP;;
 		printf("\tI2C Write Success and completes\n");
 	}
-#else
+#નહીંતર
 	i2c_complete_flag = 0;
 
-	if(last)
+	જો(last)
 	{
 		instance->control = I2C_STOP_ENI; //Sending the sslave address to the I2C slave
 		printf("\n Calling stop eni write");
-		while(!i2c_complete_flag);
+		જ્યારે(!i2c_complete_flag);
 	}
-	else
+	નહીંતર
 	{
 		//			instance->control = I2C_REPSTART_ENI;
 		//			printf("\n Calling repstart eni write");
@@ -673,5 +673,5 @@ int i2c_write_interrupt_data(i2c_struct * instance, unsigned char writeData, uns
 	log_info("\n Write Operation is complete.");
 	i2c_complete_flag = 0;
 #endif
-	return I2C_SUCCESS;
+	પાછા I2C_SUCCESS;
 }

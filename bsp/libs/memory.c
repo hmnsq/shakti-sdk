@@ -26,9 +26,9 @@
 @brief A library to display the memory contents at byte and word level.
 */
 
-#include "log.h"
-#include "memory.h"
-#include <stdint.h>
+#અન્તર્ભાવ "log.h"
+#અન્તર્ભાવ "memory.h"
+#અન્તર્ભાવ <stdint.h>
 
 /** @fn void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @brief dump contents of word addressabe location in the memory,
@@ -37,14 +37,14 @@
  * @param uint32_t word_length
  */
 
-void dump_word_memory(uint32_t* start, uint32_t word_length)
+શૂન્ય dump_word_memory(uint32_t* start, uint32_t word_length)
 {
 	uint32_t i=0;
-	void *address;
+	શૂન્ય *address;
 
 	address = (uint32_t *) start;
 
-	while(i++< word_length)
+	જ્યારે(i++< word_length)
 	{
 		log_info("address = %x data = %x\n", address, *(uint32_t *) address);
 		address += 4;
@@ -58,16 +58,16 @@ void dump_word_memory(uint32_t* start, uint32_t word_length)
  * @param uint32_t word_length
  */
 
-void dump_byte_memory(uint32_t* start, uint32_t word_length)
+શૂન્ય dump_byte_memory(uint32_t* start, uint32_t word_length)
 {
 	uint32_t i=0;
-	void *address;
+	શૂન્ય *address;
 
-	address = (unsigned char *) start;
+	address = (unsigned અક્ષર *) start;
 
-	while(i++< word_length)
+	જ્યારે(i++< word_length)
 	{
-		log_info("address = %x data = %x\n", address, *(unsigned char
+		log_info("address = %x data = %x\n", address, *(unsigned અક્ષર
 							       *) address);
 		address += 1;
 	}

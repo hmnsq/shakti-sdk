@@ -31,14 +31,14 @@
  by the isr.
 */
 
-#include "gpio.h"
-#include "uart.h"
-#include "traps.h"
-#include "platform.h"
-#include "plic_driver.h"
-#include "log.h"
-#include "memory.h"
-#include "pwm_driver.h"
+#અન્તર્ભાવ "gpio.h"
+#અન્તર્ભાવ "uart.h"
+#અન્તર્ભાવ "traps.h"
+#અન્તર્ભાવ "platform.h"
+#અન્તર્ભાવ "plic_driver.h"
+#અન્તર્ભાવ "log.h"
+#અન્તર્ભાવ "memory.h"
+#અન્તર્ભાવ "pwm_driver.h"
 
 /** @fn unsigned handle_pwm_interrupt (uint32_t num)
  * @brief  Default handler to handle pwm interrupt,
@@ -46,11 +46,11 @@
  * @param unsigned num
  * @return unsigned
  */
-void handle_pwm_interrupt( uint32_t num)
+શૂન્ય handle_pwm_interrupt( uint32_t અંક)
 {
-	if(pwm_check_continuous_mode((6-num)) == 0)
+	જો(pwm_check_continuous_mode((6-અંક)) == 0)
 	{
-		set_pwm_control_register((6-num),0x80);
+		set_pwm_control_register((6-અંક),0x80);
 	}
 	log_info("pwm interrupt handled\n");
 }
@@ -58,10 +58,10 @@ void handle_pwm_interrupt( uint32_t num)
 /** @fn void main(void)
  * @brief sets up the environment for pwn interrupt feature
   */
-void main(void){
+શૂન્ય મુખ્ય(શૂન્ય){
 
-	register unsigned int retval;
-	int i;
+	નોંધણી unsigned પૂર્ણાંક retval;
+	પૂર્ણાંક i;
 
 	plic_init();
 
@@ -72,15 +72,15 @@ void main(void){
 	isr_table[PLIC_INTERRUPT_2] = handle_pwm_interrupt;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm અસ્થિર("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm અસ્થિર("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm અસ્થિર(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -90,7 +90,7 @@ void main(void){
 
 	log_debug(" mstatus = %x\n", retval);
 
-	asm volatile(
+	asm અસ્થિર(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -100,7 +100,7 @@ void main(void){
 
 	log_debug("mie = %x\n", retval);
 
-	asm volatile(
+	asm અસ્થિર(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -136,8 +136,8 @@ void main(void){
 	pwm_start(PWM_5,1);
 */
 	
-	while(1){
-		asm volatile(
+	જ્યારે(1){
+		asm અસ્થિર(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -146,7 +146,7 @@ void main(void){
 			    );
 
 		i++;
-		if((i%10000000) == 0){
+		જો((i%10000000) == 0){
 			printf(" mip = %x\n", retval);
 		}
 	}

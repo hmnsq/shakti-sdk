@@ -25,10 +25,10 @@
 @brief Performs the reading operation with the help of gpio pins.
 */
 
-#include <stdio.h>
-#include "gpio.h"
-#include "utils.h"
-#include "platform.h"
+#અન્તર્ભાવ <stdio.h>
+#અન્તર્ભાવ "gpio.h"
+#અન્તર્ભાવ "utils.h"
+#અન્તર્ભાવ "platform.h"
 
 /** @fn void read_data()
  * @brief set the direction reg to input and start reading from the gpio data reg
@@ -36,12 +36,12 @@
  * pins. start reading the gpio pin value from data reg. delay for some time and
  * read data again 
  */
-void read_data()
+શૂન્ય read_data()
 {
 	unsigned long data = 0;
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
 
-	while (1) {
+	જ્યારે (1) {
 		data =read_word(GPIO_DATA_REG);//copi GPIO_DATA_REG content
 		log_info("\n Read Data is :%x", data);
 		delay_loop(3000, 5000);
@@ -51,7 +51,7 @@ void read_data()
 /** @fn void main()
  * @brief initiate the reading from gpio
  */
-void main()
+શૂન્ય મુખ્ય()
 {
     read_data();
 }

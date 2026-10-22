@@ -42,8 +42,8 @@
 #define SPI_ADC_IN 0xC0
 
 // function prototype
- unsigned char readbyte(unsigned char delay);
- int config();
+ अचिन्हित वर्ण readbyte(अचिन्हित वर्ण delay);
+ पूर्णाङ्क config();
 
 #endif/* GPIO_SPI_H*/
 

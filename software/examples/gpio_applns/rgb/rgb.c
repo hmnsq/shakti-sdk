@@ -26,34 +26,34 @@
 @detail By giving signal it will glow Red Green Blue light within a certain interval.
 */
 
-#include "platform.h"
-#include "gpio.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
 
 /** @fn void main()
  * @brief Getting RGB light glow one by one
  * @details By giving HIGH signal RED GREEN and BLUE light glow automatically.
  */
-void main()
+शून्य main()
 {
     //Assume  0 for INPUT and  1 for OUTPUT
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000FFF);
 
-    while (1) {
+    यावत् (1) {
         write_word(GPIO_DATA_REG, GPIO0);
 	    delay_loop(1000, 1000);
-	printf("\nRED LIGHT");			//RED LIGHT.
+	म_लिखो("\nRED LIGHT");			//RED LIGHT.
         write_word(GPIO_DATA_REG, 0x00);
         delay_loop(1000,1000);
 
         write_word(GPIO_DATA_REG, GPIO1);
 	    delay_loop(1000, 1000);
-	printf("\nGREEN LIGHT");			//GREEN LIGHT.
+	म_लिखो("\nGREEN LIGHT");			//GREEN LIGHT.
         write_word(GPIO_DATA_REG, 0x00);
         delay_loop(1000,1000);
         
         write_word(GPIO_DATA_REG, GPIO2);
 	    delay_loop(1000, 1000);
-	printf("\nBLUE LIGHT");			//BLUE LIGHT.
+	म_लिखो("\nBLUE LIGHT");			//BLUE LIGHT.
         write_word(GPIO_DATA_REG, 0x00);
         delay_loop(1000,1000);
     }

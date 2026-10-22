@@ -33,39 +33,39 @@ d0 - spi miso
 clk -spi clk
 cs  -spi cs
 **********************************************/
-#include <stdint.h>
-#include "spi.h"
-#include "pinmux.h"
+#अन्तर्भाव <stdint.h>
+#अन्तर्भाव "spi.h"
+#अन्तर्भाव "pinmux.h"
 
 /** 
  * @fn void w25q32()
  * @brief Reads the spi value from w25q32
  * @details Reads SPI over w25q32 interface
  */
-void w25q32()
+शून्य w25q32()
 {
-	int total_data = 100; //total data you want to read/write
-	int read_address = 0x00000100;  //read from this address
-	int* bram_address = (int*) 0x80000100; //write to this address
+	पूर्णाङ्क total_data = 100; //total data you want to read/write
+	पूर्णाङ्क read_address = 0x00000100;  //read from this address
+	पूर्णाङ्क* bram_address = (पूर्णाङ्क*) 0x80000100; //write to this address
 
 	*pinmux_config_reg = 0x154000;	
 
 	configure_spi(SPI1_OFFSET);
 	spi_init();
 
-	printf("SPI init done\n");
+	म_लिखो("SPI init done\n");
 
 	flash_device_id();
 	waitfor(200);
 		
-	for(int i = 0; i < total_data; ++i)
+	प्रति(पूर्णाङ्क i = 0; i < total_data; ++i)
 	{
-		int read_value= flash_read(read_address);
-		printf("Reading from adddress %x and data \ %x\n",read_address,read_value);
-		*(bram_address+i) = read_value;
+		पूर्णाङ्क read_मूल्य= flash_read(read_address);
+		म_लिखो("Reading from adddress %x and data \ %x\n",read_address,read_मूल्य);
+		*(bram_address+i) = read_मूल्य;
 		read_address=read_address+4;
 	}
-	printf("SPI Read Successr\n");
+	म_लिखो("SPI Read Successr\n");
 }
 
 /** 
@@ -74,9 +74,9 @@ void w25q32()
  * @details Configures the SPI read FLASH values, reads the same 
  * prints the read values.
  */
-void main()
+शून्य main()
 {
 	w25q32();
 
-	while(1);
+	यावत्(1);
 }

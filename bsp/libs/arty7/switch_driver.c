@@ -26,12 +26,12 @@
 @detail Configures Switches and maps to the gpio pins 
 */ 
 
-#if defined(ARTIX7_35T) || defined(ARTIX7_100T)
+#यदि defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-#include "platform.h"
-#include "gpio.h"
-#include "switch_driver.h"
-#include "utils.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "switch_driver.h"
+#अन्तर्भाव "utils.h"
 
 /** @fn void configure_switch(unsigned long pinCntrl)
  * @brief Function for configure Individual Switch pins as input.
@@ -39,9 +39,9 @@
  * each SW as input pin.
  * @param unsigned long (Pin that needs to be configured as SW.)
  */
-void configure_switch(unsigned long pinCntrl)
+शून्य configure_switch(अचिन्हित दीर्घ pinCntrl)
 {
-	unsigned long read_data = 0;
+	अचिन्हित दीर्घ read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(pinCntrl) ) );
 }
@@ -51,9 +51,9 @@ void configure_switch(unsigned long pinCntrl)
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  *          all SWs as input pin.
  */
-void configure_all_switchs()
+शून्य configure_all_switchs()
 {
-	unsigned long read_data = 0;
+	अचिन्हित दीर्घ read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(ALL_SWITCHES) ) );
 }

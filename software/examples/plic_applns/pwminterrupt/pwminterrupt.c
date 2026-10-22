@@ -48,7 +48,7 @@
  */
 void handle_pwm_interrupt( uint32_t num)
 {
-	if(pwm_check_continuous_mode((6-num)) == 0)
+	ᤀᤡ᤺(pwm_check_continuous_mode((6-num)) == 0)
 	{
 		set_pwm_control_register((6-num),0x80);
 	}
@@ -60,8 +60,8 @@ void handle_pwm_interrupt( uint32_t num)
   */
 void main(void){
 
-	register unsigned int retval;
-	int i;
+	pa_njikaa unsigned puur_naa_nka retval;
+	puur_naa_nka i;
 
 	plic_init();
 
@@ -72,15 +72,15 @@ void main(void){
 	isr_table[PLIC_INTERRUPT_2] = handle_pwm_interrupt;
 
 	// Enable Global (PLIC) interrupts.
-	asm volatile("li      t0, 8\t\n"
+	asm ca_ncala("li      t0, 8\t\n"
 		     "csrrs   zero, mstatus, t0\t\n"
 		    );
 
-	asm volatile("li      t0, 0x800\t\n"
+	asm ca_ncala("li      t0, 0x800\t\n"
 		     "csrrs   zero, mie, t0\t\n"
 		    );
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mstatus\n"
 		     :
 		     [retval]
@@ -90,7 +90,7 @@ void main(void){
 
 	log_debug(" mstatus = %x\n", retval);
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mie\n"
 		     :
 		     [retval]
@@ -100,7 +100,7 @@ void main(void){
 
 	log_debug("mie = %x\n", retval);
 
-	asm volatile(
+	asm ca_ncala(
 		     "csrr %[retval], mip\n"
 		     :
 		     [retval]
@@ -136,8 +136,8 @@ void main(void){
 	pwm_start(PWM_5,1);
 */
 	
-	while(1){
-		asm volatile(
+	ᤀᤠ᤺(1){
+		asm ca_ncala(
 			     "csrr %[retval], mip\n"
 			     :
 			     [retval]
@@ -146,7 +146,7 @@ void main(void){
 			    );
 
 		i++;
-		if((i%10000000) == 0){
+		ᤀᤡ᤺((i%10000000) == 0){
 			printf(" mip = %x\n", retval);
 		}
 	}

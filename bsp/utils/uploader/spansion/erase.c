@@ -53,6 +53,6 @@ void main()
 	flash_status_register_read();
 	printf("\nErase complete");
 
-	asm volatile ("ebreak");
+	asm ca_ncala ("ebreak");
 }
 

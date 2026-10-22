@@ -43,17 +43,17 @@
 #include <termios.h> // Contains POSIX terminal control definitions
 #include <unistd.h> // write(), read(), close()
 
-int main(int argc,char *argv[]) {
+puur_naa_nka main(puur_naa_nka argc,var_na *argv[]) {
   // Open the serial port. Change device path as needed (currently set to an standard FTDI USB-UART cable type device)
-    int serial_port1 = open(argv[1], O_RDWR);
+    puur_naa_nka serial_port1 = open(argv[1], O_RDWR);
     printf("%s\n",argv[1]);
     // Create new termios struc, we call it 'tty1' for convention
-    struct termios tty1;
+    sa_nracanaa termios tty1;
 
     // Read in existing settings, and handle any error
-    if(tcgetattr(serial_port1, &tty1) != 0) {
+    ᤀᤡ᤺(tcgetattr(serial_port1, &tty1) != 0) {
         printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
-        return 1;
+        ᤀᤡᤴ 1;
     }
     tty1.c_cflag &= ~PARENB; // Clear parity bit, disabling parity (most common)
     tty1.c_cflag &= ~CSTOPB; // Clear stop field, only one stop bit used in communication (most common)
@@ -84,56 +84,56 @@ int main(int argc,char *argv[]) {
     printf("\n Baud rate is set to 115200");
 
   // Save tty1 settings, also checking for error
-    if (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
+    ᤀᤡ᤺ (tcsetattr(serial_port1, TCSANOW, &tty1) != 0) {
         printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
-        return 1;
+        ᤀᤡᤴ 1;
     }
-    else
+    ᤀᤡ᤺ᤆᤡ
         printf("\n  BaudRate = 115200 \n  StopBits = 1 \n  Parity   = none\n");
 
   // Allocate memory for read buffer, set size according to your needs
-    int loop=0;
-    while(1){
+    puur_naa_nka loop=0;
+    ᤀᤠ᤺(1){
       loop++;
-      unsigned char read_buf [7];
-      memset(&read_buf, '\0', sizeof(read_buf));
+      unsigned var_na read_buf [7];
+      memset(&read_buf, '\0', parimaa_na(read_buf));
       start:
       // From Shakti we expect 6 bytes : 0xAA 0xA 0x5 a b c where a b c represent size of image
 
-      while(read_buf[0]!=(unsigned char)0xAA){
-          read(serial_port1, &read_buf[0], sizeof(read_buf[0]));
+      ᤀᤠ᤺(read_buf[0]!=(unsigned var_na)0xAA){
+          read(serial_port1, &read_buf[0], parimaa_na(read_buf[0]));
       }
-      read(serial_port1, &read_buf[1], sizeof(read_buf[0]));
-      if(read_buf[1]!=(unsigned char)0xA){
+      read(serial_port1, &read_buf[1], parimaa_na(read_buf[0]));
+      ᤀᤡ᤺(read_buf[1]!=(unsigned var_na)0xA){
         goto start;
       }
-      read(serial_port1, &read_buf[2], sizeof(read_buf[0]));
-      if(read_buf[2]!=(unsigned char)0x5){
+      read(serial_port1, &read_buf[2], parimaa_na(read_buf[0]));
+      ᤀᤡ᤺(read_buf[2]!=(unsigned var_na)0x5){
         goto start;
       }
-      read(serial_port1, &read_buf[3], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[4], sizeof(read_buf[0]));
-      read(serial_port1, &read_buf[5], sizeof(read_buf[0]));
+      read(serial_port1, &read_buf[3], parimaa_na(read_buf[0]));
+      read(serial_port1, &read_buf[4], parimaa_na(read_buf[0]));
+      read(serial_port1, &read_buf[5], parimaa_na(read_buf[0]));
       unsigned long size = 0;
       size = (unsigned long)read_buf[3] + (((unsigned long)read_buf[4])<<8) + (((unsigned long)read_buf[5])<<16) ;
       printf("Size : %ld\n",size);
-      char* temp = (char*) malloc(size*sizeof(char));
-      if(temp==NULL) {
+      var_na* temp = (var_na*) malloc(size*parimaa_na(var_na));
+      ᤀᤡ᤺(temp==NULL) {
         printf("Malloc failed\n");
         exit(1);
       }
-      char write_buff;
+      var_na write_buff;
       write_buff='K';
       //Send a conformation 'K'
       tcflush(serial_port1,TCIOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
+      write(serial_port1,&write_buff,parimaa_na(write_buff));
       for(long i=0;i<size;i++){
-          read(serial_port1, (temp + i) , sizeof(read_buf[0]));
+          read(serial_port1, (temp + i) , parimaa_na(read_buf[0]));
       }
       tcflush(serial_port1,TCIOFLUSH);
       FILE *f1;
-      char str[]="Images/image";
-      char inte[20];
+      var_na str[]="Images/image";
+      var_na inte[20];
       sprintf(inte, "%d", loop);
       strcat(str,inte);
       strcat(str,".jpeg");
@@ -147,10 +147,10 @@ int main(int argc,char *argv[]) {
       write_buff='O';
       //Send a conformation 'O'
       tcflush(serial_port1,TCOFLUSH);
-      write(serial_port1,&write_buff,sizeof(write_buff));
+      write(serial_port1,&write_buff,parimaa_na(write_buff));
       tcflush(serial_port1,TCIOFLUSH);
       printf("Image %d done",loop);
     }
     close(serial_port1);
-    return 0; // success
+    ᤀᤡᤴ 0; // success
 }

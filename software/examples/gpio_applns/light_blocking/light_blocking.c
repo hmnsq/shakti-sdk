@@ -27,27 +27,27 @@
 @detail Photo Interrupter key module will trigger a signal when light between the sensor's gap is blocked.
 */
 
-#include "gpio.h"
-#include "platform.h"
-#include <stdio.h>
-#include "utils.h"
+#अन्तर्भाव "gpio.h"
+#अन्तर्भाव "platform.h"
+#अन्तर्भाव <stdio.h>
+#अन्तर्भाव "utils.h"
 
 /** @fn void main()
  * @brief Gives output as HIGH when partition is introduced and LOW when partition is removed with the help of gpio pins  
  */
-void main()
+शून्य main()
 {   
     unsigned long readData = 0;
     write_word(GPIO_DIRECTION_CNTRL_REG, 0x0000);
 
-    while (1) {
+    यावत् (1) {
         	readData = read_word(GPIO_DATA_REG);
 
-        	if(readData == 0x00000001) {
+        	यदि(readData == 0x00000001) {
 
 		 printf("\n Blocked");
         	 }
-        	else {
+        	अन्यथा {
             
 		printf("\n Not Blocked");
         	 }
